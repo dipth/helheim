@@ -1,0 +1,13 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb mb-0">
+  <li class="breadcrumb-item"><a href="/">Home</a></li>
+  <%= for entry <- @view_module.breadcrumbs(@view_template, assigns) do %>
+    <%= if elem(entry, 1) do %>
+      <a href="<%= elem(entry, 1) || '#' %> ">
+        <%= elem(entry, 0) %>
+      </a>
+    <% else %>
+      <li class="breadcrumb-item active"><%= elem(entry, 0) %></li>
+    <% end %>
+  <% end %>
+</ol>

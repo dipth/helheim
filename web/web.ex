@@ -52,6 +52,8 @@ defmodule Altnation.Web do
       import Altnation.Router.Helpers
       import Altnation.ErrorHelpers
       import Altnation.Gettext
+
+      use Altnation.BreadcrumbsDefaults
     end
   end
 

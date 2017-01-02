@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -11,25 +11,24 @@
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
-  <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
+  <body class="navbar-fixed sidebar-nav">
+    <%= render "header.html", conn: @conn %>
+    <%= render "sidebar.html", conn: @conn %>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <!-- Main content -->
+    <main class="main">
+      <%= render "breadcrumbs.html", conn: @conn, view_module: @view_module, view_template: @view_template %>
 
-      <main role="main">
+      <div class="container-fluid">
+        <%= render "alerts.html", conn: @conn %>
         <%= render @view_module, @view_template, assigns %>
-      </main>
+      </div>
+      <!-- /.conainer-fluid -->
+    </main>
 
-    </div> <!-- /container -->
+    <%= render "footer.html", conn: @conn %>
+
+    <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
