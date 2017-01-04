@@ -4,7 +4,9 @@ use Mix.Config
 # you can enable the server option below.
 config :altnation, Altnation.Endpoint,
   http: [port: 4001],
-  server: false
+  server: true
+
+config :altnation, :sql_sandbox, true
 
 # Print only warnings and errors during test
 config :logger, level: :warn
@@ -17,3 +19,13 @@ config :altnation, Altnation.Repo,
   database: "altnation_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Make password hashing faster during tests
+config :comeonin, :bcrypt_log_rounds, 4
+config :comeonin, :pbkdf2_rounds, 1
+
+config :altnation, :secret_key_passphrase, "password"
+config :altnation, :secret_key, File.read!("priv/repo/dev.jwk")
+
+config :altnation, Altnation.Mailer,
+  adapter: Bamboo.TestAdapter

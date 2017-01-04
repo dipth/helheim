@@ -1,6 +1,9 @@
 defmodule Altnation do
   use Application
 
+  def config({:system, env}), do: System.get_env(env)
+  def config(value), do: value
+
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do

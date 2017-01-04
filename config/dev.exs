@@ -41,3 +41,9 @@ config :altnation, Altnation.Repo,
   database: "altnation_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :altnation, :secret_key_passphrase, "password"
+config :altnation, :secret_key, File.read!("priv/repo/dev.jwk")
+
+config :altnation, Altnation.Mailer,
+  adapter: Bamboo.LocalAdapter

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <meta name="keyword" content="">
+
+      <title>Altnation</title>
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+      <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+  <body class="app-special">
+    <div class="container d-table">
+      <div class="d-100vh-va-middle">
+        <div class="row mb-2">
+          <div class="col-md-12">
+            <div class="text-xs-center">
+              <a href="/">
+                <img src="<%= static_path(@conn, "/images/logo2.png") %>" alt="Altnation">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="mx-2">
+              <%= render "alerts.html", conn: @conn %>
+            </div>
+          </div>
+        </div>
+        <%= render @view_module, @view_template, assigns %>
+      </div>
+    </div>
+
+    <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

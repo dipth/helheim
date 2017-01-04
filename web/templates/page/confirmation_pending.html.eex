@@ -1,0 +1,7 @@
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="alert alert-success" role="alert">
+      <strong><%= gettext "Excellent!" %></strong> <%= gettext "Before you can enter, you need to pass a final test. Please check your e-mail for further instructions..." %>
+    </div>
+  </div>
+</div>

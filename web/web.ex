@@ -19,6 +19,7 @@ defmodule Altnation.Web do
   def model do
     quote do
       use Ecto.Schema
+      use Calecto.Schema, usec: true
 
       import Ecto
       import Ecto.Changeset

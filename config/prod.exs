@@ -56,6 +56,9 @@ config :logger, level: :info
 #     config :altnation, Altnation.Endpoint, server: true
 #
 
+config :altnation, :secret_key_passphrase, {:system, "SECRET_KEY_PASSPHRASE"}
+config :altnation, :secret_key, {:system, "SECRET_KEY"}
+
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 import_config "prod.secret.exs"

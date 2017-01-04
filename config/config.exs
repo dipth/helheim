@@ -22,6 +22,25 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :guardian, Guardian,
+  allowed_algos: ["HS512"], # optional
+  verify_module: Guardian.JWT,  # optional
+  issuer: "Altnation",
+  ttl: { 1, :day },
+  allowed_drift: 2000,
+  verify_issuer: true, # optional
+  secret_key: fn ->
+    secret_key = Altnation.config(Application.get_env(:altnation, :secret_key))
+    secret_key_passphrase = Altnation.config(Application.get_env(:altnation, :secret_key_passphrase))
+    {_, jwk} = secret_key_passphrase |> JOSE.JWK.from_binary(secret_key)
+    jwk
+  end,
+  serializer: Altnation.GuardianSerializer
+
+config :altnation, Altnation.Mailer,
+  adapter: Bamboo.PostmarkAdapter,
+  api_key: "my_api_key"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

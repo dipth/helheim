@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <div class="card mx-2">
+      <div class="card-block p-2">
+        <h1><%= gettext "New Registration" %></h1>
+        <p class="text-muted"><%= gettext "Create your account" %></p>
+        <%= form_for @changeset, registration_path(@conn, :create), fn f -> %>
+          <div class="form-group <%= if f.errors[:name] do 'has-danger' end %>">
+            <div class="controls">
+              <div class="input-prepend input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <%= text_input f, :name, placeholder: gettext("Name"), class: "form-control" %>
+              </div>
+              <%= if message = f.errors[:name] do %>
+                <div class="form-control-feedback"><%= translate_error(message) %></div>
+              <% else %>
+                <p class="help-block text-muted"><%= gettext "Will only be shown to administrators" %></p>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="form-group <%= if f.errors[:username] do 'has-danger' end %>">
+            <div class="controls">
+              <div class="input-prepend input-group">
+                <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+                <%= text_input f, :username, placeholder: gettext("Username"), class: "form-control" %>
+              </div>
+              <%= if message = f.errors[:username] do %>
+                <div class="form-control-feedback"><%= translate_error(message) %></div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="form-group <%= if f.errors[:email] do 'has-danger' end %>">
+            <div class="controls">
+              <div class="input-prepend input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <%= text_input f, :email, placeholder: gettext("E-mail"), class: "form-control" %>
+              </div>
+              <%= if message = f.errors[:email] do %>
+                <div class="form-control-feedback"><%= translate_error(message) %></div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="form-group mb-2 <%= if f.errors[:password] do 'has-danger' end %>">
+            <div class="controls">
+              <div class="input-prepend input-group">
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <%= password_input f, :password, placeholder: gettext("Password"), class: "form-control" %>
+              </div>
+              <%= if message = f.errors[:password] do %>
+                <div class="form-control-feedback"><%= translate_error(message) %></div>
+              <% end %>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-block btn-success"><%= gettext "Create Account" %></button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
