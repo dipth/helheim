@@ -20,12 +20,13 @@ config :altnation, Altnation.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
+# Guardian configuration
+config :guardian, Guardian,
+  secret_key: "MHtXjXB4jXOtVQAJE39RxEaHOPj8jJiAI5HLW+p8xC1IeUcnc+T81t9KiC/9a4wh"
+
 # Make password hashing faster during tests
 config :comeonin, :bcrypt_log_rounds, 4
 config :comeonin, :pbkdf2_rounds, 1
-
-config :altnation, :secret_key_passphrase, "password"
-config :altnation, :secret_key, File.read!("priv/repo/dev.jwk")
 
 config :altnation, Altnation.Mailer,
   adapter: Bamboo.TestAdapter

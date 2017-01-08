@@ -13,8 +13,25 @@ use Mix.Config
 # which you typically run after static files are built.
 config :altnation, Altnation.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/manifest.json"
+  url: [scheme: "https", host: "altnation.herokuapp.com", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  cache_static_manifest: "priv/static/manifest.json",
+  secret_key_base: System.get_env("SECRET_KEY_BASE")
+
+# Configure your database
+config :altnation, Altnation.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("DATABASE_URL"),
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  ssl: true
+
+# Configure guardian
+config :guardian, Guardian,
+  secret_key: System.get_env("GUARDIAN_SECRET_KEY")
+
+# Configure mailer
+config :altnation, Altnation.Mailer,
+  api_key: System.get_env("POSTMARK_API_KEY")
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -55,10 +72,3 @@ config :logger, level: :info
 #
 #     config :altnation, Altnation.Endpoint, server: true
 #
-
-config :altnation, :secret_key_passphrase, {:system, "SECRET_KEY_PASSPHRASE"}
-config :altnation, :secret_key, {:system, "SECRET_KEY"}
-
-# Finally import the config/prod.secret.exs
-# which should be versioned separately.
-import_config "prod.secret.exs"
