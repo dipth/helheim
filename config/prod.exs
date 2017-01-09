@@ -33,6 +33,13 @@ config :guardian, Guardian,
 config :altnation, Altnation.Mailer,
   api_key: System.get_env("POSTMARK_API_KEY")
 
+# Configure Sentry
+config :sentry,
+  dsn: System.get_env("SENTRY_DSN"),
+  tags: %{
+    env: "production"
+  }
+
 # Do not print debug messages in production
 config :logger, level: :info
 

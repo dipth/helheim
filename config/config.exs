@@ -29,6 +29,11 @@ config :guardian, Guardian,
   verify_issuer: true,
   serializer: Altnation.GuardianSerializer
 
+# Configure Sentry
+config :sentry,
+  environment_name: Mix.env,
+  included_environments: [:prod]
+
 config :altnation, Altnation.Mailer,
   adapter: Bamboo.PostmarkAdapter,
   api_key: "only_applicable_in_production"
