@@ -34,6 +34,21 @@ config :sentry,
   environment_name: Mix.env,
   included_environments: [:prod]
 
+# Configure Appsignal
+config :appsignal, :config,
+  active: false,
+  name: :altnation,
+  push_api_key: "only_applicable_in_production",
+  env: Mix.env
+config :altnation, Altnation.Endpoint,
+  instrumenters: [Appsignal.Phoenix.Instrumenter]
+config :phoenix, :template_engines,
+  eex: Appsignal.Phoenix.Template.EExEngine,
+  exs: Appsignal.Phoenix.Template.ExsEngine
+config :altnation, Altnation.Repo,
+  loggers: [Appsignal.Ecto]
+
+# Configure mailer
 config :altnation, Altnation.Mailer,
   adapter: Bamboo.PostmarkAdapter,
   api_key: "only_applicable_in_production"

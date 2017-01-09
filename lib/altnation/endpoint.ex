@@ -1,5 +1,6 @@
 defmodule Altnation.Endpoint do
   use Phoenix.Endpoint, otp_app: :altnation
+  use Appsignal.Phoenix
 
   socket "/socket", Altnation.UserSocket
 

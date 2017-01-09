@@ -40,6 +40,12 @@ config :sentry,
     env: "production"
   }
 
+# Configure Appsignal
+config :appsignal, :config,
+  active: true,
+  name: :altnation,
+  push_api_key: System.get_env("APPSIGNAL_KEY")
+
 # Do not print debug messages in production
 config :logger, level: :info
 
