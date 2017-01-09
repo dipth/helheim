@@ -9,6 +9,14 @@ defmodule Altnation.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+  end
+
+  pipeline :browser_auth do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.EnsureAuthenticated, handler: Altnation.Token
+    plug Guardian.Plug.LoadResource
   end
 
   pipeline :api do
@@ -21,8 +29,15 @@ defmodule Altnation.Router do
     get "/", PageController, :index
     get "/confirmation_pending", PageController, :confirmation_pending
     get "/debug", PageController, :debug
-    resources "/registrations", RegistrationController
-    resources "/confirmations", ConfirmationController
+    resources "/registrations", RegistrationController, only: [:new, :create]
+    resources "/confirmations", ConfirmationController, only: [:new, :create, :show]
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
+  end
+
+  scope "/", Altnation do
+    pipe_through [:browser, :browser_auth]
+
+    get "/signed_in", PageController, :signed_in
   end
 
   # Other scopes may use custom stacks.
