@@ -8,7 +8,7 @@ defmodule Altnation.ConfirmationControllerTest do
   describe "new/2" do
     test "it returns a successful response", %{conn: conn} do
       conn = get conn, "/confirmations/new"
-      assert html_response(conn, 200) =~ "Resend confirmation e-mail"
+      assert html_response(conn, 200) =~ gettext("Resend confirmation e-mail")
     end
   end
 
@@ -22,7 +22,7 @@ defmodule Altnation.ConfirmationControllerTest do
 
     test "it re-renders the new template when posting a non-existing e-mail address", %{conn: conn} do
       conn = post conn, "/confirmations", confirmation: %{email: "non@existing.com"}
-      assert html_response(conn, 200) =~ "No user with that e-mail address!"
+      assert html_response(conn, 200) =~ gettext("No user with that e-mail address!")
     end
   end
 

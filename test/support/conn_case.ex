@@ -26,6 +26,7 @@ defmodule Altnation.ConnCase do
       import Ecto.Query
 
       import Altnation.Router.Helpers
+      import Altnation.Gettext
 
       # The default endpoint for testing
       @endpoint Altnation.Endpoint
@@ -54,6 +55,8 @@ defmodule Altnation.ConnCase do
   end
 
   setup tags do
+    Gettext.put_locale(Altnation.Gettext, "da")
+
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Altnation.Repo)
 
     unless tags[:async] do

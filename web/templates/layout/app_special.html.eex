@@ -8,7 +8,7 @@
       <meta name="author" content="">
       <meta name="keyword" content="">
 
-      <title>Altnation</title>
+      <title><%= gettext("Altnation") %></title>
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
       <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
@@ -19,7 +19,7 @@
           <div class="col-md-12">
             <div class="text-xs-center">
               <a href="/">
-                <img src="<%= static_path(@conn, "/images/logo2.png") %>" alt="Altnation">
+                <img src="<%= static_path(@conn, "/images/logo2.png") %>" alt="<%= gettext("Altnation") %>">
               </a>
             </div>
           </div>

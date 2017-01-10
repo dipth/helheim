@@ -14,7 +14,7 @@ defmodule Altnation.ConfirmationController do
     user = Repo.get_by(User, email: confirmation_params["email"])
     if is_nil(user) do
       conn
-      |> put_flash(:info, "No user with that e-mail address!")
+      |> put_flash(:info, gettext("No user with that e-mail address!"))
       |> render("new.html")
     else
       send_confirmation(conn, user)
@@ -25,7 +25,7 @@ defmodule Altnation.ConfirmationController do
     user = Repo.get_by(User, confirmation_token: confirmation_token)
     if is_nil(user) do
       conn
-      |> put_flash(:info, "Token not found!")
+      |> put_flash(:info, gettext("Token not found!"))
       |> redirect(to: page_path(conn, :index))
     else
       confirm_user(conn, user)
@@ -36,11 +36,11 @@ defmodule Altnation.ConfirmationController do
     case User.confirm!(user) do
       {:ok, _user} ->
         conn
-        |> put_flash(:info, "User confirmed!")
+        |> put_flash(:info, gettext("User confirmed!"))
         |> redirect(to: page_path(conn, :index))
       {:error, _changeset} ->
         conn
-        |> put_flash(:info, "Unable to confirm!")
+        |> put_flash(:info, gettext("Unable to confirm!"))
         |> redirect(to: page_path(conn, :index))
     end
   end
@@ -50,7 +50,7 @@ defmodule Altnation.ConfirmationController do
     |> Mailer.deliver_later
 
     conn
-    |> put_flash(:info, "Confirmation e-mail sent!")
+    |> put_flash(:info, gettext("Confirmation e-mail sent!"))
     |> redirect(to: page_path(conn, :index))
   end
 end

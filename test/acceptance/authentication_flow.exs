@@ -9,18 +9,18 @@ defmodule Altnation.AuthenticationFlowTest do
 
     result = session
     |> visit("/")
-    |> click_link("Sign in")
-    |> fill_in("E-mail", with: user.email)
-    |> fill_in("Password", with: "password")
-    |> click_on("Sign In")
+    |> click_link(gettext("Sign In"))
+    |> fill_in(gettext("E-mail"), with: user.email)
+    |> fill_in(gettext("Password"), with: "password")
+    |> click_on(gettext("Sign In"))
     |> find(".alert.alert-info")
     |> text
-    assert result == "Welcome back #{user.username}!"
+    assert result == gettext("Welcome back %{username}!", username: user.username)
 
     result = session
-    |> click_link("Sign out")
+    |> click_link(gettext("Sign Out"))
     |> find(".alert.alert-info")
     |> text
-    assert result == "See you later!"
+    assert result == gettext("See you later!")
   end
 end

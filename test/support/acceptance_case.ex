@@ -11,10 +11,13 @@ defmodule Altnation.AcceptanceCase do
       import Ecto.Query
 
       import Altnation.Router.Helpers
+      import Altnation.Gettext
     end
   end
 
   setup tags do
+    Gettext.put_locale(Altnation.Gettext, "da")
+
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Altnation.Repo)
 
     unless tags[:async] do

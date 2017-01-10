@@ -5,7 +5,7 @@ defmodule Altnation.SessionControllerTest do
   describe "new/2" do
     test "it returns a successful response", %{conn: conn} do
       conn = get conn, "/sessions/new"
-      assert html_response(conn, 200) =~ "Sign In"
+      assert html_response(conn, 200) =~ gettext("Sign In")
     end
   end
 
@@ -20,7 +20,7 @@ defmodule Altnation.SessionControllerTest do
     test "it does not log the user in when submitting invalid credentials", %{conn: conn} do
       user = insert(:user)
       conn = post conn, "/sessions", session: %{email: user.email, password: "wrong"}
-      assert html_response(conn, 200) =~ "Wrong e-mail or password"
+      assert html_response(conn, 200) =~ gettext("Wrong e-mail or password")
       refute Guardian.Plug.current_resource(conn)
     end
   end

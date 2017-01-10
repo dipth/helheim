@@ -6,15 +6,15 @@ defmodule Altnation.RegistrationFlowTest do
   test "users can register", %{session: session} do
     result = session
     |> visit("/")
-    |> click_link("Register Account")
-    |> fill_in("Name", with: "Foo Bar")
-    |> fill_in("Username", with: "foobar")
-    |> fill_in("E-mail", with: "foo@bar.dk")
-    |> fill_in("Password", with: "password")
-    |> click_on("Create Account")
+    |> click_link(gettext("Register Account"))
+    |> fill_in(gettext("Name"), with: "Foo Bar")
+    |> fill_in(gettext("Username"), with: "foobar")
+    |> fill_in(gettext("E-mail"), with: "foo@bar.dk")
+    |> fill_in(gettext("Password"), with: "password")
+    |> click_on(gettext("Create Account"))
     |> find(".alert.alert-info")
     |> text
-    assert result == "User created!"
+    assert result == gettext("User created!")
 
     # TODO: Check that the user cannot sign in before confirming
 
@@ -23,6 +23,6 @@ defmodule Altnation.RegistrationFlowTest do
     |> visit("/confirmations/#{user.confirmation_token}")
     |> find(".alert.alert-info")
     |> text
-    assert result == "User confirmed!"
+    assert result == gettext("User confirmed!")
   end
 end

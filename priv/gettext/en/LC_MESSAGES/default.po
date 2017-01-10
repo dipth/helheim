@@ -1,0 +1,147 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/page/index.html.eex:6
+msgid "%{site_name} is a community for alternative people."
+msgstr ""
+
+#: web/templates/layout/app_special.html.eex:11
+#: web/templates/layout/app_special.html.eex:22
+#: web/templates/page/index.html.eex:5 web/templates/page/index.html.eex:6
+msgid "Altnation"
+msgstr ""
+
+#: web/templates/page/confirmation_pending.html.eex:4
+msgid "Before you can enter, you need to pass a final test. Please check your e-mail for further instructions..."
+msgstr ""
+
+#: web/templates/session/new.html.eex:34
+msgid "Click here if you did not get your confirmation e-mail"
+msgstr ""
+
+#: web/templates/registration/new.html.eex:58
+msgid "Create Account"
+msgstr ""
+
+#: web/templates/registration/new.html.eex:6
+msgid "Create your account"
+msgstr ""
+
+#: web/templates/confirmation/new.html.eex:12
+#: web/templates/registration/new.html.eex:38
+#: web/templates/session/new.html.eex:11
+msgid "E-mail"
+msgstr ""
+
+#: web/templates/page/confirmation_pending.html.eex:4
+msgid "Excellent!"
+msgstr ""
+
+#: web/templates/confirmation/new.html.eex:6
+msgid "If for some reason you did not receive your confirmation e-mail, then enter your e-mail address below and we will send it again."
+msgstr ""
+
+#: web/templates/registration/new.html.eex:12
+msgid "Name"
+msgstr ""
+
+#: web/templates/registration/new.html.eex:5 web/views/registration_view.ex:4
+msgid "New Registration"
+msgstr ""
+
+#: web/templates/registration/new.html.eex:50
+#: web/templates/session/new.html.eex:23
+msgid "Password"
+msgstr ""
+
+#: web/templates/page/index.html.eex:10
+msgid "Register Account"
+msgstr ""
+
+#: web/templates/confirmation/new.html.eex:5
+#: web/templates/confirmation/new.html.eex:20 web/views/confirmation_view.ex:4
+msgid "Resend confirmation e-mail"
+msgstr ""
+
+#: web/templates/page/index.html.eex:15 web/templates/session/new.html.eex:5
+#: web/templates/session/new.html.eex:31
+msgid "Sign In"
+msgstr ""
+
+#: web/templates/registration/new.html.eex:26
+msgid "Username"
+msgstr ""
+
+#: web/templates/page/index.html.eex:5
+msgid "Welcome to %{site_name}"
+msgstr ""
+
+#: web/templates/registration/new.html.eex:17
+msgid "Will only be shown to administrators"
+msgstr ""
+
+#: web/templates/page/signed_in.html.eex:9
+msgid "Sign Out"
+msgstr ""
+
+#: web/templates/page/signed_in.html.eex:5
+msgid "You are now signed in"
+msgstr ""
+
+#: web/templates/page/signed_in.html.eex:7
+msgid "Unfortunately we're not quite ready to open the doors fully yet."
+msgstr ""
+
+#: web/controllers/confirmation_controller.ex:53
+msgid "Confirmation e-mail sent!"
+msgstr ""
+
+#: web/controllers/confirmation_controller.ex:17
+msgid "No user with that e-mail address!"
+msgstr ""
+
+#: web/controllers/session_controller.ex:27
+msgid "See you later!"
+msgstr ""
+
+#: web/controllers/confirmation_controller.ex:28
+msgid "Token not found!"
+msgstr ""
+
+#: web/controllers/confirmation_controller.ex:43
+msgid "Unable to confirm!"
+msgstr ""
+
+#: web/controllers/guardian_serializer.ex:7
+#: web/controllers/guardian_serializer.ex:9
+msgid "Unknown resource type"
+msgstr ""
+
+#: web/controllers/confirmation_controller.ex:39
+msgid "User confirmed!"
+msgstr ""
+
+#: web/controllers/registration_controller.ex:22
+msgid "User created!"
+msgstr ""
+
+#: web/controllers/session_controller.ex:15
+msgid "Welcome back %{username}!"
+msgstr ""
+
+#: web/controllers/session_controller.ex:19
+msgid "Wrong e-mail or password"
+msgstr ""
+
+#: web/controllers/token.ex:6 web/controllers/token.ex:12
+msgid "You must be signed in to access this page"
+msgstr ""

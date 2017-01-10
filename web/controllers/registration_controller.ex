@@ -19,7 +19,7 @@ defmodule Altnation.RegistrationController do
         |> Mailer.deliver_later
 
         conn
-        |> put_flash(:info, "User created!")
+        |> put_flash(:info, gettext("User created!"))
         |> redirect(to: page_path(conn, :confirmation_pending))
       {:error, changeset} ->
         conn

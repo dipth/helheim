@@ -11,6 +11,7 @@ defmodule Altnation.Router do
     plug :put_secure_browser_headers
     plug Guardian.Plug.VerifySession
     plug Guardian.Plug.LoadResource
+    plug Altnation.Locale
   end
 
   pipeline :browser_auth do

@@ -1,0 +1,156 @@
+# # `msgid`s in this file come from POT (.pot) files.
+# #
+# # Do not add, change, or remove `msgid`s manually here as
+# # they're tied to the ones in the corresponding POT file
+# # (with the same domain).
+# #
+# # Use `mix gettext.extract --merge` or `mix gettext.merge`
+# # to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: da\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+
+#: web/templates/page/index.html.eex:6
+msgid "%{site_name} is a community for alternative people."
+msgstr "%{site_name} er et community for alternative folk."
+
+#: web/templates/layout/app_special.html.eex:11
+#: web/templates/layout/app_special.html.eex:22
+#: web/templates/page/index.html.eex:5 web/templates/page/index.html.eex:6
+msgid "Altnation"
+msgstr "Altnation"
+
+#: web/templates/page/confirmation_pending.html.eex:4
+msgid "Before you can enter, you need to pass a final test. Please check your e-mail for further instructions..."
+msgstr "Før du kan fortsætte skal du gennemføre en sidste test. Tjek din e-mail for yderligere oplysninger…"
+
+#: web/templates/session/new.html.eex:34
+msgid "Click here if you did not get your confirmation e-mail"
+msgstr "Klik her hvis du ikke har modtaget din aktiveringsmail"
+
+#: web/templates/registration/new.html.eex:58
+msgid "Create Account"
+msgstr "Opret Profil"
+
+#: web/templates/registration/new.html.eex:6
+msgid "Create your account"
+msgstr "Opret din profil"
+
+#: web/templates/confirmation/new.html.eex:12
+#: web/templates/registration/new.html.eex:38
+#: web/templates/session/new.html.eex:11
+msgid "E-mail"
+msgstr "E-mail"
+
+#: web/templates/page/confirmation_pending.html.eex:4
+msgid "Excellent!"
+msgstr "Perfekt!"
+
+#: web/templates/confirmation/new.html.eex:6
+msgid "If for some reason you did not receive your confirmation e-mail, then enter your e-mail address below and we will send it again."
+msgstr "Hvis du ikke har modtaget din aktiveringsmail, kan du indtaste din e-mail adresse herunder, så sender vi den igen."
+
+#: web/templates/registration/new.html.eex:12
+msgid "Name"
+msgstr "Navn"
+
+#: web/templates/registration/new.html.eex:5 web/views/registration_view.ex:4
+msgid "New Registration"
+msgstr "Opret Profil"
+
+#: web/templates/registration/new.html.eex:50
+#: web/templates/session/new.html.eex:23
+msgid "Password"
+msgstr "Kodeord"
+
+#: web/templates/page/index.html.eex:10
+msgid "Register Account"
+msgstr "Opret Profil"
+
+#: web/templates/confirmation/new.html.eex:5
+#: web/templates/confirmation/new.html.eex:20 web/views/confirmation_view.ex:4
+msgid "Resend confirmation e-mail"
+msgstr "Gensend aktiveringsmail"
+
+#: web/templates/page/index.html.eex:15 web/templates/session/new.html.eex:5
+#: web/templates/session/new.html.eex:31
+msgid "Sign In"
+msgstr "Log ind"
+
+#: web/templates/registration/new.html.eex:26
+msgid "Username"
+msgstr "Brugernavn"
+
+#: web/templates/page/index.html.eex:5
+msgid "Welcome to %{site_name}"
+msgstr "Velkommen til %{site_name}"
+
+#: web/templates/registration/new.html.eex:17
+msgid "Will only be shown to administrators"
+msgstr "Vil kun blive vist til administratorer"
+
+#: web/templates/page/signed_in.html.eex:9
+msgid "Sign Out"
+msgstr "Log ud"
+
+#: web/templates/page/signed_in.html.eex:5
+msgid "You are now signed in"
+msgstr "Du er nu logget ind"
+
+#: web/templates/page/signed_in.html.eex:7
+msgid "Unfortunately we're not quite ready to open the doors fully yet."
+msgstr "Desværre er vi ikke helt klar til at åbne dørene endnu. Kig tilbage om et par uger :)"
+
+#: web/controllers/confirmation_controller.ex:53
+msgid "Confirmation e-mail sent!"
+msgstr "Aktiveringsmail afsendt!"
+
+#: web/controllers/confirmation_controller.ex:17
+msgid "No user with that e-mail address!"
+msgstr "Der findes ingen profiler med den e-mail adresse!"
+
+#: web/controllers/session_controller.ex:27
+msgid "See you later!"
+msgstr "Vi ses senere!"
+
+#: web/controllers/confirmation_controller.ex:28
+msgid "Token not found!"
+msgstr "Der findes ingen profil med den aktiveringskode!"
+
+#: web/controllers/confirmation_controller.ex:43
+msgid "Unable to confirm!"
+msgstr "Vi kunne desværre ikke bekræfte din e-mail adresse!"
+
+#: web/controllers/guardian_serializer.ex:7
+#: web/controllers/guardian_serializer.ex:9
+msgid "Unknown resource type"
+msgstr "Ukendt resourcetype"
+
+#: web/controllers/confirmation_controller.ex:39
+msgid "User confirmed!"
+msgstr "Din profil er nu aktiveret!"
+
+#: web/controllers/registration_controller.ex:22
+msgid "User created!"
+msgstr "Din profil er nu oprettet!"
+
+#: web/controllers/session_controller.ex:15
+msgid "Welcome back %{username}!"
+msgstr "Velkommen tilbage %{username}!"
+
+#: web/controllers/session_controller.ex:19
+msgid "Wrong e-mail or password"
+msgstr "Forkert e-mail eller kodeord"
+
+#: web/controllers/token.ex:6 web/controllers/token.ex:12
+msgid "You must be signed in to access this page"
+msgstr "Du skal først logge ind!"

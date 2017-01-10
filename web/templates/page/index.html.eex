@@ -2,8 +2,8 @@
   <div class="col-md-8 offset-md-2">
     <div class="card mx-2">
       <div class="card-block p-2">
-        <h1><%= gettext "Welcome to Altnation" %></h1>
-        <p><%= gettext "Altnation is a community for alternative people." %></p>
+        <h1><%= gettext "Welcome to %{site_name}", site_name: gettext("Altnation") %></h1>
+        <p><%= gettext "%{site_name} is a community for alternative people.", site_name: gettext("Altnation") %></p>
 
         <div class="row">
           <div class="col-lg-6">
@@ -12,7 +12,7 @@
           </div>
 
           <div class="col-lg-6">
-            <%= link gettext("Sign in"), to: session_path(@conn, :new), class: "btn btn-outline-success btn-block" %>
+            <%= link gettext("Sign In"), to: session_path(@conn, :new), class: "btn btn-outline-success btn-block" %>
           </div>
         </div>
       </div>

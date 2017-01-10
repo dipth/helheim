@@ -2,12 +2,11 @@
   <div class="col-md-8 offset-md-2">
     <div class="card mx-2">
       <div class="card-block p-2">
-        <h1>You are now signed in</h1>
+        <h1><%= gettext "You are now signed in" %></h1>
         <p>
-          Unfortunately we're not quite ready to open the doors fully yet.
-          Check back in a couple of weeks :)
+          <%= gettext "Unfortunately we're not quite ready to open the doors fully yet." %>
         </p>
-        <%= link gettext("Sign out"), to: session_path(@conn, :delete, :access), method: :delete, class: "btn btn-outline-danger btn-block" %>
+        <%= link gettext("Sign Out"), to: session_path(@conn, :delete, :access), method: :delete, class: "btn btn-outline-danger btn-block" %>
       </div>
     </div>
   </div>
