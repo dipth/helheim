@@ -11,7 +11,7 @@ defmodule Altnation.Email do
 
   defp base_email do
     new_email
-    |> from("Altnation<support@altnation.dk>")
+    |> from("Helheim<no-reply@helheim.dk>")
     |> put_html_layout({Altnation.LayoutView, "email.html"})
   end
 end

@@ -27,7 +27,7 @@ msgstr "%{site_name} er et community for alternative folk."
 #: web/templates/layout/app_special.html.eex:22
 #: web/templates/page/index.html.eex:5 web/templates/page/index.html.eex:6
 msgid "Altnation"
-msgstr "Altnation"
+msgstr "Helheim"
 
 #: web/templates/page/confirmation_pending.html.eex:4
 msgid "Before you can enter, you need to pass a final test. Please check your e-mail for further instructions..."
