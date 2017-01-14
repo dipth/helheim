@@ -14,8 +14,15 @@ msgstr ""
 msgid "%{site_name} is a community for alternative people."
 msgstr ""
 
-#: web/templates/layout/app_special.html.eex:11
-#: web/templates/layout/app_special.html.eex:22
+#: web/email.ex:8 web/email.ex:16
+#: web/templates/email/password_reset_email.html.eex:5
+#: web/templates/email/password_reset_email.html.eex:15
+#: web/templates/email/password_reset_email.text.eex:1
+#: web/templates/email/registration_email.html.eex:5
+#: web/templates/email/registration_email.html.eex:15
+#: web/templates/email/registration_email.text.eex:1
+#: web/templates/layout/app_special.html.eex:18
+#: web/templates/layout/app_special.html.eex:29
 #: web/templates/page/index.html.eex:5 web/templates/page/index.html.eex:6
 msgid "Altnation"
 msgstr ""
@@ -24,7 +31,7 @@ msgstr ""
 msgid "Before you can enter, you need to pass a final test. Please check your e-mail for further instructions..."
 msgstr ""
 
-#: web/templates/session/new.html.eex:34
+#: web/templates/session/new.html.eex:37
 msgid "Click here if you did not get your confirmation e-mail"
 msgstr ""
 
@@ -37,6 +44,7 @@ msgid "Create your account"
 msgstr ""
 
 #: web/templates/confirmation/new.html.eex:12
+#: web/templates/password_reset/new.html.eex:12
 #: web/templates/registration/new.html.eex:38
 #: web/templates/session/new.html.eex:11
 msgid "E-mail"
@@ -81,6 +89,7 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
+#: web/templates/email/registration_email.html.eex:5
 #: web/templates/page/index.html.eex:5
 msgid "Welcome to %{site_name}"
 msgstr ""
@@ -106,6 +115,7 @@ msgid "Confirmation e-mail sent!"
 msgstr ""
 
 #: web/controllers/confirmation_controller.ex:17
+#: web/controllers/password_reset_controller.ex:17
 msgid "No user with that e-mail address!"
 msgstr ""
 
@@ -114,6 +124,8 @@ msgid "See you later!"
 msgstr ""
 
 #: web/controllers/confirmation_controller.ex:28
+#: web/controllers/password_reset_controller.ex:30
+#: web/controllers/password_reset_controller.ex:49
 msgid "Token not found!"
 msgstr ""
 
@@ -144,4 +156,96 @@ msgstr ""
 
 #: web/controllers/token.ex:6 web/controllers/token.ex:12
 msgid "You must be signed in to access this page"
+msgstr ""
+
+#: web/templates/email/password_reset_email.html.eex:38
+msgid "Choose a new password"
+msgstr ""
+
+#: web/templates/session/new.html.eex:34
+msgid "Click here if you forgot your password"
+msgstr ""
+
+#: web/templates/password_reset/new.html.eex:5
+msgid "Forgot your password?"
+msgstr ""
+
+#: web/templates/email/password_reset_email.html.eex:16
+#: web/templates/email/password_reset_email.text.eex:3
+msgid "If it was you who requested the password reset, then simply click the link below to choose a new password:"
+msgstr ""
+
+#: web/templates/email/password_reset_email.html.eex:58
+#: web/templates/email/password_reset_email.text.eex:9
+msgid "If you did not request the password change, then simply delete and ignore this e-mail."
+msgstr ""
+
+#: web/templates/password_reset/new.html.eex:6
+msgid "If you forgot your password then fill out your e-mail below and we will send you instructions about how to reset it."
+msgstr ""
+
+#: web/email.ex:16
+msgid "Password reset instructions for %{site_name}"
+msgstr ""
+
+#: web/controllers/password_reset_controller.ex:77
+msgid "Password reset instructions sent!"
+msgstr ""
+
+#: web/templates/password_reset/new.html.eex:20
+msgid "Reset Password"
+msgstr ""
+
+#: web/templates/email/password_reset_email.html.eex:5
+msgid "Reset your password on %{site_name}"
+msgstr ""
+
+#: web/templates/email/password_reset_email.html.eex:15
+#: web/templates/email/password_reset_email.text.eex:1
+msgid "Someone has requested a password reset for your user on %{site_name}."
+msgstr ""
+
+#: web/email.ex:8
+msgid "Welcome to %{site_name}. Please confirm your e-mail address"
+msgstr ""
+
+#: web/templates/email/password_reset_email.html.eex:59
+#: web/templates/email/password_reset_email.text.eex:11
+msgid "Your account will remain safe as long as your e-mail account remains uncompromised."
+msgstr ""
+
+#: web/templates/email/registration_email.html.eex:16
+#: web/templates/email/registration_email.text.eex:3
+msgid "Click the link below to confirm:"
+msgstr ""
+
+#: web/templates/email/registration_email.html.eex:38
+msgid "Confirm my e-mail!"
+msgstr ""
+
+#: web/templates/email/registration_email.html.eex:15
+#: web/templates/email/registration_email.text.eex:1
+msgid "Your profile has now been created on %{site_name}, but you need to confirm your e-mail address before we can let you in."
+msgstr ""
+
+#: web/templates/password_reset/show.html.eex:5
+#: web/templates/password_reset/show.html.eex:22
+msgid "Change Password"
+msgstr ""
+
+#: web/templates/password_reset/show.html.eex:14
+msgid "New Password"
+msgstr ""
+
+#: web/templates/password_reset/show.html.eex:6
+msgid "Please choose a new password for your account:"
+msgstr ""
+
+#: web/controllers/password_reset_controller.ex:61
+msgid "Your password has now been changed and you have been signed in!"
+msgstr ""
+
+#: web/controllers/password_reset_controller.ex:34
+#: web/controllers/password_reset_controller.ex:53
+msgid "Your password reset token has expired. Please request a new!"
 msgstr ""

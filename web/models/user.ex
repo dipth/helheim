@@ -3,13 +3,15 @@ defmodule Altnation.User do
   alias Altnation.Repo
 
   schema "users" do
-    field :name,               :string
-    field :email,              :string
-    field :username,           :string
-    field :password,           :string, virtual: true
-    field :password_hash,      :string
-    field :confirmation_token, :string
-    field :confirmed_at,       Calecto.DateTimeUTC
+    field :name,                            :string
+    field :email,                           :string
+    field :username,                        :string
+    field :password,                        :string, virtual: true
+    field :password_hash,                   :string
+    field :password_reset_token,            :string
+    field :password_reset_token_updated_at, Calecto.DateTimeUTC
+    field :confirmation_token,              :string
+    field :confirmed_at,                    Calecto.DateTimeUTC
 
     timestamps()
   end
@@ -35,6 +37,15 @@ defmodule Altnation.User do
     |> put_confirmation_token()
   end
 
+  def new_password_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:password])
+    |> validate_required([:password])
+    |> validate_length(:password, min: 6)
+    |> put_password_hash()
+    |> clear_password_reset_token()
+  end
+
   def confirm!(user) do
     case user.confirmed_at do
       nil ->
@@ -42,6 +53,17 @@ defmodule Altnation.User do
         Repo.update(changeset)
       _ -> {:ok, user}
     end
+  end
+
+  def update_password_reset_token!(user) do
+    changeset = Ecto.Changeset.change user,
+      password_reset_token: SecureRandom.urlsafe_base64(16),
+      password_reset_token_updated_at: DateTime.utc_now
+    Repo.update(changeset)
+  end
+
+  def password_reset_token_expired?(user) do
+    user.password_reset_token_updated_at < Calendar.DateTime.subtract!(DateTime.utc_now, 24 * 60 * 60)
   end
 
   defp put_password_hash(changeset) do
@@ -57,6 +79,15 @@ defmodule Altnation.User do
     case changeset do
       %Ecto.Changeset{valid?: true} ->
         put_change(changeset, :confirmation_token, SecureRandom.urlsafe_base64(16))
+      _ ->
+        changeset
+    end
+  end
+
+  defp clear_password_reset_token(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true} ->
+        put_change(changeset, :password_reset_token, nil)
       _ ->
         changeset
     end

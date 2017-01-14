@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <div class="card mx-2">
+      <div class="card-block p-2">
+        <h1><%= gettext "Change Password" %></h1>
+        <p class="text-muted"><%= gettext "Please choose a new password for your account:" %></p>
+        <%= form_for @changeset, password_reset_path(@conn, :update, @password_reset_token), fn f -> %>
+          <input name="_method" type="hidden" value="patch" />
+
+          <div class="form-group mb-2 <%= if f.errors[:password] do 'has-danger' end %>">
+            <div class="controls">
+              <div class="input-prepend input-group">
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <%= password_input f, :password, placeholder: gettext("New Password"), class: "form-control" %>
+              </div>
+              <%= if message = f.errors[:password] do %>
+                <div class="form-control-feedback"><%= translate_error(message) %></div>
+              <% end %>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-block btn-success"><%= gettext "Change Password" %></button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -31,6 +31,9 @@
           <button type="submit" class="btn btn-block btn-success mb-2"><%= gettext "Sign In" %></button>
 
           <p>
+            <%= link gettext("Click here if you forgot your password"), to: password_reset_path(@conn, :new) %>
+          </p>
+          <p>
             <%= link gettext("Click here if you did not get your confirmation e-mail"), to: confirmation_path(@conn, :new) %>
           </p>
         <% end %>
