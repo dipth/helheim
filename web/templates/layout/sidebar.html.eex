@@ -1,11 +1,8 @@
 <div class="sidebar">
   <nav class="sidebar-nav">
     <ul class="nav">
-      <li class="nav-title">
-        Dashboard
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="index.html"><i class="icon-speedometer"></i> Dashboard <span class="tag tag-info">NEW</span></a>
+      <li class="nav-item mt-1">
+        <a class="nav-link" href="<%= page_path(@conn, :front_page)%>"><i class="fa fa-home"></i> <%= gettext("Front Page") %></a>
       </li>
     </ul>
   </nav>

@@ -7,7 +7,7 @@ defmodule Altnation.RegistrationControllerTest do
   describe "new/2" do
     test "it returns a successful response", %{conn: conn} do
       conn = get conn, "/registrations/new"
-      assert html_response(conn, 200) =~ gettext("Create your account")
+      assert html_response(conn, 200) =~ gettext("New Registration")
     end
   end
 
@@ -25,7 +25,7 @@ defmodule Altnation.RegistrationControllerTest do
 
     test "it does not create a user but re-renders the new template when posting invalid params", %{conn: conn} do
       conn = post conn, "/registrations", user: @invalid_params
-      assert html_response(conn, 200) =~ gettext("Create your account")
+      assert html_response(conn, 200) =~ gettext("New Registration")
       refute Repo.get_by(User, email: @valid_params[:email])
     end
   end

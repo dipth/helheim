@@ -59,7 +59,7 @@ defmodule Altnation.PasswordResetController do
             conn
             |> Altnation.Auth.login(user)
             |> put_flash(:info, gettext("Your password has now been changed and you have been signed in!"))
-            |> redirect(to: page_path(conn, :signed_in))
+            |> redirect(to: page_path(conn, :front_page))
           {:error, changeset} ->
             conn
             |> render("show.html", changeset: changeset, password_reset_token: password_reset_token)

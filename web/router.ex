@@ -40,6 +40,7 @@ defmodule Altnation.Router do
     pipe_through [:browser, :browser_auth]
 
     get "/signed_in", PageController, :signed_in
+    get "/front_page", PageController, :front_page
   end
 
   # Other scopes may use custom stacks.

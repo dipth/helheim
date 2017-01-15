@@ -14,11 +14,12 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">
 
-    <title>Hello Altnation!</title>
+    <title><%= gettext("Altnation") %></title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   </head>
 
-  <body class="navbar-fixed sidebar-nav">
+  <body class="navbar-fixed sidebar-nav app" data-csrf="<%= get_csrf_token() %>">
     <%= render "header.html", conn: @conn %>
     <%= render "sidebar.html", conn: @conn %>
 

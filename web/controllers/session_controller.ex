@@ -13,7 +13,7 @@ defmodule Altnation.SessionController do
         user = Guardian.Plug.current_resource(conn)
         conn
         |> put_flash(:info, gettext("Welcome back %{username}!", username: user.username))
-        |> redirect(to: page_path(conn, :signed_in))
+        |> redirect(to: page_path(conn, :front_page))
       {:error, _reason, conn} ->
         conn
         |> put_flash(:error, gettext("Wrong e-mail or password"))

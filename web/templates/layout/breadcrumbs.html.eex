@@ -1,6 +1,5 @@
 <!-- Breadcrumb -->
 <ol class="breadcrumb mb-0">
-  <li class="breadcrumb-item"><a href="/">Home</a></li>
   <%= for entry <- @view_module.breadcrumbs(@view_template, assigns) do %>
     <%= if elem(entry, 1) do %>
       <a href="<%= elem(entry, 1) || '#' %> ">

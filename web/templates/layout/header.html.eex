@@ -7,5 +7,35 @@
         <a class="nav-link navbar-toggler layout-toggler" href="#">☰</a>
       </li>
     </ul>
+
+    <ul class="nav navbar-nav float-xs-right">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <img src="<%= static_path(@conn, "/images/dummy_avatar.jpg") %>" class="img-avatar" alt="admin@bootstrapmaster.com">
+          <span class="hidden-md-down"><%= Guardian.Plug.current_resource(@conn).username %></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <div class="dropdown-header text-xs-center">
+            <strong>Account</strong>
+          </div>
+
+          <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages</a>
+          <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comments</a>
+
+          <div class="dropdown-header text-xs-center">
+            <strong>Settings</strong>
+          </div>
+
+          <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+          <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
+          <%= link to: session_path(@conn, :delete, :access), "data-method": "DELETE", class: "dropdown-item rest" do %>
+            <i class="fa fa-lock"></i> <%= gettext "Sign Out" %>
+          <% end %>
+        </div>
+      </li>
+      <li class="nav-item hidden-md-down">
+        <a class="nav-link aside-toggle" href="#">☰</a>
+      </li>
+    </ul>
   </div>
 </header>

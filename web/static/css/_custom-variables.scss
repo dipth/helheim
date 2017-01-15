@@ -1,8 +1,8 @@
 // Core Admin Variables
 
-$enable-sidebar-nav-rounded: true;
+$enable-sidebar-nav-rounded: false;
 
-$border-color: $gray-lighter;
+$border-color: $gray;
 $layout-transition-speed: .25s;
 
 
@@ -38,7 +38,7 @@ $vimeo: #aad450;
 // Navbar
 
 $navbar-height:                     55px;
-$navbar-bg:                         #fff;
+$navbar-bg:                         $gray-light;
 $navbar-border: (
     bottom: (
         size:                       1px,
@@ -47,21 +47,21 @@ $navbar-border: (
     )
 );
 $navbar-brand-width:                240px;
-$navbar-brand-bg:                   $brand-success;
+$navbar-brand-bg:                   $gray-lighter;
 $navbar-brand-logo:                 url('/images/logo.png');
-$navbar-brand-logo-size:            70px auto;
+$navbar-brand-logo-size:            130px auto;
 $navbar-brand-border: (
     bottom: (
         size:                       1px,
         style:                      solid,
-        color:                      $brand-success
+        color:                      $brand-primary
     )
 );
 
-$navbar-color:                      rgba(0,0,0,.3);
-$navbar-hover-color:                rgba(0,0,0,.6);
-$navbar-active-color:               rgba(0,0,0,.8);
-$navbar-disabled-color:             rgba(0,0,0,.15);
+$navbar-color:                      $gray-lightest;
+$navbar-hover-color:                $gray-lighter;
+$navbar-active-color:               $gray-lightest;
+$navbar-disabled-color:             $gray-dark;
 
 // Sidebar
 
@@ -70,35 +70,41 @@ $mobile-sidebar-width:              240px;
 $sidebar-padding:                   0 0 0 $spacer-x;
 $sidebar-compact-width:             55px;
 $sidebar-compact-height:            $sidebar-compact-width;
-$sidebar-color:                     $gray-dark;
-$sidebar-bg:                        $body-bg;
+$sidebar-color:                     $gray-lightest;
+$sidebar-bg:                        $gray-dark;
 $sidebar-header-bg:                 rgba(0,0,0,.2);
 $sidebar-footer-bg:                 rgba(0,0,0,.2);
 $sidebar-borders:                   none;
 
 // Sidebar Navigation
 
-$sidebar-nav-color:                 $gray-dark;
+$sidebar-nav-color:                 $gray-lightest;
 $sidebar-nav-title-padding-y:       .95rem;
 $sidebar-nav-title-padding-x:       1rem;
 $sidebar-nav-title-color:           $text-muted;
 $sidebar-nav-link-padding-y:        .75rem;
 $sidebar-nav-link-padding-x:        1rem;
-$sidebar-nav-link-color:            $gray-dark;
+$sidebar-nav-link-color:            $gray-lightest;
 $sidebar-nav-link-bg:               transparent;
-$sidebar-nav-link-icon-color:       $gray-dark;
+$sidebar-nav-link-icon-color:       $gray-lightest;
 
 $sidebar-nav-link-borders:          0;
 $sidebar-nav-link-hover-color:      #fff;
-$sidebar-nav-link-hover-bg:         $brand-success;
+$sidebar-nav-link-hover-bg:         $brand-primary;
 $sidebar-nav-link-hover-icon-color: #fff !important;
 
 $sidebar-nav-link-hover-borders:    0;
 $sidebar-nav-link-active-color:     #fff;
-$sidebar-nav-link-active-bg:        $brand-success;
+$sidebar-nav-link-active-bg:        transparent; //$brand-primary;
 $sidebar-nav-link-active-icon-color: #fff !important;
 
-$sidebar-nav-link-active-borders:   0;
+$sidebar-nav-link-active-borders:   (
+  left: (
+      size:                       3px,
+      style:                      solid,
+      color:                      $brand-primary
+  )
+);
 
 $sidebar-nav-dropdown-color:        #fff;
 $sidebar-nav-dropdown-bg:           lighten($brand-success, 10%);
@@ -154,10 +160,21 @@ $aside-menu-nav-padding-x:          1rem;
 
 $footer-height:                     50px;
 $footer-bg:                         transparent;
-$footer-color:                      $body-color;
+$footer-color:                      $gray-light;
 $footer-borders:                    0;
 
 // Cards
 
 $card-icon-bg:                      transparent;
 $card-icon-color:                   $body-color;
+
+// Dropdown
+
+$dropdown-bg: $gray-light;
+$dropdown-border-color: $gray-dark;
+$dropdown-divider-bg: $gray-dark;
+$dropdown-header-color: $gray-lightest;
+$dropdown-link-color: $gray-lightest;
+$dropdown-link-active-color: $gray-lightest;
+$dropdown-link-hover-bg: $body-color;
+$dropdown-link-hover-color: $gray-lightest;

@@ -1,8 +1,5 @@
 <footer class="footer">
-  <span class="text-left">
-    <a href="https://genesisui.com">Leaf</a> © 2016 creativeLabs.
-  </span>
   <span class="float-xs-right">
-    Powered by <a href="https://genesisui.com">GenesisUI</a>
+    © 2016 Visioneers
   </span>
 </footer>
