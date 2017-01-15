@@ -25,4 +25,8 @@ defmodule Altnation.Auth do
         {:error, :not_found, conn}
     end
   end
+
+  def password_correct?(password_hash, given_pass) do
+    checkpw(given_pass, password_hash)
+  end
 end

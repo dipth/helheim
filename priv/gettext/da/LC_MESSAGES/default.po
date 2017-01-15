@@ -47,6 +47,7 @@ msgstr "Klik her hvis du ikke har modtaget din aktiveringsmail"
 msgid "Create Account"
 msgstr "Opret Profil"
 
+#: web/templates/account/edit.html.eex:27
 #: web/templates/confirmation/new.html.eex:12
 #: web/templates/password_reset/new.html.eex:12
 #: web/templates/registration/new.html.eex:37
@@ -62,6 +63,7 @@ msgstr "Perfekt!"
 msgid "If for some reason you did not receive your confirmation e-mail, then enter your e-mail address below and we will send it again."
 msgstr "Hvis du ikke har modtaget din aktiveringsmail, kan du indtaste din e-mail adresse herunder, så sender vi den igen."
 
+#: web/templates/account/edit.html.eex:13
 #: web/templates/registration/new.html.eex:23
 msgid "Name"
 msgstr "Navn"
@@ -70,6 +72,7 @@ msgstr "Navn"
 msgid "New Registration"
 msgstr "Opret Profil"
 
+#: web/templates/account/edit.html.eex:47
 #: web/templates/registration/new.html.eex:51
 #: web/templates/session/new.html.eex:23
 msgid "Password"
@@ -97,11 +100,12 @@ msgstr "Brugernavn"
 msgid "Welcome to %{site_name}"
 msgstr "Velkommen til %{site_name}"
 
+#: web/templates/account/edit.html.eex:18
 #: web/templates/registration/new.html.eex:28
 msgid "Will only be shown to administrators"
 msgstr "Vil kun blive vist til administratorer"
 
-#: web/templates/layout/header.html.eex:32
+#: web/templates/layout/header.html.eex:30
 #: web/templates/page/signed_in.html.eex:9
 msgid "Sign Out"
 msgstr "Log ud"
@@ -146,7 +150,7 @@ msgstr "Ukendt resourcetype"
 msgid "User confirmed!"
 msgstr "Din profil er nu aktiveret!"
 
-#: web/controllers/registration_controller.ex:22
+#: web/controllers/registration_controller.ex:17
 msgid "User created!"
 msgstr "Din profil er nu oprettet!"
 
@@ -232,6 +236,7 @@ msgstr "Bekræft min e-mail!"
 msgid "Your profile has now been created on %{site_name}, but you need to confirm your e-mail address before we can let you in."
 msgstr "Din profil er nu blevet oprettet på %{site_name}, men før vi kan lukke dig ind skal du lige bekræfte din e-mail adresse."
 
+#: web/templates/account/edit.html.eex:40
 #: web/templates/password_reset/show.html.eex:5
 #: web/templates/password_reset/show.html.eex:38
 msgid "Change Password"
@@ -262,11 +267,13 @@ msgstr "Før vi kan lukke dig ind skal du bekræfte din e-mail adresse. Tjek din
 msgid "Front Page"
 msgstr "Forside"
 
+#: web/templates/account/edit.html.eex:52
 #: web/templates/password_reset/show.html.eex:19
 #: web/templates/registration/new.html.eex:56
 msgid "Must be at least 6 characters long"
 msgstr "Skal være minimum 6 tegn langt"
 
+#: web/templates/account/edit.html.eex:32
 #: web/templates/registration/new.html.eex:42
 msgid "Will never be shown to other users. Only used for login, notifications and password recovery"
 msgstr "Vil aldrig blive vist til andre brugere. Bruges udelukkende til login, notifikationer og nulstilling af kodeord"
@@ -275,11 +282,13 @@ msgstr "Vil aldrig blive vist til andre brugere. Bruges udelukkende til login, n
 msgid "You need to confirm your e-mail address before you can log in"
 msgstr "Du skal først bekræfte din e-mail adresse før du kan logge ind"
 
+#: web/templates/account/edit.html.eex:61
 #: web/templates/password_reset/show.html.eex:28
 #: web/templates/registration/new.html.eex:65
 msgid "Confirm Password"
 msgstr "Bekræft Kodeord"
 
+#: web/templates/account/edit.html.eex:66
 #: web/templates/password_reset/show.html.eex:33
 #: web/templates/registration/new.html.eex:70
 msgid "To ensure that you didn't make any typos"
@@ -288,3 +297,52 @@ msgstr "For at sikre dig imod tastefejl"
 #: web/controllers/password_reset_controller.ex:20
 msgid "You need to confirm your e-mail address before you can reset your password"
 msgstr "Du skal først bekræfte din e-mail adresse før du kan nulstille dit kodeord"
+
+#: web/templates/layout/header.html.eex:26 web/views/account_view.ex:4
+msgid "Settings"
+msgstr "Indstillinger"
+
+#: web/templates/layout/header.html.eex:29 web/views/account_view.ex:4
+msgid "Account"
+msgstr "Konto"
+
+#: web/templates/account/edit.html.eex:5
+msgid "Account Settings"
+msgstr "Kontoindstillinger"
+
+#: web/controllers/account_controller.ex:17
+msgid "Account updated!"
+msgstr "Dine kontoindstillinger blev opdateret!"
+
+#: web/templates/account/edit.html.eex:33
+msgid "Be aware!"
+msgstr "Advarsel!"
+
+#: web/templates/account/edit.html.eex:73
+#: web/templates/account/edit.html.eex:80
+msgid "Existing Password"
+msgstr "Nuværende Kodeord"
+
+#: web/templates/account/edit.html.eex:74
+msgid "For security reasons you must type in your existing password when updating your account settings"
+msgstr "Af hensyn til din sikkerhed skal du indtaste dit nuværende kodeord for at kunne opdatere dine kontoindstillinger"
+
+#: web/templates/account/edit.html.eex:33
+msgid "If you change your e-mail address, you will be unable to log in again until you have verified the new e-mail address!"
+msgstr "Hvis du ændrer din e-mail sender vi dig en ny bekræftelsesmail med et link som du skal klikke på, før du kan logge ind igen!"
+
+#: web/templates/account/edit.html.eex:41
+msgid "Leave these fields blank to keep your current password"
+msgstr "Udfyld kun disse to felter hvis du ønsker at ændre dit kodeord"
+
+#: web/templates/account/edit.html.eex:7
+msgid "Personal Details"
+msgstr "Personlige detaljer"
+
+#: web/templates/account/edit.html.eex:88
+msgid "Update Account"
+msgstr "Opdatér Konto"
+
+#: web/models/user.ex:116
+msgid "does not match your current password"
+msgstr "matcher ikke dit nuværende kodeord"

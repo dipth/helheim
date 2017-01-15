@@ -1,6 +1,7 @@
 defmodule Altnation.User do
   use Altnation.Web, :model
   alias Altnation.Repo
+  import Altnation.Gettext
 
   schema "users" do
     field :name,                            :string
@@ -8,6 +9,7 @@ defmodule Altnation.User do
     field :username,                        :string
     field :password,                        :string, virtual: true
     field :password_confirmation,           :string, virtual: true
+    field :existing_password,               :string, virtual: true
     field :password_hash,                   :string
     field :password_reset_token,            :string
     field :password_reset_token_updated_at, Calecto.DateTimeUTC
@@ -22,7 +24,7 @@ defmodule Altnation.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :email, :username, :password])
+    |> cast(params, [:name, :email, :username, :password, :password_confirmation])
     |> validate_required([:name, :email, :username])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
@@ -36,7 +38,7 @@ defmodule Altnation.User do
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password)
     |> put_password_hash()
-    |> put_confirmation_token()
+    |> reset_confirmed_state_if_email_changed()
   end
 
   def new_password_changeset(struct, params \\ %{}) do
@@ -47,6 +49,19 @@ defmodule Altnation.User do
     |> validate_confirmation(:password)
     |> put_password_hash()
     |> clear_password_reset_token()
+  end
+
+  def account_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:name, :email, :password, :password_confirmation, :existing_password])
+    |> validate_required([:name, :email, :existing_password])
+    |> validate_format(:email, ~r/@/)
+    |> validate_length(:password, min: 6)
+    |> validate_confirmation(:password)
+    |> validate_existing_password()
+    |> unique_constraint(:email)
+    |> put_password_hash()
+    |> reset_confirmed_state_if_email_changed()
   end
 
   def confirm!(user) do
@@ -82,19 +97,37 @@ defmodule Altnation.User do
     end
   end
 
-  defp put_confirmation_token(changeset) do
+  defp clear_password_reset_token(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true} ->
-        put_change(changeset, :confirmation_token, SecureRandom.urlsafe_base64(16))
+        put_change(changeset, :password_reset_token, nil)
       _ ->
         changeset
     end
   end
 
-  defp clear_password_reset_token(changeset) do
+  defp validate_existing_password(changeset) do
     case changeset do
-      %Ecto.Changeset{valid?: true} ->
-        put_change(changeset, :password_reset_token, nil)
+      %Ecto.Changeset{changes: %{existing_password: existing_password}} ->
+        password_hash = get_field(changeset, :password_hash)
+        if Altnation.Auth.password_correct?(password_hash, existing_password) do
+          changeset
+        else
+          add_error(changeset, :existing_password, gettext("does not match your current password"))
+        end
+      _ ->
+        changeset
+    end
+  end
+
+  defp reset_confirmed_state_if_email_changed(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{email: email}} ->
+        changeset = put_change(changeset, :confirmation_token, SecureRandom.urlsafe_base64(16))
+        changeset = put_change(changeset, :confirmed_at, nil)
+        confirmation_token = get_field(changeset, :confirmation_token)
+        Altnation.Email.registration_email(email, confirmation_token) |> Altnation.Mailer.deliver_later
+        changeset
       _ ->
         changeset
     end

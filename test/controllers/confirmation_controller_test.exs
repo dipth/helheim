@@ -17,12 +17,13 @@ defmodule Altnation.ConfirmationControllerTest do
       user = insert(:user)
       conn = post conn, "/confirmations", confirmation: %{email: user.email}
       assert html_response(conn, 302)
-      assert_delivered_email Altnation.Email.registration_email(user)
+      assert_delivered_email Altnation.Email.registration_email(user.email, user.confirmation_token)
     end
 
     test "it re-renders the new template when posting a non-existing e-mail address", %{conn: conn} do
       conn = post conn, "/confirmations", confirmation: %{email: "non@existing.com"}
       assert html_response(conn, 200) =~ gettext("No user with that e-mail address!")
+      assert_no_emails_delivered
     end
   end
 

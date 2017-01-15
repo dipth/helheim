@@ -46,7 +46,7 @@ defmodule Altnation.ConfirmationController do
   end
 
   defp send_confirmation(conn, user) do
-    Email.registration_email(user)
+    Email.registration_email(user.email, user.confirmation_token)
     |> Mailer.deliver_later
 
     conn

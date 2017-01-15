@@ -37,6 +37,7 @@ msgstr ""
 msgid "Create Account"
 msgstr ""
 
+#: web/templates/account/edit.html.eex:27
 #: web/templates/confirmation/new.html.eex:12
 #: web/templates/password_reset/new.html.eex:12
 #: web/templates/registration/new.html.eex:37
@@ -52,6 +53,7 @@ msgstr ""
 msgid "If for some reason you did not receive your confirmation e-mail, then enter your e-mail address below and we will send it again."
 msgstr ""
 
+#: web/templates/account/edit.html.eex:13
 #: web/templates/registration/new.html.eex:23
 msgid "Name"
 msgstr ""
@@ -60,6 +62,7 @@ msgstr ""
 msgid "New Registration"
 msgstr ""
 
+#: web/templates/account/edit.html.eex:47
 #: web/templates/registration/new.html.eex:51
 #: web/templates/session/new.html.eex:23
 msgid "Password"
@@ -87,11 +90,12 @@ msgstr ""
 msgid "Welcome to %{site_name}"
 msgstr ""
 
+#: web/templates/account/edit.html.eex:18
 #: web/templates/registration/new.html.eex:28
 msgid "Will only be shown to administrators"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:32
+#: web/templates/layout/header.html.eex:30
 #: web/templates/page/signed_in.html.eex:9
 msgid "Sign Out"
 msgstr ""
@@ -136,7 +140,7 @@ msgstr ""
 msgid "User confirmed!"
 msgstr ""
 
-#: web/controllers/registration_controller.ex:22
+#: web/controllers/registration_controller.ex:17
 msgid "User created!"
 msgstr ""
 
@@ -222,6 +226,7 @@ msgstr ""
 msgid "Your profile has now been created on %{site_name}, but you need to confirm your e-mail address before we can let you in."
 msgstr ""
 
+#: web/templates/account/edit.html.eex:40
 #: web/templates/password_reset/show.html.eex:5
 #: web/templates/password_reset/show.html.eex:38
 msgid "Change Password"
@@ -252,11 +257,13 @@ msgstr ""
 msgid "Front Page"
 msgstr ""
 
+#: web/templates/account/edit.html.eex:52
 #: web/templates/password_reset/show.html.eex:19
 #: web/templates/registration/new.html.eex:56
 msgid "Must be at least 6 characters long"
 msgstr ""
 
+#: web/templates/account/edit.html.eex:32
 #: web/templates/registration/new.html.eex:42
 msgid "Will never be shown to other users. Only used for login, notifications and password recovery"
 msgstr ""
@@ -265,11 +272,13 @@ msgstr ""
 msgid "You need to confirm your e-mail address before you can log in"
 msgstr ""
 
+#: web/templates/account/edit.html.eex:61
 #: web/templates/password_reset/show.html.eex:28
 #: web/templates/registration/new.html.eex:65
 msgid "Confirm Password"
 msgstr ""
 
+#: web/templates/account/edit.html.eex:66
 #: web/templates/password_reset/show.html.eex:33
 #: web/templates/registration/new.html.eex:70
 msgid "To ensure that you didn't make any typos"
@@ -277,4 +286,52 @@ msgstr ""
 
 #: web/controllers/password_reset_controller.ex:20
 msgid "You need to confirm your e-mail address before you can reset your password"
+msgstr ""
+
+#: web/templates/layout/header.html.eex:26 web/views/account_view.ex:4
+msgid "Settings"
+msgstr ""
+
+#: web/templates/layout/header.html.eex:29 web/views/account_view.ex:4
+msgid "Account"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:5
+msgid "Account Settings"
+msgstr ""
+
+#: web/controllers/account_controller.ex:17
+msgid "Account updated!"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:33
+msgid "Be aware!"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:73 web/templates/account/edit.html.eex:80
+msgid "Existing Password"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:74
+msgid "For security reasons you must type in your existing password when updating your account settings"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:33
+msgid "If you change your e-mail address, you will be unable to log in again until you have verified the new e-mail address!"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:41
+msgid "Leave these fields blank to keep your current password"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:7
+msgid "Personal Details"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:88
+msgid "Update Account"
+msgstr ""
+
+#: web/models/user.ex:116
+msgid "does not match your current password"
 msgstr ""

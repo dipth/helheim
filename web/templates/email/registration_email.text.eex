@@ -3,4 +3,4 @@
 <%= gettext("Click the link below to confirm:") %>
 
 
-<%= confirmation_url(Altnation.Endpoint, :show, @user.confirmation_token) %>
+<%= confirmation_url(Altnation.Endpoint, :show, @confirmation_token) %>

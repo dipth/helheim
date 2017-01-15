@@ -2,11 +2,11 @@ defmodule Altnation.Email do
   use Bamboo.Phoenix, view: Altnation.EmailView
   import Altnation.Gettext
 
-  def registration_email(user) do
+  def registration_email(email, confirmation_token) do
     base_email
-    |> to(user.email)
+    |> to(email)
     |> subject(gettext("Welcome to %{site_name}. Please confirm your e-mail address", site_name: gettext("Altnation")))
-    |> assign(:user, user)
+    |> assign(:confirmation_token, confirmation_token)
     |> render(:registration_email)
   end
 

@@ -1,8 +1,6 @@
 defmodule Altnation.RegistrationController do
   use Altnation.Web, :controller
   alias Altnation.User
-  alias Altnation.Email
-  alias Altnation.Mailer
 
   plug :put_layout, "app_special.html"
 
@@ -14,10 +12,7 @@ defmodule Altnation.RegistrationController do
   def create(conn, %{"user" => user_params}) do
     changeset = User.registration_changeset(%User{}, user_params)
     case Repo.insert(changeset) do
-      {:ok, user} ->
-        Email.registration_email(user)
-        |> Mailer.deliver_later
-
+      {:ok, _user} ->
         conn
         |> put_flash(:success, gettext("User created!"))
         |> redirect(to: page_path(conn, :confirmation_pending))

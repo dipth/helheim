@@ -20,13 +20,14 @@ defmodule Altnation.RegistrationControllerTest do
       assert html_response(conn, 302)
       user = Repo.get_by(User, email: @valid_params[:email])
       assert user
-      assert_delivered_email Altnation.Email.registration_email(user)
+      assert_delivered_email Altnation.Email.registration_email(user.email, user.confirmation_token)
     end
 
     test "it does not create a user but re-renders the new template when posting invalid params", %{conn: conn} do
       conn = post conn, "/registrations", user: @invalid_params
       assert html_response(conn, 200) =~ gettext("New Registration")
       refute Repo.get_by(User, email: @valid_params[:email])
+      assert_no_emails_delivered
     end
   end
 end
