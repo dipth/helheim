@@ -14,6 +14,10 @@ defmodule Altnation.SessionController do
         conn
         |> put_flash(:success, gettext("Welcome back %{username}!", username: user.username))
         |> redirect(to: page_path(conn, :front_page))
+      {:error, :unconfirmed, conn} ->
+        conn
+        |> put_flash(:warning, gettext("You need to confirm your e-mail address before you can log in"))
+        |> render("new.html")
       {:error, _reason, conn} ->
         conn
         |> put_flash(:warning, gettext("Wrong e-mail or password"))

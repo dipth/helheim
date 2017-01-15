@@ -14,8 +14,10 @@ defmodule Altnation.Auth do
     user = Repo.get_by(User, email: email)
 
     cond do
-      user && checkpw(given_pass, user.password_hash) ->
+      user && User.confirmed?(user) && checkpw(given_pass, user.password_hash) ->
         {:ok, login(conn, user)}
+      user && checkpw(given_pass, user.password_hash) ->
+        {:error, :unconfirmed, conn}
       user ->
         {:error, :unauthorized, conn}
       true ->

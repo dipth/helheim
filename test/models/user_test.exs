@@ -60,4 +60,16 @@ defmodule Altnation.UserTest do
       assert user.confirmed_at == confirmed_at
     end
   end
+
+  describe "confirmed?/1" do
+    test "it returns true if the confirmed_at timestamp is set" do
+      user = insert(:user, confirmed_at: DateTime.utc_now)
+      assert User.confirmed?(user)
+    end
+
+    test "it returns false if the confirmed_at timestamp is not set" do
+      user = insert(:user, confirmed_at: nil)
+      refute User.confirmed?(user)
+    end
+  end
 end

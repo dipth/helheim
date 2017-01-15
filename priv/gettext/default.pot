@@ -113,7 +113,7 @@ msgstr ""
 msgid "No user with that e-mail address!"
 msgstr ""
 
-#: web/controllers/session_controller.ex:27
+#: web/controllers/session_controller.ex:31
 msgid "See you later!"
 msgstr ""
 
@@ -144,7 +144,7 @@ msgstr ""
 msgid "Welcome back %{username}!"
 msgstr ""
 
-#: web/controllers/session_controller.ex:19
+#: web/controllers/session_controller.ex:23
 msgid "Wrong e-mail or password"
 msgstr ""
 
@@ -258,4 +258,8 @@ msgstr ""
 
 #: web/templates/registration/new.html.eex:42
 msgid "Will never be shown to other users. Only used for login, notifications and password recovery"
+msgstr ""
+
+#: web/controllers/session_controller.ex:19
+msgid "You need to confirm your e-mail address before you can log in"
 msgstr ""

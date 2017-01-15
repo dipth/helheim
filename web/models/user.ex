@@ -55,6 +55,10 @@ defmodule Altnation.User do
     end
   end
 
+  def confirmed?(user) do
+    !is_nil(user.confirmed_at)
+  end
+
   def update_password_reset_token!(user) do
     changeset = Ecto.Changeset.change user,
       password_reset_token: SecureRandom.urlsafe_base64(16),

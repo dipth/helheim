@@ -123,7 +123,7 @@ msgstr "Aktiveringsmail afsendt!"
 msgid "No user with that e-mail address!"
 msgstr "Der findes ingen profiler med den e-mail adresse!"
 
-#: web/controllers/session_controller.ex:27
+#: web/controllers/session_controller.ex:31
 msgid "See you later!"
 msgstr "Vi ses senere!"
 
@@ -154,7 +154,7 @@ msgstr "Din profil er nu oprettet!"
 msgid "Welcome back %{username}!"
 msgstr "Velkommen tilbage %{username}!"
 
-#: web/controllers/session_controller.ex:19
+#: web/controllers/session_controller.ex:23
 msgid "Wrong e-mail or password"
 msgstr "Forkert e-mail eller kodeord"
 
@@ -269,3 +269,7 @@ msgstr "Skal være minimum 6 tegn langt"
 #: web/templates/registration/new.html.eex:42
 msgid "Will never be shown to other users. Only used for login, notifications and password recovery"
 msgstr "Vil aldrig blive vist til andre brugere. Bruges udelukkende til login, notifikationer og nulstilling af kodeord"
+
+#: web/controllers/session_controller.ex:19
+msgid "You need to confirm your e-mail address before you can log in"
+msgstr "Du skal først bekræfte din e-mail adresse før du kan logge ind"
