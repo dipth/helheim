@@ -1,10 +1,4 @@
-<%
-  info  = get_flash(@conn, :info)
-  error = get_flash(@conn, :error)
-%>
-<%= if info do %>
-  <p class="alert alert-info" role="alert"><%= info %></p>
-<% end %>
-<%= if error do %>
-  <p class="alert alert-danger" role="alert"><%= error %></p>
-<% end %>
+<%= render "alert.html", alert_msg: get_flash(@conn, :success), alert_type: "success" %>
+<%= render "alert.html", alert_msg: get_flash(@conn, :info), alert_type: "info" %>
+<%= render "alert.html", alert_msg: get_flash(@conn, :warning), alert_type: "warning" %>
+<%= render "alert.html", alert_msg: get_flash(@conn, :error), alert_type: "danger" %>

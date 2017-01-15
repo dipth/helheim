@@ -5,14 +5,14 @@ defmodule Altnation.PageControllerTest do
   describe "index/2" do
     test "it returns a successful response", %{conn: conn} do
       conn = get conn, "/"
-      assert html_response(conn, 200) =~ gettext("Welcome to %{site_name}", site_name: gettext("Altnation"))
+      assert html_response(conn, 200) =~ gettext("%{site_name} is a community for alternative people.", site_name: gettext("Altnation"))
     end
   end
 
   describe "confirmation_pending/2" do
     test "it returns a successful response", %{conn: conn} do
       conn = get conn, "/confirmation_pending"
-      assert html_response(conn, 200) =~ gettext("Before you can enter, you need to pass a final test. Please check your e-mail for further instructions...")
+      assert html_response(conn, 200) =~ gettext("Before we can let you in, you need to confirm your e-mail address. Please check your inbox for further instructions...")
     end
   end
 

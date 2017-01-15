@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: web/templates/page/index.html.eex:6
+#: web/templates/page/index.html.eex:5
 msgid "%{site_name} is a community for alternative people."
 msgstr "%{site_name} er et community for alternative folk."
 
@@ -31,36 +31,30 @@ msgstr "%{site_name} er et community for alternative folk."
 #: web/templates/email/registration_email.html.eex:5
 #: web/templates/email/registration_email.html.eex:15
 #: web/templates/email/registration_email.text.eex:1
+#: web/templates/layout/app.html.eex:17
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
-#: web/templates/page/index.html.eex:5 web/templates/page/index.html.eex:6
+#: web/templates/layout/app_special.html.eex:30
+#: web/templates/page/index.html.eex:5
 msgid "Altnation"
 msgstr "Helheim"
-
-#: web/templates/page/confirmation_pending.html.eex:4
-msgid "Before you can enter, you need to pass a final test. Please check your e-mail for further instructions..."
-msgstr "Før du kan fortsætte skal du gennemføre en sidste test. Tjek din e-mail for yderligere oplysninger…"
 
 #: web/templates/session/new.html.eex:37
 msgid "Click here if you did not get your confirmation e-mail"
 msgstr "Klik her hvis du ikke har modtaget din aktiveringsmail"
 
-#: web/templates/registration/new.html.eex:58
+#: web/templates/registration/new.html.eex:61
 msgid "Create Account"
 msgstr "Opret Profil"
 
-#: web/templates/registration/new.html.eex:6
-msgid "Create your account"
-msgstr "Opret din profil"
-
 #: web/templates/confirmation/new.html.eex:12
 #: web/templates/password_reset/new.html.eex:12
-#: web/templates/registration/new.html.eex:38
+#: web/templates/registration/new.html.eex:37
 #: web/templates/session/new.html.eex:11
 msgid "E-mail"
 msgstr "E-mail"
 
-#: web/templates/page/confirmation_pending.html.eex:4
+#: web/templates/page/confirmation_pending.html.eex:5
 msgid "Excellent!"
 msgstr "Perfekt!"
 
@@ -68,7 +62,7 @@ msgstr "Perfekt!"
 msgid "If for some reason you did not receive your confirmation e-mail, then enter your e-mail address below and we will send it again."
 msgstr "Hvis du ikke har modtaget din aktiveringsmail, kan du indtaste din e-mail adresse herunder, så sender vi den igen."
 
-#: web/templates/registration/new.html.eex:12
+#: web/templates/registration/new.html.eex:23
 msgid "Name"
 msgstr "Navn"
 
@@ -76,12 +70,12 @@ msgstr "Navn"
 msgid "New Registration"
 msgstr "Opret Profil"
 
-#: web/templates/registration/new.html.eex:50
+#: web/templates/registration/new.html.eex:51
 #: web/templates/session/new.html.eex:23
 msgid "Password"
 msgstr "Kodeord"
 
-#: web/templates/page/index.html.eex:10
+#: web/templates/page/index.html.eex:9
 msgid "Register Account"
 msgstr "Opret Profil"
 
@@ -90,24 +84,24 @@ msgstr "Opret Profil"
 msgid "Resend confirmation e-mail"
 msgstr "Gensend aktiveringsmail"
 
-#: web/templates/page/index.html.eex:15 web/templates/session/new.html.eex:5
+#: web/templates/page/index.html.eex:14 web/templates/session/new.html.eex:5
 #: web/templates/session/new.html.eex:31
 msgid "Sign In"
 msgstr "Log ind"
 
-#: web/templates/registration/new.html.eex:26
+#: web/templates/registration/new.html.eex:11
 msgid "Username"
 msgstr "Brugernavn"
 
 #: web/templates/email/registration_email.html.eex:5
-#: web/templates/page/index.html.eex:5
 msgid "Welcome to %{site_name}"
 msgstr "Velkommen til %{site_name}"
 
-#: web/templates/registration/new.html.eex:17
+#: web/templates/registration/new.html.eex:28
 msgid "Will only be shown to administrators"
 msgstr "Vil kun blive vist til administratorer"
 
+#: web/templates/layout/header.html.eex:32
 #: web/templates/page/signed_in.html.eex:9
 msgid "Sign Out"
 msgstr "Log ud"
@@ -259,3 +253,19 @@ msgstr "Dit kodeord er hermed blevet ændret og vi har logget dig ind!"
 #: web/controllers/password_reset_controller.ex:53
 msgid "Your password reset token has expired. Please request a new!"
 msgstr "Din nulstillingskode er desværre udløbet. Du er derfor nødt til at forespørge en ny!"
+
+#: web/templates/page/confirmation_pending.html.eex:5
+msgid "Before we can let you in, you need to confirm your e-mail address. Please check your inbox for further instructions..."
+msgstr "Før vi kan lukke dig ind skal du bekræfte din e-mail adresse. Tjek din indbakke for yderligere instruktioner…"
+
+#: web/templates/layout/sidebar.html.eex:5
+msgid "Front Page"
+msgstr "Forside"
+
+#: web/templates/registration/new.html.eex:56
+msgid "Must be at least 6 characters long"
+msgstr "Skal være minimum 6 tegn langt"
+
+#: web/templates/registration/new.html.eex:42
+msgid "Will never be shown to other users. Only used for login, notifications and password recovery"
+msgstr "Vil aldrig blive vist til andre brugere. Bruges udelukkende til login, notifikationer og nulstilling af kodeord"

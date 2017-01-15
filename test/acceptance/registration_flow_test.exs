@@ -12,17 +12,17 @@ defmodule Altnation.RegistrationFlowTest do
     |> fill_in(gettext("E-mail"), with: "foo@bar.dk")
     |> fill_in(gettext("Password"), with: "password")
     |> click_on(gettext("Create Account"))
-    |> find(".alert.alert-info")
+    |> find(".alert.alert-success")
     |> text
-    assert result == gettext("User created!")
+    assert result =~ gettext("User created!")
 
     # TODO: Check that the user cannot sign in before confirming
 
     user = Repo.get_by(User, email: "foo@bar.dk")
     result = session
     |> visit("/confirmations/#{user.confirmation_token}")
-    |> find(".alert.alert-info")
+    |> find(".alert.alert-success")
     |> text
-    assert result == gettext("User confirmed!")
+    assert result =~ gettext("User confirmed!")
   end
 end

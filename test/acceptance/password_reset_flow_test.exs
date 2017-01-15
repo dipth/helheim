@@ -13,17 +13,17 @@ defmodule Altnation.PasswordResetFlowTest do
     |> click_link(gettext("Click here if you forgot your password"))
     |> fill_in(gettext("E-mail"), with: user.email)
     |> click_on(gettext("Reset Password"))
-    |> find(".alert.alert-info")
+    |> find(".alert.alert-success")
     |> text
-    assert result == gettext("Password reset instructions sent!")
+    assert result =~ gettext("Password reset instructions sent!")
 
     user = Repo.get(User, user.id)
     result = session
     |> visit("/password_resets/#{user.password_reset_token}")
     |> fill_in(gettext("New Password"), with: "myNewPassword")
     |> click_on(gettext("Change Password"))
-    |> find(".alert.alert-info")
+    |> find(".alert.alert-success")
     |> text
-    assert result == gettext("Your password has now been changed and you have been signed in!")
+    assert result =~ gettext("Your password has now been changed and you have been signed in!")
   end
 end

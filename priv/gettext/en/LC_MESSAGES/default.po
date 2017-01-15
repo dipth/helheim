@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Language: en\n"
 
-#: web/templates/page/index.html.eex:6
+#: web/templates/page/index.html.eex:5
 msgid "%{site_name} is a community for alternative people."
 msgstr ""
 
@@ -21,36 +21,30 @@ msgstr ""
 #: web/templates/email/registration_email.html.eex:5
 #: web/templates/email/registration_email.html.eex:15
 #: web/templates/email/registration_email.text.eex:1
+#: web/templates/layout/app.html.eex:17
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
-#: web/templates/page/index.html.eex:5 web/templates/page/index.html.eex:6
+#: web/templates/layout/app_special.html.eex:30
+#: web/templates/page/index.html.eex:5
 msgid "Altnation"
-msgstr ""
-
-#: web/templates/page/confirmation_pending.html.eex:4
-msgid "Before you can enter, you need to pass a final test. Please check your e-mail for further instructions..."
 msgstr ""
 
 #: web/templates/session/new.html.eex:37
 msgid "Click here if you did not get your confirmation e-mail"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:58
+#: web/templates/registration/new.html.eex:61
 msgid "Create Account"
-msgstr ""
-
-#: web/templates/registration/new.html.eex:6
-msgid "Create your account"
 msgstr ""
 
 #: web/templates/confirmation/new.html.eex:12
 #: web/templates/password_reset/new.html.eex:12
-#: web/templates/registration/new.html.eex:38
+#: web/templates/registration/new.html.eex:37
 #: web/templates/session/new.html.eex:11
 msgid "E-mail"
 msgstr ""
 
-#: web/templates/page/confirmation_pending.html.eex:4
+#: web/templates/page/confirmation_pending.html.eex:5
 msgid "Excellent!"
 msgstr ""
 
@@ -58,7 +52,7 @@ msgstr ""
 msgid "If for some reason you did not receive your confirmation e-mail, then enter your e-mail address below and we will send it again."
 msgstr ""
 
-#: web/templates/registration/new.html.eex:12
+#: web/templates/registration/new.html.eex:23
 msgid "Name"
 msgstr ""
 
@@ -66,12 +60,12 @@ msgstr ""
 msgid "New Registration"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:50
+#: web/templates/registration/new.html.eex:51
 #: web/templates/session/new.html.eex:23
 msgid "Password"
 msgstr ""
 
-#: web/templates/page/index.html.eex:10
+#: web/templates/page/index.html.eex:9
 msgid "Register Account"
 msgstr ""
 
@@ -80,24 +74,24 @@ msgstr ""
 msgid "Resend confirmation e-mail"
 msgstr ""
 
-#: web/templates/page/index.html.eex:15 web/templates/session/new.html.eex:5
+#: web/templates/page/index.html.eex:14 web/templates/session/new.html.eex:5
 #: web/templates/session/new.html.eex:31
 msgid "Sign In"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:26
+#: web/templates/registration/new.html.eex:11
 msgid "Username"
 msgstr ""
 
 #: web/templates/email/registration_email.html.eex:5
-#: web/templates/page/index.html.eex:5
 msgid "Welcome to %{site_name}"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:17
+#: web/templates/registration/new.html.eex:28
 msgid "Will only be shown to administrators"
 msgstr ""
 
+#: web/templates/layout/header.html.eex:32
 #: web/templates/page/signed_in.html.eex:9
 msgid "Sign Out"
 msgstr ""
@@ -248,4 +242,21 @@ msgstr ""
 #: web/controllers/password_reset_controller.ex:34
 #: web/controllers/password_reset_controller.ex:53
 msgid "Your password reset token has expired. Please request a new!"
+msgstr ""
+
+#, fuzzy
+#: web/templates/page/confirmation_pending.html.eex:5
+msgid "Before we can let you in, you need to confirm your e-mail address. Please check your inbox for further instructions..."
+msgstr ""
+
+#: web/templates/layout/sidebar.html.eex:5
+msgid "Front Page"
+msgstr ""
+
+#: web/templates/registration/new.html.eex:56
+msgid "Must be at least 6 characters long"
+msgstr ""
+
+#: web/templates/registration/new.html.eex:42
+msgid "Will never be shown to other users. Only used for login, notifications and password recovery"
 msgstr ""

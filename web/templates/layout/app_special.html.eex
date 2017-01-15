@@ -26,7 +26,8 @@
           <div class="col-md-12">
             <div class="text-xs-center">
               <a href="/">
-                <img src="<%= static_path(@conn, "/images/logo2.png") %>" alt="<%= gettext("Altnation") %>">
+                <img src="<%= static_path(@conn, "/images/logo2.png") %>" alt="<%= gettext("Altnation") %>" class="mb-1"><br>
+                <img src="<%= static_path(@conn, "/images/logo.png") %>" alt="<%= gettext("Altnation") %>" class="logo-text">
               </a>
             </div>
           </div>
