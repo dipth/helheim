@@ -12,7 +12,7 @@ defmodule Altnation.RegistrationControllerTest do
   end
 
   describe "create/2" do
-    @valid_params %{name: "Foo Bar", username: "foobar", email: "foo@bar.dk", password: "password"}
+    @valid_params %{name: "Foo Bar", username: "foobar", email: "foo@bar.dk", password: "password", password_confirmation: "password"}
     @invalid_params %{email: "foo@bar.dk"}
 
     test "it creates a user, sends a registration e-mail and redirects when posting valid params", %{conn: conn} do

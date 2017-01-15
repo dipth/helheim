@@ -21,6 +21,7 @@ defmodule Altnation.PasswordResetFlowTest do
     result = session
     |> visit("/password_resets/#{user.password_reset_token}")
     |> fill_in(gettext("New Password"), with: "myNewPassword")
+    |> fill_in(gettext("Confirm Password"), with: "myNewPassword")
     |> click_on(gettext("Change Password"))
     |> find(".alert.alert-success")
     |> text

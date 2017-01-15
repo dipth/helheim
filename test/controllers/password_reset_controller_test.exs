@@ -24,6 +24,14 @@ defmodule Altnation.PasswordResetControllerTest do
       assert_delivered_email Altnation.Email.password_reset_email(user)
     end
 
+    test "it re-renders the new template when posting a non-confirmed e-mail address", %{conn: conn} do
+      user = insert(:user, confirmed_at: nil)
+      conn = post conn, "/password_resets", password_reset: %{email: user.email}
+      assert html_response(conn, 200) =~ gettext("You need to confirm your e-mail address before you can reset your password")
+      user = Repo.get(User, user.id)
+      refute user.password_reset_token
+    end
+
     test "it re-renders the new template when posting a non-existing e-mail address", %{conn: conn} do
       conn = post conn, "/password_resets", password_reset: %{email: "non@existing.com"}
       assert html_response(conn, 200) =~ gettext("No user with that e-mail address!")
@@ -55,7 +63,7 @@ defmodule Altnation.PasswordResetControllerTest do
     test "it changes the users password, clears his reset token, signs him in and redirects him when posting a valid password", %{conn: conn} do
       user = insert(:user, password_reset_token: "sometoken", password_reset_token_updated_at: DateTime.utc_now)
       old_password_hash = user.password_hash
-      conn = post conn, "/password_resets/sometoken", user: %{password: "myshinynewpassword"}, _method: "patch"
+      conn = post conn, "/password_resets/sometoken", user: %{password: "myshinynewpassword", password_confirmation: "myshinynewpassword"}, _method: "patch"
       assert html_response(conn, 302)
       assert Guardian.Plug.current_resource(conn).id == user.id
       user = Repo.get(User, user.id)
@@ -77,7 +85,7 @@ defmodule Altnation.PasswordResetControllerTest do
     test "it does not change the users password or sign him in, but redirects when the reset token is invalid", %{conn: conn} do
       user = insert(:user, password_reset_token: "sometoken", password_reset_token_updated_at: DateTime.utc_now)
       old_password_hash = user.password_hash
-      conn = post conn, "/password_resets/someothertoken", user: %{password: "myshinynewpassword"}, _method: "patch"
+      conn = post conn, "/password_resets/someothertoken", user: %{password: "myshinynewpassword", password_confirmation: "myshinynewpassword"}, _method: "patch"
       assert html_response(conn, 302)
       refute Guardian.Plug.current_resource(conn)
       user = Repo.get(User, user.id)
@@ -89,7 +97,7 @@ defmodule Altnation.PasswordResetControllerTest do
       updated_at = Calendar.DateTime.subtract!(DateTime.utc_now, 24 * 60 * 60)
       user = insert(:user, password_reset_token: "sometoken", password_reset_token_updated_at: updated_at)
       old_password_hash = user.password_hash
-      conn = post conn, "/password_resets/someothertoken", user: %{password: "myshinynewpassword"}, _method: "patch"
+      conn = post conn, "/password_resets/someothertoken", user: %{password: "myshinynewpassword", password_confirmation: "myshinynewpassword"}, _method: "patch"
       assert html_response(conn, 302)
       refute Guardian.Plug.current_resource(conn)
       user = Repo.get(User, user.id)

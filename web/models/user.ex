@@ -7,6 +7,7 @@ defmodule Altnation.User do
     field :email,                           :string
     field :username,                        :string
     field :password,                        :string, virtual: true
+    field :password_confirmation,           :string, virtual: true
     field :password_hash,                   :string
     field :password_reset_token,            :string
     field :password_reset_token_updated_at, Calecto.DateTimeUTC
@@ -33,6 +34,7 @@ defmodule Altnation.User do
     |> changeset(params)
     |> validate_required([:password])
     |> validate_length(:password, min: 6)
+    |> validate_confirmation(:password)
     |> put_password_hash()
     |> put_confirmation_token()
   end
@@ -42,6 +44,7 @@ defmodule Altnation.User do
     |> cast(params, [:password])
     |> validate_required([:password])
     |> validate_length(:password, min: 6)
+    |> validate_confirmation(:password)
     |> put_password_hash()
     |> clear_password_reset_token()
   end

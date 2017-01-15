@@ -11,6 +11,7 @@ defmodule Altnation.RegistrationFlowTest do
     |> fill_in(gettext("Username"), with: "foobar")
     |> fill_in(gettext("E-mail"), with: "foo@bar.dk")
     |> fill_in(gettext("Password"), with: "password")
+    |> fill_in(gettext("Confirm Password"), with: "password")
     |> click_on(gettext("Create Account"))
     |> find(".alert.alert-success")
     |> text

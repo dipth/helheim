@@ -33,7 +33,7 @@ msgstr ""
 msgid "Click here if you did not get your confirmation e-mail"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:61
+#: web/templates/registration/new.html.eex:75
 msgid "Create Account"
 msgstr ""
 
@@ -109,7 +109,7 @@ msgid "Confirmation e-mail sent!"
 msgstr ""
 
 #: web/controllers/confirmation_controller.ex:17
-#: web/controllers/password_reset_controller.ex:17
+#: web/controllers/password_reset_controller.ex:24
 msgid "No user with that e-mail address!"
 msgstr ""
 
@@ -118,8 +118,8 @@ msgid "See you later!"
 msgstr ""
 
 #: web/controllers/confirmation_controller.ex:28
-#: web/controllers/password_reset_controller.ex:30
-#: web/controllers/password_reset_controller.ex:49
+#: web/controllers/password_reset_controller.ex:35
+#: web/controllers/password_reset_controller.ex:54
 msgid "Token not found!"
 msgstr ""
 
@@ -182,7 +182,7 @@ msgstr ""
 msgid "Password reset instructions for %{site_name}"
 msgstr ""
 
-#: web/controllers/password_reset_controller.ex:77
+#: web/controllers/password_reset_controller.ex:82
 msgid "Password reset instructions sent!"
 msgstr ""
 
@@ -223,7 +223,7 @@ msgid "Your profile has now been created on %{site_name}, but you need to confir
 msgstr ""
 
 #: web/templates/password_reset/show.html.eex:5
-#: web/templates/password_reset/show.html.eex:22
+#: web/templates/password_reset/show.html.eex:38
 msgid "Change Password"
 msgstr ""
 
@@ -235,12 +235,12 @@ msgstr ""
 msgid "Please choose a new password for your account:"
 msgstr ""
 
-#: web/controllers/password_reset_controller.ex:61
+#: web/controllers/password_reset_controller.ex:66
 msgid "Your password has now been changed and you have been signed in!"
 msgstr ""
 
-#: web/controllers/password_reset_controller.ex:34
-#: web/controllers/password_reset_controller.ex:53
+#: web/controllers/password_reset_controller.ex:39
+#: web/controllers/password_reset_controller.ex:58
 msgid "Your password reset token has expired. Please request a new!"
 msgstr ""
 
@@ -252,6 +252,7 @@ msgstr ""
 msgid "Front Page"
 msgstr ""
 
+#: web/templates/password_reset/show.html.eex:19
 #: web/templates/registration/new.html.eex:56
 msgid "Must be at least 6 characters long"
 msgstr ""
@@ -262,4 +263,18 @@ msgstr ""
 
 #: web/controllers/session_controller.ex:19
 msgid "You need to confirm your e-mail address before you can log in"
+msgstr ""
+
+#: web/templates/password_reset/show.html.eex:28
+#: web/templates/registration/new.html.eex:65
+msgid "Confirm Password"
+msgstr ""
+
+#: web/templates/password_reset/show.html.eex:33
+#: web/templates/registration/new.html.eex:70
+msgid "To ensure that you didn't make any typos"
+msgstr ""
+
+#: web/controllers/password_reset_controller.ex:20
+msgid "You need to confirm your e-mail address before you can reset your password"
 msgstr ""

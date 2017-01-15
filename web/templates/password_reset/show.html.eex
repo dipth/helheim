@@ -15,6 +15,22 @@
               </div>
               <%= if message = f.errors[:password] do %>
                 <div class="form-control-feedback"><%= translate_error(message) %></div>
+              <% else %>
+                <small class="pl-3"><%= gettext "Must be at least 6 characters long" %></small>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="form-group mb-2 <%= if f.errors[:password_confirmation] do 'has-danger' end %>">
+            <div class="controls">
+              <div class="input-prepend input-group">
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <%= password_input f, :password_confirmation, placeholder: gettext("Confirm Password"), class: "form-control" %>
+              </div>
+              <%= if message = f.errors[:password_confirmation] do %>
+                <div class="form-control-feedback"><%= translate_error(message) %></div>
+              <% else %>
+                <small class="pl-3"><%= gettext "To ensure that you didn't make any typos" %></small>
               <% end %>
             </div>
           </div>

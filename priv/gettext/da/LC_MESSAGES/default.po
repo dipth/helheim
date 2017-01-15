@@ -43,7 +43,7 @@ msgstr "Helheim"
 msgid "Click here if you did not get your confirmation e-mail"
 msgstr "Klik her hvis du ikke har modtaget din aktiveringsmail"
 
-#: web/templates/registration/new.html.eex:61
+#: web/templates/registration/new.html.eex:75
 msgid "Create Account"
 msgstr "Opret Profil"
 
@@ -119,7 +119,7 @@ msgid "Confirmation e-mail sent!"
 msgstr "Aktiveringsmail afsendt!"
 
 #: web/controllers/confirmation_controller.ex:17
-#: web/controllers/password_reset_controller.ex:17
+#: web/controllers/password_reset_controller.ex:24
 msgid "No user with that e-mail address!"
 msgstr "Der findes ingen profiler med den e-mail adresse!"
 
@@ -128,8 +128,8 @@ msgid "See you later!"
 msgstr "Vi ses senere!"
 
 #: web/controllers/confirmation_controller.ex:28
-#: web/controllers/password_reset_controller.ex:30
-#: web/controllers/password_reset_controller.ex:49
+#: web/controllers/password_reset_controller.ex:35
+#: web/controllers/password_reset_controller.ex:54
 msgid "Token not found!"
 msgstr "Der findes ingen profil med den aktiveringskode!"
 
@@ -192,7 +192,7 @@ msgstr "Hvis du har glemt dit kodeord så udfyld din e-mail adresse herunder, s�
 msgid "Password reset instructions for %{site_name}"
 msgstr "Nulstilling af kodeord på %{site_name}"
 
-#: web/controllers/password_reset_controller.ex:77
+#: web/controllers/password_reset_controller.ex:82
 msgid "Password reset instructions sent!"
 msgstr "Vi har nu sendt dig en e-mail med instruktioner!"
 
@@ -233,7 +233,7 @@ msgid "Your profile has now been created on %{site_name}, but you need to confir
 msgstr "Din profil er nu blevet oprettet på %{site_name}, men før vi kan lukke dig ind skal du lige bekræfte din e-mail adresse."
 
 #: web/templates/password_reset/show.html.eex:5
-#: web/templates/password_reset/show.html.eex:22
+#: web/templates/password_reset/show.html.eex:38
 msgid "Change Password"
 msgstr "Skift Kodeord"
 
@@ -245,12 +245,12 @@ msgstr "Nyt Kodeord"
 msgid "Please choose a new password for your account:"
 msgstr "Vælg venligst et nyt kodeord til din profil:"
 
-#: web/controllers/password_reset_controller.ex:61
+#: web/controllers/password_reset_controller.ex:66
 msgid "Your password has now been changed and you have been signed in!"
 msgstr "Dit kodeord er hermed blevet ændret og vi har logget dig ind!"
 
-#: web/controllers/password_reset_controller.ex:34
-#: web/controllers/password_reset_controller.ex:53
+#: web/controllers/password_reset_controller.ex:39
+#: web/controllers/password_reset_controller.ex:58
 msgid "Your password reset token has expired. Please request a new!"
 msgstr "Din nulstillingskode er desværre udløbet. Du er derfor nødt til at forespørge en ny!"
 
@@ -262,6 +262,7 @@ msgstr "Før vi kan lukke dig ind skal du bekræfte din e-mail adresse. Tjek din
 msgid "Front Page"
 msgstr "Forside"
 
+#: web/templates/password_reset/show.html.eex:19
 #: web/templates/registration/new.html.eex:56
 msgid "Must be at least 6 characters long"
 msgstr "Skal være minimum 6 tegn langt"
@@ -273,3 +274,17 @@ msgstr "Vil aldrig blive vist til andre brugere. Bruges udelukkende til login, n
 #: web/controllers/session_controller.ex:19
 msgid "You need to confirm your e-mail address before you can log in"
 msgstr "Du skal først bekræfte din e-mail adresse før du kan logge ind"
+
+#: web/templates/password_reset/show.html.eex:28
+#: web/templates/registration/new.html.eex:65
+msgid "Confirm Password"
+msgstr "Bekræft Kodeord"
+
+#: web/templates/password_reset/show.html.eex:33
+#: web/templates/registration/new.html.eex:70
+msgid "To ensure that you didn't make any typos"
+msgstr "For at sikre dig imod tastefejl"
+
+#: web/controllers/password_reset_controller.ex:20
+msgid "You need to confirm your e-mail address before you can reset your password"
+msgstr "Du skal først bekræfte din e-mail adresse før du kan nulstille dit kodeord"

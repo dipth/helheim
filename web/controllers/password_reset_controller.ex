@@ -12,12 +12,17 @@ defmodule Altnation.PasswordResetController do
 
   def create(conn, %{"password_reset" => reset_params}) do
     user = Repo.get_by(User, email: reset_params["email"])
-    if is_nil(user) do
-      conn
-      |> put_flash(:warning, gettext("No user with that e-mail address!"))
-      |> render("new.html")
-    else
-      send_reset_instructions(conn, user)
+    cond do
+      user && User.confirmed?(user) ->
+        send_reset_instructions(conn, user)
+      user ->
+        conn
+        |> put_flash(:warning, gettext("You need to confirm your e-mail address before you can reset your password"))
+        |> render("new.html")
+      true ->
+        conn
+        |> put_flash(:warning, gettext("No user with that e-mail address!"))
+        |> render("new.html")
     end
   end
 
