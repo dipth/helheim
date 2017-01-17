@@ -1,6 +1,5 @@
 defmodule Altnation.EditProfileSettingsFlowTest do
   use Altnation.AcceptanceCase, async: true
-  import Altnation.Factory
 
   # TODO: Enable this test when you figure out how to use Wallaby with the
   #       Trumbowyg editor:

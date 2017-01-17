@@ -27,7 +27,7 @@ defmodule Altnation.Avatar do
     version
   end
 
-  def storage_dir(version, {file, user}) do
+  def storage_dir(_version, {_file, user}) do
     "uploads/avatars/#{user.id}"
   end
 

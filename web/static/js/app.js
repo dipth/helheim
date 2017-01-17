@@ -26,7 +26,6 @@ import { ProfileSettings } from "web/static/js/profile_settings"
 
 export var App = {
   run: function(){
-    console.log("App.run()");
     Leaf.run();
     RestfulizerTweak.run();
     ProfileSettings.run();
@@ -35,7 +34,6 @@ export var App = {
 
 export var AppSpecial = {
   run: function(){
-    console.log("AppSpecial.run()");
     Leaf.run();
   }
 }
