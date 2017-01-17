@@ -25,7 +25,10 @@
               <h4 class="mb-1"><%= gettext "Profile Text" %></h4>
               <hr>
               <div class="form-group <%= if f.errors[:profile_text] do 'has-danger' end %>">
-                <%= textarea f, :profile_text, class: "form-control input-html", rows: 17 %>
+                <%= hidden_input f, :profile_text %>
+                <div id="user_profile_text_editor" data-placeholder="<%= gettext("Please write a description of yourself") %>">
+                  <%= raw input_value f, :profile_text %>
+                </div>
                 <%= if message = f.errors[:profile_text] do %>
                   <div class="form-control-feedback"><%= translate_error(message) %></div>
                 <% end %>
