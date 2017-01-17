@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-block p-2">
+        <h1 class="mb-2"><%= gettext "Profile Settings" %></h1>
+
+        <%= form_for @changeset, profile_path(@conn, :update), [multipart: true], fn f -> %>
+
+          <div class="row">
+            <div class="col-lg-4 col-sm-6">
+              <h4 class="mb-1"><%= gettext "Profile Photo" %></h4>
+              <hr>
+              <img src="<%= Altnation.Avatar.url({@changeset.data.avatar, @changeset.data}, :thumb) %>" class="rounded mx-auto d-block mb-1" alt="<%= gettext "Profile Photo" %>">
+              <div class="form-group <%= if f.errors[:avatar] do 'has-danger' end %>">
+                <%= file_input f, :avatar, placeholder: gettext("Name"), class: "form-control" %>
+                <%= if message = f.errors[:avatar] do %>
+                  <div class="form-control-feedback"><%= translate_error(message) %></div>
+                <% else %>
+                  <small><%= gettext "Maximum file size: %{file_size}", file_size: Altnation.Avatar.max_file_size |> Crutches.Format.Number.as_human_size %></small>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="col-lg-8 col-sm-6">
+              <h4 class="mb-1"><%= gettext "Profile Text" %></h4>
+              <hr>
+              <div class="form-group <%= if f.errors[:profile_text] do 'has-danger' end %>">
+                <%= textarea f, :profile_text, class: "form-control input-html", rows: 17 %>
+                <%= if message = f.errors[:profile_text] do %>
+                  <div class="form-control-feedback"><%= translate_error(message) %></div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-block btn-success"><%= gettext "Update Profile" %></button>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

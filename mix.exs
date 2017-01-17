@@ -20,7 +20,7 @@ defmodule Altnation.Mixfile do
     [mod: {Altnation, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :comeonin, :bamboo, :calendar, :sentry,
-                    :appsignal]]
+                    :appsignal, :ex_aws, :hackney, :poison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -49,7 +49,16 @@ defmodule Altnation.Mixfile do
      {:wallaby, "~> 0.15.0"},
      {:ex_machina, "~> 1.0", only: :test},
      {:sentry, "~> 1.0"},
-     {:appsignal, "~> 0.0"}]
+     {:appsignal, "~> 0.0"},
+     {:arc, "~> 0.6.0"},
+     {:arc_ecto, "~> 0.5.0"},
+     {:ex_aws, "~> 1.0.0"},               # Used by arc
+     {:hackney, "1.6.3", override: true}, # Used by arc
+     {:poison, "~> 2.0"},                 # Used by arc
+     {:sweet_xml, "~> 0.5"},              # Used by arc
+     {:html_sanitize_ex, "~> 1.0.0"},
+     {:crutches, "~> 1.0.0"}
+   ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

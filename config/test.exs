@@ -28,5 +28,10 @@ config :guardian, Guardian,
 config :comeonin, :bcrypt_log_rounds, 4
 config :comeonin, :pbkdf2_rounds, 1
 
+# Configure mailer
 config :altnation, Altnation.Mailer,
   adapter: Bamboo.TestAdapter
+
+# Configure arc
+config :arc,
+  storage: Arc.Storage.Local

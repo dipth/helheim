@@ -48,3 +48,5 @@ config :guardian, Guardian,
 
 config :altnation, Altnation.Mailer,
   adapter: Bamboo.LocalAdapter
+
+import_config "dev.secret.exs"

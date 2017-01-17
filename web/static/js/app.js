@@ -199,3 +199,10 @@ function smartResize(e) {
   });
   $(".rest").restfulizer({});
 })();
+
+(function() {
+  $.trumbowyg.svgPath = $('body').data('trumbowyg-icons');
+  $('.input-html').trumbowyg({
+    resetCss: true
+  });
+})();

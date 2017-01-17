@@ -1,5 +1,6 @@
 defmodule Altnation.User do
   use Altnation.Web, :model
+  use Arc.Ecto.Schema
   alias Altnation.Repo
   import Altnation.Gettext
 
@@ -15,6 +16,8 @@ defmodule Altnation.User do
     field :password_reset_token_updated_at, Calecto.DateTimeUTC
     field :confirmation_token,              :string
     field :confirmed_at,                    Calecto.DateTimeUTC
+    field :avatar,                          Altnation.Avatar.Type
+    field :profile_text,                    :string
 
     timestamps()
   end
@@ -62,6 +65,14 @@ defmodule Altnation.User do
     |> unique_constraint(:email)
     |> put_password_hash()
     |> reset_confirmed_state_if_email_changed()
+  end
+
+  def profile_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:profile_text])
+    |> cast_attachments(params, [:avatar])
+    |> validate_required([:profile_text])
+    |> scrub_profile_text()
   end
 
   def confirm!(user) do
@@ -128,6 +139,15 @@ defmodule Altnation.User do
         confirmation_token = get_field(changeset, :confirmation_token)
         Altnation.Email.registration_email(email, confirmation_token) |> Altnation.Mailer.deliver_later
         changeset
+      _ ->
+        changeset
+    end
+  end
+
+  defp scrub_profile_text(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{profile_text: profile_text}} ->
+        put_change(changeset, :profile_text, profile_text |> HtmlSanitizeEx.Scrubber.scrub(Altnation.Scrubber))
       _ ->
         changeset
     end
