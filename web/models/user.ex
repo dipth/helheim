@@ -22,6 +22,11 @@ defmodule Altnation.User do
     timestamps()
   end
 
+  def newest(query) do
+    from u in query,
+    order_by: [desc: u.inserted_at]
+  end
+
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """

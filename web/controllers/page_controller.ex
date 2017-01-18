@@ -15,7 +15,11 @@ defmodule Altnation.PageController do
   end
 
   def front_page(conn, _params) do
-    render conn, "front_page.html"
+    newest_users = User
+    |> User.newest
+    |> limit(10)
+    |> Altnation.Repo.all
+    render conn, "front_page.html", newest_users: newest_users
   end
 
   def debug(conn, _params) do
