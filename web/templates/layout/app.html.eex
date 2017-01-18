@@ -17,7 +17,6 @@
     <title><%= gettext("Altnation") %></title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link href="https://cdn.quilljs.com/1.1.10/quill.snow.css" rel="stylesheet">
   </head>
 
   <body class="navbar-fixed sidebar-nav app" data-csrf="<%= get_csrf_token() %>">
@@ -38,7 +37,6 @@
     <%= render "footer.html", conn: @conn %>
 
     <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
-    <script src="https://cdn.quilljs.com/1.1.10/quill.js"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <script>require("web/static/js/app").App.run()</script>
   </body>
