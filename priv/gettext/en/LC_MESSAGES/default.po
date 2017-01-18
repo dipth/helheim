@@ -53,7 +53,7 @@ msgstr ""
 msgid "If for some reason you did not receive your confirmation e-mail, then enter your e-mail address below and we will send it again."
 msgstr ""
 
-#: web/templates/account/edit.html.eex:13
+#: web/templates/account/edit.html.eex:13 web/templates/profile/edit.html.eex:15
 #: web/templates/registration/new.html.eex:23
 msgid "Name"
 msgstr ""
@@ -95,7 +95,7 @@ msgstr ""
 msgid "Will only be shown to administrators"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:30
+#: web/templates/layout/header.html.eex:31
 #: web/templates/page/signed_in.html.eex:9
 msgid "Sign Out"
 msgstr ""
@@ -289,10 +289,11 @@ msgid "You need to confirm your e-mail address before you can reset your passwor
 msgstr ""
 
 #: web/templates/layout/header.html.eex:26 web/views/account_view.ex:4
+#: web/views/profile_view.ex:4
 msgid "Settings"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:29 web/views/account_view.ex:4
+#: web/templates/layout/header.html.eex:30 web/views/account_view.ex:4
 msgid "Account"
 msgstr ""
 
@@ -332,6 +333,38 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:116
+#: web/models/user.ex:127
 msgid "does not match your current password"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:19
+msgid "Maximum file size: %{file_size}"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:29
+msgid "Please write a description of yourself"
+msgstr ""
+
+#: web/templates/layout/header.html.eex:29 web/views/profile_view.ex:4
+msgid "Profile"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:11 web/templates/profile/edit.html.eex:13
+msgid "Profile Photo"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:5
+msgid "Profile Settings"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:25
+msgid "Profile Text"
+msgstr ""
+
+#: web/controllers/profile_controller.ex:17
+msgid "Profile updated!"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:39
+msgid "Update Profile"
 msgstr ""
