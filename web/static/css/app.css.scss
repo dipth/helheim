@@ -22,7 +22,7 @@
 @import "bootstrap_custom/buttons";
 
 // Components
-@import "../vendor/css/bootstrap_src/animation";
+@import "../vendor/css/bootstrap_src/transitions";
 @import "../vendor/css/bootstrap_src/dropdown";
 @import "bootstrap_custom/dropdown";
 @import "../vendor/css/bootstrap_src/button-group";
@@ -37,8 +37,8 @@
 @import "../vendor/css/bootstrap_src/breadcrumb";
 @import "bootstrap_custom/breadcrumb";
 @import "../vendor/css/bootstrap_src/pagination";
-@import "../vendor/css/bootstrap_src/tags";
-@import "bootstrap_custom/tags";
+@import "../vendor/css/bootstrap_src/badge";
+@import "bootstrap_custom/badge";
 @import "../vendor/css/bootstrap_src/alert";
 @import "../vendor/css/bootstrap_src/progress";
 @import "bootstrap_custom/progress";
@@ -56,6 +56,13 @@
 
 // Utility classes
 @import "../vendor/css/bootstrap_src/utilities";
+
+// CoreUI Styles
+// Additional typography
+@import "core/typography";
+
+// Animations
+@import "core/animate";
 
 // Core files
 @import "core/grid";

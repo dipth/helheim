@@ -10,14 +10,28 @@ body:not(.top-nav) {
     }
 }
 
-body.app {
+body.app-signed-in {
   background-image: url('/images/body_bg_02.png');
 }
 
-body.app-special {
+body.app-signed-out {
   background-image: url('/images/body_bg_02.png');
 
   .logo-text {
     height: 75px;
   }
+}
+
+.img-thumbnail .form-control {
+  border: none;
+  border-radius: 0;
+  background-color: $thumbnail-border-color;
+}
+
+.img-thumbnail-with-form-control {
+  padding: 0;
+}
+
+.btn {
+  cursor: pointer;
 }

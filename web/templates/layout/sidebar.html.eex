@@ -1,5 +1,5 @@
 <div class="sidebar">
-  <nav class="sidebar-nav">
+  <nav class="sidebar-nav open">
     <ul class="nav">
       <li class="nav-item mt-1">
         <a class="nav-link" href="<%= page_path(@conn, :front_page)%>"><i class="fa fa-home"></i> <%= gettext("Front Page") %></a>

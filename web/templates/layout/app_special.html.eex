@@ -19,27 +19,22 @@
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
       <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
-  <body class="app-special">
-    <div class="container d-table">
-      <div class="d-100vh-va-middle">
-        <div class="row mb-2">
-          <div class="col-md-12">
-            <div class="text-xs-center">
-              <a href="/">
-                <img src="<%= static_path(@conn, "/images/logo2.png") %>" alt="<%= gettext("Altnation") %>" class="mb-1"><br>
-                <img src="<%= static_path(@conn, "/images/logo.png") %>" alt="<%= gettext("Altnation") %>" class="logo-text">
-              </a>
-            </div>
+  <body class="app app-signed-out flex-row align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+
+        <div class="col-md-8">
+          <div class="text-center mb-2">
+            <a href="/">
+              <img src="<%= static_path(@conn, "/images/logo2.png") %>" alt="<%= gettext("Altnation") %>" class="mb-1"><br>
+              <img src="<%= static_path(@conn, "/images/logo.png") %>" alt="<%= gettext("Altnation") %>" class="logo-text">
+            </a>
           </div>
+
+          <%= render "alerts.html", conn: @conn %>
+          <%= render @view_module, @view_template, assigns %>
         </div>
-        <div class="row">
-          <div class="col-md-8 offset-md-2">
-            <div class="mx-2">
-              <%= render "alerts.html", conn: @conn %>
-            </div>
-          </div>
-        </div>
-        <%= render @view_module, @view_template, assigns %>
+
       </div>
     </div>
 

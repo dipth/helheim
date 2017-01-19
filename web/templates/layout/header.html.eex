@@ -1,39 +1,37 @@
-<header class="navbar">
-  <div class="container-fluid">
-    <button class="navbar-toggler mobile-toggler hidden-lg-up" type="button">☰</button>
-    <a class="navbar-brand" href="#"></a>
-    <ul class="nav navbar-nav hidden-md-down">
-      <li class="nav-item">
-        <a class="nav-link navbar-toggler layout-toggler" href="#">☰</a>
-      </li>
-    </ul>
+<header class="app-header navbar">
+  <button class="navbar-toggler mobile-sidebar-toggler hidden-lg-up" type="button">&#9776;</button>
+  <a class="navbar-brand" href="<%= page_path(@conn, :front_page)%>"></a>
+  <ul class="nav navbar-nav hidden-md-down">
+    <li class="nav-item">
+      <a class="nav-link navbar-toggler sidebar-toggler" href="#">&#9776;</a>
+    </li>
+  </ul>
 
-    <ul class="nav navbar-nav float-xs-right">
-      <li class="nav-item dropdown nav-item-user-menu">
-        <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-          <img src="<%= Altnation.Avatar.url({Guardian.Plug.current_resource(@conn).avatar, Guardian.Plug.current_resource(@conn)}, :tiny) %>" class="img-avatar" alt="<%= Guardian.Plug.current_resource(@conn).username %>">
-          <span class="hidden-md-down"><%= Guardian.Plug.current_resource(@conn).username %></span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right">
-          <div class="dropdown-header text-xs-center">
-            <strong>Account</strong>
-          </div>
-
-          <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages</a>
-          <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comments</a>
-
-          <div class="dropdown-header text-xs-center">
-            <strong><%= gettext("Settings") %></strong>
-          </div>
-
-          <a class="dropdown-item" href="<%= profile_path(@conn, :edit) %>"><i class="fa fa-id-card"></i> <%= gettext("Profile") %></a>
-          <a class="dropdown-item" href="<%= account_path(@conn, :edit) %>"><i class="fa fa-user"></i> <%= gettext("Account") %></a>
-          <a class="dropdown-item rest" href="<%= session_path(@conn, :delete, :access) %>" data-method="DELETE"><i class="fa fa-lock"></i> <%= gettext "Sign Out" %></a>
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item dropdown nav-item-user-menu">
+      <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        <img src="<%= Altnation.Avatar.url({Guardian.Plug.current_resource(@conn).avatar, Guardian.Plug.current_resource(@conn)}, :tiny) %>" class="img-avatar" alt="<%= Guardian.Plug.current_resource(@conn).username %>">
+        <span class="hidden-md-down"><%= Guardian.Plug.current_resource(@conn).username %></span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <div class="dropdown-header text-center">
+          <strong>Account</strong>
         </div>
-      </li>
-      <li class="nav-item hidden-md-down">
-        <a class="nav-link aside-toggle" href="#">☰</a>
-      </li>
-    </ul>
-  </div>
+
+        <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages</a>
+        <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comments</a>
+
+        <div class="dropdown-header text-center">
+          <strong><%= gettext("Settings") %></strong>
+        </div>
+
+        <a class="dropdown-item" href="<%= profile_path(@conn, :edit) %>"><i class="fa fa-id-card"></i> <%= gettext("Profile") %></a>
+        <a class="dropdown-item" href="<%= account_path(@conn, :edit) %>"><i class="fa fa-user"></i> <%= gettext("Account") %></a>
+        <a class="dropdown-item rest" href="<%= session_path(@conn, :delete, :access) %>" data-method="DELETE"><i class="fa fa-lock"></i> <%= gettext "Sign Out" %></a>
+      </div>
+    </li>
+    <li class="nav-item hidden-md-down">
+      &nbsp;
+    </li>
+  </ul>
 </header>

@@ -1,5 +1,5 @@
-<footer class="footer">
-  <span class="float-xs-right">
+<footer class="app-footer">
+  <span class="float-right">
     © 2016 Visioneers
   </span>
 </footer>

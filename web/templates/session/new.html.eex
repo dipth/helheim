@@ -1,43 +1,39 @@
-<div class="row">
-  <div class="col-md-8 offset-md-2">
-    <div class="card mx-2">
-      <div class="card-block p-2">
-        <h1 class="mb-2"><%= gettext "Sign In" %></h1>
-        <%= form_for @conn, session_path(@conn, :create), [as: :session], fn f -> %>
-          <div class="form-group <%= if f.errors[:email] do 'has-danger' end %>">
-            <div class="controls">
-              <div class="input-prepend input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <%= text_input f, :email, placeholder: gettext("E-mail"), class: "form-control" %>
-              </div>
-              <%= if message = f.errors[:email] do %>
-                <div class="form-control-feedback"><%= translate_error(message) %></div>
-              <% end %>
-            </div>
+<div class="card mx-2">
+  <div class="card-block p-2">
+    <h1 class="mb-2"><%= gettext "Sign In" %></h1>
+    <%= form_for @conn, session_path(@conn, :create), [as: :session], fn f -> %>
+      <div class="form-group <%= if f.errors[:email] do 'has-danger' end %>">
+        <div class="controls">
+          <div class="input-prepend input-group">
+            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+            <%= text_input f, :email, placeholder: gettext("E-mail"), class: "form-control" %>
           </div>
-
-          <div class="form-group <%= if f.errors[:password] do 'has-danger' end %>">
-            <div class="controls">
-              <div class="input-prepend input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <%= password_input f, :password, placeholder: gettext("Password"), class: "form-control" %>
-              </div>
-              <%= if message = f.errors[:password] do %>
-                <div class="form-control-feedback"><%= translate_error(message) %></div>
-              <% end %>
-            </div>
-          </div>
-
-          <button type="submit" class="btn btn-block btn-success mb-2"><%= gettext "Sign In" %></button>
-
-          <p>
-            <%= link gettext("Click here if you forgot your password"), to: password_reset_path(@conn, :new) %>
-          </p>
-          <p>
-            <%= link gettext("Click here if you did not get your confirmation e-mail"), to: confirmation_path(@conn, :new) %>
-          </p>
-        <% end %>
+          <%= if message = f.errors[:email] do %>
+            <div class="form-control-feedback"><%= translate_error(message) %></div>
+          <% end %>
+        </div>
       </div>
-    </div>
+
+      <div class="form-group <%= if f.errors[:password] do 'has-danger' end %>">
+        <div class="controls">
+          <div class="input-prepend input-group">
+            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+            <%= password_input f, :password, placeholder: gettext("Password"), class: "form-control" %>
+          </div>
+          <%= if message = f.errors[:password] do %>
+            <div class="form-control-feedback"><%= translate_error(message) %></div>
+          <% end %>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-block btn-success mb-2"><%= gettext "Sign In" %></button>
+
+      <p>
+        <%= link gettext("Click here if you forgot your password"), to: password_reset_path(@conn, :new) %>
+      </p>
+      <p>
+        <%= link gettext("Click here if you did not get your confirmation e-mail"), to: confirmation_path(@conn, :new) %>
+      </p>
+    <% end %>
   </div>
 </div>

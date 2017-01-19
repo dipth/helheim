@@ -19,9 +19,9 @@ defmodule Altnation.EditAccountSettingsFlowTest do
     session
     |> fill_in(gettext("Name"), with: "New Name")
     |> fill_in(gettext("E-mail"), with: "new@email.com")
-    |> fill_in(gettext("Password"), with: "newpassword")
-    |> fill_in(gettext("Confirm Password"), with: "newpassword")
-    |> fill_in(gettext("Existing Password"), with: "password")
+    |> fill_in(gettext("user_password"), with: "newpassword")
+    |> fill_in(gettext("user_password_confirmation"), with: "newpassword")
+    |> fill_in(gettext("user_existing_password"), with: "password")
     |> click_on(gettext("Update Account"))
 
     result = session

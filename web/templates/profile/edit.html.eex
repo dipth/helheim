@@ -1,28 +1,29 @@
 <div class="row">
   <div class="col-md-12">
-    <div class="card">
-      <div class="card-block">
-        <h1 class="mb-2"><%= gettext "Profile Settings" %></h1>
-
-        <%= form_for @changeset, profile_path(@conn, :update), [multipart: true], fn f -> %>
-
+    <%= form_for @changeset, profile_path(@conn, :update), [multipart: true], fn f -> %>
+      <div class="card">
+        <div class="card-header">
+          <strong><%= gettext "Profile Settings" %></strong>
+        </div>
+        <div class="card-block p-2">
           <div class="row">
-            <div class="col-lg-5 col-sm-12">
-              <h4 class="mb-1"><%= gettext "Profile Photo" %></h4>
+            <div class="col-lg-4 col-sm-12 mb-1">
+              <h5 class="mb-1"><%= gettext "Profile Photo" %></h5>
               <hr>
-              <img src="<%= Altnation.Avatar.url({@changeset.data.avatar, @changeset.data}, :thumb) %>" class="rounded mx-auto d-block mb-1" alt="<%= gettext "Profile Photo" %>">
-              <div class="form-group <%= if f.errors[:avatar] do 'has-danger' end %>">
+              <div class="img-thumbnail img-thumbnail-with-form-control">
+                <img src="<%= Altnation.Avatar.url({@changeset.data.avatar, @changeset.data}, :large) %>" class="img-fluid mx-auto d-block" alt="<%= gettext "Profile Photo" %>">
                 <%= file_input f, :avatar, placeholder: gettext("Name"), class: "form-control" %>
-                <%= if message = f.errors[:avatar] do %>
-                  <div class="form-control-feedback"><%= translate_error(message) %></div>
-                <% else %>
-                  <small><%= gettext "Maximum file size: %{file_size}", file_size: Altnation.Avatar.max_file_size |> Crutches.Format.Number.as_human_size %></small>
-                <% end %>
               </div>
+
+              <%= if message = f.errors[:avatar] do %>
+                <div class="form-control-feedback"><%= translate_error(message) %></div>
+              <% else %>
+                <small><%= gettext "Maximum file size: %{file_size}", file_size: Altnation.Avatar.max_file_size |> Crutches.Format.Number.as_human_size %></small>
+              <% end %>
             </div>
 
-            <div class="col-lg-7 col-sm-12">
-              <h4 class="mb-1"><%= gettext "Profile Text" %></h4>
+            <div class="col-lg-8 col-sm-12 mb-1">
+              <h5 class="mb-1"><%= gettext "Profile Text" %></h5>
               <hr>
               <div class="form-group <%= if f.errors[:profile_text] do 'has-danger' end %>">
                 <%= hidden_input f, :profile_text %>
@@ -35,11 +36,11 @@
               </div>
             </div>
           </div>
-
-          <button type="submit" class="btn btn-block btn-success"><%= gettext "Update Profile" %></button>
-
-        <% end %>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Update Profile" %></button>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>

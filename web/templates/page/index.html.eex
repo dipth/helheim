@@ -1,19 +1,15 @@
-<div class="row">
-  <div class="col-md-8 offset-md-2">
-    <div class="card mx-2">
-      <div class="card-block p-2">
-        <p><%= gettext "%{site_name} is a community for alternative people.", site_name: gettext("Altnation") %></p>
+<div class="card mx-2">
+  <div class="card-block p-2">
+    <p><%= gettext "%{site_name} is a community for alternative people.", site_name: gettext("Altnation") %></p>
 
-        <div class="row">
-          <div class="col-lg-6">
-            <%= link gettext("Register Account"), to: registration_path(@conn, :new), class: "btn btn-outline-secondary btn-block" %>
-            <br class="hidden-lg-up">
-          </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <%= link gettext("Register Account"), to: registration_path(@conn, :new), class: "btn btn-outline-secondary btn-block" %>
+        <br class="hidden-lg-up">
+      </div>
 
-          <div class="col-lg-6">
-            <%= link gettext("Sign In"), to: session_path(@conn, :new), class: "btn btn-outline-success btn-block" %>
-          </div>
-        </div>
+      <div class="col-lg-6">
+        <%= link gettext("Sign In"), to: session_path(@conn, :new), class: "btn btn-outline-success btn-block" %>
       </div>
     </div>
   </div>
