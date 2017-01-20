@@ -7,6 +7,12 @@ defmodule Altnation.PageControllerTest do
       conn = get conn, "/"
       assert html_response(conn, 200) =~ gettext("%{site_name} is a community for alternative people.", site_name: gettext("Altnation"))
     end
+
+    test "it redirects to the front_page if you are signed in", %{conn: conn} do
+      conn = conn |> sign_in(insert(:user))
+      conn = get conn, "/"
+      assert redirected_to(conn) == "/front_page"
+    end
   end
 
   describe "confirmation_pending/2" do

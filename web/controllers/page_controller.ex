@@ -3,7 +3,11 @@ defmodule Altnation.PageController do
   alias Altnation.User
 
   def index(conn, _params) do
-    render conn, "index.html", layout: {Altnation.LayoutView, "app_special.html"}
+    if Guardian.Plug.current_resource(conn) do
+      conn |> redirect(to: page_path(conn, :front_page))
+    else
+      render conn, "index.html", layout: {Altnation.LayoutView, "app_special.html"}
+    end
   end
 
   def confirmation_pending(conn, _params) do
