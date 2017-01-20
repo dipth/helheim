@@ -39,3 +39,13 @@ body.app-signed-out {
 label {
   font-weight: bold;
 }
+
+.avatar-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  img {
+    width: 50px;
+    margin: 0 1rem 1rem 0;
+  }
+}
