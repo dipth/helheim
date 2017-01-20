@@ -12,21 +12,21 @@ defmodule Altnation.SessionControllerTest do
   describe "create/2" do
     test "it logs in and redirects the user when submitting valid credentials", %{conn: conn} do
       user = insert(:user)
-      conn = post conn, "/sessions", session: %{email: user.email, password: "password"}
+      conn = post conn, "/sessions", session: %{email: user.email, password: "password", remember_me: "false"}
       assert html_response(conn, 302)
       assert Guardian.Plug.current_resource(conn).id == user.id
     end
 
     test "it does not log the user in when he has not yet confirmed his e-mail address", %{conn: conn} do
       user = insert(:user, confirmed_at: nil)
-      conn = post conn, "/sessions", session: %{email: user.email, password: "password"}
+      conn = post conn, "/sessions", session: %{email: user.email, password: "password", remember_me: "false"}
       assert html_response(conn, 200) =~ gettext("You need to confirm your e-mail address before you can log in")
       refute Guardian.Plug.current_resource(conn)
     end
 
     test "it does not log the user in when submitting invalid credentials", %{conn: conn} do
       user = insert(:user)
-      conn = post conn, "/sessions", session: %{email: user.email, password: "wrong"}
+      conn = post conn, "/sessions", session: %{email: user.email, password: "wrong", remember_me: "false"}
       assert html_response(conn, 200) =~ gettext("Wrong e-mail or password")
       refute Guardian.Plug.current_resource(conn)
     end

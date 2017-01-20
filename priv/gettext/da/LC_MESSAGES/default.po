@@ -39,7 +39,7 @@ msgstr "%{site_name} er et community for alternative folk."
 msgid "Altnation"
 msgstr "Helheim"
 
-#: web/templates/session/new.html.eex:35
+#: web/templates/session/new.html.eex:42
 msgid "Click here if you did not get your confirmation e-mail"
 msgstr "Klik her hvis du ikke har modtaget din aktiveringsmail"
 
@@ -89,7 +89,7 @@ msgid "Resend confirmation e-mail"
 msgstr "Gensend aktiveringsmail"
 
 #: web/templates/page/index.html.eex:12 web/templates/session/new.html.eex:3
-#: web/templates/session/new.html.eex:29
+#: web/templates/session/new.html.eex:36
 msgid "Sign In"
 msgstr "Log ind"
 
@@ -128,7 +128,7 @@ msgstr "Aktiveringsmail afsendt!"
 msgid "No user with that e-mail address!"
 msgstr "Der findes ingen profiler med den e-mail adresse!"
 
-#: web/controllers/session_controller.ex:31
+#: web/controllers/session_controller.ex:33
 msgid "See you later!"
 msgstr "Vi ses senere!"
 
@@ -155,11 +155,11 @@ msgstr "Din profil er nu aktiveret!"
 msgid "User created!"
 msgstr "Din profil er nu oprettet!"
 
-#: web/controllers/session_controller.ex:15
+#: web/controllers/session_controller.ex:16
 msgid "Welcome back %{username}!"
 msgstr "Velkommen tilbage %{username}!"
 
-#: web/controllers/session_controller.ex:23
+#: web/controllers/session_controller.ex:24
 msgid "Wrong e-mail or password"
 msgstr "Forkert e-mail eller kodeord"
 
@@ -171,7 +171,7 @@ msgstr "Du skal først logge ind!"
 msgid "Choose a new password"
 msgstr "Vælg et nyt kodeord"
 
-#: web/templates/session/new.html.eex:32
+#: web/templates/session/new.html.eex:39
 msgid "Click here if you forgot your password"
 msgstr "Klik her hvis du har glemt dit kodeord"
 
@@ -279,7 +279,7 @@ msgstr "Skal være minimum 6 tegn langt"
 msgid "Will never be shown to other users. Only used for login, notifications and password recovery"
 msgstr "Vil aldrig blive vist til andre brugere. Bruges udelukkende til login, notifikationer og nulstilling af kodeord"
 
-#: web/controllers/session_controller.ex:19
+#: web/controllers/session_controller.ex:20
 msgid "You need to confirm your e-mail address before you can log in"
 msgstr "Du skal først bekræfte din e-mail adresse før du kan logge ind"
 
@@ -385,3 +385,7 @@ msgstr "Opdatér Profil"
 #: web/templates/page/front_page.html.eex:3
 msgid "Newest Users"
 msgstr "Nyeste Brugere"
+
+#: web/templates/session/new.html.eex:32
+msgid "Remember me"
+msgstr "Husk mig i 30 dage"

@@ -26,6 +26,13 @@
         </div>
       </div>
 
+      <div class="form-group">
+        <%= label f, :remember_me do %>
+          <%= checkbox f, :remember_me %>
+          <%= gettext "Remember me" %>
+        <% end %>
+      </div>
+
       <button type="submit" class="btn btn-block btn-success mb-2"><%= gettext "Sign In" %></button>
 
       <p>

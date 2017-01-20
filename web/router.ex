@@ -10,12 +10,14 @@ defmodule Altnation.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.VerifyRememberMe
     plug Guardian.Plug.LoadResource
     plug Altnation.Locale
   end
 
   pipeline :browser_auth do
     plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.VerifyRememberMe
     plug Guardian.Plug.EnsureAuthenticated, handler: Altnation.Token
     plug Guardian.Plug.LoadResource
   end
