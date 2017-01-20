@@ -44,7 +44,8 @@ defmodule Altnation.Router do
     get "/signed_in", PageController, :signed_in
     get "/front_page", PageController, :front_page
     resources "/account", AccountController, singleton: true, only: [:edit, :update]
-    resources "/profile", ProfileController, singleton: true, only: [:edit, :update]
+    resources "/profile", ProfileController, singleton: true, only: [:show, :edit, :update]
+    resources "/profiles", ProfileController, only: [:show], as: :public_profile
   end
 
   # Other scopes may use custom stacks.

@@ -73,7 +73,7 @@ msgstr "Navn"
 msgid "New Registration"
 msgstr "Opret Profil"
 
-#: web/templates/account/edit.html.eex:40
+#: web/templates/account/edit.html.eex:41
 #: web/templates/registration/new.html.eex:49
 #: web/templates/session/new.html.eex:21
 msgid "Password"
@@ -237,7 +237,7 @@ msgstr "Bekræft min e-mail!"
 msgid "Your profile has now been created on %{site_name}, but you need to confirm your e-mail address before we can let you in."
 msgstr "Din profil er nu blevet oprettet på %{site_name}, men før vi kan lukke dig ind skal du lige bekræfte din e-mail adresse."
 
-#: web/templates/account/edit.html.eex:36
+#: web/templates/account/edit.html.eex:37
 #: web/templates/password_reset/show.html.eex:3
 #: web/templates/password_reset/show.html.eex:36
 msgid "Change Password"
@@ -268,7 +268,7 @@ msgstr "Før vi kan lukke dig ind skal du bekræfte din e-mail adresse. Tjek din
 msgid "Front Page"
 msgstr "Forside"
 
-#: web/templates/account/edit.html.eex:45
+#: web/templates/account/edit.html.eex:46
 #: web/templates/password_reset/show.html.eex:17
 #: web/templates/registration/new.html.eex:54
 msgid "Must be at least 6 characters long"
@@ -283,13 +283,13 @@ msgstr "Vil aldrig blive vist til andre brugere. Bruges udelukkende til login, n
 msgid "You need to confirm your e-mail address before you can log in"
 msgstr "Du skal først bekræfte din e-mail adresse før du kan logge ind"
 
-#: web/templates/account/edit.html.eex:50
+#: web/templates/account/edit.html.eex:51
 #: web/templates/password_reset/show.html.eex:26
 #: web/templates/registration/new.html.eex:63
 msgid "Confirm Password"
 msgstr "Bekræft Kodeord"
 
-#: web/templates/account/edit.html.eex:55
+#: web/templates/account/edit.html.eex:56
 #: web/templates/password_reset/show.html.eex:31
 #: web/templates/registration/new.html.eex:68
 msgid "To ensure that you didn't make any typos"
@@ -300,7 +300,7 @@ msgid "You need to confirm your e-mail address before you can reset your passwor
 msgstr "Du skal først bekræfte din e-mail adresse før du kan nulstille dit kodeord"
 
 #: web/templates/layout/header.html.eex:25 web/views/account_view.ex:4
-#: web/views/profile_view.ex:4
+#: web/views/profile_view.ex:5
 msgid "Settings"
 msgstr "Indstillinger"
 
@@ -320,12 +320,12 @@ msgstr "Dine kontoindstillinger blev opdateret!"
 msgid "Be aware!"
 msgstr "Advarsel!"
 
-#: web/templates/account/edit.html.eex:62
-#: web/templates/account/edit.html.eex:66
+#: web/templates/account/edit.html.eex:64
+#: web/templates/account/edit.html.eex:68
 msgid "Existing Password"
 msgstr "Nuværende Kodeord"
 
-#: web/templates/account/edit.html.eex:63
+#: web/templates/account/edit.html.eex:65
 msgid "For security reasons you must type in your existing password when updating your account settings"
 msgstr "Af hensyn til din sikkerhed skal du indtaste dit nuværende kodeord for at kunne opdatere dine kontoindstillinger"
 
@@ -333,7 +333,7 @@ msgstr "Af hensyn til din sikkerhed skal du indtaste dit nuværende kodeord for 
 msgid "If you change your e-mail address, you will be unable to log in again until you have verified the new e-mail address!"
 msgstr "Hvis du ændrer din e-mail sender vi dig en ny bekræftelsesmail med et link som du skal klikke på, før du kan logge ind igen!"
 
-#: web/templates/account/edit.html.eex:37
+#: web/templates/account/edit.html.eex:38
 msgid "Leave these fields blank to keep your current password"
 msgstr "Udfyld kun disse to felter hvis du ønsker at ændre dit kodeord"
 
@@ -341,7 +341,7 @@ msgstr "Udfyld kun disse to felter hvis du ønsker at ændre dit kodeord"
 msgid "Personal Details"
 msgstr "Personlige detaljer"
 
-#: web/templates/account/edit.html.eex:76
+#: web/templates/account/edit.html.eex:78
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
@@ -357,7 +357,7 @@ msgstr "Maksimum fil størrelse: %{file_size}"
 msgid "Please write a description of yourself"
 msgstr "Giv en beskrivelse af dig selv"
 
-#: web/templates/layout/header.html.eex:28 web/views/profile_view.ex:4
+#: web/templates/layout/header.html.eex:28 web/views/profile_view.ex:5
 msgid "Profile"
 msgstr "Profil"
 
@@ -374,7 +374,7 @@ msgstr "Profil Indstillinger"
 msgid "Profile Text"
 msgstr "Profiltekst"
 
-#: web/controllers/profile_controller.ex:17
+#: web/controllers/profile_controller.ex:33
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
@@ -382,10 +382,40 @@ msgstr "Din profil blev opdateret!"
 msgid "Update Profile"
 msgstr "Opdatér Profil"
 
-#: web/templates/page/front_page.html.eex:3
+#: web/templates/page/front_page.html.eex:4
 msgid "Newest Users"
 msgstr "Nyeste Brugere"
 
 #: web/templates/session/new.html.eex:32
 msgid "Remember me"
 msgstr "Husk mig i 30 dage"
+
+#: web/templates/page/front_page.html.eex:24
+#: web/templates/page/front_page.html.eex:30
+#: web/templates/page/front_page.html.eex:38
+msgid "Coming soon"
+msgstr "Kommer snart"
+
+#: web/templates/profile/show.html.eex:12
+msgid "Member since:"
+msgstr "Medlem siden:"
+
+#: web/templates/page/front_page.html.eex:29
+msgid "Newest Blogs"
+msgstr "Nyeste Blogs"
+
+#: web/templates/page/front_page.html.eex:23
+msgid "Newest Forum Posts"
+msgstr "Nyeste Forumindlæg"
+
+#: web/templates/page/front_page.html.eex:37
+msgid "Newest Photos"
+msgstr "Nyeste Fotos"
+
+#: web/controllers/profile_controller.ex:16
+msgid "The requested profile could not be found!"
+msgstr "Den valgte profil kunne ikke findes!"
+
+#: web/templates/layout/sidebar.html.eex:8
+msgid "Your Profile"
+msgstr "Din Profil"

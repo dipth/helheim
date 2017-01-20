@@ -62,7 +62,7 @@ msgstr ""
 msgid "New Registration"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:40
+#: web/templates/account/edit.html.eex:41
 #: web/templates/registration/new.html.eex:49
 #: web/templates/session/new.html.eex:21
 msgid "Password"
@@ -226,7 +226,7 @@ msgstr ""
 msgid "Your profile has now been created on %{site_name}, but you need to confirm your e-mail address before we can let you in."
 msgstr ""
 
-#: web/templates/account/edit.html.eex:36
+#: web/templates/account/edit.html.eex:37
 #: web/templates/password_reset/show.html.eex:3
 #: web/templates/password_reset/show.html.eex:36
 msgid "Change Password"
@@ -257,7 +257,7 @@ msgstr ""
 msgid "Front Page"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:45
+#: web/templates/account/edit.html.eex:46
 #: web/templates/password_reset/show.html.eex:17
 #: web/templates/registration/new.html.eex:54
 msgid "Must be at least 6 characters long"
@@ -272,13 +272,13 @@ msgstr ""
 msgid "You need to confirm your e-mail address before you can log in"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:50
+#: web/templates/account/edit.html.eex:51
 #: web/templates/password_reset/show.html.eex:26
 #: web/templates/registration/new.html.eex:63
 msgid "Confirm Password"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:55
+#: web/templates/account/edit.html.eex:56
 #: web/templates/password_reset/show.html.eex:31
 #: web/templates/registration/new.html.eex:68
 msgid "To ensure that you didn't make any typos"
@@ -289,7 +289,7 @@ msgid "You need to confirm your e-mail address before you can reset your passwor
 msgstr ""
 
 #: web/templates/layout/header.html.eex:25 web/views/account_view.ex:4
-#: web/views/profile_view.ex:4
+#: web/views/profile_view.ex:5
 msgid "Settings"
 msgstr ""
 
@@ -309,11 +309,11 @@ msgstr ""
 msgid "Be aware!"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:62 web/templates/account/edit.html.eex:66
+#: web/templates/account/edit.html.eex:64 web/templates/account/edit.html.eex:68
 msgid "Existing Password"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:63
+#: web/templates/account/edit.html.eex:65
 msgid "For security reasons you must type in your existing password when updating your account settings"
 msgstr ""
 
@@ -321,7 +321,7 @@ msgstr ""
 msgid "If you change your e-mail address, you will be unable to log in again until you have verified the new e-mail address!"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:37
+#: web/templates/account/edit.html.eex:38
 msgid "Leave these fields blank to keep your current password"
 msgstr ""
 
@@ -329,7 +329,7 @@ msgstr ""
 msgid "Personal Details"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:76
+#: web/templates/account/edit.html.eex:78
 msgid "Update Account"
 msgstr ""
 
@@ -345,7 +345,7 @@ msgstr ""
 msgid "Please write a description of yourself"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:28 web/views/profile_view.ex:4
+#: web/templates/layout/header.html.eex:28 web/views/profile_view.ex:5
 msgid "Profile"
 msgstr ""
 
@@ -361,7 +361,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:17
+#: web/controllers/profile_controller.ex:33
 msgid "Profile updated!"
 msgstr ""
 
@@ -369,10 +369,40 @@ msgstr ""
 msgid "Update Profile"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:3
+#: web/templates/page/front_page.html.eex:4
 msgid "Newest Users"
 msgstr ""
 
 #: web/templates/session/new.html.eex:32
 msgid "Remember me"
+msgstr ""
+
+#: web/templates/page/front_page.html.eex:24
+#: web/templates/page/front_page.html.eex:30
+#: web/templates/page/front_page.html.eex:38
+msgid "Coming soon"
+msgstr ""
+
+#: web/templates/profile/show.html.eex:12
+msgid "Member since:"
+msgstr ""
+
+#: web/templates/page/front_page.html.eex:29
+msgid "Newest Blogs"
+msgstr ""
+
+#: web/templates/page/front_page.html.eex:23
+msgid "Newest Forum Posts"
+msgstr ""
+
+#: web/templates/page/front_page.html.eex:37
+msgid "Newest Photos"
+msgstr ""
+
+#: web/controllers/profile_controller.ex:16
+msgid "The requested profile could not be found!"
+msgstr ""
+
+#: web/templates/layout/sidebar.html.eex:8
+msgid "Your Profile"
 msgstr ""

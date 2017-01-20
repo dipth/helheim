@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-block">
+        <img
+          src="<%= Altnation.Avatar.url({@user.avatar, @user}, :large) %>"
+          class="rounded img-fluid mx-auto d-block mb-1"
+          alt="<%= @user.username %>"
+        >
+        <h1><%= @user.username %></h1>
+        <p>
+          <strong><%= gettext "Member since:" %></strong>
+          <span class="float-right">
+            <%=
+              @user.inserted_at
+              |> Calendar.DateTime.shift_zone!("Europe/Copenhagen")
+              |> Calendar.Strftime.strftime!("%Y-%m-%d %H:%M:%S")
+            %>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <%= raw @user.profile_text %>
+  </div>
+</div>

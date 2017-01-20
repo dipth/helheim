@@ -5,6 +5,38 @@ defmodule Altnation.ProfileControllerTest do
   alias Altnation.User
   import Altnation.Factory
 
+  describe "show/2" do
+    test "it returns a successful response when signed in and not specifying an id", %{conn: conn} do
+      conn = conn |> sign_in(insert(:user))
+      conn = get conn, "/profile"
+      assert html_response(conn, 200)
+    end
+
+    test "it returns a successful response when signed in and specifying an existing id", %{conn: conn} do
+      user = insert(:user)
+      conn = conn |> sign_in(user)
+      conn = get conn, "/profiles/#{user.id}"
+      assert html_response(conn, 200)
+    end
+
+    test "it redirects when signed in and specifying a non-existing id", %{conn: conn} do
+      conn = conn |> sign_in(insert(:user))
+      conn = get conn, "/profiles/999999999"
+      assert html_response(conn, 302)
+    end
+
+    test "it redirects when not signed in and not specifying an id", %{conn: conn} do
+      conn = get conn, "/profile"
+      assert html_response(conn, 302)
+    end
+
+    test "it redirects when not signed in and specifying an existing id", %{conn: conn} do
+      user = insert(:user)
+      conn = get conn, "/profiles/#{user.id}"
+      assert html_response(conn, 302)
+    end
+  end
+
   describe "new/2" do
     test "it returns a successful response when signed in", %{conn: conn} do
       conn = conn |> sign_in(insert(:user))

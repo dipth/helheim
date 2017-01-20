@@ -4,14 +4,16 @@
       <h5 class="mb-1"><%= gettext "Newest Users" %></h5>
       <div class="avatar-list">
         <%= for user <- @newest_users do %>
-          <img
-            src="<%= Altnation.Avatar.url({user.avatar, user}, :tiny) %>"
-            class="rounded"
-            alt="<%= user.username %>"
-            data-toggle="tooltip"
-            data-placement="bottom"
-            title="<%= user.username %>"
-          >
+          <a href="<%= public_profile_path(@conn, :show, user.id) %>">
+            <img
+              src="<%= Altnation.Avatar.url({user.avatar, user}, :tiny) %>"
+              class="rounded"
+              alt="<%= user.username %>"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="<%= user.username %>"
+            >
+          </a>
         <% end %>
       </div>
     </div>
