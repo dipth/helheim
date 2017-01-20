@@ -37,7 +37,7 @@ defmodule Altnation.SessionController do
   defp set_remember_me(conn, user, remember_me) do
     case remember_me do
       "true" ->
-        {:ok, jwt, claims} = Guardian.encode_and_sign(user, "refresh")
+        {:ok, jwt, _claims} = Guardian.encode_and_sign(user, "refresh")
         thirty_days = 30*24*60*60
         conn
         |> put_resp_cookie("remember_me", jwt, max_age: thirty_days, secure: Mix.env == :prod)
