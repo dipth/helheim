@@ -1,6 +1,7 @@
 defmodule Altnation.ProfileController do
   use Altnation.Web, :controller
   alias Altnation.User
+  alias Altnation.BlogPost
 
   def show(conn, params) do
     user = if params["id"] do
@@ -10,7 +11,14 @@ defmodule Altnation.ProfileController do
     end
 
     if user do
-      render conn, "show.html", user: user
+      newest_blog_posts =
+        assoc(user, :blog_posts)
+        |> BlogPost.newest
+        |> limit(5)
+        |> Altnation.Repo.all
+        |> Repo.preload(:user)
+
+      render conn, "show.html", user: user, newest_blog_posts: newest_blog_posts
     else
       conn
       |> put_flash(:error, gettext("The requested profile could not be found!"))

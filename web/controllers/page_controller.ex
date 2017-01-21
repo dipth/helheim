@@ -1,6 +1,7 @@
 defmodule Altnation.PageController do
   use Altnation.Web, :controller
   alias Altnation.User
+  alias Altnation.BlogPost
 
   def index(conn, _params) do
     if Guardian.Plug.current_resource(conn) do
@@ -19,11 +20,22 @@ defmodule Altnation.PageController do
   end
 
   def front_page(conn, _params) do
-    newest_users = User
-    |> User.newest
-    |> limit(10)
-    |> Altnation.Repo.all
-    render conn, "front_page.html", newest_users: newest_users
+    newest_users =
+      User
+      |> User.newest
+      |> limit(10)
+      |> Altnation.Repo.all
+
+    newest_blog_posts =
+      BlogPost
+      |> BlogPost.newest
+      |> limit(5)
+      |> Altnation.Repo.all
+      |> Repo.preload(:user)
+
+    render conn, "front_page.html",
+      newest_users: newest_users,
+      newest_blog_posts: newest_blog_posts
   end
 
   def debug(conn, _params) do

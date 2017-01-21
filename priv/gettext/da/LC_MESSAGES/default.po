@@ -345,7 +345,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:132
+#: web/models/user.ex:134
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -374,7 +374,7 @@ msgstr "Profil Indstillinger"
 msgid "Profile Text"
 msgstr "Profiltekst"
 
-#: web/controllers/profile_controller.ex:33
+#: web/controllers/profile_controller.ex:41
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
@@ -391,8 +391,9 @@ msgid "Remember me"
 msgstr "Husk mig i 30 dage"
 
 #: web/templates/page/front_page.html.eex:24
-#: web/templates/page/front_page.html.eex:30
-#: web/templates/page/front_page.html.eex:38
+#: web/templates/page/front_page.html.eex:40
+#: web/templates/profile/show.html.eex:43
+#: web/templates/profile/show.html.eex:51
 msgid "Coming soon"
 msgstr "Kommer snart"
 
@@ -401,21 +402,93 @@ msgid "Member since:"
 msgstr "Medlem siden:"
 
 #: web/templates/page/front_page.html.eex:29
+#: web/templates/profile/show.html.eex:33
 msgid "Newest Blogs"
 msgstr "Nyeste Blogs"
 
 #: web/templates/page/front_page.html.eex:23
+#: web/templates/profile/show.html.eex:42
 msgid "Newest Forum Posts"
 msgstr "Nyeste Forumindlæg"
 
-#: web/templates/page/front_page.html.eex:37
+#: web/templates/page/front_page.html.eex:39
+#: web/templates/profile/show.html.eex:50
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
 
-#: web/controllers/profile_controller.ex:16
+#: web/controllers/profile_controller.ex:24
 msgid "The requested profile could not be found!"
 msgstr "Den valgte profil kunne ikke findes!"
 
 #: web/templates/layout/sidebar.html.eex:8
 msgid "Your Profile"
 msgstr "Din Profil"
+
+#: web/templates/blog_post/index.html.eex:3
+msgid "Blog Posts"
+msgstr "Blogs"
+
+#: web/templates/blog_post/index.html.eex:6
+#: web/templates/blog_post/new.html.eex:3
+msgid "New Blog Post"
+msgstr "Ny Blog"
+
+#: web/templates/blog_post/form.html.eex:23
+msgid "Save Blog Post"
+msgstr "Gem Blog"
+
+#: web/templates/layout/sidebar.html.eex:11
+msgid "Your Blog Posts"
+msgstr "Dine Blogs"
+
+#: web/templates/blog_post/show.html.eex:24
+msgid "Are you sure?"
+msgstr "Er du sikker?"
+
+#: web/controllers/blog_post_controller.ex:36
+msgid "Blog post created successfully."
+msgstr "Din blog er oprettet!"
+
+#: web/controllers/blog_post_controller.ex:80
+msgid "Blog post deleted successfully."
+msgstr "Din blog er nu slettet!"
+
+#: web/controllers/blog_post_controller.ex:67
+msgid "Blog post updated successfully."
+msgstr "Din blog er opdateret!"
+
+#: web/templates/blog_post/show.html.eex:26
+msgid "Delete"
+msgstr "Slet"
+
+#: web/templates/blog_post/show.html.eex:22
+msgid "Edit"
+msgstr "Redigér"
+
+#: web/templates/blog_post/edit.html.eex:3
+msgid "Edit Blog Post"
+msgstr "Redigér Blog"
+
+#: web/templates/blog_post/form.html.eex:13
+msgid "Body"
+msgstr "Tekst"
+
+#: web/templates/blog_post/form.html.eex:4
+msgid "Title"
+msgstr "Titel"
+
+#: web/templates/blog_post/index.html.eex:16
+msgid "First"
+msgstr "Første"
+
+#: web/templates/blog_post/index.html.eex:17
+msgid "Last"
+msgstr "Sidste"
+
+#: web/templates/blog_post/index.html.eex:14
+msgid "Next"
+msgstr "Næste"
+
+#: web/templates/blog_post/index.html.eex:15
+msgid "Previous"
+msgstr "Forrige"

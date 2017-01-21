@@ -4,6 +4,7 @@
 /deps
 /*.ez
 /uploads
+/screenshots
 
 # Generated on crash by the VM
 erl_crash.dump

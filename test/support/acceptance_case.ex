@@ -26,6 +26,7 @@ defmodule Altnation.AcceptanceCase do
 
     metadata = Phoenix.Ecto.SQL.Sandbox.metadata_for(Altnation.Repo, self())
     {:ok, session} = Wallaby.start_session(metadata: metadata)
+    session = Wallaby.Session.set_window_size(session, 1366, 768)
     {:ok, session: session}
   end
 end

@@ -26,3 +26,28 @@
     <%= raw @user.profile_text %>
   </div>
 </div>
+
+<div class="card-group">
+  <div class="card">
+    <div class="card-block">
+      <h5 class="mb-1"><%= gettext "Newest Blogs" %></h5>
+      <%= for blog_post <- @newest_blog_posts do %>
+        <%= render Altnation.BlogPostView, "list_entry.html", conn: @conn, blog_post: blog_post %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-block">
+      <h5 class="mb-1"><%= gettext "Newest Forum Posts" %></h5>
+      <p><%= gettext "Coming soon" %></p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-block">
+    <h5 class="mb-1"><%= gettext "Newest Photos" %></h5>
+    <p><%= gettext "Coming soon" %></p>
+  </div>
+</div>

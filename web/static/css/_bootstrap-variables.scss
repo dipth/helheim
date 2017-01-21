@@ -99,3 +99,17 @@ $text-muted: $body-bg;
 // Images
 
 $thumbnail-border-width: 2px;
+
+// Pagination
+
+$pagination-bg: $body-color;
+$pagination-color: $gray-dark;
+$pagination-border-color: $body-color;
+
+$pagination-active-color: $brand-primary;
+$pagination-active-bg: $gray-light;
+$pagination-active-border: $gray-light;
+
+$pagination-hover-bg: $brand-primary;
+$pagination-hover-color: $body-color;
+$pagination-hover-border: $brand-primary;

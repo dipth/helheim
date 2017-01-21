@@ -333,7 +333,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:132
+#: web/models/user.ex:134
 msgid "does not match your current password"
 msgstr ""
 
@@ -361,7 +361,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:33
+#: web/controllers/profile_controller.ex:41
 msgid "Profile updated!"
 msgstr ""
 
@@ -378,8 +378,8 @@ msgid "Remember me"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:24
-#: web/templates/page/front_page.html.eex:30
-#: web/templates/page/front_page.html.eex:38
+#: web/templates/page/front_page.html.eex:40
+#: web/templates/profile/show.html.eex:43 web/templates/profile/show.html.eex:51
 msgid "Coming soon"
 msgstr ""
 
@@ -388,21 +388,93 @@ msgid "Member since:"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:29
+#: web/templates/profile/show.html.eex:33
 msgid "Newest Blogs"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:23
+#: web/templates/profile/show.html.eex:42
 msgid "Newest Forum Posts"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:37
+#: web/templates/page/front_page.html.eex:39
+#: web/templates/profile/show.html.eex:50
 msgid "Newest Photos"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:16
+#: web/controllers/profile_controller.ex:24
 msgid "The requested profile could not be found!"
 msgstr ""
 
 #: web/templates/layout/sidebar.html.eex:8
 msgid "Your Profile"
+msgstr ""
+
+#: web/templates/blog_post/index.html.eex:3
+msgid "Blog Posts"
+msgstr ""
+
+#: web/templates/blog_post/index.html.eex:6
+#: web/templates/blog_post/new.html.eex:3
+msgid "New Blog Post"
+msgstr ""
+
+#: web/templates/blog_post/form.html.eex:23
+msgid "Save Blog Post"
+msgstr ""
+
+#: web/templates/layout/sidebar.html.eex:11
+msgid "Your Blog Posts"
+msgstr ""
+
+#: web/templates/blog_post/show.html.eex:24
+msgid "Are you sure?"
+msgstr ""
+
+#: web/controllers/blog_post_controller.ex:36
+msgid "Blog post created successfully."
+msgstr ""
+
+#: web/controllers/blog_post_controller.ex:80
+msgid "Blog post deleted successfully."
+msgstr ""
+
+#: web/controllers/blog_post_controller.ex:67
+msgid "Blog post updated successfully."
+msgstr ""
+
+#: web/templates/blog_post/show.html.eex:26
+msgid "Delete"
+msgstr ""
+
+#: web/templates/blog_post/show.html.eex:22
+msgid "Edit"
+msgstr ""
+
+#: web/templates/blog_post/edit.html.eex:3
+msgid "Edit Blog Post"
+msgstr ""
+
+#: web/templates/blog_post/form.html.eex:13
+msgid "Body"
+msgstr ""
+
+#: web/templates/blog_post/form.html.eex:4
+msgid "Title"
+msgstr ""
+
+#: web/templates/blog_post/index.html.eex:16
+msgid "First"
+msgstr ""
+
+#: web/templates/blog_post/index.html.eex:17
+msgid "Last"
+msgstr ""
+
+#: web/templates/blog_post/index.html.eex:14
+msgid "Next"
+msgstr ""
+
+#: web/templates/blog_post/index.html.eex:15
+msgid "Previous"
 msgstr ""

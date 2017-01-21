@@ -27,7 +27,9 @@
   <div class="card">
     <div class="card-block">
       <h5 class="mb-1"><%= gettext "Newest Blogs" %></h5>
-      <p><%= gettext "Coming soon" %></p>
+      <%= for blog_post <- @newest_blog_posts do %>
+        <%= render Altnation.BlogPostView, "list_entry.html", conn: @conn, blog_post: blog_post %>
+      <% end %>
     </div>
   </div>
 </div>

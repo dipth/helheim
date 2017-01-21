@@ -11,4 +11,12 @@ defmodule Altnation.Factory do
       confirmed_at: DateTime.utc_now
     }
   end
+
+  def blog_post_factory do
+    %Altnation.BlogPost{
+      user: build(:user),
+      title: "My Awesome Title",
+      body: "My Aweseome Text"
+    }
+  end
 end

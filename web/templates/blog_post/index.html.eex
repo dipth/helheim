@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-header">
+    <%= gettext "Blog Posts" %>
+    <%= link to: blog_post_path(@conn, :new), class: "btn btn-primary btn-sm float-right" do %>
+      <i class="fa fa-plus"></i>
+      <%= gettext("New Blog Post") %>
+    <% end %>
+  </div>
+  <div class="card-block">
+    <%= for blog_post <- @blog_posts do %>
+      <%= render "list_entry.html", conn: @conn, blog_post: blog_post %>
+    <% end %>
+    <%= paginate @conn, @pagination,
+          next_label: gettext("Next"),
+          previous_label: gettext("Previous"),
+          first_label: gettext("First"),
+          last_label: gettext("Last") %>
+  </div>
+</div>

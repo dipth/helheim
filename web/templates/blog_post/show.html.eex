@@ -1,0 +1,30 @@
+<p>
+  <%= link img_tag(Altnation.Avatar.url({@blog_post.user.avatar, @blog_post.user}, :tiny), class: "rounded"), to: public_profile_path(@conn, :show, @blog_post.user.id) %>
+  <%= link @blog_post.user.username, to: public_profile_path(@conn, :show, @blog_post.user.id) %>
+  <small>
+    -
+    <%=
+      @blog_post.inserted_at
+      |> Calendar.DateTime.shift_zone!("Europe/Copenhagen")
+      |> Calendar.Strftime.strftime!("%d-%m-%Y %H:%M:%S")
+    %>
+  </small>
+</p>
+<h1 class="display-4 blog-post-title"><%= @blog_post.title %></h1>
+
+<%= raw @blog_post.body %>
+
+<%= if @blog_post.user_id == Guardian.Plug.current_resource(@conn).id do %>
+  <div class="card">
+    <div class="card-block">
+      <%= link to: blog_post_path(@conn, :edit, @blog_post), class: "btn btn-sm btn-primary" do %>
+        <i class="fa fa-pencil"></i>
+        <%= gettext "Edit" %>
+      <% end %>
+      <%= link to: blog_post_path(@conn, :delete, @blog_post), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-sm float-right" do %>
+        <i class="fa fa-trash"></i>
+        <%= gettext "Delete" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

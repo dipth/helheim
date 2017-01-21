@@ -19,6 +19,8 @@ defmodule Altnation.User do
     field :avatar,                          Altnation.Avatar.Type
     field :profile_text,                    :string
 
+    has_many :blog_posts, Altnation.BlogPost
+
     timestamps()
   end
 

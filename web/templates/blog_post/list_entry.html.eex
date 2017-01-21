@@ -1,0 +1,14 @@
+<blockquote class="blockquote">
+  <p class="mb-0">
+    <%= link @blog_post.title, to: public_profile_blog_post_path(@conn, :show, @blog_post.user, @blog_post) %>
+  </p>
+  <footer class="blockquote-footer">
+    <%= link @blog_post.user.username, to: public_profile_path(@conn, :show, @blog_post.user.id) %>
+    -
+    <%=
+      @blog_post.inserted_at
+      |> Calendar.DateTime.shift_zone!("Europe/Copenhagen")
+      |> Calendar.Strftime.strftime!("%d-%m-%Y %H:%M:%S")
+    %>
+  </footer>
+</blockquote>
