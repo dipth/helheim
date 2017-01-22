@@ -4,7 +4,7 @@ defmodule Altnation.BlogPostControllerTest do
   alias Altnation.BlogPost
 
   @valid_attrs %{body: "Body Text", title: "Title String"}
-  @invalid_attrs %{body: "", title: ""}
+  @invalid_attrs %{body: "   ", title: "   "}
 
   describe "index/2" do
     test "it returns a successful response when supplying an existing user id", %{conn: conn} do
@@ -86,6 +86,14 @@ defmodule Altnation.BlogPostControllerTest do
       post conn, "/blog_posts", blog_post: Map.merge(@valid_attrs, %{user_id: user_2.id})
       blog_post = Repo.one(BlogPost)
       assert blog_post.user_id == user_1.id
+    end
+
+    test "it trims whitespace from the title", %{conn: conn} do
+      user = insert(:user)
+      conn = conn |> sign_in(user)
+      post conn, "/blog_posts", blog_post: Map.merge(@valid_attrs, %{title: "   Foo Bar   "})
+      blog_post = Repo.one(BlogPost)
+      assert blog_post.title == "Foo Bar"
     end
   end
 
@@ -217,6 +225,15 @@ defmodule Altnation.BlogPostControllerTest do
       put conn, "/blog_posts/#{blog_post.id}", blog_post: Map.merge(@valid_attrs, %{user_id: user_2.id})
       blog_post = Repo.get(BlogPost, blog_post.id)
       assert blog_post.user_id == user_1.id
+    end
+
+    test "it trims whitespace from the title", %{conn: conn} do
+      blog_post = insert(:blog_post)
+      user = blog_post.user
+      conn = conn |> sign_in(user)
+      put conn, "/blog_posts/#{blog_post.id}", blog_post: Map.merge(@valid_attrs, %{title: "   Trim Me   "})
+      blog_post = Repo.get(BlogPost, blog_post.id)
+      assert blog_post.title == "Trim Me"
     end
   end
 

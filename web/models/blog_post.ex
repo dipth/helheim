@@ -20,6 +20,7 @@ defmodule Altnation.BlogPost do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:title, :body])
+    |> trim_fields(:title)
     |> validate_required([:title, :body])
     |> scrub_body()
   end

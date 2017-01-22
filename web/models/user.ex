@@ -35,6 +35,7 @@ defmodule Altnation.User do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:name, :email, :username, :password, :password_confirmation])
+    |> trim_fields([:name, :email, :username])
     |> validate_required([:name, :email, :username])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
@@ -64,6 +65,7 @@ defmodule Altnation.User do
   def account_changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:name, :email, :password, :password_confirmation, :existing_password])
+    |> trim_fields([:name, :email])
     |> validate_required([:name, :email, :existing_password])
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 6)

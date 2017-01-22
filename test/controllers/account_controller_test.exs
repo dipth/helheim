@@ -5,7 +5,7 @@ defmodule Altnation.AccountControllerTest do
   alias Altnation.User
   import Altnation.Factory
 
-  describe "new/2" do
+  describe "edit/2" do
     test "it returns a successful response when signed in", %{conn: conn} do
       conn = conn |> sign_in(insert(:user))
       conn = get conn, "/account/edit"
@@ -18,7 +18,7 @@ defmodule Altnation.AccountControllerTest do
     end
   end
 
-  describe "create/2" do
+  describe "update/2" do
     test "it allows the update of the users name", %{conn: conn} do
       user = insert(:user)
       conn = conn
@@ -117,6 +117,17 @@ defmodule Altnation.AccountControllerTest do
       refute user.name == "New Name"
       refute user.email == "new@email.com"
       refute Altnation.Auth.password_correct?(user.password_hash, "newpassword")
+    end
+
+    test "it trims whitespace", %{conn: conn} do
+      user = insert(:user)
+      conn = conn
+      |> sign_in(user)
+      |> post("/account", user: %{name: "   New Name   ", email: "   new@email.com   ", existing_password: "password"}, _method: "put")
+      assert html_response(conn, 302)
+      user = Repo.get(User, user.id)
+      assert user.name == "New Name"
+      assert user.email == "new@email.com"
     end
   end
 end

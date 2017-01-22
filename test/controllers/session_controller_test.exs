@@ -30,6 +30,13 @@ defmodule Altnation.SessionControllerTest do
       assert html_response(conn, 200) =~ gettext("Wrong e-mail or password")
       refute Guardian.Plug.current_resource(conn)
     end
+
+    test "it trims whitespace before checking credentials", %{conn: conn} do
+      user = insert(:user)
+      conn = post conn, "/sessions", session: %{email: "   #{user.email}   ", password: "password", remember_me: "false"}
+      assert html_response(conn, 302)
+      assert Guardian.Plug.current_resource(conn).id == user.id
+    end
   end
 
   describe "delete/2" do
