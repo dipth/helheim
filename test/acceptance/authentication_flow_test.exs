@@ -1,7 +1,5 @@
 defmodule Altnation.AuthenticationFlowTest do
   use Altnation.AcceptanceCase, async: true
-  alias Altnation.Repo
-  alias Altnation.User
   import Altnation.Factory
 
   test "users can sign in and out", %{session: session} do
@@ -13,15 +11,19 @@ defmodule Altnation.AuthenticationFlowTest do
     |> fill_in(gettext("E-mail"), with: user.email)
     |> fill_in(gettext("Password"), with: "password")
     |> click_on(gettext("Sign In"))
-    |> find(".alert.alert-info")
+    |> find(".alert.alert-success")
     |> text
-    assert result == gettext("Welcome back %{username}!", username: user.username)
+    assert result =~ gettext("Welcome back %{username}!", username: user.username)
+
+    session
+    |> find(".nav-item-user-menu")
+    |> click_link(user.username)
+    |> click_link(gettext("Sign Out"))
 
     result = session
-    |> click_link(gettext("Sign Out"))
-    |> find(".alert.alert-info")
+    |> find(".alert.alert-success")
     |> text
-    assert result == gettext("See you later!")
+    assert result =~ gettext("See you later!")
   end
 
   test "users can remember their password", %{session: session} do
@@ -34,26 +36,30 @@ defmodule Altnation.AuthenticationFlowTest do
     |> fill_in(gettext("Password"), with: "password")
     |> check(gettext("Remember me"))
     |> click_on(gettext("Sign In"))
-    |> find(".alert.alert-info")
+    |> find(".alert.alert-success")
     |> text
-    assert result == gettext("Welcome back %{username}!", username: user.username)
+    assert result =~ gettext("Welcome back %{username}!", username: user.username)
 
     session
-    |> execute_script("$.removeCookie('_altnation_key', { path: '/' });")
-    |> visit("/")
+    |> execute_script("document.cookie = '_altnation_key=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';")
 
-    assert get_current_path(session) == "front_page"
+    session
+    |> visit("/")
+    assert get_current_path(session) == "/front_page"
+
+    session
+    |> find(".nav-item-user-menu")
+    |> click_link(user.username)
+    |> click_link(gettext("Sign Out"))
 
     result = session
-    |> click_link(gettext("Sign Out"))
-    |> find(".alert.alert-info")
+    |> find(".alert.alert-success")
     |> text
-    assert result == gettext("See you later!")
+    assert result =~ gettext("See you later!")
 
     session
-    |> execute_script("$.removeCookie('_altnation_key', { path: '/' });")
     |> visit("/")
 
-    assert get_current_path(session) == ""
+    assert get_current_path(session) == "/"
   end
 end
