@@ -47,8 +47,11 @@ defmodule Altnation.Router do
     resources "/profile", ProfileController, singleton: true, only: [:show, :edit, :update]
     resources "/profiles", ProfileController, only: [:show], as: :public_profile do
       resources "/blog_posts", BlogPostController, only: [:index, :show]
+      resources "/comments", ProfileCommentController, only: [:index, :create], as: :comment
     end
-    resources "/blog_posts", BlogPostController, only: [:new, :create, :edit, :update, :delete]
+    resources "/blog_posts", BlogPostController, only: [:new, :create, :edit, :update, :delete] do
+      resources "/comments", BlogPostCommentController, only: [:create], as: :comment
+    end
   end
 
   # Other scopes may use custom stacks.

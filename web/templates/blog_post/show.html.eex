@@ -28,3 +28,13 @@
     </div>
   </div>
 <% end %>
+
+<h3><%= gettext "Comments:" %></h3>
+
+<%=
+  render Altnation.CommentView,
+         "comments.html",
+         conn: @conn,
+         comments: @comments,
+         pagination: @pagination,
+         post_path: blog_post_comment_path(@conn, :create, @blog_post) %>

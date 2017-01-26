@@ -19,4 +19,12 @@ defmodule Altnation.Factory do
       body: "My Aweseome Text"
     }
   end
+
+  def profile_comment_factory do
+    %Altnation.Comment{
+      author: build(:user),
+      profile: build(:user),
+      body: "My Aweseome Comment"
+    }
+  end
 end

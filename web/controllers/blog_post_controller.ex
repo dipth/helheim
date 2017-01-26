@@ -3,6 +3,7 @@ defmodule Altnation.BlogPostController do
   import Guardian.Plug, only: [current_resource: 1]
   alias Altnation.BlogPost
   alias Altnation.User
+  alias Altnation.Comment
 
   def index(conn, params = %{"profile_id" => user_id}) do
     user = Repo.get!(User, user_id)
@@ -40,13 +41,18 @@ defmodule Altnation.BlogPostController do
     end
   end
 
-  def show(conn, %{"profile_id" => user_id, "id" => id}) do
+  def show(conn, params = %{"profile_id" => user_id, "id" => id}) do
     user = Repo.get!(User, user_id)
     blog_post =
       assoc(user, :blog_posts)
       |> Repo.get!(id)
       |> Repo.preload(:user)
-    render(conn, "show.html", blog_post: blog_post)
+    {comments, pagination} =
+      assoc(blog_post, :comments)
+      |> Comment.newest
+      |> Repo.paginate(params)
+    comments = Repo.preload(comments, :author)
+    render(conn, "show.html", blog_post: blog_post, comments: comments, pagination: pagination)
   end
 
   def edit(conn, %{"id" => id}) do

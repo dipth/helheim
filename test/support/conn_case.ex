@@ -27,6 +27,7 @@ defmodule Altnation.ConnCase do
 
       import Altnation.Router.Helpers
       import Altnation.Gettext
+      import Altnation.Factory
 
       # The default endpoint for testing
       @endpoint Altnation.Endpoint
@@ -50,6 +51,13 @@ defmodule Altnation.ConnCase do
         conn
         |> conn_with_fetched_session
         |> Guardian.Plug.sign_in(resource, :access)
+      end
+
+      defp create_and_sign_in_user(context) do
+        user = insert(:user)
+        conn = context[:conn]
+        conn = conn |> sign_in(user)
+        [conn: conn, user: user]
       end
     end
   end

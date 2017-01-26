@@ -1,0 +1,27 @@
+<div class="d-flex flex-column-reverse">
+  <%= for comment <- @comments do %>
+    <%= render Altnation.CommentView, "comment.html", conn: @conn, comment: comment %>
+  <% end %>
+</div>
+
+<%= if @pagination do %>
+  <%= paginate @conn, @pagination,
+        next_label: gettext("Next"),
+        previous_label: gettext("Previous"),
+        first_label: gettext("First"),
+        last_label: gettext("Last") %>
+<% end %>
+
+<%= form_for Altnation.Comment.changeset(%Altnation.Comment{}), @post_path, fn f -> %>
+  <div class="card">
+    <div class="card-header">
+      <%= label f, :body, gettext("Write new comment:"), class: "control-label mb-0" %>
+    </div>
+    <div class="card-block">
+      <%= textarea f, :body, class: "form-control", rows: 5 %>
+    </div>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Post Comment" %></button>
+    </div>
+  </div>
+<% end %>

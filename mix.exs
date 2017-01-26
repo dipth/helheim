@@ -20,7 +20,7 @@ defmodule Altnation.Mixfile do
     [mod: {Altnation, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :comeonin, :bamboo, :calendar, :sentry,
-                    :appsignal, :ex_aws, :hackney, :poison]]
+                    :appsignal, :ex_aws, :hackney, :poison, :timex]]
   end
 
   # Specifies which paths to compile per environment.
@@ -45,7 +45,9 @@ defmodule Altnation.Mixfile do
      {:bamboo, "~> 0.7"},
      {:bamboo_postmark, "~> 0.2.0"},
      {:calendar, "~> 0.16.1"},
+     {:calendar_translations, "~> 0.0.4"},
      {:calecto, "~> 0.16.0"},
+     {:timex, git: "https://github.com/bitwalker/timex.git"},
      {:wallaby, "~> 0.15.0"},
      {:ex_machina, "~> 1.0", only: :test},
      {:sentry, "~> 1.0"},

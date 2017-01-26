@@ -69,6 +69,7 @@ defmodule Altnation.Web do
       import Altnation.Router.Helpers
       import Altnation.ErrorHelpers
       import Altnation.Gettext
+      import Altnation.TimeHelpers
 
       use Altnation.BreadcrumbsDefaults
     end

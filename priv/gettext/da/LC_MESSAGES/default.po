@@ -345,7 +345,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:134
+#: web/models/user.ex:138
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -374,7 +374,7 @@ msgstr "Profil Indstillinger"
 msgid "Profile Text"
 msgstr "Profiltekst"
 
-#: web/controllers/profile_controller.ex:41
+#: web/controllers/profile_controller.ex:48
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
@@ -416,7 +416,7 @@ msgstr "Nyeste Forumindlæg"
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
 
-#: web/controllers/profile_controller.ex:24
+#: web/controllers/profile_controller.ex:31
 msgid "The requested profile could not be found!"
 msgstr "Den valgte profil kunne ikke findes!"
 
@@ -445,15 +445,15 @@ msgstr "Dine Blogs"
 msgid "Are you sure?"
 msgstr "Er du sikker?"
 
-#: web/controllers/blog_post_controller.ex:36
+#: web/controllers/blog_post_controller.ex:37
 msgid "Blog post created successfully."
 msgstr "Din blog er oprettet!"
 
-#: web/controllers/blog_post_controller.ex:80
+#: web/controllers/blog_post_controller.ex:86
 msgid "Blog post deleted successfully."
 msgstr "Din blog er nu slettet!"
 
-#: web/controllers/blog_post_controller.ex:67
+#: web/controllers/blog_post_controller.ex:73
 msgid "Blog post updated successfully."
 msgstr "Din blog er opdateret!"
 
@@ -478,17 +478,55 @@ msgid "Title"
 msgstr "Titel"
 
 #: web/templates/blog_post/index.html.eex:16
+#: web/templates/comment/comments.html.eex:11
 msgid "First"
 msgstr "Første"
 
 #: web/templates/blog_post/index.html.eex:17
+#: web/templates/comment/comments.html.eex:12
 msgid "Last"
 msgstr "Sidste"
 
 #: web/templates/blog_post/index.html.eex:14
+#: web/templates/comment/comments.html.eex:9
 msgid "Next"
 msgstr "Næste"
 
 #: web/templates/blog_post/index.html.eex:15
+#: web/templates/comment/comments.html.eex:10
 msgid "Previous"
 msgstr "Forrige"
+
+#: web/controllers/blog_post_comment_controller.ex:18
+#: web/controllers/profile_comment_controller.ex:28
+msgid "Comment created successfully"
+msgstr "Din kommentar er tilføjet!"
+
+#: web/templates/blog_post/show.html.eex:32
+msgid "Comments:"
+msgstr "Kommentarer:"
+
+#: web/templates/profile_comment/index.html.eex:8
+msgid "Guest Book"
+msgstr "Gæstebog"
+
+#: web/templates/profile/show.html.eex:56
+msgid "Newest Guest Book Entries"
+msgstr "Nyeste gæstebogsindlæg"
+
+#: web/templates/comment/comments.html.eex:24
+msgid "Post Comment"
+msgstr "Tilføj Kommentar"
+
+#: web/templates/profile/show.html.eex:57
+msgid "Show All"
+msgstr "Vis alle"
+
+#: web/controllers/blog_post_comment_controller.ex:22
+#: web/controllers/profile_comment_controller.ex:32
+msgid "Unable to create comment"
+msgstr "Din kommentar kunne ikke tilføjes!"
+
+#: web/templates/comment/comments.html.eex:18
+msgid "Write new comment:"
+msgstr "Skriv ny kommentar:"

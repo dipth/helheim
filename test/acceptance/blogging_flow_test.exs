@@ -48,6 +48,24 @@ defmodule Altnation.BloggingFlowTest do
     assert result =~ gettext("Blog post updated successfully.")
   end
 
+  test "users can comment on blog posts", %{session: session} do
+    blog_post = insert(:blog_post)
+    user = insert(:user)
+    sign_in session, user
+
+    session
+    |> visit("/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}")
+
+    result = session
+    |> fill_in(gettext("Write new comment:"), with: "Super Duper Awesome Comment")
+    |> click_on(gettext("Post Comment"))
+    |> find(".alert.alert-success")
+    |> text
+
+    assert result =~ gettext("Comment created successfully")
+    assert find(session, "p", text: "Super Duper Awesome Comment")
+  end
+
   # TODO: Enable when wallaby / phoenixjs supports alert interaction
   # test "users can delete their existing blog posts", %{session: session} do
   #   blog_post = insert(:blog_post, title: "Blog Title Test")

@@ -12,6 +12,21 @@ defmodule Altnation.AcceptanceCase do
 
       import Altnation.Router.Helpers
       import Altnation.Gettext
+      import Altnation.Factory
+
+      defp sign_in(session, user) do
+        session
+        |> visit("/sessions/new")
+        |> fill_in(gettext("E-mail"), with: user.email)
+        |> fill_in(gettext("Password"), with: "password")
+        |> click_on(gettext("Sign In"))
+      end
+
+      defp create_and_sign_in_user(context) do
+        user = insert(:user)
+        context[:session] |> sign_in(user)
+        [user: user]
+      end
     end
   end
 

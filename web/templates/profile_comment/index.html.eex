@@ -1,0 +1,17 @@
+<h1 class="mb-2">
+  <img
+    src="<%= Altnation.Avatar.url({@user.avatar, @user}, :tiny) %>"
+    class="rounded"
+    alt="<%= @user.username %>"
+  >
+  <%= @user.username %>
+  : <%= gettext "Guest Book" %>
+</h1>
+
+<%=
+  render Altnation.CommentView,
+         "comments.html",
+         conn: @conn,
+         comments: @comments,
+         pagination: @pagination,
+         post_path: public_profile_comment_path(@conn, :create, @user) %>

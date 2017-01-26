@@ -20,6 +20,8 @@ defmodule Altnation.User do
     field :profile_text,                    :string
 
     has_many :blog_posts, Altnation.BlogPost
+    has_many :comments, Altnation.Comment, foreign_key: :profile_id
+    has_many :authored_comments, Altnation.Comment, foreign_key: :author_id
 
     timestamps()
   end

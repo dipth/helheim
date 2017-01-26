@@ -1,18 +1,20 @@
-defmodule Altnation.BlogPost do
+defmodule Altnation.Comment do
   use Altnation.Web, :model
 
-  schema "blog_posts" do
-    field :title, :string
-    field :body, :string
-    belongs_to :user, Altnation.User
-    has_many :comments, Altnation.Comment
+  schema "comments" do
+    field      :body,         :string
+    field      :approved_at,  Calecto.DateTimeUTC
+    field      :deleted_at,   Calecto.DateTimeUTC
+    belongs_to :author,       Altnation.User
+    belongs_to :profile,      Altnation.User
+    belongs_to :blog_post,    Altnation.BlogPost
 
     timestamps()
   end
 
   def newest(query) do
-    from u in query,
-    order_by: [desc: u.inserted_at]
+    from c in query,
+    order_by: [desc: c.inserted_at]
   end
 
   @doc """
@@ -20,9 +22,9 @@ defmodule Altnation.BlogPost do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :body])
-    |> trim_fields(:title)
-    |> validate_required([:title, :body])
+    |> cast(params, [:body])
+    |> trim_fields(:body)
+    |> validate_required([:body])
     |> scrub_body()
   end
 
