@@ -1,4 +1,4 @@
-defmodule Altnation.Repo.Migrations.AddProfileTextToUser do
+defmodule Helheim.Repo.Migrations.AddProfileTextToUser do
   use Ecto.Migration
 
   def change do

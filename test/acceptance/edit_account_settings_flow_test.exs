@@ -1,6 +1,6 @@
-defmodule Altnation.EditAccountSettingsFlowTest do
-  use Altnation.AcceptanceCase, async: true
-  import Altnation.Factory
+defmodule Helheim.EditAccountSettingsFlowTest do
+  use Helheim.AcceptanceCase, async: true
+  import Helheim.Factory
 
   test "users can edit their account settings", %{session: session} do
     user = insert(:user)

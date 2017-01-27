@@ -1,5 +1,5 @@
-defmodule Altnation.Router do
-  use Altnation.Web, :router
+defmodule Helheim.Router do
+  use Helheim.Web, :router
   use Plug.ErrorHandler
   use Sentry.Plug
 
@@ -12,13 +12,13 @@ defmodule Altnation.Router do
     plug Guardian.Plug.VerifySession
     plug Guardian.Plug.VerifyRememberMe
     plug Guardian.Plug.LoadResource
-    plug Altnation.Locale
+    plug Helheim.Locale
   end
 
   pipeline :browser_auth do
     plug Guardian.Plug.VerifySession
     plug Guardian.Plug.VerifyRememberMe
-    plug Guardian.Plug.EnsureAuthenticated, handler: Altnation.Token
+    plug Guardian.Plug.EnsureAuthenticated, handler: Helheim.Token
     plug Guardian.Plug.LoadResource
   end
 
@@ -26,7 +26,7 @@ defmodule Altnation.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Altnation do
+  scope "/", Helheim do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
@@ -38,7 +38,7 @@ defmodule Altnation.Router do
     resources "/password_resets", PasswordResetController, only: [:new, :create, :show, :update]
   end
 
-  scope "/", Altnation do
+  scope "/", Helheim do
     pipe_through [:browser, :browser_auth]
 
     get "/signed_in", PageController, :signed_in
@@ -55,7 +55,7 @@ defmodule Altnation.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Altnation do
+  # scope "/api", Helheim do
   #   pipe_through :api
   # end
 

@@ -1,5 +1,5 @@
-defmodule Altnation.ErrorView do
-  use Altnation.Web, :view
+defmodule Helheim.ErrorView do
+  use Helheim.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"

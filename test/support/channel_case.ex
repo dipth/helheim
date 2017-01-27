@@ -1,4 +1,4 @@
-defmodule Altnation.ChannelCase do
+defmodule Helheim.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -20,22 +20,22 @@ defmodule Altnation.ChannelCase do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
-      alias Altnation.Repo
+      alias Helheim.Repo
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
 
 
       # The default endpoint for testing
-      @endpoint Altnation.Endpoint
+      @endpoint Helheim.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Altnation.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Helheim.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Altnation.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Helheim.Repo, {:shared, self()})
     end
 
     :ok

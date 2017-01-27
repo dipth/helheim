@@ -26,7 +26,7 @@ msgstr ""
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
 #: web/templates/page/index.html.eex:3
-msgid "Altnation"
+msgid "Helheim"
 msgstr ""
 
 #: web/templates/session/new.html.eex:42

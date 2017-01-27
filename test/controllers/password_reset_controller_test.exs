@@ -1,9 +1,9 @@
-defmodule Altnation.PasswordResetControllerTest do
-  use Altnation.ConnCase
+defmodule Helheim.PasswordResetControllerTest do
+  use Helheim.ConnCase
   use Bamboo.Test
-  alias Altnation.Repo
-  alias Altnation.User
-  import Altnation.Factory
+  alias Helheim.Repo
+  alias Helheim.User
+  import Helheim.Factory
 
   describe "new/2" do
     test "it returns a successful response", %{conn: conn} do
@@ -21,7 +21,7 @@ defmodule Altnation.PasswordResetControllerTest do
       assert user.password_reset_token
       {:ok, time_diff, _, _} = Calendar.DateTime.diff(user.password_reset_token_updated_at, DateTime.utc_now)
       assert time_diff < 10
-      assert_delivered_email Altnation.Email.password_reset_email(user)
+      assert_delivered_email Helheim.Email.password_reset_email(user)
     end
 
     test "it re-renders the new template when posting a non-confirmed e-mail address", %{conn: conn} do

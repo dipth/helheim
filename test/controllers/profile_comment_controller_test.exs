@@ -1,6 +1,6 @@
-defmodule Altnation.ProfileCommentControllerTest do
-  use Altnation.ConnCase
-  alias Altnation.Comment
+defmodule Helheim.ProfileCommentControllerTest do
+  use Helheim.ConnCase
+  alias Helheim.Comment
 
   @valid_attrs %{body: "Body Text"}
   @invalid_attrs %{body: ""}

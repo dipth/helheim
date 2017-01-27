@@ -1,7 +1,7 @@
-defmodule Altnation.BlogPostControllerTest do
-  use Altnation.ConnCase
-  import Altnation.Factory
-  alias Altnation.BlogPost
+defmodule Helheim.BlogPostControllerTest do
+  use Helheim.ConnCase
+  import Helheim.Factory
+  alias Helheim.BlogPost
 
   @valid_attrs %{body: "Body Text", title: "Title String"}
   @invalid_attrs %{body: "   ", title: "   "}

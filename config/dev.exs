@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :altnation, Altnation.Endpoint,
+config :helheim, Helheim.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -16,7 +16,7 @@ config :altnation, Altnation.Endpoint,
 
 
 # Watch static and templates for browser reloading.
-config :altnation, Altnation.Endpoint,
+config :helheim, Helheim.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
@@ -34,11 +34,11 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
-config :altnation, Altnation.Repo,
+config :helheim, Helheim.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "altnation_dev",
+  database: "helheim_dev",
   hostname: "localhost",
   pool_size: 10
 
@@ -46,7 +46,7 @@ config :altnation, Altnation.Repo,
 config :guardian, Guardian,
   secret_key: "Af5zLmIvBFsArKwijmXSomDNSsjkXMsoQEQ5c6IJu74o7v0qOSLQRED9NEgsRlqU"
 
-config :altnation, Altnation.Mailer,
+config :helheim, Helheim.Mailer,
   adapter: Bamboo.LocalAdapter
 
 import_config "dev.secret.exs"

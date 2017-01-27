@@ -1,5 +1,5 @@
-defmodule Altnation.Token do
-  use Altnation.Web, :controller
+defmodule Helheim.Token do
+  use Helheim.Web, :controller
 
   def unauthenticated(conn, _params) do
     conn

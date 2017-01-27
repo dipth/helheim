@@ -1,3 +1,3 @@
-defmodule Altnation.LayoutViewTest do
-  use Altnation.ConnCase, async: true
+defmodule Helheim.LayoutViewTest do
+  use Helheim.ConnCase, async: true
 end

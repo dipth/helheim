@@ -10,7 +10,7 @@
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item dropdown nav-item-user-menu">
       <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        <img src="<%= Altnation.Avatar.url({Guardian.Plug.current_resource(@conn).avatar, Guardian.Plug.current_resource(@conn)}, :tiny) %>" class="img-avatar" alt="<%= Guardian.Plug.current_resource(@conn).username %>">
+        <img src="<%= Helheim.Avatar.url({Guardian.Plug.current_resource(@conn).avatar, Guardian.Plug.current_resource(@conn)}, :tiny) %>" class="img-avatar" alt="<%= Guardian.Plug.current_resource(@conn).username %>">
         <span class="hidden-md-down"><%= Guardian.Plug.current_resource(@conn).username %></span>
       </a>
       <div class="dropdown-menu dropdown-menu-right">

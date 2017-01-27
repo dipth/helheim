@@ -1,3 +1,3 @@
-defmodule Altnation.EmailView do
-  use Altnation.Web, :view
+defmodule Helheim.EmailView do
+  use Helheim.Web, :view
 end

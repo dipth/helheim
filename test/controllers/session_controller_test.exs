@@ -1,6 +1,6 @@
-defmodule Altnation.SessionControllerTest do
-  use Altnation.ConnCase
-  import Altnation.Factory
+defmodule Helheim.SessionControllerTest do
+  use Helheim.ConnCase
+  import Helheim.Factory
 
   describe "new/2" do
     test "it returns a successful response", %{conn: conn} do

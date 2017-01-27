@@ -1,8 +1,8 @@
-defmodule Altnation.RegistrationControllerTest do
-  use Altnation.ConnCase
+defmodule Helheim.RegistrationControllerTest do
+  use Helheim.ConnCase
   use Bamboo.Test
-  alias Altnation.Repo
-  alias Altnation.User
+  alias Helheim.Repo
+  alias Helheim.User
 
   describe "new/2" do
     test "it returns a successful response", %{conn: conn} do
@@ -20,7 +20,7 @@ defmodule Altnation.RegistrationControllerTest do
       assert html_response(conn, 302)
       user = Repo.get_by(User, email: @valid_params[:email])
       assert user
-      assert_delivered_email Altnation.Email.registration_email(user.email, user.confirmation_token)
+      assert_delivered_email Helheim.Email.registration_email(user.email, user.confirmation_token)
     end
 
     test "it does not create a user but re-renders the new template when posting invalid params", %{conn: conn} do

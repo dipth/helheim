@@ -1,5 +1,5 @@
-defmodule Altnation.ProfileBrowsingFlowTest do
-  use Altnation.AcceptanceCase, async: true
+defmodule Helheim.ProfileBrowsingFlowTest do
+  use Helheim.AcceptanceCase, async: true
 
   setup [:create_profile, :create_and_sign_in_user]
 

@@ -1,4 +1,4 @@
-defmodule Altnation.Repo.Migrations.CreateUser do
+defmodule Helheim.Repo.Migrations.CreateUser do
   use Ecto.Migration
 
   def change do

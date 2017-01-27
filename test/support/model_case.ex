@@ -1,4 +1,4 @@
-defmodule Altnation.ModelCase do
+defmodule Helheim.ModelCase do
   @moduledoc """
   This module defines the test case to be used by
   model tests.
@@ -16,20 +16,20 @@ defmodule Altnation.ModelCase do
 
   using do
     quote do
-      alias Altnation.Repo
+      alias Helheim.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Altnation.ModelCase
+      import Helheim.ModelCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Altnation.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Helheim.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Altnation.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Helheim.Repo, {:shared, self()})
     end
 
     :ok
@@ -59,7 +59,7 @@ defmodule Altnation.ModelCase do
   """
   def errors_on(struct, data) do
     struct.__struct__.changeset(struct, data)
-    |> Ecto.Changeset.traverse_errors(&Altnation.ErrorHelpers.translate_error/1)
+    |> Ecto.Changeset.traverse_errors(&Helheim.ErrorHelpers.translate_error/1)
     |> Enum.flat_map(fn {key, errors} -> for msg <- errors, do: {key, msg} end)
   end
 end

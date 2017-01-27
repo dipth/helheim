@@ -1,4 +1,4 @@
-# Altnation
+# Helheim
 
 To start your Phoenix app:
 

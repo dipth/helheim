@@ -1,10 +1,10 @@
-defmodule Altnation.Endpoint do
-  use Phoenix.Endpoint, otp_app: :altnation
+defmodule Helheim.Endpoint do
+  use Phoenix.Endpoint, otp_app: :helheim
   use Appsignal.Phoenix
 
-  socket "/socket", Altnation.UserSocket
+  socket "/socket", Helheim.UserSocket
 
-  if Application.get_env(:altnation, :sql_sandbox) do
+  if Application.get_env(:helheim, :sql_sandbox) do
     plug Phoenix.Ecto.SQL.Sandbox
   end
 
@@ -13,7 +13,7 @@ defmodule Altnation.Endpoint do
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :altnation, gzip: false,
+    at: "/", from: :helheim, gzip: false,
     only: ~w(css fonts images js robots.txt android-chrome-192x192.png apple-touch-icon.png browserconfig.xml favicon-16x16.png favicon-32x32.png favicon.ico manifest.json mstile-150x150.png safari-pinned-tab.svg)
 
   # Code reloading can be explicitly enabled under the
@@ -40,8 +40,8 @@ defmodule Altnation.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_altnation_key",
+    key: "_helheim_key",
     signing_salt: "ihhWS/9O"
 
-  plug Altnation.Router
+  plug Helheim.Router
 end

@@ -1,5 +1,5 @@
 <p>
-  <%= link img_tag(Altnation.Avatar.url({@blog_post.user.avatar, @blog_post.user}, :tiny), class: "rounded"), to: public_profile_path(@conn, :show, @blog_post.user.id) %>
+  <%= link img_tag(Helheim.Avatar.url({@blog_post.user.avatar, @blog_post.user}, :tiny), class: "rounded"), to: public_profile_path(@conn, :show, @blog_post.user.id) %>
   <%= link @blog_post.user.username, to: public_profile_path(@conn, :show, @blog_post.user.id) %>
   <small>
     -
@@ -32,7 +32,7 @@
 <h3><%= gettext "Comments:" %></h3>
 
 <%=
-  render Altnation.CommentView,
+  render Helheim.CommentView,
          "comments.html",
          conn: @conn,
          comments: @comments,

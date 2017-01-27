@@ -1,11 +1,11 @@
-defmodule Altnation.PageControllerTest do
-  use Altnation.ConnCase
-  import Altnation.Factory
+defmodule Helheim.PageControllerTest do
+  use Helheim.ConnCase
+  import Helheim.Factory
 
   describe "index/2" do
     test "it returns a successful response", %{conn: conn} do
       conn = get conn, "/"
-      assert html_response(conn, 200) =~ gettext("%{site_name} is a community for alternative people.", site_name: gettext("Altnation"))
+      assert html_response(conn, 200) =~ gettext("%{site_name} is a community for alternative people.", site_name: gettext("Helheim"))
     end
 
     test "it redirects to the front_page if you are signed in", %{conn: conn} do

@@ -1,9 +1,9 @@
-defmodule Altnation.AccountControllerTest do
-  use Altnation.ConnCase
+defmodule Helheim.AccountControllerTest do
+  use Helheim.ConnCase
   use Bamboo.Test
-  alias Altnation.Repo
-  alias Altnation.User
-  import Altnation.Factory
+  alias Helheim.Repo
+  alias Helheim.User
+  import Helheim.Factory
 
   describe "edit/2" do
     test "it returns a successful response when signed in", %{conn: conn} do
@@ -50,7 +50,7 @@ defmodule Altnation.AccountControllerTest do
       refute user.confirmed_at
       refute user.confirmation_token == existing_confirmation_token
       assert user.confirmation_token
-      assert_delivered_email Altnation.Email.registration_email(user.email, user.confirmation_token)
+      assert_delivered_email Helheim.Email.registration_email(user.email, user.confirmation_token)
     end
 
     test "it does not reset the users confirmation state or send a confirmation e-mail when not changing the e-mail address", %{conn: conn} do
@@ -71,7 +71,7 @@ defmodule Altnation.AccountControllerTest do
       |> post("/account", user: %{name: user.name, email: user.email, password: "newpassword", password_confirmation: "newpassword", existing_password: "password"}, _method: "put")
       assert html_response(conn, 302)
       user = Repo.get(User, user.id)
-      assert Altnation.Auth.password_correct?(user.password_hash, "newpassword")
+      assert Helheim.Auth.password_correct?(user.password_hash, "newpassword")
     end
 
     test "it allows keeping the existing password", %{conn: conn} do
@@ -81,7 +81,7 @@ defmodule Altnation.AccountControllerTest do
       |> post("/account", user: %{name: user.name, email: user.email, password: "", password_confirmation: "", existing_password: "password"}, _method: "put")
       assert html_response(conn, 302)
       user = Repo.get(User, user.id)
-      assert Altnation.Auth.password_correct?(user.password_hash, "password")
+      assert Helheim.Auth.password_correct?(user.password_hash, "password")
     end
 
     test "it requires the existing password", %{conn: conn} do
@@ -93,7 +93,7 @@ defmodule Altnation.AccountControllerTest do
       user = Repo.get(User, user.id)
       refute user.name == "New Name"
       refute user.email == "new@email.com"
-      refute Altnation.Auth.password_correct?(user.password_hash, "newpassword")
+      refute Helheim.Auth.password_correct?(user.password_hash, "newpassword")
     end
 
     test "it requires that the existing password is correct", %{conn: conn} do
@@ -105,7 +105,7 @@ defmodule Altnation.AccountControllerTest do
       user = Repo.get(User, user.id)
       refute user.name == "New Name"
       refute user.email == "new@email.com"
-      refute Altnation.Auth.password_correct?(user.password_hash, "newpassword")
+      refute Helheim.Auth.password_correct?(user.password_hash, "newpassword")
     end
 
     test "it requires that the user is signed in", %{conn: conn} do
@@ -116,7 +116,7 @@ defmodule Altnation.AccountControllerTest do
       user = Repo.get(User, user.id)
       refute user.name == "New Name"
       refute user.email == "new@email.com"
-      refute Altnation.Auth.password_correct?(user.password_hash, "newpassword")
+      refute Helheim.Auth.password_correct?(user.password_hash, "newpassword")
     end
 
     test "it trims whitespace", %{conn: conn} do

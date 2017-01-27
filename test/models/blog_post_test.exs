@@ -1,7 +1,7 @@
-defmodule Altnation.BlogPostTest do
-  use Altnation.ModelCase
+defmodule Helheim.BlogPostTest do
+  use Helheim.ModelCase
 
-  alias Altnation.BlogPost
+  alias Helheim.BlogPost
 
   @valid_attrs %{body: "some content", title: "some content"}
   @invalid_attrs %{}

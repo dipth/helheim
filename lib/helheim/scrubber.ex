@@ -1,4 +1,4 @@
-defmodule Altnation.Scrubber do
+defmodule Helheim.Scrubber do
   require HtmlSanitizeEx.Scrubber.Meta
   alias HtmlSanitizeEx.Scrubber.Meta
 

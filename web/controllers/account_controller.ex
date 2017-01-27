@@ -1,6 +1,6 @@
-defmodule Altnation.AccountController do
-  use Altnation.Web, :controller
-  alias Altnation.User
+defmodule Helheim.AccountController do
+  use Helheim.Web, :controller
+  alias Helheim.User
 
   def edit(conn, _params) do
     user = Guardian.Plug.current_resource(conn)

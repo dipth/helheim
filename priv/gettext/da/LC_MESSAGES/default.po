@@ -36,7 +36,7 @@ msgstr "%{site_name} er et community for alternative folk."
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
 #: web/templates/page/index.html.eex:3
-msgid "Altnation"
+msgid "Helheim"
 msgstr "Helheim"
 
 #: web/templates/session/new.html.eex:42

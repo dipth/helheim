@@ -11,14 +11,14 @@
               <h5 class="mb-1"><%= gettext "Profile Photo" %></h5>
               <hr>
               <div class="img-thumbnail img-thumbnail-with-form-control">
-                <img src="<%= Altnation.Avatar.url({@changeset.data.avatar, @changeset.data}, :large) %>" class="img-fluid mx-auto d-block" alt="<%= gettext "Profile Photo" %>">
+                <img src="<%= Helheim.Avatar.url({@changeset.data.avatar, @changeset.data}, :large) %>" class="img-fluid mx-auto d-block" alt="<%= gettext "Profile Photo" %>">
                 <%= file_input f, :avatar, placeholder: gettext("Name"), class: "form-control" %>
               </div>
 
               <%= if message = f.errors[:avatar] do %>
                 <div class="form-control-feedback"><%= translate_error(message) %></div>
               <% else %>
-                <small><%= gettext "Maximum file size: %{file_size}", file_size: Altnation.Avatar.max_file_size |> Crutches.Format.Number.as_human_size %></small>
+                <small><%= gettext "Maximum file size: %{file_size}", file_size: Helheim.Avatar.max_file_size |> Crutches.Format.Number.as_human_size %></small>
               <% end %>
             </div>
 

@@ -1,4 +1,4 @@
-defmodule Altnation.ErrorHelpers do
+defmodule Helheim.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -32,9 +32,9 @@ defmodule Altnation.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(Altnation.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(Helheim.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(Altnation.Gettext, "errors", msg, opts)
+      Gettext.dgettext(Helheim.Gettext, "errors", msg, opts)
     end
   end
 end

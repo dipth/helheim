@@ -1,4 +1,4 @@
-defmodule Altnation.ConnCase do
+defmodule Helheim.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -20,17 +20,17 @@ defmodule Altnation.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
-      alias Altnation.Repo
+      alias Helheim.Repo
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
 
-      import Altnation.Router.Helpers
-      import Altnation.Gettext
-      import Altnation.Factory
+      import Helheim.Router.Helpers
+      import Helheim.Gettext
+      import Helheim.Factory
 
       # The default endpoint for testing
-      @endpoint Altnation.Endpoint
+      @endpoint Helheim.Endpoint
 
       @default_opts [
         store: :cookie,
@@ -63,12 +63,12 @@ defmodule Altnation.ConnCase do
   end
 
   setup tags do
-    Gettext.put_locale(Altnation.Gettext, "da")
+    Gettext.put_locale(Helheim.Gettext, "da")
 
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Altnation.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Helheim.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Altnation.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Helheim.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

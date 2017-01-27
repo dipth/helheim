@@ -1,9 +1,9 @@
-defmodule Altnation.ProfileControllerTest do
-  use Altnation.ConnCase
+defmodule Helheim.ProfileControllerTest do
+  use Helheim.ConnCase
   use Bamboo.Test
-  alias Altnation.Repo
-  alias Altnation.User
-  import Altnation.Factory
+  alias Helheim.Repo
+  alias Helheim.User
+  import Helheim.Factory
 
   describe "show/2" do
     test "it returns a successful response when signed in and not specifying an id", %{conn: conn} do

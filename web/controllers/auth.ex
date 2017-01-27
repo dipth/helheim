@@ -1,9 +1,9 @@
 require IEx;
 
-defmodule Altnation.Auth do
+defmodule Helheim.Auth do
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
-  alias Altnation.Repo
-  alias Altnation.User
+  alias Helheim.Repo
+  alias Helheim.User
 
   def login(conn, user) do
     conn

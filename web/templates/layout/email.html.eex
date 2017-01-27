@@ -8,7 +8,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width">
   <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
-  <title>Altnation</title>
+  <title>Helheim</title>
 
 
   <style id="media-query">
@@ -154,8 +154,8 @@
     <tbody><tr style="vertical-align: top">
         <td align="center" style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;width: 100%;padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px">
             <div align="center" style="font-size:12px">
-                <a href="<%= page_url(Altnation.Endpoint, :index) %>" target="_blank">
-                    <img class="center" align="center" border="0" src="<%= static_url(Altnation.Endpoint, "/images/logo2.png") %>" alt="Altnation" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block;border: none;height: auto;line-height: 100%;margin: 0 auto;float: none;width: 100% !important;max-width: 116px" width="116">
+                <a href="<%= page_url(Helheim.Endpoint, :index) %>" target="_blank">
+                    <img class="center" align="center" border="0" src="<%= static_url(Helheim.Endpoint, "/images/logo2.png") %>" alt="Helheim" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block;border: none;height: auto;line-height: 100%;margin: 0 auto;float: none;width: 100% !important;max-width: 116px" width="116">
                 </a>
 
             </div>

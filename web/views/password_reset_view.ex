@@ -1,3 +1,3 @@
-defmodule Altnation.PasswordResetView do
-  use Altnation.Web, :view
+defmodule Helheim.PasswordResetView do
+  use Helheim.Web, :view
 end

@@ -1,6 +1,6 @@
-defmodule Altnation.BloggingFlowTest do
-  use Altnation.AcceptanceCase, async: true
-  import Altnation.Factory
+defmodule Helheim.BloggingFlowTest do
+  use Helheim.AcceptanceCase, async: true
+  import Helheim.Factory
 
   test "users can create a new blog post", %{session: session} do
     user = insert(:user)

@@ -1,3 +1,3 @@
-defmodule Altnation.PageViewTest do
-  use Altnation.ConnCase, async: true
+defmodule Helheim.PageViewTest do
+  use Helheim.ConnCase, async: true
 end

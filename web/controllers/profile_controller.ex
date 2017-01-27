@@ -1,8 +1,8 @@
-defmodule Altnation.ProfileController do
-  use Altnation.Web, :controller
-  alias Altnation.User
-  alias Altnation.BlogPost
-  alias Altnation.Comment
+defmodule Helheim.ProfileController do
+  use Helheim.Web, :controller
+  alias Helheim.User
+  alias Helheim.BlogPost
+  alias Helheim.Comment
 
   def show(conn, params) do
     user = if params["id"] do
@@ -16,13 +16,13 @@ defmodule Altnation.ProfileController do
         assoc(user, :blog_posts)
         |> BlogPost.newest
         |> limit(5)
-        |> Altnation.Repo.all
+        |> Helheim.Repo.all
         |> Repo.preload(:user)
       newest_comments =
         assoc(user, :comments)
         |> Comment.newest
         |> limit(5)
-        |> Altnation.Repo.all
+        |> Helheim.Repo.all
         |> Repo.preload(:author)
 
       render conn, "show.html", user: user, newest_blog_posts: newest_blog_posts, newest_comments: newest_comments

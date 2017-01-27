@@ -1,4 +1,4 @@
-defmodule Altnation.Repo.Migrations.CreateBlogPost do
+defmodule Helheim.Repo.Migrations.CreateBlogPost do
   use Ecto.Migration
 
   def change do

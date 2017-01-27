@@ -1,4 +1,4 @@
-defmodule Altnation.Repo.Migrations.AddPasswordResetTokenToUser do
+defmodule Helheim.Repo.Migrations.AddPasswordResetTokenToUser do
   use Ecto.Migration
 
   def change do

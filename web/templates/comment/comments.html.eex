@@ -1,6 +1,6 @@
 <div class="d-flex flex-column-reverse">
   <%= for comment <- @comments do %>
-    <%= render Altnation.CommentView, "comment.html", conn: @conn, comment: comment %>
+    <%= render Helheim.CommentView, "comment.html", conn: @conn, comment: comment %>
   <% end %>
 </div>
 
@@ -12,7 +12,7 @@
         last_label: gettext("Last") %>
 <% end %>
 
-<%= form_for Altnation.Comment.changeset(%Altnation.Comment{}), @post_path, fn f -> %>
+<%= form_for Helheim.Comment.changeset(%Helheim.Comment{}), @post_path, fn f -> %>
   <div class="card">
     <div class="card-header">
       <%= label f, :body, gettext("Write new comment:"), class: "control-label mb-0" %>

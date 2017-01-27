@@ -1,4 +1,4 @@
-defmodule Altnation.BreadcrumbsDefaults do
+defmodule Helheim.BreadcrumbsDefaults do
   defmacro __using__(_) do
     quote do
       def breadcrumbs(_other, _assigns), do: []

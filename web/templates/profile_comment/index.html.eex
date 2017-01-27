@@ -1,6 +1,6 @@
 <h1 class="mb-2">
   <img
-    src="<%= Altnation.Avatar.url({@user.avatar, @user}, :tiny) %>"
+    src="<%= Helheim.Avatar.url({@user.avatar, @user}, :tiny) %>"
     class="rounded"
     alt="<%= @user.username %>"
   >
@@ -9,7 +9,7 @@
 </h1>
 
 <%=
-  render Altnation.CommentView,
+  render Helheim.CommentView,
          "comments.html",
          conn: @conn,
          comments: @comments,

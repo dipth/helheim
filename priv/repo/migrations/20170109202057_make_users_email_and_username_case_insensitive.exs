@@ -1,4 +1,4 @@
-defmodule Altnation.Repo.Migrations.MakeUsersEmailAndUsernameCaseInsensitive do
+defmodule Helheim.Repo.Migrations.MakeUsersEmailAndUsernameCaseInsensitive do
   use Ecto.Migration
 
   def up do

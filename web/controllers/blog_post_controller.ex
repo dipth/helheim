@@ -1,9 +1,9 @@
-defmodule Altnation.BlogPostController do
-  use Altnation.Web, :controller
+defmodule Helheim.BlogPostController do
+  use Helheim.Web, :controller
   import Guardian.Plug, only: [current_resource: 1]
-  alias Altnation.BlogPost
-  alias Altnation.User
-  alias Altnation.Comment
+  alias Helheim.BlogPost
+  alias Helheim.User
+  alias Helheim.Comment
 
   def index(conn, params = %{"profile_id" => user_id}) do
     user = Repo.get!(User, user_id)

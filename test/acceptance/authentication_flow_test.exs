@@ -1,6 +1,6 @@
-defmodule Altnation.AuthenticationFlowTest do
-  use Altnation.AcceptanceCase, async: true
-  import Altnation.Factory
+defmodule Helheim.AuthenticationFlowTest do
+  use Helheim.AcceptanceCase, async: true
+  import Helheim.Factory
 
   test "users can sign in and out", %{session: session} do
     user = insert(:user)
@@ -41,7 +41,7 @@ defmodule Altnation.AuthenticationFlowTest do
     assert result =~ gettext("Welcome back %{username}!", username: user.username)
 
     session
-    |> execute_script("document.cookie = '_altnation_key=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';")
+    |> execute_script("document.cookie = '_helheim_key=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';")
 
     session
     |> visit("/")

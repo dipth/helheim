@@ -2,21 +2,21 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :altnation, Altnation.Endpoint,
+config :helheim, Helheim.Endpoint,
   http: [port: 4001],
   server: true
 
-config :altnation, :sql_sandbox, true
+config :helheim, :sql_sandbox, true
 
 # Print only warnings and errors during test
 config :logger, level: :warn
 
 # Configure your database
-config :altnation, Altnation.Repo,
+config :helheim, Helheim.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: System.get_env("DATABASE_POSTGRESQL_USERNAME") || "postgres",
   password: System.get_env("DATABASE_POSTGRESQL_PASSWORD") || "postgres",
-  database: "altnation_test",
+  database: "helheim_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
@@ -29,7 +29,7 @@ config :comeonin, :bcrypt_log_rounds, 4
 config :comeonin, :pbkdf2_rounds, 1
 
 # Configure mailer
-config :altnation, Altnation.Mailer,
+config :helheim, Helheim.Mailer,
   adapter: Bamboo.TestAdapter
 
 # Configure arc

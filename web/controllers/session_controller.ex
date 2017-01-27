@@ -1,5 +1,5 @@
-defmodule Altnation.SessionController do
-  use Altnation.Web, :controller
+defmodule Helheim.SessionController do
+  use Helheim.Web, :controller
 
   plug :put_layout, "app_special.html"
 
@@ -8,7 +8,7 @@ defmodule Altnation.SessionController do
   end
 
   def create(conn, %{"session" => %{"email" => email, "password" => password, "remember_me" => remember_me}}) do
-    case Altnation.Auth.login_by_email_and_pass(conn, email, password) do
+    case Helheim.Auth.login_by_email_and_pass(conn, email, password) do
       {:ok, conn} ->
         user = Guardian.Plug.current_resource(conn)
         conn

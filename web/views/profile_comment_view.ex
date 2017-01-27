@@ -1,3 +1,3 @@
-defmodule Altnation.ProfileCommentView do
-  use Altnation.Web, :view
+defmodule Helheim.ProfileCommentView do
+  use Helheim.Web, :view
 end

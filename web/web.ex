@@ -1,12 +1,12 @@
-defmodule Altnation.Web do
+defmodule Helheim.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use Altnation.Web, :controller
-      use Altnation.Web, :view
+      use Helheim.Web, :controller
+      use Helheim.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -47,12 +47,12 @@ defmodule Altnation.Web do
     quote do
       use Phoenix.Controller
 
-      alias Altnation.Repo
+      alias Helheim.Repo
       import Ecto
       import Ecto.Query
 
-      import Altnation.Router.Helpers
-      import Altnation.Gettext
+      import Helheim.Router.Helpers
+      import Helheim.Gettext
     end
   end
 
@@ -66,12 +66,12 @@ defmodule Altnation.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Altnation.Router.Helpers
-      import Altnation.ErrorHelpers
-      import Altnation.Gettext
-      import Altnation.TimeHelpers
+      import Helheim.Router.Helpers
+      import Helheim.ErrorHelpers
+      import Helheim.Gettext
+      import Helheim.TimeHelpers
 
-      use Altnation.BreadcrumbsDefaults
+      use Helheim.BreadcrumbsDefaults
     end
   end
 
@@ -85,10 +85,10 @@ defmodule Altnation.Web do
     quote do
       use Phoenix.Channel
 
-      alias Altnation.Repo
+      alias Helheim.Repo
       import Ecto
       import Ecto.Query
-      import Altnation.Gettext
+      import Helheim.Gettext
     end
   end
 

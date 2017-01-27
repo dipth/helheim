@@ -6,15 +6,15 @@
 use Mix.Config
 
 # General application configuration
-config :altnation,
-  ecto_repos: [Altnation.Repo]
+config :helheim,
+  ecto_repos: [Helheim.Repo]
 
 # Configures the endpoint
-config :altnation, Altnation.Endpoint,
+config :helheim, Helheim.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "JXAQU/sDIXwY//LkAGR99f22MNDD4pO0vJUFeJFnX1JBTRsnG+UD/EbZpjVGoZb6",
-  render_errors: [view: Altnation.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Altnation.PubSub,
+  render_errors: [view: Helheim.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: Helheim.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
@@ -24,10 +24,10 @@ config :logger, :console,
 
 # Configure guardian
 config :guardian, Guardian,
-  issuer: "Altnation",
+  issuer: "Helheim",
   ttl: { 1, :day },
   verify_issuer: true,
-  serializer: Altnation.GuardianSerializer
+  serializer: Helheim.GuardianSerializer
 
 # Configure Sentry
 config :sentry,
@@ -37,19 +37,19 @@ config :sentry,
 # Configure Appsignal
 config :appsignal, :config,
   active: false,
-  name: :altnation,
+  name: :helheim,
   push_api_key: "only_applicable_in_production",
   env: Mix.env
-config :altnation, Altnation.Endpoint,
+config :helheim, Helheim.Endpoint,
   instrumenters: [Appsignal.Phoenix.Instrumenter]
 config :phoenix, :template_engines,
   eex: Appsignal.Phoenix.Template.EExEngine,
   exs: Appsignal.Phoenix.Template.ExsEngine
-config :altnation, Altnation.Repo,
+config :helheim, Helheim.Repo,
   loggers: [Appsignal.Ecto]
 
 # Configure mailer
-config :altnation, Altnation.Mailer,
+config :helheim, Helheim.Mailer,
   adapter: Bamboo.PostmarkAdapter,
   api_key: "only_applicable_in_production"
 

@@ -1,6 +1,6 @@
-<%= gettext("Your profile has now been created on %{site_name}, but you need to confirm your e-mail address before we can let you in.", site_name: gettext("Altnation")) %>
+<%= gettext("Your profile has now been created on %{site_name}, but you need to confirm your e-mail address before we can let you in.", site_name: gettext("Helheim")) %>
 
 <%= gettext("Click the link below to confirm:") %>
 
 
-<%= confirmation_url(Altnation.Endpoint, :show, @confirmation_token) %>
+<%= confirmation_url(Helheim.Endpoint, :show, @confirmation_token) %>

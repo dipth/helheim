@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-block">
         <img
-          src="<%= Altnation.Avatar.url({@user.avatar, @user}, :large) %>"
+          src="<%= Helheim.Avatar.url({@user.avatar, @user}, :large) %>"
           class="rounded img-fluid mx-auto d-block mb-1"
           alt="<%= @user.username %>"
         >
@@ -32,7 +32,7 @@
     <div class="card-block">
       <h5 class="mb-1"><%= gettext "Newest Blogs" %></h5>
       <%= for blog_post <- @newest_blog_posts do %>
-        <%= render Altnation.BlogPostView, "list_entry.html", conn: @conn, blog_post: blog_post %>
+        <%= render Helheim.BlogPostView, "list_entry.html", conn: @conn, blog_post: blog_post %>
       <% end %>
     </div>
   </div>
@@ -58,7 +58,7 @@
 </h5>
 
 <%=
-  render Altnation.CommentView,
+  render Helheim.CommentView,
          "comments.html",
          conn: @conn,
          comments: @newest_comments,

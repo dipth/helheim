@@ -1,13 +1,13 @@
-defmodule Altnation.Comment do
-  use Altnation.Web, :model
+defmodule Helheim.Comment do
+  use Helheim.Web, :model
 
   schema "comments" do
     field      :body,         :string
     field      :approved_at,  Calecto.DateTimeUTC
     field      :deleted_at,   Calecto.DateTimeUTC
-    belongs_to :author,       Altnation.User
-    belongs_to :profile,      Altnation.User
-    belongs_to :blog_post,    Altnation.BlogPost
+    belongs_to :author,       Helheim.User
+    belongs_to :profile,      Helheim.User
+    belongs_to :blog_post,    Helheim.BlogPost
 
     timestamps()
   end
@@ -31,7 +31,7 @@ defmodule Altnation.Comment do
   defp scrub_body(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{body: body}} ->
-        put_change(changeset, :body, body |> HtmlSanitizeEx.Scrubber.scrub(Altnation.Scrubber))
+        put_change(changeset, :body, body |> HtmlSanitizeEx.Scrubber.scrub(Helheim.Scrubber))
       _ ->
         changeset
     end

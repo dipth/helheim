@@ -1,8 +1,8 @@
-defmodule Altnation.GuardianSerializer do
+defmodule Helheim.GuardianSerializer do
   @behaviour Guardian.Serializer
-  import Altnation.Gettext
-  alias Altnation.Repo
-  alias Altnation.User
+  import Helheim.Gettext
+  alias Helheim.Repo
+  alias Helheim.User
   def for_token(user = %User{}), do: {:ok, "User:#{user.id}"}
   def for_token(_), do: {:error, gettext("Unknown resource type")}
   def from_token("User:" <> id), do: {:ok, Repo.get(User, id)}

@@ -1,7 +1,7 @@
-defmodule Altnation.RegistrationFlowTest do
-  use Altnation.AcceptanceCase, async: true
-  alias Altnation.Repo
-  alias Altnation.User
+defmodule Helheim.RegistrationFlowTest do
+  use Helheim.AcceptanceCase, async: true
+  alias Helheim.Repo
+  alias Helheim.User
 
   test "users can register", %{session: session} do
     result = session

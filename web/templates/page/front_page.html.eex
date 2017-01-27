@@ -6,7 +6,7 @@
         <%= for user <- @newest_users do %>
           <a href="<%= public_profile_path(@conn, :show, user.id) %>">
             <img
-              src="<%= Altnation.Avatar.url({user.avatar, user}, :tiny) %>"
+              src="<%= Helheim.Avatar.url({user.avatar, user}, :tiny) %>"
               class="rounded"
               alt="<%= user.username %>"
               data-toggle="tooltip"
@@ -28,7 +28,7 @@
     <div class="card-block">
       <h5 class="mb-1"><%= gettext "Newest Blogs" %></h5>
       <%= for blog_post <- @newest_blog_posts do %>
-        <%= render Altnation.BlogPostView, "list_entry.html", conn: @conn, blog_post: blog_post %>
+        <%= render Helheim.BlogPostView, "list_entry.html", conn: @conn, blog_post: blog_post %>
       <% end %>
     </div>
   </div>

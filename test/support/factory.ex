@@ -1,8 +1,8 @@
-defmodule Altnation.Factory do
-  use ExMachina.Ecto, repo: Altnation.Repo
+defmodule Helheim.Factory do
+  use ExMachina.Ecto, repo: Helheim.Repo
 
   def user_factory do
-    %Altnation.User{
+    %Helheim.User{
       name: "Some User",
       username: sequence(:username, &"foobar-#{&1}"),
       email: sequence(:email, &"foo-#{&1}@bar.com"),
@@ -13,7 +13,7 @@ defmodule Altnation.Factory do
   end
 
   def blog_post_factory do
-    %Altnation.BlogPost{
+    %Helheim.BlogPost{
       user: build(:user),
       title: "My Awesome Title",
       body: "My Aweseome Text"
@@ -21,7 +21,7 @@ defmodule Altnation.Factory do
   end
 
   def profile_comment_factory do
-    %Altnation.Comment{
+    %Helheim.Comment{
       author: build(:user),
       profile: build(:user),
       body: "My Aweseome Comment"

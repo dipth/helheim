@@ -1,4 +1,4 @@
-defmodule Altnation.Repo.Migrations.CreateComment do
+defmodule Helheim.Repo.Migrations.CreateComment do
   use Ecto.Migration
 
   def change do

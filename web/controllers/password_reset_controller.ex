@@ -1,8 +1,8 @@
-defmodule Altnation.PasswordResetController do
-  use Altnation.Web, :controller
-  alias Altnation.User
-  alias Altnation.Email
-  alias Altnation.Mailer
+defmodule Helheim.PasswordResetController do
+  use Helheim.Web, :controller
+  alias Helheim.User
+  alias Helheim.Email
+  alias Helheim.Mailer
 
   plug :put_layout, "app_special.html"
 
@@ -62,7 +62,7 @@ defmodule Altnation.PasswordResetController do
         case Repo.update(changeset) do
           {:ok, user} ->
             conn
-            |> Altnation.Auth.login(user)
+            |> Helheim.Auth.login(user)
             |> put_flash(:success, gettext("Your password has now been changed and you have been signed in!"))
             |> redirect(to: page_path(conn, :front_page))
           {:error, changeset} ->

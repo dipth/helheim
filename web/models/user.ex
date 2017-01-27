@@ -1,8 +1,8 @@
-defmodule Altnation.User do
-  use Altnation.Web, :model
+defmodule Helheim.User do
+  use Helheim.Web, :model
   use Arc.Ecto.Schema
-  alias Altnation.Repo
-  import Altnation.Gettext
+  alias Helheim.Repo
+  import Helheim.Gettext
 
   schema "users" do
     field :name,                            :string
@@ -16,12 +16,12 @@ defmodule Altnation.User do
     field :password_reset_token_updated_at, Calecto.DateTimeUTC
     field :confirmation_token,              :string
     field :confirmed_at,                    Calecto.DateTimeUTC
-    field :avatar,                          Altnation.Avatar.Type
+    field :avatar,                          Helheim.Avatar.Type
     field :profile_text,                    :string
 
-    has_many :blog_posts, Altnation.BlogPost
-    has_many :comments, Altnation.Comment, foreign_key: :profile_id
-    has_many :authored_comments, Altnation.Comment, foreign_key: :author_id
+    has_many :blog_posts, Helheim.BlogPost
+    has_many :comments, Helheim.Comment, foreign_key: :profile_id
+    has_many :authored_comments, Helheim.Comment, foreign_key: :author_id
 
     timestamps()
   end
@@ -132,7 +132,7 @@ defmodule Altnation.User do
     case changeset do
       %Ecto.Changeset{changes: %{existing_password: existing_password}} ->
         password_hash = get_field(changeset, :password_hash)
-        if Altnation.Auth.password_correct?(password_hash, existing_password) do
+        if Helheim.Auth.password_correct?(password_hash, existing_password) do
           changeset
         else
           add_error(changeset, :existing_password, gettext("does not match your current password"))
@@ -148,7 +148,7 @@ defmodule Altnation.User do
         changeset = put_change(changeset, :confirmation_token, SecureRandom.urlsafe_base64(16))
         changeset = put_change(changeset, :confirmed_at, nil)
         confirmation_token = get_field(changeset, :confirmation_token)
-        Altnation.Email.registration_email(email, confirmation_token) |> Altnation.Mailer.deliver_later
+        Helheim.Email.registration_email(email, confirmation_token) |> Helheim.Mailer.deliver_later
         changeset
       _ ->
         changeset
@@ -158,7 +158,7 @@ defmodule Altnation.User do
   defp scrub_profile_text(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{profile_text: profile_text}} ->
-        put_change(changeset, :profile_text, profile_text |> HtmlSanitizeEx.Scrubber.scrub(Altnation.Scrubber))
+        put_change(changeset, :profile_text, profile_text |> HtmlSanitizeEx.Scrubber.scrub(Helheim.Scrubber))
       _ ->
         changeset
     end

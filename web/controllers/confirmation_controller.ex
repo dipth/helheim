@@ -1,8 +1,8 @@
-defmodule Altnation.ConfirmationController do
-  use Altnation.Web, :controller
-  alias Altnation.User
-  alias Altnation.Email
-  alias Altnation.Mailer
+defmodule Helheim.ConfirmationController do
+  use Helheim.Web, :controller
+  alias Helheim.User
+  alias Helheim.Email
+  alias Helheim.Mailer
 
   plug :put_layout, "app_special.html"
 

@@ -1,8 +1,8 @@
-defmodule Altnation.BlogPostCommentController do
-  use Altnation.Web, :controller
+defmodule Helheim.BlogPostCommentController do
+  use Helheim.Web, :controller
   import Guardian.Plug, only: [current_resource: 1]
-  alias Altnation.BlogPost
-  alias Altnation.Comment
+  alias Helheim.BlogPost
+  alias Helheim.Comment
 
   def create(conn, %{"blog_post_id" => blog_post_id, "comment" => comment_params}) do
     author = current_resource(conn)

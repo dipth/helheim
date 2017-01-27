@@ -1,5 +1,5 @@
-defmodule Altnation.EditProfileSettingsFlowTest do
-  use Altnation.AcceptanceCase, async: true
+defmodule Helheim.EditProfileSettingsFlowTest do
+  use Helheim.AcceptanceCase, async: true
 
   # TODO: Enable this test when you figure out how to use Wallaby with the
   #       Trumbowyg editor:

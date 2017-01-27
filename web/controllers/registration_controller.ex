@@ -1,6 +1,6 @@
-defmodule Altnation.RegistrationController do
-  use Altnation.Web, :controller
-  alias Altnation.User
+defmodule Helheim.RegistrationController do
+  use Helheim.Web, :controller
+  alias Helheim.User
 
   plug :put_layout, "app_special.html"
 

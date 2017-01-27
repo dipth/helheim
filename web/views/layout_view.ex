@@ -1,3 +1,3 @@
-defmodule Altnation.LayoutView do
-  use Altnation.Web, :view
+defmodule Helheim.LayoutView do
+  use Helheim.Web, :view
 end

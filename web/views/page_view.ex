@@ -1,3 +1,3 @@
-defmodule Altnation.PageView do
-  use Altnation.Web, :view
+defmodule Helheim.PageView do
+  use Helheim.Web, :view
 end

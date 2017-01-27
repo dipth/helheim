@@ -1,4 +1,4 @@
-defmodule Altnation.Repo.Migrations.AddAvatarToUser do
+defmodule Helheim.Repo.Migrations.AddAvatarToUser do
   use Ecto.Migration
 
   def change do

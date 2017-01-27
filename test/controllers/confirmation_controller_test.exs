@@ -1,9 +1,9 @@
-defmodule Altnation.ConfirmationControllerTest do
-  use Altnation.ConnCase
+defmodule Helheim.ConfirmationControllerTest do
+  use Helheim.ConnCase
   use Bamboo.Test
-  alias Altnation.Repo
-  alias Altnation.User
-  import Altnation.Factory
+  alias Helheim.Repo
+  alias Helheim.User
+  import Helheim.Factory
 
   describe "new/2" do
     test "it returns a successful response", %{conn: conn} do
@@ -17,7 +17,7 @@ defmodule Altnation.ConfirmationControllerTest do
       user = insert(:user)
       conn = post conn, "/confirmations", confirmation: %{email: user.email}
       assert html_response(conn, 302)
-      assert_delivered_email Altnation.Email.registration_email(user.email, user.confirmation_token)
+      assert_delivered_email Helheim.Email.registration_email(user.email, user.confirmation_token)
     end
 
     test "it re-renders the new template when posting a non-existing e-mail address", %{conn: conn} do

@@ -1,8 +1,8 @@
-defmodule Altnation.UserTest do
-  use Altnation.ModelCase
-  alias Altnation.Repo
-  alias Altnation.User
-  import Altnation.Factory
+defmodule Helheim.UserTest do
+  use Helheim.ModelCase
+  alias Helheim.Repo
+  alias Helheim.User
+  import Helheim.Factory
 
   @valid_registration_attrs %{name: "Foo Bar", username: "foobar", email: "foo@bar.dk", password: "password"}
   @invalid_registration_attrs %{}

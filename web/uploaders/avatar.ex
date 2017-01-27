@@ -1,4 +1,4 @@
-defmodule Altnation.Avatar do
+defmodule Helheim.Avatar do
   use Arc.Definition
   use Arc.Ecto.Definition
 
