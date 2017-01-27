@@ -2,7 +2,6 @@ defmodule Helheim.PasswordResetFlowTest do
   use Helheim.AcceptanceCase, async: true
   alias Helheim.Repo
   alias Helheim.User
-  import Helheim.Factory
 
   test "users can reset their password", %{session: session} do
     user = insert(:user)

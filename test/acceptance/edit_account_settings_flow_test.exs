@@ -1,16 +1,9 @@
 defmodule Helheim.EditAccountSettingsFlowTest do
   use Helheim.AcceptanceCase, async: true
-  import Helheim.Factory
 
-  test "users can edit their account settings", %{session: session} do
-    user = insert(:user)
+  setup [:create_and_sign_in_user]
 
-    session
-    |> visit("/sessions/new")
-    |> fill_in(gettext("E-mail"), with: user.email)
-    |> fill_in(gettext("Password"), with: "password")
-    |> click_on(gettext("Sign In"))
-
+  test "users can edit their account settings", %{session: session, user: user} do
     session
     |> find(".nav-item-user-menu")
     |> click_link(user.username)

@@ -1,16 +1,9 @@
 defmodule Helheim.BloggingFlowTest do
   use Helheim.AcceptanceCase, async: true
-  import Helheim.Factory
+
+  setup [:create_and_sign_in_user]
 
   test "users can create a new blog post", %{session: session} do
-    user = insert(:user)
-
-    session
-    |> visit("/sessions/new")
-    |> fill_in(gettext("E-mail"), with: user.email)
-    |> fill_in(gettext("Password"), with: "password")
-    |> click_on(gettext("Sign In"))
-
     session
     |> click_link(gettext("Your Blog Posts"))
     |> click_link(gettext("New Blog Post"))
@@ -25,18 +18,12 @@ defmodule Helheim.BloggingFlowTest do
     assert result =~ gettext("Blog post created successfully.")
   end
 
-  test "users can edit their existing blog posts", %{session: session} do
-    blog_post = insert(:blog_post, title: "Blog Title Test")
-    user = blog_post.user
+  test "users can edit their existing blog posts", %{session: session, user: user} do
+    insert(:blog_post, user: user, title: "Blog Title Test")
 
     session
-    |> visit("/sessions/new")
-    |> fill_in(gettext("E-mail"), with: user.email)
-    |> fill_in(gettext("Password"), with: "password")
-    |> click_on(gettext("Sign In"))
-
-    session
-    |> click_link(gettext("Blog Title Test"))
+    |> click_link(gettext("Your Blog Posts"))
+    |> click_link("Blog Title Test")
     |> click_link(gettext("Edit"))
     |> fill_in(gettext("Title"), with: "My Awesome Title")
 
@@ -50,8 +37,6 @@ defmodule Helheim.BloggingFlowTest do
 
   test "users can comment on blog posts", %{session: session} do
     blog_post = insert(:blog_post)
-    user = insert(:user)
-    sign_in session, user
 
     session
     |> visit("/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}")
@@ -67,20 +52,13 @@ defmodule Helheim.BloggingFlowTest do
   end
 
   # TODO: Enable when wallaby / phoenixjs supports alert interaction
-  # test "users can delete their existing blog posts", %{session: session} do
-  #   blog_post = insert(:blog_post, title: "Blog Title Test")
-  #   user = blog_post.user
+  # test "users can delete their existing blog posts", %{session: session, user: user} do
+  #   blog_post = insert(:blog_post, user: user, title: "Blog Title Test")
   #
   #   session
-  #   |> visit("/sessions/new")
-  #   |> fill_in(gettext("E-mail"), with: user.email)
-  #   |> fill_in(gettext("Password"), with: "password")
-  #   |> click_on(gettext("Sign In"))
-  #
-  #   session
-  #   |> click_link(gettext("Blog Title Test"))
+  #   |> click_link(gettext("Your Blog Posts"))
+  #   |> click_link("Blog Title Test")
   #   |> click_link(gettext("Delete"))
-  #   |> take_screenshot
   #
   #   result = session
   #   |> find(".alert.alert-success")
