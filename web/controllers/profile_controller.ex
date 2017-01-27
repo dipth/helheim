@@ -6,31 +6,25 @@ defmodule Helheim.ProfileController do
 
   def show(conn, params) do
     user = if params["id"] do
-      Repo.get(User, params["id"])
+      Repo.get!(User, params["id"])
     else
       Guardian.Plug.current_resource(conn)
     end
 
-    if user do
-      newest_blog_posts =
-        assoc(user, :blog_posts)
-        |> BlogPost.newest
-        |> limit(5)
-        |> Helheim.Repo.all
-        |> Repo.preload(:user)
-      newest_comments =
-        assoc(user, :comments)
-        |> Comment.newest
-        |> limit(5)
-        |> Helheim.Repo.all
-        |> Repo.preload(:author)
+    newest_blog_posts =
+      assoc(user, :blog_posts)
+      |> BlogPost.newest
+      |> limit(5)
+      |> Helheim.Repo.all
+      |> Repo.preload(:user)
+    newest_comments =
+      assoc(user, :comments)
+      |> Comment.newest
+      |> limit(5)
+      |> Helheim.Repo.all
+      |> Repo.preload(:author)
 
-      render conn, "show.html", user: user, newest_blog_posts: newest_blog_posts, newest_comments: newest_comments
-    else
-      conn
-      |> put_flash(:error, gettext("The requested profile could not be found!"))
-      |> redirect(to: page_path(conn, :front_page))
-    end
+    render conn, "show.html", user: user, newest_blog_posts: newest_blog_posts, newest_comments: newest_comments
   end
 
   def edit(conn, _params) do

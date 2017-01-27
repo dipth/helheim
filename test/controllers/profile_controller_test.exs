@@ -3,93 +3,95 @@ defmodule Helheim.ProfileControllerTest do
   use Bamboo.Test
   alias Helheim.Repo
   alias Helheim.User
-  import Helheim.Factory
 
-  describe "show/2" do
-    test "it returns a successful response when signed in and not specifying an id", %{conn: conn} do
-      conn = conn |> sign_in(insert(:user))
+  ##############################################################################
+  # show/2
+  describe "show/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it returns a successful response when not specifying an id", %{conn: conn} do
       conn = get conn, "/profile"
       assert html_response(conn, 200)
     end
 
-    test "it returns a successful response when signed in and specifying an existing id", %{conn: conn} do
-      user = insert(:user)
-      conn = conn |> sign_in(user)
-      conn = get conn, "/profiles/#{user.id}"
+    test "it returns a successful response when specifying an existing id", %{conn: conn} do
+      profile = insert(:user)
+      conn = get conn, "/profiles/#{profile.id}"
       assert html_response(conn, 200)
     end
 
-    test "it redirects when signed in and specifying a non-existing id", %{conn: conn} do
-      conn = conn |> sign_in(insert(:user))
-      conn = get conn, "/profiles/999999999"
-      assert html_response(conn, 302)
-    end
-
-    test "it redirects when not signed in and not specifying an id", %{conn: conn} do
-      conn = get conn, "/profile"
-      assert html_response(conn, 302)
-    end
-
-    test "it redirects when not signed in and specifying an existing id", %{conn: conn} do
-      user = insert(:user)
-      conn = get conn, "/profiles/#{user.id}"
-      assert html_response(conn, 302)
+    test "it redirects to an error page when specifying a non-existing id", %{conn: conn} do
+      assert_error_sent :not_found, fn ->
+        get conn, "/profiles/1"
+      end
     end
   end
 
-  describe "new/2" do
-    test "it returns a successful response when signed in", %{conn: conn} do
+  describe "show/2 when not signed in" do
+    test "it redirects to the login page when specifying an id", %{conn: conn} do
+      conn = get conn, "/profile"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+
+    test "it redirects to the login page when specifying an existing id", %{conn: conn} do
+      user = insert(:user)
+      conn = get conn, "/profiles/#{user.id}"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # edit/2
+  describe "edit/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it returns a successful response", %{conn: conn} do
       conn = conn |> sign_in(insert(:user))
       conn = get conn, "/profile/edit"
       assert html_response(conn, 200) =~ gettext("Profile Settings")
     end
+  end
 
-    test "it redirects when not signed in", %{conn: conn} do
+  describe "edit/2 when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/profile/edit"
-      assert html_response(conn, 302)
+      assert redirected_to(conn) == session_path(conn, :new)
     end
   end
 
-  describe "create/2" do
-    test "it allows the update of the users profile photo", %{conn: conn} do
-      user = insert(:user, profile_text: "Foo")
+  ##############################################################################
+  # update/2
+  describe "update/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it allows the update of the users profile photo", %{conn: conn, user: user} do
       upload = %Plug.Upload{path: "test/files/1.0MB.jpg", filename: "1.0MB.jpg"}
-      conn = conn
-      |> sign_in(user)
-      |> post("/profile", user: %{avatar: upload}, _method: "put")
+      conn = put conn, "/profile", user: %{avatar: upload}
       assert html_response(conn, 302)
       user = Repo.get(User, user.id)
       assert %{file_name: "1.0MB.jpg"} = user.avatar
     end
 
-    test "it does not allow to upload of profile images larger than 1 MB", %{conn: conn} do
-      user = insert(:user, profile_text: "Foo")
+    test "it does not allow to upload of profile images larger than 1 MB", %{conn: conn, user: user} do
       upload = %Plug.Upload{path: "test/files/2.0MB.jpg", filename: "2.0MB.jpg"}
-      conn = conn
-      |> sign_in(user)
-      |> post("/profile", user: %{avatar: upload}, _method: "put")
+      conn = put conn, "/profile", user: %{avatar: upload}
       assert html_response(conn, 200) =~ gettext("Profile Settings")
       user = Repo.get(User, user.id)
       refute user.avatar
     end
 
-    test "it allows the update of the users profile text", %{conn: conn} do
-      user = insert(:user)
-      conn = conn
-      |> sign_in(user)
-      |> post("/profile", user: %{profile_text: "Lorem Ipsum"}, _method: "put")
+    test "it allows the update of the users profile text", %{conn: conn, user: user} do
+      conn = put conn, "/profile", user: %{profile_text: "Lorem Ipsum"}
       assert html_response(conn, 302)
       user = Repo.get(User, user.id)
       assert user.profile_text == "Lorem Ipsum"
     end
+  end
 
-    test "it requires that the user is signed in", %{conn: conn} do
-      user = insert(:user)
-      conn = conn
-      |> post("/profile", user: %{profile_text: "Lorem Ipsum"}, _method: "put")
-      assert html_response(conn, 302)
-      user = Repo.get(User, user.id)
-      refute user.profile_text == "Lorem Ipsum"
+  describe "update/2 when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      conn = put conn, "/profile", user: %{profile_text: "Lorem Ipsum"}
+      assert redirected_to(conn) == session_path(conn, :new)
     end
   end
 end

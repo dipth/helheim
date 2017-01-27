@@ -3,7 +3,6 @@ defmodule Helheim.PasswordResetControllerTest do
   use Bamboo.Test
   alias Helheim.Repo
   alias Helheim.User
-  import Helheim.Factory
 
   describe "new/2" do
     test "it returns a successful response", %{conn: conn} do

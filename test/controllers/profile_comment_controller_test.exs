@@ -45,11 +45,11 @@ defmodule Helheim.ProfileCommentControllerTest do
   describe "create/2 when signed in" do
     setup [:create_and_sign_in_user]
 
-    test "it creates a new comment for the profile with the currently signed in user as the author and redirects back to the comments page for the profile", context = %{conn: conn} do
+    test "it creates a new comment for the profile with the currently signed in user as the author and redirects back to the comments page for the profile", %{conn: conn, user: user} do
       profile = insert(:user)
       conn = post conn, "/profiles/#{profile.id}/comments", comment: @valid_attrs
       comment = Repo.one(Comment)
-      assert comment.author_id == context[:user].id
+      assert comment.author_id == user.id
       assert comment.profile_id == profile.id
       assert comment.body == @valid_attrs.body
       assert redirected_to(conn) == public_profile_comment_path(conn, :index, profile.id)
@@ -68,11 +68,11 @@ defmodule Helheim.ProfileCommentControllerTest do
       refute Repo.one(Comment)
     end
 
-    test "it does not allow spoofing the author", context = %{conn: conn} do
+    test "it does not allow spoofing the author", %{conn: conn, user: user} do
       profile = insert(:user)
       post conn, "/profiles/#{profile.id}/comments", comment: Map.merge(@valid_attrs, %{author_id: profile.id})
       comment = Repo.one(Comment)
-      assert comment.author_id == context[:user].id
+      assert comment.author_id == user.id
     end
 
     test "it trims whitespace from the body", %{conn: conn} do
@@ -80,6 +80,12 @@ defmodule Helheim.ProfileCommentControllerTest do
       post conn, "/profiles/#{profile.id}/comments", comment: Map.merge(@valid_attrs, %{body: "   Foo   "})
       comment = Repo.one(Comment)
       assert comment.body == "Foo"
+    end
+
+    test "it redirects to an error page when supplying an non-existing profile id", %{conn: conn} do
+      assert_error_sent :not_found, fn ->
+        post conn, "/profiles/1/comments", comment: @valid_attrs
+      end
     end
   end
 

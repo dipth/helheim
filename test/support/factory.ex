@@ -8,7 +8,8 @@ defmodule Helheim.Factory do
       email: sequence(:email, &"foo-#{&1}@bar.com"),
       password_hash: "$2b$12$Zc2AexPqKCRDCybgOJ28dOBJSGOd70xYSdyS2fb/vZbRQ/dhAnCym", # "password"
       confirmation_token: "ZUhtaHI4R29mZVdYSjdVRUNvMWhzZz09",
-      confirmed_at: DateTime.utc_now
+      confirmed_at: DateTime.utc_now,
+      profile_text: "Foo Bar"
     }
   end
 

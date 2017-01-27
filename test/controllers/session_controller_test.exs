@@ -1,6 +1,5 @@
 defmodule Helheim.SessionControllerTest do
   use Helheim.ConnCase
-  import Helheim.Factory
 
   describe "new/2" do
     test "it returns a successful response", %{conn: conn} do

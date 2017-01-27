@@ -1,6 +1,5 @@
 defmodule Helheim.PageControllerTest do
   use Helheim.ConnCase
-  import Helheim.Factory
 
   describe "index/2" do
     test "it returns a successful response", %{conn: conn} do
