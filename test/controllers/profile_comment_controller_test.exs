@@ -1,9 +1,10 @@
 defmodule Helheim.ProfileCommentControllerTest do
   use Helheim.ConnCase
-  alias Helheim.Comment
+  import Mock
+  alias Helheim.ProfileCommentService
 
-  @valid_attrs %{body: "Body Text"}
-  @invalid_attrs %{body: ""}
+  @post_attrs %{foo: "bar"}
+  @call_attrs %{"foo" => "bar"}
 
   ##############################################################################
   # index/2
@@ -43,63 +44,51 @@ defmodule Helheim.ProfileCommentControllerTest do
   ##############################################################################
   # create/2
   describe "create/2 when signed in" do
-    setup [:create_and_sign_in_user]
+    setup [:create_and_sign_in_user, :create_profile]
 
-    test "it creates a new comment for the profile with the currently signed in user as the author and redirects back to the comments page for the profile", %{conn: conn, user: user} do
-      profile = insert(:user)
-      conn = post conn, "/profiles/#{profile.id}/comments", comment: @valid_attrs
-      comment = Repo.one(Comment)
-      assert comment.author_id == user.id
-      assert comment.profile_id == profile.id
-      assert comment.body == @valid_attrs.body
+    test_with_mock "it redirects to the profile comments page with a success flash message when successfull", %{conn: conn, user: user, profile: profile},
+      ProfileCommentService, [], [insert: fn(_attrs,_author,_profile) -> {:ok, %{comment: %{}, notification: %{}}} end] do
+
+      conn = post conn, "/profiles/#{profile.id}/comments", comment: @post_attrs
+      assert called ProfileCommentService.insert(@call_attrs, user, profile)
       assert redirected_to(conn) == public_profile_comment_path(conn, :index, profile.id)
+      assert get_flash(conn, :success) == gettext("Comment created successfully")
     end
 
-    test "it does not create any comments when posting invalid attributes", %{conn: conn} do
-      profile = insert(:user)
-      post conn, "/profiles/#{profile.id}/comments", comment: @invalid_attrs
-      refute Repo.one(Comment)
+    test_with_mock "it redirects to the profile comments page with an error flash message when unsuccessfull", %{conn: conn, user: user, profile: profile},
+      ProfileCommentService, [], [insert: fn(_attrs,_author,_profile) -> {:error, :comment, %{}, []} end] do
+
+      conn = post conn, "/profiles/#{profile.id}/comments", comment: @post_attrs
+      assert called ProfileCommentService.insert(@call_attrs, user, profile)
+      assert redirected_to(conn) == public_profile_comment_path(conn, :index, profile.id)
+      assert get_flash(conn, :error) == gettext("Unable to create comment")
     end
 
-    test "it does not create any comments if the profile does not exist but instead shows a 404 error", %{conn: conn} do
+    test_with_mock "it does not invoke the ProfileCommentService if the profile does not exist but instead shows a 404 error", %{conn: conn},
+      ProfileCommentService, [], [insert: fn(_attrs,_author,_profile) -> raise("ProfileCommentService was called!") end] do
+
       assert_error_sent :not_found, fn ->
-        post conn, "/profiles/1/comments", comment: @valid_attrs
-      end
-      refute Repo.one(Comment)
-    end
-
-    test "it does not allow spoofing the author", %{conn: conn, user: user} do
-      profile = insert(:user)
-      post conn, "/profiles/#{profile.id}/comments", comment: Map.merge(@valid_attrs, %{author_id: profile.id})
-      comment = Repo.one(Comment)
-      assert comment.author_id == user.id
-    end
-
-    test "it trims whitespace from the body", %{conn: conn} do
-      profile = insert(:user)
-      post conn, "/profiles/#{profile.id}/comments", comment: Map.merge(@valid_attrs, %{body: "   Foo   "})
-      comment = Repo.one(Comment)
-      assert comment.body == "Foo"
-    end
-
-    test "it redirects to an error page when supplying an non-existing profile id", %{conn: conn} do
-      assert_error_sent :not_found, fn ->
-        post conn, "/profiles/1/comments", comment: @valid_attrs
+        post conn, "/profiles/1/comments", comment: @post_attrs
       end
     end
   end
 
   describe "create/2 when not signed in" do
-    test "it does not create any comments", %{conn: conn} do
-      profile = insert(:user)
-      post conn, "/profiles/#{profile.id}/comments", comment: @valid_attrs
-      refute Repo.one(Comment)
+    setup [:create_profile]
+
+    test_with_mock "it does not invoke the ProfileCommentService", %{conn: conn, profile: profile},
+      ProfileCommentService, [], [insert: fn(_attrs,_author,_profile) -> raise("ProfileCommentService was called!") end] do
+
+      post conn, "/profiles/#{profile.id}/comments", comment: @post_attrs
     end
 
-    test "it redirects to the login page", %{conn: conn} do
-      profile = insert(:user)
-      conn = post conn, "/profiles/#{profile.id}/comments", comment: @valid_attrs
+    test "it redirects to the login page", %{conn: conn, profile: profile} do
+      conn = post conn, "/profiles/#{profile.id}/comments", comment: @post_attrs
       assert redirected_to(conn) == session_path(conn, :new)
     end
+  end
+
+  defp create_profile(_context) do
+    [profile: insert(:user)]
   end
 end

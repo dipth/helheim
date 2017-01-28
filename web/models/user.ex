@@ -22,6 +22,7 @@ defmodule Helheim.User do
     has_many :blog_posts, Helheim.BlogPost
     has_many :comments, Helheim.Comment, foreign_key: :profile_id
     has_many :authored_comments, Helheim.Comment, foreign_key: :author_id
+    has_many :notifications, Helheim.Notification
 
     timestamps()
   end

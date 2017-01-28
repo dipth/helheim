@@ -60,7 +60,8 @@ defmodule Helheim.Mixfile do
      {:sweet_xml, "~> 0.5"},              # Used by arc
      {:html_sanitize_ex, "~> 1.1"},
      {:crutches, "~> 1.0.0"},
-     {:kerosene, "~> 0.5.0"} # Pagination
+     {:kerosene, "~> 0.5.0"}, # Pagination
+     {:mock, "~> 0.2.0", only: :test}
    ]
   end
 

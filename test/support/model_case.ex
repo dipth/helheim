@@ -21,7 +21,9 @@ defmodule Helheim.ModelCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
+      import Helheim.Gettext
       import Helheim.ModelCase
+      import Helheim.Factory
     end
   end
 

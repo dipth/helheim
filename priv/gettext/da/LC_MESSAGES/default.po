@@ -64,7 +64,6 @@ msgid "If for some reason you did not receive your confirmation e-mail, then ent
 msgstr "Hvis du ikke har modtaget din aktiveringsmail, kan du indtaste din e-mail adresse herunder, så sender vi den igen."
 
 #: web/templates/account/edit.html.eex:14
-#: web/templates/profile/edit.html.eex:15
 #: web/templates/registration/new.html.eex:21
 msgid "Name"
 msgstr "Navn"
@@ -374,7 +373,7 @@ msgstr "Profil Indstillinger"
 msgid "Profile Text"
 msgstr "Profiltekst"
 
-#: web/controllers/profile_controller.ex:48
+#: web/controllers/profile_controller.ex:42
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
@@ -415,10 +414,6 @@ msgstr "Nyeste Forumindlæg"
 #: web/templates/profile/show.html.eex:50
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
-
-#: web/controllers/profile_controller.ex:31
-msgid "The requested profile could not be found!"
-msgstr "Den valgte profil kunne ikke findes!"
 
 #: web/templates/layout/sidebar.html.eex:8
 msgid "Your Profile"
@@ -497,8 +492,8 @@ msgstr "Næste"
 msgid "Previous"
 msgstr "Forrige"
 
-#: web/controllers/blog_post_comment_controller.ex:18
-#: web/controllers/profile_comment_controller.ex:28
+#: web/controllers/blog_post_comment_controller.ex:15
+#: web/controllers/profile_comment_controller.ex:26
 msgid "Comment created successfully"
 msgstr "Din kommentar er tilføjet!"
 
@@ -522,11 +517,19 @@ msgstr "Tilføj Kommentar"
 msgid "Show All"
 msgstr "Vis alle"
 
-#: web/controllers/blog_post_comment_controller.ex:22
-#: web/controllers/profile_comment_controller.ex:32
+#: web/controllers/blog_post_comment_controller.ex:19
+#: web/controllers/profile_comment_controller.ex:30
 msgid "Unable to create comment"
 msgstr "Din kommentar kunne ikke tilføjes!"
 
 #: web/templates/comment/comments.html.eex:18
 msgid "Write new comment:"
 msgstr "Skriv ny kommentar:"
+
+#: web/services/profile_comment_service.ex:33
+msgid "%{username} wrote a comment in your guest book"
+msgstr "%{username} har skrevet i din gæstebog"
+
+#: web/services/blog_post_comment_service.ex:33
+msgid "%{username} wrote a comment on your blog post: %{title}"
+msgstr "%{username} har skrevet en kommentar til din blog: %{title}"

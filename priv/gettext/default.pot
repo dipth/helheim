@@ -53,7 +53,7 @@ msgstr ""
 msgid "If for some reason you did not receive your confirmation e-mail, then enter your e-mail address below and we will send it again."
 msgstr ""
 
-#: web/templates/account/edit.html.eex:14 web/templates/profile/edit.html.eex:15
+#: web/templates/account/edit.html.eex:14
 #: web/templates/registration/new.html.eex:21
 msgid "Name"
 msgstr ""
@@ -361,7 +361,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:48
+#: web/controllers/profile_controller.ex:42
 msgid "Profile updated!"
 msgstr ""
 
@@ -400,10 +400,6 @@ msgstr ""
 #: web/templates/page/front_page.html.eex:39
 #: web/templates/profile/show.html.eex:50
 msgid "Newest Photos"
-msgstr ""
-
-#: web/controllers/profile_controller.ex:31
-msgid "The requested profile could not be found!"
 msgstr ""
 
 #: web/templates/layout/sidebar.html.eex:8
@@ -483,8 +479,8 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
-#: web/controllers/blog_post_comment_controller.ex:18
-#: web/controllers/profile_comment_controller.ex:28
+#: web/controllers/blog_post_comment_controller.ex:15
+#: web/controllers/profile_comment_controller.ex:26
 msgid "Comment created successfully"
 msgstr ""
 
@@ -508,11 +504,19 @@ msgstr ""
 msgid "Show All"
 msgstr ""
 
-#: web/controllers/blog_post_comment_controller.ex:22
-#: web/controllers/profile_comment_controller.ex:32
+#: web/controllers/blog_post_comment_controller.ex:19
+#: web/controllers/profile_comment_controller.ex:30
 msgid "Unable to create comment"
 msgstr ""
 
 #: web/templates/comment/comments.html.eex:18
 msgid "Write new comment:"
+msgstr ""
+
+#: web/services/profile_comment_service.ex:33
+msgid "%{username} wrote a comment in your guest book"
+msgstr ""
+
+#: web/services/blog_post_comment_service.ex:33
+msgid "%{username} wrote a comment on your blog post: %{title}"
 msgstr ""

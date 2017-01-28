@@ -28,4 +28,13 @@ defmodule Helheim.Factory do
       body: "My Aweseome Comment"
     }
   end
+
+  def notification_factory do
+    %Helheim.Notification{
+      user: build(:user),
+      title: "Some Notification!",
+      icon: "foo",
+      path: "/"
+    }
+  end
 end

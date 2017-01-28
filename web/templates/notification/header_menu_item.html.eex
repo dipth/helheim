@@ -1,0 +1,18 @@
+<% notifications = unread_notifications(@conn) %>
+<li class="nav-item dropdown hidden-md-down" id="nav-item-notifications">
+  <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="nav-link-notifications">
+    <i class="fa fa-bell"></i>
+    <%= if length(notifications) > 0 do %>
+      <span class="badge badge-pill badge-danger"><%= length notifications %></span>
+    <% end %>
+  </a>
+  <div class="dropdown-menu dropdown-menu-right">
+    <div class="dropdown-header text-center">
+      <strong><%= gettext "You have %{count} notifications", count: length(notifications) %></strong>
+    </div>
+
+    <%= for notification <- notifications do %>
+      <%= render "notification.html", conn: @conn, notification: notification %>
+    <% end %>
+  </div>
+</li>
