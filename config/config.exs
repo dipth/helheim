@@ -26,6 +26,10 @@ config :logger, :console,
 config :guardian, Guardian,
   issuer: "Helheim",
   ttl: { 1, :day },
+  token_ttl: %{
+    "refresh" => {30, :days},
+    "access" =>  {1, :days}
+  },
   verify_issuer: true,
   serializer: Helheim.GuardianSerializer
 
