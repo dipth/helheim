@@ -10,12 +10,13 @@ defmodule Helheim.EditProfileSettingsFlowTest do
     |> click_link(gettext("Profile"))
 
     session
+    |> attach_file("user[avatar]", path: "test/files/1.0MB.jpg")
+
+    session
     |> execute_script("$('#profile_text_editor .ql-editor').html('This is my awesome text');")
 
     session
     |> click_on(gettext("Update Profile"))
-
-    # TODO: Also test the profile photo upload
 
     result = session
     |> find(".alert.alert-success")
