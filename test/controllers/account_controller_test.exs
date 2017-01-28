@@ -57,7 +57,7 @@ defmodule Helheim.AccountControllerTest do
       assert html_response(conn, 302)
       user = Repo.get(User, user.id)
       assert user.confirmed_at
-      assert_no_emails_delivered
+      assert_no_emails_delivered()
     end
 
     test "it allows the update of the users password", %{conn: conn, user: user} do

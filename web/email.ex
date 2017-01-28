@@ -3,7 +3,7 @@ defmodule Helheim.Email do
   import Helheim.Gettext
 
   def registration_email(email, confirmation_token) do
-    base_email
+    base_email()
     |> to(email)
     |> subject(gettext("Welcome to %{site_name}. Please confirm your e-mail address", site_name: gettext("Helheim")))
     |> assign(:confirmation_token, confirmation_token)
@@ -11,7 +11,7 @@ defmodule Helheim.Email do
   end
 
   def password_reset_email(user) do
-    base_email
+    base_email()
     |> to(user.email)
     |> subject(gettext("Password reset instructions for %{site_name}", site_name: gettext("Helheim")))
     |> assign(:user, user)
@@ -19,7 +19,7 @@ defmodule Helheim.Email do
   end
 
   defp base_email do
-    new_email
+    new_email()
     |> from("Helheim<no-reply@helheim.dk>")
     |> put_html_layout({Helheim.LayoutView, "email.html"})
   end

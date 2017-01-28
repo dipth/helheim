@@ -27,7 +27,7 @@ defmodule Helheim.RegistrationControllerTest do
       conn = post conn, "/registrations", user: @invalid_params
       assert html_response(conn, 200) =~ gettext("New Registration")
       refute Repo.get_by(User, email: @valid_params[:email])
-      assert_no_emails_delivered
+      assert_no_emails_delivered()
     end
 
     test "extra spaces are stripped during registration", %{conn: conn} do

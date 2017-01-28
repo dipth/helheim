@@ -22,7 +22,7 @@ defmodule Helheim.ConfirmationControllerTest do
     test "it re-renders the new template when posting a non-existing e-mail address", %{conn: conn} do
       conn = post conn, "/confirmations", confirmation: %{email: "non@existing.com"}
       assert html_response(conn, 200) =~ gettext("No user with that e-mail address!")
-      assert_no_emails_delivered
+      assert_no_emails_delivered()
     end
   end
 
