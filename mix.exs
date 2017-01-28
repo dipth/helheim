@@ -44,21 +44,21 @@ defmodule Helheim.Mixfile do
      {:secure_random, "~> 0.5.0"},
      {:bamboo, "~> 0.7"},
      {:bamboo_postmark, "~> 0.2.0"},
-     {:calendar, "~> 0.16.1"},
+     {:calendar, "~> 0.17"},
      {:calendar_translations, "~> 0.0.4"},
      {:calecto, "~> 0.16.0"},
      {:timex, git: "https://github.com/bitwalker/timex.git"},
      {:wallaby, "~> 0.15.0"},
      {:ex_machina, "~> 1.0", only: :test},
-     {:sentry, "~> 1.0"},
+     {:sentry, "~> 2.1"},
      {:appsignal, "~> 0.0"},
      {:arc, "~> 0.6.0"},
      {:arc_ecto, "~> 0.5.0"},
+     {:hackney, "1.6.5", override: true}, # Used by arc
      {:ex_aws, "~> 1.0.0"},               # Used by arc
-     {:hackney, "1.6.3", override: true}, # Used by arc
      {:poison, "~> 2.0"},                 # Used by arc
      {:sweet_xml, "~> 0.5"},              # Used by arc
-     {:html_sanitize_ex, "~> 1.0.0"},
+     {:html_sanitize_ex, "~> 1.1"},
      {:crutches, "~> 1.0.0"},
      {:kerosene, "~> 0.5.0"} # Pagination
    ]
