@@ -12,7 +12,7 @@
               <hr>
               <div class="img-thumbnail img-thumbnail-with-form-control">
                 <img src="<%= Helheim.Avatar.url({@changeset.data.avatar, @changeset.data}, :large) %>" class="img-fluid mx-auto d-block" alt="<%= gettext "Profile Photo" %>">
-                <%= file_input f, :avatar, placeholder: gettext("Name"), class: "form-control" %>
+                <%= file_input f, :avatar, class: "form-control" %>
               </div>
 
               <%= if message = f.errors[:avatar] do %>
