@@ -3,7 +3,7 @@ defmodule Helheim.NotificationControllerTest do
   alias Helheim.Notification
 
   ##############################################################################
-  # index/2
+  # show/2
   describe "show/2 when signed in" do
     setup [:create_and_sign_in_user]
 

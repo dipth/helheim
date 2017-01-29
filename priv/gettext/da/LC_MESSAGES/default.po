@@ -19,6 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: web/templates/page/index.html.eex:3
 msgid "%{site_name} is a community for alternative people."
@@ -105,7 +106,7 @@ msgstr "Velkommen til %{site_name}"
 msgid "Will only be shown to administrators"
 msgstr "Vil kun blive vist til administratorer"
 
-#: web/templates/layout/header.html.eex:30
+#: web/templates/layout/header.html.eex:24
 #: web/templates/page/signed_in.html.eex:7
 msgid "Sign Out"
 msgstr "Log ud"
@@ -298,12 +299,12 @@ msgstr "For at sikre dig imod tastefejl"
 msgid "You need to confirm your e-mail address before you can reset your password"
 msgstr "Du skal først bekræfte din e-mail adresse før du kan nulstille dit kodeord"
 
-#: web/templates/layout/header.html.eex:25 web/views/account_view.ex:4
+#: web/templates/layout/header.html.eex:19 web/views/account_view.ex:4
 #: web/views/profile_view.ex:5
 msgid "Settings"
 msgstr "Indstillinger"
 
-#: web/templates/layout/header.html.eex:29 web/views/account_view.ex:4
+#: web/templates/layout/header.html.eex:23 web/views/account_view.ex:4
 msgid "Account"
 msgstr "Konto"
 
@@ -319,8 +320,7 @@ msgstr "Dine kontoindstillinger blev opdateret!"
 msgid "Be aware!"
 msgstr "Advarsel!"
 
-#: web/templates/account/edit.html.eex:64
-#: web/templates/account/edit.html.eex:68
+#: web/templates/account/edit.html.eex:64 web/templates/account/edit.html.eex:68
 msgid "Existing Password"
 msgstr "Nuværende Kodeord"
 
@@ -344,7 +344,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:138
+#: web/models/user.ex:141
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -356,12 +356,11 @@ msgstr "Maksimum fil størrelse: %{file_size}"
 msgid "Please write a description of yourself"
 msgstr "Giv en beskrivelse af dig selv"
 
-#: web/templates/layout/header.html.eex:28 web/views/profile_view.ex:5
+#: web/templates/layout/header.html.eex:22 web/views/profile_view.ex:5
 msgid "Profile"
 msgstr "Profil"
 
-#: web/templates/profile/edit.html.eex:11
-#: web/templates/profile/edit.html.eex:14
+#: web/templates/profile/edit.html.eex:11 web/templates/profile/edit.html.eex:14
 msgid "Profile Photo"
 msgstr "Profilbillede"
 
@@ -391,8 +390,7 @@ msgstr "Husk mig i 30 dage"
 
 #: web/templates/page/front_page.html.eex:24
 #: web/templates/page/front_page.html.eex:40
-#: web/templates/profile/show.html.eex:43
-#: web/templates/profile/show.html.eex:51
+#: web/templates/profile/show.html.eex:51 web/templates/profile/show.html.eex:59
 msgid "Coming soon"
 msgstr "Kommer snart"
 
@@ -401,17 +399,17 @@ msgid "Member since:"
 msgstr "Medlem siden:"
 
 #: web/templates/page/front_page.html.eex:29
-#: web/templates/profile/show.html.eex:33
+#: web/templates/profile/show.html.eex:41
 msgid "Newest Blogs"
 msgstr "Nyeste Blogs"
 
 #: web/templates/page/front_page.html.eex:23
-#: web/templates/profile/show.html.eex:42
+#: web/templates/profile/show.html.eex:50
 msgid "Newest Forum Posts"
 msgstr "Nyeste Forumindlæg"
 
 #: web/templates/page/front_page.html.eex:39
-#: web/templates/profile/show.html.eex:50
+#: web/templates/profile/show.html.eex:58
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
 
@@ -432,7 +430,7 @@ msgstr "Ny Blog"
 msgid "Save Blog Post"
 msgstr "Gem Blog"
 
-#: web/templates/layout/sidebar.html.eex:11
+#: web/templates/layout/sidebar.html.eex:17
 msgid "Your Blog Posts"
 msgstr "Dine Blogs"
 
@@ -472,23 +470,19 @@ msgstr "Tekst"
 msgid "Title"
 msgstr "Titel"
 
-#: web/templates/blog_post/index.html.eex:16
-#: web/templates/comment/comments.html.eex:11
+#: web/views/pagination_helpers.ex:9
 msgid "First"
 msgstr "Første"
 
-#: web/templates/blog_post/index.html.eex:17
-#: web/templates/comment/comments.html.eex:12
+#: web/views/pagination_helpers.ex:10
 msgid "Last"
 msgstr "Sidste"
 
-#: web/templates/blog_post/index.html.eex:14
-#: web/templates/comment/comments.html.eex:9
+#: web/views/pagination_helpers.ex:7
 msgid "Next"
 msgstr "Næste"
 
-#: web/templates/blog_post/index.html.eex:15
-#: web/templates/comment/comments.html.eex:10
+#: web/views/pagination_helpers.ex:8
 msgid "Previous"
 msgstr "Forrige"
 
@@ -505,15 +499,15 @@ msgstr "Kommentarer:"
 msgid "Guest Book"
 msgstr "Gæstebog"
 
-#: web/templates/profile/show.html.eex:56
+#: web/templates/profile/show.html.eex:64
 msgid "Newest Guest Book Entries"
 msgstr "Nyeste gæstebogsindlæg"
 
-#: web/templates/comment/comments.html.eex:24
+#: web/templates/comment/comments.html.eex:20
 msgid "Post Comment"
 msgstr "Tilføj Kommentar"
 
-#: web/templates/profile/show.html.eex:57
+#: web/templates/profile/show.html.eex:65
 msgid "Show All"
 msgstr "Vis alle"
 
@@ -522,7 +516,7 @@ msgstr "Vis alle"
 msgid "Unable to create comment"
 msgstr "Din kommentar kunne ikke tilføjes!"
 
-#: web/templates/comment/comments.html.eex:18
+#: web/templates/comment/comments.html.eex:14
 msgid "Write new comment:"
 msgstr "Skriv ny kommentar:"
 
@@ -533,3 +527,50 @@ msgstr "%{username} har skrevet i din gæstebog"
 #: web/services/blog_post_comment_service.ex:33
 msgid "%{username} wrote a comment on your blog post: %{title}"
 msgstr "%{username} har skrevet en kommentar til din blog: %{title}"
+
+#: web/services/private_message_service.ex:31
+msgid "%{username} wrote you a private message"
+msgstr "%{username} har sendt dig en privat besked"
+
+#: web/controllers/private_message_controller.ex:16
+msgid "Message successfully sent"
+msgstr "Din besked blev sendt!"
+
+#: web/templates/private_conversation/form.html.eex:10
+msgid "Send Message"
+msgstr "Send Besked"
+
+#: web/templates/profile/show.html.eex:25
+msgid "Send private message"
+msgstr "Send privat besked"
+
+#: web/templates/private_conversation/show.html.eex:6
+msgid "Start by writing a message below!"
+msgstr "Start med at skrive en besked nedenfor!"
+
+#: web/templates/private_conversation/show.html.eex:5
+msgid "There are no messages in this conversation..."
+msgstr "Der er ingen beskeder i denne samtale…"
+
+#: web/controllers/private_message_controller.ex:20
+msgid "Unable to send message"
+msgstr "Din besked kunne ikke sendes!"
+
+#: web/templates/private_conversation/form.html.eex:4
+msgid "Write new message:"
+msgstr "Skriv en ny besked:"
+
+#: web/templates/notification/header_menu_item.html.eex:11
+msgid "You have %{count} notification"
+msgid_plural "You have %{count} notifications"
+msgstr[0] "Du har %{count} notifikation"
+msgstr[1] "Du har %{count} notifikationer"
+
+#: web/templates/layout/sidebar.html.eex:13
+#: web/templates/private_conversation/index.html.eex:1
+msgid "Private Messages"
+msgstr "Private Beskeder"
+
+#: web/templates/private_conversation/show.html.eex:1
+msgid "Private conversation with %{username}"
+msgstr ""

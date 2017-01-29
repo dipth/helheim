@@ -23,6 +23,8 @@ defmodule Helheim.User do
     has_many :comments, Helheim.Comment, foreign_key: :profile_id
     has_many :authored_comments, Helheim.Comment, foreign_key: :author_id
     has_many :notifications, Helheim.Notification
+    has_many :sent_private_messages, Helheim.PrivateMessage, foreign_key: :sender_id
+    has_many :received_private_messages, Helheim.PrivateMessage, foreign_key: :recipient_id
 
     timestamps()
   end

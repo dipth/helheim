@@ -37,4 +37,12 @@ defmodule Helheim.Factory do
       path: "/"
     }
   end
+
+  def private_message_factory do
+    %Helheim.PrivateMessage {
+      sender: build(:user),
+      recipient: build(:user),
+      body: "Awesome Message Text"
+    }
+  end
 end

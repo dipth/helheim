@@ -95,7 +95,7 @@ msgstr ""
 msgid "Will only be shown to administrators"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:30
+#: web/templates/layout/header.html.eex:24
 #: web/templates/page/signed_in.html.eex:7
 msgid "Sign Out"
 msgstr ""
@@ -288,12 +288,12 @@ msgstr ""
 msgid "You need to confirm your e-mail address before you can reset your password"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:25 web/views/account_view.ex:4
+#: web/templates/layout/header.html.eex:19 web/views/account_view.ex:4
 #: web/views/profile_view.ex:5
 msgid "Settings"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:29 web/views/account_view.ex:4
+#: web/templates/layout/header.html.eex:23 web/views/account_view.ex:4
 msgid "Account"
 msgstr ""
 
@@ -333,7 +333,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:138
+#: web/models/user.ex:141
 msgid "does not match your current password"
 msgstr ""
 
@@ -345,7 +345,7 @@ msgstr ""
 msgid "Please write a description of yourself"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:28 web/views/profile_view.ex:5
+#: web/templates/layout/header.html.eex:22 web/views/profile_view.ex:5
 msgid "Profile"
 msgstr ""
 
@@ -379,7 +379,7 @@ msgstr ""
 
 #: web/templates/page/front_page.html.eex:24
 #: web/templates/page/front_page.html.eex:40
-#: web/templates/profile/show.html.eex:43 web/templates/profile/show.html.eex:51
+#: web/templates/profile/show.html.eex:51 web/templates/profile/show.html.eex:59
 msgid "Coming soon"
 msgstr ""
 
@@ -388,17 +388,17 @@ msgid "Member since:"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:29
-#: web/templates/profile/show.html.eex:33
+#: web/templates/profile/show.html.eex:41
 msgid "Newest Blogs"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:23
-#: web/templates/profile/show.html.eex:42
+#: web/templates/profile/show.html.eex:50
 msgid "Newest Forum Posts"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:39
-#: web/templates/profile/show.html.eex:50
+#: web/templates/profile/show.html.eex:58
 msgid "Newest Photos"
 msgstr ""
 
@@ -419,7 +419,7 @@ msgstr ""
 msgid "Save Blog Post"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:11
+#: web/templates/layout/sidebar.html.eex:17
 msgid "Your Blog Posts"
 msgstr ""
 
@@ -459,23 +459,19 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: web/templates/blog_post/index.html.eex:16
-#: web/templates/comment/comments.html.eex:11
+#: web/views/pagination_helpers.ex:9
 msgid "First"
 msgstr ""
 
-#: web/templates/blog_post/index.html.eex:17
-#: web/templates/comment/comments.html.eex:12
+#: web/views/pagination_helpers.ex:10
 msgid "Last"
 msgstr ""
 
-#: web/templates/blog_post/index.html.eex:14
-#: web/templates/comment/comments.html.eex:9
+#: web/views/pagination_helpers.ex:7
 msgid "Next"
 msgstr ""
 
-#: web/templates/blog_post/index.html.eex:15
-#: web/templates/comment/comments.html.eex:10
+#: web/views/pagination_helpers.ex:8
 msgid "Previous"
 msgstr ""
 
@@ -492,15 +488,15 @@ msgstr ""
 msgid "Guest Book"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:56
+#: web/templates/profile/show.html.eex:64
 msgid "Newest Guest Book Entries"
 msgstr ""
 
-#: web/templates/comment/comments.html.eex:24
+#: web/templates/comment/comments.html.eex:20
 msgid "Post Comment"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:57
+#: web/templates/profile/show.html.eex:65
 msgid "Show All"
 msgstr ""
 
@@ -509,7 +505,7 @@ msgstr ""
 msgid "Unable to create comment"
 msgstr ""
 
-#: web/templates/comment/comments.html.eex:18
+#: web/templates/comment/comments.html.eex:14
 msgid "Write new comment:"
 msgstr ""
 
@@ -519,4 +515,51 @@ msgstr ""
 
 #: web/services/blog_post_comment_service.ex:33
 msgid "%{username} wrote a comment on your blog post: %{title}"
+msgstr ""
+
+#: web/services/private_message_service.ex:31
+msgid "%{username} wrote you a private message"
+msgstr ""
+
+#: web/controllers/private_message_controller.ex:16
+msgid "Message successfully sent"
+msgstr ""
+
+#: web/templates/private_conversation/form.html.eex:10
+msgid "Send Message"
+msgstr ""
+
+#: web/templates/profile/show.html.eex:25
+msgid "Send private message"
+msgstr ""
+
+#: web/templates/private_conversation/show.html.eex:6
+msgid "Start by writing a message below!"
+msgstr ""
+
+#: web/templates/private_conversation/show.html.eex:5
+msgid "There are no messages in this conversation..."
+msgstr ""
+
+#: web/controllers/private_message_controller.ex:20
+msgid "Unable to send message"
+msgstr ""
+
+#: web/templates/private_conversation/form.html.eex:4
+msgid "Write new message:"
+msgstr ""
+
+#: web/templates/notification/header_menu_item.html.eex:11
+msgid "You have %{count} notification"
+msgid_plural "You have %{count} notifications"
+msgstr[0] ""
+msgstr[1] ""
+
+#: web/templates/layout/sidebar.html.eex:13
+#: web/templates/private_conversation/index.html.eex:1
+msgid "Private Messages"
+msgstr ""
+
+#: web/templates/private_conversation/show.html.eex:1
+msgid "Private conversation with %{username}"
 msgstr ""

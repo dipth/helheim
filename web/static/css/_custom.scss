@@ -63,3 +63,49 @@ form.link {
   margin-left: -0.5rem;
   margin-right: 0.5rem;
 }
+
+.sender-avatar {
+  height: 35px;
+}
+
+.conversation {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+
+  .message {
+    border-bottom: 1px dotted $gray-lighter;
+    display: flex;
+    padding-top: 1rem;
+  }
+
+  .sender-avatar {
+    margin-right: 1rem;
+  }
+
+  .message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .message-content {
+    width: 100%;
+  }
+
+  .message-timestamp {
+    color: $gray-light;
+  }
+
+  .message-me {
+    flex-direction: row-reverse;
+
+    .sender-avatar {
+      margin-left: 1rem;
+    }
+
+    .message-header {
+      flex-direction: row-reverse;
+    }
+  }
+}

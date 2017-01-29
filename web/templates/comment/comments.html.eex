@@ -5,11 +5,7 @@
 </div>
 
 <%= if @pagination do %>
-  <%= paginate @conn, @pagination,
-        next_label: gettext("Next"),
-        previous_label: gettext("Previous"),
-        first_label: gettext("First"),
-        last_label: gettext("Last") %>
+  <%= lpaginate @conn, @pagination %>
 <% end %>
 
 <%= form_for Helheim.Comment.changeset(%Helheim.Comment{}), @post_path, fn f -> %>

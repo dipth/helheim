@@ -8,6 +8,12 @@
         <a class="nav-link" href="<%= profile_path(@conn, :show)%>"><i class="fa fa-id-card"></i> <%= gettext("Your Profile") %></a>
       </li>
       <li class="nav-item">
+        <%= link to: private_conversation_path(@conn, :index), class: "nav-link" do %>
+          <i class="fa fa-envelope-o"></i>
+          <%= gettext("Private Messages") %>
+        <% end %>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="<%= public_profile_blog_post_path(@conn, :index, Guardian.Plug.current_resource(@conn))%>"><i class="fa fa-file-text"></i> <%= gettext("Your Blog Posts") %></a>
       </li>
     </ul>

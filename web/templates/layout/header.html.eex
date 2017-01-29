@@ -16,13 +16,6 @@
       </a>
       <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-header text-center">
-          <strong>Account</strong>
-        </div>
-
-        <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comments</a>
-
-        <div class="dropdown-header text-center">
           <strong><%= gettext("Settings") %></strong>
         </div>
 

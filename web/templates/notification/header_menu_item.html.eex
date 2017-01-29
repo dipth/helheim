@@ -8,7 +8,7 @@
   </a>
   <div class="dropdown-menu dropdown-menu-right">
     <div class="dropdown-header text-center">
-      <strong><%= gettext "You have %{count} notifications", count: length(notifications) %></strong>
+      <strong><%= ngettext "You have %{count} notification", "You have %{count} notifications", length(notifications) %></strong>
     </div>
 
     <%= for notification <- notifications do %>

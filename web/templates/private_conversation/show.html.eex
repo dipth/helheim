@@ -1,0 +1,16 @@
+<h3 class="mb-1"><%= gettext "Private conversation with %{username}", username: @partner.username %></h3>
+
+<%= if Enum.empty? @messages do %>
+  <div class="alert alert-info text-center" role="alert">
+    <%= gettext "There are no messages in this conversation..." %><br>
+    <%= gettext "Start by writing a message below!" %>
+  </div>
+<% else %>
+  <ul class="list-unstyled conversation">
+    <%= for message <- @messages do %>
+      <%= render "message.html", conn: @conn, message: message %>
+    <% end %>
+  </ul>
+  <%= lpaginate @conn, @pagination %>
+<% end %>
+<%= render "form.html", conn: @conn, me: @me, partner: @partner %>

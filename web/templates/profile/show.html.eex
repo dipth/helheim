@@ -18,6 +18,14 @@
             %>
           </span>
         </p>
+        <%= if @user.id != Guardian.Plug.current_resource(@conn).id do %>
+          <p class="mb-0">
+            <%= link to: private_conversation_path(@conn, :show, @user.id), class: "btn btn-primary btn-block" do %>
+              <i class="fa fa-envelope"></i>
+              <%= gettext "Send private message" %>
+            <% end %>
+          </p>
+        <% end %>
       </div>
     </div>
   </div>

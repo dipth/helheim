@@ -53,6 +53,9 @@ defmodule Helheim.Router do
       resources "/comments", BlogPostCommentController, only: [:create], as: :comment
     end
     resources "/notifications", NotificationController, only: [:show]
+    resources "/private_conversations", PrivateConversationController, param: "partner_id", only: [:index, :show] do
+      resources "/messages", PrivateMessageController, only: [:create], as: :message
+    end
   end
 
   # Other scopes may use custom stacks.
