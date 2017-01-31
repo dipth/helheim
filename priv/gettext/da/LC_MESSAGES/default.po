@@ -320,7 +320,8 @@ msgstr "Dine kontoindstillinger blev opdateret!"
 msgid "Be aware!"
 msgstr "Advarsel!"
 
-#: web/templates/account/edit.html.eex:64 web/templates/account/edit.html.eex:68
+#: web/templates/account/edit.html.eex:64
+#: web/templates/account/edit.html.eex:68
 msgid "Existing Password"
 msgstr "Nuværende Kodeord"
 
@@ -360,7 +361,8 @@ msgstr "Giv en beskrivelse af dig selv"
 msgid "Profile"
 msgstr "Profil"
 
-#: web/templates/profile/edit.html.eex:11 web/templates/profile/edit.html.eex:14
+#: web/templates/profile/edit.html.eex:11
+#: web/templates/profile/edit.html.eex:14
 msgid "Profile Photo"
 msgstr "Profilbillede"
 
@@ -390,7 +392,8 @@ msgstr "Husk mig i 30 dage"
 
 #: web/templates/page/front_page.html.eex:24
 #: web/templates/page/front_page.html.eex:40
-#: web/templates/profile/show.html.eex:51 web/templates/profile/show.html.eex:59
+#: web/templates/profile/show.html.eex:51
+#: web/templates/profile/show.html.eex:59
 msgid "Coming soon"
 msgstr "Kommer snart"
 
@@ -573,4 +576,4 @@ msgstr "Private Beskeder"
 
 #: web/templates/private_conversation/show.html.eex:1
 msgid "Private conversation with %{username}"
-msgstr ""
+msgstr "Privat samtale med %{username}"
