@@ -40,4 +40,38 @@ defmodule Helheim.NotificationControllerTest do
       refute notification.read_at
     end
   end
+
+  ##############################################################################
+  # refresh/2
+  describe "refresh/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it returns a successful response", %{conn: conn} do
+      conn = get conn, "/notifications/refresh"
+      assert html_response(conn, 200)
+    end
+
+    test "it only returns notifications belonging to the user", %{conn: conn, user: user} do
+      notification_1 = insert(:notification, user: user, title: "Foo Notification")
+      notification_2 = insert(:notification, title: "Bar Notification")
+      conn = get conn, "/notifications/refresh"
+      assert conn.resp_body =~ notification_1.title
+      refute conn.resp_body =~ notification_2.title
+    end
+
+    test "it only returns notifications that are unread", %{conn: conn, user: user} do
+      notification_1 = insert(:notification, user: user, title: "Foo Notification")
+      notification_2 = insert(:notification, user: user, title: "Bar Notification", read_at: DateTime.utc_now)
+      conn = get conn, "/notifications/refresh"
+      assert conn.resp_body =~ notification_1.title
+      refute conn.resp_body =~ notification_2.title
+    end
+  end
+
+  describe "refresh/2 when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      conn = get conn, "/notifications/refresh"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
 end
