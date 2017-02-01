@@ -10,4 +10,10 @@ defmodule Helheim.NotificationController do
       |> Notification.mark_as_read!
     redirect(conn, to: notification.path)
   end
+
+  def refresh(conn, _params) do
+    conn
+    |> put_layout(false)
+    |> render("refresh.html")
+  end
 end

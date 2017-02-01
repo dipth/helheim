@@ -52,6 +52,7 @@ defmodule Helheim.Router do
     resources "/blog_posts", BlogPostController, only: [:new, :create, :edit, :update, :delete] do
       resources "/comments", BlogPostCommentController, only: [:create], as: :comment
     end
+    get "/notifications/refresh", NotificationController, :refresh
     resources "/notifications", NotificationController, only: [:show]
     resources "/private_conversations", PrivateConversationController, param: "partner_id", only: [:index, :show] do
       resources "/messages", PrivateMessageController, only: [:create], as: :message

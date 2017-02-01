@@ -1,6 +1,7 @@
 defmodule Helheim.User do
   use Helheim.Web, :model
   use Arc.Ecto.Schema
+  use Timex
   alias Helheim.Repo
   import Helheim.Gettext
 
@@ -110,7 +111,7 @@ defmodule Helheim.User do
   end
 
   def password_reset_token_expired?(user) do
-    user.password_reset_token_updated_at < Calendar.DateTime.subtract!(DateTime.utc_now, 24 * 60 * 60)
+    Timex.before?(user.password_reset_token_updated_at, Timex.shift(Timex.now, days: -1))
   end
 
   defp put_password_hash(changeset) do

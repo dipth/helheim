@@ -5,12 +5,14 @@ defmodule Helheim.PrivateMessageService do
   alias Helheim.Repo
   alias Helheim.PrivateMessage
   alias Helheim.Notification
+  alias Helheim.NotificationChannel
 
   def insert(sender, recipient, body) do
     Multi.new
     |> Multi.insert(:private_message, build_message(sender, recipient, body))
     |> Multi.insert(:notification, build_notification(sender, recipient))
     |> Multi.run(:ensure_different_sender_and_recipient, &ensure_different_sender_and_recipient/1)
+    |> Multi.run(:push_notification, &push_notification/1)
     |> Repo.transaction
   end
 
@@ -34,5 +36,9 @@ defmodule Helheim.PrivateMessageService do
     }
     Notification.changeset(%Notification{}, attrs)
     |> Ecto.Changeset.put_assoc(:user, recipient)
+  end
+
+  defp push_notification(%{notification: notification}) do
+    {NotificationChannel.broadcast_notification(notification), notification}
   end
 end

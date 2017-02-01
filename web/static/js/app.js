@@ -18,13 +18,12 @@
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-// import socket from "./socket"
-
 import { Leaf } from "web/static/js/leaf";
 import { RestfulizerTweak } from "web/static/js/restfulizer";
 import { BootstrapStuff } from "web/static/js/bootstrap_stuff";
 import { ProfileSettings } from "web/static/js/profile_settings";
 import { BlogPostForm } from "web/static/js/blog_post_form";
+import { Notifications } from "web/static/js/notifications";
 
 export var App = {
   run: function(){
@@ -33,6 +32,7 @@ export var App = {
     BootstrapStuff.run();
     ProfileSettings.run();
     BlogPostForm.run();
+    Notifications.run();
   }
 }
 

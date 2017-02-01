@@ -1,5 +1,5 @@
 defmodule Helheim.EditAccountSettingsFlowTest do
-  use Helheim.AcceptanceCase, async: true
+  use Helheim.AcceptanceCase#, async: true
 
   setup [:create_and_sign_in_user]
 
