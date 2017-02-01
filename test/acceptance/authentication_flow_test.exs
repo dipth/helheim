@@ -1,5 +1,5 @@
 defmodule Helheim.AuthenticationFlowTest do
-  use Helheim.AcceptanceCase, async: true
+  use Helheim.AcceptanceCase#, async: true
 
   test "users can sign in and out", %{session: session} do
     user = insert(:user)

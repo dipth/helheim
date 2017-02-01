@@ -1,8 +1,9 @@
 defmodule Helheim.UserSocket do
   use Phoenix.Socket
+  import Guardian.Phoenix.Socket
 
   ## Channels
-  # channel "room:*", Helheim.RoomChannel
+  channel "notifications:*", Helheim.NotificationChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket, timeout: 45_000
@@ -19,8 +20,17 @@ defmodule Helheim.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
-    {:ok, socket}
+  def connect(%{"guardian_token" => jwt}, socket) do
+    case sign_in(socket, jwt) do
+      {:ok, authed_socket, _guardian_params} ->
+        {:ok, authed_socket}
+      _ ->
+        {:error, :unauthorized}
+    end
+  end
+
+  def connect(_params, _socket) do
+    {:error, :unauthorized}
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
@@ -32,6 +42,13 @@ defmodule Helheim.UserSocket do
   #
   #     Helheim.Endpoint.broadcast("users_socket:#{user.id}", "disconnect", %{})
   #
-  # Returning `nil` makes this socket anonymous.
-  def id(_socket), do: nil
+  # Returning `nil` will make this socket anonymous.
+  def id(socket) do
+    user = current_resource(socket)
+    if user do
+      "users_socket:#{user.id}"
+    else
+      nil
+    end
+  end
 end

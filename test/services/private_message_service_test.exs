@@ -1,9 +1,11 @@
 defmodule Helheim.PrivateMessageServiceTest do
   use Helheim.ModelCase
   import Helheim.Router.Helpers
+  import Mock
   alias Helheim.PrivateMessageService
   alias Helheim.PrivateMessage
   alias Helheim.Notification
+  alias Helheim.NotificationChannel
 
   @valid_body "Foo"
   @invalid_body ""
@@ -25,6 +27,20 @@ defmodule Helheim.PrivateMessageServiceTest do
       assert notification.user_id == recipient.id
       assert notification.title == gettext("%{username} wrote you a private message", username: sender.username)
       assert notification.path == private_conversation_path(Helheim.Endpoint, :show, sender.id)
+    end
+
+    test_with_mock "it sends the notification to the NotificationChannel", %{sender: sender, recipient: recipient},
+      NotificationChannel, [], [broadcast_notification: fn(_notification) -> :ok end] do
+
+      PrivateMessageService.insert(sender, recipient, @valid_body)
+      assert called NotificationChannel.broadcast_notification(:_)
+    end
+
+    test_with_mock "it does not sends the notification to the NotificationChannel if anything failed", %{sender: sender, recipient: recipient},
+      NotificationChannel, [], [broadcast_notification: fn(_notification) -> :ok end] do
+
+      PrivateMessageService.insert(sender, recipient, @invalid_body)
+      refute called NotificationChannel.broadcast_notification(:_)
     end
 
     test "returns :ok and a Map including a private message and a notification", %{sender: sender, recipient: recipient} do
