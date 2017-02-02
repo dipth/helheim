@@ -1,6 +1,7 @@
 defmodule Helheim.NotificationChannel do
   use Phoenix.Channel
   import Guardian.Phoenix.Socket
+  alias Helheim.Repo
 
   def join("notifications:" <> user_id, %{"guardian_token" => token}, socket) do
     authenticate_channel socket, user_id, token
@@ -17,6 +18,7 @@ defmodule Helheim.NotificationChannel do
   end
 
   def broadcast_notification(notification) do
+    notification = notification |> Repo.preload(:user)
     payload = %{
       title: notification.title,
       icon: notification.icon,

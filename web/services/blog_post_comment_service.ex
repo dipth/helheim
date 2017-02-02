@@ -4,7 +4,7 @@ defmodule Helheim.BlogPostCommentService do
   alias Ecto.Multi
   alias Helheim.Repo
   alias Helheim.Comment
-  alias Helheim.Notification
+  alias Helheim.NotificationService
 
   def insert(attrs, author, blog_post) do
     Multi.new
@@ -22,7 +22,7 @@ defmodule Helheim.BlogPostCommentService do
   defp maybe_insert_notification(multi, author, blog_post) do
     if author.id != blog_post.user.id do
       multi
-      |> Multi.insert(:notification, build_notification(author, blog_post))
+      |> Multi.append(build_notification(author, blog_post))
     else
       multi
     end
@@ -34,7 +34,6 @@ defmodule Helheim.BlogPostCommentService do
       icon:  "comment-o",
       path:  public_profile_blog_post_path(Helheim.Endpoint, :show, blog_post.user.id, blog_post.id)
     }
-    Notification.changeset(%Notification{}, attrs)
-    |> Ecto.Changeset.put_assoc(:user, blog_post.user)
+    NotificationService.multi_insert(blog_post.user, attrs)
   end
 end
