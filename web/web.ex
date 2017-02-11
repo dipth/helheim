@@ -25,21 +25,7 @@ defmodule Helheim.Web do
       import Ecto.Changeset
       import Ecto.Query
 
-      defp trim_fields(changeset, fields) do
-        fields = List.wrap(fields)
-        Enum.reduce(fields, changeset, fn(field, changeset) ->
-          trim_field changeset, field
-        end)
-      end
-
-      defp trim_field(changeset, field) do
-        case changeset do
-          %Ecto.Changeset{changes: %{^field => value}} ->
-            put_change(changeset, field, String.trim(value))
-          _ ->
-            changeset
-        end
-      end
+      use Helheim.TrimFieldsConcern
     end
   end
 
