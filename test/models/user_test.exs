@@ -72,4 +72,16 @@ defmodule Helheim.UserTest do
       refute User.confirmed?(user)
     end
   end
+
+  describe "admin?/1" do
+    test "it returns true if the role of the user is 'admin'" do
+      user = insert(:user, role: "admin")
+      assert User.admin?(user)
+    end
+
+    test "it returns false if the role of the user is not 'admin'" do
+      user = insert(:user, role: "nope")
+      refute User.admin?(user)
+    end
+  end
 end

@@ -16,6 +16,8 @@
       <li class="nav-item">
         <a class="nav-link" href="<%= public_profile_blog_post_path(@conn, :index, Guardian.Plug.current_resource(@conn))%>"><i class="fa fa-file-text"></i> <%= gettext("Your Blog Posts") %></a>
       </li>
+
+      <%= if User.admin?(current_resource(@conn)) do render("sidebar_admin.html", conn: @conn) end %>
     </ul>
   </nav>
 </div>

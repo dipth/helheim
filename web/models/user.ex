@@ -19,6 +19,7 @@ defmodule Helheim.User do
     field :confirmed_at,                    Calecto.DateTimeUTC
     field :avatar,                          Helheim.Avatar.Type
     field :profile_text,                    :string
+    field :role,                            :string
 
     has_many :blog_posts, Helheim.BlogPost
     has_many :comments, Helheim.Comment, foreign_key: :profile_id
@@ -112,6 +113,10 @@ defmodule Helheim.User do
 
   def password_reset_token_expired?(user) do
     Timex.before?(user.password_reset_token_updated_at, Timex.shift(Timex.now, days: -1))
+  end
+
+  def admin?(user) do
+    user.role == "admin"
   end
 
   defp put_password_hash(changeset) do

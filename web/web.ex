@@ -66,6 +66,8 @@ defmodule Helheim.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
+      import Guardian.Plug, only: [current_resource: 1]
+
       import Helheim.Router.Helpers
       import Helheim.ErrorHelpers
       import Helheim.Gettext
