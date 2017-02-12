@@ -8,12 +8,28 @@
           alt="<%= @user.username %>"
         >
         <h1><%= @user.username %></h1>
-        <p>
-          <strong><%= gettext "Joined:" %></strong>
+        <div>
+          <strong><%= gettext "Joined" %>:</strong>
           <span class="float-right">
             <%= time_ago_in_words @user.inserted_at %>
           </span>
-        </p>
+        </div>
+        <%= if @user.gender do %>
+          <div>
+            <strong><%= gettext "Gender" %>:</strong>
+            <span class="float-right">
+              <%= @user.gender %>
+            </span>
+          </div>
+        <% end %>
+        <%= if @user.location do %>
+          <div>
+            <strong><%= gettext "Location" %>:</strong>
+            <span class="float-right">
+              <%= @user.location %>
+            </span>
+          </div>
+        <% end %>
         <%= if @user.id != Guardian.Plug.current_resource(@conn).id do %>
           <p class="mb-0">
             <%= link to: private_conversation_path(@conn, :show, @user.id), class: "btn btn-primary btn-block" do %>

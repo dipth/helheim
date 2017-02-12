@@ -4,10 +4,10 @@ defmodule Helheim.UserTest do
   alias Helheim.User
   import Helheim.Factory
 
-  @valid_registration_attrs %{name: "Foo Bar", username: "foobar", email: "foo@bar.dk", password: "password"}
-  @invalid_registration_attrs %{}
-
   describe "registration_changeset/2" do
+    @valid_registration_attrs %{name: "Foo Bar", username: "foobar", email: "foo@bar.dk", password: "password"}
+    @invalid_registration_attrs %{}
+
     test "it accepts valid attributes" do
       changeset = User.registration_changeset(%User{}, @valid_registration_attrs)
       assert changeset.valid?
@@ -42,6 +42,56 @@ defmodule Helheim.UserTest do
 
       assert {:error, changeset} = Repo.insert(user2)
       assert {"has already been taken", _} = changeset.errors[:email]
+    end
+  end
+
+  describe "profile_changeset/2" do
+    setup [:create_user]
+
+    test "it allows changing the gender", %{user: user} do
+      user = User.profile_changeset(user, %{gender: "Foo"})
+             |> Repo.update!
+      assert user.gender == "Foo"
+    end
+
+    test "it trims the gender value", %{user: user} do
+      user = User.profile_changeset(user, %{gender: "   Foo   "})
+             |> Repo.update!
+      assert user.gender == "Foo"
+    end
+
+    test "it allows a custom value for gender", %{user: user} do
+      user = User.profile_changeset(user, %{gender: "%%CUSTOM%%", gender_custom: "Bar"})
+             |> Repo.update!
+      assert user.gender == "Bar"
+    end
+
+    test "it trims the custom value for gender", %{user: user} do
+      user = User.profile_changeset(user, %{gender: "%%CUSTOM%%", gender_custom: "   Bar   "})
+             |> Repo.update!
+      assert user.gender == "Bar"
+    end
+
+    test "it clears the gender if trying to set a custom value without providing a custom value", %{user: user} do
+      user = User.profile_changeset(user, %{gender: "%%CUSTOM%%"})
+             |> Repo.update!
+      assert user.gender == nil
+    end
+
+    test "it allows changing the location", %{user: user} do
+      user = User.profile_changeset(user, %{location: "Foo"})
+             |> Repo.update!
+      assert user.location == "Foo"
+    end
+
+    test "it trims the location value", %{user: user} do
+      user = User.profile_changeset(user, %{location: "   Foo   "})
+             |> Repo.update!
+      assert user.location == "Foo"
+    end
+
+    defp create_user(_context) do
+      [user: insert(:user)]
     end
   end
 

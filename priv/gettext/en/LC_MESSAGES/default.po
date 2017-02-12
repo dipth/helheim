@@ -21,7 +21,7 @@ msgstr ""
 #: web/templates/email/registration_email.html.eex:5
 #: web/templates/email/registration_email.html.eex:15
 #: web/templates/email/registration_email.text.eex:1
-#: web/templates/layout/app.html.eex:17
+#: web/templates/layout/app.html.eex:21
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
@@ -333,7 +333,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:141
+#: web/models/user.ex:152
 msgid "does not match your current password"
 msgstr ""
 
@@ -341,7 +341,7 @@ msgstr ""
 msgid "Maximum file size: %{file_size}"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:30
+#: web/templates/profile/edit.html.eex:51
 msgid "Please write a description of yourself"
 msgstr ""
 
@@ -357,7 +357,7 @@ msgstr ""
 msgid "Profile Settings"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:26
+#: web/templates/profile/edit.html.eex:47
 msgid "Profile Text"
 msgstr ""
 
@@ -365,7 +365,7 @@ msgstr ""
 msgid "Profile updated!"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:41
+#: web/templates/profile/edit.html.eex:62
 msgid "Update Profile"
 msgstr ""
 
@@ -379,26 +379,22 @@ msgstr ""
 
 #: web/templates/page/front_page.html.eex:24
 #: web/templates/page/front_page.html.eex:40
-#: web/templates/profile/show.html.eex:51 web/templates/profile/show.html.eex:59
+#: web/templates/profile/show.html.eex:63 web/templates/profile/show.html.eex:71
 msgid "Coming soon"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:12
-msgid "Member since:"
-msgstr ""
-
 #: web/templates/page/front_page.html.eex:29
-#: web/templates/profile/show.html.eex:41
+#: web/templates/profile/show.html.eex:53
 msgid "Newest Blogs"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:23
-#: web/templates/profile/show.html.eex:50
+#: web/templates/profile/show.html.eex:62
 msgid "Newest Forum Posts"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:39
-#: web/templates/profile/show.html.eex:58
+#: web/templates/profile/show.html.eex:70
 msgid "Newest Photos"
 msgstr ""
 
@@ -488,7 +484,7 @@ msgstr ""
 msgid "Guest Book"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:64
+#: web/templates/profile/show.html.eex:76
 msgid "Newest Guest Book Entries"
 msgstr ""
 
@@ -496,7 +492,7 @@ msgstr ""
 msgid "Post Comment"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:65
+#: web/templates/profile/show.html.eex:77
 msgid "Show All"
 msgstr ""
 
@@ -529,7 +525,7 @@ msgstr ""
 msgid "Send Message"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:25
+#: web/templates/profile/show.html.eex:37
 msgid "Send private message"
 msgstr ""
 
@@ -562,4 +558,40 @@ msgstr ""
 
 #: web/templates/private_conversation/show.html.eex:1
 msgid "Private conversation with %{username}"
+msgstr ""
+
+#: web/templates/layout/sidebar_admin.html.eex:1
+msgid "Admin"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:26
+msgid "Basic Details"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:35
+msgid "Custom"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:33
+msgid "Female"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:29 web/templates/profile/show.html.eex:19
+msgid "Gender"
+msgstr ""
+
+#: web/templates/profile/show.html.eex:12
+msgid "Joined"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:43 web/templates/profile/show.html.eex:27
+msgid "Location"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:33
+msgid "Male"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:33
+msgid "Not specified"
 msgstr ""

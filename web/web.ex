@@ -26,6 +26,7 @@ defmodule Helheim.Web do
       import Ecto.Query
 
       use Helheim.TrimFieldsConcern
+      use Helheim.AllowCustomValueForFieldsConcern
     end
   end
 

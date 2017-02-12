@@ -24,6 +24,7 @@ import { BootstrapStuff } from "web/static/js/bootstrap_stuff";
 import { ProfileSettings } from "web/static/js/profile_settings";
 import { BlogPostForm } from "web/static/js/blog_post_form";
 import { Notifications } from "web/static/js/notifications";
+import { SelectWithCustom } from "web/static/js/select_with_custom";
 
 export var App = {
   run: function(){
@@ -33,6 +34,7 @@ export var App = {
     ProfileSettings.run();
     BlogPostForm.run();
     Notifications.run();
+    SelectWithCustom.run();
   }
 }
 

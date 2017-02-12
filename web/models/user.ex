@@ -20,6 +20,9 @@ defmodule Helheim.User do
     field :avatar,                          Helheim.Avatar.Type
     field :profile_text,                    :string
     field :role,                            :string
+    field :gender,                          :string
+    field :gender_custom,                   :string, virtual: true
+    field :location,                        :string
 
     has_many :blog_posts, Helheim.BlogPost
     has_many :comments, Helheim.Comment, foreign_key: :profile_id
@@ -85,7 +88,9 @@ defmodule Helheim.User do
 
   def profile_changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:profile_text])
+    |> cast(params, [:gender, :gender_custom, :location, :profile_text])
+    |> allow_custom_value_for_fields([{:gender, :gender_custom}])
+    |> trim_fields([:gender, :location])
     |> cast_attachments(params, [:avatar])
     |> validate_required([:profile_text])
     |> scrub_profile_text()

@@ -32,7 +32,7 @@ msgstr "%{site_name} er et community for alternative folk."
 #: web/templates/email/registration_email.html.eex:5
 #: web/templates/email/registration_email.html.eex:15
 #: web/templates/email/registration_email.text.eex:1
-#: web/templates/layout/app.html.eex:17
+#: web/templates/layout/app.html.eex:21
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
@@ -345,7 +345,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:141
+#: web/models/user.ex:152
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -353,7 +353,7 @@ msgstr "matcher ikke dit nuværende kodeord"
 msgid "Maximum file size: %{file_size}"
 msgstr "Maksimum fil størrelse: %{file_size}"
 
-#: web/templates/profile/edit.html.eex:30
+#: web/templates/profile/edit.html.eex:51
 msgid "Please write a description of yourself"
 msgstr "Giv en beskrivelse af dig selv"
 
@@ -370,7 +370,7 @@ msgstr "Profilbillede"
 msgid "Profile Settings"
 msgstr "Profil Indstillinger"
 
-#: web/templates/profile/edit.html.eex:26
+#: web/templates/profile/edit.html.eex:47
 msgid "Profile Text"
 msgstr "Profiltekst"
 
@@ -378,7 +378,7 @@ msgstr "Profiltekst"
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
-#: web/templates/profile/edit.html.eex:41
+#: web/templates/profile/edit.html.eex:62
 msgid "Update Profile"
 msgstr "Opdatér Profil"
 
@@ -392,27 +392,23 @@ msgstr "Husk mig i 30 dage"
 
 #: web/templates/page/front_page.html.eex:24
 #: web/templates/page/front_page.html.eex:40
-#: web/templates/profile/show.html.eex:51
-#: web/templates/profile/show.html.eex:59
+#: web/templates/profile/show.html.eex:63
+#: web/templates/profile/show.html.eex:71
 msgid "Coming soon"
 msgstr "Kommer snart"
 
-#: web/templates/profile/show.html.eex:12
-msgid "Member since:"
-msgstr "Medlem siden:"
-
 #: web/templates/page/front_page.html.eex:29
-#: web/templates/profile/show.html.eex:41
+#: web/templates/profile/show.html.eex:53
 msgid "Newest Blogs"
 msgstr "Nyeste Blogs"
 
 #: web/templates/page/front_page.html.eex:23
-#: web/templates/profile/show.html.eex:50
+#: web/templates/profile/show.html.eex:62
 msgid "Newest Forum Posts"
 msgstr "Nyeste Forumindlæg"
 
 #: web/templates/page/front_page.html.eex:39
-#: web/templates/profile/show.html.eex:58
+#: web/templates/profile/show.html.eex:70
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
 
@@ -502,7 +498,7 @@ msgstr "Kommentarer:"
 msgid "Guest Book"
 msgstr "Gæstebog"
 
-#: web/templates/profile/show.html.eex:64
+#: web/templates/profile/show.html.eex:76
 msgid "Newest Guest Book Entries"
 msgstr "Nyeste gæstebogsindlæg"
 
@@ -510,7 +506,7 @@ msgstr "Nyeste gæstebogsindlæg"
 msgid "Post Comment"
 msgstr "Tilføj Kommentar"
 
-#: web/templates/profile/show.html.eex:65
+#: web/templates/profile/show.html.eex:77
 msgid "Show All"
 msgstr "Vis alle"
 
@@ -543,7 +539,7 @@ msgstr "Din besked blev sendt!"
 msgid "Send Message"
 msgstr "Send Besked"
 
-#: web/templates/profile/show.html.eex:25
+#: web/templates/profile/show.html.eex:37
 msgid "Send private message"
 msgstr "Send privat besked"
 
@@ -577,3 +573,41 @@ msgstr "Private Beskeder"
 #: web/templates/private_conversation/show.html.eex:1
 msgid "Private conversation with %{username}"
 msgstr "Privat samtale med %{username}"
+
+#: web/templates/layout/sidebar_admin.html.eex:1
+msgid "Admin"
+msgstr "Admin"
+
+#: web/templates/profile/edit.html.eex:26
+msgid "Basic Details"
+msgstr "Basis detaljer"
+
+#: web/templates/profile/edit.html.eex:35
+msgid "Custom"
+msgstr "Brugerdefineret"
+
+#: web/templates/profile/edit.html.eex:33
+msgid "Female"
+msgstr "Kvinde"
+
+#: web/templates/profile/edit.html.eex:29
+#: web/templates/profile/show.html.eex:19
+msgid "Gender"
+msgstr "Køn"
+
+#: web/templates/profile/show.html.eex:12
+msgid "Joined"
+msgstr "Tilmeldt"
+
+#: web/templates/profile/edit.html.eex:43
+#: web/templates/profile/show.html.eex:27
+msgid "Location"
+msgstr "Lokation"
+
+#: web/templates/profile/edit.html.eex:33
+msgid "Male"
+msgstr "Mand"
+
+#: web/templates/profile/edit.html.eex:33
+msgid "Not specified"
+msgstr "Ikke udspecificeret"

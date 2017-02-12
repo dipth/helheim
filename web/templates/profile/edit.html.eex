@@ -23,6 +23,27 @@
             </div>
 
             <div class="col-lg-8 col-sm-12 mb-1">
+              <h5 class="mb-1"><%= gettext "Basic Details" %></h5>
+              <hr>
+              <div class="form-group">
+                <%= label f, :gender, gettext("Gender") %>
+                <%=
+                  select f,
+                         :gender,
+                         [{gettext("Not specified"), ""}, gettext("Male"), gettext("Female")],
+                         class: "form-control",
+                         "data-custom-label": gettext("Custom"),
+                         "data-custom-input": "#user_gender_custom",
+                         "data-custom-value": @changeset.data.gender || ""
+                %>
+                <%= text_input f, :gender_custom, class: "form-control" %>
+              </div>
+
+              <div class="form-group">
+                <%= label f, :location, gettext("Location") %>
+                <%= text_input f, :location, class: "form-control" %>
+              </div>
+
               <h5 class="mb-1"><%= gettext "Profile Text" %></h5>
               <hr>
               <div class="form-group <%= if f.errors[:profile_text] do 'has-danger' end %>">
