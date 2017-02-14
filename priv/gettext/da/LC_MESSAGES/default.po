@@ -345,7 +345,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:152
+#: web/models/user.ex:153
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -374,7 +374,7 @@ msgstr "Profil Indstillinger"
 msgid "Profile Text"
 msgstr "Profiltekst"
 
-#: web/controllers/profile_controller.ex:42
+#: web/controllers/profile_controller.ex:44
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
@@ -391,9 +391,7 @@ msgid "Remember me"
 msgstr "Husk mig i 30 dage"
 
 #: web/templates/page/front_page.html.eex:24
-#: web/templates/page/front_page.html.eex:40
 #: web/templates/profile/show.html.eex:63
-#: web/templates/profile/show.html.eex:71
 msgid "Coming soon"
 msgstr "Kommer snart"
 
@@ -408,7 +406,6 @@ msgid "Newest Forum Posts"
 msgstr "Nyeste Forumindlæg"
 
 #: web/templates/page/front_page.html.eex:39
-#: web/templates/profile/show.html.eex:70
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
 
@@ -434,6 +431,8 @@ msgid "Your Blog Posts"
 msgstr "Dine Blogs"
 
 #: web/templates/blog_post/show.html.eex:24
+#: web/templates/photo/show.html.eex:38
+#: web/templates/photo_album/show.html.eex:47
 msgid "Are you sure?"
 msgstr "Er du sikker?"
 
@@ -450,6 +449,8 @@ msgid "Blog post updated successfully."
 msgstr "Din blog er opdateret!"
 
 #: web/templates/blog_post/show.html.eex:26
+#: web/templates/photo/show.html.eex:40
+#: web/templates/photo_album/show.html.eex:49
 msgid "Delete"
 msgstr "Slet"
 
@@ -465,7 +466,8 @@ msgstr "Redigér Blog"
 msgid "Body"
 msgstr "Tekst"
 
-#: web/templates/blog_post/form.html.eex:4
+#: web/templates/blog_post/form.html.eex:4 web/templates/photo/form.html.eex:10
+#: web/templates/photo_album/form.html.eex:4
 msgid "Title"
 msgstr "Titel"
 
@@ -498,7 +500,7 @@ msgstr "Kommentarer:"
 msgid "Guest Book"
 msgstr "Gæstebog"
 
-#: web/templates/profile/show.html.eex:76
+#: web/templates/profile/show.html.eex:81
 msgid "Newest Guest Book Entries"
 msgstr "Nyeste gæstebogsindlæg"
 
@@ -506,7 +508,7 @@ msgstr "Nyeste gæstebogsindlæg"
 msgid "Post Comment"
 msgstr "Tilføj Kommentar"
 
-#: web/templates/profile/show.html.eex:77
+#: web/templates/profile/show.html.eex:82
 msgid "Show All"
 msgstr "Vis alle"
 
@@ -611,3 +613,93 @@ msgstr "Mand"
 #: web/templates/profile/edit.html.eex:33
 msgid "Not specified"
 msgstr "Ikke udspecificeret"
+
+#: web/templates/photo_album/index.html.eex:32
+msgid "Create New"
+msgstr "Opret ny"
+
+#: web/templates/photo/form.html.eex:18
+#: web/templates/photo_album/form.html.eex:12
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: web/templates/photo_album/edit.html.eex:3
+#: web/templates/photo_album/show.html.eex:44
+msgid "Edit Photo Album"
+msgstr "Redigér Fotoalbum"
+
+#: web/templates/photo_album/new.html.eex:3
+msgid "New Photo Album"
+msgstr "Nyt Fotoalbum"
+
+#: web/templates/photo/show.html.eex:3
+#: web/templates/photo_album/index.html.eex:3
+#: web/templates/photo_album/show.html.eex:3
+msgid "Photo Albums"
+msgstr "Fotoalbum"
+
+#: web/controllers/photo_album_controller.ex:36
+msgid "Photo album created successfully."
+msgstr "Fotoalbummet blev oprettet!"
+
+#: web/controllers/photo_album_controller.ex:71
+msgid "Photo album updated successfully."
+msgstr "Fotoalbummet blev opdateret!"
+
+#: web/templates/photo_album/form.html.eex:29
+msgid "Save Photo Album"
+msgstr "Gem Fotoalbum"
+
+#: web/templates/photo/show.html.eex:10
+#: web/templates/photo_album/form.html.eex:20
+#: web/templates/photo_album/show.html.eex:10
+msgid "Visibility"
+msgstr "Synlighed"
+
+#: web/templates/profile/show.html.eex:76
+msgid "Browse All Photo Albums"
+msgstr "Se alle fotoalbums"
+
+#: web/templates/photo_album/show.html.eex:37
+msgid "Drop photos here (or click) to upload..."
+msgstr "Slip billeder her (eller klik) for at uploade…"
+
+#: web/templates/photo/edit.html.eex:3 web/templates/photo/show.html.eex:35
+msgid "Edit Photo Details"
+msgstr "Redigér billed-detaljer"
+
+#: web/templates/profile/show.html.eex:70
+msgid "Newest Public Photos"
+msgstr "Nyeste offentlige billeder"
+
+#: web/controllers/photo_album_controller.ex:85
+msgid "Photo Album deleted successfully."
+msgstr "Fotoalbummet blev slettet!"
+
+#: web/controllers/photo_controller.ex:68
+msgid "Photo deleted successfully."
+msgstr "Billedet blev slettet!"
+
+#: web/controllers/photo_controller.ex:53
+msgid "Photo details updated successfully."
+msgstr "Billed-detaljerne blev opdateret!"
+
+#: web/templates/photo/form.html.eex:28
+msgid "Save Photo Details"
+msgstr "Gem billed-detaljer"
+
+#: web/templates/photo_album/show.html.eex:30
+msgid "Upload Photos"
+msgstr "Upload billeder"
+
+#: web/templates/photo/show.html.eex:26
+msgid "Uploaded"
+msgstr "Uploadet"
+
+#: web/templates/layout/sidebar.html.eex:22
+msgid "Your Photo Albums"
+msgstr "Dine Fotoalbums"
+
+#: web/templates/photo_album/space_used.html.eex:9
+msgid "You have used %{used_space} out of a maximum of %{max_space} across all your photo albums"
+msgstr "Du har brugt %{used_space} ud af maksimum %{max_space} fordelt over alle dine fotoalbums"

@@ -30,6 +30,7 @@ defmodule Helheim.User do
     has_many :notifications, Helheim.Notification
     has_many :sent_private_messages, Helheim.PrivateMessage, foreign_key: :sender_id
     has_many :received_private_messages, Helheim.PrivateMessage, foreign_key: :recipient_id
+    has_many :photo_albums, Helheim.PhotoAlbum
 
     timestamps()
   end

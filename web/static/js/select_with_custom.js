@@ -8,8 +8,6 @@ export var SelectWithCustom = {
       let customOption   = $('<option value="%%CUSTOM%%">' + customLabel + '</option>')
       let selectedOption = select.find('option[value="' + customValue + '"]')
 
-      console.log('customValue', customValue);
-
       select.append(customOption)
 
       // Check if there is a select option with the same value as the one set by

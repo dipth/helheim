@@ -45,4 +45,20 @@ defmodule Helheim.Factory do
       body: "Awesome Message Text"
     }
   end
+
+  def photo_album_factory do
+    %Helheim.PhotoAlbum {
+      user: build(:user),
+      title: "My Photo Album",
+      description: "Full of photos",
+      visibility: "public"
+    }
+  end
+
+  def photo_factory do
+    %Helheim.Photo {
+      photo_album: build(:photo_album),
+      uuid: sequence(:uuid, &"5976423a-ee35-11e3-8569-14109ff1a30#{&1}")
+    }
+  end
 end

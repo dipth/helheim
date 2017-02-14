@@ -1,0 +1,24 @@
+<%
+  photo_album = assigns[:photo_album] || @photo.photo_album
+  user        = assigns[:user] || photo_album.user
+%>
+<div class="card">
+  <%= link to: public_profile_photo_album_photo_path(@conn, :show, user, photo_album, @photo) do %>
+    <%= img_tag(Helheim.PhotoFile.url({@photo.file, @photo}, :thumb), class: "card-img-top img-fluid img-photo") %>
+  <% end %>
+  <div class="card-block">
+    <p class="card-text">
+      <%= unless assigns[:hide_title] do %>
+        <strong class="text-break-up"><%= @photo.title %></strong><br>
+      <% end %>
+      <small>
+        <%= unless assigns[:user] do %>
+          <%= img_tag(Helheim.Avatar.url({user.avatar, user}, :tiny), class: "img-avatar") %>
+          <strong><%= link user.username, to: public_profile_path(@conn, :show, user) %></strong>
+        <% else %>
+          <%= time_ago_in_words @photo.inserted_at %>
+        <% end %>
+      </small>
+    </p>
+  </div>
+</div>

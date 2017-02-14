@@ -1,0 +1,18 @@
+<div id="photo-space-used">
+  <%
+    space_used = Helheim.Photo.total_used_space_by @user
+    max_space  = Helheim.Photo.max_total_file_size_per_user
+  %>
+  <%= if space_used > 0 do %>
+    <% percent_used = round(space_used / max_space * 100) %>
+    <%=
+      gettext "You have used %{used_space} out of a maximum of %{max_space} across all your photo albums", [
+        used_space: Crutches.Format.Number.as_human_size(space_used),
+        max_space: Crutches.Format.Number.as_human_size(max_space)
+      ]
+    %>
+    <div class="progress mb-1">
+      <div class="progress-bar" role="progressbar" style="width: <%= percent_used %>%;" aria-valuenow="<%= percent_used %>" aria-valuemin="0" aria-valuemax="100"><%= percent_used %>%</div>
+    </div>
+  <% end %>
+</div>
