@@ -71,17 +71,6 @@ defmodule Helheim.PhotoAlbumTest do
     end
   end
 
-  describe "with_latest_photo/1" do
-    test "it preloads the latest photo of the album" do
-      photo_album = insert(:photo_album)
-      insert(:photo, photo_album: photo_album)
-      latest_photo = insert(:photo, photo_album: photo_album)
-      photo_album = PhotoAlbum |> PhotoAlbum.with_latest_photo() |> Repo.one
-      [photo] = photo_album.photos
-      assert photo.id == latest_photo.id
-    end
-  end
-
   describe "delete/1" do
     test_with_mock "it calls Photo.delete! for each photo in the album",
       Photo, [:passthrough], [delete!: fn(_photo) -> {:ok} end] do

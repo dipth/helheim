@@ -9,8 +9,8 @@ defmodule Helheim.PhotoAlbumController do
     {photo_albums, pagination} =
       assoc(user, :photo_albums)
       |> PhotoAlbum.viewable_by(user, current_resource(conn))
-      |> PhotoAlbum.with_latest_photo()
       |> Repo.paginate(params)
+    photo_albums = photo_albums |> Repo.preload(:photos)
     render(conn, "index.html", user: user, photo_albums: photo_albums, pagination: pagination)
   end
 

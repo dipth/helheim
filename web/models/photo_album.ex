@@ -30,11 +30,6 @@ defmodule Helheim.PhotoAlbum do
     end
   end
 
-  def with_latest_photo(query) do
-    photos_query = from p in Photo, order_by: [desc: p.inserted_at], limit: 1
-    from pa in query, preload: [photos: ^photos_query]
-  end
-
   def delete!(photo_album) do
     photos = assoc(photo_album, :photos) |> Repo.all
     Enum.each(photos, fn(p) -> Photo.delete!(p) end)
