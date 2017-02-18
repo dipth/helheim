@@ -25,6 +25,7 @@ import { ProfileSettings } from "web/static/js/profile_settings";
 import { BlogPostForm } from "web/static/js/blog_post_form";
 import { Notifications } from "web/static/js/notifications";
 import { SelectWithCustom } from "web/static/js/select_with_custom";
+import { PhotoUpload } from "web/static/js/photo_upload";
 
 export var App = {
   run: function(){
@@ -35,6 +36,7 @@ export var App = {
     BlogPostForm.run();
     Notifications.run();
     SelectWithCustom.run();
+    PhotoUpload.run();
   }
 }
 

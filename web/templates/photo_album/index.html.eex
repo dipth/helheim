@@ -1,0 +1,44 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link @user.username, to: public_profile_path(@conn, :show, @user) %></li>
+  <li class="breadcrumb-item active"><%= gettext "Photo Albums" %></li>
+</ol>
+
+<div class="card-group card-group-photos">
+  <%= for photo_album <- @photo_albums do %>
+    <% photo = List.first photo_album.photos %>
+    <div class="card">
+        <%= link to: public_profile_photo_album_path(@conn, :show, @user, photo_album) do %>
+          <%= if photo do %>
+            <%= img_tag(Helheim.PhotoFile.url({photo.file, photo}, :thumb), class: "card-img-top img-fluid") %>
+          <% else %>
+            <%= img_tag(static_path(@conn, "/images/photo_thumb_default.jpg"), class: "card-img-top img-fluid") %>
+          <% end %>
+        <% end %>
+      <div class="card-block">
+        <p class="card-text">
+          <%= if photo_album.visibility != "public" do %>
+            <span class="badge badge-danger">
+              <i class="fa fa-lock"></i>
+              <%= Helheim.Visibility.human_visibility photo_album.visibility %>
+            </span>
+          <% end %>
+          <strong class="text-break-up"><%= photo_album.title %></strong>
+          <%= if photo do %>
+            <br>
+            <small><%= time_ago_in_words photo.inserted_at %></small>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+  <%= if @user == current_resource(@conn) do %>
+    <div class="card">
+      <div class="card-block text-center d-flex flex-column justify-content-center">
+        <i class="fa fa-plus fa-5x mb-1"></i>
+        <%= link gettext("Create New"), to: photo_album_path(@conn, :new), class: "btn btn-primary btn-block" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= lpaginate @conn, @pagination %>

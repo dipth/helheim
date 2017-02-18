@@ -38,6 +38,8 @@ defmodule Helheim.Web do
       import Ecto
       import Ecto.Query
 
+      import Guardian.Plug, only: [current_resource: 1]
+
       import Helheim.Router.Helpers
       import Helheim.Gettext
     end

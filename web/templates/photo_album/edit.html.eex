@@ -1,0 +1,7 @@
+<div class="card">
+  <div class="card-header">
+    <%= gettext "Edit Photo Album" %>
+  </div>
+  <%= render "form.html", changeset: @changeset,
+                          action: photo_album_path(@conn, :update, @photo_album) %>
+</div>

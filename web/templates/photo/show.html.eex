@@ -1,0 +1,44 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link @user.username, to: public_profile_path(@conn, :show, @user) %></li>
+  <li class="breadcrumb-item"><%= link gettext("Photo Albums"), to: public_profile_photo_album_path(@conn, :index, @user) %></li>
+  <li class="breadcrumb-item"><%= link @photo_album.title, to: public_profile_photo_album_path(@conn, :show, @user, @photo_album) %></li>
+</ol>
+
+<%= if @photo_album.visibility != "public" do %>
+  <div class="alert alert-warning" role="alert">
+    <i class="fa fa-lock"></i>
+    <%= gettext "Visibility" %>:
+    <%= Helheim.Visibility.human_visibility @photo_album.visibility %>
+  </div>
+<% end %>
+
+<div class="card">
+  <h5 class="card-header">
+    <span class="text-break-up"><%= @photo.title %></span>
+  </h5>
+  <div class="card-block text-center">
+    <%= img_tag(Helheim.PhotoFile.url({@photo.file, @photo}, :large), class: "card-img-top img-fluid mb-1") %>
+    <blockquote class="blockquote text-left">
+      <%= if @photo.description do %>
+        <p><%= text_to_html @photo.description %></p>
+      <% end %>
+      <footer class="blockquote-footer">
+        <%= gettext "Uploaded" %>
+        <%= time_ago_in_words(@photo.inserted_at) %>
+      </footer>
+    </blockquote>
+  </div>
+  <%= if @user == current_resource(@conn) do %>
+    <div class="card-footer text-muted">
+      <%= link to: photo_album_photo_path(@conn, :edit, @photo_album, @photo), class: "btn btn-sm btn-primary" do %>
+        <i class="fa fa-pencil"></i>
+        <%= gettext("Edit Photo Details") %>
+      <% end %>
+
+      <%= link to: photo_album_photo_path(@conn, :delete, @photo_album, @photo), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-sm float-right" do %>
+        <i class="fa fa-trash"></i>
+        <%= gettext "Delete" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

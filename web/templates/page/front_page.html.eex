@@ -37,6 +37,10 @@
 <div class="card">
   <div class="card-block">
     <h5 class="mb-1"><%= gettext "Newest Photos" %></h5>
-    <p><%= gettext "Coming soon" %></p>
+    <div class="card-group card-group-photos">
+      <%= for photo <- @newest_photos do %>
+        <%= render Helheim.PhotoView, "thumb.html", conn: @conn, photo: photo, hide_title: true %>
+      <% end %>
+    </div>
   </div>
 </div>

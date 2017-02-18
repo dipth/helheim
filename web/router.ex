@@ -4,7 +4,7 @@ defmodule Helheim.Router do
   use Sentry.Plug
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html", "json"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
@@ -48,9 +48,15 @@ defmodule Helheim.Router do
     resources "/profiles", ProfileController, only: [:show], as: :public_profile do
       resources "/blog_posts", BlogPostController, only: [:index, :show]
       resources "/comments", ProfileCommentController, only: [:index, :create], as: :comment
+      resources "/photo_albums", PhotoAlbumController, only: [:index, :show] do
+        resources "/photos", PhotoController, only: [:show]
+      end
     end
     resources "/blog_posts", BlogPostController, only: [:new, :create, :edit, :update, :delete] do
       resources "/comments", BlogPostCommentController, only: [:create], as: :comment
+    end
+    resources "/photo_albums", PhotoAlbumController, only: [:new, :create, :edit, :update, :delete] do
+      resources "/photos", PhotoController, only: [:create, :edit, :update, :delete]
     end
     get "/notifications/refresh", NotificationController, :refresh
     resources "/notifications", NotificationController, only: [:show]

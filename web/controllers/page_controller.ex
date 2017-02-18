@@ -33,9 +33,12 @@ defmodule Helheim.PageController do
       |> Helheim.Repo.all
       |> Repo.preload(:user)
 
+    newest_photos = Helheim.Photo.newest_public_photos(10)
+
     render conn, "front_page.html",
       newest_users: newest_users,
-      newest_blog_posts: newest_blog_posts
+      newest_blog_posts: newest_blog_posts,
+      newest_photos: newest_photos
   end
 
   def debug(conn, _params) do

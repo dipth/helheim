@@ -67,8 +67,13 @@
 
 <div class="card">
   <div class="card-block">
-    <h5 class="mb-1"><%= gettext "Newest Photos" %></h5>
-    <p><%= gettext "Coming soon" %></p>
+    <h5 class="mb-1"><%= gettext "Newest Public Photos" %></h5>
+    <div class="card-group card-group-photos">
+      <%= for photo <- @newest_photos do %>
+        <%= render Helheim.PhotoView, "thumb.html", conn: @conn, user: @user, photo: photo %>
+      <% end %>
+    </div>
+    <%= link gettext("Browse All Photo Albums"), to: public_profile_photo_album_path(@conn, :index, @user), class: "btn btn-primary mb-0" %>
   </div>
 </div>
 

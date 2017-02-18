@@ -3,6 +3,7 @@ defmodule Helheim.ProfileController do
   alias Helheim.User
   alias Helheim.BlogPost
   alias Helheim.Comment
+  alias Helheim.Photo
 
   def show(conn, params) do
     user = if params["id"] do
@@ -23,8 +24,9 @@ defmodule Helheim.ProfileController do
       |> limit(5)
       |> Helheim.Repo.all
       |> Repo.preload(:author)
+    newest_photos = Photo.newest_public_photos_by(user, 5)
 
-    render conn, "show.html", user: user, newest_blog_posts: newest_blog_posts, newest_comments: newest_comments
+    render conn, "show.html", user: user, newest_blog_posts: newest_blog_posts, newest_comments: newest_comments, newest_photos: newest_photos
   end
 
   def edit(conn, _params) do

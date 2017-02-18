@@ -333,7 +333,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:152
+#: web/models/user.ex:153
 msgid "does not match your current password"
 msgstr ""
 
@@ -361,7 +361,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:42
+#: web/controllers/profile_controller.ex:44
 msgid "Profile updated!"
 msgstr ""
 
@@ -378,8 +378,7 @@ msgid "Remember me"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:24
-#: web/templates/page/front_page.html.eex:40
-#: web/templates/profile/show.html.eex:63 web/templates/profile/show.html.eex:71
+#: web/templates/profile/show.html.eex:63
 msgid "Coming soon"
 msgstr ""
 
@@ -394,7 +393,6 @@ msgid "Newest Forum Posts"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:39
-#: web/templates/profile/show.html.eex:70
 msgid "Newest Photos"
 msgstr ""
 
@@ -419,7 +417,8 @@ msgstr ""
 msgid "Your Blog Posts"
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:24
+#: web/templates/blog_post/show.html.eex:24 web/templates/photo/show.html.eex:38
+#: web/templates/photo_album/show.html.eex:47
 msgid "Are you sure?"
 msgstr ""
 
@@ -435,7 +434,8 @@ msgstr ""
 msgid "Blog post updated successfully."
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:26
+#: web/templates/blog_post/show.html.eex:26 web/templates/photo/show.html.eex:40
+#: web/templates/photo_album/show.html.eex:49
 msgid "Delete"
 msgstr ""
 
@@ -451,7 +451,8 @@ msgstr ""
 msgid "Body"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:4
+#: web/templates/blog_post/form.html.eex:4 web/templates/photo/form.html.eex:10
+#: web/templates/photo_album/form.html.eex:4
 msgid "Title"
 msgstr ""
 
@@ -484,7 +485,7 @@ msgstr ""
 msgid "Guest Book"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:76
+#: web/templates/profile/show.html.eex:81
 msgid "Newest Guest Book Entries"
 msgstr ""
 
@@ -492,7 +493,7 @@ msgstr ""
 msgid "Post Comment"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:77
+#: web/templates/profile/show.html.eex:82
 msgid "Show All"
 msgstr ""
 
@@ -594,4 +595,94 @@ msgstr ""
 
 #: web/templates/profile/edit.html.eex:33
 msgid "Not specified"
+msgstr ""
+
+#: web/templates/photo_album/index.html.eex:32
+msgid "Create New"
+msgstr ""
+
+#: web/templates/photo/form.html.eex:18
+#: web/templates/photo_album/form.html.eex:12
+msgid "Description"
+msgstr ""
+
+#: web/templates/photo_album/edit.html.eex:3
+#: web/templates/photo_album/show.html.eex:44
+msgid "Edit Photo Album"
+msgstr ""
+
+#: web/templates/photo_album/new.html.eex:3
+msgid "New Photo Album"
+msgstr ""
+
+#: web/templates/photo/show.html.eex:3
+#: web/templates/photo_album/index.html.eex:3
+#: web/templates/photo_album/show.html.eex:3
+msgid "Photo Albums"
+msgstr ""
+
+#: web/controllers/photo_album_controller.ex:36
+msgid "Photo album created successfully."
+msgstr ""
+
+#: web/controllers/photo_album_controller.ex:71
+msgid "Photo album updated successfully."
+msgstr ""
+
+#: web/templates/photo_album/form.html.eex:29
+msgid "Save Photo Album"
+msgstr ""
+
+#: web/templates/photo/show.html.eex:10
+#: web/templates/photo_album/form.html.eex:20
+#: web/templates/photo_album/show.html.eex:10
+msgid "Visibility"
+msgstr ""
+
+#: web/templates/profile/show.html.eex:76
+msgid "Browse All Photo Albums"
+msgstr ""
+
+#: web/templates/photo_album/show.html.eex:37
+msgid "Drop photos here (or click) to upload..."
+msgstr ""
+
+#: web/templates/photo/edit.html.eex:3 web/templates/photo/show.html.eex:35
+msgid "Edit Photo Details"
+msgstr ""
+
+#: web/templates/profile/show.html.eex:70
+msgid "Newest Public Photos"
+msgstr ""
+
+#: web/controllers/photo_album_controller.ex:85
+msgid "Photo Album deleted successfully."
+msgstr ""
+
+#: web/controllers/photo_controller.ex:68
+msgid "Photo deleted successfully."
+msgstr ""
+
+#: web/controllers/photo_controller.ex:53
+msgid "Photo details updated successfully."
+msgstr ""
+
+#: web/templates/photo/form.html.eex:28
+msgid "Save Photo Details"
+msgstr ""
+
+#: web/templates/photo_album/show.html.eex:30
+msgid "Upload Photos"
+msgstr ""
+
+#: web/templates/photo/show.html.eex:26
+msgid "Uploaded"
+msgstr ""
+
+#: web/templates/layout/sidebar.html.eex:22
+msgid "Your Photo Albums"
+msgstr ""
+
+#: web/templates/photo_album/space_used.html.eex:9
+msgid "You have used %{used_space} out of a maximum of %{max_space} across all your photo albums"
 msgstr ""

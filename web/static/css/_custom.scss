@@ -109,3 +109,59 @@ form.link {
     }
   }
 }
+
+.card-group-photos {
+  justify-content: center;
+
+  .card {
+    background-color: $gray-light;
+    border-radius: 0px;
+    max-width: 500px;
+    min-width: 250px;
+
+    .card-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    img.img-photo {
+      border: 1px solid $gray;
+      border-radius: 0px;
+
+      &:hover {
+        border-color: $brand-primary;
+      }
+    }
+
+    img.img-avatar {
+      margin-right: 0.5rem;
+      width: 20px;
+    }
+  }
+}
+
+.dropzone {
+  background-color: $gray-lighter;
+  border: 1px dashed $gray;
+  min-height: 185px;
+  text-align: center;
+  padding: 1rem;
+
+  .dz-preview {
+    background: transparent !important;
+  }
+}
+.dropzone .dz-preview .dz-progress .dz-upload {
+  background: $brand-primary !important;
+}
+
+.text-break-up {
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap; /* HP printers */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: pre-wrap; /* CSS 2.1 */
+  white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+  word-wrap: break-word; /* IE */
+  word-break: break-all;
+}

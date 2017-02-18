@@ -1,0 +1,8 @@
+msgid "private"
+msgstr ""
+
+msgid "friends_only"
+msgstr ""
+
+msgid "public"
+msgstr ""
