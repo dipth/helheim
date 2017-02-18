@@ -49,8 +49,6 @@ config :helheim, Helheim.Endpoint,
 config :phoenix, :template_engines,
   eex: Appsignal.Phoenix.Template.EExEngine,
   exs: Appsignal.Phoenix.Template.ExsEngine
-config :helheim, Helheim.Repo,
-  loggers: [Appsignal.Ecto]
 
 # Configure mailer
 config :helheim, Helheim.Mailer,

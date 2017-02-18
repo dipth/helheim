@@ -45,6 +45,8 @@ config :appsignal, :config,
   active: true,
   name: :helheim,
   push_api_key: System.get_env("APPSIGNAL_KEY")
+config :helheim, Helheim.Repo,
+  loggers: [Appsignal.Ecto]
 
 # Configure arc & AWS
 config :arc,
