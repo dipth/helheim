@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -409,7 +409,7 @@ msgstr "Nyeste Forumindlæg"
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
 
-#: web/templates/layout/sidebar.html.eex:8
+#: web/templates/layout/sidebar.html.eex:17
 msgid "Your Profile"
 msgstr "Din Profil"
 
@@ -426,10 +426,12 @@ msgstr "Ny Blog"
 msgid "Save Blog Post"
 msgstr "Gem Blog"
 
-#: web/templates/layout/sidebar.html.eex:17
+#: web/templates/layout/sidebar.html.eex:26
 msgid "Your Blog Posts"
 msgstr "Dine Blogs"
 
+#: web/templates/admin/forum_category/index.html.eex:13
+#: web/templates/admin/forum_category/index.html.eex:34
 #: web/templates/blog_post/show.html.eex:24
 #: web/templates/photo/show.html.eex:38
 #: web/templates/photo_album/show.html.eex:47
@@ -466,26 +468,14 @@ msgstr "Redigér Blog"
 msgid "Body"
 msgstr "Tekst"
 
-#: web/templates/blog_post/form.html.eex:4 web/templates/photo/form.html.eex:10
+#: web/templates/admin/forum/form.html.eex:4
+#: web/templates/admin/forum_category/form.html.eex:4
+#: web/templates/blog_post/form.html.eex:4
+#: web/templates/forum_topic/form.html.eex:4
+#: web/templates/photo/form.html.eex:10
 #: web/templates/photo_album/form.html.eex:4
 msgid "Title"
 msgstr "Titel"
-
-#: web/views/pagination_helpers.ex:9
-msgid "First"
-msgstr "Første"
-
-#: web/views/pagination_helpers.ex:10
-msgid "Last"
-msgstr "Sidste"
-
-#: web/views/pagination_helpers.ex:7
-msgid "Next"
-msgstr "Næste"
-
-#: web/views/pagination_helpers.ex:8
-msgid "Previous"
-msgstr "Forrige"
 
 #: web/controllers/blog_post_comment_controller.ex:15
 #: web/controllers/profile_comment_controller.ex:26
@@ -504,7 +494,7 @@ msgstr "Gæstebog"
 msgid "Newest Guest Book Entries"
 msgstr "Nyeste gæstebogsindlæg"
 
-#: web/templates/comment/comments.html.eex:20
+#: web/templates/comment/comments.html.eex:26
 msgid "Post Comment"
 msgstr "Tilføj Kommentar"
 
@@ -517,7 +507,7 @@ msgstr "Vis alle"
 msgid "Unable to create comment"
 msgstr "Din kommentar kunne ikke tilføjes!"
 
-#: web/templates/comment/comments.html.eex:14
+#: web/templates/comment/comments.html.eex:20
 msgid "Write new comment:"
 msgstr "Skriv ny kommentar:"
 
@@ -567,7 +557,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] "Du har %{count} notifikation"
 msgstr[1] "Du har %{count} notifikationer"
 
-#: web/templates/layout/sidebar.html.eex:13
+#: web/templates/layout/sidebar.html.eex:22
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr "Private Beskeder"
@@ -614,10 +604,12 @@ msgstr "Mand"
 msgid "Not specified"
 msgstr "Ikke udspecificeret"
 
-#: web/templates/photo_album/index.html.eex:32
+#: web/templates/photo_album/index.html.eex:38
 msgid "Create New"
 msgstr "Opret ny"
 
+#: web/templates/admin/forum/form.html.eex:12
+#: web/templates/admin/forum_category/form.html.eex:12
 #: web/templates/photo/form.html.eex:18
 #: web/templates/photo_album/form.html.eex:12
 msgid "Description"
@@ -696,10 +688,143 @@ msgstr "Upload billeder"
 msgid "Uploaded"
 msgstr "Uploadet"
 
-#: web/templates/layout/sidebar.html.eex:22
+#: web/templates/layout/sidebar.html.eex:31
 msgid "Your Photo Albums"
 msgstr "Dine Fotoalbums"
 
 #: web/templates/photo_album/space_used.html.eex:9
 msgid "You have used %{used_space} out of a maximum of %{max_space} across all your photo albums"
 msgstr "Du har brugt %{used_space} ud af maksimum %{max_space} fordelt over alle dine fotoalbums"
+
+#: web/templates/admin/forum/edit.html.eex:2
+#: web/templates/admin/forum/new.html.eex:2
+#: web/templates/admin/forum_category/edit.html.eex:2
+#: web/templates/admin/forum_category/index.html.eex:2
+#: web/templates/admin/forum_category/new.html.eex:2
+msgid "Administration"
+msgstr "Administration"
+
+#: web/templates/forum_reply/form.html.eex:11
+#: web/templates/forum_topic/form.html.eex:12
+msgid "Content"
+msgstr "Indhold"
+
+#: web/templates/admin/forum_category/index.html.eex:52
+msgid "Create New Forum Category"
+msgstr "Opret ny forum kategori"
+
+#: web/templates/admin/forum_category/index.html.eex:44
+msgid "Create new forum"
+msgstr "Opret nyt forum"
+
+#: web/templates/forum/show.html.eex:23
+#: web/templates/forum_topic/new.html.eex:6
+msgid "Create new topic"
+msgstr "Opret nyt indlæg"
+
+#: web/templates/admin/forum/edit.html.eex:5
+#: web/templates/admin/forum/edit.html.eex:10
+msgid "Edit Forum"
+msgstr "Redigér forum"
+
+#: web/templates/admin/forum_category/edit.html.eex:4
+#: web/templates/admin/forum_category/edit.html.eex:9
+msgid "Edit Forum Category"
+msgstr "Redigér forum kategori"
+
+#: web/templates/admin/forum/edit.html.eex:3
+#: web/templates/admin/forum/new.html.eex:3
+#: web/templates/admin/forum_category/edit.html.eex:3
+#: web/templates/admin/forum_category/index.html.eex:3
+#: web/templates/admin/forum_category/new.html.eex:3
+msgid "Forum Categories"
+msgstr "Forum kategorier"
+
+#: web/controllers/admin/forum_category_controller.ex:20
+msgid "Forum category created successfully."
+msgstr "Forum kategorien blev oprettet!"
+
+#: web/controllers/admin/forum_category_controller.ex:50
+msgid "Forum category deleted successfully."
+msgstr "Forum kategorien blev slettet!"
+
+#: web/controllers/admin/forum_category_controller.ex:39
+msgid "Forum category updated successfully."
+msgstr "Forum kategorien blev opdateret!"
+
+#: web/controllers/admin/forum_controller.ex:22
+msgid "Forum created successfully."
+msgstr "Forummet blev oprettet!"
+
+#: web/controllers/admin/forum_controller.ex:55
+msgid "Forum deleted successfully."
+msgstr "Forummet blev slettet!"
+
+#: web/controllers/forum_topic_controller.ex:28
+msgid "Forum topic created successfully."
+msgstr "Indlægget blev oprettet!"
+
+#: web/controllers/admin/forum_controller.ex:43
+msgid "Forum updated successfully."
+msgstr "Forummet blev opdateret!"
+
+#: web/templates/forum/index.html.eex:2 web/templates/forum/show.html.eex:2
+#: web/templates/forum_topic/new.html.eex:2
+#: web/templates/forum_topic/show.html.eex:2
+#: web/templates/layout/sidebar.html.eex:10
+msgid "Forums"
+msgstr "Forum"
+
+#: web/templates/layout/sidebar_admin.html.eex:6
+msgid "Forums and Categories"
+msgstr "Forum og kategorier"
+
+#: web/templates/forum_topic/show.html.eex:44
+msgid "Go to the last page to reply..."
+msgstr "Hop til den sidste side for at sende et svar"
+
+#: web/templates/forum_topic/show.html.eex:43
+msgid "Hint"
+msgstr "Tip"
+
+#: web/templates/admin/forum/new.html.eex:5
+#: web/templates/admin/forum/new.html.eex:10
+msgid "New Forum"
+msgstr "Nyt forum"
+
+#: web/templates/admin/forum_category/new.html.eex:4
+#: web/templates/admin/forum_category/new.html.eex:9
+msgid "New Forum Category"
+msgstr "Ny forum kategori"
+
+#: web/templates/forum_reply/form.html.eex:19
+msgid "Post Reply"
+msgstr "Send svar"
+
+#: web/templates/forum_topic/form.html.eex:20
+msgid "Post Topic"
+msgstr "Opret indlæg"
+
+#: web/controllers/forum_reply_controller.ex:23
+msgid "Reply could not be created"
+msgstr "Dit svar kunne ikke oprettes"
+
+#: web/controllers/forum_reply_controller.ex:19
+msgid "Reply created successfully"
+msgstr "Dit svar blev sendt"
+
+#: web/templates/admin/forum/form.html.eex:20
+msgid "Save Forum"
+msgstr "Gem forum"
+
+#: web/templates/admin/forum_category/form.html.eex:20
+msgid "Save Forum Category"
+msgstr "Gem forum kategori"
+
+#: web/templates/forum_reply/form.html.eex:5
+msgid "Submit new reply"
+msgstr "Send nyt svar"
+
+#: web/templates/layout/sidebar.html.eex:14
+msgid "You"
+msgstr "Dig"

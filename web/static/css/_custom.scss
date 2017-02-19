@@ -171,3 +171,15 @@ form.link {
   word-wrap: break-word; /* IE */
   word-break: break-all;
 }
+
+.card .list-group a:hover {
+  background-color: $gray-dark;
+}
+
+.card-header .img-avatar {
+  max-height: 30px;
+}
+
+.card-block p:last-of-type {
+  margin-bottom: 0px;
+}

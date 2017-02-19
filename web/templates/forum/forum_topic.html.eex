@@ -1,0 +1,27 @@
+<%
+  forum = assigns[:forum] || @forum_topic.forum
+%>
+<%= link to: forum_forum_topic_path(@conn, :show, forum, @forum_topic), class: "list-group-item list-group-item-action flex-column align-items-start" do %>
+  <% forum_reply = List.first(@forum_topic.forum_replies) %>
+  <div class="d-flex w-100 justify-content-between">
+    <div>
+      <h6 class="mb-0"><%= @forum_topic.title %></h6>
+    </div>
+    <div>
+      <span class="badge badge-default badge-pill"><%= @forum_topic.forum_replies_count %></span>
+    </div>
+  </div>
+  <div>
+    <small>
+      <span class="badge badge-default">
+        <i class="fa fa-user fa-fw"></i> <%= @forum_topic.user.username %> - <%= time_ago_in_words @forum_topic.inserted_at %>
+      </span>
+      <%= if forum_reply do %>
+        <i class="fa fa-angle-right fa-fw"></i>
+        <span class="badge badge-default">
+          <i class="fa fa-commenting-o fa-fw"></i> <%= forum_reply.user.username %> - <%= time_ago_in_words forum_reply.inserted_at %>
+        </span>
+      <% end %>
+    </small>
+  </div>
+<% end %>

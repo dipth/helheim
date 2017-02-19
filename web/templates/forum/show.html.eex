@@ -1,0 +1,37 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link gettext("Forums"), to: forum_path(@conn, :index) %></li>
+  <li class="breadcrumb-item active">
+    <%= @forum.forum_category.title %>:
+    <%= @forum.title %>
+  </li>
+</ol>
+
+<div class="card">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between mb-1">
+      <div>
+        <%= @forum.forum_category.title %><br>
+        <strong>
+          <i class="fa fa-angle-right"></i>
+          <%= @forum.title %>
+        </strong>
+        <br><small><%= @forum.description %></small>
+      </div>
+      <div>
+        <%= link to: forum_forum_topic_path(@conn, :new, @forum), class: "btn btn-outline-success btn-sm mt-1" do %>
+          <i class="fa fa-plus"></i>
+          <span class="hidden-xs-down"><%= gettext "Create new topic" %></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="card-block">
+    <div class="list-group">
+      <%= for forum_topic <- @forum_topics.entries do %>
+        <%= render "forum_topic.html", conn: @conn, forum: @forum, forum_topic: forum_topic %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= lpaginate @conn, @forum_topics %>

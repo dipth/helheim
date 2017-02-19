@@ -22,6 +22,10 @@ defmodule Helheim.Router do
     plug Guardian.Plug.LoadResource
   end
 
+  pipeline :browser_admin_auth do
+    plug Helheim.Plug.VerifyAdmin
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -62,6 +66,19 @@ defmodule Helheim.Router do
     resources "/notifications", NotificationController, only: [:show]
     resources "/private_conversations", PrivateConversationController, param: "partner_id", only: [:index, :show] do
       resources "/messages", PrivateMessageController, only: [:create], as: :message
+    end
+    resources "/forums", ForumController, only: [:index, :show] do
+      resources "/forum_topics", ForumTopicController, only: [:new, :create, :show] do
+        resources "/forum_replies", ForumReplyController, only: [:create]
+      end
+    end
+  end
+
+  scope "/admin", Helheim.Admin, as: :admin do
+    pipe_through [:browser, :browser_auth, :browser_admin_auth]
+
+    resources "/forum_categories", ForumCategoryController, only: [:index, :new, :create, :edit, :update, :delete] do
+      resources "/forums", ForumController, only: [:new, :create, :edit, :update, :delete]
     end
   end
 

@@ -1,0 +1,20 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link gettext("Forums"), to: forum_path(@conn, :index) %></li>
+  <li class="breadcrumb-item">
+    <%= link "#{@forum.forum_category.title}: #{@forum.title}", to: forum_path(@conn, :show, @forum) %>
+  </li>
+  <li class="breadcrumb-item active"><%= gettext "Create new topic" %></li>
+</ol>
+
+<div class="card">
+  <div class="card-header">
+    <%= @forum.forum_category.title %><br>
+    <strong>
+      <i class="fa fa-angle-right"></i>
+      <%= @forum.title %>
+    </strong>
+    <br><small><%= @forum.description %></small>
+  </div>
+  <%= render "form.html", changeset: @changeset,
+                          action: forum_forum_topic_path(@conn, :create, @forum) %>
+</div>

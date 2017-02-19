@@ -1,0 +1,27 @@
+defmodule Helheim.Forum do
+  use Helheim.Web, :model
+
+  schema "forums" do
+    field      :title,              :string
+    field      :description,        :string
+    field      :rank,               :integer
+    field      :forum_topics_count, :integer
+
+    timestamps()
+
+    belongs_to :forum_category, Helheim.ForumCategory
+    has_many   :forum_topics,   Helheim.ForumTopic
+  end
+
+  def changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:title, :description])
+    |> trim_fields([:title, :description])
+    |> validate_required([:title])
+  end
+
+  def in_positional_order(query) do
+    from f in query,
+    order_by: f.rank
+  end
+end

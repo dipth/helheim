@@ -1,0 +1,7 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item active"><%= gettext("Forums") %></li>
+</ol>
+
+<%= for forum_category <- @forum_categories do %>
+  <%= render "forum_category.html", conn: @conn, forum_category: forum_category %>
+<% end %>

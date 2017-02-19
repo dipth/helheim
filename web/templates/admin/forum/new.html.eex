@@ -1,0 +1,14 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><i class="fa fa-lock"></i> <%= gettext("Administration") %></li>
+  <li class="breadcrumb-item"><%= link gettext("Forum Categories"), to: admin_forum_category_path(@conn, :index) %></li>
+  <li class="breadcrumb-item"><%= @forum_category.title %></li>
+  <li class="breadcrumb-item active"><%= gettext("New Forum") %></li>
+</ol>
+
+<div class="card">
+  <div class="card-header">
+    <%= gettext "New Forum" %>
+  </div>
+  <%= render "form.html", changeset: @changeset,
+                          action: admin_forum_category_forum_path(@conn, :create, @forum_category) %>
+</div>

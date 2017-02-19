@@ -1,0 +1,50 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link gettext("Forums"), to: forum_path(@conn, :index) %></li>
+  <li class="breadcrumb-item">
+    <%= link "#{@forum.forum_category.title}: #{@forum.title}", to: forum_path(@conn, :show, @forum) %>
+  </li>
+  <li class="breadcrumb-item active"><%= @forum_topic.title %></li>
+</ol>
+
+<%= if @forum_replies.page_number == 1 do %>
+  <div class="card">
+    <div class="card-header">
+      <div class="d-flex w-100 justify-content-between">
+        <div>
+          <h6 class="mb-0"><%= @forum_topic.title %></h6>
+          <small>
+            <span class="badge badge-default">
+              <%= time_ago_in_words @forum_topic.inserted_at %>
+            </span>
+          </small>
+        </div>
+        <div>
+          <%= link @forum_topic.user.username, to: public_profile_path(@conn, :show, @forum_topic.user.id) %>&nbsp;
+          <%= link img_tag(Helheim.Avatar.url({@forum_topic.user.avatar, @forum_topic.user}, :tiny), class: "img-avatar"), to: public_profile_path(@conn, :show, @forum_topic.user.id) %>
+        </div>
+      </div>
+    </div>
+    <div class="card-block">
+      <%= text_to_html @forum_topic.body %>
+    </div>
+  </div>
+<% end %>
+
+<%= for forum_reply <- @forum_replies.entries do %>
+  <%= render Helheim.ForumReplyView, "forum_reply.html", conn: @conn, forum_reply: forum_reply %>
+<% end %>
+
+<%= unless @forum_replies.page_number < @forum_replies.total_pages do %>
+  <%= render Helheim.ForumReplyView,
+             "form.html",
+             changeset: @changeset,
+             action: forum_forum_topic_forum_reply_path(@conn, :create, @forum, @forum_topic) %>
+<% else %>
+  <p>
+    <i class="fa fa-info"></i>
+    <strong><%= gettext "Hint"%>:</strong>
+    <%= gettext "Go to the last page to reply..." %>
+  </p>
+<% end %>
+
+<%= lpaginate @conn, @forum_replies %>

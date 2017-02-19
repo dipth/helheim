@@ -1,0 +1,134 @@
+defmodule Helheim.ForumTopicControllerTest do
+  use Helheim.ConnCase
+  alias Helheim.ForumTopic
+
+  @valid_attrs %{body: "Body Text", title: "Title String"}
+  @invalid_attrs %{body: "   ", title: "   "}
+
+  ##############################################################################
+  # new/2
+  describe "new/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it returns a successful response when specifying a valid forum_id", %{conn: conn} do
+      forum = insert(:forum)
+      conn  = get conn, "/forums/#{forum.id}/forum_topics/new"
+      assert html_response(conn, 200) =~ gettext("Create new topic")
+    end
+
+    test "it redirects to an error page when supplying an non-existing forum_id", %{conn: conn} do
+      assert_error_sent :not_found, fn ->
+        get conn, "/forums/1/forum_topics/new"
+      end
+    end
+  end
+
+  describe "new/2 when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      forum = insert(:forum)
+      conn  = get conn, "/forums/#{forum.id}/forum_topics/new"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # create/2
+  describe "create/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it creates a new forum topic and associates it with the current user and the specified forum", %{conn: conn, user: user} do
+      forum = insert(:forum)
+      conn  = post conn, "/forums/#{forum.id}/forum_topics", forum_topic: @valid_attrs
+      topic = Repo.one(ForumTopic)
+      assert redirected_to(conn) == forum_forum_topic_path(conn, :show, forum, topic)
+      assert topic.forum_id == forum.id
+      assert topic.user_id  == user.id
+      assert topic.title    == @valid_attrs.title
+      assert topic.body     == @valid_attrs.body
+    end
+
+    test "it does not create a forum topic but redirects to an error page when supplying an non-existing forum_id", %{conn: conn} do
+      assert_error_sent :not_found, fn ->
+        post conn, "/forums/1/forum_topics", forum_topic: @valid_attrs
+      end
+      refute Repo.one(ForumTopic)
+    end
+
+    test "it does not create a forum topic but re-renders the new template when posting invalid attrs", %{conn: conn} do
+      forum = insert(:forum)
+      conn  = post conn, "/forums/#{forum.id}/forum_topics", forum_topic: @invalid_attrs
+      refute Repo.one(ForumTopic)
+      assert html_response(conn, 200) =~ gettext("Create new topic")
+    end
+  end
+
+  describe "create/2 when not signed in" do
+    test "it does not create a forum topic but redirects to the sign in page", %{conn: conn} do
+      forum = insert(:forum)
+      conn  = post conn, "/forums/#{forum.id}/forum_topics", forum_topic: @valid_attrs
+      assert redirected_to(conn) == session_path(conn, :new)
+      refute Repo.one(ForumTopic)
+    end
+  end
+
+  ##############################################################################
+  # show/2
+  describe "show/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it returns a successful response when specifying a valid forum_id and id", %{conn: conn} do
+      topic = insert(:forum_topic, title: "What a topic!")
+      conn  = get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}"
+      assert html_response(conn, 200) =~ topic.title
+    end
+
+    test "it redirects to an error page when supplying an non-existing forum_id", %{conn: conn} do
+      topic = insert(:forum_topic)
+      assert_error_sent :not_found, fn ->
+        get conn, "/forums/#{topic.forum.id + 1}/forum_topics/#{topic.id}"
+      end
+    end
+
+    test "it redirects to an error page when supplying an non-existing id", %{conn: conn} do
+      topic = insert(:forum_topic)
+      assert_error_sent :not_found, fn ->
+        get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id + 1}"
+      end
+    end
+
+    test "it only shows replies to the specifed topic", %{conn: conn} do
+      topic   = insert(:forum_topic)
+      reply_1 = insert(:forum_reply, forum_topic: topic, body: "Reply A")
+      reply_2 = insert(:forum_reply, body: "Reply B")
+      conn    = get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}"
+      assert conn.resp_body =~ reply_1.body
+      refute conn.resp_body =~ reply_2.body
+    end
+
+    test "it only shows the actual topic on the first page of the replies", %{conn: conn, user: user} do
+      topic = insert(:forum_topic, body: "What a topic!")
+      insert_list(27, :forum_reply, forum_topic: topic, user: user)
+      conn = get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}"
+      assert conn.resp_body =~ topic.body
+      conn = get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}?page=2"
+      refute conn.resp_body =~ topic.body
+    end
+
+    test "it only shows the reply form on the last page of the replies", %{conn: conn, user: user} do
+      topic = insert(:forum_topic)
+      insert_list(27, :forum_reply, forum_topic: topic, user: user)
+      conn = get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}"
+      refute conn.resp_body =~ gettext("Submit new reply")
+      conn = get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}?page=2"
+      assert conn.resp_body =~ gettext("Submit new reply")
+    end
+  end
+
+  describe "show/2 when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      topic = insert(:forum_topic)
+      conn  = get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+end

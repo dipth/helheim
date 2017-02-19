@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-header">
+    <strong><%= @forum_category.title %></strong>
+    <br><small><%= @forum_category.description %></small>
+  </div>
+  <div class="card-block">
+    <div class="list-group">
+      <%= for forum <- @forum_category.forums do %>
+        <% forum_topic = List.first(forum.forum_topics) %>
+        <%= link to: forum_path(@conn, :show, forum), class: "list-group-item list-group-item-action flex-column align-items-start" do %>
+          <div class="d-flex w-100 justify-content-between mb-1">
+            <div>
+              <h6 class="mb-0"><%= forum.title %></h6>
+              <%= if forum.description do %>
+                <small><%= forum.description%></small>
+              <% end %>
+            </div>
+            <div>
+              <span class="badge badge-default badge-pill"><%= forum.forum_topics_count %></span>
+            </div>
+          </div>
+          <%= if forum_topic do %>
+            <small>
+              <i class="fa fa-commenting-o fa-fw"></i>&nbsp;
+              <%= forum_topic.title %>&nbsp;
+              <span class="badge badge-default badge-pill">
+                <%= forum_topic.user.username %> - <%= time_ago_in_words forum_topic.inserted_at %>
+              </span>
+            </small>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

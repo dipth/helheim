@@ -39,7 +39,7 @@ defmodule Helheim.Factory do
   end
 
   def private_message_factory do
-    %Helheim.PrivateMessage {
+    %Helheim.PrivateMessage{
       sender: build(:user),
       recipient: build(:user),
       body: "Awesome Message Text"
@@ -47,7 +47,7 @@ defmodule Helheim.Factory do
   end
 
   def photo_album_factory do
-    %Helheim.PhotoAlbum {
+    %Helheim.PhotoAlbum{
       user: build(:user),
       title: "My Photo Album",
       description: "Full of photos",
@@ -56,9 +56,41 @@ defmodule Helheim.Factory do
   end
 
   def photo_factory do
-    %Helheim.Photo {
+    %Helheim.Photo{
       photo_album: build(:photo_album),
       uuid: sequence(:uuid, &"5976423a-ee35-11e3-8569-14109ff1a30#{&1}")
+    }
+  end
+
+  def forum_category_factory do
+    %Helheim.ForumCategory{
+      title: "A Category",
+      description: "A Description"
+    }
+  end
+
+  def forum_factory do
+    %Helheim.Forum{
+      forum_category: build(:forum_category),
+      title: "A Forum",
+      description: "A Description"
+    }
+  end
+
+  def forum_topic_factory do
+    %Helheim.ForumTopic{
+      forum: build(:forum),
+      user: build(:user),
+      title: "A Topic",
+      body: "Some Content"
+    }
+  end
+
+  def forum_reply_factory do
+    %Helheim.ForumReply{
+      forum_topic: build(:forum_topic),
+      user: build(:user),
+      body: "Some Content"
     }
   end
 end

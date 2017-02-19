@@ -1,0 +1,53 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><i class="fa fa-lock"></i> <%= gettext("Administration") %></li>
+  <li class="breadcrumb-item active"><%= gettext("Forum Categories") %></li>
+</ol>
+
+<%= for forum_category <- @forum_categories do %>
+  <div class="card">
+    <div class="card-header">
+      <div class="float-right">
+        <%= link to: admin_forum_category_path(@conn, :edit, forum_category), class: "btn btn-sm btn-link" do %>
+          <i class="fa fa-pencil"></i>
+        <% end %>
+        <%= link to: admin_forum_category_path(@conn, :delete, forum_category), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-sm btn-link" do %>
+          <i class="fa fa-trash"></i>
+        <% end %>
+      </div>
+      <strong><%= forum_category.title %></strong>
+      <br><small><%= forum_category.description %></small>
+    </div>
+    <div class="card-block">
+      <ul class="list-group mb-1">
+        <%#= for forum <- Ecto.assoc(forum_category, :forums) |> Helheim.Forum.in_positional_order |> Helheim.Repo.all do %>
+        <%= for forum <- forum_category.forums do %>
+          <li class="list-group-item justify-content-between">
+            <span>
+              <strong><%= forum.title %></strong>
+              <small>- <%= forum.description %></small>
+            </span>
+            <span>
+              <span class="badge badge-default badge-pill"><%= forum.forum_topics_count %></span>
+              <%= link to: admin_forum_category_forum_path(@conn, :edit, forum_category, forum), class: "btn btn-sm btn-link" do %>
+                <i class="fa fa-pencil"></i>
+              <% end %>
+              <%= link to: admin_forum_category_forum_path(@conn, :delete, forum_category, forum), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-sm btn-link" do %>
+                <i class="fa fa-trash"></i>
+              <% end %>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+
+      <%= link to: admin_forum_category_forum_path(@conn, :new, forum_category) do %>
+        <i class="fa fa-plus"></i>
+        <%= gettext "Create new forum" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<%= link to: admin_forum_category_path(@conn, :new), class: "btn btn-outline-primary mb-1" do %>
+  <i class="fa fa-plus"></i>
+  <%= gettext("Create New Forum Category") %>
+<% end %>

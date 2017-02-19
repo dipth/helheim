@@ -2,6 +2,7 @@ defmodule Helheim.PageController do
   use Helheim.Web, :controller
   alias Helheim.User
   alias Helheim.BlogPost
+  alias Helheim.ForumTopic
 
   def index(conn, _params) do
     if Guardian.Plug.current_resource(conn) do
@@ -30,15 +31,23 @@ defmodule Helheim.PageController do
       BlogPost
       |> BlogPost.newest
       |> limit(5)
+      |> preload(:user)
       |> Helheim.Repo.all
-      |> Repo.preload(:user)
+
+    newest_forum_topics = ForumTopic
+      |> ForumTopic.with_latest_reply
+      |> order_by([desc: :updated_at])
+      |> preload([:forum, :user])
+      |> limit(6)
+      |> Repo.all
 
     newest_photos = Helheim.Photo.newest_public_photos(10)
 
     render conn, "front_page.html",
       newest_users: newest_users,
       newest_blog_posts: newest_blog_posts,
-      newest_photos: newest_photos
+      newest_photos: newest_photos,
+      newest_forum_topics: newest_forum_topics
   end
 
   def debug(conn, _params) do

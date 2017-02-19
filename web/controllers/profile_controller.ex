@@ -4,6 +4,7 @@ defmodule Helheim.ProfileController do
   alias Helheim.BlogPost
   alias Helheim.Comment
   alias Helheim.Photo
+  alias Helheim.ForumTopic
 
   def show(conn, params) do
     user = if params["id"] do
@@ -24,9 +25,21 @@ defmodule Helheim.ProfileController do
       |> limit(5)
       |> Helheim.Repo.all
       |> Repo.preload(:author)
+    newest_forum_topics = ForumTopic
+      |> where(user_id: ^user.id)
+      |> ForumTopic.with_latest_reply
+      |> order_by([desc: :updated_at])
+      |> preload([:forum, :user])
+      |> limit(6)
+      |> Repo.all
     newest_photos = Photo.newest_public_photos_by(user, 5)
 
-    render conn, "show.html", user: user, newest_blog_posts: newest_blog_posts, newest_comments: newest_comments, newest_photos: newest_photos
+    render conn, "show.html",
+      user: user,
+      newest_blog_posts: newest_blog_posts,
+      newest_comments: newest_comments,
+      newest_photos: newest_photos,
+      newest_forum_topics: newest_forum_topics
   end
 
   def edit(conn, _params) do

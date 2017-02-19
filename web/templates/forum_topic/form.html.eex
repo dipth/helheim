@@ -1,0 +1,22 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <div class="card-block">
+    <div class="form-group <%= if f.errors[:title] do 'has-danger' end %>">
+      <%= label f, :title, gettext("Title"), class: "control-label" %>
+      <%= text_input f, :title, class: "form-control" %>
+      <%= if message = f.errors[:title] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% end %>
+    </div>
+
+    <div class="form-group <%= if f.errors[:body] do 'has-danger' end %>">
+      <%= label f, :body, gettext("Content"), class: "control-label" %>
+      <%= textarea f, :body, class: "form-control", rows: 10 %>
+      <%= if message = f.errors[:body] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Post Topic" %></button>
+  </div>
+<% end %>
