@@ -6,12 +6,12 @@ defmodule Helheim.PhotoAlbumController do
 
   def index(conn, params = %{"profile_id" => user_id}) do
     user = Repo.get!(User, user_id)
-    {photo_albums, pagination} =
+    photo_albums =
       assoc(user, :photo_albums)
       |> PhotoAlbum.viewable_by(user, current_resource(conn))
-      |> Repo.paginate(params)
-    photo_albums = photo_albums |> Repo.preload(:photos)
-    render(conn, "index.html", user: user, photo_albums: photo_albums, pagination: pagination)
+      |> preload(:photos)
+      |> Repo.paginate(page: sanitized_page(params["page"]))
+    render(conn, "index.html", user: user, photo_albums: photo_albums)
   end
 
   def new(conn, _params) do

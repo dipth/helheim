@@ -7,9 +7,9 @@
     <% end %>
   </div>
   <div class="card-block">
-    <%= for blog_post <- @blog_posts do %>
+    <%= for blog_post <- @blog_posts.entries do %>
       <%= render "list_entry.html", conn: @conn, blog_post: blog_post %>
     <% end %>
-    <%= lpaginate @conn, @pagination %>
+    <%= lpaginate @conn, @blog_posts %>
   </div>
 </div>

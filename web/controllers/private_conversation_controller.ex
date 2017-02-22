@@ -7,12 +7,12 @@ defmodule Helheim.PrivateConversationController do
 
   def index(conn, params) do
     me = current_resource(conn)
-    {messages, pagination} =
+    messages =
       PrivateMessage.unique_conversations_for(me)
       |> PrivateMessage.newest
-      |> Repo.paginate(params, per_page: 10)
-    messages = Repo.preload(messages, [:sender, :recipient])
-    render(conn, "index.html", me: me, messages: messages, pagination: pagination)
+      |> preload([:sender, :recipient])
+      |> Repo.paginate(page: sanitized_page(params["page"]))
+    render(conn, "index.html", me: me, messages: messages)
   end
 
   def show(conn, params = %{"partner_id" => partner_id}) do
@@ -20,13 +20,13 @@ defmodule Helheim.PrivateConversationController do
     partner         = Repo.one!(from u in User, where: u.id == ^partner_id and u.id != ^me.id)
     conversation_id = PrivateMessage.calculate_conversation_id(me, partner)
 
-    {messages, pagination} =
+    messages =
       PrivateMessage
       |> PrivateMessage.in_conversation(conversation_id)
       |> PrivateMessage.newest
-      |> Repo.paginate(params, per_page: 10)
-    messages = Repo.preload(messages, :sender)
+      |> preload(:sender)
+      |> Repo.paginate(page: sanitized_page(params["page"]))
 
-    render(conn, "show.html", messages: messages, me: me, partner: partner, pagination: pagination)
+    render(conn, "show.html", messages: messages, me: me, partner: partner)
   end
 end

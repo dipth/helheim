@@ -36,5 +36,5 @@
          "comments.html",
          conn: @conn,
          comments: @comments,
-         pagination: @pagination,
+         pagination: true,
          post_path: blog_post_comment_path(@conn, :create, @blog_post) %>

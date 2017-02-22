@@ -13,5 +13,5 @@
          "comments.html",
          conn: @conn,
          comments: @comments,
-         pagination: @pagination,
+         pagination: true,
          post_path: public_profile_comment_path(@conn, :create, @user) %>

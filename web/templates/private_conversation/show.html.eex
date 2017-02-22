@@ -7,10 +7,10 @@
   </div>
 <% else %>
   <ul class="list-unstyled conversation">
-    <%= for message <- @messages do %>
+    <%= for message <- @messages.entries do %>
       <%= render "message.html", conn: @conn, message: message %>
     <% end %>
   </ul>
-  <%= lpaginate @conn, @pagination %>
+  <%= lpaginate @conn, @messages %>
 <% end %>
 <%= render "form.html", conn: @conn, me: @me, partner: @partner %>

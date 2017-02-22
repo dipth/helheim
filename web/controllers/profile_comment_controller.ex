@@ -7,12 +7,12 @@ defmodule Helheim.ProfileCommentController do
 
   def index(conn, params = %{"profile_id" => user_id}) do
     user = Repo.get!(User, user_id)
-    {comments, pagination} =
+    comments =
       assoc(user, :comments)
       |> Comment.newest
-      |> Repo.paginate(params)
-    comments = Repo.preload(comments, :author)
-    render(conn, "index.html", user: user, comments: comments, pagination: pagination)
+      |> preload(:author)
+      |> Repo.paginate(page: sanitized_page(params["page"]))
+    render(conn, "index.html", user: user, comments: comments)
   end
 
   def create(conn, %{"profile_id" => profile_id, "comment" => comment_params}) do

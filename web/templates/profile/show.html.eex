@@ -87,5 +87,5 @@
          "comments.html",
          conn: @conn,
          comments: @newest_comments,
-         pagination: nil,
+         pagination: false,
          post_path: public_profile_comment_path(@conn, :create, @user) %>

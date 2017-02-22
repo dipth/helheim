@@ -56,8 +56,8 @@ config :helheim, Helheim.Mailer,
   api_key: "only_applicable_in_production"
 
 # Configure pagination
-config :kerosene,
-  theme: :bootstrap4
+config :scrivener_html,
+  routes_helper: Helheim.Router.Helpers
 
 # Configure calendar
 config :calendar, :translation_module, CalendarTranslations.Translations

@@ -7,12 +7,12 @@ defmodule Helheim.BlogPostController do
 
   def index(conn, params = %{"profile_id" => user_id}) do
     user = Repo.get!(User, user_id)
-    {blog_posts, pagination} =
+    blog_posts =
       assoc(user, :blog_posts)
       |> BlogPost.newest
-      |> Repo.paginate(params)
-    blog_posts = Repo.preload(blog_posts, :user)
-    render(conn, "index.html", blog_posts: blog_posts, pagination: pagination)
+      |> preload(:user)
+      |> Repo.paginate(page: sanitized_page(params["page"]))
+    render(conn, "index.html", blog_posts: blog_posts)
   end
 
   def new(conn, _params) do
@@ -47,12 +47,12 @@ defmodule Helheim.BlogPostController do
       assoc(user, :blog_posts)
       |> Repo.get!(id)
       |> Repo.preload(:user)
-    {comments, pagination} =
+    comments =
       assoc(blog_post, :comments)
       |> Comment.newest
-      |> Repo.paginate(params)
-    comments = Repo.preload(comments, :author)
-    render(conn, "show.html", blog_post: blog_post, comments: comments, pagination: pagination)
+      |> preload(:author)
+      |> Repo.paginate(page: sanitized_page(params["page"]))
+    render(conn, "show.html", blog_post: blog_post, comments: comments)
   end
 
   def edit(conn, %{"id" => id}) do

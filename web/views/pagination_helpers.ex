@@ -1,12 +1,9 @@
 defmodule Helheim.PaginationHelpers do
-  import Kerosene.HTML
-  import Helheim.Gettext
+  import Scrivener.HTML
 
   def lpaginate(conn, pagination) do
-    paginate conn, pagination,
-      next_label: gettext("Next"),
-      previous_label: gettext("Previous"),
-      first_label: gettext("First"),
-      last_label: gettext("Last")
+    pagination_links pagination, first:      true,
+                                 last:       true,
+                                 view_style: :bootstrap_v4
   end
 end

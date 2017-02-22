@@ -1,11 +1,17 @@
 <div class="d-flex flex-column-reverse">
-  <%= for comment <- @comments do %>
-    <%= render Helheim.CommentView, "comment.html", conn: @conn, comment: comment %>
+  <%= if @pagination do %>
+    <%= for comment <- @comments.entries do %>
+      <%= render Helheim.CommentView, "comment.html", conn: @conn, comment: comment %>
+    <% end %>
+  <% else %>
+    <%= for comment <- @comments do %>
+      <%= render Helheim.CommentView, "comment.html", conn: @conn, comment: comment %>
+    <% end %>
   <% end %>
 </div>
 
 <%= if @pagination do %>
-  <%= lpaginate @conn, @pagination %>
+  <%= lpaginate @conn, @comments %>
 <% end %>
 
 <%= form_for Helheim.Comment.changeset(%Helheim.Comment{}), @post_path, fn f -> %>

@@ -4,7 +4,7 @@
 </ol>
 
 <div class="card-group card-group-photos">
-  <%= for photo_album <- @photo_albums do %>
+  <%= for photo_album <- @photo_albums.entries do %>
     <% photo = List.first photo_album.photos %>
     <div class="card">
         <%= link to: public_profile_photo_album_path(@conn, :show, @user, photo_album) do %>
@@ -41,4 +41,4 @@
   <% end %>
 </div>
 
-<%= lpaginate @conn, @pagination %>
+<%= lpaginate @conn, @photo_albums %>

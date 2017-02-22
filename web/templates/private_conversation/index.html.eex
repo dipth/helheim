@@ -1,7 +1,7 @@
 <h3 class="mb-1"><%= gettext "Private Messages" %></h3>
 
 <div class="list-group mb-1">
-  <%= for message <- @messages do %>
+  <%= for message <- @messages.entries do %>
     <% partner = Helheim.PrivateMessage.partner(message, @me) %>
     <%= link to: private_conversation_path(@conn, :show, partner), class: "list-group-item list-group-item-action flex-column align-items-start p-1" do %>
       <div class="d-flex w-100">
@@ -20,4 +20,4 @@
   <% end %>
 </div>
 
-<%= lpaginate @conn, @pagination %>
+<%= lpaginate @conn, @messages %>

@@ -42,6 +42,7 @@ defmodule Helheim.Web do
 
       import Helheim.Router.Helpers
       import Helheim.Gettext
+      import Helheim.PaginationSanitization
     end
   end
 
