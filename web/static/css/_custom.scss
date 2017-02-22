@@ -116,7 +116,7 @@ form.link {
   .card {
     background-color: $gray-light;
     border-radius: 0px;
-    max-width: 500px;
+    max-width: 250px;
     min-width: 250px;
 
     .card-text {
@@ -136,6 +136,12 @@ form.link {
     img.img-avatar {
       margin-right: 0.5rem;
       width: 20px;
+    }
+  }
+
+  @include media-breakpoint-down(xs) {
+    .card {
+      margin: 1rem auto;
     }
   }
 }

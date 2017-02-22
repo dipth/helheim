@@ -20,7 +20,7 @@ defmodule Helheim.PhotoFile do
   end
 
   def transform(:thumb, _) do
-    {:convert, "-define jpeg:size=1000x1000 -strip -auto-orient -thumbnail 500x500^ -gravity center -extent 500x500"}
+    {:convert, "-define jpeg:size=500x500 -strip -auto-orient -thumbnail 250x250^ -gravity center -extent 250x250"}
   end
 
   def filename(version, _) do
@@ -36,7 +36,7 @@ defmodule Helheim.PhotoFile do
   end
 
   def default_url(:thumb) do
-    "https://placehold.it/500x500"
+    "https://placehold.it/250x250"
   end
 
   defp current_max_file_size(user) do
