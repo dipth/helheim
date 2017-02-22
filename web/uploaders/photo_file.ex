@@ -16,11 +16,11 @@ defmodule Helheim.PhotoFile do
   end
 
   def transform(:large, _) do
-    {:convert, "-define jpeg:size=2400x2400 -strip -auto-orient -resize 1200x1200>"}
+    {:convert, "-define jpeg:size=2400x2400 -auto-orient -strip -resize 1200x1200>"}
   end
 
   def transform(:thumb, _) do
-    {:convert, "-define jpeg:size=500x500 -strip -auto-orient -thumbnail 250x250^ -gravity center -extent 250x250"}
+    {:convert, "-define jpeg:size=500x500 -auto-orient -strip -thumbnail 250x250^ -gravity center -extent 250x250"}
   end
 
   def filename(version, _) do
