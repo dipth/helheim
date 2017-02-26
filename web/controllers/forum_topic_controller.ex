@@ -6,7 +6,8 @@ defmodule Helheim.ForumTopicController do
 
   plug :find_forum
   plug :find_user
-  plug :build_forum_topic_changeset, except: [:show]
+  plug :enforce_locked_forum when not action in [:show]
+  plug :build_forum_topic_changeset when not action in [:show]
 
   def new(conn, %{"forum_id" => _}) do
     render(conn, "new.html")
@@ -44,6 +45,17 @@ defmodule Helheim.ForumTopicController do
   defp find_user(conn, _) do
     user = current_resource(conn)
     assign conn, :user, user
+  end
+
+  defp enforce_locked_forum(conn, _) do
+    if Forum.locked_for?(conn.assigns[:forum], conn.assigns[:user]) do
+      conn
+      |> put_flash(:error, gettext("You cannot create a topic in a locked forum!"))
+      |> redirect(to: forum_path(conn, :show, conn.assigns[:forum]))
+      |> halt
+    else
+      conn
+    end
   end
 
   defp build_forum_topic_changeset(conn, _) do

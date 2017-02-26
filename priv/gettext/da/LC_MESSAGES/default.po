@@ -374,7 +374,7 @@ msgstr "Profil Indstillinger"
 msgid "Profile Text"
 msgstr "Profiltekst"
 
-#: web/controllers/profile_controller.ex:44
+#: web/controllers/profile_controller.ex:57
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
@@ -390,12 +390,7 @@ msgstr "Nyeste Brugere"
 msgid "Remember me"
 msgstr "Husk mig i 30 dage"
 
-#: web/templates/page/front_page.html.eex:24
-#: web/templates/profile/show.html.eex:63
-msgid "Coming soon"
-msgstr "Kommer snart"
-
-#: web/templates/page/front_page.html.eex:29
+#: web/templates/page/front_page.html.eex:33
 #: web/templates/profile/show.html.eex:53
 msgid "Newest Blogs"
 msgstr "Nyeste Blogs"
@@ -405,7 +400,7 @@ msgstr "Nyeste Blogs"
 msgid "Newest Forum Posts"
 msgstr "Nyeste Forumindlæg"
 
-#: web/templates/page/front_page.html.eex:39
+#: web/templates/page/front_page.html.eex:43
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
 
@@ -431,7 +426,7 @@ msgid "Your Blog Posts"
 msgstr "Dine Blogs"
 
 #: web/templates/admin/forum_category/index.html.eex:13
-#: web/templates/admin/forum_category/index.html.eex:34
+#: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/blog_post/show.html.eex:24
 #: web/templates/photo/show.html.eex:38
 #: web/templates/photo_album/show.html.eex:47
@@ -490,7 +485,7 @@ msgstr "Kommentarer:"
 msgid "Guest Book"
 msgstr "Gæstebog"
 
-#: web/templates/profile/show.html.eex:81
+#: web/templates/profile/show.html.eex:85
 msgid "Newest Guest Book Entries"
 msgstr "Nyeste gæstebogsindlæg"
 
@@ -498,7 +493,7 @@ msgstr "Nyeste gæstebogsindlæg"
 msgid "Post Comment"
 msgstr "Tilføj Kommentar"
 
-#: web/templates/profile/show.html.eex:82
+#: web/templates/profile/show.html.eex:86
 msgid "Show All"
 msgstr "Vis alle"
 
@@ -648,7 +643,7 @@ msgstr "Gem Fotoalbum"
 msgid "Visibility"
 msgstr "Synlighed"
 
-#: web/templates/profile/show.html.eex:76
+#: web/templates/profile/show.html.eex:80
 msgid "Browse All Photo Albums"
 msgstr "Se alle fotoalbums"
 
@@ -660,7 +655,7 @@ msgstr "Slip billeder her (eller klik) for at uploade…"
 msgid "Edit Photo Details"
 msgstr "Redigér billed-detaljer"
 
-#: web/templates/profile/show.html.eex:70
+#: web/templates/profile/show.html.eex:74
 msgid "Newest Public Photos"
 msgstr "Nyeste offentlige billeder"
 
@@ -709,15 +704,15 @@ msgstr "Administration"
 msgid "Content"
 msgstr "Indhold"
 
-#: web/templates/admin/forum_category/index.html.eex:52
+#: web/templates/admin/forum_category/index.html.eex:57
 msgid "Create New Forum Category"
 msgstr "Opret ny forum kategori"
 
-#: web/templates/admin/forum_category/index.html.eex:44
+#: web/templates/admin/forum_category/index.html.eex:49
 msgid "Create new forum"
 msgstr "Opret nyt forum"
 
-#: web/templates/forum/show.html.eex:23
+#: web/templates/forum/show.html.eex:24
 #: web/templates/forum_topic/new.html.eex:6
 msgid "Create new topic"
 msgstr "Opret nyt indlæg"
@@ -760,7 +755,7 @@ msgstr "Forummet blev oprettet!"
 msgid "Forum deleted successfully."
 msgstr "Forummet blev slettet!"
 
-#: web/controllers/forum_topic_controller.ex:28
+#: web/controllers/forum_topic_controller.ex:20
 msgid "Forum topic created successfully."
 msgstr "Indlægget blev oprettet!"
 
@@ -779,11 +774,11 @@ msgstr "Forum"
 msgid "Forums and Categories"
 msgstr "Forum og kategorier"
 
-#: web/templates/forum_topic/show.html.eex:44
+#: web/templates/forum_topic/show.html.eex:46
 msgid "Go to the last page to reply..."
 msgstr "Hop til den sidste side for at sende et svar"
 
-#: web/templates/forum_topic/show.html.eex:43
+#: web/templates/forum_topic/show.html.eex:45
 msgid "Hint"
 msgstr "Tip"
 
@@ -805,15 +800,15 @@ msgstr "Send svar"
 msgid "Post Topic"
 msgstr "Opret indlæg"
 
-#: web/controllers/forum_reply_controller.ex:23
+#: web/controllers/forum_reply_controller.ex:22
 msgid "Reply could not be created"
 msgstr "Dit svar kunne ikke oprettes"
 
-#: web/controllers/forum_reply_controller.ex:19
+#: web/controllers/forum_reply_controller.ex:18
 msgid "Reply created successfully"
 msgstr "Dit svar blev sendt"
 
-#: web/templates/admin/forum/form.html.eex:20
+#: web/templates/admin/forum/form.html.eex:27
 msgid "Save Forum"
 msgstr "Gem forum"
 
@@ -828,3 +823,15 @@ msgstr "Send nyt svar"
 #: web/templates/layout/sidebar.html.eex:14
 msgid "You"
 msgstr "Dig"
+
+#: web/templates/admin/forum/form.html.eex:22
+msgid "Locked?"
+msgstr "Låst?"
+
+#: web/templates/forum/show.html.eex:31
+msgid "Only admins can post here"
+msgstr "Låst, undtagen admins"
+
+#: web/controllers/forum_topic_controller.ex:53
+msgid "You cannot create a topic in a locked forum!"
+msgstr "Du kan ikke oprette indlæg i et låst forum!"

@@ -23,7 +23,12 @@
         <%= for forum <- forum_category.forums do %>
           <li class="list-group-item justify-content-between">
             <span>
-              <strong><%= forum.title %></strong>
+              <strong>
+                <%= if forum.locked do %>
+                  <i class="fa fa-lock fa-fw"></i>
+                <% end  %>
+                <%= forum.title %>
+              </strong>
               <small>- <%= forum.description %></small>
             </span>
             <span>

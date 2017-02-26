@@ -1,6 +1,8 @@
 defmodule Helheim.ForumTopicControllerTest do
   use Helheim.ConnCase
+  import Mock
   alias Helheim.ForumTopic
+  alias Helheim.Forum
 
   @valid_attrs %{body: "Body Text", title: "Title String"}
   @invalid_attrs %{body: "   ", title: "   "}
@@ -20,6 +22,14 @@ defmodule Helheim.ForumTopicControllerTest do
       assert_error_sent :not_found, fn ->
         get conn, "/forums/1/forum_topics/new"
       end
+    end
+
+    test_with_mock "it redirects back to the forum if the forum is locked", %{conn: conn},
+      Forum, [:passthrough], [locked_for?: fn(_forum, _user) -> true end] do
+
+      forum = insert(:forum)
+      conn  = get conn, "/forums/#{forum.id}/forum_topics/new"
+      assert redirected_to(conn) == forum_path(conn, :show, forum)
     end
   end
 
@@ -59,6 +69,15 @@ defmodule Helheim.ForumTopicControllerTest do
       conn  = post conn, "/forums/#{forum.id}/forum_topics", forum_topic: @invalid_attrs
       refute Repo.one(ForumTopic)
       assert html_response(conn, 200) =~ gettext("Create new topic")
+    end
+
+    test_with_mock "it does not create a forum topic but redirects back to the forum if the forum is locked", %{conn: conn},
+      Forum, [:passthrough], [locked_for?: fn(_forum, _user) -> true end] do
+
+      forum = insert(:forum)
+      conn  = post conn, "/forums/#{forum.id}/forum_topics", forum_topic: @invalid_attrs
+      refute Repo.one(ForumTopic)
+      assert redirected_to(conn) == forum_path(conn, :show, forum)
     end
   end
 
@@ -121,6 +140,14 @@ defmodule Helheim.ForumTopicControllerTest do
       refute conn.resp_body =~ gettext("Submit new reply")
       conn = get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}?page=2"
       assert conn.resp_body =~ gettext("Submit new reply")
+    end
+
+    test_with_mock "it allows showing a topic that is locked", %{conn: conn},
+      Forum, [:passthrough], [locked_for?: fn(_forum, _user) -> true end] do
+
+      topic = insert(:forum_topic, title: "What a topic!")
+      conn  = get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}"
+      assert html_response(conn, 200) =~ topic.title
     end
   end
 

@@ -6,6 +6,7 @@ defmodule Helheim.Forum do
     field      :description,        :string
     field      :rank,               :integer
     field      :forum_topics_count, :integer
+    field      :locked,             :boolean
 
     timestamps()
 
@@ -15,7 +16,7 @@ defmodule Helheim.Forum do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :description])
+    |> cast(params, [:title, :description, :locked])
     |> trim_fields([:title, :description])
     |> validate_required([:title])
   end
@@ -23,5 +24,13 @@ defmodule Helheim.Forum do
   def in_positional_order(query) do
     from f in query,
     order_by: f.rank
+  end
+
+  def locked_for?(forum, user) do
+    if Helheim.User.admin?(user) do
+      false
+    else
+      forum.locked
+    end
   end
 end

@@ -1,5 +1,7 @@
 defmodule Helheim.ForumControllerTest do
   use Helheim.ConnCase
+  import Mock
+  alias Helheim.Forum
 
   ##############################################################################
   # index/2
@@ -43,6 +45,22 @@ defmodule Helheim.ForumControllerTest do
       conn = get conn, "/forums/#{forum.id}"
       assert conn.resp_body =~ topic_1.title
       refute conn.resp_body =~ topic_2.title
+    end
+
+    test_with_mock "it shows a `create new topic` button if the forum is not locked", %{conn: conn},
+      Forum, [:passthrough], [locked_for?: fn(_forum, _user) -> false end] do
+
+      forum = insert(:forum)
+      conn  = get conn, "/forums/#{forum.id}"
+      assert conn.resp_body =~ gettext("Create new topic")
+    end
+
+    test_with_mock "it does not show a `create new topic` button if the forum is locked", %{conn: conn},
+      Forum, [:passthrough], [locked_for?: fn(_forum, _user) -> true end] do
+
+      forum = insert(:forum)
+      conn  = get conn, "/forums/#{forum.id}"
+      refute conn.resp_body =~ gettext("Create new topic")
     end
   end
 

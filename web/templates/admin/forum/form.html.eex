@@ -15,6 +15,13 @@
         <div class="form-control-feedback"><%= translate_error(message) %></div>
       <% end %>
     </div>
+
+    <div class="form-group">
+      <%= label f, :locked do %>
+        <%= checkbox f, :locked %>
+        <%= gettext "Locked?" %>
+      <% end %>
+    </div>
   </div>
   <div class="card-footer">
     <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Save Forum" %></button>

@@ -361,7 +361,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:44
+#: web/controllers/profile_controller.ex:57
 msgid "Profile updated!"
 msgstr ""
 
@@ -377,12 +377,7 @@ msgstr ""
 msgid "Remember me"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:24
-#: web/templates/profile/show.html.eex:63
-msgid "Coming soon"
-msgstr ""
-
-#: web/templates/page/front_page.html.eex:29
+#: web/templates/page/front_page.html.eex:33
 #: web/templates/profile/show.html.eex:53
 msgid "Newest Blogs"
 msgstr ""
@@ -392,7 +387,7 @@ msgstr ""
 msgid "Newest Forum Posts"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:39
+#: web/templates/page/front_page.html.eex:43
 msgid "Newest Photos"
 msgstr ""
 
@@ -418,7 +413,7 @@ msgid "Your Blog Posts"
 msgstr ""
 
 #: web/templates/admin/forum_category/index.html.eex:13
-#: web/templates/admin/forum_category/index.html.eex:34
+#: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/blog_post/show.html.eex:24 web/templates/photo/show.html.eex:38
 #: web/templates/photo_album/show.html.eex:47
 msgid "Are you sure?"
@@ -475,7 +470,7 @@ msgstr ""
 msgid "Guest Book"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:81
+#: web/templates/profile/show.html.eex:85
 msgid "Newest Guest Book Entries"
 msgstr ""
 
@@ -483,7 +478,7 @@ msgstr ""
 msgid "Post Comment"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:82
+#: web/templates/profile/show.html.eex:86
 msgid "Show All"
 msgstr ""
 
@@ -631,7 +626,7 @@ msgstr ""
 msgid "Visibility"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:76
+#: web/templates/profile/show.html.eex:80
 msgid "Browse All Photo Albums"
 msgstr ""
 
@@ -643,7 +638,7 @@ msgstr ""
 msgid "Edit Photo Details"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:70
+#: web/templates/profile/show.html.eex:74
 msgid "Newest Public Photos"
 msgstr ""
 
@@ -692,15 +687,15 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#: web/templates/admin/forum_category/index.html.eex:52
+#: web/templates/admin/forum_category/index.html.eex:57
 msgid "Create New Forum Category"
 msgstr ""
 
-#: web/templates/admin/forum_category/index.html.eex:44
+#: web/templates/admin/forum_category/index.html.eex:49
 msgid "Create new forum"
 msgstr ""
 
-#: web/templates/forum/show.html.eex:23 web/templates/forum_topic/new.html.eex:6
+#: web/templates/forum/show.html.eex:24 web/templates/forum_topic/new.html.eex:6
 msgid "Create new topic"
 msgstr ""
 
@@ -742,7 +737,7 @@ msgstr ""
 msgid "Forum deleted successfully."
 msgstr ""
 
-#: web/controllers/forum_topic_controller.ex:28
+#: web/controllers/forum_topic_controller.ex:20
 msgid "Forum topic created successfully."
 msgstr ""
 
@@ -761,11 +756,11 @@ msgstr ""
 msgid "Forums and Categories"
 msgstr ""
 
-#: web/templates/forum_topic/show.html.eex:44
+#: web/templates/forum_topic/show.html.eex:46
 msgid "Go to the last page to reply..."
 msgstr ""
 
-#: web/templates/forum_topic/show.html.eex:43
+#: web/templates/forum_topic/show.html.eex:45
 msgid "Hint"
 msgstr ""
 
@@ -787,15 +782,15 @@ msgstr ""
 msgid "Post Topic"
 msgstr ""
 
-#: web/controllers/forum_reply_controller.ex:23
+#: web/controllers/forum_reply_controller.ex:22
 msgid "Reply could not be created"
 msgstr ""
 
-#: web/controllers/forum_reply_controller.ex:19
+#: web/controllers/forum_reply_controller.ex:18
 msgid "Reply created successfully"
 msgstr ""
 
-#: web/templates/admin/forum/form.html.eex:20
+#: web/templates/admin/forum/form.html.eex:27
 msgid "Save Forum"
 msgstr ""
 
@@ -809,4 +804,16 @@ msgstr ""
 
 #: web/templates/layout/sidebar.html.eex:14
 msgid "You"
+msgstr ""
+
+#: web/templates/admin/forum/form.html.eex:22
+msgid "Locked?"
+msgstr ""
+
+#: web/templates/forum/show.html.eex:31
+msgid "Only admins can post here"
+msgstr ""
+
+#: web/controllers/forum_topic_controller.ex:53
+msgid "You cannot create a topic in a locked forum!"
 msgstr ""

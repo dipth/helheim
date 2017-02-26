@@ -18,9 +18,18 @@
         <br><small><%= @forum.description %></small>
       </div>
       <div>
-        <%= link to: forum_forum_topic_path(@conn, :new, @forum), class: "btn btn-outline-success btn-sm mt-1" do %>
-          <i class="fa fa-plus"></i>
-          <span class="hidden-xs-down"><%= gettext "Create new topic" %></span>
+        <%= unless Helheim.Forum.locked_for?(@forum, current_resource(@conn)) do %>
+          <%= link to: forum_forum_topic_path(@conn, :new, @forum), class: "btn btn-outline-success btn-sm mt-1" do %>
+            <i class="fa fa-plus"></i>
+            <span class="hidden-xs-down"><%= gettext "Create new topic" %></span>
+          <% end %>
+        <% end %>
+        <%= if @forum.locked do %>
+          <br>
+          <span class="badge badge-primary">
+            <i class="fa fa-lock fa-fw"></i>
+            <span class="hidden-xs-down"><%= gettext "Only admins can post here" %></span>
+          </span>
         <% end %>
       </div>
     </div>

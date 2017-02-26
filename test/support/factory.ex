@@ -73,7 +73,8 @@ defmodule Helheim.Factory do
     %Helheim.Forum{
       forum_category: build(:forum_category),
       title: "A Forum",
-      description: "A Description"
+      description: "A Description",
+      locked: false
     }
   end
 
