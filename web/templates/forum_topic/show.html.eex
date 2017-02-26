@@ -19,6 +19,9 @@
           </small>
         </div>
         <div>
+          <%= if Helheim.User.admin?(@forum_topic.user) do %>
+            <span class="badge badge-primary">admin</span>
+          <% end %>
           <%= link @forum_topic.user.username, to: public_profile_path(@conn, :show, @forum_topic.user.id) %>&nbsp;
           <%= link img_tag(Helheim.Avatar.url({@forum_topic.user.avatar, @forum_topic.user}, :tiny), class: "img-avatar"), to: public_profile_path(@conn, :show, @forum_topic.user.id) %>
         </div>
