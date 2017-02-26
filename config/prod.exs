@@ -64,6 +64,9 @@ config :ex_aws,
     region: System.get_env("AWS_REGION")
   ]
 
+# Filter sensitive data from logs
+config :phoenix, :filter_parameters, ["password", "guardian_token"]
+
 # Do not print debug messages in production
 config :logger, level: :info
 
