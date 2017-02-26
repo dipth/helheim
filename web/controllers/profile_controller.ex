@@ -55,7 +55,7 @@ defmodule Helheim.ProfileController do
       {:ok, _user} ->
         conn
         |> put_flash(:success, gettext("Profile updated!"))
-        |> redirect(to: page_path(conn, :front_page))
+        |> redirect(to: public_profile_path(conn, :show, user))
       {:error, changeset} ->
         conn
         |> render("edit.html", changeset: changeset)
