@@ -24,8 +24,29 @@ defmodule Helheim.Scrubber do
 
   Meta.allow_tag_with_these_attributes "br", []
 
-  Meta.allow_tag_with_uri_attributes   "img", ["src"], ["https"]
-  Meta.allow_tag_with_these_attributes "img", ["alt"]
+  def scrub({"img", attributes, _}) do
+    attributes = scrub_attributes("img", attributes)
+    attributes = attributes ++ [{"class", "img-fluid rounded mx-auto d-block"}]
+    IO.inspect attributes
+    {"img", attributes, []}
+  end
+
+  defp scrub_attributes("img", attributes) do
+    Enum.map(attributes, fn(attr) -> scrub_attribute("img", attr) end)
+    |> Enum.reject(&(is_nil(&1)))
+  end
+
+  def scrub_attribute("img", {"alt", alt}), do: {"alt", alt}
+  def scrub_attribute("img", {"src", value}) do
+    %{host: host, scheme: scheme} = URI.parse(value)
+    %{host: asset_host} = URI.parse(Application.get_env(:arc, :asset_host))
+
+    if String.downcase(host) == String.downcase(asset_host) && scheme == "https" do
+      {"src", value}
+    else
+      nil
+    end
+  end
 
   Meta.allow_tag_with_these_attributes "ul", []
   Meta.allow_tag_with_these_attributes "ol", []

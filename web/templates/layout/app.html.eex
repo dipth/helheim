@@ -43,6 +43,7 @@
 
     </div>
 
+    <script src="//cloud.tinymce.com/stable/tinymce.min.js?apiKey=qm4hmp6umu1xldkbq8nkvayb455wevb3mu6gpydobmdwozxo"></script>
     <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <script>require("web/static/js/app").App.run()</script>

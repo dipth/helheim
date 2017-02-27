@@ -353,10 +353,6 @@ msgstr "matcher ikke dit nuværende kodeord"
 msgid "Maximum file size: %{file_size}"
 msgstr "Maksimum fil størrelse: %{file_size}"
 
-#: web/templates/profile/edit.html.eex:51
-msgid "Please write a description of yourself"
-msgstr "Giv en beskrivelse af dig selv"
-
 #: web/templates/layout/header.html.eex:22 web/views/profile_view.ex:5
 msgid "Profile"
 msgstr "Profil"
@@ -378,7 +374,7 @@ msgstr "Profiltekst"
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
-#: web/templates/profile/edit.html.eex:62
+#: web/templates/profile/edit.html.eex:64
 msgid "Update Profile"
 msgstr "Opdatér Profil"
 
@@ -417,7 +413,7 @@ msgstr "Blogs"
 msgid "New Blog Post"
 msgstr "Ny Blog"
 
-#: web/templates/blog_post/form.html.eex:23
+#: web/templates/blog_post/form.html.eex:25
 msgid "Save Blog Post"
 msgstr "Gem Blog"
 
@@ -458,10 +454,6 @@ msgstr "Redigér"
 #: web/templates/blog_post/edit.html.eex:3
 msgid "Edit Blog Post"
 msgstr "Redigér Blog"
-
-#: web/templates/blog_post/form.html.eex:13
-msgid "Body"
-msgstr "Tekst"
 
 #: web/templates/admin/forum/form.html.eex:4
 #: web/templates/admin/forum_category/form.html.eex:4
@@ -699,8 +691,10 @@ msgstr "Du har brugt %{used_space} ud af maksimum %{max_space} fordelt over alle
 msgid "Administration"
 msgstr "Administration"
 
+#: web/templates/blog_post/form.html.eex:12
 #: web/templates/forum_reply/form.html.eex:11
 #: web/templates/forum_topic/form.html.eex:12
+#: web/templates/profile/edit.html.eex:50
 msgid "Content"
 msgstr "Indhold"
 
@@ -774,11 +768,13 @@ msgstr "Forum"
 msgid "Forums and Categories"
 msgstr "Forum og kategorier"
 
-#: web/templates/forum_topic/show.html.eex:46
+#: web/templates/forum_topic/show.html.eex:49
 msgid "Go to the last page to reply..."
 msgstr "Hop til den sidste side for at sende et svar"
 
-#: web/templates/forum_topic/show.html.eex:45
+#: web/templates/blog_post/form.html.eex:21
+#: web/templates/forum_topic/show.html.eex:48
+#: web/templates/profile/edit.html.eex:58
 msgid "Hint"
 msgstr "Tip"
 
@@ -835,3 +831,8 @@ msgstr "Låst, undtagen admins"
 #: web/controllers/forum_topic_controller.ex:53
 msgid "You cannot create a topic in a locked forum!"
 msgstr "Du kan ikke oprette indlæg i et låst forum!"
+
+#: web/templates/blog_post/form.html.eex:21
+#: web/templates/profile/edit.html.eex:58
+msgid "You can insert pictures from your photo albums by copying the image url and pasting it into the source-field when clicking the image button in the editor"
+msgstr "Du kan indsætte billeder fra dine fotoalbums ved at kopiere billedets url og indsætte det i “source”-feltet når du klikker på billed-knappen i editoren"

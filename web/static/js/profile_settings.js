@@ -1,26 +1,15 @@
 export var ProfileSettings = {
   run: function(){
-    const el_editor = $('#user_profile_text_editor');
-    if (el_editor.length == 0) return;
-
-    const el_form = el_editor.parents('form');
-
-    var quill = new Quill(el_editor[0], {
-      modules: {
-        toolbar: [
-          [{ header: [1, 2, false] }],
-          ['bold', 'italic', 'underline'],
-          [{ 'list': 'ordered'}, { 'list': 'bullet' }]
-        ]
-      },
-      placeholder: el_editor.data('placeholder'),
-      theme: 'snow'
-    });
-
-    el_form.submit(function(e){
-      const html = el_editor.find('.ql-editor').html()
-      const el_input = $('#user_profile_text');
-      el_input.val(html);
-    });
+    tinymce.init({
+      selector: '#user_profile_text',
+      height: 350,
+      menubar: false,
+      plugins: [
+        'autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime table contextmenu paste code'
+      ],
+      toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image',
+    })
   },
 }
