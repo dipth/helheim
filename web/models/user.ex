@@ -125,6 +125,12 @@ defmodule Helheim.User do
     user.role == "admin"
   end
 
+  def delete!(user) do
+    photo_albums = assoc(user, :photo_albums) |> Repo.all
+    Parallel.pmap(photo_albums, fn(pa) -> Helheim.PhotoAlbum.delete!(pa) end)
+    Repo.delete!(user)
+  end
+
   defp put_password_hash(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->

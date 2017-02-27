@@ -1,4 +1,10 @@
-<h3 class="mb-1"><%= gettext "Private conversation with %{username}", username: @partner.username %></h3>
+<h3 class="mb-1">
+  <%= if @partner do %>
+    <%= gettext "Private conversation with %{username}", username: @partner.username %>
+  <% else %>
+    <%= gettext "Private conversation with %{username}", username: "(#{gettext("User deleted")})" %>
+  <% end %>
+</h3>
 
 <%= if Enum.empty? @messages do %>
   <div class="alert alert-info text-center" role="alert">
@@ -13,4 +19,6 @@
   </ul>
   <%= lpaginate @conn, @messages %>
 <% end %>
-<%= render "form.html", conn: @conn, me: @me, partner: @partner %>
+<%= if @partner do %>
+  <%= render "form.html", conn: @conn, me: @me, partner: @partner %>
+<% end %>

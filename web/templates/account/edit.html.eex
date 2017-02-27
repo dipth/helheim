@@ -79,5 +79,36 @@
         </div>
       </div>
     <% end %>
+
+    <div class="card">
+      <div class="card-header">
+        <strong><%= gettext "Delete Account" %></strong>
+      </div>
+      <div class="card-block p-2">
+        <p>
+          <%= gettext "Click the button below to delete your account." %><br>
+          <%= gettext "Please be aware that the following data will be permanently deleted and therefore unrecoverable:" %>
+        </p>
+        <ul>
+          <li><%= gettext "Your profile along with text, details and avatar" %></li>
+          <li><%= gettext "All your blog posts along with all comments" %></li>
+          <li><%= gettext "All your photo albums along with all photos" %></li>
+        </ul>
+        <p>
+          <%= gettext "The following data will not be deleted but will be anonymized:" %>
+        </p>
+        <ul>
+          <li><%= gettext "Any comments you posted on stuff from other users" %></li>
+          <li><%= gettext "Any forum topics or replies that you posted" %></li>
+          <li><%= gettext "Any private message that you sent to someone else" %></li>
+        </ul>
+        <p>
+          <%= link to: account_path(@conn, :delete), method: :delete, data: [confirm: gettext("Are you sure? All your data will be permanently lost!")], class: "btn btn-danger btn-sm" do %>
+            <i class="fa fa-trash"></i>
+            <%= gettext "Delete Account" %>
+          <% end %>
+        </p>
+      </div>
+    </div>
   </div>
 </div>

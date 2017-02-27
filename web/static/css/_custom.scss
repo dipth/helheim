@@ -58,14 +58,14 @@ form.link {
   font-family: 'Pirata One', cursive;
 }
 
-.comment-author-avatar {
+.comment .img-avatar {
   height: 25px;
   margin-left: -0.5rem;
-  margin-right: 0.5rem;
+  margin-right: 0.2rem;
 }
 
-.sender-avatar {
-  height: 35px;
+.img-avatar {
+  height: 25px;
 }
 
 .conversation {
@@ -79,7 +79,8 @@ form.link {
     padding-top: 1rem;
   }
 
-  .sender-avatar {
+  .img-avatar {
+    float: left;
     margin-right: 1rem;
   }
 
@@ -100,7 +101,8 @@ form.link {
   .message-me {
     flex-direction: row-reverse;
 
-    .sender-avatar {
+    .img-avatar {
+      float: right;
       margin-left: 1rem;
     }
 

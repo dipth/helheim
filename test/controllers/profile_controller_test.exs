@@ -25,6 +25,13 @@ defmodule Helheim.ProfileControllerTest do
         get conn, "/profiles/1"
       end
     end
+
+    test "it supports showing comments from deleted users", %{conn: conn} do
+      comment = insert(:profile_comment, author: nil)
+      profile = comment.profile
+      conn    = get conn, "/profiles/#{profile.id}"
+      assert html_response(conn, 200)
+    end
   end
 
   describe "show/2 when not signed in" do

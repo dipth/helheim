@@ -17,8 +17,8 @@ defmodule Helheim.PrivateConversationController do
 
   def show(conn, params = %{"partner_id" => partner_id}) do
     me              = current_resource(conn)
-    partner         = Repo.one!(from u in User, where: u.id == ^partner_id and u.id != ^me.id)
-    conversation_id = PrivateMessage.calculate_conversation_id(me, partner)
+    partner         = Repo.one(from u in User, where: u.id == ^partner_id and u.id != ^me.id)
+    conversation_id = PrivateMessage.calculate_conversation_id(me, partner || partner_id)
 
     messages =
       PrivateMessage

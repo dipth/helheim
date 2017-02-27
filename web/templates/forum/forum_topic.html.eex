@@ -13,22 +13,10 @@
   </div>
   <div>
     <small>
-      <span class="badge <%= if Helheim.User.admin?(@forum_topic.user) do %>badge-primary<% else %>badge-default<% end %>">
-        <i class="fa fa-user fa-fw"></i>
-        <%= @forum_topic.user.username %>
-        <%= if Helheim.User.admin?(@forum_topic.user) do %>(admin)<% end %>
-        -
-        <%= time_ago_in_words @forum_topic.inserted_at %>
-      </span>
+      <%= user_badge @forum_topic.user, icon: "fa-user", postfix: " - #{time_ago_in_words @forum_topic.inserted_at}" %>
       <%= if forum_reply do %>
         <i class="fa fa-angle-right fa-fw"></i>
-        <span class="badge <%= if Helheim.User.admin?(forum_reply.user) do %>badge-primary<% else %>badge-default<% end %>">
-          <i class="fa fa-commenting-o fa-fw"></i>
-          <%= forum_reply.user.username %>
-          <%= if Helheim.User.admin?(forum_reply.user) do %>(admin)<% end %>
-          -
-          <%= time_ago_in_words forum_reply.inserted_at %>
-        </span>
+        <%= user_badge forum_reply.user, icon: "fa-commenting-o", postfix: " - #{time_ago_in_words forum_reply.inserted_at}" %>
       <% end %>
     </small>
   </div>

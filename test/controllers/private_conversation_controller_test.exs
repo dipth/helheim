@@ -23,6 +23,15 @@ defmodule Helheim.PrivateConversationControllerTest do
       assert conn.resp_body =~ "Message Two"
       refute conn.resp_body =~ "Message Three"
     end
+
+    test "it supports showing conversations where the other user has been deleted", %{conn: conn, user: user} do
+      partner = insert(:user)
+      insert_message(user, partner, "Message With Deleted User")
+      Repo.delete!(partner)
+      conn = get conn, "/private_conversations"
+      assert html_response(conn, 200)
+      assert conn.resp_body =~ "Message With Deleted User"
+    end
   end
 
   describe "index/2 when not signed in" do
@@ -43,12 +52,6 @@ defmodule Helheim.PrivateConversationControllerTest do
       assert html_response(conn, 200) =~ gettext("Private conversation with %{username}", username: user.username)
     end
 
-    test "it shows an error page if you supply your own user id", %{conn: conn, user: user} do
-      assert_error_sent :not_found, fn ->
-        get conn, "/private_conversations/#{user.id}"
-      end
-    end
-
     test "it shows only messages between the current user and the specified partner", %{conn: conn, user: user_a} do
       user_b = insert(:user)
       user_c = insert(:user)
@@ -59,6 +62,15 @@ defmodule Helheim.PrivateConversationControllerTest do
       assert conn.resp_body =~ "Message One"
       refute conn.resp_body =~ "Message Two"
       refute conn.resp_body =~ "Message Three"
+    end
+
+    test "it supports showing conversations where the other user has been deleted", %{conn: conn, user: user} do
+      partner = insert(:user)
+      insert_message(user, partner, "Message With Deleted User")
+      Repo.delete!(partner)
+      conn = get conn, "/private_conversations/#{partner.id}"
+      assert html_response(conn, 200)
+      assert conn.resp_body =~ "Message With Deleted User"
     end
   end
 

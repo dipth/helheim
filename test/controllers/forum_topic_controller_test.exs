@@ -124,6 +124,19 @@ defmodule Helheim.ForumTopicControllerTest do
       refute conn.resp_body =~ reply_2.body
     end
 
+    test "it supports showing topics where the user of the topic is deleted", %{conn: conn} do
+      topic = insert(:forum_topic, user: nil, title: "Topic with deleted user")
+      conn  = get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}"
+      assert html_response(conn, 200) =~ "Topic with deleted user"
+    end
+
+    test "it supports showing topics where the user of a recent reply is deleted", %{conn: conn} do
+      reply = insert(:forum_reply, user: nil, body: "Reply with deleted user")
+      topic = reply.forum_topic
+      conn  = get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}"
+      assert html_response(conn, 200) =~ "Reply with deleted user"
+    end
+
     test "it only shows the actual topic on the first page of the replies", %{conn: conn, user: user} do
       topic = insert(:forum_topic, body: "What a topic!")
       insert_list(27, :forum_reply, forum_topic: topic, user: user)

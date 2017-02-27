@@ -1,9 +1,8 @@
-<div class="card">
+<div class="card comment">
   <div class="card-header">
     <div class="d-flex flex-row justify-content-between">
       <div>
-        <%= link img_tag(Helheim.Avatar.url({@comment.author.avatar, @comment.author}, :tiny), class: "rounded comment-author-avatar"), to: public_profile_path(@conn, :show, @comment.author) %>
-        <%= link @comment.author.username, to: public_profile_path(@conn, :show, @comment.author) %>
+        <%= username_with_avatar @comment.author, avatar_before_username: true %>
       </div>
       <div class="hidden-xs-down">
         <small>

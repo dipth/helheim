@@ -21,6 +21,14 @@ defmodule Helheim.Factory do
     }
   end
 
+  def blog_post_comment_factory do
+    %Helheim.Comment{
+      author: build(:user),
+      blog_post: build(:blog_post),
+      body: "My Aweseome Comment"
+    }
+  end
+
   def profile_comment_factory do
     %Helheim.Comment{
       author: build(:user),

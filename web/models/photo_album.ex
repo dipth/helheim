@@ -1,7 +1,6 @@
 defmodule Helheim.PhotoAlbum do
   use Helheim.Web, :model
   alias Helheim.Repo
-  alias Helheim.Photo
 
   schema "photo_albums" do
     belongs_to :user,        Helheim.User
@@ -32,7 +31,7 @@ defmodule Helheim.PhotoAlbum do
 
   def delete!(photo_album) do
     photos = assoc(photo_album, :photos) |> Repo.all
-    Enum.each(photos, fn(p) -> Photo.delete!(p) end)
+    Parallel.pmap(photos, fn(p) -> Helheim.Photo.delete!(p) end)
     Repo.delete!(photo_album)
   end
 end

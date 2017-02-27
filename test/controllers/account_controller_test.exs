@@ -1,5 +1,6 @@
 defmodule Helheim.AccountControllerTest do
   use Helheim.ConnCase
+  import Mock
   use Bamboo.Test
   alias Helheim.Repo
   alias Helheim.User
@@ -104,6 +105,28 @@ defmodule Helheim.AccountControllerTest do
   describe "update/2 when not signed in" do
     test "it redirects back to the sign in page", %{conn: conn} do
       conn = put conn, "/account", user: %{name: "New Name", email: "new@email.com", password: "newpassword", password_confirmation: "newpassword", existing_password: "wrong"}
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # delete/2
+  describe "delete/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it deletes the users account, signs him out and redirects to the landing page", %{conn: conn, user: user},
+      User, [:passthrough], [delete!: fn(_user) -> {:ok} end] do
+
+      conn = delete conn, "/account"
+      assert called User.delete!(user)
+      assert redirected_to(conn) == page_path(conn, :index)
+      refute Guardian.Plug.current_resource(conn)
+    end
+  end
+
+  describe "delete/2 when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      conn = delete conn, "/account"
       assert redirected_to(conn) == session_path(conn, :new)
     end
   end

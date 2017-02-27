@@ -333,7 +333,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:153
+#: web/models/user.ex:159
 msgid "does not match your current password"
 msgstr ""
 
@@ -507,11 +507,11 @@ msgstr ""
 msgid "Send private message"
 msgstr ""
 
-#: web/templates/private_conversation/show.html.eex:6
+#: web/templates/private_conversation/show.html.eex:12
 msgid "Start by writing a message below!"
 msgstr ""
 
-#: web/templates/private_conversation/show.html.eex:5
+#: web/templates/private_conversation/show.html.eex:11
 msgid "There are no messages in this conversation..."
 msgstr ""
 
@@ -534,7 +534,8 @@ msgstr[1] ""
 msgid "Private Messages"
 msgstr ""
 
-#: web/templates/private_conversation/show.html.eex:1
+#: web/templates/private_conversation/show.html.eex:3
+#: web/templates/private_conversation/show.html.eex:5
 msgid "Private conversation with %{username}"
 msgstr ""
 
@@ -750,12 +751,12 @@ msgstr ""
 msgid "Forums and Categories"
 msgstr ""
 
-#: web/templates/forum_topic/show.html.eex:49
+#: web/templates/forum_topic/show.html.eex:45
 msgid "Go to the last page to reply..."
 msgstr ""
 
 #: web/templates/blog_post/form.html.eex:21
-#: web/templates/forum_topic/show.html.eex:48
+#: web/templates/forum_topic/show.html.eex:44
 #: web/templates/profile/edit.html.eex:58
 msgid "Hint"
 msgstr ""
@@ -817,4 +818,59 @@ msgstr ""
 #: web/templates/blog_post/form.html.eex:21
 #: web/templates/profile/edit.html.eex:58
 msgid "You can insert pictures from your photo albums by copying the image url and pasting it into the source-field when clicking the image button in the editor"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:106
+msgid "Are you sure? All your data will be permanently lost!"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:85
+#: web/templates/account/edit.html.eex:108
+msgid "Delete Account"
+msgstr ""
+
+#: web/controllers/account_controller.ex:32
+msgid "Hope to see you again some time!"
+msgstr ""
+
+#: web/templates/private_conversation/index.html.eex:19
+#: web/templates/private_conversation/show.html.eex:5
+#: web/views/profile_helpers.ex:10 web/views/profile_helpers.ex:51
+msgid "User deleted"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:94
+msgid "All your blog posts along with all comments"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:95
+msgid "All your photo albums along with all photos"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:101
+msgid "Any comments you posted on stuff from other users"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:102
+msgid "Any forum topics or replies that you posted"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:103
+msgid "Any private message that you sent to someone else"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:89
+msgid "Click the button below to delete your account."
+msgstr ""
+
+#: web/templates/account/edit.html.eex:90
+msgid "Please be aware that the following data will be permanently deleted and therefore unrecoverable:"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:98
+msgid "The following data will not be deleted but will be anonymized:"
+msgstr ""
+
+#: web/templates/account/edit.html.eex:93
+msgid "Your profile along with text, details and avatar"
 msgstr ""

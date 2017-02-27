@@ -345,7 +345,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:153
+#: web/models/user.ex:159
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -522,11 +522,11 @@ msgstr "Send Besked"
 msgid "Send private message"
 msgstr "Send privat besked"
 
-#: web/templates/private_conversation/show.html.eex:6
+#: web/templates/private_conversation/show.html.eex:12
 msgid "Start by writing a message below!"
 msgstr "Start med at skrive en besked nedenfor!"
 
-#: web/templates/private_conversation/show.html.eex:5
+#: web/templates/private_conversation/show.html.eex:11
 msgid "There are no messages in this conversation..."
 msgstr "Der er ingen beskeder i denne samtale…"
 
@@ -549,7 +549,8 @@ msgstr[1] "Du har %{count} notifikationer"
 msgid "Private Messages"
 msgstr "Private Beskeder"
 
-#: web/templates/private_conversation/show.html.eex:1
+#: web/templates/private_conversation/show.html.eex:3
+#: web/templates/private_conversation/show.html.eex:5
 msgid "Private conversation with %{username}"
 msgstr "Privat samtale med %{username}"
 
@@ -768,12 +769,12 @@ msgstr "Forum"
 msgid "Forums and Categories"
 msgstr "Forum og kategorier"
 
-#: web/templates/forum_topic/show.html.eex:49
+#: web/templates/forum_topic/show.html.eex:45
 msgid "Go to the last page to reply..."
 msgstr "Hop til den sidste side for at sende et svar"
 
 #: web/templates/blog_post/form.html.eex:21
-#: web/templates/forum_topic/show.html.eex:48
+#: web/templates/forum_topic/show.html.eex:44
 #: web/templates/profile/edit.html.eex:58
 msgid "Hint"
 msgstr "Tip"
@@ -836,3 +837,58 @@ msgstr "Du kan ikke oprette indlæg i et låst forum!"
 #: web/templates/profile/edit.html.eex:58
 msgid "You can insert pictures from your photo albums by copying the image url and pasting it into the source-field when clicking the image button in the editor"
 msgstr "Du kan indsætte billeder fra dine fotoalbums ved at kopiere billedets url og indsætte det i “source”-feltet når du klikker på billed-knappen i editoren"
+
+#: web/templates/account/edit.html.eex:106
+msgid "Are you sure? All your data will be permanently lost!"
+msgstr "Er du helt sikker? Alle dine data vil blive slettet permanent!"
+
+#: web/templates/account/edit.html.eex:85
+#: web/templates/account/edit.html.eex:108
+msgid "Delete Account"
+msgstr "Slet konto"
+
+#: web/controllers/account_controller.ex:32
+msgid "Hope to see you again some time!"
+msgstr "Håber vi ses igen engang!"
+
+#: web/templates/private_conversation/index.html.eex:19
+#: web/templates/private_conversation/show.html.eex:5
+#: web/views/profile_helpers.ex:10 web/views/profile_helpers.ex:51
+msgid "User deleted"
+msgstr "Slettet bruger"
+
+#: web/templates/account/edit.html.eex:94
+msgid "All your blog posts along with all comments"
+msgstr "Alle dine blogs inklusive kommentarer"
+
+#: web/templates/account/edit.html.eex:95
+msgid "All your photo albums along with all photos"
+msgstr "Alle dine fotoalbums og deres fotos"
+
+#: web/templates/account/edit.html.eex:101
+msgid "Any comments you posted on stuff from other users"
+msgstr "Alle kommentarer som du har oprettet på ting fra andre brugere"
+
+#: web/templates/account/edit.html.eex:102
+msgid "Any forum topics or replies that you posted"
+msgstr "Alle de forumindlæg og svar som du har oprettet"
+
+#: web/templates/account/edit.html.eex:103
+msgid "Any private message that you sent to someone else"
+msgstr "Alle private beskeder som du har sendt til andre brugere"
+
+#: web/templates/account/edit.html.eex:89
+msgid "Click the button below to delete your account."
+msgstr "Klik på knappen herunder for at slette din konto"
+
+#: web/templates/account/edit.html.eex:90
+msgid "Please be aware that the following data will be permanently deleted and therefore unrecoverable:"
+msgstr "Bemærk at følgende data vil blive slettet permanent og vil derfor ikke kunne gendannes:"
+
+#: web/templates/account/edit.html.eex:98
+msgid "The following data will not be deleted but will be anonymized:"
+msgstr "Følgende data vil ikke blive slettet, men vil blive anonymiseret:"
+
+#: web/templates/account/edit.html.eex:93
+msgid "Your profile along with text, details and avatar"
+msgstr "Din profil inklusive tekst, detaljer og profilbillede"

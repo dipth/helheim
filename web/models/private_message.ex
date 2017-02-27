@@ -2,6 +2,7 @@ defmodule Helheim.PrivateMessage do
   use Helheim.Web, :model
   alias Helheim.Repo
   alias Helheim.PrivateMessage
+  alias Helheim.User
 
   schema "private_messages" do
     field      :conversation_id, :string
@@ -42,17 +43,26 @@ defmodule Helheim.PrivateMessage do
       where: m.id in(^last_conversation_msg_ids_for(user))
   end
 
-  def calculate_conversation_id(user_1, user_2) do
-    [user_1.id, user_2.id]
+  def calculate_conversation_id(user_1 = %User{}, user_2 = %User{}), do: calculate_conversation_id(user_1.id, user_2.id)
+  def calculate_conversation_id(user_1 = %User{}, user_2_id), do: calculate_conversation_id(user_1.id, user_2_id)
+  def calculate_conversation_id(user_1_id, user_2 = %User{}), do: calculate_conversation_id(user_1_id, user_2.id)
+  def calculate_conversation_id(user_1_id, user_2_id) do
+    [user_1_id, user_2_id]
     |> Enum.sort()
     |> Enum.join(":")
   end
 
   def partner(message, you) do
-    if message.sender.id == you.id do
-      message.recipient
-    else
-      message.sender
+    cond do
+      message.sender_id && message.recipient_id && message.sender_id == you.id ->
+        message.recipient
+      message.sender_id && message.recipient_id && message.recipient_id == you.id ->
+        message.sender
+      true ->
+        message.conversation_id
+        |> String.split(":")
+        |> Enum.map(fn(str_id) -> String.to_integer(str_id) end)
+        |> Enum.find(fn(id) -> id != you.id end)
     end
   end
 

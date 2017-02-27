@@ -9,8 +9,7 @@
         </small>
       </div>
       <div>
-        <%= link @forum_reply.user.username, to: public_profile_path(@conn, :show, @forum_reply.user.id) %>&nbsp;
-        <%= link img_tag(Helheim.Avatar.url({@forum_reply.user.avatar, @forum_reply.user}, :tiny), class: "img-avatar"), to: public_profile_path(@conn, :show, @forum_reply.user.id) %>
+        <%= username_with_avatar @forum_reply.user, [] %>
       </div>
     </div>
   </div>

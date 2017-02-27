@@ -12,6 +12,12 @@ defmodule Helheim.ForumControllerTest do
       conn = get conn, "/forums"
       assert html_response(conn, 200)
     end
+
+    test "it supports showing forums where the user of the newest topic is deleted", %{conn: conn} do
+      insert(:forum_topic, user: nil, title: "Topic with deleted user")
+      conn = get conn, "/forums"
+      assert html_response(conn, 200) =~ "Topic with deleted user"
+    end
   end
 
   describe "index/2 when not signed in" do
@@ -45,6 +51,12 @@ defmodule Helheim.ForumControllerTest do
       conn = get conn, "/forums/#{forum.id}"
       assert conn.resp_body =~ topic_1.title
       refute conn.resp_body =~ topic_2.title
+    end
+
+    test "it supports showing forums where the user of a recent topic is deleted", %{conn: conn} do
+      forum_topic = insert(:forum_topic, user: nil, title: "Topic with deleted user")
+      conn = get conn, "/forums/#{forum_topic.forum.id}"
+      assert html_response(conn, 200) =~ "Topic with deleted user"
     end
 
     test_with_mock "it shows a `create new topic` button if the forum is not locked", %{conn: conn},

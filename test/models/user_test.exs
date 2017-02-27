@@ -1,7 +1,9 @@
 defmodule Helheim.UserTest do
   use Helheim.ModelCase
+  import Mock
   alias Helheim.Repo
   alias Helheim.User
+  alias Helheim.PhotoAlbum
   import Helheim.Factory
 
   describe "registration_changeset/2" do
@@ -132,6 +134,61 @@ defmodule Helheim.UserTest do
     test "it returns false if the role of the user is not 'admin'" do
       user = insert(:user, role: "nope")
       refute User.admin?(user)
+    end
+  end
+
+  describe "delete/1" do
+    test_with_mock "it calls PhotoAlbum.delete! for each photo album belonging to the user",
+      PhotoAlbum, [:passthrough], [delete!: fn(_photo_album) -> {:ok} end] do
+
+      user         = insert(:user)
+      photo_album1 = Repo.get_by(PhotoAlbum, id: insert(:photo_album, user: user).id)
+      photo_album2 = Repo.get_by(PhotoAlbum, id: insert(:photo_album, user: user).id)
+      photo_album3 = Repo.get_by(PhotoAlbum, id: insert(:photo_album).id)
+
+      User.delete! user
+
+      assert called PhotoAlbum.delete!(photo_album1)
+      assert called PhotoAlbum.delete!(photo_album2)
+      refute called PhotoAlbum.delete!(photo_album3)
+    end
+
+    test "it deletes the user" do
+      user = insert(:user)
+      User.delete! user
+      refute Repo.get(User, user.id)
+    end
+  end
+
+  describe "foreign keys" do
+    test "all associated blog posts are deleted when a user is deleted" do
+      user      = insert(:user)
+      blog_post = insert(:blog_post, user: user)
+      Repo.delete!(user)
+      refute Repo.get(Helheim.BlogPost, blog_post.id)
+    end
+
+    test "all authored comments are nilified when a user is deleted" do
+      user              = insert(:user)
+      blog_post_comment = insert(:blog_post_comment, author: user)
+      profile_comment   = insert(:profile_comment, author: user)
+      Repo.delete!(user)
+      assert Repo.get(Helheim.Comment, blog_post_comment.id).author_id == nil
+      assert Repo.get(Helheim.Comment, profile_comment.id).author_id   == nil
+    end
+
+    test "all associated forum topics are nilified when a user is deleted" do
+      user = insert(:user)
+      forum_topic = insert(:forum_topic, user: user)
+      Repo.delete!(user)
+      assert Repo.get(Helheim.ForumTopic, forum_topic.id).user_id == nil
+    end
+
+    test "all associated forum replies are nilified when a user is deleted" do
+      user = insert(:user)
+      forum_reply = insert(:forum_reply, user: user)
+      Repo.delete!(user)
+      assert Repo.get(Helheim.ForumReply, forum_reply.id).user_id == nil
     end
   end
 end

@@ -63,6 +63,7 @@ defmodule Helheim.Web do
       import Helheim.Gettext
       import Helheim.TimeHelpers
       import Helheim.PaginationHelpers
+      import Helheim.ProfileHelpers
 
       use Helheim.BreadcrumbsDefaults
     end

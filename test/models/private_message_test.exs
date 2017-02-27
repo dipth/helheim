@@ -9,5 +9,13 @@ defmodule Helheim.PrivateMessageTest do
       assert PrivateMessage.calculate_conversation_id(second_user, first_user) == "#{first_user.id}:#{second_user.id}"
       assert PrivateMessage.calculate_conversation_id(first_user, second_user) == "#{first_user.id}:#{second_user.id}"
     end
+
+    test "it works when using integers instead of users" do
+      first_user  = insert(:user)
+      second_user = insert(:user)
+      assert PrivateMessage.calculate_conversation_id(first_user.id, second_user.id) == "#{first_user.id}:#{second_user.id}"
+      assert PrivateMessage.calculate_conversation_id(first_user.id, second_user) == "#{first_user.id}:#{second_user.id}"
+      assert PrivateMessage.calculate_conversation_id(first_user, second_user.id) == "#{first_user.id}:#{second_user.id}"
+    end
   end
 end

@@ -121,6 +121,13 @@ defmodule Helheim.BlogPostControllerTest do
         get conn, "/profiles/#{user.id}/blog_posts/#{blog_post.id}"
       end
     end
+
+    test "it supports showing comments from deleted users", %{conn: conn} do
+      comment   = insert(:blog_post_comment, author: nil)
+      blog_post = comment.blog_post
+      conn      = get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
+      assert html_response(conn, 200)
+    end
   end
 
   describe "show/2 when not signed in" do

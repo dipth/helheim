@@ -26,6 +26,13 @@ defmodule Helheim.ProfileCommentControllerTest do
       refute conn.resp_body =~ comment_2.body
     end
 
+    test "it supports showing comments where the author is deleted", %{conn: conn} do
+      comment = insert(:profile_comment, author: nil, body: "Comment with deleted user")
+      profile = comment.profile
+      conn = get conn, "/profiles/#{profile.id}/comments"
+      assert html_response(conn, 200) =~ "Comment with deleted user"
+    end
+
     test "it redirects to an error page when supplying an non-existing profile id", %{conn: conn} do
       assert_error_sent :not_found, fn ->
         get conn, "/profiles/1/comments"

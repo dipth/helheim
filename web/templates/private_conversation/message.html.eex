@@ -1,14 +1,9 @@
-<li class="message <%= if @message.sender.id == Guardian.Plug.current_resource(@conn).id do "message-me" end %>">
-  <%= img_tag(Helheim.Avatar.url({@message.sender.avatar, @message.sender}, :tiny), class: "sender-avatar img-avatar") %>
+<li class="message <%= if @message.sender == Guardian.Plug.current_resource(@conn) do "message-me" end %>">
   <div class="message-content">
     <div class="message-header">
       <div class="message-sender-name">
         <strong>
-          <%= if @message.sender.id == Guardian.Plug.current_resource(@conn).id do %>
-            <%= @message.sender.username %>
-          <% else %>
-            <%= link @message.sender.username, to: public_profile_path(@conn, :show, @message.sender) %>
-          <% end %>
+          <%= username_with_avatar @message.sender, [] %>
         </strong>
       </div>
       <div class="message-timestamp">
