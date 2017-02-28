@@ -1,5 +1,6 @@
 defmodule Helheim.BlogPostControllerTest do
   use Helheim.ConnCase
+  import Mock
   alias Helheim.BlogPost
 
   @valid_attrs %{body: "Body Text", title: "Title String"}
@@ -127,6 +128,14 @@ defmodule Helheim.BlogPostControllerTest do
       blog_post = comment.blog_post
       conn      = get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
       assert html_response(conn, 200)
+    end
+
+    test_with_mock "it tracks the view", %{conn: conn, user: user},
+      Helheim.VisitorLogEntry, [:passthrough], [track!: fn(_user, _thing) -> {:ok} end] do
+
+      blog_post = insert(:blog_post)
+      get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
+      assert called Helheim.VisitorLogEntry.track!(user, blog_post)
     end
   end
 

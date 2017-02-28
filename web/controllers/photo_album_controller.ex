@@ -50,6 +50,7 @@ defmodule Helheim.PhotoAlbumController do
       assoc(photo_album, :photos)
       |> Photo.chronologically
       |> Repo.all
+    Helheim.VisitorLogEntry.track! current_resource(conn), photo_album
     render(conn, "show.html", user: user, photo_album: photo_album, photos: photos)
   end
 

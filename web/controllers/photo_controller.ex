@@ -27,8 +27,8 @@ defmodule Helheim.PhotoController do
     photo_album = assoc(user, :photo_albums)
                   |> PhotoAlbum.viewable_by(user, current_resource(conn))
                   |> Repo.get!(photo_album_id)
-    photo       = assoc(photo_album, :photos) |> Repo.get!(id)
-
+    photo       = assoc(photo_album, :photos) |> preload(:photo_album) |> Repo.get!(id)
+    Helheim.VisitorLogEntry.track! current_resource(conn), photo
     render(conn, "show.html", user: user, photo_album: photo_album, photo: photo)
   end
 

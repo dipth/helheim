@@ -23,16 +23,17 @@ defmodule Helheim.User do
     field :gender,                          :string
     field :gender_custom,                   :string, virtual: true
     field :location,                        :string
-
-    has_many :blog_posts, Helheim.BlogPost
-    has_many :comments, Helheim.Comment, foreign_key: :profile_id
-    has_many :authored_comments, Helheim.Comment, foreign_key: :author_id
-    has_many :notifications, Helheim.Notification
-    has_many :sent_private_messages, Helheim.PrivateMessage, foreign_key: :sender_id
-    has_many :received_private_messages, Helheim.PrivateMessage, foreign_key: :recipient_id
-    has_many :photo_albums, Helheim.PhotoAlbum
+    field :visitor_count,                   :integer
 
     timestamps()
+
+    has_many :blog_posts,                Helheim.BlogPost
+    has_many :comments,                  Helheim.Comment,        foreign_key: :profile_id
+    has_many :authored_comments,         Helheim.Comment,        foreign_key: :author_id
+    has_many :notifications,             Helheim.Notification
+    has_many :sent_private_messages,     Helheim.PrivateMessage, foreign_key: :sender_id
+    has_many :received_private_messages, Helheim.PrivateMessage, foreign_key: :recipient_id
+    has_many :photo_albums,              Helheim.PhotoAlbum
   end
 
   def newest(query) do

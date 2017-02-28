@@ -9,7 +9,8 @@ defmodule Helheim.Factory do
       password_hash: "$2b$12$Zc2AexPqKCRDCybgOJ28dOBJSGOd70xYSdyS2fb/vZbRQ/dhAnCym", # "password"
       confirmation_token: "ZUhtaHI4R29mZVdYSjdVRUNvMWhzZz09",
       confirmed_at: DateTime.utc_now,
-      profile_text: "Foo Bar"
+      profile_text: "Foo Bar",
+      visitor_count: 0
     }
   end
 
@@ -17,7 +18,8 @@ defmodule Helheim.Factory do
     %Helheim.BlogPost{
       user: build(:user),
       title: "My Awesome Title",
-      body: "My Aweseome Text"
+      body: "My Aweseome Text",
+      visitor_count: 0
     }
   end
 
@@ -59,14 +61,16 @@ defmodule Helheim.Factory do
       user: build(:user),
       title: "My Photo Album",
       description: "Full of photos",
-      visibility: "public"
+      visibility: "public",
+      visitor_count: 0
     }
   end
 
   def photo_factory do
     %Helheim.Photo{
       photo_album: build(:photo_album),
-      uuid: sequence(:uuid, &"5976423a-ee35-11e3-8569-14109ff1a30#{&1}")
+      uuid: sequence(:uuid, &"5976423a-ee35-11e3-8569-14109ff1a30#{&1}"),
+      visitor_count: 0
     }
   end
 
@@ -107,6 +111,12 @@ defmodule Helheim.Factory do
     %Helheim.Term{
       body: "Some Content",
       published: false
+    }
+  end
+
+  def visitor_log_entry_factory do
+    %Helheim.VisitorLogEntry{
+      user: build(:user)
     }
   end
 end

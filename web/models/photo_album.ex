@@ -3,14 +3,15 @@ defmodule Helheim.PhotoAlbum do
   alias Helheim.Repo
 
   schema "photo_albums" do
-    belongs_to :user,        Helheim.User
-    field      :title,       :string
-    field      :description, :string
-    field      :visibility,  :string
-
-    has_many   :photos, Helheim.Photo
+    field :title,         :string
+    field :description,   :string
+    field :visibility,    :string
+    field :visitor_count, :integer
 
     timestamps()
+
+    belongs_to :user,   Helheim.User
+    has_many   :photos, Helheim.Photo
   end
 
   def changeset(struct, params \\ %{}) do

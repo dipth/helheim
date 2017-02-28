@@ -52,6 +52,7 @@ defmodule Helheim.BlogPostController do
       |> Comment.newest
       |> preload(:author)
       |> Repo.paginate(page: sanitized_page(params["page"]))
+    Helheim.VisitorLogEntry.track! current_resource(conn), blog_post
     render(conn, "show.html", blog_post: blog_post, comments: comments)
   end
 
