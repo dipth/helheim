@@ -5,4 +5,8 @@
     <i class="fa fa-comments-o"></i>
     <%= gettext("Forums and Categories") %>
   <% end %>
+  <%= link to: admin_term_path(@conn, :index), class: "nav-link" do %>
+    <i class="fa fa-file-text-o"></i>
+    <%= gettext("Terms") %>
+  <% end %>
 </li>

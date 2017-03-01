@@ -1,0 +1,13 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><i class="fa fa-lock"></i> <%= gettext("Administration") %></li>
+  <li class="breadcrumb-item"><%= link gettext("Terms"), to: admin_term_path(@conn, :index) %></li>
+  <li class="breadcrumb-item active"><%= gettext "Edit Terms" %></li>
+</ol>
+
+<div class="card">
+  <div class="card-header">
+    <%= gettext "Edit Terms" %>
+  </div>
+  <%= render "form.html", changeset: @changeset,
+                          action: admin_term_path(@conn, :update, @term) %>
+</div>

@@ -1,8 +1,10 @@
 defmodule Helheim.PageController do
   use Helheim.Web, :controller
+  alias Helheim.Repo
   alias Helheim.User
   alias Helheim.BlogPost
   alias Helheim.ForumTopic
+  alias Helheim.Term
 
   def index(conn, _params) do
     if Guardian.Plug.current_resource(conn) do
@@ -48,6 +50,11 @@ defmodule Helheim.PageController do
       newest_blog_posts: newest_blog_posts,
       newest_photos: newest_photos,
       newest_forum_topics: newest_forum_topics
+  end
+
+  def terms(conn, _params) do
+    term = Term |> Term.newest |> Term.published |> Ecto.Query.first |> Repo.one
+    render(conn, "terms.html", term: term, layout: {Helheim.LayoutView, "app_special.html"})
   end
 
   def debug(conn, _params) do

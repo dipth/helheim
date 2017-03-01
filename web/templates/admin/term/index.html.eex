@@ -1,0 +1,42 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><i class="fa fa-lock"></i> <%= gettext("Administration") %></li>
+  <li class="breadcrumb-item active"><%= gettext("Terms") %></li>
+</ol>
+
+<%= link to: admin_term_path(@conn, :new), class: "btn btn-outline-primary mb-1" do %>
+  <i class="fa fa-plus"></i>
+  <%= gettext("Create New Terms") %>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th><%= gettext "Inserted at" %></th>
+      <th><%= gettext "Updated at" %></th>
+      <th><%= gettext "Published?" %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for term <- @terms do %>
+      <tr>
+        <th scope="row"><%= term.id %></th>
+        <td><%= lt term.inserted_at, "{ISOdate} {ISOtime}" %></td>
+        <td><%= lt term.updated_at, "{ISOdate} {ISOtime}" %></td>
+        <td><%= term.published %></td>
+        <td class="text-right">
+          <%= link to: admin_term_path(@conn, :show, term), class: "btn btn-primary btn-sm" do %>
+            <i class="fa fa-fw fa-eye"></i>
+          <% end %>
+          <%= link to: admin_term_path(@conn, :edit, term), class: "btn btn-primary btn-sm" do %>
+            <i class="fa fa-fw fa-pencil"></i>
+          <% end %>
+          <%= link to: admin_term_path(@conn, :delete, term), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-sm" do %>
+            <i class="fa fa-fw fa-trash"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

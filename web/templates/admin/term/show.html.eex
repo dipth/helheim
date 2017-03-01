@@ -1,0 +1,15 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><i class="fa fa-lock"></i> <%= gettext("Administration") %></li>
+  <li class="breadcrumb-item"><%= link gettext("Terms"), to: admin_term_path(@conn, :index) %></li>
+  <li class="breadcrumb-item active"><%= gettext "Show Terms" %></li>
+</ol>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <hr>
+      <h1 class="mb-2"><%= gettext "Terms and rules" %></h1>
+      <%= raw @term.body %>
+    </div>
+  </div>
+</div>

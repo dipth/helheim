@@ -34,6 +34,7 @@ defmodule Helheim.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/terms", PageController, :terms
     get "/confirmation_pending", PageController, :confirmation_pending
     get "/debug", PageController, :debug
     resources "/registrations", RegistrationController, only: [:new, :create]
@@ -80,6 +81,7 @@ defmodule Helheim.Router do
     resources "/forum_categories", ForumCategoryController, only: [:index, :new, :create, :edit, :update, :delete] do
       resources "/forums", ForumController, only: [:new, :create, :edit, :update, :delete]
     end
+    resources "/terms", TermController
   end
 
   # Other scopes may use custom stacks.

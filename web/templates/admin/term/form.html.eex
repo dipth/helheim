@@ -1,0 +1,21 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <div class="card-block">
+    <div class="form-group <%= if f.errors[:body] do 'has-danger' end %>">
+      <%= label f, :body, gettext("Description"), class: "control-label" %>
+      <%= textarea f, :body, class: "form-control", rows: 10 %>
+      <%= if message = f.errors[:body] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :published do %>
+        <%= checkbox f, :published %>
+        <%= gettext "Published?" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Save Terms" %></button>
+  </div>
+<% end %>

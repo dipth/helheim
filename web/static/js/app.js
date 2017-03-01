@@ -26,6 +26,7 @@ import { BlogPostForm } from "web/static/js/blog_post_form";
 import { Notifications } from "web/static/js/notifications";
 import { SelectWithCustom } from "web/static/js/select_with_custom";
 import { PhotoUpload } from "web/static/js/photo_upload";
+import { AdminTermsForm } from "web/static/js/admin_terms_form";
 
 export var App = {
   run: function(){
@@ -37,6 +38,7 @@ export var App = {
     Notifications.run();
     SelectWithCustom.run();
     PhotoUpload.run();
+    AdminTermsForm.run();
   }
 }
 

@@ -102,4 +102,11 @@ defmodule Helheim.Factory do
       body: "Some Content"
     }
   end
+
+  def term_factory do
+    %Helheim.Term{
+      body: "Some Content",
+      published: false
+    }
+  end
 end

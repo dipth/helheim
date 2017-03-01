@@ -33,4 +33,21 @@ defmodule Helheim.PageControllerTest do
       assert html_response(conn, 200) =~ gettext("You are now signed in")
     end
   end
+
+  describe "terms/2" do
+    test "it returns a successful response with the latest published terms", %{conn: conn} do
+      insert(:term, body: "Old Published Terms",   published: true)
+      insert(:term, body: "Old Unpublished Terms", published: false)
+      insert(:term, body: "New Published Terms",   published: true)
+      insert(:term, body: "New Unpublished Terms", published: false)
+
+      conn = get conn, "/terms"
+      assert html_response(conn, 200) =~ "New Published Terms"
+    end
+
+    test "it returns a successful response when there are no terms", %{conn: conn} do
+      conn = get conn, "/terms"
+      assert html_response(conn, 200)
+    end
+  end
 end

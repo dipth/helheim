@@ -70,6 +70,11 @@
         </div>
       </div>
 
+      <p class="mb-2">
+        <%= gettext "By signing up you agree to the "%>
+        <%= link gettext("terms and rules"), to: page_path(@conn, :terms), target: "_blank" %>
+      </p>
+
       <button type="submit" class="btn btn-block btn-success"><%= gettext "Create Account" %></button>
     <% end %>
   </div>
