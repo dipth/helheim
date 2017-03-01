@@ -1,4 +1,4 @@
-<div class="text-center">
+<div class="text-center mb-2">
   <hr>
   <h1 class="mb-2"><%= gettext "Terms and rules" %></h1>
 

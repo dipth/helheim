@@ -6,7 +6,7 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8 text-center">
+    <div class="col-md-8 text-center mb-2">
       <hr>
       <h1 class="mb-2"><%= gettext "Terms and rules" %></h1>
       <%= raw @term.body %>
