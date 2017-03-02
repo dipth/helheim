@@ -1,22 +1,14 @@
-<div class="card">
-  <div class="card-header">
-    <strong>
-      <i class="fa fa-commenting-o fa-fw"></i>
-      <%= gettext "Submit new reply" %>
-    </strong>
+<%= form_for @changeset, @action, fn f -> %>
+  <div class="card-block">
+    <div class="form-group <%= if f.errors[:body] do 'has-danger' end %>">
+      <%= label f, :body, gettext("Content"), class: "control-label" %>
+      <%= textarea f, :body, class: "form-control", rows: 10 %>
+      <%= if message = f.errors[:body] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% end %>
+    </div>
   </div>
-  <%= form_for @changeset, @action, fn f -> %>
-    <div class="card-block">
-      <div class="form-group <%= if f.errors[:body] do 'has-danger' end %>">
-        <%= label f, :body, gettext("Content"), class: "control-label" %>
-        <%= textarea f, :body, class: "form-control", rows: 10 %>
-        <%= if message = f.errors[:body] do %>
-          <div class="form-control-feedback"><%= translate_error(message) %></div>
-        <% end %>
-      </div>
-    </div>
-    <div class="card-footer">
-      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Post Reply" %></button>
-    </div>
-  <% end %>
-</div>
+  <div class="card-footer">
+    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= @button_label %></button>
+  </div>
+<% end %>

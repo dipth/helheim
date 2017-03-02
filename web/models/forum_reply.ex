@@ -1,5 +1,6 @@
 defmodule Helheim.ForumReply do
   use Helheim.Web, :model
+  use Helheim.TimeLimitedEditableConcern
 
   schema "forum_replies" do
     field      :body,                :string

@@ -171,4 +171,140 @@ defmodule Helheim.ForumTopicControllerTest do
       assert redirected_to(conn) == session_path(conn, :new)
     end
   end
+
+  ##############################################################################
+  # edit/2
+  describe "edit/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it returns a successful response when specifying a valid forum_id and id and if the topic is editable by the user", %{conn: conn},
+      ForumTopic, [:passthrough], [editable_by?: fn(_topic, _user) -> true end] do
+
+      topic = insert(:forum_topic)
+      forum = topic.forum
+      conn  = get conn, "/forums/#{forum.id}/forum_topics/#{topic.id}/edit"
+      assert html_response(conn, 200) =~ gettext("Edit topic")
+    end
+
+    test_with_mock "it redirects to an error page when supplying an non-existing forum_id", %{conn: conn},
+      ForumTopic, [:passthrough], [editable_by?: fn(_topic, _user) -> true end] do
+
+      assert_error_sent :not_found, fn ->
+        topic = insert(:forum_topic)
+        forum = topic.forum
+        get conn, "/forums/#{forum.id + 1}/forum_topics/#{topic.id}/edit"
+      end
+    end
+
+    test_with_mock "it redirects to an error page when supplying an non-existing id", %{conn: conn},
+      ForumTopic, [:passthrough], [editable_by?: fn(_topic, _user) -> true end] do
+
+      assert_error_sent :not_found, fn ->
+        topic = insert(:forum_topic)
+        forum = topic.forum
+        get conn, "/forums/#{forum.id}/forum_topics/#{topic.id + 1}/edit"
+      end
+    end
+
+    test_with_mock "it redirects back to the topic if it is not editable by the user", %{conn: conn},
+      ForumTopic, [:passthrough], [editable_by?: fn(_topic, _user) -> false end] do
+
+      topic = insert(:forum_topic)
+      forum = topic.forum
+      conn  = get conn, "/forums/#{forum.id}/forum_topics/#{topic.id}/edit"
+      assert redirected_to(conn) == forum_forum_topic_path(conn, :show, forum, topic)
+    end
+  end
+
+  describe "edit/2 when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      topic = insert(:forum_topic)
+      forum = topic.forum
+      conn  = get conn, "/forums/#{forum.id}/forum_topics/#{topic.id}/edit"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # update/2
+  describe "update/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it updates the topic and redirects back to the topic", %{conn: conn},
+      ForumTopic, [:passthrough], [editable_by?: fn(_topic, _user) -> true end] do
+
+      user  = insert(:user)
+      topic = insert(:forum_topic, user: user, title: "Before", body: "Edit")
+      forum = topic.forum
+      conn  = put conn, "/forums/#{forum.id}/forum_topics/#{topic.id}", forum_topic: @valid_attrs
+      topic = Repo.one(ForumTopic)
+      assert redirected_to(conn) == forum_forum_topic_path(conn, :show, forum, topic)
+      assert topic.forum_id      == forum.id
+      assert topic.user_id       == user.id
+      assert topic.title         == @valid_attrs.title
+      assert topic.body          == @valid_attrs.body
+    end
+
+    test_with_mock "it does not update the topic but re-renders the edit template when posting invalid attrs", %{conn: conn},
+      ForumTopic, [:passthrough], [editable_by?: fn(_topic, _user) -> true end] do
+
+      topic = insert(:forum_topic, title: "Before", body: "Edit")
+      forum = topic.forum
+      conn  = put conn, "/forums/#{forum.id}/forum_topics/#{topic.id}", forum_topic: @invalid_attrs
+      topic = Repo.one(ForumTopic)
+      assert html_response(conn, 200) =~ gettext("Edit topic")
+      assert topic.title == "Before"
+      assert topic.body  == "Edit"
+    end
+
+    test_with_mock "does not update the topic but redirects to an error page when supplying an non-existing forum_id", %{conn: conn},
+      ForumTopic, [:passthrough], [editable_by?: fn(_topic, _user) -> true end] do
+
+      topic = insert(:forum_topic, title: "Before", body: "Edit")
+      forum = topic.forum
+      assert_error_sent :not_found, fn ->
+        put conn, "/forums/#{forum.id + 1}/forum_topics/#{topic.id}", forum_topic: @valid_attrs
+      end
+      topic = Repo.one(ForumTopic)
+      assert topic.title == "Before"
+      assert topic.body  == "Edit"
+    end
+
+    test_with_mock "it does not update the topic but redirects to an error page when supplying an non-existing id", %{conn: conn},
+      ForumTopic, [:passthrough], [editable_by?: fn(_topic, _user) -> true end] do
+
+      topic = insert(:forum_topic, title: "Before", body: "Edit")
+      forum = topic.forum
+      assert_error_sent :not_found, fn ->
+        put conn, "/forums/#{forum.id}/forum_topics/#{topic.id + 1}", forum_topic: @valid_attrs
+      end
+      topic = Repo.one(ForumTopic)
+      assert topic.title == "Before"
+      assert topic.body  == "Edit"
+    end
+
+    test_with_mock "it does not update the topic but redirects back to the topic if it is not editable by the user", %{conn: conn},
+      ForumTopic, [:passthrough], [editable_by?: fn(_topic, _user) -> false end] do
+
+      topic = insert(:forum_topic, title: "Before", body: "Edit")
+      forum = topic.forum
+      conn  = put conn, "/forums/#{forum.id}/forum_topics/#{topic.id}", forum_topic: @valid_attrs
+      topic = Repo.one(ForumTopic)
+      assert redirected_to(conn) == forum_forum_topic_path(conn, :show, forum, topic)
+      assert topic.title         == "Before"
+      assert topic.body          == "Edit"
+    end
+  end
+
+  describe "update/2 when not signed in" do
+    test "it does not update the topic but redirects to the sign in page", %{conn: conn} do
+      topic = insert(:forum_topic, title: "Before", body: "Edit")
+      forum = topic.forum
+      conn  = put conn, "/forums/#{forum.id}/forum_topics/#{topic.id}", forum_topic: @valid_attrs
+      topic = Repo.one(ForumTopic)
+      assert redirected_to(conn) == session_path(conn, :new)
+      assert topic.title         == "Before"
+      assert topic.body          == "Edit"
+    end
+  end
 end

@@ -60,4 +60,30 @@ defmodule Helheim.ForumReplyTest do
       assert Enum.find(forum_replies, fn(t) -> t.id == topic_2_reply_3.id end)
     end
   end
+
+  describe "editable_by?/2" do
+    test "it returns true if the user is the author of the topic and it is no older than 10 minutes" do
+      user  = insert(:user)
+      reply = insert(:forum_reply, user: user, inserted_at: Timex.shift(Timex.now, minutes: -9))
+      assert ForumReply.editable_by?(reply, user)
+    end
+
+    test "it returns false if the topic is older than 10 minutes" do
+      user  = insert(:user)
+      reply = insert(:forum_reply, user: user, inserted_at: Timex.shift(Timex.now, minutes: -11))
+      refute ForumReply.editable_by?(reply, user)
+    end
+
+    test "it returns false if the user is not the author of the topic" do
+      user  = insert(:user)
+      reply = insert(:forum_reply, inserted_at: Timex.shift(Timex.now, minutes: -9))
+      refute ForumReply.editable_by?(reply, user)
+    end
+
+    test "it returns true if the user is an admin" do
+      user  = insert(:user, role: "admin")
+      reply = insert(:forum_reply, inserted_at: Timex.shift(Timex.now, minutes: -11))
+      assert ForumReply.editable_by?(reply, user)
+    end
+  end
 end

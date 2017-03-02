@@ -3,7 +3,7 @@
   <li class="breadcrumb-item">
     <%= link "#{@forum.forum_category.title}: #{@forum.title}", to: forum_path(@conn, :show, @forum) %>
   </li>
-  <li class="breadcrumb-item active"><%= gettext "Create new topic" %></li>
+  <li class="breadcrumb-item active"><%= gettext "Edit topic" %></li>
 </ol>
 
 <div class="card">
@@ -16,6 +16,6 @@
     <br><small><%= @forum.description %></small>
   </div>
   <%= render "form.html", changeset: @changeset,
-                          button_label: gettext("Post Topic"),
-                          action: forum_forum_topic_path(@conn, :create, @forum) %>
+                          button_label: gettext("Save Changes"),
+                          action: forum_forum_topic_path(@conn, :update, @forum, @forum_topic) %>
 </div>

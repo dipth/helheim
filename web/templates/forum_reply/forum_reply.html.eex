@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card forum-reply">
   <div class="card-header">
     <div class="d-flex w-100 justify-content-between">
       <div>
@@ -16,4 +16,10 @@
   <div class="card-block">
     <%= text_to_html @forum_reply.body %>
   </div>
+  <%= if ForumReply.editable_by?(@forum_reply, current_resource(@conn)) do %>
+    <div class="card-footer">
+      <%= link gettext("Edit"), to: forum_forum_topic_forum_reply_path(@conn, :edit, @forum, @forum_topic, @forum_reply), class: "btn btn-outline-secondary btn-sm" %>
+      <small><%= gettext "Only possible for up to 10 minutes after posting..." %></small>
+    </div>
+  <% end %>
 </div>

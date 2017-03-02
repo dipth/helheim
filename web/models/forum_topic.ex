@@ -1,5 +1,6 @@
 defmodule Helheim.ForumTopic do
   use Helheim.Web, :model
+  use Helheim.TimeLimitedEditableConcern
 
   schema "forum_topics" do
     field      :title,               :string

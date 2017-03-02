@@ -80,4 +80,30 @@ defmodule Helheim.ForumTopicTest do
       assert Enum.map(topic_2.forum_replies, fn(r) -> r.id end) == [topic_2_reply_2.id]
     end
   end
+
+  describe "editable_by?/2" do
+    test "it returns true if the user is the author of the topic and it is no older than 10 minutes" do
+      user  = insert(:user)
+      topic = insert(:forum_topic, user: user, inserted_at: Timex.shift(Timex.now, minutes: -9))
+      assert ForumTopic.editable_by?(topic, user)
+    end
+
+    test "it returns false if the topic is older than 10 minutes" do
+      user  = insert(:user)
+      topic = insert(:forum_topic, user: user, inserted_at: Timex.shift(Timex.now, minutes: -11))
+      refute ForumTopic.editable_by?(topic, user)
+    end
+
+    test "it returns false if the user is not the author of the topic" do
+      user  = insert(:user)
+      topic = insert(:forum_topic, inserted_at: Timex.shift(Timex.now, minutes: -9))
+      refute ForumTopic.editable_by?(topic, user)
+    end
+
+    test "it returns true if the user is an admin" do
+      user  = insert(:user, role: "admin")
+      topic = insert(:forum_topic, inserted_at: Timex.shift(Timex.now, minutes: -11))
+      assert ForumTopic.editable_by?(topic, user)
+    end
+  end
 end

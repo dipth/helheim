@@ -449,6 +449,8 @@ msgid "Delete"
 msgstr "Slet"
 
 #: web/templates/blog_post/show.html.eex:22
+#: web/templates/forum_reply/forum_reply.html.eex:21
+#: web/templates/forum_topic/show.html.eex:31
 msgid "Edit"
 msgstr "Redigér"
 
@@ -699,7 +701,7 @@ msgid "Administration"
 msgstr "Administration"
 
 #: web/templates/blog_post/form.html.eex:12
-#: web/templates/forum_reply/form.html.eex:11
+#: web/templates/forum_reply/form.html.eex:4
 #: web/templates/forum_topic/form.html.eex:12
 #: web/templates/profile/edit.html.eex:50
 msgid "Content"
@@ -756,7 +758,7 @@ msgstr "Forummet blev oprettet!"
 msgid "Forum deleted successfully."
 msgstr "Forummet blev slettet!"
 
-#: web/controllers/forum_topic_controller.ex:20
+#: web/controllers/forum_topic_controller.ex:23
 msgid "Forum topic created successfully."
 msgstr "Indlægget blev oprettet!"
 
@@ -765,6 +767,8 @@ msgid "Forum updated successfully."
 msgstr "Forummet blev opdateret!"
 
 #: web/templates/forum/index.html.eex:2 web/templates/forum/show.html.eex:2
+#: web/templates/forum_reply/edit.html.eex:2
+#: web/templates/forum_topic/edit.html.eex:2
 #: web/templates/forum_topic/new.html.eex:2
 #: web/templates/forum_topic/show.html.eex:2
 #: web/templates/layout/sidebar.html.eex:10
@@ -775,12 +779,12 @@ msgstr "Forum"
 msgid "Forums and Categories"
 msgstr "Forum og kategorier"
 
-#: web/templates/forum_topic/show.html.eex:45
+#: web/templates/forum_topic/show.html.eex:53
 msgid "Go to the last page to reply..."
 msgstr "Hop til den sidste side for at sende et svar"
 
 #: web/templates/blog_post/form.html.eex:21
-#: web/templates/forum_topic/show.html.eex:44
+#: web/templates/forum_topic/show.html.eex:52
 #: web/templates/profile/edit.html.eex:58
 msgid "Hint"
 msgstr "Tip"
@@ -795,19 +799,19 @@ msgstr "Nyt forum"
 msgid "New Forum Category"
 msgstr "Ny forum kategori"
 
-#: web/templates/forum_reply/form.html.eex:19
+#: web/templates/forum_reply/new.html.eex:9
 msgid "Post Reply"
 msgstr "Send svar"
 
-#: web/templates/forum_topic/form.html.eex:20
+#: web/templates/forum_topic/new.html.eex:19
 msgid "Post Topic"
 msgstr "Opret indlæg"
 
-#: web/controllers/forum_reply_controller.ex:22
+#: web/controllers/forum_reply_controller.ex:26
 msgid "Reply could not be created"
 msgstr "Dit svar kunne ikke oprettes"
 
-#: web/controllers/forum_reply_controller.ex:18
+#: web/controllers/forum_reply_controller.ex:22
 msgid "Reply created successfully"
 msgstr "Dit svar blev sendt"
 
@@ -819,7 +823,7 @@ msgstr "Gem forum"
 msgid "Save Forum Category"
 msgstr "Gem forum kategori"
 
-#: web/templates/forum_reply/form.html.eex:5
+#: web/templates/forum_reply/new.html.eex:5
 msgid "Submit new reply"
 msgstr "Send nyt svar"
 
@@ -835,7 +839,7 @@ msgstr "Låst?"
 msgid "Only admins can post here"
 msgstr "Låst, undtagen admins"
 
-#: web/controllers/forum_topic_controller.ex:53
+#: web/controllers/forum_topic_controller.ex:77
 msgid "You cannot create a topic in a locked forum!"
 msgstr "Du kan ikke oprette indlæg i et låst forum!"
 
@@ -974,3 +978,37 @@ msgstr "Opdateret"
 #: web/templates/registration/new.html.eex:75
 msgid "terms and rules"
 msgstr "betingelser og regler"
+
+#: web/templates/forum_reply/edit.html.eex:7
+msgid "Edit reply"
+msgstr "Redigér svar"
+
+#: web/templates/forum_topic/edit.html.eex:6
+msgid "Edit topic"
+msgstr "Redigér indlæg"
+
+#: web/controllers/forum_reply_controller.ex:39
+msgid "Forum reply updated successfully."
+msgstr "Dit svar blev gemt!"
+
+#: web/controllers/forum_topic_controller.ex:49
+msgid "Forum topic updated successfully."
+msgstr "Dit indlæg blev gemt!"
+
+#: web/templates/forum_reply/forum_reply.html.eex:22
+#: web/templates/forum_topic/show.html.eex:32
+msgid "Only possible for up to 10 minutes after posting..."
+msgstr "Det er kun muligt at redigere i op til 10 minutter…"
+
+#: web/templates/forum_reply/edit.html.eex:12
+#: web/templates/forum_topic/edit.html.eex:19
+msgid "Save Changes"
+msgstr "Gem ændringer"
+
+#: web/controllers/forum_reply_controller.ex:74
+msgid "You can only edit a forum reply in the first 10 minutes!"
+msgstr "Du kan kun redigere dit svar i de første 10 minutter!"
+
+#: web/controllers/forum_topic_controller.ex:88
+msgid "You can only edit a forum topic in the first 10 minutes!"
+msgstr "Du kan kun redigere dit indlæg i de første 10 minutter!"

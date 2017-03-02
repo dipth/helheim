@@ -26,18 +26,26 @@
     <div class="card-block">
       <%= text_to_html @forum_topic.body %>
     </div>
+    <%= if ForumTopic.editable_by?(@forum_topic, current_resource(@conn)) do %>
+      <div class="card-footer">
+        <%= link gettext("Edit"), to: forum_forum_topic_path(@conn, :edit, @forum, @forum_topic), class: "btn btn-outline-secondary btn-sm" %>
+        <small><%= gettext "Only possible for up to 10 minutes after posting..." %></small>
+      </div>
+    <% end %>
   </div>
 <% end %>
 
 <%= for forum_reply <- @forum_replies.entries do %>
-  <%= render Helheim.ForumReplyView, "forum_reply.html", conn: @conn, forum_reply: forum_reply %>
+  <%= render Helheim.ForumReplyView, "forum_reply.html", conn: @conn, forum: @forum, forum_topic: @forum_topic, forum_reply: forum_reply %>
 <% end %>
 
 <%= unless @forum_replies.page_number < @forum_replies.total_pages do %>
   <%= render Helheim.ForumReplyView,
-             "form.html",
-             changeset: @changeset,
-             action: forum_forum_topic_forum_reply_path(@conn, :create, @forum, @forum_topic) %>
+             "new.html",
+             conn: @conn,
+             forum: @forum,
+             forum_topic: @forum_topic,
+             changeset: @changeset %>
 <% else %>
   <p>
     <i class="fa fa-info"></i>

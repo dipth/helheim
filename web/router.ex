@@ -69,8 +69,8 @@ defmodule Helheim.Router do
       resources "/messages", PrivateMessageController, only: [:create], as: :message
     end
     resources "/forums", ForumController, only: [:index, :show] do
-      resources "/forum_topics", ForumTopicController, only: [:new, :create, :show] do
-        resources "/forum_replies", ForumReplyController, only: [:create]
+      resources "/forum_topics", ForumTopicController, only: [:new, :create, :show, :edit, :update] do
+        resources "/forum_replies", ForumReplyController, only: [:create, :edit, :update]
       end
     end
   end

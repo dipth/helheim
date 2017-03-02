@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="card-header">
+    <strong>
+      <i class="fa fa-commenting-o fa-fw"></i>
+      <%= gettext "Submit new reply" %>
+    </strong>
+  </div>
+  <%= render "form.html", changeset: @changeset,
+                          button_label: gettext("Post Reply"),
+                          action: forum_forum_topic_forum_reply_path(@conn, :create, @forum, @forum_topic) %>
+</div>

@@ -17,6 +17,21 @@ defmodule Helheim.ForumFlowTest do
     assert result =~ gettext("Forum topic created successfully.")
   end
 
+  test "users can edit their own topics for a limited amount of time", %{session: session, user: user, forum: forum} do
+    insert(:forum_topic, forum: forum, user: user, title: "Topic before edit")
+
+    result = session
+      |> visit("/forums/#{forum.id}")
+      |> click_link("Topic before edit")
+      |> click_link(gettext("Edit"))
+      |> fill_in(gettext("Title"), with: "Topic after edit!")
+      |> click_button(gettext("Save Changes"))
+      |> find(".alert.alert-success")
+      |> text
+
+    assert result =~ gettext("Forum topic updated successfully.")
+  end
+
   test "users can reply to existing topics", %{session: session, forum: forum} do
     topic = insert(:forum_topic, forum: forum, title: "Existing topic")
 
@@ -30,6 +45,21 @@ defmodule Helheim.ForumFlowTest do
       |> text
 
     assert result =~ gettext("Reply created successfully")
+  end
+
+  test "users can edit their own replies for a limited amount of time", %{session: session, user: user, forum: forum} do
+    topic = insert(:forum_topic, forum: forum)
+    insert(:forum_reply, forum_topic: topic, user: user, body: "Reply before edit")
+
+    result = session
+      |> visit("/forums/#{forum.id}/forum_topics/#{topic.id}")
+      |> click_link(gettext("Edit"))
+      |> fill_in(gettext("Content"), with: "Reply after edit!")
+      |> click_button(gettext("Save Changes"))
+      |> find(".alert.alert-success")
+      |> text
+
+    assert result =~ gettext("Forum reply updated successfully.")
   end
 
   def create_forum(_context) do

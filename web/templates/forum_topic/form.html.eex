@@ -17,6 +17,6 @@
     </div>
   </div>
   <div class="card-footer">
-    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Post Topic" %></button>
+    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= @button_label %></button>
   </div>
 <% end %>
