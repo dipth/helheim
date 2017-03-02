@@ -26,7 +26,7 @@ defmodule Helheim.PageController do
     newest_users =
       User
       |> User.newest
-      |> limit(10)
+      |> limit(25)
       |> Helheim.Repo.all
 
     newest_blog_posts =
