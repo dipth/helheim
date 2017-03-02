@@ -1,6 +1,7 @@
 defmodule Helheim.Avatar do
   use Arc.Definition
   use Arc.Ecto.Definition
+  import Helheim.Router.Helpers
 
   @versions [:original, :large, :thumb, :tiny]
   @extension_whitelist ~w(.jpg .jpeg .gif .png)
@@ -37,15 +38,15 @@ defmodule Helheim.Avatar do
   end
 
   def default_url(:large) do
-    "https://placehold.it/800x800"
+    static_url(Helheim.Endpoint, "/images/default_avatar.jpg")
   end
 
   def default_url(:thumb) do
-    "https://placehold.it/250x250"
+    static_url(Helheim.Endpoint, "/images/default_avatar.jpg")
   end
 
   def default_url(:tiny) do
-    "https://placehold.it/50x50"
+    static_url(Helheim.Endpoint, "/images/default_avatar_tiny.jpg")
   end
 
   def max_file_size do
