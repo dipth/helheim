@@ -5,7 +5,12 @@
   <% forum_reply = List.first(@forum_topic.forum_replies) %>
   <div class="d-flex w-100 justify-content-between">
     <div>
-      <h6 class="mb-0"><%= @forum_topic.title %></h6>
+      <h6 class="mb-0">
+        <%= if @forum_topic.pinned do %>
+          <i class="fa fa-fw fa-thumb-tack"></i>
+        <% end %>
+        <%= @forum_topic.title %>
+      </h6>
     </div>
     <div>
       <span class="badge badge-default badge-pill"><%= @forum_topic.forum_replies_count %></span>

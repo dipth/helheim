@@ -45,4 +45,9 @@ defmodule Helheim.ForumTopic do
     from ft in query,
       preload: [forum_replies: ^forum_replies_query]
   end
+
+  def in_order(query) do
+    from ft in query,
+      order_by: [desc: :pinned, desc: :updated_at]
+  end
 end

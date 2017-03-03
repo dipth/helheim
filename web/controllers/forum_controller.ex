@@ -17,7 +17,7 @@ defmodule Helheim.ForumController do
     forum = Forum |> preload(:forum_category) |> Repo.get!(id)
     forum_topics = assoc(forum, :forum_topics)
                    |> ForumTopic.with_latest_reply
-                   |> order_by([desc: :updated_at])
+                   |> ForumTopic.in_order
                    |> preload(:user)
                    |> Repo.paginate(page: sanitized_page(params["page"]))
     render(conn, "show.html", forum: forum, forum_topics: forum_topics)

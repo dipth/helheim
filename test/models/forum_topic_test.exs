@@ -106,4 +106,30 @@ defmodule Helheim.ForumTopicTest do
       assert ForumTopic.editable_by?(topic, user)
     end
   end
+
+  describe "in_order/1" do
+    test "it orders recently updated topics before older ones" do
+      forum_topic1 = insert(:forum_topic, updated_at: Timex.shift(Timex.now, minutes: 5))
+      forum_topic2 = insert(:forum_topic)
+      [first, last] = ForumTopic |> ForumTopic.in_order |> Repo.all
+      assert first.id == forum_topic1.id
+      assert last.id == forum_topic2.id
+    end
+
+    test "it orders a pinned topic above a recently updated topic" do
+      forum_topic1 = insert(:forum_topic, updated_at: Timex.shift(Timex.now, minutes: 5))
+      forum_topic2 = insert(:forum_topic, pinned: true)
+      [first, last] = ForumTopic |> ForumTopic.in_order |> Repo.all
+      assert first.id == forum_topic2.id
+      assert last.id == forum_topic1.id
+    end
+
+    test "it orders a recently updated pinned topic above a pinned topic" do
+      forum_topic1 = insert(:forum_topic, pinned: true, updated_at: Timex.shift(Timex.now, minutes: 5))
+      forum_topic2 = insert(:forum_topic, pinned: true)
+      [first, last] = ForumTopic |> ForumTopic.in_order |> Repo.all
+      assert first.id == forum_topic1.id
+      assert last.id == forum_topic2.id
+    end
+  end
 end
