@@ -93,7 +93,6 @@ defmodule Helheim.User do
     |> allow_custom_value_for_fields([{:gender, :gender_custom}])
     |> trim_fields([:gender, :location])
     |> cast_attachments(params, [:avatar])
-    |> validate_required([:profile_text])
     |> scrub_profile_text()
   end
 
