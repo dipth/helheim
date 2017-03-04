@@ -189,3 +189,7 @@ form.link {
 hr {
   border-color: $gray;
 }
+
+a .badge:hover {
+  color: $brand-primary;
+}

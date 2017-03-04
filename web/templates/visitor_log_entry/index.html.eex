@@ -1,0 +1,19 @@
+<%= crumbs(@conn, @thing) %>
+
+<div class="list-group mb-1">
+  <%= for entry <- @entries.entries do %>
+    <%= link to: public_profile_path(@conn, :show, entry.user), class: "list-group-item list-group-item-action" do %>
+      <div class="d-flex flex-row justify-content-between w-100">
+        <div class="">
+          <%= img_tag(Avatar.url({entry.user.avatar, entry.user}, :tiny), class: "img-avatar mr-1") %>
+          <%= entry.user.username %>
+        </div>
+        <div class="">
+          <small class="ml-1"><%= time_ago_in_words entry.updated_at %></small>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<%= lpaginate @conn, @entries %>

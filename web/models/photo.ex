@@ -20,7 +20,8 @@ defmodule Helheim.Photo do
 
     timestamps()
 
-    belongs_to :photo_album, Helheim.PhotoAlbum
+    belongs_to :photo_album,         Helheim.PhotoAlbum
+    has_many   :visitor_log_entries, Helheim.VisitorLogEntry
   end
 
   def changeset(struct, params \\ %{}) do

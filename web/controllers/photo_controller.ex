@@ -16,6 +16,7 @@ defmodule Helheim.PhotoController do
 
     case Repo.insert(changeset) do
       {:ok, photo} ->
+        photo = Photo |> preload(:photo_album) |> Repo.get(photo.id)
         render(conn, "create.js", user: user, photo_album: photo_album, photo: photo)
       {:error, changeset} ->
         send_resp(conn, 403, translate_error(changeset.errors[:file]))

@@ -12,11 +12,13 @@
   </div>
 <% end %>
 
-<%= if @photo_album.description do %>
-  <blockquote class="blockquote text-left">
+
+<blockquote class="blockquote text-left">
+  <%= if @photo_album.description do %>
     <p><%= text_to_html @photo_album.description %></p>
-  </blockquote>
-<% end %>
+  <% end %>
+  <%= visitor_count_badge @conn, @photo_album %>
+</blockquote>
 
 <div class="card-group card-group-photos" id="photos">
   <%= for photo <- @photos do %>

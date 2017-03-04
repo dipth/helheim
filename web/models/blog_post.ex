@@ -8,8 +8,9 @@ defmodule Helheim.BlogPost do
 
     timestamps()
 
-    belongs_to :user, Helheim.User
-    has_many :comments, Helheim.Comment
+    belongs_to :user,                Helheim.User
+    has_many   :comments,            Helheim.Comment
+    has_many   :visitor_log_entries, Helheim.VisitorLogEntry
   end
 
   def newest(query) do
