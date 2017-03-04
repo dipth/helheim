@@ -17,6 +17,7 @@
           <strong><%= link user.username, to: public_profile_path(@conn, :show, user) %></strong>
         <% else %>
           <%= time_ago_in_words @photo.inserted_at %>
+          <%= visitor_count_badge @photo %>
         <% end %>
       </small>
     </p>

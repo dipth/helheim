@@ -23,10 +23,11 @@
             </span>
           <% end %>
           <strong class="text-break-up"><%= photo_album.title %></strong>
+          <br>
           <%= if photo do %>
-            <br>
             <small><%= time_ago_in_words photo.inserted_at %></small>
           <% end %>
+          <%= visitor_count_badge photo_album %>
         </p>
       </div>
     </div>

@@ -8,6 +8,7 @@
           alt="<%= @user.username %>"
         >
         <h1><%= @user.username %></h1>
+        <p class="mb-1"><%= visitor_count_badge @user %></p>
         <div>
           <strong><%= gettext "Joined" %>:</strong>
           <span class="float-right">
