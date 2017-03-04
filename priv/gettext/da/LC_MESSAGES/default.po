@@ -345,7 +345,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:159
+#: web/models/user.ex:160
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -370,7 +370,7 @@ msgstr "Profil Indstillinger"
 msgid "Profile Text"
 msgstr "Profiltekst"
 
-#: web/controllers/profile_controller.ex:57
+#: web/controllers/profile_controller.ex:59
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
@@ -387,12 +387,12 @@ msgid "Remember me"
 msgstr "Husk mig i 30 dage"
 
 #: web/templates/page/front_page.html.eex:33
-#: web/templates/profile/show.html.eex:53
+#: web/templates/profile/show.html.eex:54
 msgid "Newest Blogs"
 msgstr "Nyeste Blogs"
 
 #: web/templates/page/front_page.html.eex:23
-#: web/templates/profile/show.html.eex:62
+#: web/templates/profile/show.html.eex:63
 msgid "Newest Forum Posts"
 msgstr "Nyeste Forumindlæg"
 
@@ -405,6 +405,7 @@ msgid "Your Profile"
 msgstr "Din Profil"
 
 #: web/templates/blog_post/index.html.eex:3
+#: web/views/visitor_log_entry_view.ex:28
 msgid "Blog Posts"
 msgstr "Blogs"
 
@@ -424,9 +425,9 @@ msgstr "Dine Blogs"
 #: web/templates/admin/forum_category/index.html.eex:13
 #: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/admin/term/index.html.eex:35
-#: web/templates/blog_post/show.html.eex:24
-#: web/templates/photo/show.html.eex:38
-#: web/templates/photo_album/show.html.eex:47
+#: web/templates/blog_post/show.html.eex:25
+#: web/templates/photo/show.html.eex:39
+#: web/templates/photo_album/show.html.eex:49
 msgid "Are you sure?"
 msgstr "Er du sikker?"
 
@@ -434,23 +435,23 @@ msgstr "Er du sikker?"
 msgid "Blog post created successfully."
 msgstr "Din blog er oprettet!"
 
-#: web/controllers/blog_post_controller.ex:86
+#: web/controllers/blog_post_controller.ex:87
 msgid "Blog post deleted successfully."
 msgstr "Din blog er nu slettet!"
 
-#: web/controllers/blog_post_controller.ex:73
+#: web/controllers/blog_post_controller.ex:74
 msgid "Blog post updated successfully."
 msgstr "Din blog er opdateret!"
 
-#: web/templates/blog_post/show.html.eex:26
-#: web/templates/photo/show.html.eex:40
-#: web/templates/photo_album/show.html.eex:49
+#: web/templates/blog_post/show.html.eex:27
+#: web/templates/photo/show.html.eex:41
+#: web/templates/photo_album/show.html.eex:51
 msgid "Delete"
 msgstr "Slet"
 
-#: web/templates/blog_post/show.html.eex:22
+#: web/templates/blog_post/show.html.eex:23
 #: web/templates/forum_reply/forum_reply.html.eex:21
-#: web/templates/forum_topic/show.html.eex:31
+#: web/templates/forum_topic/show.html.eex:36
 msgid "Edit"
 msgstr "Redigér"
 
@@ -472,7 +473,7 @@ msgstr "Titel"
 msgid "Comment created successfully"
 msgstr "Din kommentar er tilføjet!"
 
-#: web/templates/blog_post/show.html.eex:32
+#: web/templates/blog_post/show.html.eex:33
 msgid "Comments:"
 msgstr "Kommentarer:"
 
@@ -480,7 +481,7 @@ msgstr "Kommentarer:"
 msgid "Guest Book"
 msgstr "Gæstebog"
 
-#: web/templates/profile/show.html.eex:85
+#: web/templates/profile/show.html.eex:86
 msgid "Newest Guest Book Entries"
 msgstr "Nyeste gæstebogsindlæg"
 
@@ -488,7 +489,7 @@ msgstr "Nyeste gæstebogsindlæg"
 msgid "Post Comment"
 msgstr "Tilføj Kommentar"
 
-#: web/templates/profile/show.html.eex:86
+#: web/templates/profile/show.html.eex:87
 msgid "Show All"
 msgstr "Vis alle"
 
@@ -521,7 +522,7 @@ msgstr "Din besked blev sendt!"
 msgid "Send Message"
 msgstr "Send Besked"
 
-#: web/templates/profile/show.html.eex:37
+#: web/templates/profile/show.html.eex:38
 msgid "Send private message"
 msgstr "Send privat besked"
 
@@ -574,16 +575,16 @@ msgid "Female"
 msgstr "Kvinde"
 
 #: web/templates/profile/edit.html.eex:29
-#: web/templates/profile/show.html.eex:19
+#: web/templates/profile/show.html.eex:20
 msgid "Gender"
 msgstr "Køn"
 
-#: web/templates/profile/show.html.eex:12
+#: web/templates/profile/show.html.eex:13
 msgid "Joined"
 msgstr "Tilmeldt"
 
 #: web/templates/profile/edit.html.eex:43
-#: web/templates/profile/show.html.eex:27
+#: web/templates/profile/show.html.eex:28
 msgid "Location"
 msgstr "Lokation"
 
@@ -595,7 +596,7 @@ msgstr "Mand"
 msgid "Not specified"
 msgstr "Ikke udspecificeret"
 
-#: web/templates/photo_album/index.html.eex:38
+#: web/templates/photo_album/index.html.eex:39
 msgid "Create New"
 msgstr "Opret ny"
 
@@ -608,7 +609,7 @@ msgid "Description"
 msgstr "Beskrivelse"
 
 #: web/templates/photo_album/edit.html.eex:3
-#: web/templates/photo_album/show.html.eex:44
+#: web/templates/photo_album/show.html.eex:46
 msgid "Edit Photo Album"
 msgstr "Redigér Fotoalbum"
 
@@ -619,6 +620,8 @@ msgstr "Nyt Fotoalbum"
 #: web/templates/photo/show.html.eex:3
 #: web/templates/photo_album/index.html.eex:3
 #: web/templates/photo_album/show.html.eex:3
+#: web/views/visitor_log_entry_view.ex:46
+#: web/views/visitor_log_entry_view.ex:65
 msgid "Photo Albums"
 msgstr "Fotoalbum"
 
@@ -626,7 +629,7 @@ msgstr "Fotoalbum"
 msgid "Photo album created successfully."
 msgstr "Fotoalbummet blev oprettet!"
 
-#: web/controllers/photo_album_controller.ex:71
+#: web/controllers/photo_album_controller.ex:73
 msgid "Photo album updated successfully."
 msgstr "Fotoalbummet blev opdateret!"
 
@@ -640,23 +643,23 @@ msgstr "Gem Fotoalbum"
 msgid "Visibility"
 msgstr "Synlighed"
 
-#: web/templates/profile/show.html.eex:80
+#: web/templates/profile/show.html.eex:81
 msgid "Browse All Photo Albums"
 msgstr "Se alle fotoalbums"
 
-#: web/templates/photo_album/show.html.eex:37
+#: web/templates/photo_album/show.html.eex:39
 msgid "Drop photos here (or click) to upload..."
 msgstr "Slip billeder her (eller klik) for at uploade…"
 
-#: web/templates/photo/edit.html.eex:3 web/templates/photo/show.html.eex:35
+#: web/templates/photo/edit.html.eex:3 web/templates/photo/show.html.eex:36
 msgid "Edit Photo Details"
 msgstr "Redigér billed-detaljer"
 
-#: web/templates/profile/show.html.eex:74
+#: web/templates/profile/show.html.eex:75
 msgid "Newest Public Photos"
 msgstr "Nyeste offentlige billeder"
 
-#: web/controllers/photo_album_controller.ex:85
+#: web/controllers/photo_album_controller.ex:87
 msgid "Photo Album deleted successfully."
 msgstr "Fotoalbummet blev slettet!"
 
@@ -672,7 +675,7 @@ msgstr "Billed-detaljerne blev opdateret!"
 msgid "Save Photo Details"
 msgstr "Gem billed-detaljer"
 
-#: web/templates/photo_album/show.html.eex:30
+#: web/templates/photo_album/show.html.eex:32
 msgid "Upload Photos"
 msgstr "Upload billeder"
 
@@ -779,12 +782,12 @@ msgstr "Forum"
 msgid "Forums and Categories"
 msgstr "Forum og kategorier"
 
-#: web/templates/forum_topic/show.html.eex:53
+#: web/templates/forum_topic/show.html.eex:58
 msgid "Go to the last page to reply..."
 msgstr "Hop til den sidste side for at sende et svar"
 
 #: web/templates/blog_post/form.html.eex:21
-#: web/templates/forum_topic/show.html.eex:52
+#: web/templates/forum_topic/show.html.eex:57
 #: web/templates/profile/edit.html.eex:58
 msgid "Hint"
 msgstr "Tip"
@@ -996,7 +999,7 @@ msgid "Forum topic updated successfully."
 msgstr "Dit indlæg blev gemt!"
 
 #: web/templates/forum_reply/forum_reply.html.eex:22
-#: web/templates/forum_topic/show.html.eex:32
+#: web/templates/forum_topic/show.html.eex:37
 msgid "Only possible for up to 10 minutes after posting..."
 msgstr "Det er kun muligt at redigere i op til 10 minutter…"
 
@@ -1012,3 +1015,14 @@ msgstr "Du kan kun redigere dit svar i de første 10 minutter!"
 #: web/controllers/forum_topic_controller.ex:88
 msgid "You can only edit a forum topic in the first 10 minutes!"
 msgstr "Du kan kun redigere dit indlæg i de første 10 minutter!"
+
+#: web/views/visitor_log_entry_view.ex:15
+#: web/views/visitor_log_entry_view.ex:33
+#: web/views/visitor_log_entry_view.ex:51
+#: web/views/visitor_log_entry_view.ex:73
+msgid "Visitors"
+msgstr "Lurelog"
+
+#: web/controllers/visitor_log_entry_controller.ex:68
+msgid "You do not have access to that page!"
+msgstr "Du har ikke adgang til den forespurgte side!"

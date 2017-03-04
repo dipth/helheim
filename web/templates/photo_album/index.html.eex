@@ -27,7 +27,7 @@
           <%= if photo do %>
             <small><%= time_ago_in_words photo.inserted_at %></small>
           <% end %>
-          <%= visitor_count_badge photo_album %>
+          <%= visitor_count_badge @conn, photo_album %>
         </p>
       </div>
     </div>

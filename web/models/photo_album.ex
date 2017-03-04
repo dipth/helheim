@@ -10,8 +10,9 @@ defmodule Helheim.PhotoAlbum do
 
     timestamps()
 
-    belongs_to :user,   Helheim.User
-    has_many   :photos, Helheim.Photo
+    belongs_to :user,                Helheim.User
+    has_many   :photos,              Helheim.Photo
+    has_many   :visitor_log_entries, Helheim.VisitorLogEntry
   end
 
   def changeset(struct, params \\ %{}) do

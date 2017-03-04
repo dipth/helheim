@@ -25,7 +25,7 @@
       <footer class="blockquote-footer">
         <%= gettext "Uploaded" %>
         <%= time_ago_in_words(@photo.inserted_at) %>
-        <br><%= visitor_count_badge @photo %>
+        <br><%= visitor_count_badge @conn, @photo %>
       </footer>
     </blockquote>
   </div>

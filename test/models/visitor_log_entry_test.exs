@@ -3,6 +3,16 @@ defmodule Helheim.VisitorLogEntryTest do
   alias Helheim.Repo
   alias Helheim.VisitorLogEntry
 
+  describe "newest/1" do
+    test "it orders recently updated entries before older ones" do
+      entry1 = insert(:visitor_log_entry, updated_at: Timex.shift(Timex.now, minutes: 5))
+      entry2 = insert(:visitor_log_entry)
+      [first, last] = VisitorLogEntry |> VisitorLogEntry.newest |> Repo.all
+      assert first.id == entry1.id
+      assert last.id  == entry2.id
+    end
+  end
+
   describe "track!/2" do
     setup [:create_user]
 

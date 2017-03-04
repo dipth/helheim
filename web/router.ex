@@ -51,11 +51,17 @@ defmodule Helheim.Router do
     resources "/account", AccountController, singleton: true, only: [:edit, :update, :delete]
     resources "/profile", ProfileController, singleton: true, only: [:show, :edit, :update]
     resources "/profiles", ProfileController, only: [:show], as: :public_profile do
-      resources "/blog_posts", BlogPostController, only: [:index, :show]
+      resources "/blog_posts", BlogPostController, only: [:index, :show] do
+        resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
+      end
       resources "/comments", ProfileCommentController, only: [:index, :create], as: :comment
       resources "/photo_albums", PhotoAlbumController, only: [:index, :show] do
-        resources "/photos", PhotoController, only: [:show]
+        resources "/photos", PhotoController, only: [:show] do
+          resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
+        end
+        resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
       end
+      resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
     end
     resources "/blog_posts", BlogPostController, only: [:new, :create, :edit, :update, :delete] do
       resources "/comments", BlogPostCommentController, only: [:create], as: :comment

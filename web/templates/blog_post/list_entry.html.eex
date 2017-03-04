@@ -10,6 +10,6 @@
       |> Calendar.DateTime.shift_zone!("Europe/Copenhagen")
       |> Calendar.Strftime.strftime!("%d-%m-%Y %H:%M:%S")
     %>
-    <br><%= visitor_count_badge @blog_post %>
+    <br><%= visitor_count_badge @conn, @blog_post %>
   </footer>
 </blockquote>
