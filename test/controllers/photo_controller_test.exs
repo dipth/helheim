@@ -162,6 +162,17 @@ defmodule Helheim.PhotoControllerTest do
       refute conn.resp_body =~ gettext("Edit Photo Details")
       refute conn.resp_body =~ gettext("Delete")
     end
+
+    test_with_mock "it tracks the view", %{conn: conn, user: user},
+      Helheim.VisitorLogEntry, [:passthrough], [track!: fn(_user, _thing) -> {:ok} end] do
+
+      profile     = insert(:user)
+      photo_album = insert(:photo_album, user: profile)
+      photo       = create_photo(photo_album)
+      get conn, "/profiles/#{profile.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
+      photo = Photo |> preload(:photo_album) |> Repo.get(photo.id)
+      assert called Helheim.VisitorLogEntry.track!(user, photo)
+    end
   end
 
   describe "show/2 when not signed in" do
@@ -302,7 +313,7 @@ defmodule Helheim.PhotoControllerTest do
       photo_album = insert(:photo_album, user: user)
       photo       = create_photo(photo_album)
       conn        = delete conn, "/photo_albums/#{photo_album.id}/photos/#{photo.id}"
-      assert called Photo.delete!(photo)
+      assert called Photo.delete!(Repo.get(Photo, photo.id))
       assert redirected_to(conn) == public_profile_photo_album_path(conn, :show, user, photo_album)
     end
 

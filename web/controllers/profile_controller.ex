@@ -34,6 +34,8 @@ defmodule Helheim.ProfileController do
       |> Repo.all
     newest_photos = Photo.newest_public_photos_by(user, 5)
 
+    Helheim.VisitorLogEntry.track! current_resource(conn), user
+
     render conn, "show.html",
       user: user,
       newest_blog_posts: newest_blog_posts,

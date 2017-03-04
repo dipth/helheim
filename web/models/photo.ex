@@ -11,14 +11,16 @@ defmodule Helheim.Photo do
   def max_total_file_size_per_user, do: @max_total_file_size_per_user
 
   schema "photos" do
-    field      :uuid,        :string
-    belongs_to :photo_album, Helheim.PhotoAlbum
-    field      :title,       :string
-    field      :description, :string
-    field      :file,        PhotoFile.Type
-    field      :file_size,   :integer
+    field      :uuid,          :string
+    field      :title,         :string
+    field      :description,   :string
+    field      :file,          PhotoFile.Type
+    field      :file_size,     :integer
+    field      :visitor_count, :integer
 
     timestamps()
+
+    belongs_to :photo_album, Helheim.PhotoAlbum
   end
 
   def changeset(struct, params \\ %{}) do

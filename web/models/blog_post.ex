@@ -2,12 +2,14 @@ defmodule Helheim.BlogPost do
   use Helheim.Web, :model
 
   schema "blog_posts" do
-    field :title, :string
-    field :body, :string
-    belongs_to :user, Helheim.User
-    has_many :comments, Helheim.Comment
+    field :title,         :string
+    field :body,          :string
+    field :visitor_count, :integer
 
     timestamps()
+
+    belongs_to :user, Helheim.User
+    has_many :comments, Helheim.Comment
   end
 
   def newest(query) do

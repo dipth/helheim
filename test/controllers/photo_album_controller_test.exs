@@ -194,6 +194,14 @@ defmodule Helheim.PhotoAlbumControllerTest do
       conn = get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"
       refute conn.resp_body =~ gettext("Upload Photos")
     end
+
+    test_with_mock "it tracks the view", %{conn: conn, user: user},
+      Helheim.VisitorLogEntry, [:passthrough], [track!: fn(_user, _thing) -> {:ok} end] do
+
+      photo_album = insert(:photo_album)
+      get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"
+      assert called Helheim.VisitorLogEntry.track!(user, Repo.get(PhotoAlbum, photo_album.id))
+    end
   end
 
   describe "show/2 when not signed in" do

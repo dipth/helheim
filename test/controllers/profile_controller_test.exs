@@ -1,5 +1,6 @@
 defmodule Helheim.ProfileControllerTest do
   use Helheim.ConnCase
+  import Mock
   use Bamboo.Test
   alias Helheim.Repo
   alias Helheim.User
@@ -31,6 +32,14 @@ defmodule Helheim.ProfileControllerTest do
       profile = comment.profile
       conn    = get conn, "/profiles/#{profile.id}"
       assert html_response(conn, 200)
+    end
+
+    test_with_mock "it tracks the view", %{conn: conn, user: user},
+      Helheim.VisitorLogEntry, [:passthrough], [track!: fn(_user, _thing) -> {:ok} end] do
+
+      profile = insert(:user)
+      get conn, "/profiles/#{profile.id}"
+      assert called Helheim.VisitorLogEntry.track!(user, profile)
     end
   end
 
