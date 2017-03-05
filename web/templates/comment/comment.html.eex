@@ -2,7 +2,7 @@
   <div class="card-header">
     <div class="d-flex flex-row justify-content-between">
       <div>
-        <%= username_with_avatar @comment.author, avatar_before_username: true %>
+        <%= username_with_avatar @comment.author, %{avatar_before_username: true} %>
       </div>
       <div class="hidden-xs-down">
         <small>

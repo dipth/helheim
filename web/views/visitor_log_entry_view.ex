@@ -1,6 +1,6 @@
 defmodule Helheim.VisitorLogEntryView do
   use Helheim.Web, :view
-  alias Helheim.Avatar
+  import Helheim.Router.Helpers
   alias Helheim.User
   alias Helheim.BlogPost
   alias Helheim.PhotoAlbum
@@ -73,5 +73,12 @@ defmodule Helheim.VisitorLogEntryView do
         content_tag(:li, gettext("Visitors"), class: "breadcrumb-item active")
       ]
     end
+  end
+
+  def link_to_visitor(_conn, nil, do: contents) do
+    link(contents, to: "#", class: "list-group-item list-group-item-action disabled")
+  end
+  def link_to_visitor(conn, user, do: contents) do
+    link(contents, to: public_profile_path(conn, :show, user), class: "list-group-item list-group-item-action")
   end
 end

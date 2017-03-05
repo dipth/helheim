@@ -9,7 +9,7 @@
         </small>
       </div>
       <div>
-        <%= username_with_avatar @forum_reply.user, [] %>
+        <%= username_with_avatar @forum_reply.user, %{} %>
       </div>
     </div>
   </div>

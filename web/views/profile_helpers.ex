@@ -52,6 +52,12 @@ defmodule Helheim.ProfileHelpers do
     avatar   = img_tag(static_path(Endpoint, "/images/deleted_user_avatar_tiny.png"), class: "img-avatar")
     username_with_avatar(username, avatar, false, opts)
   end
+  def username_with_avatar(%User{} = user, %{no_link: true} = opts) do
+    username = "Foo"#user.username
+    avatar   = img_tag(Avatar.url({user.avatar, user}, :tiny), class: "img-avatar")
+    is_admin = User.admin?(user)
+    username_with_avatar(username, avatar, is_admin, opts)
+  end
   def username_with_avatar(%User{} = user, opts) do
     username = link(user.username, to: public_profile_path(Endpoint, :show, user))
     avatar   = link(img_tag(Avatar.url({user.avatar, user}, :tiny), class: "img-avatar"), to: public_profile_path(Endpoint, :show, user))
@@ -59,7 +65,7 @@ defmodule Helheim.ProfileHelpers do
     username_with_avatar(username, avatar, is_admin, opts)
   end
   def username_with_avatar(username, avatar, is_admin, opts) do
-    opts = Keyword.merge([avatar_before_username: false], opts)
+    opts = Map.merge(%{avatar_before_username: false}, opts)
 
     username = if is_admin do
       [

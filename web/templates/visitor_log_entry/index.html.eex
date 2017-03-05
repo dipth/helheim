@@ -2,11 +2,10 @@
 
 <div class="list-group mb-1">
   <%= for entry <- @entries.entries do %>
-    <%= link to: public_profile_path(@conn, :show, entry.user), class: "list-group-item list-group-item-action" do %>
+    <%= link_to_visitor @conn, entry.user do %>
       <div class="d-flex flex-row justify-content-between w-100">
         <div class="">
-          <%= img_tag(Avatar.url({entry.user.avatar, entry.user}, :tiny), class: "img-avatar mr-1") %>
-          <%= entry.user.username %>
+          <%= username_with_avatar entry.user, %{no_link: true, avatar_before_username: true} %>
         </div>
         <div class="">
           <small class="ml-1"><%= time_ago_in_words entry.updated_at %></small>

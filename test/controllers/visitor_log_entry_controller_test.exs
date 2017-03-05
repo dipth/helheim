@@ -22,6 +22,12 @@ defmodule Helheim.VisitorLogEntryControllerTest do
       conn = get conn, "/profiles/#{user.id}/visitor_log_entries"
       assert redirected_to(conn) == public_profile_path(conn, :show, user)
     end
+
+    test "it supports showing log entries where the user is deleted", %{conn: conn, user: user} do
+      insert(:visitor_log_entry, profile: user, user: nil)
+      conn = get conn, "/profiles/#{user.id}/visitor_log_entries"
+      assert html_response(conn, 200)
+    end
   end
 
   describe "index/2 for a profile when signed in as an admin" do

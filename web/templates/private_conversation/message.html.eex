@@ -3,7 +3,7 @@
     <div class="message-header">
       <div class="message-sender-name">
         <strong>
-          <%= username_with_avatar @message.sender, [] %>
+          <%= username_with_avatar @message.sender, %{} %>
         </strong>
       </div>
       <div class="message-timestamp">
