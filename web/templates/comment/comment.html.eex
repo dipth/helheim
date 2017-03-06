@@ -6,7 +6,7 @@
       </div>
       <div class="hidden-xs-down">
         <small>
-          <%= lt @comment.inserted_at, "{ANSIC}" %>
+          <%= time_ago_in_words @comment.inserted_at %>
         </small>
       </div>
     </div>
@@ -16,7 +16,7 @@
   </div>
   <div class="card-footer hidden-sm-up">
     <small>
-      <%= lt @comment.inserted_at, "{ANSIC}" %>
+      <%= time_ago_in_words @comment.inserted_at %>
     </small>
   </div>
 </div>

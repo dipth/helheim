@@ -5,11 +5,7 @@
   <footer class="blockquote-footer">
     <%= link @blog_post.user.username, to: public_profile_path(@conn, :show, @blog_post.user.id) %>
     -
-    <%=
-      @blog_post.inserted_at
-      |> Calendar.DateTime.shift_zone!("Europe/Copenhagen")
-      |> Calendar.Strftime.strftime!("%d-%m-%Y %H:%M:%S")
-    %>
+    <%= time_ago_in_words @blog_post.inserted_at %>
     <br><%= visitor_count_badge @conn, @blog_post %>
   </footer>
 </blockquote>

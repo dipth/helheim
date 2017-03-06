@@ -18,10 +18,10 @@
   </div>
   <div>
     <small>
-      <%= user_badge @forum_topic.user, icon: "fa-user", postfix: " - #{time_ago_in_words @forum_topic.inserted_at}" %>
+      <%= user_badge @forum_topic.user, icon: "fa-user", postfix: " - #{time_ago_in_words(@forum_topic.inserted_at, simple: true)}" %>
       <%= if forum_reply do %>
         <i class="fa fa-angle-right fa-fw"></i>
-        <%= user_badge forum_reply.user, icon: "fa-commenting-o", postfix: " - #{time_ago_in_words forum_reply.inserted_at}" %>
+        <%= user_badge forum_reply.user, icon: "fa-commenting-o", postfix: " - #{time_ago_in_words(forum_reply.inserted_at, simple: true)}" %>
       <% end %>
     </small>
   </div>
