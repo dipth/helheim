@@ -11,20 +11,18 @@
     <div class="card-header">
       <div class="d-flex w-100 justify-content-between">
         <div>
-          <h6 class="mb-0">
+          <%= username_with_avatar @forum_topic.user, %{avatar_before_username: true} %>
+          <h6 class="mb-0 mt-1">
             <%= if @forum_topic.pinned do %>
               <i class="fa fa-fw fa-thumb-tack"></i>
             <% end %>
             <%= @forum_topic.title %>
           </h6>
-          <small>
-            <span class="badge badge-default">
-              <%= time_ago_in_words @forum_topic.inserted_at %>
-            </span>
-          </small>
         </div>
         <div>
-          <%= username_with_avatar @forum_topic.user, %{} %>
+          <span class="badge badge-default">
+            <%= time_ago_in_words @forum_topic.inserted_at %>
+          </span>
         </div>
       </div>
     </div>

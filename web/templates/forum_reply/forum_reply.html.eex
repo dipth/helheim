@@ -2,14 +2,14 @@
   <div class="card-header">
     <div class="d-flex w-100 justify-content-between">
       <div>
+        <%= username_with_avatar @forum_reply.user, %{avatar_before_username: true} %>
+      </div>
+      <div>
         <small>
           <span class="badge badge-default">
             <%= time_ago_in_words @forum_reply.inserted_at %>
           </span>
         </small>
-      </div>
-      <div>
-        <%= username_with_avatar @forum_reply.user, %{} %>
       </div>
     </div>
   </div>
