@@ -1,12 +1,7 @@
-<h1 class="mb-2">
-  <img
-    src="<%= Helheim.Avatar.url({@user.avatar, @user}, :tiny) %>"
-    class="rounded"
-    alt="<%= @user.username %>"
-  >
-  <%= @user.username %>
-  : <%= gettext "Guest Book" %>
-</h1>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link @user.username, to: public_profile_path(@conn, :show, @user) %></li>
+  <li class="breadcrumb-item active"><%= gettext "Guest Book" %></li>
+</ol>
 
 <%=
   render Helheim.CommentView,
