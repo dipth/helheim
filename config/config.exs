@@ -38,18 +38,6 @@ config :sentry,
   environment_name: Mix.env,
   included_environments: [:prod]
 
-# Configure Appsignal
-config :appsignal, :config,
-  active: false,
-  name: :helheim,
-  push_api_key: "only_applicable_in_production",
-  env: Mix.env
-config :helheim, Helheim.Endpoint,
-  instrumenters: [Appsignal.Phoenix.Instrumenter]
-config :phoenix, :template_engines,
-  eex: Appsignal.Phoenix.Template.EExEngine,
-  exs: Appsignal.Phoenix.Template.ExsEngine
-
 # Configure mailer
 config :helheim, Helheim.Mailer,
   adapter: Bamboo.PostmarkAdapter,

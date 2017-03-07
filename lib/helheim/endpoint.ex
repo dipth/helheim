@@ -1,6 +1,5 @@
 defmodule Helheim.Endpoint do
   use Phoenix.Endpoint, otp_app: :helheim
-  use Appsignal.Phoenix
 
   socket "/socket", Helheim.UserSocket
 

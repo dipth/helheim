@@ -20,7 +20,7 @@ defmodule Helheim.Mixfile do
     [mod: {Helheim, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :comeonin, :bamboo, :calendar, :sentry,
-                    :appsignal, :ex_aws, :hackney, :poison, :timex, :scrivener_html]]
+                    :ex_aws, :hackney, :poison, :timex, :scrivener_html]]
   end
 
   # Specifies which paths to compile per environment.
@@ -51,7 +51,6 @@ defmodule Helheim.Mixfile do
      {:wallaby, "~> 0.15.0"},
      {:ex_machina, "~> 1.0", only: :test},
      {:sentry, "~> 2.1"},
-     {:appsignal, "~> 0.0"},
      {:arc, "~> 0.6.0"},
      {:arc_ecto, "~> 0.5.0"},
      {:hackney, "1.6.5", override: true}, # Used by arc
