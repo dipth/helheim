@@ -1,22 +1,16 @@
-<div class="card comment">
-  <div class="card-header">
-    <div class="d-flex flex-row justify-content-between">
-      <div>
-        <%= username_with_avatar @comment.author, %{avatar_before_username: true} %>
-      </div>
-      <div class="hidden-xs-down">
-        <small>
-          <%= time_ago_in_words @comment.inserted_at %>
-        </small>
-      </div>
+<div class="">
+  <div class="d-flex flex-row justify-content-between mb-1">
+    <div>
+      <%= username_with_avatar @comment.author, %{avatar_before_username: true} %>
+    </div>
+    <div class="hidden-xs-down">
+      <small>
+        <%= time_ago_in_words @comment.inserted_at %>
+      </small>
     </div>
   </div>
-  <div class="card-block">
+  <div class="embeds">
     <%= text_to_html @comment.body %>
   </div>
-  <div class="card-footer hidden-sm-up">
-    <small>
-      <%= time_ago_in_words @comment.inserted_at %>
-    </small>
-  </div>
+  <hr>
 </div>

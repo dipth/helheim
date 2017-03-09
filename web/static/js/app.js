@@ -27,9 +27,11 @@ import { Notifications } from "web/static/js/notifications";
 import { SelectWithCustom } from "web/static/js/select_with_custom";
 import { PhotoUpload } from "web/static/js/photo_upload";
 import { AdminTermsForm } from "web/static/js/admin_terms_form";
+import { Embeds } from "web/static/js/embeds/embeds";
 
 export var App = {
   run: function(){
+    Embeds.run();
     Leaf.run();
     RestfulizerTweak.run();
     BootstrapStuff.run();
