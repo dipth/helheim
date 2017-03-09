@@ -13,7 +13,9 @@
 <h1 class="display-4 blog-post-title"><%= @blog_post.title %></h1>
 <p><%= visitor_count_badge @conn, @blog_post %></p>
 
-<%= raw @blog_post.body %>
+<div class="embeds">
+  <%= raw @blog_post.body %>
+</div>
 
 <%= if @blog_post.user_id == Guardian.Plug.current_resource(@conn).id do %>
   <div class="card">

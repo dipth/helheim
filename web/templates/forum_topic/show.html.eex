@@ -7,40 +7,17 @@
 </ol>
 
 <%= if @forum_replies.page_number == 1 do %>
-  <div class="card">
-    <div class="card-header">
-      <div class="d-flex w-100 justify-content-between">
-        <div>
-          <%= username_with_avatar @forum_topic.user, %{avatar_before_username: true} %>
-          <h6 class="mb-0 mt-1">
-            <%= if @forum_topic.pinned do %>
-              <i class="fa fa-fw fa-thumb-tack"></i>
-            <% end %>
-            <%= @forum_topic.title %>
-          </h6>
-        </div>
-        <div>
-          <span class="badge badge-default">
-            <%= time_ago_in_words @forum_topic.inserted_at %>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="card-block">
-      <%= text_to_html @forum_topic.body %>
-    </div>
-    <%= if ForumTopic.editable_by?(@forum_topic, current_resource(@conn)) do %>
-      <div class="card-footer">
-        <%= link gettext("Edit"), to: forum_forum_topic_path(@conn, :edit, @forum, @forum_topic), class: "btn btn-outline-secondary btn-sm" %>
-        <small><%= gettext "Only possible for up to 10 minutes after posting..." %></small>
-      </div>
-    <% end %>
-  </div>
+  <%= render "forum_topic.html",
+             conn: @conn,
+             forum: @forum,
+             forum_topic: @forum_topic %>
 <% end %>
 
 <%= for forum_reply <- @forum_replies.entries do %>
   <%= render Helheim.ForumReplyView, "forum_reply.html", conn: @conn, forum: @forum, forum_topic: @forum_topic, forum_reply: forum_reply %>
 <% end %>
+
+<%= lpaginate @conn, @forum_replies %>
 
 <%= unless @forum_replies.page_number < @forum_replies.total_pages do %>
   <%= render Helheim.ForumReplyView,
@@ -56,5 +33,3 @@
     <%= gettext "Go to the last page to reply..." %>
   </p>
 <% end %>
-
-<%= lpaginate @conn, @forum_replies %>
