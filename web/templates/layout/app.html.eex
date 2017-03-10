@@ -32,8 +32,6 @@
 
       <!-- Main content -->
       <main class="main">
-        <%= render "breadcrumbs.html", conn: @conn, view_module: @view_module, view_template: @view_template %>
-
         <div class="container-fluid">
           <%= render "alerts.html", conn: @conn %>
           <%= render @view_module, @view_template, assigns %>

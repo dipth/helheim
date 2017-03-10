@@ -65,8 +65,6 @@ defmodule Helheim.Web do
       import Helheim.PaginationHelpers
       import Helheim.ProfileHelpers
       import Helheim.VisitorLogEntryHelpers
-
-      use Helheim.BreadcrumbsDefaults
     end
   end
 
