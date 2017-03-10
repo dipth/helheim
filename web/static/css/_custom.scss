@@ -199,3 +199,8 @@ a .badge:hover {
     max-width: 400px;
   }
 }
+
+code {
+  background-color: $body-color;
+  color: $gray-dark;
+}

@@ -46,6 +46,7 @@ defmodule Helheim.Router do
   scope "/", Helheim do
     pipe_through [:browser, :browser_auth]
 
+    get "/help/embeds", HelpController, :embeds
     get "/signed_in", PageController, :signed_in
     get "/front_page", PageController, :front_page
     resources "/account", AccountController, singleton: true, only: [:edit, :update, :delete]

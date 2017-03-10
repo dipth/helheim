@@ -1,0 +1,99 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= gettext("Help") %></li>
+  <li class="breadcrumb-item active"><%= gettext "Embeds" %></li>
+</ol>
+
+<h1><%= gettext "How to embed media" %></h1>
+
+<p><%= gettext "It is possible to embed media in the following type of posts: "%></p>
+<ul>
+  <li><%= gettext "Profile text" %></li>
+  <li><%= gettext "Blog posts" %></li>
+  <li><%= gettext "Comments" %></li>
+  <li><%= gettext "Forum topics" %></li>
+  <li><%= gettext "Forum replies" %></li>
+</ul>
+
+<p><%= gettext "Media from the following websites can be embedded by using the provided code-tags: "%></p>
+<ul>
+  <li class="mb-1">
+    <a href="https://giphy.com" target="_blank">Giphy.com</a><br>
+    <code>[giphy]ID[/giphy]</code>
+  </li>
+  <li class="mb-1">
+    <a href="https://imgur.com" target="_blank">Imgur.com</a><br>
+    <code>[imgur]ID[/imgur]</code>
+  </li>
+  <li class="mb-1">
+    <a href="https://vimeo.com" target="_blank">Vimeo.com</a><br>
+    <code>[vimeo]ID[/vimeo]</code>
+  </li>
+  <li class="mb-1">
+    <a href="https://youtube.com" target="_blank">Youtube.com</a><br>
+    <code>[youtube]ID[/youtube]</code>
+  </li>
+</ul>
+
+<h3><%= gettext "How to embed %{type} from %{source}", type: gettext("an image"), source: "Giphy.com" %></h3>
+<p>
+  <%= gettext "Find the id of %{type} you want to insert.", type: gettext("the image") %>
+  <%= gettext "The id can be found by browsing to %{type} on %{source} and looking at the address bar of the browser.", type: gettext("the desired image"), source: "Giphy.com" %>
+</p>
+<p>
+  <%= link to: static_path(@conn, "/images/help/embeds/giphy.jpg") do %>
+    <%= img_tag(static_path(@conn, "/images/help/embeds/giphy.jpg"), class: "img-fluid") %>
+  <% end %>
+</p>
+<p>
+  <%= gettext "Once you have copied the id of %{type}, insert a tag in your post like so:", type: gettext("the image") %>
+  <code>[giphy]ID[/giphy]</code>,
+  <%= gettext "where ID is the id of %{type}.", type: gettext("the image") %>
+</p>
+
+<h3><%= gettext "How to embed %{type} from %{source}", type: gettext("an image"), source: "Imgur.com" %></h3>
+<p>
+  <%= gettext "Find the id of %{type} you want to insert.", type: gettext("the image") %>
+  <%= gettext "The id can be found by browsing to %{type} on %{source} and looking at the address bar of the browser.", type: gettext("the desired image"), source: "Giphy.com" %>
+</p>
+<p>
+  <%= link to: static_path(@conn, "/images/help/embeds/imgur.jpg") do %>
+    <%= img_tag(static_path(@conn, "/images/help/embeds/imgur.jpg"), class: "img-fluid") %>
+  <% end %>
+</p>
+<p>
+  <%= gettext "Once you have copied the id of %{type}, insert a tag in your post like so:", type: gettext("the image") %>
+  <code>[imgur]ID[/imgur]</code>,
+  <%= gettext "where ID is the id of %{type}.", type: gettext("the image") %>
+</p>
+
+<h3><%= gettext "How to embed %{type} from %{source}", type: gettext("a video"), source: "Vimeo.com" %></h3>
+<p>
+  <%= gettext "Find the id of %{type} you want to insert.", type: gettext("the video") %>
+  <%= gettext "The id can be found by browsing to %{type} on %{source} and looking at the address bar of the browser.", type: gettext("the desired video"), source: "Vimeo.com" %>
+</p>
+<p>
+  <%= link to: static_path(@conn, "/images/help/embeds/vimeo.jpg") do %>
+    <%= img_tag(static_path(@conn, "/images/help/embeds/vimeo.jpg"), class: "img-fluid") %>
+  <% end %>
+</p>
+<p>
+  <%= gettext "Once you have copied the id of %{type}, insert a tag in your post like so:", type: gettext("the video") %>
+  <code>[vimeo]ID[/vimeo]</code>,
+  <%= gettext "where ID is the id of %{type}.", type: gettext("the video") %>
+</p>
+
+<h3><%= gettext "How to embed %{type} from %{source}", type: gettext("a video"), source: "Youtube.com" %></h3>
+<p>
+  <%= gettext "Find the id of %{type} you want to insert.", type: gettext("the video") %>
+  <%= gettext "The id can be found by browsing to %{type} on %{source} and looking at the address bar of the browser.", type: gettext("the desired video"), source: "Youtube.com" %>
+</p>
+<p>
+  <%= link to: static_path(@conn, "/images/help/embeds/youtube.jpg") do %>
+    <%= img_tag(static_path(@conn, "/images/help/embeds/youtube.jpg"), class: "img-fluid") %>
+  <% end %>
+</p>
+<p class="mb-2">
+  <%= gettext "Once you have copied the id of %{type}, insert a tag in your post like so:", type: gettext("the video") %>
+  <code>[youtube]ID[/youtube]</code>,
+  <%= gettext "where ID is the id of %{type}.", type: gettext("the video") %>
+</p>

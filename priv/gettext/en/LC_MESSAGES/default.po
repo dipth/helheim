@@ -405,14 +405,14 @@ msgstr ""
 msgid "Save Blog Post"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:26
+#: web/templates/layout/sidebar.html.eex:32
 msgid "Your Blog Posts"
 msgstr ""
 
 #: web/templates/admin/forum_category/index.html.eex:13
 #: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/admin/term/index.html.eex:35
-#: web/templates/blog_post/show.html.eex:25 web/templates/photo/show.html.eex:39
+#: web/templates/blog_post/show.html.eex:27 web/templates/photo/show.html.eex:39
 #: web/templates/photo_album/show.html.eex:49
 msgid "Are you sure?"
 msgstr ""
@@ -429,14 +429,14 @@ msgstr ""
 msgid "Blog post updated successfully."
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:27 web/templates/photo/show.html.eex:41
+#: web/templates/blog_post/show.html.eex:29 web/templates/photo/show.html.eex:41
 #: web/templates/photo_album/show.html.eex:51
 msgid "Delete"
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:23
-#: web/templates/forum_reply/forum_reply.html.eex:21
-#: web/templates/forum_topic/show.html.eex:36
+#: web/templates/blog_post/show.html.eex:25
+#: web/templates/forum_reply/forum_reply.html.eex:17
+#: web/templates/forum_topic/forum_topic.html.eex:21
 msgid "Edit"
 msgstr ""
 
@@ -458,11 +458,12 @@ msgstr ""
 msgid "Comment created successfully"
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:33
+#: web/templates/blog_post/show.html.eex:35
 msgid "Comments:"
 msgstr ""
 
-#: web/templates/profile_comment/index.html.eex:8
+#: web/templates/layout/sidebar.html.eex:22
+#: web/templates/profile_comment/index.html.eex:3
 msgid "Guest Book"
 msgstr ""
 
@@ -533,7 +534,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/layout/sidebar.html.eex:22
+#: web/templates/layout/sidebar.html.eex:28
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr ""
@@ -644,11 +645,11 @@ msgstr ""
 msgid "Photo Album deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:68
+#: web/controllers/photo_controller.ex:69
 msgid "Photo deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:53
+#: web/controllers/photo_controller.ex:54
 msgid "Photo details updated successfully."
 msgstr ""
 
@@ -664,7 +665,7 @@ msgstr ""
 msgid "Uploaded"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:31
+#: web/templates/layout/sidebar.html.eex:37
 msgid "Your Photo Albums"
 msgstr ""
 
@@ -762,12 +763,12 @@ msgstr ""
 msgid "Forums and Categories"
 msgstr ""
 
-#: web/templates/forum_topic/show.html.eex:58
+#: web/templates/forum_topic/show.html.eex:33
 msgid "Go to the last page to reply..."
 msgstr ""
 
 #: web/templates/blog_post/form.html.eex:21
-#: web/templates/forum_topic/show.html.eex:57
+#: web/templates/forum_topic/show.html.eex:32
 #: web/templates/profile/edit.html.eex:58
 msgid "Hint"
 msgstr ""
@@ -977,8 +978,8 @@ msgstr ""
 msgid "Forum topic updated successfully."
 msgstr ""
 
-#: web/templates/forum_reply/forum_reply.html.eex:22
-#: web/templates/forum_topic/show.html.eex:37
+#: web/templates/forum_reply/forum_reply.html.eex:18
+#: web/templates/forum_topic/forum_topic.html.eex:22
 msgid "Only possible for up to 10 minutes after posting..."
 msgstr ""
 
@@ -1002,4 +1003,101 @@ msgstr ""
 
 #: web/controllers/visitor_log_entry_controller.ex:68
 msgid "You do not have access to that page!"
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:11
+msgid "Blog posts"
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:12
+msgid "Comments"
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:3
+msgid "Embeds"
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:14
+msgid "Forum replies"
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:13
+msgid "Forum topics"
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:2
+msgid "Help"
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:37 web/templates/help/embeds.html.eex:53
+#: web/templates/help/embeds.html.eex:69 web/templates/help/embeds.html.eex:85
+msgid "How to embed %{type} from %{source}"
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:6
+msgid "How to embed media"
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:8
+msgid "It is possible to embed media in the following type of posts: "
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:17
+msgid "Media from the following websites can be embedded by using the provided code-tags: "
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:10
+msgid "Profile text"
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:69 web/templates/help/embeds.html.eex:85
+msgid "a video"
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:37 web/templates/help/embeds.html.eex:53
+msgid "an image"
+msgstr ""
+
+#, fuzzy
+#: web/templates/help/embeds.html.eex:39 web/templates/help/embeds.html.eex:55
+#: web/templates/help/embeds.html.eex:71 web/templates/help/embeds.html.eex:87
+msgid "Find the id of %{type} you want to insert."
+msgstr ""
+
+#, fuzzy
+#: web/templates/help/embeds.html.eex:48 web/templates/help/embeds.html.eex:64
+#: web/templates/help/embeds.html.eex:80 web/templates/help/embeds.html.eex:96
+msgid "Once you have copied the id of %{type}, insert a tag in your post like so:"
+msgstr ""
+
+#, fuzzy
+#: web/templates/help/embeds.html.eex:40 web/templates/help/embeds.html.eex:56
+#: web/templates/help/embeds.html.eex:72 web/templates/help/embeds.html.eex:88
+msgid "The id can be found by browsing to %{type} on %{source} and looking at the address bar of the browser."
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:40 web/templates/help/embeds.html.eex:56
+msgid "the desired image"
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:72 web/templates/help/embeds.html.eex:88
+msgid "the desired video"
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:39 web/templates/help/embeds.html.eex:48
+#: web/templates/help/embeds.html.eex:50 web/templates/help/embeds.html.eex:55
+#: web/templates/help/embeds.html.eex:64 web/templates/help/embeds.html.eex:66
+msgid "the image"
+msgstr ""
+
+#: web/templates/help/embeds.html.eex:71 web/templates/help/embeds.html.eex:80
+#: web/templates/help/embeds.html.eex:82 web/templates/help/embeds.html.eex:87
+#: web/templates/help/embeds.html.eex:96 web/templates/help/embeds.html.eex:98
+msgid "the video"
+msgstr ""
+
+#, fuzzy
+#: web/templates/help/embeds.html.eex:50 web/templates/help/embeds.html.eex:66
+#: web/templates/help/embeds.html.eex:82 web/templates/help/embeds.html.eex:98
+msgid "where ID is the id of %{type}."
 msgstr ""
