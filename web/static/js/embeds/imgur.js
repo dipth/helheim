@@ -1,4 +1,4 @@
-let regEx = /https?:\/\/(?:www\.)?imgur\.com\/gallery\/([0-9a-zA-Z]+)/gi
+let regEx = /\[imgur\](.+?)\[\/imgur\]/gi
 
 let replacer = function(match, imageId) {
   return `

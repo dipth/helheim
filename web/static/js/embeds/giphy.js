@@ -1,4 +1,4 @@
-let regEx = /https?:\/\/(?:www\.|i\.|media\.)?(?:giphy\.com|gph\.is)(?:\/gifs|\/media)?\/(?:.+-)?([0-9a-zA-Z]+)(?:\/source)?(?:\/html5|\.gif)?/gi
+let regEx = /\[giphy\](.+?)\[\/giphy\]/gi
 
 let replacer = function(match, imageId) {
   return `

@@ -1,4 +1,4 @@
-let regEx = /https?:\/\/(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/ytscreeningroom\?v=|\/feeds\/api\/videos\/|\/user\S*[^\w\-\s]|\S*[^\w\-\s]))([\w\-]{11})[?=&+%\w-]*/gi
+let regEx = /\[youtube\](.+?)\[\/youtube\]/gi
 
 let replacer = function(match, videoId) {
   return `
