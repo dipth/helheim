@@ -86,4 +86,14 @@ defmodule Helheim.ForumReplyTest do
       assert ForumReply.editable_by?(reply, user)
     end
   end
+
+  describe "in_order/1" do
+    test "it orders recently inserted replies after older ones" do
+      forum_reply1 = insert(:forum_reply, inserted_at: Timex.shift(Timex.now, minutes: 5))
+      forum_reply2 = insert(:forum_reply)
+      [first, last] = ForumReply |> ForumReply.in_order |> Repo.all
+      assert first.id == forum_reply2.id
+      assert last.id == forum_reply1.id
+    end
+  end
 end

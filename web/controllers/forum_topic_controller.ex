@@ -29,6 +29,7 @@ defmodule Helheim.ForumTopicController do
 
   def show(conn, %{"forum_id" => _, "id" => _} = params) do
     forum_replies = assoc(conn.assigns[:forum_topic], :forum_replies)
+                    |> ForumReply.in_order
                     |> preload(:user)
                     |> Repo.paginate(page: sanitized_page(params["page"]))
     changeset     = conn.assigns[:forum_topic]

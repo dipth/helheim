@@ -34,4 +34,9 @@ defmodule Helheim.ForumReply do
       """),
       where: inner.row_number <= ^per and inner.id == outer.id
   end
+
+  def in_order(query) do
+    from fr in query,
+      order_by: [asc: :inserted_at]
+  end
 end
