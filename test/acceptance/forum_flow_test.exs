@@ -1,18 +1,26 @@
 defmodule Helheim.ForumFlowTest do
-  use Helheim.AcceptanceCase
+  use Helheim.AcceptanceCase, async: true
+
+  defp forums_link,         do: Query.link(gettext("Forums"))
+  defp forum_link(forum),   do: Query.link(forum.title)
+  defp title_field,         do: Query.text_field(gettext("Title"))
+  defp content_field,       do: Query.text_field(gettext("Content"))
+  defp success_alert,       do: Query.css(".alert.alert-success")
+  defp edit_link,           do: Query.link(gettext("Edit"))
+  defp save_changes_button, do: Query.button(gettext("Save Changes"))
 
   setup [:create_and_sign_in_user, :create_forum]
 
   test "users can post a new topic in a forum", %{session: session, forum: forum} do
     result = session
-      |> click_link(gettext("Forums"))
-      |> click_link(forum.title)
-      |> click_link(gettext("Create new topic"))
-      |> fill_in(gettext("Title"), with: "What an awesome title!")
-      |> fill_in(gettext("Content"), with: "Best topic ever!")
-      |> click_button(gettext("Post Topic"))
-      |> find(".alert.alert-success")
-      |> text
+      |> click(forums_link())
+      |> click(forum_link(forum))
+      |> click(Query.link(gettext("Create new topic")))
+      |> fill_in(title_field(), with: "What an awesome title!")
+      |> fill_in(content_field(), with: "Best topic ever!")
+      |> click(Query.button(gettext("Post Topic")))
+      |> find(success_alert())
+      |> Element.text
 
     assert result =~ gettext("Forum topic created successfully.")
   end
@@ -22,12 +30,12 @@ defmodule Helheim.ForumFlowTest do
 
     result = session
       |> visit("/forums/#{forum.id}")
-      |> click_link("Topic before edit")
-      |> click_link(gettext("Edit"))
-      |> fill_in(gettext("Title"), with: "Topic after edit!")
-      |> click_button(gettext("Save Changes"))
-      |> find(".alert.alert-success")
-      |> text
+      |> click(Query.link("Topic before edit"))
+      |> click(edit_link())
+      |> fill_in(title_field(), with: "Topic after edit!")
+      |> click(save_changes_button())
+      |> find(success_alert())
+      |> Element.text
 
     assert result =~ gettext("Forum topic updated successfully.")
   end
@@ -36,13 +44,13 @@ defmodule Helheim.ForumFlowTest do
     topic = insert(:forum_topic, forum: forum, title: "Existing topic")
 
     result = session
-      |> click_link(gettext("Forums"))
-      |> click_link(forum.title)
-      |> click_link(topic.title)
-      |> fill_in(gettext("Content"), with: "Best reply ever!")
-      |> click_button(gettext("Post Reply"))
-      |> find(".alert.alert-success")
-      |> text
+      |> click(forums_link())
+      |> click(forum_link(forum))
+      |> click(Query.link(topic.title))
+      |> fill_in(content_field(), with: "Best reply ever!")
+      |> click(Query.button(gettext("Post Reply")))
+      |> find(success_alert())
+      |> Element.text
 
     assert result =~ gettext("Reply created successfully")
   end
@@ -53,11 +61,11 @@ defmodule Helheim.ForumFlowTest do
 
     result = session
       |> visit("/forums/#{forum.id}/forum_topics/#{topic.id}")
-      |> click_link(gettext("Edit"))
-      |> fill_in(gettext("Content"), with: "Reply after edit!")
-      |> click_button(gettext("Save Changes"))
-      |> find(".alert.alert-success")
-      |> text
+      |> click(edit_link())
+      |> fill_in(content_field(), with: "Reply after edit!")
+      |> click(save_changes_button())
+      |> find(success_alert())
+      |> Element.text
 
     assert result =~ gettext("Forum reply updated successfully.")
   end

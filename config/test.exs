@@ -18,7 +18,9 @@ config :helheim, Helheim.Repo,
   password: System.get_env("DATABASE_POSTGRESQL_PASSWORD") || "postgres",
   database: "helheim_test",
   hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+  pool: Ecto.Adapters.SQL.Sandbox,
+  timeout: 60_000,
+  pool_timeout: 60_000
 
 # Guardian configuration
 config :guardian, Guardian,

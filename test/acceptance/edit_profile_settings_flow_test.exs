@@ -1,28 +1,28 @@
 defmodule Helheim.EditProfileSettingsFlowTest do
-  use Helheim.AcceptanceCase#, async: true
+  use Helheim.AcceptanceCase, async: true
 
   setup [:create_and_sign_in_user]
 
-  # TODO: Enable when wallaby supports interacting with TinyMCE
-  # test "users can edit their profile settings", %{session: session, user: user} do
-  #   session
-  #   |> find(".nav-item-user-menu")
-  #   |> click_link(user.username)
-  #   |> click_link(gettext("Profile"))
-  #
-  #   session
-  #   |> attach_file("user[avatar]", path: "test/files/1.0MB.jpg")
-  #
-  #   session
-  #   |> execute_script("$('#tinymce').html('This is my awesome text');")
-  #
-  #   session
-  #   |> click_on(gettext("Update Profile"))
-  #
-  #   result = session
-  #   |> find(".alert.alert-success")
-  #   |> text
-  #
-  #   assert result =~ gettext("Profile updated!")
-  # end
+  test "users can edit their profile settings", %{session: session, user: user} do
+    session
+    |> find(Query.css(".nav-item-user-menu"))
+    |> click(Query.link(user.username))
+    |> click(Query.link(gettext("Profile")))
+
+    session
+    |> attach_file(Query.file_field("user[avatar]"), path: "test/files/1.0MB.jpg")
+
+    session
+    |> click(Query.css("#user_profile_text_ifr"))
+    |> send_keys("This is my awesome text")
+
+    session
+    |> click(Query.button(gettext("Update Profile")))
+
+    result = session
+    |> find(Query.css(".alert.alert-success"))
+    |> Element.text
+
+    assert result =~ gettext("Profile updated!")
+  end
 end

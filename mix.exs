@@ -49,7 +49,7 @@ defmodule Helheim.Mixfile do
      {:calecto, "~> 0.16.0"},
      {:timex, "~> 3.0"},
      {:timex_ecto, "~> 3.0"},
-     {:wallaby, "~> 0.15.0"},
+     {:wallaby, "~> 0.16.1"},
      {:ex_machina, "~> 1.0", only: :test},
      {:sentry, "~> 2.1"},
      {:arc, "~> 0.6.0"},

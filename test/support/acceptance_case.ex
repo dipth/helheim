@@ -17,9 +17,9 @@ defmodule Helheim.AcceptanceCase do
       defp sign_in(session, user) do
         session
         |> visit("/sessions/new")
-        |> fill_in(gettext("E-mail"), with: user.email)
-        |> fill_in(gettext("Password"), with: "password")
-        |> click_on(gettext("Sign In"))
+        |> fill_in(Wallaby.Query.text_field(gettext("E-mail")), with: user.email)
+        |> fill_in(Wallaby.Query.text_field(gettext("Password")), with: "password")
+        |> click(Wallaby.Query.button(gettext("Sign In")))
       end
 
       defp create_and_sign_in_user(context) do
@@ -41,7 +41,7 @@ defmodule Helheim.AcceptanceCase do
 
     metadata = Phoenix.Ecto.SQL.Sandbox.metadata_for(Helheim.Repo, self())
     {:ok, session} = Wallaby.start_session(metadata: metadata)
-    session = Wallaby.Session.set_window_size(session, 1366, 768)
+    session = Wallaby.Browser.resize_window(session, 1366, 768)
     {:ok, session: session}
   end
 end

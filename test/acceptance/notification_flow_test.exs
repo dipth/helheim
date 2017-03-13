@@ -1,5 +1,5 @@
 defmodule Helheim.NotificationFlowTest do
-  use Helheim.AcceptanceCase#, async: true
+  use Helheim.AcceptanceCase, async: true
 
   setup [:create_and_sign_in_user]
 
@@ -9,12 +9,12 @@ defmodule Helheim.NotificationFlowTest do
     session
     |> visit("/front_page")
 
-    assert find(session, "#nav-item-notifications .badge", text: "1")
+    assert find(session, Query.css("#nav-item-notifications .badge", text: "1"))
 
     session
-    |> click_link("nav-link-notifications")
-    |> click_link("Super Notification!")
+    |> click(Query.css("#nav-link-notifications"))
+    |> click(Query.link("Super Notification!"))
 
-    assert get_current_path(session) == "/profiles/#{user.id}"
+    assert current_path(session) == "/profiles/#{user.id}"
   end
 end

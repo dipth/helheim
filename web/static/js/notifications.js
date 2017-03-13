@@ -2,10 +2,15 @@ import {Socket} from "phoenix"
 
 export var Notifications = {
   run: function(){
+    let env = jQuery('meta[name="env"]').attr('content')
     let guardianToken = jQuery('meta[name="guardian_token"]').attr('content')
     let userId = jQuery('meta[name="user_id"]').attr('content')
     let notification_sound_path = jQuery('meta[name="notification_sound"]').attr('content')
     let notification_sound
+
+    if (env == 'test') {
+      return;
+    }
 
     // Only try to use notification sound if the browser supports it
     try {

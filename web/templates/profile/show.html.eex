@@ -94,7 +94,7 @@
 
 <h5 class="mb-1">
   <%= gettext "Newest Guest Book Entries" %>
-  <%= link gettext("Show All"), to: public_profile_comment_path(@conn, :index, @user), class: "float-right" %>
+  <%= link gettext("Show All"), to: public_profile_comment_path(@conn, :index, @user), class: "float-right show-all-comments" %>
 </h5>
 
 <%=
