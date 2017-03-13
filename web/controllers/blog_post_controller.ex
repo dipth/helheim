@@ -12,7 +12,7 @@ defmodule Helheim.BlogPostController do
       |> BlogPost.newest
       |> preload(:user)
       |> Repo.paginate(page: sanitized_page(params["page"]))
-    render(conn, "index.html", blog_posts: blog_posts)
+    render(conn, "index.html", user: user, blog_posts: blog_posts)
   end
 
   def new(conn, _params) do
@@ -53,7 +53,7 @@ defmodule Helheim.BlogPostController do
       |> preload(:author)
       |> Repo.paginate(page: sanitized_page(params["page"]))
     Helheim.VisitorLogEntry.track! current_resource(conn), blog_post
-    render(conn, "show.html", blog_post: blog_post, comments: comments)
+    render(conn, "show.html", user: user, blog_post: blog_post, comments: comments)
   end
 
   def edit(conn, %{"id" => id}) do

@@ -1,38 +1,39 @@
-<p>
-  <%= link img_tag(Helheim.Avatar.url({@blog_post.user.avatar, @blog_post.user}, :tiny), class: "rounded"), to: public_profile_path(@conn, :show, @blog_post.user.id) %>
-  <%= link @blog_post.user.username, to: public_profile_path(@conn, :show, @blog_post.user.id) %>
-  <small>
-    -
-    <%=
-      @blog_post.inserted_at
-      |> Calendar.DateTime.shift_zone!("Europe/Copenhagen")
-      |> Calendar.Strftime.strftime!("%d-%m-%Y %H:%M:%S")
-    %>
-  </small>
-</p>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link @user.username, to: public_profile_path(@conn, :show, @user) %></li>
+  <li class="breadcrumb-item"><%= link gettext("Blog posts"), to: public_profile_blog_post_path(@conn, :index, @user) %></li>
+  <li class="breadcrumb-item active"><%= @blog_post.title %></li>
+</ol>
+
 <h1 class="display-4 blog-post-title"><%= @blog_post.title %></h1>
-<p><%= visitor_count_badge @conn, @blog_post %></p>
+<div class="d-flex w-100 justify-content-between">
+  <div class="align-self-center">
+    <%= visitor_count_badge @conn, @blog_post %>
+    <small>
+      <i class="fa fa-clock-o"></i>
+      <%= time_ago_in_words @blog_post.inserted_at %>
+    </small>
+  </div>
+  <div>
+    <%= if @blog_post.user_id == current_resource(@conn).id do %>
+      <%= link to: blog_post_path(@conn, :edit, @blog_post), class: "btn btn-sm btn-primary mr-1" do %>
+        <i class="fa fa-pencil"></i>
+        <span class="hidden-sm-down"><%= gettext "Edit" %></span>
+      <% end %>
+      <%= link to: blog_post_path(@conn, :delete, @blog_post), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-sm float-right" do %>
+        <i class="fa fa-trash"></i>
+        <span class="hidden-sm-down"><%= gettext "Delete" %></span>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<hr>
 
 <div class="embeds">
   <%= raw @blog_post.body %>
 </div>
 
-<%= if @blog_post.user_id == Guardian.Plug.current_resource(@conn).id do %>
-  <div class="card">
-    <div class="card-block">
-      <%= link to: blog_post_path(@conn, :edit, @blog_post), class: "btn btn-sm btn-primary" do %>
-        <i class="fa fa-pencil"></i>
-        <%= gettext "Edit" %>
-      <% end %>
-      <%= link to: blog_post_path(@conn, :delete, @blog_post), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-sm float-right" do %>
-        <i class="fa fa-trash"></i>
-        <%= gettext "Delete" %>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<h3><%= gettext "Comments:" %></h3>
+<h3 class="mb-2"><%= gettext "Comments:" %></h3>
 
 <%=
   render Helheim.CommentView,

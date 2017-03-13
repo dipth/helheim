@@ -1,4 +1,4 @@
-<h3 class="mb-1">
+<h3 class="mb-1 mt-1">
   <%= if @partner do %>
     <%= gettext "Private conversation with %{username}", username: @partner.username %>
   <% else %>

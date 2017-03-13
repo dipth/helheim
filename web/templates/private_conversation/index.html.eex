@@ -1,4 +1,4 @@
-<h3 class="mb-1"><%= gettext "Private Messages" %></h3>
+<h3 class="mb-1 mt-1"><%= gettext "Private Messages" %></h3>
 
 <div class="list-group mb-1">
   <%= for message <- @messages.entries do %>

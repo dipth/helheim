@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mt-1">
   <div class="col-lg-4">
     <div class="card">
       <div class="card-block">
@@ -63,6 +63,8 @@
       <%= for blog_post <- @newest_blog_posts do %>
         <%= render Helheim.BlogPostView, "list_entry.html", conn: @conn, blog_post: blog_post %>
       <% end %>
+
+      <%= link gettext("Show All"), to: public_profile_blog_post_path(@conn, :index, @user), class: "btn btn-outline-secondary btn-block mb-0" %>
     </div>
   </div>
 
@@ -86,7 +88,7 @@
         <%= render Helheim.PhotoView, "thumb.html", conn: @conn, user: @user, photo: photo %>
       <% end %>
     </div>
-    <%= link gettext("Browse All Photo Albums"), to: public_profile_photo_album_path(@conn, :index, @user), class: "btn btn-primary mb-0" %>
+    <%= link gettext("Show All"), to: public_profile_photo_album_path(@conn, :index, @user), class: "btn btn-outline-secondary btn-block mb-0" %>
   </div>
 </div>
 

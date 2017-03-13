@@ -378,7 +378,7 @@ msgid "Newest Blogs"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:23
-#: web/templates/profile/show.html.eex:71
+#: web/templates/profile/show.html.eex:73
 msgid "Newest Forum Posts"
 msgstr ""
 
@@ -390,12 +390,11 @@ msgstr ""
 msgid "Your Profile"
 msgstr ""
 
-#: web/templates/blog_post/index.html.eex:3
 #: web/views/visitor_log_entry_view.ex:28
 msgid "Blog Posts"
 msgstr ""
 
-#: web/templates/blog_post/index.html.eex:6
+#: web/templates/blog_post/index.html.eex:10
 #: web/templates/blog_post/new.html.eex:3
 msgid "New Blog Post"
 msgstr ""
@@ -411,7 +410,7 @@ msgstr ""
 #: web/templates/admin/forum_category/index.html.eex:13
 #: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/admin/term/index.html.eex:35
-#: web/templates/blog_post/show.html.eex:27 web/templates/photo/show.html.eex:39
+#: web/templates/blog_post/show.html.eex:22 web/templates/photo/show.html.eex:39
 #: web/templates/photo_album/show.html.eex:49
 msgid "Are you sure?"
 msgstr ""
@@ -428,12 +427,12 @@ msgstr ""
 msgid "Blog post updated successfully."
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:29 web/templates/photo/show.html.eex:41
+#: web/templates/blog_post/show.html.eex:24 web/templates/photo/show.html.eex:41
 #: web/templates/photo_album/show.html.eex:51
 msgid "Delete"
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:25
+#: web/templates/blog_post/show.html.eex:20
 #: web/templates/forum_reply/forum_reply.html.eex:17
 #: web/templates/forum_topic/forum_topic.html.eex:21
 msgid "Edit"
@@ -457,7 +456,7 @@ msgstr ""
 msgid "Comment created successfully"
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:35
+#: web/templates/blog_post/show.html.eex:36
 msgid "Comments:"
 msgstr ""
 
@@ -466,7 +465,7 @@ msgstr ""
 msgid "Guest Book"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:94
+#: web/templates/profile/show.html.eex:96
 msgid "Newest Guest Book Entries"
 msgstr ""
 
@@ -474,7 +473,8 @@ msgstr ""
 msgid "Post Comment"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:95
+#: web/templates/profile/show.html.eex:67 web/templates/profile/show.html.eex:91
+#: web/templates/profile/show.html.eex:97
 msgid "Show All"
 msgstr ""
 
@@ -624,10 +624,6 @@ msgstr ""
 msgid "Visibility"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:89
-msgid "Browse All Photo Albums"
-msgstr ""
-
 #: web/templates/photo_album/show.html.eex:39
 msgid "Drop photos here (or click) to upload..."
 msgstr ""
@@ -636,7 +632,7 @@ msgstr ""
 msgid "Edit Photo Details"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:83
+#: web/templates/profile/show.html.eex:85
 msgid "Newest Public Photos"
 msgstr ""
 
@@ -1004,7 +1000,8 @@ msgstr ""
 msgid "You do not have access to that page!"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:11
+#: web/templates/blog_post/index.html.eex:3
+#: web/templates/blog_post/show.html.eex:3 web/templates/help/embeds.html.eex:11
 msgid "Blog posts"
 msgstr ""
 
