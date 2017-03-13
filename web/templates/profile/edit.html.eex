@@ -44,6 +44,19 @@
                 <%= text_input f, :location, class: "form-control" %>
               </div>
 
+              <div class="form-group">
+                <%= label f, :birthday, gettext("Birthday") %><br>
+                <%= date_select f, :birthday, builder: fn b -> %>
+                  <%= b.(:day, prompt: "", class: "custom-select") %> /
+                  <%= b.(:month, options: gettext_month_options(),prompt: "", class: "custom-select") %> /
+                  <%= b.(:year, options: Timex.now.year..(Timex.now.year - 100), prompt: "", class: "custom-select") %>
+                <% end %>
+                <small class="form-text">
+                  <i class="fa fa-info fa-fw"></i>
+                  <%= gettext "We never show your birthday directly to other users, only your age, although some users might be able to guess it by observing your age increasing..." %>
+                </small>
+              </div>
+
               <h5 class="mb-1"><%= gettext "Profile Text" %></h5>
               <hr>
               <div class="form-group <%= if f.errors[:profile_text] do 'has-danger' end %>">

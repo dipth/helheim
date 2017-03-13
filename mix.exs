@@ -20,7 +20,7 @@ defmodule Helheim.Mixfile do
     [mod: {Helheim, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :comeonin, :bamboo, :calendar, :sentry,
-                    :ex_aws, :hackney, :poison, :timex, :scrivener_html]]
+                    :ex_aws, :hackney, :poison, :timex, :scrivener_html, :timex_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -47,7 +47,8 @@ defmodule Helheim.Mixfile do
      {:calendar, "~> 0.17"},
      {:calendar_translations, "~> 0.0.4"},
      {:calecto, "~> 0.16.0"},
-     {:timex, git: "https://github.com/bitwalker/timex.git"},
+     {:timex, "~> 3.0"},
+     {:timex_ecto, "~> 3.0"},
      {:wallaby, "~> 0.15.0"},
      {:ex_machina, "~> 1.0", only: :test},
      {:sentry, "~> 2.1"},

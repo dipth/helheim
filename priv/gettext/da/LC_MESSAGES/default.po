@@ -300,7 +300,6 @@ msgid "You need to confirm your e-mail address before you can reset your passwor
 msgstr "Du skal først bekræfte din e-mail adresse før du kan nulstille dit kodeord"
 
 #: web/templates/layout/header.html.eex:19 web/views/account_view.ex:4
-#: web/views/profile_view.ex:5
 msgid "Settings"
 msgstr "Indstillinger"
 
@@ -345,7 +344,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:160
+#: web/models/user.ex:172
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -353,7 +352,7 @@ msgstr "matcher ikke dit nuværende kodeord"
 msgid "Maximum file size: %{file_size}"
 msgstr "Maksimum fil størrelse: %{file_size}"
 
-#: web/templates/layout/header.html.eex:22 web/views/profile_view.ex:5
+#: web/templates/layout/header.html.eex:22
 msgid "Profile"
 msgstr "Profil"
 
@@ -366,7 +365,7 @@ msgstr "Profilbillede"
 msgid "Profile Settings"
 msgstr "Profil Indstillinger"
 
-#: web/templates/profile/edit.html.eex:47
+#: web/templates/profile/edit.html.eex:60
 msgid "Profile Text"
 msgstr "Profiltekst"
 
@@ -374,7 +373,7 @@ msgstr "Profiltekst"
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
-#: web/templates/profile/edit.html.eex:64
+#: web/templates/profile/edit.html.eex:77
 msgid "Update Profile"
 msgstr "Opdatér Profil"
 
@@ -387,12 +386,12 @@ msgid "Remember me"
 msgstr "Husk mig i 30 dage"
 
 #: web/templates/page/front_page.html.eex:33
-#: web/templates/profile/show.html.eex:54
+#: web/templates/profile/show.html.eex:62
 msgid "Newest Blogs"
 msgstr "Nyeste Blogs"
 
 #: web/templates/page/front_page.html.eex:23
-#: web/templates/profile/show.html.eex:63
+#: web/templates/profile/show.html.eex:71
 msgid "Newest Forum Posts"
 msgstr "Nyeste Forumindlæg"
 
@@ -400,7 +399,7 @@ msgstr "Nyeste Forumindlæg"
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
 
-#: web/templates/layout/sidebar.html.eex:17
+#: web/templates/layout/sidebar.html.eex:33
 msgid "Your Profile"
 msgstr "Din Profil"
 
@@ -418,7 +417,7 @@ msgstr "Ny Blog"
 msgid "Save Blog Post"
 msgstr "Gem Blog"
 
-#: web/templates/layout/sidebar.html.eex:32
+#: web/templates/layout/sidebar.html.eex:48
 msgid "Your Blog Posts"
 msgstr "Dine Blogs"
 
@@ -477,12 +476,12 @@ msgstr "Din kommentar er tilføjet!"
 msgid "Comments:"
 msgstr "Kommentarer:"
 
-#: web/templates/layout/sidebar.html.eex:22
+#: web/templates/layout/sidebar.html.eex:38
 #: web/templates/profile_comment/index.html.eex:3
 msgid "Guest Book"
 msgstr "Gæstebog"
 
-#: web/templates/profile/show.html.eex:86
+#: web/templates/profile/show.html.eex:94
 msgid "Newest Guest Book Entries"
 msgstr "Nyeste gæstebogsindlæg"
 
@@ -490,7 +489,7 @@ msgstr "Nyeste gæstebogsindlæg"
 msgid "Post Comment"
 msgstr "Tilføj Kommentar"
 
-#: web/templates/profile/show.html.eex:87
+#: web/templates/profile/show.html.eex:95
 msgid "Show All"
 msgstr "Vis alle"
 
@@ -523,7 +522,7 @@ msgstr "Din besked blev sendt!"
 msgid "Send Message"
 msgstr "Send Besked"
 
-#: web/templates/profile/show.html.eex:38
+#: web/templates/profile/show.html.eex:46
 msgid "Send private message"
 msgstr "Send privat besked"
 
@@ -549,7 +548,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] "Du har %{count} notifikation"
 msgstr[1] "Du har %{count} notifikationer"
 
-#: web/templates/layout/sidebar.html.eex:28
+#: web/templates/layout/sidebar.html.eex:44
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr "Private Beskeder"
@@ -585,7 +584,7 @@ msgid "Joined"
 msgstr "Tilmeldt"
 
 #: web/templates/profile/edit.html.eex:43
-#: web/templates/profile/show.html.eex:28
+#: web/templates/profile/show.html.eex:36
 msgid "Location"
 msgstr "Lokation"
 
@@ -644,7 +643,7 @@ msgstr "Gem Fotoalbum"
 msgid "Visibility"
 msgstr "Synlighed"
 
-#: web/templates/profile/show.html.eex:81
+#: web/templates/profile/show.html.eex:89
 msgid "Browse All Photo Albums"
 msgstr "Se alle fotoalbums"
 
@@ -656,7 +655,7 @@ msgstr "Slip billeder her (eller klik) for at uploade…"
 msgid "Edit Photo Details"
 msgstr "Redigér billed-detaljer"
 
-#: web/templates/profile/show.html.eex:75
+#: web/templates/profile/show.html.eex:83
 msgid "Newest Public Photos"
 msgstr "Nyeste offentlige billeder"
 
@@ -684,7 +683,7 @@ msgstr "Upload billeder"
 msgid "Uploaded"
 msgstr "Uploadet"
 
-#: web/templates/layout/sidebar.html.eex:37
+#: web/templates/layout/sidebar.html.eex:53
 msgid "Your Photo Albums"
 msgstr "Dine Fotoalbums"
 
@@ -707,7 +706,7 @@ msgstr "Administration"
 #: web/templates/blog_post/form.html.eex:12
 #: web/templates/forum_reply/form.html.eex:4
 #: web/templates/forum_topic/form.html.eex:12
-#: web/templates/profile/edit.html.eex:50
+#: web/templates/profile/edit.html.eex:63
 msgid "Content"
 msgstr "Indhold"
 
@@ -789,7 +788,7 @@ msgstr "Hop til den sidste side for at sende et svar"
 
 #: web/templates/blog_post/form.html.eex:21
 #: web/templates/forum_topic/show.html.eex:32
-#: web/templates/profile/edit.html.eex:58
+#: web/templates/profile/edit.html.eex:71
 msgid "Hint"
 msgstr "Tip"
 
@@ -831,7 +830,7 @@ msgstr "Gem forum kategori"
 msgid "Submit new reply"
 msgstr "Send nyt svar"
 
-#: web/templates/layout/sidebar.html.eex:14
+#: web/templates/layout/sidebar.html.eex:30
 msgid "You"
 msgstr "Dig"
 
@@ -843,12 +842,12 @@ msgstr "Låst?"
 msgid "Only admins can post here"
 msgstr "Låst, undtagen admins"
 
-#: web/controllers/forum_topic_controller.ex:77
+#: web/controllers/forum_topic_controller.ex:78
 msgid "You cannot create a topic in a locked forum!"
 msgstr "Du kan ikke oprette indlæg i et låst forum!"
 
 #: web/templates/blog_post/form.html.eex:21
-#: web/templates/profile/edit.html.eex:58
+#: web/templates/profile/edit.html.eex:71
 msgid "You can insert pictures from your photo albums by copying the image url and pasting it into the source-field when clicking the image button in the editor"
 msgstr "Du kan indsætte billeder fra dine fotoalbums ved at kopiere billedets url og indsætte det i “source”-feltet når du klikker på billed-knappen i editoren"
 
@@ -995,7 +994,7 @@ msgstr "Redigér indlæg"
 msgid "Forum reply updated successfully."
 msgstr "Dit svar blev gemt!"
 
-#: web/controllers/forum_topic_controller.ex:49
+#: web/controllers/forum_topic_controller.ex:50
 msgid "Forum topic updated successfully."
 msgstr "Dit indlæg blev gemt!"
 
@@ -1013,7 +1012,7 @@ msgstr "Gem ændringer"
 msgid "You can only edit a forum reply in the first 10 minutes!"
 msgstr "Du kan kun redigere dit svar i de første 10 minutter!"
 
-#: web/controllers/forum_topic_controller.ex:88
+#: web/controllers/forum_topic_controller.ex:89
 msgid "You can only edit a forum topic in the first 10 minutes!"
 msgstr "Du kan kun redigere dit indlæg i de første 10 minutter!"
 
@@ -1037,6 +1036,7 @@ msgid "Comments"
 msgstr "Kommentarer"
 
 #: web/templates/help/embeds.html.eex:3
+#: web/templates/layout/sidebar.html.eex:23
 msgid "Embeds"
 msgstr "Embeds"
 
@@ -1049,6 +1049,7 @@ msgid "Forum topics"
 msgstr "Forumtråde"
 
 #: web/templates/help/embeds.html.eex:2
+#: web/templates/layout/sidebar.html.eex:17
 msgid "Help"
 msgstr "Hjælp"
 
@@ -1120,3 +1121,63 @@ msgstr "videoen"
 #: web/templates/help/embeds.html.eex:82 web/templates/help/embeds.html.eex:98
 msgid "where ID is the id of %{type}."
 msgstr "hvor ID er id’et på %{type}."
+
+#: web/templates/profile/show.html.eex:28
+msgid "Age"
+msgstr "Alder"
+
+#: web/views/time_helpers.ex:29
+msgid "April"
+msgstr "April"
+
+#: web/views/time_helpers.ex:33
+msgid "August"
+msgstr "August"
+
+#: web/templates/profile/edit.html.eex:48
+msgid "Birthday"
+msgstr "Fødselsdato"
+
+#: web/views/time_helpers.ex:37
+msgid "December"
+msgstr "December"
+
+#: web/views/time_helpers.ex:27
+msgid "February"
+msgstr "Februar"
+
+#: web/views/time_helpers.ex:26
+msgid "January"
+msgstr "Januar"
+
+#: web/views/time_helpers.ex:32
+msgid "July"
+msgstr "Juli"
+
+#: web/views/time_helpers.ex:31
+msgid "June"
+msgstr "Juni"
+
+#: web/views/time_helpers.ex:28
+msgid "March"
+msgstr "Marts"
+
+#: web/views/time_helpers.ex:30
+msgid "May"
+msgstr "Maj"
+
+#: web/views/time_helpers.ex:36
+msgid "November"
+msgstr "November"
+
+#: web/views/time_helpers.ex:35
+msgid "October"
+msgstr "Oktober"
+
+#: web/views/time_helpers.ex:34
+msgid "September"
+msgstr "September"
+
+#: web/templates/profile/edit.html.eex:56
+msgid "We never show your birthday directly to other users, only your age, although some users might be able to guess it by observing your age increasing..."
+msgstr "Vi viser aldrig din fødselsdato til andre brugere, kun din alder. Det er dog muligt at andre vil kunne gætte din fødselsdato ved at observere hvornår din alder skifter…"

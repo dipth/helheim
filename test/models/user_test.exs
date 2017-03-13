@@ -160,6 +160,36 @@ defmodule Helheim.UserTest do
     end
   end
 
+  describe "age/1" do
+    test "it returns the number of full years between the birthday of a user and the current date" do
+      now = Timex.now
+      birthday = Timex.set(now, year: now.year - 10) |> Timex.to_date
+      user = insert(:user, birthday: birthday)
+      assert User.age(user) == 10
+    end
+
+    test "it correctly subtracts 1 if the current month is before the month of the birthday" do
+      now = Timex.now
+      birthday = Timex.set(now, year: now.year - 10, month: now.month + 1) |> Timex.to_date
+      user = insert(:user, birthday: birthday)
+      assert User.age(user) == 9
+    end
+
+    test "it correctly subtracts 1 if the current month is the same as the month of the birthday but the current day is before" do
+      now = Timex.now
+      birthday = Timex.set(now, year: now.year - 10, day: now.day + 1) |> Timex.to_date
+      user = insert(:user, birthday: birthday)
+      assert User.age(user) == 9
+    end
+
+    test "it does not subtract 1 if the current day is before the day of the birthday but the current month is after" do
+      now = Timex.now
+      birthday = Timex.set(now, year: now.year - 10, month: now.month - 1, day: now.day + 1) |> Timex.to_date
+      user = insert(:user, birthday: birthday)
+      assert User.age(user) == 10
+    end
+  end
+
   describe "foreign keys" do
     test "all associated blog posts are deleted when a user is deleted" do
       user      = insert(:user)

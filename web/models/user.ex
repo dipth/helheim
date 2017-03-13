@@ -23,6 +23,7 @@ defmodule Helheim.User do
     field :gender,                          :string
     field :gender_custom,                   :string, virtual: true
     field :location,                        :string
+    field :birthday,                        :date
     field :visitor_count,                   :integer
 
     timestamps()
@@ -91,7 +92,7 @@ defmodule Helheim.User do
 
   def profile_changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:gender, :gender_custom, :location, :profile_text])
+    |> cast(params, [:gender, :gender_custom, :location, :profile_text, :birthday])
     |> allow_custom_value_for_fields([{:gender, :gender_custom}])
     |> trim_fields([:gender, :location])
     |> cast_attachments(params, [:avatar])
@@ -130,6 +131,17 @@ defmodule Helheim.User do
     photo_albums = assoc(user, :photo_albums) |> Repo.all
     Parallel.pmap(photo_albums, fn(pa) -> Helheim.PhotoAlbum.delete!(pa) end)
     Repo.delete!(user)
+  end
+
+  def age(user) do
+    now      = Timex.now
+    birthday = user.birthday
+
+    if now.month < birthday.month || (now.month == birthday.month && now.day < birthday.day) do
+      now.year - birthday.year - 1
+    else
+      now.year - birthday.year
+    end
   end
 
   defp put_password_hash(changeset) do
