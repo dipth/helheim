@@ -6,6 +6,32 @@ defmodule Helheim.ProfileControllerTest do
   alias Helheim.User
 
   ##############################################################################
+  # index/2
+  describe "index/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it returns a successful response", %{conn: conn} do
+      conn = get conn, "/profiles"
+      assert html_response(conn, 200)
+    end
+
+    test "it shows all users", %{conn: conn} do
+      user_1 = insert(:user, username: "Username 1")
+      user_2 = insert(:user, username: "Username 2")
+      conn = get conn, "/profiles"
+      assert conn.resp_body =~ user_1.username
+      assert conn.resp_body =~ user_2.username
+    end
+  end
+
+  describe "index/2 when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      conn = get conn, "/profiles"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
   # show/2
   describe "show/2 when signed in" do
     setup [:create_and_sign_in_user]

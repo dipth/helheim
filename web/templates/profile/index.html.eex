@@ -1,0 +1,21 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= gettext "Profiles" %></li>
+</ol>
+
+<div class="card-group card-group-photos">
+  <%= for user <- @users.entries do %>
+    <div class="card">
+      <%= link to: public_profile_path(@conn, :show, user) do %>
+        <%= img_tag(Helheim.Avatar.url({user.avatar, user}, :thumb), class: "card-img-top img-fluid img-photo") %>
+      <% end %>
+      <div class="card-block">
+        <p class="card-text">
+          <strong><%= user.username %></strong><br>
+          <small><%= time_ago_in_words user.inserted_at %></small>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= lpaginate @conn, @users %>

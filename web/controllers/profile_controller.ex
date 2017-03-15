@@ -6,6 +6,13 @@ defmodule Helheim.ProfileController do
   alias Helheim.Photo
   alias Helheim.ForumTopic
 
+  def index(conn, params) do
+    users = User
+            |> User.newest
+            |> Repo.paginate(page: sanitized_page(params["page"]))
+    render(conn, "index.html", users: users)
+  end
+
   def show(conn, params) do
     user = if params["id"] do
       Repo.get!(User, params["id"])

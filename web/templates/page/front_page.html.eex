@@ -15,6 +15,7 @@
             >
           </a>
         <% end %>
+        <%= link gettext("Show All"), to: public_profile_path(@conn, :index), class: "btn btn-outline-secondary btn-block mb-0" %>
       </div>
     </div>
   </div>
