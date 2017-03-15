@@ -70,6 +70,7 @@ defmodule Helheim.Router do
     resources "/photo_albums", PhotoAlbumController, only: [:new, :create, :edit, :update, :delete] do
       resources "/photos", PhotoController, only: [:create, :edit, :update, :delete]
     end
+    resources "/photos", PhotoController, only: [:index]
     get "/notifications/refresh", NotificationController, :refresh
     resources "/notifications", NotificationController, only: [:show]
     resources "/private_conversations", PrivateConversationController, param: "partner_id", only: [:index, :show] do

@@ -39,6 +39,12 @@ defmodule Helheim.Photo do
     order_by: [desc: p.inserted_at]
   end
 
+  def public(query) do
+    from p in query,
+    join:  pa in Helheim.PhotoAlbum, on: pa.id == p.photo_album_id,
+    where: pa.visibility == "public"
+  end
+
   def newest_public_photos_by(user, limit) do
     Repo.all from p in Helheim.Photo,
       join:     pa in Helheim.PhotoAlbum, on: pa.id == p.photo_album_id,

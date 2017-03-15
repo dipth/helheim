@@ -7,19 +7,13 @@
     <%= img_tag(Helheim.PhotoFile.url({@photo.file, @photo}, :thumb), class: "card-img-top img-fluid img-photo") %>
   <% end %>
   <div class="card-block">
+    <div class="d-flex w-100 justify-content-between mb-1">
+      <div><%= user_badge user, [] %></div>
+      <div><%= visitor_count_badge @conn, @photo %></div>
+    </div>
     <p class="card-text">
-      <%= unless assigns[:hide_title] do %>
-        <strong class="text-break-up"><%= @photo.title %></strong><br>
-      <% end %>
-      <small>
-        <%= unless assigns[:user] do %>
-          <%= img_tag(Helheim.Avatar.url({user.avatar, user}, :tiny), class: "img-avatar") %>
-          <strong><%= link user.username, to: public_profile_path(@conn, :show, user) %></strong>
-        <% else %>
-          <%= time_ago_in_words @photo.inserted_at %>
-          <%= visitor_count_badge @conn, @photo %>
-        <% end %>
-      </small>
+      <strong class="text-break-up"><%= @photo.title %></strong><br>
+      <small><%= time_ago_in_words @photo.inserted_at %></small>
     </p>
   </div>
 </div>

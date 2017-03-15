@@ -5,6 +5,15 @@ defmodule Helheim.PhotoController do
   alias Helheim.Photo
   import Helheim.ErrorHelpers, only: [translate_error: 1]
 
+  def index(conn, params) do
+    photos = Photo
+             |> Photo.public
+             |> Photo.newest
+             |> preload(photo_album: :user)
+             |> Repo.paginate(page: sanitized_page(params["page"]))
+    render(conn, "index.html", photos: photos)
+  end
+
   def create(conn, %{"photo_album_id" => photo_album_id, "file" => file}) do
     user        = current_resource(conn)
     photo_album = assoc(user, :photo_albums) |> Repo.get!(photo_album_id)

@@ -44,8 +44,9 @@
     <h5 class="mb-1"><%= gettext "Newest Photos" %></h5>
     <div class="card-group card-group-photos">
       <%= for photo <- @newest_photos do %>
-        <%= render Helheim.PhotoView, "thumb.html", conn: @conn, photo: photo, hide_title: true %>
+        <%= render Helheim.PhotoView, "thumb.html", conn: @conn, photo: photo %>
       <% end %>
+      <%= link gettext("Show All"), to: photo_path(@conn, :index), class: "btn btn-outline-secondary btn-block mb-0" %>
     </div>
   </div>
 </div>

@@ -83,6 +83,21 @@ defmodule Helheim.PhotoTest do
     end
   end
 
+  describe "public/1" do
+    test "it only returns photos that are in a public photo album" do
+      public_album       = insert(:photo_album, visibility: "public")
+      friends_only_album = insert(:photo_album, visibility: "friends_only")
+      private_album      = insert(:photo_album, visibility: "private")
+      public_photo       = insert(:photo, photo_album: public_album)
+      friends_only_photo = insert(:photo, photo_album: friends_only_album)
+      private_photo      = insert(:photo, photo_album: private_album)
+      photo_ids = Photo |> Photo.public |> Repo.all |> Enum.map(fn(p) -> p.id end)
+      assert Enum.member?(photo_ids, public_photo.id)
+      refute Enum.member?(photo_ids, friends_only_photo.id)
+      refute Enum.member?(photo_ids, private_photo.id)
+    end
+  end
+
   describe "newest_public_photos_by/2" do
     test "it returns the n newest public photos uploaded by the specified user" do
       user = insert(:user)

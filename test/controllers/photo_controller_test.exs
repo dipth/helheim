@@ -10,6 +10,42 @@ defmodule Helheim.PhotoControllerTest do
   @invalid_attrs %{title: "", description: ""}
 
   ##############################################################################
+  # index/2
+  describe "index/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it returns a successful response", %{conn: conn} do
+      conn = get conn, "/photos"
+      assert html_response(conn, 200)
+    end
+
+    test "it shows photos from all users", %{conn: conn} do
+      photo_1 = insert(:photo, title: "Photo 1")
+      photo_2 = insert(:photo, title: "Photo 2")
+      conn = get conn, "/photos"
+      assert conn.resp_body =~ photo_1.title
+      assert conn.resp_body =~ photo_2.title
+    end
+
+    test "it does not show private or friends only photos", %{conn: conn} do
+      photo_album_1 = insert(:photo_album, visibility: "private")
+      photo_album_2 = insert(:photo_album, visibility: "friends_only")
+      photo_1 = insert(:photo, title: "Photo 1", photo_album: photo_album_1)
+      photo_2 = insert(:photo, title: "Photo 2", photo_album: photo_album_2)
+      conn = get conn, "/photos"
+      refute conn.resp_body =~ photo_1.title
+      refute conn.resp_body =~ photo_2.title
+    end
+  end
+
+  describe "index/2 when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      conn = get conn, "/photos"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
   # create/2
   describe "create/2 when signed in" do
     setup [:create_and_sign_in_user]
