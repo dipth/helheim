@@ -1,5 +1,5 @@
 defmodule Helheim.BloggingFlowTest do
-  use Helheim.AcceptanceCase, async: true
+  use Helheim.AcceptanceCase#, async: true
 
   defp your_blog_posts_link,  do: Query.link(gettext("Your Blog Posts"))
   defp title_field,           do: Query.text_field(gettext("Title"))

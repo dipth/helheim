@@ -1,5 +1,5 @@
 defmodule Helheim.ForumFlowTest do
-  use Helheim.AcceptanceCase, async: true
+  use Helheim.AcceptanceCase#, async: true
 
   defp forums_link,         do: Query.link(gettext("Forums"))
   defp forum_link(forum),   do: Query.link(forum.title)

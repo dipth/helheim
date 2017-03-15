@@ -1,5 +1,5 @@
 defmodule Helheim.ProfileBrowsingFlowTest do
-  use Helheim.AcceptanceCase, async: true
+  use Helheim.AcceptanceCase#, async: true
 
   defp show_all_comments_link,  do: Query.css(".show-all-comments")
   defp comment_text_field,      do: Query.text_field(gettext("Write new comment:"))

@@ -1,5 +1,5 @@
 defmodule Helheim.PasswordResetFlowTest do
-  use Helheim.AcceptanceCase, async: true
+  use Helheim.AcceptanceCase#, async: true
   alias Helheim.Repo
   alias Helheim.User
 

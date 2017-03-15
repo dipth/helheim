@@ -1,5 +1,5 @@
 defmodule Helheim.PrivateMessagingFlowTest do
-  use Helheim.AcceptanceCase, async: true
+  use Helheim.AcceptanceCase#, async: true
 
   defp private_messages_link, do: Query.link(gettext("Private Messages"))
 

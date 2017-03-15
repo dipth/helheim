@@ -1,5 +1,5 @@
 defmodule Helheim.EditAccountSettingsFlowTest do
-  use Helheim.AcceptanceCase, async: true
+  use Helheim.AcceptanceCase#, async: true
 
   defp user_menu,       do: Query.css(".nav-item-user-menu")
   defp user_link(user), do: Query.link(user.username)

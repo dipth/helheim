@@ -1,5 +1,5 @@
 defmodule Helheim.AuthenticationFlowTest do
-  use Helheim.AcceptanceCase, async: true
+  use Helheim.AcceptanceCase#, async: true
 
   defp sign_in_link,    do: Query.link(gettext("Sign In"))
   defp email_field,     do: Query.text_field(gettext("E-mail"))
