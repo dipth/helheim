@@ -15,6 +15,15 @@ defmodule Helheim.BlogPostController do
     render(conn, "index.html", user: user, blog_posts: blog_posts)
   end
 
+  def index(conn, params) do
+    blog_posts =
+      BlogPost
+      |> BlogPost.newest
+      |> preload(:user)
+      |> Repo.paginate(page: sanitized_page(params["page"]))
+    render(conn, "index_all_public.html", blog_posts: blog_posts)
+  end
+
   def new(conn, _params) do
     user = current_resource(conn)
     changeset =

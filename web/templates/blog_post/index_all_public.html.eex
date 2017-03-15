@@ -1,0 +1,11 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item active"><%= gettext("Blog posts") %></li>
+</ol>
+
+<%= for blog_post <- @blog_posts.entries do %>
+  <%= render "list_entry_card.html", conn: @conn,
+                                     user: blog_post.user,
+                                     blog_post: blog_post %>
+<% end %>
+
+<%= lpaginate @conn, @blog_posts %>

@@ -34,6 +34,7 @@
       <%= for blog_post <- @newest_blog_posts do %>
         <%= render Helheim.BlogPostView, "list_entry.html", conn: @conn, blog_post: blog_post %>
       <% end %>
+      <%= link gettext("Show All"), to: blog_post_path(@conn, :index), class: "btn btn-outline-secondary btn-block mb-0" %>
     </div>
   </div>
 </div>

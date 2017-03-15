@@ -7,8 +7,8 @@ defmodule Helheim.BlogPostControllerTest do
   @invalid_attrs %{body: "   ", title: "   "}
 
   ##############################################################################
-  # index/2
-  describe "index/2 when signed in" do
+  # index/2 for a single user
+  describe "index/2 for a single user when signed in" do
     setup [:create_and_sign_in_user]
 
     test "it returns a successful response when supplying an existing user id", %{conn: conn, user: user} do
@@ -31,10 +31,36 @@ defmodule Helheim.BlogPostControllerTest do
     end
   end
 
-  describe "index/2 when not signed in" do
+  describe "index/2 for a single user when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       user = insert(:user)
       conn = get conn, "/profiles/#{user.id}/blog_posts"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # index/2 for all users
+  describe "index/2 for all users when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it returns a successful response", %{conn: conn} do
+      conn = get conn, "/blog_posts"
+      assert html_response(conn, 200)
+    end
+
+    test "it shows blog posts from all users", %{conn: conn} do
+      blog_post_1 = insert(:blog_post, title: "Blog Post 1")
+      blog_post_2 = insert(:blog_post, title: "Blog Post 2")
+      conn = get conn, "/blog_posts"
+      assert conn.resp_body =~ blog_post_1.title
+      assert conn.resp_body =~ blog_post_2.title
+    end
+  end
+
+  describe "index/2 for all users when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      conn = get conn, "/blog_posts"
       assert redirected_to(conn) == session_path(conn, :new)
     end
   end

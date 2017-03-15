@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-block">
+    <div class="d-flex w-100 justify-content-between">
+      <h4 class="card-title">
+        <%= link @blog_post.title, to: public_profile_blog_post_path(@conn, :show, @user, @blog_post) %>
+      </h4>
+      <div class="hidden-sm-down">
+        <%= username_with_avatar @user, %{} %>
+      </div>
+    </div>
+    <span class="hidden-md-up"><%= user_badge @user, [] %></span>
+    <%= visitor_count_badge @conn, @blog_post %>
+    <small>
+      <i class="fa fa-clock-o"></i>
+      <%= time_ago_in_words @blog_post.inserted_at %>
+    </small>
+  </div>
+</div>

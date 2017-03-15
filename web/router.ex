@@ -64,7 +64,7 @@ defmodule Helheim.Router do
       end
       resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
     end
-    resources "/blog_posts", BlogPostController, only: [:new, :create, :edit, :update, :delete] do
+    resources "/blog_posts", BlogPostController, only: [:index, :new, :create, :edit, :update, :delete] do
       resources "/comments", BlogPostCommentController, only: [:create], as: :comment
     end
     resources "/photo_albums", PhotoAlbumController, only: [:new, :create, :edit, :update, :delete] do

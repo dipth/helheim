@@ -13,19 +13,9 @@
 <% end %>
 
 <%= for blog_post <- @blog_posts.entries do %>
-  <div class="card">
-    <div class="card-block">
-      <h4 class="card-title">
-        <%= link blog_post.title, to: public_profile_blog_post_path(@conn, :show, @user, blog_post) %>
-      </h4>
-      <%= visitor_count_badge @conn, blog_post %>
-      <small>
-        <i class="fa fa-clock-o"></i>
-        <%= time_ago_in_words blog_post.inserted_at %>
-      </small>
-      <%#= render "list_entry.html", conn: @conn, blog_post: blog_post %>
-    </div>
-  </div>
+  <%= render "list_entry_card.html", conn: @conn,
+                                     user: blog_post.user,
+                                     blog_post: blog_post %>
 <% end %>
 
 <%= lpaginate @conn, @blog_posts %>
