@@ -21,7 +21,7 @@ msgstr ""
 #: web/templates/email/registration_email.html.eex:5
 #: web/templates/email/registration_email.html.eex:15
 #: web/templates/email/registration_email.text.eex:1
-#: web/templates/layout/app.html.eex:21
+#: web/templates/layout/app.html.eex:22
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
@@ -356,7 +356,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:59
+#: web/controllers/profile_controller.ex:66
 msgid "Profile updated!"
 msgstr ""
 
@@ -372,17 +372,17 @@ msgstr ""
 msgid "Remember me"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:33
+#: web/templates/page/front_page.html.eex:34
 #: web/templates/profile/show.html.eex:62
 msgid "Newest Blogs"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:23
+#: web/templates/page/front_page.html.eex:24
 #: web/templates/profile/show.html.eex:73
 msgid "Newest Forum Posts"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:43
+#: web/templates/page/front_page.html.eex:45
 msgid "Newest Photos"
 msgstr ""
 
@@ -415,15 +415,15 @@ msgstr ""
 msgid "Are you sure?"
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:37
+#: web/controllers/blog_post_controller.ex:46
 msgid "Blog post created successfully."
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:87
+#: web/controllers/blog_post_controller.ex:96
 msgid "Blog post deleted successfully."
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:74
+#: web/controllers/blog_post_controller.ex:83
 msgid "Blog post updated successfully."
 msgstr ""
 
@@ -473,6 +473,9 @@ msgstr ""
 msgid "Post Comment"
 msgstr ""
 
+#: web/templates/page/front_page.html.eex:18
+#: web/templates/page/front_page.html.eex:38
+#: web/templates/page/front_page.html.eex:50
 #: web/templates/profile/show.html.eex:67 web/templates/profile/show.html.eex:91
 #: web/templates/profile/show.html.eex:97
 msgid "Show All"
@@ -640,11 +643,11 @@ msgstr ""
 msgid "Photo Album deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:69
+#: web/controllers/photo_controller.ex:78
 msgid "Photo deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:54
+#: web/controllers/photo_controller.ex:63
 msgid "Photo details updated successfully."
 msgstr ""
 
@@ -1001,6 +1004,7 @@ msgid "You do not have access to that page!"
 msgstr ""
 
 #: web/templates/blog_post/index.html.eex:3
+#: web/templates/blog_post/index_all_public.html.eex:2
 #: web/templates/blog_post/show.html.eex:3 web/templates/help/embeds.html.eex:11
 msgid "Blog posts"
 msgstr ""
@@ -1152,4 +1156,12 @@ msgstr ""
 
 #: web/templates/profile/edit.html.eex:56
 msgid "We never show your birthday directly to other users, only your age, although some users might be able to guess it by observing your age increasing..."
+msgstr ""
+
+#: web/templates/photo/index.html.eex:2
+msgid "Photos"
+msgstr ""
+
+#: web/templates/profile/index.html.eex:2
+msgid "Profiles"
 msgstr ""
