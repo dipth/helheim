@@ -65,6 +65,7 @@ defmodule Helheim.Web do
       import Helheim.PaginationHelpers
       import Helheim.ProfileHelpers
       import Helheim.VisitorLogEntryHelpers
+      import Helheim.NotificationHelpers
     end
   end
 

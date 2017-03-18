@@ -91,4 +91,8 @@ defmodule Helheim.ProfileHelpers do
 
     Enum.reject(result, fn(e) -> is_nil(e) end)
   end
+
+  def me?(conn, user) do
+    Guardian.Plug.current_resource(conn).id == user.id
+  end
 end

@@ -5,6 +5,7 @@ defmodule Helheim.BlogPost do
     field :title,         :string
     field :body,          :string
     field :visitor_count, :integer
+    field :comment_count, :integer
 
     timestamps()
 

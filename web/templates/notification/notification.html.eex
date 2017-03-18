@@ -1,6 +1,0 @@
-<%= link to: notification_path(@conn, :show, @notification.id), class: "dropdown-item" do %>
-  <%= if @notification.icon do %>
-    <i class="fa fa-<%= @notification.icon %>"></i>
-  <% end %>
-  <%= @notification.title %>
-<% end %>

@@ -29,11 +29,10 @@ export var Notifications = {
       //.receive("error", resp => { console.log("Unable to join", resp) })
 
     let handleIncomingNotification = payload => {
-      $.get('/notifications/refresh', handleRefreshedNotificationsData)
+      $.get('/notifications', handleRefreshedNotificationsData)
     }
 
-    let handleRefreshedNotificationsData = data => {
-      $('#nav-item-notifications').replaceWith(data)
+    let handleRefreshedNotificationsData = () => {
       $('#nav-item-notifications').animateCss('tada')
       playNotificationSound()
     }

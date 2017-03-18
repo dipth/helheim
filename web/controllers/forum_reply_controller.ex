@@ -11,17 +11,16 @@ defmodule Helheim.ForumReplyController do
   plug :enforce_editable_by when action in [:edit, :update]
 
   def create(conn, %{"forum_id" => _, "forum_topic_id" => _, "forum_reply" => forum_reply_params}) do
-    changeset   = conn.assigns[:forum_topic]
-                  |> Ecto.build_assoc(:forum_replies)
-                  |> ForumReply.changeset(forum_reply_params)
-                  |> Ecto.Changeset.put_assoc(:user, conn.assigns[:user])
+    user   = current_resource(conn)
+    body   = forum_reply_params["body"]
+    result = Helheim.ForumReplyService.create!(conn.assigns[:forum_topic], user, body)
 
-    case Repo.insert(changeset) do
-      {:ok, _forum_reply} ->
+    case result do
+      {:ok, %{forum_reply: _forum_reply}} ->
         conn
         |> put_flash(:success, gettext("Reply created successfully"))
         |> redirect(to: forum_forum_topic_path(conn, :show, conn.assigns[:forum], conn.assigns[:forum_topic]))
-      {:error, _changeset} ->
+      {:error, _failed_operation, _failed_value, _changes_so_far} ->
         conn
         |> put_flash(:error, gettext("Reply could not be created"))
         |> redirect(to: forum_forum_topic_path(conn, :show, conn.assigns[:forum], conn.assigns[:forum_topic]))

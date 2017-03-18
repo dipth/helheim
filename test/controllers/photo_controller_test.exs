@@ -200,7 +200,7 @@ defmodule Helheim.PhotoControllerTest do
     end
 
     test_with_mock "it tracks the view", %{conn: conn, user: user},
-      Helheim.VisitorLogEntry, [:passthrough], [track!: fn(_user, _thing) -> {:ok} end] do
+      Helheim.VisitorLogEntry, [:passthrough], [track!: fn(_user, _subject) -> {:ok} end] do
 
       profile     = insert(:user)
       photo_album = insert(:photo_album, user: profile)

@@ -9,7 +9,7 @@ defmodule Helheim.VisitorLogEntryController do
     entries   = find_entries(blog_post, params)
 
     if allow_access?(conn, profile.id) do
-      render(conn, "index.html", profile: profile, thing: blog_post, entries: entries)
+      render(conn, "index.html", profile: profile, subject: blog_post, entries: entries)
     else
       no_access!(conn, public_profile_blog_post_path(conn, :show, profile, blog_post))
     end
@@ -22,7 +22,7 @@ defmodule Helheim.VisitorLogEntryController do
     entries     = find_entries(photo, params)
 
     if allow_access?(conn, profile.id) do
-      render(conn, "index.html", profile: profile, photo_album: photo_album, thing: photo, entries: entries)
+      render(conn, "index.html", profile: profile, photo_album: photo_album, subject: photo, entries: entries)
     else
       no_access!(conn, public_profile_photo_album_photo_path(conn, :show, profile, photo_album, photo))
     end
@@ -34,7 +34,7 @@ defmodule Helheim.VisitorLogEntryController do
     entries     = find_entries(photo_album, params)
 
     if allow_access?(conn, profile.id) do
-      render(conn, "index.html", profile: profile, thing: photo_album, entries: entries)
+      render(conn, "index.html", profile: profile, subject: photo_album, entries: entries)
     else
       no_access!(conn, public_profile_photo_album_path(conn, :show, profile, photo_album))
     end
@@ -45,14 +45,14 @@ defmodule Helheim.VisitorLogEntryController do
     entries = find_entries(profile, params)
 
     if allow_access?(conn, profile.id) do
-      render(conn, "index.html", thing: profile, entries: entries)
+      render(conn, "index.html", subject: profile, entries: entries)
     else
       no_access!(conn, public_profile_path(conn, :show, profile))
     end
   end
 
-  def find_entries(thing, params) do
-    assoc(thing, :visitor_log_entries)
+  def find_entries(subject, params) do
+    assoc(subject, :visitor_log_entries)
     |> VisitorLogEntry.newest
     |> preload(:user)
     |> Repo.paginate(page: sanitized_page(params["page"]))

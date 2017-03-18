@@ -20,6 +20,7 @@ defmodule Helheim.Router do
     plug Guardian.Plug.VerifyRememberMe
     plug Guardian.Plug.EnsureAuthenticated, handler: Helheim.Token
     plug Guardian.Plug.LoadResource
+    plug Helheim.Plug.LoadNotifications
   end
 
   pipeline :browser_admin_auth do
@@ -55,7 +56,7 @@ defmodule Helheim.Router do
       resources "/blog_posts", BlogPostController, only: [:index, :show] do
         resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
       end
-      resources "/comments", ProfileCommentController, only: [:index, :create], as: :comment
+      resources "/comments", CommentController, only: [:index, :create]
       resources "/photo_albums", PhotoAlbumController, only: [:index, :show] do
         resources "/photos", PhotoController, only: [:show] do
           resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
@@ -63,16 +64,16 @@ defmodule Helheim.Router do
         resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
       end
       resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
+      resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
     end
     resources "/blog_posts", BlogPostController, only: [:index, :new, :create, :edit, :update, :delete] do
-      resources "/comments", BlogPostCommentController, only: [:create], as: :comment
+      resources "/comments", CommentController, only: [:create]
+      resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
     end
     resources "/photo_albums", PhotoAlbumController, only: [:new, :create, :edit, :update, :delete] do
       resources "/photos", PhotoController, only: [:create, :edit, :update, :delete]
     end
     resources "/photos", PhotoController, only: [:index]
-    get "/notifications/refresh", NotificationController, :refresh
-    resources "/notifications", NotificationController, only: [:show]
     resources "/private_conversations", PrivateConversationController, param: "partner_id", only: [:index, :show] do
       resources "/messages", PrivateMessageController, only: [:create], as: :message
     end
@@ -81,6 +82,10 @@ defmodule Helheim.Router do
         resources "/forum_replies", ForumReplyController, only: [:create, :edit, :update]
       end
     end
+    resources "/forum_topics", ForumTopicController, only: [] do
+      resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
+    end
+    resources "/notifications", NotificationController, only: [:index, :show]
   end
 
   scope "/admin", Helheim.Admin, as: :admin do

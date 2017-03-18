@@ -7,12 +7,14 @@ defmodule Helheim.PhotoAlbum do
     field :description,   :string
     field :visibility,    :string
     field :visitor_count, :integer
+    field :comment_count, :integer
 
     timestamps()
 
     belongs_to :user,                Helheim.User
     has_many   :photos,              Helheim.Photo
     has_many   :visitor_log_entries, Helheim.VisitorLogEntry
+    has_many   :comments,            Helheim.Comment
   end
 
   def changeset(struct, params \\ %{}) do
@@ -24,7 +26,7 @@ defmodule Helheim.PhotoAlbum do
   end
 
   def viewable_by(query, owner, viewer) do
-    if owner == viewer do
+    if owner.id == viewer.id do
       query
     else
       from pa in query, where: pa.visibility == "public"

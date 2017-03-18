@@ -196,7 +196,7 @@ defmodule Helheim.PhotoAlbumControllerTest do
     end
 
     test_with_mock "it tracks the view", %{conn: conn, user: user},
-      Helheim.VisitorLogEntry, [:passthrough], [track!: fn(_user, _thing) -> {:ok} end] do
+      Helheim.VisitorLogEntry, [:passthrough], [track!: fn(_user, _subject) -> {:ok} end] do
 
       photo_album = insert(:photo_album)
       get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"

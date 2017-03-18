@@ -14,7 +14,7 @@
     </small>
   </div>
   <div>
-    <%= if @blog_post.user_id == current_resource(@conn).id do %>
+    <%= if me?(@conn, @user) do %>
       <%= link to: blog_post_path(@conn, :edit, @blog_post), class: "btn btn-sm btn-primary mr-1" do %>
         <i class="fa fa-pencil"></i>
         <span class="hidden-sm-down"><%= gettext "Edit" %></span>
@@ -33,12 +33,4 @@
   <%= raw @blog_post.body %>
 </div>
 
-<h3 class="mb-2"><%= gettext "Comments:" %></h3>
-
-<%=
-  render Helheim.CommentView,
-         "comments.html",
-         conn: @conn,
-         comments: @comments,
-         pagination: true,
-         post_path: blog_post_comment_path(@conn, :create, @blog_post) %>
+<%= Helheim.CommentView.render_comments @conn, @comments, @blog_post %>

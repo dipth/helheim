@@ -1,15 +1,22 @@
 defmodule Helheim.Notification do
   use Helheim.Web, :model
-  alias Helheim.Repo
+
+  @primary_key {:id, :binary_id, autogenerate: true}
 
   schema "notifications" do
-    belongs_to :user,    Helheim.User
-    field      :title,   :string
-    field      :icon,    :string
-    field      :path,    :string
-    field      :read_at, Calecto.DateTimeUTC
+    field :type,       :string
+    field :seen_at,    Calecto.DateTimeUTC
+    field :clicked_at, Calecto.DateTimeUTC
 
     timestamps()
+
+    belongs_to :recipient,      Helheim.User
+    belongs_to :trigger_person, Helheim.User
+    belongs_to :profile,        Helheim.User
+    belongs_to :blog_post,      Helheim.BlogPost
+    belongs_to :photo_album,    Helheim.PhotoAlbum
+    belongs_to :photo,          Helheim.Photo
+    belongs_to :forum_topic,    Helheim.ForumTopic
   end
 
   def newest(query) do
@@ -17,23 +24,21 @@ defmodule Helheim.Notification do
     order_by: [desc: n.inserted_at]
   end
 
-  def unread(query) do
+  def not_clicked(query) do
     from n in query,
-    where: is_nil(n.read_at)
+    where: is_nil(n.clicked_at)
   end
 
-  def mark_as_read!(notification) do
-    Ecto.Changeset.change(notification, read_at: DateTime.utc_now)
-    |> Repo.update
+  def with_preloads(query) do
+    query
+    |> preload([:trigger_person, :profile, :blog_post, :photo_album, :photo, :forum_topic])
   end
 
-  @doc """
-  Builds a changeset based on the `struct` and `params`.
-  """
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [:title, :icon, :path])
-    |> trim_fields([:title, :icon, :path])
-    |> validate_required([:title])
+  def subject(notification) do
+    notification.profile ||
+    notification.blog_post ||
+    notification.photo_album ||
+    notification.photo ||
+    notification.forum_topic
   end
 end

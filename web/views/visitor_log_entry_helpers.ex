@@ -46,7 +46,7 @@ defmodule Helheim.VisitorLogEntryHelpers do
   # def visitor_count_badge(conn, %PhotoAlbum{} = photo_album), do: visitor_count_badge(conn, photo_album, photo_album.user_id)
   # def visitor_count_badge(conn, %Photo{} = photo), do: visitor_count_badge(conn, photo, photo.photo_album.user_id)
 
-  defp visitor_count_badge(conn, thing, owner_id, entries_path) do
+  defp visitor_count_badge(conn, subject, owner_id, entries_path) do
     current_user = current_resource(conn)
 
     if User.admin?(current_user) || current_user.id == owner_id do
@@ -55,7 +55,7 @@ defmodule Helheim.VisitorLogEntryHelpers do
           [
             content_tag(:i, "", class: "fa fa-fw fa-eye"),
             {:safe, [" "]},
-            {:safe, ["#{thing.visitor_count}"]}
+            {:safe, ["#{subject.visitor_count}"]}
           ]
         end
       end
@@ -64,7 +64,7 @@ defmodule Helheim.VisitorLogEntryHelpers do
         [
           content_tag(:i, "", class: "fa fa-fw fa-eye"),
           {:safe, [" "]},
-          {:safe, ["#{thing.visitor_count}"]}
+          {:safe, ["#{subject.visitor_count}"]}
         ]
       end
     end

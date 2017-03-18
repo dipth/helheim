@@ -214,3 +214,10 @@ code {
   background-color: $body-color;
   color: $gray-dark;
 }
+
+.dropdown-menu-notifications {
+  width: 300px;
+  .dropdown-item {
+    white-space: normal;
+  }
+}

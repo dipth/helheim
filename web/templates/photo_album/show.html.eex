@@ -26,7 +26,7 @@
   <% end %>
 </div>
 
-<%= if @user == current_resource(@conn) do %>
+<%= if me?(@conn, @user) do %>
   <div class="card">
     <div class="card-header">
       <%= gettext "Upload Photos" %>

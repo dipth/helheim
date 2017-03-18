@@ -17,11 +17,13 @@ defmodule Helheim.Photo do
     field      :file,          PhotoFile.Type
     field      :file_size,     :integer
     field      :visitor_count, :integer
+    field      :comment_count, :integer
 
     timestamps()
 
     belongs_to :photo_album,         Helheim.PhotoAlbum
     has_many   :visitor_log_entries, Helheim.VisitorLogEntry
+    has_many   :comments,            Helheim.Comment
   end
 
   def changeset(struct, params \\ %{}) do

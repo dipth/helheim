@@ -1,4 +1,4 @@
-<%= crumbs(@conn, @thing) %>
+<%= crumbs(@conn, @subject) %>
 
 <div class="list-group mb-1">
   <%= for entry <- @entries.entries do %>

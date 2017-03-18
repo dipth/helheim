@@ -92,15 +92,4 @@
   </div>
 </div>
 
-<h5 class="mb-1">
-  <%= gettext "Newest Guest Book Entries" %>
-  <%= link gettext("Show All"), to: public_profile_comment_path(@conn, :index, @user), class: "float-right show-all-comments" %>
-</h5>
-
-<%=
-  render Helheim.CommentView,
-         "comments.html",
-         conn: @conn,
-         comments: @newest_comments,
-         pagination: false,
-         post_path: public_profile_comment_path(@conn, :create, @user) %>
+<%= Helheim.CommentView.render_comments @conn, @newest_comments, @user, limited: true %>
