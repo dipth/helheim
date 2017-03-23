@@ -332,7 +332,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:172
+#: web/models/user.ex:176
 msgid "does not match your current password"
 msgstr ""
 
@@ -362,10 +362,6 @@ msgstr ""
 
 #: web/templates/profile/edit.html.eex:77
 msgid "Update Profile"
-msgstr ""
-
-#: web/templates/page/front_page.html.eex:4
-msgid "Newest Users"
 msgstr ""
 
 #: web/templates/session/new.html.eex:32
@@ -1164,4 +1160,8 @@ msgstr ""
 
 #: web/templates/profile/index.html.eex:2
 msgid "Profiles"
+msgstr ""
+
+#: web/templates/page/front_page.html.eex:4
+msgid "Newest users with photo"
 msgstr ""

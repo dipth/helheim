@@ -43,6 +43,7 @@ label {
 .avatar-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 
   img {
     width: 50px;

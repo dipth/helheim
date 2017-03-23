@@ -344,7 +344,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:172
+#: web/models/user.ex:176
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -376,10 +376,6 @@ msgstr "Din profil blev opdateret!"
 #: web/templates/profile/edit.html.eex:77
 msgid "Update Profile"
 msgstr "Opdatér Profil"
-
-#: web/templates/page/front_page.html.eex:4
-msgid "Newest Users"
-msgstr "Nyeste Brugere"
 
 #: web/templates/session/new.html.eex:32
 msgid "Remember me"
@@ -1192,3 +1188,7 @@ msgstr "Billeder"
 #: web/templates/profile/index.html.eex:2
 msgid "Profiles"
 msgstr "Profiler"
+
+#: web/templates/page/front_page.html.eex:4
+msgid "Newest users with photo"
+msgstr "Nyeste brugere med profilbillede"
