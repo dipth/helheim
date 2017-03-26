@@ -59,6 +59,14 @@ form.link {
   font-family: 'Pirata One', cursive;
 }
 
+.blog-post-body {
+  color: darken($body-color, 10);
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  max-width: 60rem;
+  text-align: justify;
+}
+
 .comment .img-avatar {
   height: 25px;
   margin-left: -0.5rem;

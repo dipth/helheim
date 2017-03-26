@@ -29,7 +29,7 @@
 
 <hr>
 
-<div class="embeds">
+<div class="embeds blog-post-body">
   <%= raw @blog_post.body %>
 </div>
 
