@@ -25,15 +25,5 @@ defmodule Helheim.Comment do
     |> cast(params, [:body])
     |> trim_fields(:body)
     |> validate_required([:body])
-    |> scrub_body()
-  end
-
-  defp scrub_body(changeset) do
-    case changeset do
-      %Ecto.Changeset{valid?: true, changes: %{body: body}} ->
-        put_change(changeset, :body, body |> HtmlSanitizeEx.Scrubber.scrub(Helheim.Scrubber))
-      _ ->
-        changeset
-    end
   end
 end
