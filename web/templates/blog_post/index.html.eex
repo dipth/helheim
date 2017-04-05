@@ -3,7 +3,7 @@
   <li class="breadcrumb-item active"><%= gettext("Blog posts") %></li>
 </ol>
 
-<%= if @user.id == current_resource(@conn).id do %>
+<%= if me?(@conn, @user) do %>
   <div class="d-flex flex-row-reverse mb-1">
     <%= link to: blog_post_path(@conn, :new), class: "btn btn-primary btn-sm" do %>
       <i class="fa fa-plus"></i>

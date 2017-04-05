@@ -1,29 +1,43 @@
-<div class="d-flex flex-column-reverse">
-  <%= if @pagination do %>
-    <%= for comment <- @comments.entries do %>
-      <%= render Helheim.CommentView, "comment.html", conn: @conn, comment: comment %>
+<div class="comments">
+  <div class="clearfix mb-2">
+    <div class="float-right">
+      <%= notifications_switch @conn, current_resource(@conn), "comment", @commentable %>
+    </div>
+    <h3>
+      <%= index_title @commentable, @limited %>:
+      <%= if @limited do %>
+        <%= link gettext("Show All"), to: show_all_path(@conn, @commentable), class: "btn btn-sm btn-outline-secondary show-all-comments" %>
+      <% end %>
+    </h3>
+  </div>
+
+  <div class="d-flex flex-column-reverse">
+    <%= if @limited do %>
+      <%= for comment <- @comments do %>
+        <%= render Helheim.CommentView, "comment.html", conn: @conn, comment: comment %>
+      <% end %>
+    <% else %>
+      <%= for comment <- @comments.entries do %>
+        <%= render Helheim.CommentView, "comment.html", conn: @conn, comment: comment %>
+      <% end %>
     <% end %>
-  <% else %>
-    <%= for comment <- @comments do %>
-      <%= render Helheim.CommentView, "comment.html", conn: @conn, comment: comment %>
-    <% end %>
+  </div>
+
+  <%= unless @limited do %>
+    <%= lpaginate @conn, @comments %>
+  <% end %>
+
+  <%= form_for Helheim.Comment.changeset(%Helheim.Comment{}), @post_path, fn f -> %>
+    <div class="card">
+      <div class="card-header">
+        <%= label f, :body, gettext("Write new comment:"), class: "control-label mb-0" %>
+      </div>
+      <div class="card-block">
+        <%= textarea f, :body, class: "form-control", rows: 5 %>
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Post Comment" %></button>
+      </div>
+    </div>
   <% end %>
 </div>
-
-<%= if @pagination do %>
-  <%= lpaginate @conn, @comments %>
-<% end %>
-
-<%= form_for Helheim.Comment.changeset(%Helheim.Comment{}), @post_path, fn f -> %>
-  <div class="card">
-    <div class="card-header">
-      <%= label f, :body, gettext("Write new comment:"), class: "control-label mb-0" %>
-    </div>
-    <div class="card-block">
-      <%= textarea f, :body, class: "form-control", rows: 5 %>
-    </div>
-    <div class="card-footer">
-      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Post Comment" %></button>
-    </div>
-  </div>
-<% end %>

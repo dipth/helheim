@@ -8,6 +8,8 @@ defmodule Helheim.Comment do
     belongs_to :author,       Helheim.User
     belongs_to :profile,      Helheim.User
     belongs_to :blog_post,    Helheim.BlogPost
+    belongs_to :photo_album,  Helheim.PhotoAlbum
+    belongs_to :photo,        Helheim.Photo
 
     timestamps()
   end

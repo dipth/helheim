@@ -2,6 +2,8 @@ defmodule Helheim.ForumReplyControllerTest do
   use Helheim.ConnCase
   import Mock
   alias Helheim.ForumReply
+  alias Helheim.ForumTopic
+  alias Helheim.ForumReplyService
 
   @valid_attrs %{body: "Body Text"}
   @invalid_attrs %{body: "   "}
@@ -11,46 +13,59 @@ defmodule Helheim.ForumReplyControllerTest do
   describe "create/2 when signed in" do
     setup [:create_and_sign_in_user]
 
-    test "it creates a new forum reply and associates it with the current user and the specified forum topic", %{conn: conn, user: user} do
-      topic = insert(:forum_topic)
-      conn  = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
-      reply = Repo.one(ForumReply)
-      assert redirected_to(conn)  == forum_forum_topic_path(conn, :show, topic.forum, topic)
-      assert reply.forum_topic_id == topic.id
-      assert reply.user_id        == user.id
-      assert reply.body           == @valid_attrs.body
+    test_with_mock "it redirects to the topic page with a success flash message when successfull", %{conn: conn, user: user},
+      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body) -> {:ok, %{forum_reply: %{}}} end] do
+
+      topic          = insert(:forum_topic)
+      expected_topic = ForumTopic |> preload(:user) |> Repo.get!(topic.id)
+      conn = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
+      assert called ForumReplyService.create!(expected_topic, user, @valid_attrs[:body])
+      assert redirected_to(conn)       == forum_forum_topic_path(conn, :show, topic.forum, topic)
+      assert get_flash(conn, :success) == gettext("Reply created successfully")
     end
 
-    test "it does not create a forum reply but redirects to an error page when supplying an non-existing forum_id", %{conn: conn} do
-      topic = insert(:forum_topic)
-      assert_error_sent :not_found, fn ->
-        post conn, "/forums/#{topic.forum.id + 1}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
-      end
-      refute Repo.one(ForumReply)
+    test_with_mock "it redirects to the topic page with an error flash message when unsuccessfull", %{conn: conn, user: user},
+      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body) -> {:error, :forum_reply, %{}, []} end] do
+
+      topic          = insert(:forum_topic)
+      expected_topic = ForumTopic |> preload(:user) |> Repo.get!(topic.id)
+      conn = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @invalid_attrs
+      assert called ForumReplyService.create!(expected_topic, user, @invalid_attrs[:body])
+      assert redirected_to(conn)     == forum_forum_topic_path(conn, :show, topic.forum, topic)
+      assert get_flash(conn, :error) == gettext("Reply could not be created")
     end
 
-    test "it does not create a forum reply but redirects to an error page when supplying an non-existing forum_topic_id", %{conn: conn} do
+    test_with_mock "it does not invoke the ForumReplyService if the topic does not exist but instead shows a 404 error", %{conn: conn},
+      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body) -> raise("ForumReplyService was called!") end] do
+
       topic = insert(:forum_topic)
       assert_error_sent :not_found, fn ->
         post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id + 1}/forum_replies", forum_reply: @valid_attrs
       end
-      refute Repo.one(ForumReply)
     end
 
-    test "it does not create a forum reply but redirects back to the topic when posting invalid attrs", %{conn: conn} do
+    test_with_mock "it does not invoke the ForumReplyService if the forum does not exist but instead shows a 404 error", %{conn: conn},
+      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body) -> raise("ForumReplyService was called!") end] do
+
       topic = insert(:forum_topic)
-      conn  = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @invalid_attrs
-      refute Repo.one(ForumReply)
-      assert redirected_to(conn) == forum_forum_topic_path(conn, :show, topic.forum, topic)
+      assert_error_sent :not_found, fn ->
+        post conn, "/forums/#{topic.forum.id + 1}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
+      end
     end
   end
 
   describe "create/2 when not signed in" do
-    test "it does not create a forum reply but redirects to the sign in page", %{conn: conn} do
+    test_with_mock "it does not invoke the ForumReplyService", %{conn: conn},
+      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body) -> raise("ForumReplyService was called!") end] do
+
+      topic = insert(:forum_topic)
+      post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
+    end
+
+    test "it redirects to the login page", %{conn: conn} do
       topic = insert(:forum_topic)
       conn  = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
       assert redirected_to(conn) == session_path(conn, :new)
-      refute Repo.one(ForumReply)
     end
   end
 

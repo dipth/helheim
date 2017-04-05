@@ -1,0 +1,3 @@
+<%= crumbs(@conn, @commentable) %>
+
+<%= render_comments @conn, @comments, @commentable %>

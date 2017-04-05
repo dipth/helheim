@@ -6,6 +6,12 @@
   <li class="breadcrumb-item active"><%= @forum_topic.title %></li>
 </ol>
 
+<div class="mb-2 clearfix">
+  <div class="float-right">
+    <%= notifications_switch @conn, current_resource(@conn), "forum_reply", @forum_topic %>
+  </div>
+</div>
+
 <%= if @forum_replies.page_number == 1 do %>
   <%= render "forum_topic.html",
              conn: @conn,

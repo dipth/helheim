@@ -148,7 +148,7 @@ defmodule Helheim.VisitorLogEntryTest do
       assert Repo.get(Helheim.User, user.id).visitor_count == 0
     end
 
-    test "it allows the user to have multiple different entries for different things", %{user: user} do
+    test "it allows the user to have multiple different entries for different subjects", %{user: user} do
       blog_post              = insert(:blog_post)
       photo_album            = insert(:photo_album)
       original_entry         = insert(:visitor_log_entry, user: user, blog_post: blog_post)

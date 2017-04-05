@@ -8,13 +8,17 @@
   </ul>
 
   <ul class="nav navbar-nav ml-auto">
-    <%= render Helheim.NotificationView, "header_menu_item.html", conn: @conn %>
+    <%= render Helheim.NotificationView, "menu_item.html", conn: @conn %>
     <li class="nav-item dropdown nav-item-user-menu">
       <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
         <img src="<%= Helheim.Avatar.url({Guardian.Plug.current_resource(@conn).avatar, Guardian.Plug.current_resource(@conn)}, :tiny) %>" class="img-avatar" alt="<%= Guardian.Plug.current_resource(@conn).username %>">
+        <%= Helheim.NotificationView.notifications_count_badge(@conn, %{class: "hidden-lg-up"}) %>
         <span class="hidden-md-down"><%= Guardian.Plug.current_resource(@conn).username %></span>
       </a>
       <div class="dropdown-menu dropdown-menu-right">
+        <div class="hidden-lg-up dropdown-menu-notifications">
+          <%= render Helheim.NotificationView, "dropdown_items.html", conn: @conn %>
+        </div>
         <div class="dropdown-header text-center">
           <strong><%= gettext("Settings") %></strong>
         </div>

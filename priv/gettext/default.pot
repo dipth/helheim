@@ -95,7 +95,7 @@ msgstr ""
 msgid "Will only be shown to administrators"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:24
+#: web/templates/layout/header.html.eex:28
 #: web/templates/page/signed_in.html.eex:7
 msgid "Sign Out"
 msgstr ""
@@ -288,11 +288,11 @@ msgstr ""
 msgid "You need to confirm your e-mail address before you can reset your password"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:19 web/views/account_view.ex:4
+#: web/templates/layout/header.html.eex:23 web/views/account_view.ex:4
 msgid "Settings"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:23 web/views/account_view.ex:4
+#: web/templates/layout/header.html.eex:27 web/views/account_view.ex:4
 msgid "Account"
 msgstr ""
 
@@ -332,7 +332,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:176
+#: web/models/user.ex:177
 msgid "does not match your current password"
 msgstr ""
 
@@ -340,7 +340,7 @@ msgstr ""
 msgid "Maximum file size: %{file_size}"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:22
+#: web/templates/layout/header.html.eex:26
 msgid "Profile"
 msgstr ""
 
@@ -368,12 +368,12 @@ msgstr ""
 msgid "Remember me"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:34
+#: web/templates/page/front_page.html.eex:4
 #: web/templates/profile/show.html.eex:62
 msgid "Newest Blogs"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:24
+#: web/templates/page/front_page.html.eex:13
 #: web/templates/profile/show.html.eex:73
 msgid "Newest Forum Posts"
 msgstr ""
@@ -447,55 +447,36 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: web/controllers/blog_post_comment_controller.ex:15
-#: web/controllers/profile_comment_controller.ex:26
+#: web/controllers/comment_controller.ex:33
 msgid "Comment created successfully"
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:36
-msgid "Comments:"
-msgstr ""
-
-#: web/templates/layout/sidebar.html.eex:38
-#: web/templates/profile_comment/index.html.eex:3
+#: web/templates/layout/sidebar.html.eex:38 web/views/comment_view.ex:12
 msgid "Guest Book"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:96
+#: web/views/comment_view.ex:17
 msgid "Newest Guest Book Entries"
 msgstr ""
 
-#: web/templates/comment/comments.html.eex:26
+#: web/templates/comment/comments.html.eex:39
 msgid "Post Comment"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:18
-#: web/templates/page/front_page.html.eex:38
+#: web/templates/comment/comments.html.eex:9
+#: web/templates/page/front_page.html.eex:8
+#: web/templates/page/front_page.html.eex:37
 #: web/templates/page/front_page.html.eex:50
 #: web/templates/profile/show.html.eex:67 web/templates/profile/show.html.eex:91
-#: web/templates/profile/show.html.eex:97
 msgid "Show All"
 msgstr ""
 
-#: web/controllers/blog_post_comment_controller.ex:19
-#: web/controllers/profile_comment_controller.ex:30
+#: web/controllers/comment_controller.ex:37
 msgid "Unable to create comment"
 msgstr ""
 
-#: web/templates/comment/comments.html.eex:20
+#: web/templates/comment/comments.html.eex:33
 msgid "Write new comment:"
-msgstr ""
-
-#: web/services/profile_comment_service.ex:33
-msgid "%{username} wrote a comment in your guest book"
-msgstr ""
-
-#: web/services/blog_post_comment_service.ex:33
-msgid "%{username} wrote a comment on your blog post: %{title}"
-msgstr ""
-
-#: web/services/private_message_service.ex:31
-msgid "%{username} wrote you a private message"
 msgstr ""
 
 #: web/controllers/private_message_controller.ex:16
@@ -526,7 +507,7 @@ msgstr ""
 msgid "Write new message:"
 msgstr ""
 
-#: web/templates/notification/header_menu_item.html.eex:11
+#: web/templates/notification/dropdown_items.html.eex:2
 msgid "You have %{count} notification"
 msgid_plural "You have %{count} notifications"
 msgstr[0] ""
@@ -757,12 +738,12 @@ msgstr ""
 msgid "Forums and Categories"
 msgstr ""
 
-#: web/templates/forum_topic/show.html.eex:33
+#: web/templates/forum_topic/show.html.eex:39
 msgid "Go to the last page to reply..."
 msgstr ""
 
 #: web/templates/blog_post/form.html.eex:21
-#: web/templates/forum_topic/show.html.eex:32
+#: web/templates/forum_topic/show.html.eex:38
 #: web/templates/profile/edit.html.eex:71
 msgid "Hint"
 msgstr ""
@@ -785,11 +766,11 @@ msgstr ""
 msgid "Post Topic"
 msgstr ""
 
-#: web/controllers/forum_reply_controller.ex:26
+#: web/controllers/forum_reply_controller.ex:25
 msgid "Reply could not be created"
 msgstr ""
 
-#: web/controllers/forum_reply_controller.ex:22
+#: web/controllers/forum_reply_controller.ex:21
 msgid "Reply created successfully"
 msgstr ""
 
@@ -964,7 +945,7 @@ msgstr ""
 msgid "Edit topic"
 msgstr ""
 
-#: web/controllers/forum_reply_controller.ex:39
+#: web/controllers/forum_reply_controller.ex:38
 msgid "Forum reply updated successfully."
 msgstr ""
 
@@ -982,7 +963,7 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
-#: web/controllers/forum_reply_controller.ex:74
+#: web/controllers/forum_reply_controller.ex:73
 msgid "You can only edit a forum reply in the first 10 minutes!"
 msgstr ""
 
@@ -1005,7 +986,7 @@ msgstr ""
 msgid "Blog posts"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:12
+#: web/templates/help/embeds.html.eex:12 web/views/comment_view.ex:19
 msgid "Comments"
 msgstr ""
 
@@ -1162,6 +1143,34 @@ msgstr ""
 msgid "Profiles"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:4
+#: web/templates/page/front_page.html.eex:23
 msgid "Newest users with photo"
+msgstr ""
+
+#: web/views/notification_view.ex:29
+msgid "%{who} wrote a comment in the guest book: %{what}"
+msgstr ""
+
+#: web/views/notification_view.ex:32
+msgid "%{who} wrote a comment on the blog post: %{what}"
+msgstr ""
+
+#: web/views/notification_view.ex:35
+msgid "%{who} wrote a comment on the photo album: %{what}"
+msgstr ""
+
+#: web/views/notification_view.ex:38
+msgid "%{who} wrote a comment on the photo: %{what}"
+msgstr ""
+
+#: web/views/notification_view.ex:41
+msgid "%{who} wrote a reply to the forum topic: %{what}"
+msgstr ""
+
+#: web/views/comment_view.ex:18
+msgid "Guest Book Entries"
+msgstr ""
+
+#: web/views/notification_helpers.ex:29
+msgid "Notifications:"
 msgstr ""

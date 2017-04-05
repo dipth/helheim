@@ -61,9 +61,9 @@ defmodule Helheim.ProfileControllerTest do
     end
 
     test_with_mock "it tracks the view", %{conn: conn, user: user},
-      Helheim.VisitorLogEntry, [:passthrough], [track!: fn(_user, _thing) -> {:ok} end] do
+      Helheim.VisitorLogEntry, [:passthrough], [track!: fn(_user, _subject) -> {:ok} end] do
 
-      profile = insert(:user)
+      profile = Repo.get(User, insert(:user).id)
       get conn, "/profiles/#{profile.id}"
       assert called Helheim.VisitorLogEntry.track!(user, profile)
     end

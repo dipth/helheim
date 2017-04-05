@@ -18,13 +18,7 @@ defmodule Helheim.NotificationChannel do
   end
 
   def broadcast_notification(notification) do
-    notification = notification |> Repo.preload(:user)
-    payload = %{
-      title: notification.title,
-      icon: notification.icon,
-      path: notification.path
-    }
-    Helheim.Endpoint.broadcast("notifications:#{notification.user.id}", "notification", payload)
+    Helheim.Endpoint.broadcast("notifications:#{notification.recipient_id}", "notification", %{})
   end
 
   # Authenticate users to make sure that they are signed in

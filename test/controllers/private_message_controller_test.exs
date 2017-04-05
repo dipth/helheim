@@ -2,6 +2,8 @@ defmodule Helheim.PrivateMessageControllerTest do
   use Helheim.ConnCase
   import Mock
   alias Helheim.PrivateMessageService
+  alias Helheim.Repo
+  alias Helheim.User
 
   @post_attrs %{body: "bar"}
 
@@ -13,7 +15,8 @@ defmodule Helheim.PrivateMessageControllerTest do
     test_with_mock "it redirects to the conversation with a success flash message when successfull", %{conn: conn, user: user, partner: partner},
       PrivateMessageService, [], [insert: fn(_sender,_recipient,_body) -> {:ok, %{private_message: %{}, notification: %{}}} end] do
 
-      conn = post conn, "/private_conversations/#{partner.id}/messages", private_message: @post_attrs
+      conn    = post conn, "/private_conversations/#{partner.id}/messages", private_message: @post_attrs
+      partner = Repo.get(User, partner.id)
       assert called PrivateMessageService.insert(user, partner, "bar")
       assert redirected_to(conn) == private_conversation_path(conn, :show, partner.id)
       assert get_flash(conn, :success) == gettext("Message successfully sent")
@@ -22,7 +25,8 @@ defmodule Helheim.PrivateMessageControllerTest do
     test_with_mock "it redirects to the conversation with an error flash message when unsuccessfull", %{conn: conn, user: user, partner: partner},
       PrivateMessageService, [], [insert: fn(_sender,_recipient,_body) -> {:error, :private_message, %{}, []} end] do
 
-      conn = post conn, "/private_conversations/#{partner.id}/messages", private_message: @post_attrs
+      conn    = post conn, "/private_conversations/#{partner.id}/messages", private_message: @post_attrs
+      partner = Repo.get(User, partner.id)
       assert called PrivateMessageService.insert(user, partner, "bar")
       assert redirected_to(conn) == private_conversation_path(conn, :show, partner.id)
       assert get_flash(conn, :error) == gettext("Unable to send message")

@@ -1,0 +1,9 @@
+<div class="notification-dropdown-items">
+  <div class="dropdown-header text-center">
+    <strong><%= ngettext "You have %{count} notification", "You have %{count} notifications", @conn.assigns[:notifications_count] %></strong>
+  </div>
+
+  <%= for notification <- @conn.assigns[:notifications] do %>
+    <%= notification_item @conn, notification, %{class: "dropdown-item"} %>
+  <% end %>
+</div>

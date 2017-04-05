@@ -39,12 +39,19 @@ defmodule Helheim.Factory do
     }
   end
 
+  def notification_subscription_factory do
+    %Helheim.NotificationSubscription{
+      user: build(:user),
+      type: "comment",
+      enabled: true
+    }
+  end
+
   def notification_factory do
     %Helheim.Notification{
-      user: build(:user),
-      title: "Some Notification!",
-      icon: "foo",
-      path: "/"
+      recipient: build(:user),
+      trigger_person: build(:user),
+      type: "comment"
     }
   end
 
