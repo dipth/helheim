@@ -106,18 +106,9 @@ msgstr "Velkommen til %{site_name}"
 msgid "Will only be shown to administrators"
 msgstr "Vil kun blive vist til administratorer"
 
-#: web/templates/layout/header.html.eex:28
-#: web/templates/page/signed_in.html.eex:7
+#: web/templates/navbar/show.html.eex:23
 msgid "Sign Out"
 msgstr "Log ud"
-
-#: web/templates/page/signed_in.html.eex:3
-msgid "You are now signed in"
-msgstr "Du er nu logget ind"
-
-#: web/templates/page/signed_in.html.eex:5
-msgid "Unfortunately we're not quite ready to open the doors fully yet."
-msgstr "Desværre er vi ikke helt klar til at åbne dørene endnu. Kig tilbage om et par uger :)"
 
 #: web/controllers/confirmation_controller.ex:53
 msgid "Confirmation e-mail sent!"
@@ -299,11 +290,11 @@ msgstr "For at sikre dig imod tastefejl"
 msgid "You need to confirm your e-mail address before you can reset your password"
 msgstr "Du skal først bekræfte din e-mail adresse før du kan nulstille dit kodeord"
 
-#: web/templates/layout/header.html.eex:23 web/views/account_view.ex:4
+#: web/templates/navbar/show.html.eex:18 web/views/account_view.ex:4
 msgid "Settings"
 msgstr "Indstillinger"
 
-#: web/templates/layout/header.html.eex:27 web/views/account_view.ex:4
+#: web/templates/navbar/show.html.eex:22 web/views/account_view.ex:4
 msgid "Account"
 msgstr "Konto"
 
@@ -352,7 +343,7 @@ msgstr "matcher ikke dit nuværende kodeord"
 msgid "Maximum file size: %{file_size}"
 msgstr "Maksimum fil størrelse: %{file_size}"
 
-#: web/templates/layout/header.html.eex:26
+#: web/templates/navbar/show.html.eex:21
 msgid "Profile"
 msgstr "Profil"
 
@@ -523,7 +514,7 @@ msgstr "Din besked kunne ikke sendes!"
 msgid "Write new message:"
 msgstr "Skriv en ny besked:"
 
-#: web/templates/notification/dropdown_items.html.eex:2
+#: web/templates/notification/dropdown_items.html.eex:3
 msgid "You have %{count} notification"
 msgid_plural "You have %{count} notifications"
 msgstr[0] "Du har %{count} notifikation"
@@ -841,7 +832,7 @@ msgstr "Slet konto"
 msgid "Hope to see you again some time!"
 msgstr "Håber vi ses igen engang!"
 
-#: web/templates/private_conversation/index.html.eex:19
+#: web/templates/private_conversation/index.html.eex:22
 #: web/templates/private_conversation/show.html.eex:5
 #: web/views/profile_helpers.ex:10 web/views/profile_helpers.ex:51
 msgid "User deleted"
@@ -1174,23 +1165,23 @@ msgstr "Profiler"
 msgid "Newest users with photo"
 msgstr "Nyeste brugere med profilbillede"
 
-#: web/views/notification_view.ex:29
+#: web/views/notification_view.ex:22
 msgid "%{who} wrote a comment in the guest book: %{what}"
 msgstr "%{who} skrev en besked i gæstebogen: %{what}"
 
-#: web/views/notification_view.ex:32
+#: web/views/notification_view.ex:25
 msgid "%{who} wrote a comment on the blog post: %{what}"
 msgstr "%{who} skrev en kommentar til bloggen: %{what}"
 
-#: web/views/notification_view.ex:35
+#: web/views/notification_view.ex:28
 msgid "%{who} wrote a comment on the photo album: %{what}"
 msgstr "%{who} skrev en kommentar til fotoalbummet: %{what}"
 
-#: web/views/notification_view.ex:38
+#: web/views/notification_view.ex:31
 msgid "%{who} wrote a comment on the photo: %{what}"
 msgstr "%{who} skrev en kommentar til fotoet: %{what}"
 
-#: web/views/notification_view.ex:41
+#: web/views/notification_view.ex:34
 msgid "%{who} wrote a reply to the forum topic: %{what}"
 msgstr "%{who} skrev et svar til forumtråden: %{what}"
 
@@ -1201,3 +1192,9 @@ msgstr "Gæstebogsindlæg"
 #: web/views/notification_helpers.ex:29
 msgid "Notifications:"
 msgstr "Notifikationer:"
+
+#: web/templates/private_conversation/dropdown_items.html.eex:3
+msgid "You have %{count} unread message"
+msgid_plural "You have %{count} unread messages"
+msgstr[0] "Du har %{count} ulæst besked"
+msgstr[1] "Du har %{count} ulæste beskeder"

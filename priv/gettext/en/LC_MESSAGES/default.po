@@ -95,17 +95,8 @@ msgstr ""
 msgid "Will only be shown to administrators"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:28
-#: web/templates/page/signed_in.html.eex:7
+#: web/templates/navbar/show.html.eex:23
 msgid "Sign Out"
-msgstr ""
-
-#: web/templates/page/signed_in.html.eex:3
-msgid "You are now signed in"
-msgstr ""
-
-#: web/templates/page/signed_in.html.eex:5
-msgid "Unfortunately we're not quite ready to open the doors fully yet."
 msgstr ""
 
 #: web/controllers/confirmation_controller.ex:53
@@ -288,11 +279,11 @@ msgstr ""
 msgid "You need to confirm your e-mail address before you can reset your password"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:23 web/views/account_view.ex:4
+#: web/templates/navbar/show.html.eex:18 web/views/account_view.ex:4
 msgid "Settings"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:27 web/views/account_view.ex:4
+#: web/templates/navbar/show.html.eex:22 web/views/account_view.ex:4
 msgid "Account"
 msgstr ""
 
@@ -340,7 +331,7 @@ msgstr ""
 msgid "Maximum file size: %{file_size}"
 msgstr ""
 
-#: web/templates/layout/header.html.eex:26
+#: web/templates/navbar/show.html.eex:21
 msgid "Profile"
 msgstr ""
 
@@ -507,7 +498,7 @@ msgstr ""
 msgid "Write new message:"
 msgstr ""
 
-#: web/templates/notification/dropdown_items.html.eex:2
+#: web/templates/notification/dropdown_items.html.eex:3
 msgid "You have %{count} notification"
 msgid_plural "You have %{count} notifications"
 msgstr[0] ""
@@ -820,7 +811,7 @@ msgstr ""
 msgid "Hope to see you again some time!"
 msgstr ""
 
-#: web/templates/private_conversation/index.html.eex:19
+#: web/templates/private_conversation/index.html.eex:22
 #: web/templates/private_conversation/show.html.eex:5
 #: web/views/profile_helpers.ex:10 web/views/profile_helpers.ex:51
 msgid "User deleted"
@@ -1147,23 +1138,23 @@ msgstr ""
 msgid "Newest users with photo"
 msgstr ""
 
-#: web/views/notification_view.ex:29
+#: web/views/notification_view.ex:22
 msgid "%{who} wrote a comment in the guest book: %{what}"
 msgstr ""
 
-#: web/views/notification_view.ex:32
+#: web/views/notification_view.ex:25
 msgid "%{who} wrote a comment on the blog post: %{what}"
 msgstr ""
 
-#: web/views/notification_view.ex:35
+#: web/views/notification_view.ex:28
 msgid "%{who} wrote a comment on the photo album: %{what}"
 msgstr ""
 
-#: web/views/notification_view.ex:38
+#: web/views/notification_view.ex:31
 msgid "%{who} wrote a comment on the photo: %{what}"
 msgstr ""
 
-#: web/views/notification_view.ex:41
+#: web/views/notification_view.ex:34
 msgid "%{who} wrote a reply to the forum topic: %{what}"
 msgstr ""
 
@@ -1174,3 +1165,9 @@ msgstr ""
 #: web/views/notification_helpers.ex:29
 msgid "Notifications:"
 msgstr ""
+
+#: web/templates/private_conversation/dropdown_items.html.eex:3
+msgid "You have %{count} unread message"
+msgid_plural "You have %{count} unread messages"
+msgstr[0] ""
+msgstr[1] ""
