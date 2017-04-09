@@ -20,6 +20,8 @@ defmodule Helheim.PrivateConversationController do
     partner         = Repo.one(from u in User, where: u.id == ^partner_id and u.id != ^me.id)
     conversation_id = PrivateMessage.calculate_conversation_id(me, partner || partner_id)
 
+    PrivateMessage.mark_as_read!(conversation_id, me)
+
     messages =
       PrivateMessage
       |> PrivateMessage.in_conversation(conversation_id)
@@ -27,6 +29,8 @@ defmodule Helheim.PrivateConversationController do
       |> preload(:sender)
       |> Repo.paginate(page: sanitized_page(params["page"]))
 
-    render(conn, "show.html", messages: messages, me: me, partner: partner)
+    conn
+    |> Helheim.Plug.LoadUnreadPrivateConversations.call([]) # We need to reload unread conversations, otherwise the count could be off
+    |> render("show.html", messages: messages, me: me, partner: partner)
   end
 end

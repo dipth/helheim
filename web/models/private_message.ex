@@ -6,11 +6,13 @@ defmodule Helheim.PrivateMessage do
 
   schema "private_messages" do
     field      :conversation_id, :string
-    belongs_to :sender,          Helheim.User
-    belongs_to :recipient,       Helheim.User
     field      :body,            :string
+    field      :read_at,         Calecto.DateTimeUTC
 
     timestamps()
+
+    belongs_to :sender,          Helheim.User
+    belongs_to :recipient,       Helheim.User
   end
 
   def create_changeset(struct, sender, recipient, params \\ %{}) do
@@ -43,6 +45,23 @@ defmodule Helheim.PrivateMessage do
       where: m.id in(^last_conversation_msg_ids_for(user))
   end
 
+  def unread_conversations_for(recipient) do
+    sq = from(
+      sub_msg in PrivateMessage,
+      select:   %{id: max(sub_msg.id)},
+      where:    sub_msg.recipient_id == ^recipient.id and is_nil(sub_msg.read_at),
+      group_by: sub_msg.conversation_id
+    )
+    from(
+      msg in PrivateMessage,
+      join:     sub_msg in subquery(sq), on: msg.id == sub_msg.id,
+      join:     usr in User, on: usr.id == msg.sender_id,
+      select:   %{conversation_id: msg.conversation_id, sender_id: msg.sender_id, body: msg.body, username: usr.username},
+      order_by: [desc: msg.inserted_at]
+    )
+    |> Repo.all
+  end
+
   def calculate_conversation_id(user_1 = %User{}, user_2 = %User{}), do: calculate_conversation_id(user_1.id, user_2.id)
   def calculate_conversation_id(user_1 = %User{}, user_2_id), do: calculate_conversation_id(user_1.id, user_2_id)
   def calculate_conversation_id(user_1_id, user_2 = %User{}), do: calculate_conversation_id(user_1_id, user_2.id)
@@ -64,6 +83,18 @@ defmodule Helheim.PrivateMessage do
         |> Enum.map(fn(str_id) -> String.to_integer(str_id) end)
         |> Enum.find(fn(id) -> id != you.id end)
     end
+  end
+
+  def unread?(message, recipient) do
+    message.read_at == nil && message.recipient_id == recipient.id
+  end
+
+  def mark_as_read!(conversation_id, recipient) do
+    from(
+      m in PrivateMessage,
+      where: m.conversation_id == ^conversation_id and m.recipient_id == ^recipient.id,
+      update: [set: [read_at: ^DateTime.utc_now]]
+    ) |> Repo.update_all([])
   end
 
   defp last_conversation_msg_ids_for(user) do

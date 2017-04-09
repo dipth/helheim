@@ -1,0 +1,9 @@
+<li class="nav-item dropdown hidden-md-down" id="nav-item-unread-messages">
+  <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="nav-link-unread-messages">
+    <i class="fa fa-envelope"></i>
+    <%= Helheim.NavbarView.count_badge(@conn, %{unread_messages: true}) %>
+  </a>
+  <div class="dropdown-menu dropdown-menu-right dropdown-menu-unread-messages">
+    <%= render "dropdown_items.html", conn: @conn %>
+  </div>
+</li>

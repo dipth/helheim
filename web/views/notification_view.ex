@@ -5,13 +5,6 @@ defmodule Helheim.NotificationView do
   import Helheim.Gettext
   alias Helheim.{Notification, User, BlogPost, PhotoAlbum, Photo, ForumTopic}
 
-  def notifications_count_badge(conn, opts \\ %{}), do: notifications_count_badge(conn, opts, conn.assigns[:notifications_count])
-  def notifications_count_badge(conn, opts, 0), do: notifications_count_badge(conn, opts, "")
-  def notifications_count_badge(_conn, opts, count) do
-    css_class = String.trim("badge badge-notification-count badge-pill badge-danger #{opts[:class]}")
-    content_tag(:span, count, class: css_class)
-  end
-
   def notification_item(conn, notification, opts \\ %{}) do
     subject = Notification.subject(notification)
     icon    = notification_icon(notification.type)

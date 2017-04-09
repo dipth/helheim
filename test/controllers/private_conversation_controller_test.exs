@@ -1,5 +1,6 @@
 defmodule Helheim.PrivateConversationControllerTest do
   use Helheim.ConnCase
+  import Mock
   alias Helheim.PrivateMessage
 
   ##############################################################################
@@ -71,6 +72,15 @@ defmodule Helheim.PrivateConversationControllerTest do
       conn = get conn, "/private_conversations/#{partner.id}"
       assert html_response(conn, 200)
       assert conn.resp_body =~ "Message With Deleted User"
+    end
+
+    test_with_mock "it marks the conversation as read for the current user", %{conn: conn, user: user_a},
+      PrivateMessage, [:passthrough], [mark_as_read!: fn(_conversation_id, _recipient) -> {:ok} end] do
+
+      user_b          = insert(:user)
+      conversation_id = PrivateMessage.calculate_conversation_id(user_a, user_b)
+      get conn, "/private_conversations/#{user_b.id}"
+      assert called PrivateMessage.mark_as_read!(conversation_id, user_a)
     end
   end
 

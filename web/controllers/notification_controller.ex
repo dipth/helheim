@@ -3,10 +3,6 @@ defmodule Helheim.NotificationController do
   alias Helheim.Notification
   alias Helheim.NotificationService
 
-  def index(conn, _params) do
-    render(conn, "index.js")
-  end
-
   def show(conn, %{"id" => id}) do
     user                = current_resource(conn)
     {:ok, notification} = assoc(user, :notifications)

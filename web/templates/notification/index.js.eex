@@ -1,2 +1,0 @@
-$('.notification-dropdown-items').replaceWith('<%= escape_javascript render(Helheim.NotificationView, "dropdown_items.html", conn: @conn) %>');
-$('.badge-notification-count').html('<%= @conn.assigns[:notifications_count] %>');

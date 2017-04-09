@@ -44,14 +44,14 @@ defmodule Helheim.NotificationService do
       |> Changeset.put_assoc(:trigger_person, trigger_person)
       |> put_subject(NotificationSubscription.subject(subscription))
       |> Repo.insert()
-    push_notification(notification)
+    push_notification(notification.recipient_id)
   end
 
   defp put_subject(changeset, %User{} = profile),           do: changeset |> Changeset.put_assoc(:profile, profile)
   defp put_subject(changeset, %BlogPost{} = blog_post),     do: changeset |> Changeset.put_assoc(:blog_post, blog_post)
   defp put_subject(changeset, %ForumTopic{} = forum_topic), do: changeset |> Changeset.put_assoc(:forum_topic, forum_topic)
 
-  defp push_notification(notification) do
-    NotificationChannel.broadcast_notification(notification)
+  defp push_notification(recipient_id) do
+    NotificationChannel.broadcast_notification(recipient_id)
   end
 end

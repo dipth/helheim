@@ -21,19 +21,6 @@ defmodule Helheim.PageControllerTest do
     end
   end
 
-  describe "signed_in/2" do
-    test "it redirects when not signed in", %{conn: conn} do
-      conn = get conn, "/signed_in"
-      assert html_response(conn, 302)
-    end
-
-    test "it returns a successful response when signed in", %{conn: conn} do
-      conn = conn |> sign_in(insert(:user))
-      conn = get conn, "/signed_in"
-      assert html_response(conn, 200) =~ gettext("You are now signed in")
-    end
-  end
-
   describe "terms/2" do
     test "it returns a successful response with the latest published terms", %{conn: conn} do
       insert(:term, body: "Old Published Terms",   published: true)

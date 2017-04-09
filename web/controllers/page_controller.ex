@@ -18,10 +18,6 @@ defmodule Helheim.PageController do
     render conn, "confirmation_pending.html", layout: {Helheim.LayoutView, "app_special.html"}
   end
 
-  def signed_in(conn, _params) do
-    render conn, "signed_in.html", layout: {Helheim.LayoutView, "app_special.html"}
-  end
-
   def front_page(conn, _params) do
     newest_users =
       User

@@ -1,0 +1,10 @@
+defmodule Helheim.Repo.Migrations.AddReadAtToPrivateMessages do
+  use Ecto.Migration
+
+  def change do
+    alter table(:private_messages) do
+      add :read_at, :utc_datetime
+    end
+    create index(:private_messages, [:read_at])
+  end
+end

@@ -29,11 +29,12 @@ export var Notifications = {
       //.receive("error", resp => { console.log("Unable to join", resp) })
 
     let handleIncomingNotification = payload => {
-      $.get('/notifications', handleRefreshedNotificationsData)
+      $.get('/navbar', handleRefreshedNavbar)
     }
 
-    let handleRefreshedNotificationsData = () => {
-      $('#nav-item-notifications').animateCss('tada')
+    let handleRefreshedNavbar = (data) => {
+      $('#navbar').replaceWith(data)
+      $('#navbar .badge').animateCss('wobble')
       playNotificationSound()
     }
 

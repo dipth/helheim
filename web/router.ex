@@ -21,6 +21,7 @@ defmodule Helheim.Router do
     plug Guardian.Plug.EnsureAuthenticated, handler: Helheim.Token
     plug Guardian.Plug.LoadResource
     plug Helheim.Plug.LoadNotifications
+    plug Helheim.Plug.LoadUnreadPrivateConversations
   end
 
   pipeline :browser_admin_auth do
@@ -40,7 +41,7 @@ defmodule Helheim.Router do
     get "/debug", PageController, :debug
     resources "/registrations", RegistrationController, only: [:new, :create]
     resources "/confirmations", ConfirmationController, only: [:new, :create, :show]
-    resources "/sessions", SessionController, only: [:new, :create, :delete]
+    resources "/sessions", SessionController, only: [:new, :create]
     resources "/password_resets", PasswordResetController, only: [:new, :create, :show, :update]
   end
 
@@ -50,6 +51,7 @@ defmodule Helheim.Router do
     get "/help/embeds", HelpController, :embeds
     get "/signed_in", PageController, :signed_in
     get "/front_page", PageController, :front_page
+    get "/sessions/sign_out", SessionController, :delete
     resources "/account", AccountController, singleton: true, only: [:edit, :update, :delete]
     resources "/profile", ProfileController, singleton: true, only: [:show, :edit, :update]
     resources "/profiles", ProfileController, only: [:index, :show], as: :public_profile do
@@ -85,7 +87,8 @@ defmodule Helheim.Router do
     resources "/forum_topics", ForumTopicController, only: [] do
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
     end
-    resources "/notifications", NotificationController, only: [:index, :show]
+    resources "/notifications", NotificationController, only: [:show]
+    resources "/navbar", NavbarController, singleton: true, only: [:show]
   end
 
   scope "/admin", Helheim.Admin, as: :admin do

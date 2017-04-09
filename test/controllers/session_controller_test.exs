@@ -41,13 +41,13 @@ defmodule Helheim.SessionControllerTest do
   describe "delete/2" do
     test "it logs out and redirects the current user", %{conn: conn} do
       conn = conn |> sign_in(insert(:user))
-      conn = delete conn, "/sessions/access"
+      conn = get conn, "/sessions/sign_out"
       assert html_response(conn, 302)
       refute Guardian.Plug.current_resource(conn)
     end
 
     test "it just redirects when you are not signed in", %{conn: conn} do
-      conn = delete conn, "/sessions/access"
+      conn = get conn, "/sessions/sign_out"
       assert html_response(conn, 302)
     end
   end

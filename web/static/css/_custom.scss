@@ -223,7 +223,7 @@ code {
   color: $gray-dark;
 }
 
-.dropdown-menu-notifications {
+.dropdown-menu-notifications, .dropdown-menu-unread-messages {
   width: 300px;
   .dropdown-item {
     white-space: normal;

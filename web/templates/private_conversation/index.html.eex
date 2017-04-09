@@ -13,6 +13,9 @@
         <div class="w-100">
           <div class="d-flex justify-content-between w-100">
             <strong>
+              <%= if Helheim.PrivateMessage.unread?(message, current_resource(@conn)) do %>
+                <i class="fa fa-fw fa-circle text-primary animated infinite pulse"></i>
+              <% end %>
               <%= unless is_number(partner) do %>
                 <%= partner.username %>
               <% else %>

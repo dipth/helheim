@@ -1,0 +1,12 @@
+<div class="unread-messages-dropdown-items">
+  <div class="dropdown-header text-center">
+    <strong><%= ngettext "You have %{count} unread message", "You have %{count} unread messages", @conn.assigns[:unread_conversations_count] %></strong>
+  </div>
+
+  <%= for conversation <- @conn.assigns[:unread_conversations] do %>
+    <%= link to: private_conversation_path(@conn, :show, conversation.sender_id), class: "dropdown-item" do %>
+      <strong><%= conversation.username %></strong><br>
+      <small><%= Crutches.String.truncate conversation.body, 50 %></small>
+    <% end %>
+  <% end %>
+</div>
