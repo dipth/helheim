@@ -65,6 +65,24 @@ defmodule Helheim.Photo do
       preload:  [photo_album: :user]
   end
 
+  def newest_for_frontpage(limit) do
+    sq = from(
+      p in Helheim.Photo,
+      join:     pa in Helheim.PhotoAlbum, on: pa.id == p.photo_album_id,
+      where:    pa.visibility == "public",
+      group_by: pa.id,
+      select:   %{last_public_photo_id: max(p.id)},
+      order_by: [desc: max(p.id)],
+      limit:    ^limit
+    )
+    from(
+      p in      Helheim.Photo,
+      join:     sub_p in subquery(sq), on: p.id == sub_p.last_public_photo_id,
+      order_by: [desc: p.inserted_at],
+      preload:  [photo_album: :user]
+    ) |> Repo.all
+  end
+
   def chronologically(query) do
     from p in query,
     order_by: [asc: p.inserted_at]

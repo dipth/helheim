@@ -123,6 +123,44 @@ defmodule Helheim.PhotoTest do
     end
   end
 
+  describe "newest_for_frontpage/1" do
+    test "only returns public photos" do
+      public_album       = insert(:photo_album, visibility: "public")
+      public_photo       = insert(:photo, photo_album: public_album)
+      friends_only_album = insert(:photo_album, visibility: "friends_only")
+      friends_only_photo = insert(:photo, photo_album: friends_only_album)
+      private_album      = insert(:photo_album, visibility: "private")
+      private_photo      = insert(:photo, photo_album: private_album)
+      photos             = Photo.newest_for_frontpage(10)
+      assert Enum.find(photos, fn(p) -> p.id == public_photo.id end)
+      refute Enum.find(photos, fn(p) -> p.id == friends_only_photo.id end)
+      refute Enum.find(photos, fn(p) -> p.id == private_photo.id end)
+    end
+
+    test "returns only the latest photo from each album" do
+      album   = insert(:photo_album, visibility: "public")
+      photo_1 = insert(:photo, photo_album: album)
+      photo_2 = insert(:photo, photo_album: album)
+      photos  = Photo.newest_for_frontpage(10)
+      refute Enum.find(photos, fn(p) -> p.id == photo_1.id end)
+      assert Enum.find(photos, fn(p) -> p.id == photo_2.id end)
+    end
+
+    test "only returns the specified number of photos" do
+      insert_list(3, :photo)
+      photos = Photo.newest_for_frontpage(2)
+      assert length(photos) == 2
+    end
+
+    test "sorts the photos from newest to oldest" do
+      photo_1       = insert(:photo)
+      photo_2       = insert(:photo)
+      [first, last] = Photo.newest_for_frontpage(2)
+      assert first.id == photo_2.id
+      assert last.id  == photo_1.id
+    end
+  end
+
   describe "chronologically/1" do
     test "it orders older photos before newer ones" do
       expected_first = insert(:photo)

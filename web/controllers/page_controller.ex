@@ -40,7 +40,7 @@ defmodule Helheim.PageController do
       |> limit(6)
       |> Repo.all
 
-    newest_photos = Helheim.Photo.newest_public_photos(15)
+    newest_photos = Helheim.Photo.newest_for_frontpage(15)
 
     render conn, "front_page.html",
       newest_users: newest_users,
