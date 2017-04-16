@@ -41,11 +41,6 @@ defmodule Helheim.VisitorLogEntryHelpers do
     )
   end
 
-  # def visitor_count_badge(conn, %User{} = profile), do: visitor_count_badge(conn, profile, profile.id)
-  # def visitor_count_badge(conn, %BlogPost{} = blog_post), do: visitor_count_badge(conn, blog_post, blog_post.user_id)
-  # def visitor_count_badge(conn, %PhotoAlbum{} = photo_album), do: visitor_count_badge(conn, photo_album, photo_album.user_id)
-  # def visitor_count_badge(conn, %Photo{} = photo), do: visitor_count_badge(conn, photo, photo.photo_album.user_id)
-
   defp visitor_count_badge(conn, subject, owner_id, entries_path) do
     current_user = current_resource(conn)
 
