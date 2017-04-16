@@ -73,7 +73,10 @@ defmodule Helheim.Router do
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
     end
     resources "/photo_albums", PhotoAlbumController, only: [:new, :create, :edit, :update, :delete] do
-      resources "/photos", PhotoController, only: [:create, :edit, :update, :delete]
+      resources "/photos", PhotoController, only: [:create, :edit, :update, :delete] do
+        resources "/comments", CommentController, only: [:create]
+        resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
+      end
     end
     resources "/photos", PhotoController, only: [:index]
     resources "/private_conversations", PrivateConversationController, param: "partner_id", only: [:index, :show] do

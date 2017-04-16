@@ -268,6 +268,94 @@ defmodule Helheim.NotificationSubscriptionControllerTest do
     end
   end
 
+  ##############################################################################
+  # update/2 for a photo
+  describe "update/2 for a photo when signed in" do
+    setup [:create_and_sign_in_user, :create_photo]
+
+    test "creates an enabled subscription for the user for the given photo when enabling", %{conn: conn, user: user, photo: photo} do
+      conn = put conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.one(NotificationSubscription)
+      assert conn.status               == 200
+      assert subscription.user_id      == user.id
+      assert subscription.photo_id     == photo.id
+      assert subscription.type         == @type_attr
+      assert subscription.enabled      == true
+    end
+
+    test "enables an existing disabled subscription for the user for the given photo when enabling", %{conn: conn, user: user, photo: photo} do
+      subscription = insert(:notification_subscription, user: user, photo: photo, type: @type_attr, enabled: false)
+      conn = put conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert conn.status               == 200
+      assert subscription.user_id      == user.id
+      assert subscription.photo_id     == photo.id
+      assert subscription.type         == @type_attr
+      assert subscription.enabled      == true
+    end
+
+    test "enables an existing enabled subscription for the user for the given photo when enabling", %{conn: conn, user: user, photo: photo} do
+      subscription = insert(:notification_subscription, user: user, photo: photo, type: @type_attr, enabled: true)
+      conn = put conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert conn.status               == 200
+      assert subscription.user_id      == user.id
+      assert subscription.photo_id     == photo.id
+      assert subscription.type         == @type_attr
+      assert subscription.enabled      == true
+    end
+
+    test "does not change subscriptions for other users", %{conn: conn, user: user, photo: photo} do
+      subscription = insert(:notification_subscription, photo: photo, type: @type_attr, enabled: false)
+      conn = put conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert conn.status               == 200
+      refute subscription.user_id      == user.id
+      assert subscription.photo_id     == photo.id
+      assert subscription.type         == @type_attr
+      assert subscription.enabled      == false
+    end
+
+    test "does not change subscriptions for other photos", %{conn: conn, user: user, photo: photo} do
+      subscription = insert(:notification_subscription, user: user, blog_post: insert(:blog_post), type: @type_attr, enabled: false)
+      conn = put conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert conn.status               == 200
+      assert subscription.user_id      == user.id
+      refute subscription.photo_id     == photo.id
+      assert subscription.type         == @type_attr
+      assert subscription.enabled      == false
+    end
+
+    test "does not change subscriptions with other types", %{conn: conn, user: user, photo: photo} do
+      subscription = insert(:notification_subscription, user: user, photo: photo, type: "blog_post", enabled: false)
+      conn = put conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert conn.status               == 200
+      assert subscription.user_id      == user.id
+      assert subscription.photo_id     == photo.id
+      refute subscription.type         == @type_attr
+      assert subscription.enabled      == false
+    end
+
+    test "it does not create a subscription but instead shows an error page if the photo does not exist", %{conn: conn, photo: photo} do
+      assert_error_sent :not_found, fn ->
+        put conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id + 1}/notification_subscription", type: @type_attr, enabled: "1"
+      end
+      refute Repo.one(NotificationSubscription)
+    end
+  end
+
+  describe "update/2 for a photo when not signed in" do
+    setup [:create_photo]
+
+    test "does not create any subscription and instead redirects to the login page", %{conn: conn, photo: photo} do
+      conn = put conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/notification_subscription", type: @type_attr, enabled: "1"
+      assert redirected_to(conn) == session_path(conn, :new)
+      refute Repo.one(NotificationSubscription)
+    end
+  end
+
   defp create_profile(_context) do
     [profile: insert(:user)]
   end
@@ -278,5 +366,9 @@ defmodule Helheim.NotificationSubscriptionControllerTest do
 
   defp create_forum_topic(_context) do
     [forum_topic: insert(:forum_topic)]
+  end
+
+  defp create_photo(_context) do
+    [photo: insert(:photo)]
   end
 end

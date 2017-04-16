@@ -22,6 +22,12 @@ defmodule Helheim.NotificationHelpers do
     notifications_switch(enabled, type, path)
   end
 
+  def notifications_switch(conn, user, type, %Helheim.Photo{} = photo) do
+    enabled = find_enabled_subscription(user, type, photo) != nil
+    path    = photo_album_photo_notification_subscription_path(conn, :update, photo.photo_album_id, photo)
+    notifications_switch(enabled, type, path)
+  end
+
   defp notifications_switch(enabled, type, path) do
     form_tag(path, method: :patch) do
       [

@@ -2,6 +2,7 @@ defmodule Helheim.CommentController do
   use Helheim.Web, :controller
   alias Helheim.Repo
   alias Helheim.User
+  alias Helheim.Photo
 
   def index(conn, %{"profile_id" => user_id} = params), do: index(conn, Repo.get!(User, user_id), params)
   defp index(conn, commentable, params) do
@@ -20,6 +21,11 @@ defmodule Helheim.CommentController do
   def create(conn, %{"profile_id" => profile_id, "comment" => comment_params}) do
     profile = User |> Repo.get!(profile_id)
     create(conn, profile, comment_params, public_profile_comment_path(conn, :index, profile))
+  end
+
+  def create(conn, %{"photo_id" => photo_id, "comment" => comment_params}) do
+    photo = Photo |> preload(:photo_album) |> Repo.get!(photo_id)
+    create(conn, photo, comment_params, public_profile_photo_album_photo_path(conn, :show, photo.photo_album.user_id, photo.photo_album, photo))
   end
 
   defp create(conn, commentable, comment_params, redirect_to) do

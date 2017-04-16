@@ -24,6 +24,10 @@ defmodule Helheim.ModelCase do
       import Helheim.Gettext
       import Helheim.ModelCase
       import Helheim.Factory
+
+      defp create_user(_context) do
+        [user: insert(:user)]
+      end
     end
   end
 

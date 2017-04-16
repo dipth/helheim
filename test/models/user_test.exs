@@ -91,10 +91,6 @@ defmodule Helheim.UserTest do
              |> Repo.update!
       assert user.location == "Foo"
     end
-
-    defp create_user(_context) do
-      [user: insert(:user)]
-    end
   end
 
   describe "confirm!/1" do

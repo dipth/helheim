@@ -43,3 +43,5 @@
     </div>
   <% end %>
 </div>
+
+<%= Helheim.CommentView.render_comments @conn, @comments, @photo %>

@@ -104,6 +104,56 @@ defmodule Helheim.NotificationServiceTest do
   end
 
   ##############################################################################
+  # create!/3 for a comment on a photo
+  describe "create!/3 for a comment on a photo" do
+    setup [:create_user, :create_trigger_person, :create_photo]
+
+    test "creates a notification for a subscription that matches the arguments",
+      %{user: user, trigger_person: trigger_person, photo: photo} do
+
+      insert(:notification_subscription, user: user, type: "comment", photo: photo, enabled: true)
+      NotificationService.create!("comment", photo, trigger_person)
+      notification = Repo.one!(Notification)
+      assert notification.recipient_id      == user.id
+      assert notification.type              == "comment"
+      assert notification.photo_id          == photo.id
+      assert notification.trigger_person_id == trigger_person.id
+    end
+
+    test "does not create a notification for a subscription with a different type value",
+      %{user: user, trigger_person: trigger_person, photo: photo} do
+
+      insert(:notification_subscription, user: user, type: "foo", photo: photo, enabled: true)
+      NotificationService.create!("comment", photo, trigger_person)
+      refute Repo.one(Notification)
+    end
+
+    test "does not create a notification for a subscription with a different subject",
+      %{user: user, trigger_person: trigger_person, photo: photo} do
+
+      insert(:notification_subscription, user: user, type: "comment", photo: insert(:photo), enabled: true)
+      NotificationService.create!("comment", photo, trigger_person)
+      refute Repo.one(Notification)
+    end
+
+    test "does not create a notification for a subscription that is disabled",
+      %{user: user, trigger_person: trigger_person, photo: photo} do
+
+      insert(:notification_subscription, user: user, type: "comment", photo: photo, enabled: false)
+      NotificationService.create!("comment", photo, trigger_person)
+      refute Repo.one(Notification)
+    end
+
+    test "does not create a notification if the trigger person is the same as the subscriber",
+      %{trigger_person: trigger_person, photo: photo} do
+
+      insert(:notification_subscription, user: trigger_person, type: "comment", photo: photo, enabled: true)
+      NotificationService.create!("comment", photo, trigger_person)
+      refute Repo.one(Notification)
+    end
+  end
+
+  ##############################################################################
   # create!/3 for a reply to a forum topic
   describe "create!/3 for a reply to a forum topic" do
     setup [:create_user, :create_trigger_person, :create_forum_topic]
@@ -164,9 +214,9 @@ defmodule Helheim.NotificationServiceTest do
     end
   end
 
-  defp create_user(_context),           do: [user: insert(:user)]
   defp create_trigger_person(_context), do: [trigger_person: insert(:user)]
   defp create_profile(_context),        do: [profile: insert(:user)]
   defp create_blog_post(_context),      do: [blog_post: insert(:blog_post)]
   defp create_forum_topic(_context),    do: [forum_topic: insert(:forum_topic)]
+  defp create_photo(_context),          do: [photo: insert(:photo)]
 end

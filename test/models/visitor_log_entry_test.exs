@@ -157,9 +157,5 @@ defmodule Helheim.VisitorLogEntryTest do
       assert entry.user_id        == user.id
       assert entry.photo_album_id == photo_album.id
     end
-
-    def create_user(_context) do
-      [user: insert(:user)]
-    end
   end
 end

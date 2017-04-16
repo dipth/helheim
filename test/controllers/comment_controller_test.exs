@@ -5,6 +5,7 @@ defmodule Helheim.CommentControllerTest do
   alias Helheim.Repo
   alias Helheim.User
   alias Helheim.BlogPost
+  alias Helheim.Photo
 
   @comment_attrs %{body: "My Comment"}
 
@@ -144,6 +145,55 @@ defmodule Helheim.CommentControllerTest do
     test "it redirects to the login page", %{conn: conn} do
       blog_post = insert(:blog_post)
       conn      = post conn, "/blog_posts/#{blog_post.id}/comments", comment: @comment_attrs
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # create/2 for a photo
+  describe "create/2 for a photo when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it redirects to the photo page with a success flash message when successfull", %{conn: conn, user: user},
+      CommentService, [], [create!: fn(_commentable, _author, _body) -> {:ok, %{comment: %{}}} end] do
+
+      photo = Photo |> preload(:photo_album) |> Repo.get!(insert(:photo).id)
+      conn  = post conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/comments", comment: @comment_attrs
+      assert called CommentService.create!(photo, user, @comment_attrs[:body])
+      assert redirected_to(conn)       == public_profile_photo_album_photo_path(conn, :show, photo.photo_album.user_id, photo.photo_album.id, photo)
+      assert get_flash(conn, :success) == gettext("Comment created successfully")
+    end
+
+    test_with_mock "it redirects to the photo page with an error flash message when unsuccessfull", %{conn: conn, user: user},
+      CommentService, [], [create!: fn(_commentable, _author, _body) -> {:error, :comment, %{}, []} end] do
+
+      photo = Photo |> preload(:photo_album) |> Repo.get!(insert(:photo).id)
+      conn  = post conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/comments", comment: @comment_attrs
+      assert called CommentService.create!(photo, user, @comment_attrs[:body])
+      assert redirected_to(conn)     == public_profile_photo_album_photo_path(conn, :show, photo.photo_album.user_id, photo.photo_album.id, photo)
+      assert get_flash(conn, :error) == gettext("Unable to create comment")
+    end
+
+    test_with_mock "it does not invoke the CommentService if the photo does not exist but instead shows a 404 error", %{conn: conn},
+      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+
+      assert_error_sent :not_found, fn ->
+        post conn, "/photo_albums/1/photos/1/comments", comment: @comment_attrs
+      end
+    end
+  end
+
+  describe "create/2 for a photo when not signed in" do
+    test_with_mock "it does not invoke the CommentService", %{conn: conn},
+      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+
+      photo = insert(:photo)
+      post conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/comments", comment: @comment_attrs
+    end
+
+    test "it redirects to the login page", %{conn: conn} do
+      photo = insert(:photo)
+      conn  = post conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/comments", comment: @comment_attrs
       assert redirected_to(conn) == session_path(conn, :new)
     end
   end

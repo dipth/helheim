@@ -5,6 +5,7 @@ defmodule Helheim.CommentServiceTest do
   alias Helheim.Comment
   alias Helheim.User
   alias Helheim.BlogPost
+  alias Helheim.Photo
   alias Helheim.NotificationService
 
   @valid_body "My Comment"
@@ -118,6 +119,60 @@ defmodule Helheim.CommentServiceTest do
     end
   end
 
+  ##############################################################################
+  # create!/3 for a photo
+  describe "create/3 for a photo with valid author and body" do
+    setup [:create_author, :create_photo]
+
+    test "creates a comment on the photo from the author with the specified body", %{author: author, photo: photo} do
+      {:ok, %{comment: comment}} = CommentService.create!(photo, author, @valid_body)
+      assert comment.author_id == author.id
+      assert comment.photo_id  == photo.id
+      assert comment.body      == @valid_body
+    end
+
+    test "increments the comment_count of the photo", %{author: author, photo: photo} do
+      CommentService.create!(photo, author, @valid_body)
+      photo = Repo.get(Photo, photo.id)
+      assert photo.comment_count == 1
+    end
+
+    test_with_mock "triggers notifications", %{author: author, photo: photo},
+      NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
+
+      CommentService.create!(photo, author, @valid_body)
+      assert called NotificationService.create_async!(:_, "comment", photo, author)
+    end
+  end
+
+  describe "create/3 for a photo with invalid body" do
+    setup [:create_author, :create_photo]
+
+    test "does not create any comments", %{author: author, photo: photo} do
+      CommentService.create!(photo, author, @invalid_body)
+      refute Repo.one(Comment)
+    end
+
+    test "returns :error, the failed operation, the failed value and changes so far", %{author: author, photo: photo} do
+      {:error, failed_operation, failed_value, changes_so_far} = CommentService.create!(photo, author, @invalid_body)
+      assert failed_operation
+      assert failed_value
+      assert changes_so_far
+    end
+
+    test "does not increment the comment_count of the photo", %{author: author, photo: photo} do
+      CommentService.create!(photo, author, @invalid_body)
+      photo = Repo.get(Photo, photo.id)
+      assert photo.comment_count == 0
+    end
+
+    test_with_mock "does not trigger notifications", %{author: author, photo: photo},
+      NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> raise "NotificationService was called!" end] do
+
+      CommentService.create!(photo, author, @invalid_body)
+    end
+  end
+
   defp create_author(_context) do
     author = insert(:user)
     [author: author]
@@ -131,5 +186,10 @@ defmodule Helheim.CommentServiceTest do
   defp create_blog_post(_context) do
     blog_post = insert(:blog_post)
     [blog_post: blog_post]
+  end
+
+  defp create_photo(_context) do
+    photo = insert(:photo)
+    [photo: photo]
   end
 end

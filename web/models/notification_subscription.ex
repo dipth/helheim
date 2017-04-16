@@ -6,6 +6,7 @@ defmodule Helheim.NotificationSubscription do
   alias Helheim.User
   alias Helheim.BlogPost
   alias Helheim.ForumTopic
+  alias Helheim.Photo
 
   @types ["comment", "blog_post", "photo", "forum_reply"]
   def types, do: @types
@@ -43,6 +44,7 @@ defmodule Helheim.NotificationSubscription do
   def for_subject(query, %User{} = profile),           do: from s in query, where: s.profile_id == ^profile.id
   def for_subject(query, %BlogPost{} = blog_post),     do: from s in query, where: s.blog_post_id == ^blog_post.id
   def for_subject(query, %ForumTopic{} = forum_topic), do: from s in query, where: s.forum_topic_id == ^forum_topic.id
+  def for_subject(query, %Photo{} = photo),            do: from s in query, where: s.photo_id == ^photo.id
 
   def enabled(query) do
     from s in query,
@@ -51,13 +53,14 @@ defmodule Helheim.NotificationSubscription do
 
   def with_preloads(query) do
     query
-    |> preload([:user, :profile, :blog_post, :forum_topic])
+    |> preload([:user, :profile, :blog_post, :forum_topic, :photo])
   end
 
   def subject(subscription) do
     subscription.profile ||
     subscription.blog_post ||
-    subscription.forum_topic
+    subscription.forum_topic ||
+    subscription.photo
   end
 
   def enable!(user, type, subject) do
@@ -83,6 +86,7 @@ defmodule Helheim.NotificationSubscription do
   defp new_subscription(user, type, %User{} = profile),           do: new_subscription(user, type) |> put_assoc(:profile, profile)
   defp new_subscription(user, type, %BlogPost{} = blog_post),     do: new_subscription(user, type) |> put_assoc(:blog_post, blog_post)
   defp new_subscription(user, type, %ForumTopic{} = forum_topic), do: new_subscription(user, type) |> put_assoc(:forum_topic, forum_topic)
+  defp new_subscription(user, type, %Photo{} = photo),            do: new_subscription(user, type) |> put_assoc(:photo, photo)
   defp new_subscription(user, type) do
     NotificationSubscription.changeset(%NotificationSubscription{}, %{type: type})
     |> Ecto.Changeset.put_assoc(:user, user)

@@ -2,6 +2,7 @@ defmodule Helheim.CommentView do
   use Helheim.Web, :view
   alias Helheim.User
   alias Helheim.BlogPost
+  alias Helheim.Photo
 
   def crumbs(conn, %User{} = profile) do
     content_tag :ol, class: "breadcrumb" do
@@ -22,6 +23,7 @@ defmodule Helheim.CommentView do
 
   def post_path(conn, %User{} = profile), do: public_profile_comment_path(conn, :create, profile)
   def post_path(conn, %BlogPost{} = blog_post), do: blog_post_comment_path(conn, :create, blog_post)
+  def post_path(conn, %Photo{} = photo), do: photo_album_photo_comment_path(conn, :create, photo.photo_album_id, photo)
 
   def render_comments(conn, comments, commentable, opts \\ []) do
     opts = Keyword.merge(

@@ -6,6 +6,7 @@ defmodule Helheim.CommentService do
   alias Helheim.Comment
   alias Helheim.User
   alias Helheim.BlogPost
+  alias Helheim.Photo
   alias Helheim.NotificationService
 
   def create!(commentable, author, body) do
@@ -29,9 +30,11 @@ defmodule Helheim.CommentService do
 
   defp put_commentable(changeset, %User{} = profile),       do: Changeset.put_assoc(changeset, :profile, profile)
   defp put_commentable(changeset, %BlogPost{} = blog_post), do: Changeset.put_assoc(changeset, :blog_post, blog_post)
+  defp put_commentable(changeset, %Photo{} = photo),        do: Changeset.put_assoc(changeset, :photo, photo)
 
   defp inc_comment_count(multi, %User{} = profile),       do: inc_comment_count(multi, User, profile.id)
   defp inc_comment_count(multi, %BlogPost{} = blog_post), do: inc_comment_count(multi, BlogPost, blog_post.id)
+  defp inc_comment_count(multi, %Photo{} = photo),        do: inc_comment_count(multi, Photo, photo.id)
   defp inc_comment_count(multi, model, id) do
     multi |> Multi.update_all(:comment_count, (model |> where(id: ^id)), inc: [comment_count: 1])
   end

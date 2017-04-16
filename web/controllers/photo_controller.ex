@@ -3,6 +3,7 @@ defmodule Helheim.PhotoController do
   alias Helheim.User
   alias Helheim.PhotoAlbum
   alias Helheim.Photo
+  alias Helheim.Comment
   import Helheim.ErrorHelpers, only: [translate_error: 1]
 
   def index(conn, params) do
@@ -32,14 +33,18 @@ defmodule Helheim.PhotoController do
     end
   end
 
-  def show(conn, %{"profile_id" => user_id, "photo_album_id" => photo_album_id, "id" => id}) do
+  def show(conn, %{"profile_id" => user_id, "photo_album_id" => photo_album_id, "id" => id} = params) do
     user        = Repo.get!(User, user_id)
     photo_album = assoc(user, :photo_albums)
                   |> PhotoAlbum.viewable_by(user, current_resource(conn))
                   |> Repo.get!(photo_album_id)
     photo       = assoc(photo_album, :photos) |> preload(:photo_album) |> Repo.get!(id)
+    comments    = assoc(photo, :comments)
+                  |> Comment.newest
+                  |> preload(:author)
+                  |> Repo.paginate(page: sanitized_page(params["page"]))
     Helheim.VisitorLogEntry.track! current_resource(conn), photo
-    render(conn, "show.html", user: user, photo_album: photo_album, photo: photo)
+    render(conn, "show.html", user: user, photo_album: photo_album, photo: photo, comments: comments)
   end
 
   def edit(conn, %{"photo_album_id" => photo_album_id, "id" => id}) do

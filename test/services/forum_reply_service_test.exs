@@ -64,5 +64,4 @@ defmodule Helheim.ForumReplyServiceTest do
   end
 
   defp create_forum_topic(_context), do: [forum_topic: insert(:forum_topic)]
-  defp create_user(_context),        do: [user: insert(:user)]
 end
