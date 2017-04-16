@@ -33,12 +33,9 @@ defmodule Helheim.PageController do
       |> preload(:user)
       |> Helheim.Repo.all
 
-    newest_forum_topics = ForumTopic
-      |> ForumTopic.with_latest_reply
-      |> order_by([desc: :updated_at])
-      |> preload([:forum, :user])
-      |> limit(6)
-      |> Repo.all
+    newest_forum_topics = ForumTopic.newest_for_frontpage(6)
+                          |> ForumTopic.with_latest_reply
+                          |> Repo.all
 
     newest_photos = Helheim.Photo.newest_for_frontpage(15)
 

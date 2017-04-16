@@ -46,6 +46,23 @@ defmodule Helheim.ForumTopic do
       preload: [forum_replies: ^forum_replies_query]
   end
 
+  def newest_for_frontpage(limit) do
+    sq = from(
+      ft in Helheim.ForumTopic,
+      left_join: fr in Helheim.ForumReply, on: fr.forum_topic_id == ft.id,
+      group_by:  ft.id,
+      select:    %{id: ft.id, last_updated_at: fragment("coalesce(?, ?)", max(fr.updated_at), ft.updated_at)},
+      order_by:  [desc: fragment("coalesce(?, ?)", max(fr.updated_at), ft.updated_at)],
+      limit:     ^limit
+    )
+    from(
+      ft in      Helheim.ForumTopic,
+      join:     sub_ft in subquery(sq), on: ft.id == sub_ft.id,
+      order_by: [desc: sub_ft.last_updated_at],
+      preload:  [:forum, :user]
+    )
+  end
+
   def in_order(query) do
     from ft in query,
       order_by: [desc: :pinned, desc: :updated_at]

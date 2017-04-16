@@ -64,4 +64,8 @@ defmodule Helheim.ModelCase do
     |> Ecto.Changeset.traverse_errors(&Helheim.ErrorHelpers.translate_error/1)
     |> Enum.flat_map(fn {key, errors} -> for msg <- errors, do: {key, msg} end)
   end
+
+  def build_datetime(year, month, day, hour, minute, second) do
+    Calendar.DateTime.from_erl!({{year, month, day}, {hour, minute, second}}, "Etc/UTC")
+  end
 end

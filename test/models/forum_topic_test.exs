@@ -81,6 +81,50 @@ defmodule Helheim.ForumTopicTest do
     end
   end
 
+  describe "newest_for_frontpage/1" do
+    test "only returns the specified number of topics" do
+      insert_list(3, :forum_topic)
+      topics = ForumTopic.newest_for_frontpage(2) |> Repo.all
+      assert length(topics) == 2
+    end
+
+    test "it sorts a topic with a reply that has a recent updated_at value above a topic with a reply that has an older updated_at value" do
+      topic_1 = insert(:forum_topic, updated_at: build_datetime(2017,1,1,0,0,0))
+      topic_2 = insert(:forum_topic, updated_at: build_datetime(2017,1,1,0,0,0))
+      insert(:forum_reply, forum_topic: topic_1, updated_at: build_datetime(2017,1,1,0,0,2))
+      insert(:forum_reply, forum_topic: topic_2, updated_at: build_datetime(2017,1,1,0,0,1))
+      [first, last] = ForumTopic.newest_for_frontpage(2) |> Repo.all
+      assert first.id == topic_1.id
+      assert last.id  == topic_2.id
+    end
+
+    test "it sorts a topic with a reply that has a recent updated_at value above a topic without replies that has an older updated_at value" do
+      topic_1 = insert(:forum_topic, updated_at: build_datetime(2017,1,1,0,0,0))
+      topic_2 = insert(:forum_topic, updated_at: build_datetime(2017,1,1,0,0,0))
+      insert(:forum_reply, forum_topic: topic_1, updated_at: build_datetime(2017,1,1,0,0,1))
+      [first, last] = ForumTopic.newest_for_frontpage(2) |> Repo.all
+      assert first.id == topic_1.id
+      assert last.id  == topic_2.id
+    end
+
+    test "it sorts a topic without replies that has a recent updated_at value above a topic with a reply that has an older updated_at value" do
+      topic_1 = insert(:forum_topic, updated_at: build_datetime(2017,1,1,0,0,1))
+      topic_2 = insert(:forum_topic, updated_at: build_datetime(2017,1,1,0,0,0))
+      insert(:forum_reply, forum_topic: topic_2, updated_at: build_datetime(2017,1,1,0,0,0))
+      [first, last] = ForumTopic.newest_for_frontpage(2) |> Repo.all
+      assert first.id == topic_1.id
+      assert last.id  == topic_2.id
+    end
+
+    test "it sorts a topic without replies that has a recent updated_at value above a topic without a replies that has an older updated_at value" do
+      topic_1 = insert(:forum_topic, updated_at: build_datetime(2017,1,1,0,0,1))
+      topic_2 = insert(:forum_topic, updated_at: build_datetime(2017,1,1,0,0,0))
+      [first, last] = ForumTopic.newest_for_frontpage(2) |> Repo.all
+      assert first.id == topic_1.id
+      assert last.id  == topic_2.id
+    end
+  end
+
   describe "editable_by?/2" do
     test "it returns true if the user is the author of the topic and it is no older than 10 minutes" do
       user  = insert(:user)
