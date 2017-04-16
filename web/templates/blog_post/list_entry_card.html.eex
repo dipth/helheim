@@ -10,6 +10,7 @@
     </div>
     <span class="hidden-md-up"><%= user_badge @user, [] %></span>
     <%= visitor_count_badge @conn, @blog_post %>
+    <%= comment_count_badge @blog_post %>
     <small>
       <i class="fa fa-clock-o"></i>
       <%= time_ago_in_words @blog_post.inserted_at %>
