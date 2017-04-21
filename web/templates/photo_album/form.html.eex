@@ -18,7 +18,6 @@
 
     <div class="form-group <%= if f.errors[:visibility] do 'has-danger' end %>">
       <%= label f, :visibility, gettext("Visibility"), class: "control-label" %>
-      <%#= select f, :visibility, [{gettext("Private"), :private}, {gettext("Friends Only"), :friends}, {gettext("Public"), :public}], class: "form-control" %>
       <%= select f, :visibility, Helheim.Visibility.visibilities_with_human, class: "form-control" %>
       <%= if message = f.errors[:visibility] do %>
         <div class="form-control-feedback"><%= translate_error(message) %></div>

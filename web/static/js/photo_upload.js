@@ -11,7 +11,6 @@ export var PhotoUpload = {
       acceptedFiles: 'image/*',
       success: (file, response) => {
         $.globalEval(response)
-        // photos.append(response)
       }
     }
   }

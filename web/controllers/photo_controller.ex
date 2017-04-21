@@ -15,13 +15,13 @@ defmodule Helheim.PhotoController do
     render(conn, "index.html", photos: photos)
   end
 
-  def create(conn, %{"photo_album_id" => photo_album_id, "file" => file}) do
+  def create(conn, %{"photo_album_id" => photo_album_id, "file" => file, "photo" => photo}) do
     user        = current_resource(conn)
     photo_album = assoc(user, :photo_albums) |> Repo.get!(photo_album_id)
     file_stats  = File.stat! file.path
     changeset   = photo_album
                   |> Ecto.build_assoc(:photos)
-                  |> Photo.changeset(%{file: file, title: file.filename})
+                  |> Photo.changeset(%{file: file, title: file.filename, nsfw: photo["nsfw"]})
                   |> Ecto.Changeset.put_change(:file_size, file_stats.size)
 
     case Repo.insert(changeset) do

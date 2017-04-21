@@ -34,7 +34,16 @@
     <div class="card-block">
       <%= render "space_used.html", conn: @conn, user: @user %>
 
-      <%= form_for @conn, photo_album_photo_path(@conn, :create, @photo_album), [as: :photo, multipart: true, id: "photo-dropzone", class: "dropzone"], fn _ -> %>
+      <%= form_for @conn, photo_album_photo_path(@conn, :create, @photo_album), [as: :photo, multipart: true, id: "photo-dropzone", class: "dropzone"], fn f -> %>
+        <div class="form-group">
+          <span class="text-warning"><i class="fa fa-warning"></i></span>
+          <%= label f, :nsfw, gettext("Please turn on this switch before uploading NSFW photos:"), class: "control-label" %>
+          <%= label f, :nsfw, class: "switch switch-text switch-primary" do %>
+            <%= checkbox f, :nsfw, class: "switch-input" %>
+            <span class="switch-label" data-on="On" data-off="Off"></span>
+            <span class="switch-handle"></span>
+          <% end %>
+        </div>
         <div class="dz-message">
           <%= gettext "Drop photos here (or click) to upload..." %>
         </div>

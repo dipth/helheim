@@ -21,6 +21,15 @@
             <div class="form-control-feedback"><%= translate_error(message) %></div>
           <% end %>
         </div>
+
+        <div class="form-group <%= if f.errors[:nsfw] do 'has-danger' end %>">
+          <%= label f, :nsfw, gettext("NSFW?"), class: "control-label" %><br>
+          <%= label f, :nsfw, class: "switch switch-text switch-primary" do %>
+            <%= checkbox f, :nsfw, class: "switch-input" %>
+            <span class="switch-label" data-on="On" data-off="Off"></span>
+            <span class="switch-handle"></span>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

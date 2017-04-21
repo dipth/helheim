@@ -16,6 +16,7 @@ defmodule Helheim.Photo do
     field      :description,   :string
     field      :file,          PhotoFile.Type
     field      :file_size,     :integer
+    field      :nsfw,          :boolean
     field      :visitor_count, :integer
     field      :comment_count, :integer
 
@@ -28,7 +29,7 @@ defmodule Helheim.Photo do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :description])
+    |> cast(params, [:title, :description, :nsfw])
     |> trim_fields([:title, :description])
     |> put_uuid()
     |> cast_attachments(params, [:file])

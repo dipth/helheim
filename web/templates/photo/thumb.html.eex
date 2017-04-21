@@ -5,7 +5,11 @@
 %>
 <div class="card">
   <%= link to: public_profile_photo_album_photo_path(@conn, :show, user, photo_album, @photo) do %>
-    <%= img_tag(Helheim.PhotoFile.url({@photo.file, @photo}, :thumb), class: "card-img-top img-fluid img-photo") %>
+    <%= if @photo.nsfw do %>
+      <%= img_tag(static_path(@conn, "/images/photo_thumb_nsfw.jpg"), class: "card-img-top img-fluid img-photo") %>
+    <% else %>
+      <%= img_tag(Helheim.PhotoFile.url({@photo.file, @photo}, :thumb), class: "card-img-top img-fluid img-photo") %>
+    <% end %>
   <% end %>
   <div class="card-block">
     <div class="d-flex w-100 justify-content-between">

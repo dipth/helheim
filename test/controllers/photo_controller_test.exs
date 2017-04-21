@@ -52,7 +52,7 @@ defmodule Helheim.PhotoControllerTest do
 
     test "it creates a new photo when posting a valid file and a photo_id belonging to the user", %{conn: conn, user: user} do
       photo_album = insert(:photo_album, user: user)
-      post conn, "/photo_albums/#{photo_album.id}/photos", file: @valid_file
+      post conn, "/photo_albums/#{photo_album.id}/photos", file: @valid_file, photo: %{nsfw: false}
       photo = Repo.one(Photo)
       assert photo.title          == "1.0MB.jpg"
       assert photo.file_size      == 999631
@@ -62,7 +62,7 @@ defmodule Helheim.PhotoControllerTest do
 
     test "it does not create a new photo when posting a non existing photo_id", %{conn: conn} do
       assert_error_sent :not_found, fn ->
-        post conn, "/photo_albums/1/photos", file: @valid_file
+        post conn, "/photo_albums/1/photos", file: @valid_file, photo: %{nsfw: false}
       end
       refute Repo.one(Photo)
     end
@@ -70,7 +70,7 @@ defmodule Helheim.PhotoControllerTest do
     test "it does not create a new photo when posting a photo_id belonging to another user", %{conn: conn} do
       photo_album = insert(:photo_album)
       assert_error_sent :not_found, fn ->
-        post conn, "/photo_albums/#{photo_album.id}/photos", file: @valid_file
+        post conn, "/photo_albums/#{photo_album.id}/photos", file: @valid_file, photo: %{nsfw: false}
       end
       refute Repo.one(Photo)
     end
@@ -78,7 +78,7 @@ defmodule Helheim.PhotoControllerTest do
     test "it does not create a new photo when posting an invalid file", %{conn: conn, user: user} do
       photo_album = insert(:photo_album, user: user)
       assert_error_sent 500, fn ->
-        post conn, "/photo_albums/#{photo_album.id}/photos", file: @invalid_file
+        post conn, "/photo_albums/#{photo_album.id}/photos", file: @invalid_file, photo: %{nsfw: false}
       end
       refute Repo.one(Photo)
     end
@@ -87,7 +87,7 @@ defmodule Helheim.PhotoControllerTest do
   describe "create/2 when not signed in" do
     test "it does not create a new photo and instead redirects to the login page", %{conn: conn} do
       photo_album = insert(:photo_album)
-      post conn, "/photo_albums/#{photo_album.id}/photos", file: @valid_file
+      post conn, "/photo_albums/#{photo_album.id}/photos", file: @valid_file, photo: %{nsfw: false}
       refute Repo.one(Photo)
     end
   end

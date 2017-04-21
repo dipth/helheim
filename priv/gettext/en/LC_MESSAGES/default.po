@@ -398,7 +398,7 @@ msgstr ""
 #: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/admin/term/index.html.eex:35
 #: web/templates/blog_post/show.html.eex:22 web/templates/photo/show.html.eex:39
-#: web/templates/photo_album/show.html.eex:49
+#: web/templates/photo_album/show.html.eex:58
 msgid "Are you sure?"
 msgstr ""
 
@@ -415,7 +415,7 @@ msgid "Blog post updated successfully."
 msgstr ""
 
 #: web/templates/blog_post/show.html.eex:24 web/templates/photo/show.html.eex:41
-#: web/templates/photo_album/show.html.eex:51
+#: web/templates/photo_album/show.html.eex:60
 msgid "Delete"
 msgstr ""
 
@@ -438,15 +438,15 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:33
+#: web/controllers/comment_controller.ex:39
 msgid "Comment created successfully"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:38 web/views/comment_view.ex:12
+#: web/templates/layout/sidebar.html.eex:38 web/views/comment_view.ex:13
 msgid "Guest Book"
 msgstr ""
 
-#: web/views/comment_view.ex:17
+#: web/views/comment_view.ex:18
 msgid "Newest Guest Book Entries"
 msgstr ""
 
@@ -462,7 +462,7 @@ msgstr ""
 msgid "Show All"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:37
+#: web/controllers/comment_controller.ex:43
 msgid "Unable to create comment"
 msgstr ""
 
@@ -550,7 +550,7 @@ msgstr ""
 msgid "Not specified"
 msgstr ""
 
-#: web/templates/photo_album/index.html.eex:39
+#: web/templates/photo_album/index.html.eex:43
 msgid "Create New"
 msgstr ""
 
@@ -562,7 +562,7 @@ msgid "Description"
 msgstr ""
 
 #: web/templates/photo_album/edit.html.eex:3
-#: web/templates/photo_album/show.html.eex:46
+#: web/templates/photo_album/show.html.eex:55
 msgid "Edit Photo Album"
 msgstr ""
 
@@ -585,7 +585,7 @@ msgstr ""
 msgid "Photo album updated successfully."
 msgstr ""
 
-#: web/templates/photo_album/form.html.eex:29
+#: web/templates/photo_album/form.html.eex:28
 msgid "Save Photo Album"
 msgstr ""
 
@@ -595,7 +595,7 @@ msgstr ""
 msgid "Visibility"
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:39
+#: web/templates/photo_album/show.html.eex:48
 msgid "Drop photos here (or click) to upload..."
 msgstr ""
 
@@ -611,15 +611,15 @@ msgstr ""
 msgid "Photo Album deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:78
+#: web/controllers/photo_controller.ex:83
 msgid "Photo deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:63
+#: web/controllers/photo_controller.ex:68
 msgid "Photo details updated successfully."
 msgstr ""
 
-#: web/templates/photo/form.html.eex:28
+#: web/templates/photo/form.html.eex:37
 msgid "Save Photo Details"
 msgstr ""
 
@@ -977,7 +977,7 @@ msgstr ""
 msgid "Blog posts"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:12 web/views/comment_view.ex:19
+#: web/templates/help/embeds.html.eex:12 web/views/comment_view.ex:20
 msgid "Comments"
 msgstr ""
 
@@ -1158,11 +1158,11 @@ msgstr ""
 msgid "%{who} wrote a reply to the forum topic: %{what}"
 msgstr ""
 
-#: web/views/comment_view.ex:18
+#: web/views/comment_view.ex:19
 msgid "Guest Book Entries"
 msgstr ""
 
-#: web/views/notification_helpers.ex:29
+#: web/views/notification_helpers.ex:35
 msgid "Notifications:"
 msgstr ""
 
@@ -1171,3 +1171,11 @@ msgid "You have %{count} unread message"
 msgid_plural "You have %{count} unread messages"
 msgstr[0] ""
 msgstr[1] ""
+
+#: web/templates/photo/form.html.eex:26
+msgid "NSFW?"
+msgstr ""
+
+#: web/templates/photo_album/show.html.eex:40
+msgid "Please turn on this switch before uploading NSFW photos:"
+msgstr ""

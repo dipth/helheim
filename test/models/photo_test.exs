@@ -5,7 +5,7 @@ defmodule Helheim.PhotoTest do
   alias Helheim.Photo
 
   @valid_upload %Plug.Upload{path: "test/files/1.0MB.jpg", filename: "1.0MB.jpg"}
-  @valid_attrs %{title: "Cool Photo", file: @valid_upload}
+  @valid_attrs %{title: "Cool Photo", file: @valid_upload, nsfw: false}
 
   describe "changeset/2" do
     test "it is valid with valid attrs" do
