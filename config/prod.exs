@@ -40,6 +40,10 @@ config :sentry,
     env: "production"
   }
 
+# Configure Scout APM
+config :scout_apm,
+  key: System.get_env("SCOUT_APM_KEY")
+
 # Configure arc & AWS
 config :arc,
   storage: Arc.Storage.S3,

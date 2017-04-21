@@ -38,6 +38,16 @@ config :sentry,
   environment_name: Mix.env,
   included_environments: [:prod]
 
+# Configure Scout APM
+config :scout_apm,
+  name: "Helheim"
+config :phoenix, :template_engines,
+  eex: ScoutApm.Instruments.EExEngine,
+  exs: ScoutApm.Instruments.ExsEngine
+config :helheim, Helheim.Repo,
+  loggers: [{Ecto.LogEntry, :log, []},
+            {ScoutApm.Instruments.EctoLogger, :log, []}]
+
 # Configure mailer
 config :helheim, Helheim.Mailer,
   adapter: Bamboo.PostmarkAdapter,
