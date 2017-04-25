@@ -1,6 +1,5 @@
 defmodule Helheim.BlogPostController do
   use Helheim.Web, :controller
-  import Guardian.Plug, only: [current_resource: 1]
   alias Helheim.BlogPost
   alias Helheim.User
   alias Helheim.Comment
@@ -9,6 +8,7 @@ defmodule Helheim.BlogPostController do
     user = Repo.get!(User, user_id)
     blog_posts =
       assoc(user, :blog_posts)
+      |> BlogPost.published_by_owner(user, current_resource(conn))
       |> BlogPost.newest
       |> preload(:user)
       |> Repo.paginate(page: sanitized_page(params["page"]))
@@ -18,6 +18,7 @@ defmodule Helheim.BlogPostController do
   def index(conn, params) do
     blog_posts =
       BlogPost
+      |> BlogPost.published
       |> BlogPost.newest
       |> preload(:user)
       |> Repo.paginate(page: sanitized_page(params["page"]))
@@ -54,6 +55,7 @@ defmodule Helheim.BlogPostController do
     user = Repo.get!(User, user_id)
     blog_post =
       assoc(user, :blog_posts)
+      |> BlogPost.published_by_owner(user, current_resource(conn))
       |> Repo.get!(id)
       |> Repo.preload(:user)
     comments =

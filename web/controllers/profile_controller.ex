@@ -22,6 +22,7 @@ defmodule Helheim.ProfileController do
 
     newest_blog_posts =
       assoc(user, :blog_posts)
+      |> BlogPost.published
       |> BlogPost.newest
       |> limit(4)
       |> Helheim.Repo.all

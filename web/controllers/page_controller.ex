@@ -28,6 +28,7 @@ defmodule Helheim.PageController do
 
     newest_blog_posts =
       BlogPost
+      |> BlogPost.published
       |> BlogPost.newest
       |> limit(5)
       |> preload(:user)

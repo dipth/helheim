@@ -347,7 +347,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:66
+#: web/controllers/profile_controller.ex:67
 msgid "Profile updated!"
 msgstr ""
 
@@ -382,14 +382,16 @@ msgid "Blog Posts"
 msgstr ""
 
 #: web/templates/blog_post/index.html.eex:10
-#: web/templates/blog_post/new.html.eex:3
+#: web/templates/blog_post/new.html.eex:3 web/templates/blog_post/new.html.eex:8
 msgid "New Blog Post"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:25
+#: web/templates/blog_post/form.html.eex:39
 msgid "Save Blog Post"
 msgstr ""
 
+#: web/templates/blog_post/edit.html.eex:2
+#: web/templates/blog_post/new.html.eex:2
 #: web/templates/layout/sidebar.html.eex:48
 msgid "Your Blog Posts"
 msgstr ""
@@ -397,35 +399,36 @@ msgstr ""
 #: web/templates/admin/forum_category/index.html.eex:13
 #: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/admin/term/index.html.eex:35
-#: web/templates/blog_post/show.html.eex:22 web/templates/photo/show.html.eex:39
+#: web/templates/blog_post/show.html.eex:28 web/templates/photo/show.html.eex:39
 #: web/templates/photo_album/show.html.eex:58
 msgid "Are you sure?"
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:46
+#: web/controllers/blog_post_controller.ex:47
 msgid "Blog post created successfully."
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:96
+#: web/controllers/blog_post_controller.ex:98
 msgid "Blog post deleted successfully."
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:83
+#: web/controllers/blog_post_controller.ex:85
 msgid "Blog post updated successfully."
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:24 web/templates/photo/show.html.eex:41
+#: web/templates/blog_post/show.html.eex:30 web/templates/photo/show.html.eex:41
 #: web/templates/photo_album/show.html.eex:60
 msgid "Delete"
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:20
+#: web/templates/blog_post/show.html.eex:26
 #: web/templates/forum_reply/forum_reply.html.eex:17
 #: web/templates/forum_topic/forum_topic.html.eex:21
 msgid "Edit"
 msgstr ""
 
 #: web/templates/blog_post/edit.html.eex:3
+#: web/templates/blog_post/edit.html.eex:8
 msgid "Edit Blog Post"
 msgstr ""
 
@@ -733,7 +736,7 @@ msgstr ""
 msgid "Go to the last page to reply..."
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:21
+#: web/templates/blog_post/form.html.eex:20
 #: web/templates/forum_topic/show.html.eex:38
 #: web/templates/profile/edit.html.eex:71
 msgid "Hint"
@@ -793,7 +796,7 @@ msgstr ""
 msgid "You cannot create a topic in a locked forum!"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:21
+#: web/templates/blog_post/form.html.eex:20
 #: web/templates/profile/edit.html.eex:71
 msgid "You can insert pictures from your photo albums by copying the image url and pasting it into the source-field when clicking the image button in the editor"
 msgstr ""
@@ -1178,4 +1181,36 @@ msgstr ""
 
 #: web/templates/photo_album/show.html.eex:40
 msgid "Please turn on this switch before uploading NSFW photos:"
+msgstr ""
+
+#: web/templates/blog_post/list_entry_card.html.eex:12
+msgid "Draft"
+msgstr ""
+
+#: web/templates/blog_post/form.html.eex:32
+msgid "No"
+msgstr ""
+
+#: web/templates/blog_post/show.html.eex:11
+msgid "Only you can currently view this blog post. Edit it to publish it."
+msgstr ""
+
+#: web/templates/blog_post/form.html.eex:24
+msgid "Publish?"
+msgstr ""
+
+#: web/templates/blog_post/show.html.eex:10
+msgid "This blog post is not published!"
+msgstr ""
+
+#: web/templates/blog_post/form.html.eex:32
+msgid "Yes"
+msgstr ""
+
+#: web/templates/blog_post/form.html.eex:27
+msgid "You are always free to unpublish a post again, but re-publishing it will not bump the post further up on lists."
+msgstr ""
+
+#: web/templates/blog_post/form.html.eex:26
+msgid "Your blog post will only be visible to yourself as a draft until you publish it, at which point it will receive it's position in lists of posts."
 msgstr ""

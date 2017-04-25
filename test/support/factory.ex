@@ -19,6 +19,8 @@ defmodule Helheim.Factory do
       user: build(:user),
       title: "My Awesome Title",
       body: "My Aweseome Text",
+      published: true,
+      published_at: DateTime.utc_now,
       visitor_count: 0
     }
   end

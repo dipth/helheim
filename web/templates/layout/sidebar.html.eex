@@ -45,7 +45,7 @@
         <% end %>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<%= public_profile_blog_post_path(@conn, :index, Guardian.Plug.current_resource(@conn))%>"><i class="fa fa-file-text"></i> <%= gettext("Your Blog Posts") %></a>
+        <a class="nav-link" href="<%= public_profile_blog_post_path(@conn, :index, Guardian.Plug.current_resource(@conn)) %>"><i class="fa fa-file-text"></i> <%= gettext("Your Blog Posts") %></a>
       </li>
       <li class="nav-item">
         <%= link to: public_profile_photo_album_path(@conn, :index, current_resource(@conn)), class: "nav-link" do %>

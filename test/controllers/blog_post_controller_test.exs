@@ -29,6 +29,18 @@ defmodule Helheim.BlogPostControllerTest do
       assert conn.resp_body =~ blog_post_1.title
       refute conn.resp_body =~ blog_post_2.title
     end
+
+    test "it does not show unpublished blog posts when browsed by another user", %{conn: conn} do
+      blog_post = insert(:blog_post, published: false)
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts"
+      refute conn.resp_body =~ blog_post.title
+    end
+
+    test "it does show unpublished blog posts when browsed by the same user", %{conn: conn, user: user} do
+      blog_post = insert(:blog_post, user: user, published: false)
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts"
+      assert conn.resp_body =~ blog_post.title
+    end
   end
 
   describe "index/2 for a single user when not signed in" do
@@ -55,6 +67,12 @@ defmodule Helheim.BlogPostControllerTest do
       conn = get conn, "/blog_posts"
       assert conn.resp_body =~ blog_post_1.title
       assert conn.resp_body =~ blog_post_2.title
+    end
+
+    test "it does not show unpublished blog posts", %{conn: conn} do
+      blog_post = insert(:blog_post, published: false)
+      conn = get conn, "/blog_posts"
+      refute conn.resp_body =~ blog_post.title
     end
   end
 
@@ -162,6 +180,19 @@ defmodule Helheim.BlogPostControllerTest do
       blog_post = BlogPost |> preload(:user) |> Repo.get(insert(:blog_post).id)
       get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
       assert called Helheim.VisitorLogEntry.track!(user, blog_post)
+    end
+
+    test "redirects to an error page when the blog post is not published or owned by the current user", %{conn: conn, user: user} do
+      blog_post = insert(:blog_post, published: false)
+      assert_error_sent :not_found, fn ->
+        get conn, "/profiles/#{user.id}/blog_posts/#{blog_post.id}"
+      end
+    end
+
+    test "returns a successful response when the blog post is not published but owned by the current user", %{conn: conn, user: user} do
+      blog_post = insert(:blog_post, published: false, user: user)
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
+      assert html_response(conn, 200)
     end
   end
 

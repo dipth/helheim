@@ -5,12 +5,18 @@
 </ol>
 
 <h1 class="display-4 blog-post-title"><%= @blog_post.title %></h1>
+<%= unless @blog_post.published do %>
+  <div class="alert alert-info">
+    <strong><%= gettext "This blog post is not published!" %></strong>
+    <%= gettext "Only you can currently view this blog post. Edit it to publish it." %>
+  </div>
+<% end %>
 <div class="d-flex w-100 justify-content-between">
   <div class="align-self-center">
     <%= visitor_count_badge @conn, @blog_post %>
     <small>
       <i class="fa fa-clock-o"></i>
-      <%= time_ago_in_words @blog_post.inserted_at %>
+      <%= time_ago_in_words (@blog_post.published_at || @blog_post.inserted_at) %>
     </small>
   </div>
   <div>

@@ -1,3 +1,8 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link gettext("Your Blog Posts"), to: public_profile_blog_post_path(@conn, :index, Guardian.Plug.current_resource(@conn)) %></li>
+  <li class="breadcrumb-item active"><%= gettext "New Blog Post" %></li>
+</ol>
+
 <div class="card">
   <div class="card-header">
     <%= gettext "New Blog Post" %>
