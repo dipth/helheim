@@ -1209,7 +1209,7 @@ msgstr "NSFW?"
 
 #: web/templates/photo_album/show.html.eex:40
 msgid "Please turn on this switch before uploading NSFW photos:"
-msgstr "Aktivér venligst denne kontakt inden du uploade NSFW billeder:"
+msgstr "Aktivér venligst denne kontakt inden du uploader NSFW billeder:"
 
 #: web/templates/blog_post/list_entry_card.html.eex:12
 msgid "Draft"
