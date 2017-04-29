@@ -415,7 +415,7 @@ msgstr "Dine Blogs"
 #: web/templates/admin/term/index.html.eex:35
 #: web/templates/blog_post/show.html.eex:28
 #: web/templates/photo/show.html.eex:39
-#: web/templates/photo_album/show.html.eex:58
+#: web/templates/photo_album/show.html.eex:67
 msgid "Are you sure?"
 msgstr "Er du sikker?"
 
@@ -433,7 +433,7 @@ msgstr "Din blog er opdateret!"
 
 #: web/templates/blog_post/show.html.eex:30
 #: web/templates/photo/show.html.eex:41
-#: web/templates/photo_album/show.html.eex:60
+#: web/templates/photo_album/show.html.eex:69
 msgid "Delete"
 msgstr "Slet"
 
@@ -585,7 +585,7 @@ msgid "Description"
 msgstr "Beskrivelse"
 
 #: web/templates/photo_album/edit.html.eex:3
-#: web/templates/photo_album/show.html.eex:55
+#: web/templates/photo_album/show.html.eex:64
 msgid "Edit Photo Album"
 msgstr "Redigér Fotoalbum"
 
@@ -619,7 +619,7 @@ msgstr "Gem Fotoalbum"
 msgid "Visibility"
 msgstr "Synlighed"
 
-#: web/templates/photo_album/show.html.eex:48
+#: web/templates/photo_album/show.html.eex:57
 msgid "Drop photos here (or click) to upload..."
 msgstr "Slip billeder her (eller klik) for at uploade…"
 
@@ -647,7 +647,7 @@ msgstr "Billed-detaljerne blev opdateret!"
 msgid "Save Photo Details"
 msgstr "Gem billed-detaljer"
 
-#: web/templates/photo_album/show.html.eex:32
+#: web/templates/photo_album/show.html.eex:41
 msgid "Upload Photos"
 msgstr "Upload billeder"
 
@@ -1207,7 +1207,7 @@ msgstr[1] "Du har %{count} ulæste beskeder"
 msgid "NSFW?"
 msgstr "NSFW?"
 
-#: web/templates/photo_album/show.html.eex:40
+#: web/templates/photo_album/show.html.eex:49
 msgid "Please turn on this switch before uploading NSFW photos:"
 msgstr "Aktivér venligst denne kontakt inden du uploader NSFW billeder:"
 
@@ -1242,3 +1242,15 @@ msgstr "Du kan altid trække din blog tilbage igen, men hvis du genudgiver den v
 #: web/templates/blog_post/form.html.eex:26
 msgid "Your blog post will only be visible to yourself as a draft until you publish it, at which point it will receive it's position in lists of posts."
 msgstr "Din blog vil kun være synlig for dig selv som et udkast indtil du udgiver den, hvorefter den vil modtage sin position på de forskellige lister."
+
+#: web/templates/photo_album/show.html.eex:28
+msgid "(only in desktop browsers)"
+msgstr "(kun i desktop browsere)"
+
+#: web/templates/photo_album/show.html.eex:26
+msgid "Did you know"
+msgstr "Vidste du"
+
+#: web/templates/photo_album/show.html.eex:27
+msgid "that you can reorder your photos by dragging and dropping them!"
+msgstr "at du kan omarrangere dine billeder ved at trække og slippe dem!"

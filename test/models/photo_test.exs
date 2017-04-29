@@ -34,6 +34,16 @@ defmodule Helheim.PhotoTest do
       assert changeset.changes.uuid
     end
 
+    test "it correctly sets the position in incrementing fashion" do
+      photo_album = insert(:photo_album)
+      {:ok, photo} = new_changeset(@valid_attrs, photo_album) |> Repo.insert
+      assert photo.position == 0
+      {:ok, photo} = new_changeset(@valid_attrs, photo_album) |> Repo.insert
+      assert photo.position == 1
+      {:ok, photo} = new_changeset(@valid_attrs, photo_album) |> Repo.insert
+      assert photo.position == 2
+    end
+
     test "it never overwrites an existing UUID" do
       photo = insert(:photo)
       changeset = Photo.changeset(photo, %{title: "New Title"})
@@ -171,6 +181,24 @@ defmodule Helheim.PhotoTest do
     end
   end
 
+  describe "in_positional_order/1" do
+    test "it orders a photo with a lower position value before a photo with a higher position value" do
+      expected_last  = insert(:photo, position: 1)
+      expected_first = insert(:photo, position: 0)
+      [first, last] = Photo |> Photo.in_positional_order() |> Repo.all
+      assert first.id == expected_first.id
+      assert last.id  == expected_last.id
+    end
+
+    test "it orders a photo with a lower inserted_at value before a photo with a higher inserted_at value" do
+      expected_last  = insert(:photo, position: 0, inserted_at: Timex.shift(Timex.now, minutes: -1))
+      expected_first = insert(:photo, position: 0, inserted_at: Timex.shift(Timex.now, minutes: -2))
+      [first, last] = Photo |> Photo.in_positional_order() |> Repo.all
+      assert first.id == expected_first.id
+      assert last.id  == expected_last.id
+    end
+  end
+
   describe "total_used_space_by/1" do
     test "it returns the sum of the file_size of all photos uploaded by the user" do
       user = insert(:user)
@@ -204,8 +232,7 @@ defmodule Helheim.PhotoTest do
     end
   end
 
-  def new_changeset(attrs \\ %{}) do
-    photo_album = insert(:photo_album)
+  def new_changeset(attrs \\ %{}, photo_album \\ insert(:photo_album)) do
     photo_album |> Ecto.build_assoc(:photos) |> Photo.changeset(attrs)
   end
 end

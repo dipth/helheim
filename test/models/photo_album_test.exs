@@ -93,4 +93,40 @@ defmodule Helheim.PhotoAlbumTest do
       refute Repo.get(PhotoAlbum, photo_album.id)
     end
   end
+
+  describe "reposition_photos!/2" do
+    test "changes the positions of the photos in the specified photo_album and the specified ids to match the index in the array of ids" do
+      photo_album = insert(:photo_album)
+      photo_1 = insert(:photo, photo_album: photo_album, position: 0)
+      photo_2 = insert(:photo, photo_album: photo_album, position: 0)
+      photo_3 = insert(:photo, photo_album: photo_album, position: 0)
+
+      PhotoAlbum.reposition_photos!(photo_album, [photo_2.id, photo_3.id, photo_1.id])
+
+      photo_1 = Repo.get(Photo, photo_1.id)
+      photo_2 = Repo.get(Photo, photo_2.id)
+      photo_3 = Repo.get(Photo, photo_3.id)
+
+      assert photo_1.position == 2
+      assert photo_2.position == 0
+      assert photo_3.position == 1
+    end
+
+    test "does not change the position values of photos from other albums" do
+      photo_album = insert(:photo_album)
+      photo_1 = insert(:photo, photo_album: photo_album, position: 9)
+      photo_2 = insert(:photo, position: 9)
+      PhotoAlbum.reposition_photos!(photo_album, [photo_1.id])
+      photo_2 = Repo.get(Photo, photo_2.id)
+      assert photo_2.position == 9
+    end
+
+    test "ignores ids of photos from other albums" do
+      photo_album = insert(:photo_album)
+      photo = insert(:photo, position: 9)
+      PhotoAlbum.reposition_photos!(photo_album, [photo.id])
+      photo = Repo.get(Photo, photo.id)
+      assert photo.position == 9
+    end
+  end
 end

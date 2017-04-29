@@ -20,7 +20,16 @@
   <%= visitor_count_badge @conn, @photo_album %>
 </blockquote>
 
-<div class="card-group card-group-photos" id="photos">
+<%= if @photo_album.user_id == current_resource(@conn).id do %>
+  <div class="alert alert-info">
+    <i class="fa fa-info-circle"></i>
+    <strong><%= gettext "Did you know" %></strong>
+    <%= gettext "that you can reorder your photos by dragging and dropping them!" %>
+    <small><%= gettext "(only in desktop browsers)" %></small>
+  </div>
+<% end %>
+
+<div class="card-group card-group-photos<%= if @photo_album.user_id == current_resource(@conn).id do " mine" end %>" id="photos" data-reposition-url="<%= photo_album_photo_positions_path(@conn, :update, @photo_album) %>">
   <%= for photo <- @photos do %>
     <%= render Helheim.PhotoView, "thumb.html", conn: @conn, user: @user, photo_album: @photo_album, photo: photo %>
   <% end %>

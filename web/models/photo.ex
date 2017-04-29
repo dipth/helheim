@@ -19,6 +19,7 @@ defmodule Helheim.Photo do
     field      :nsfw,          :boolean
     field      :visitor_count, :integer
     field      :comment_count, :integer
+    field      :position,      :integer
 
     timestamps()
 
@@ -32,6 +33,7 @@ defmodule Helheim.Photo do
     |> cast(params, [:title, :description, :nsfw])
     |> trim_fields([:title, :description])
     |> put_uuid()
+    |> resolve_position()
     |> cast_attachments(params, [:file])
     |> validate_required([:title, :file])
     |> unique_constraint(:uuid)
@@ -89,6 +91,11 @@ defmodule Helheim.Photo do
     order_by: [asc: p.inserted_at]
   end
 
+  def in_positional_order(query) do
+    from p in query,
+    order_by: [p.position, p.inserted_at]
+  end
+
   def total_used_space_by(user) do
     ((from p in Helheim.Photo,
       join:   pa in Helheim.PhotoAlbum, on: pa.id == p.photo_album_id,
@@ -109,5 +116,21 @@ defmodule Helheim.Photo do
       nil -> put_change(changeset, :uuid, SecureRandom.uuid())
       _ ->   changeset
     end
+  end
+
+  defp resolve_position(changeset) do
+    case get_field(changeset, :position) do
+      nil ->
+        photo_album_id = get_field(changeset, :photo_album_id)
+        put_change(changeset, :position, next_position(photo_album_id))
+      _ -> changeset
+    end
+  end
+
+  defp next_position(photo_album_id) do
+    (((from p in Helheim.Photo,
+    where:  p.photo_album_id == ^photo_album_id,
+    select: max(p.position))
+    |> Repo.one) || -1) + 1
   end
 end

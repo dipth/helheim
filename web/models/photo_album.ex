@@ -1,6 +1,7 @@
 defmodule Helheim.PhotoAlbum do
   use Helheim.Web, :model
   alias Helheim.Repo
+  alias Helheim.Photo
 
   schema "photo_albums" do
     field :title,         :string
@@ -31,6 +32,14 @@ defmodule Helheim.PhotoAlbum do
     else
       from pa in query, where: pa.visibility == "public"
     end
+  end
+
+  def reposition_photos!(photo_album, photo_ids) do
+    from(
+      p in Photo,
+      where: p.photo_album_id == ^photo_album.id,
+      update: [set: [position: fragment("array_position(?, id) - 1", ^photo_ids)]]
+    ) |> Repo.update_all([])
   end
 
   def delete!(photo_album) do

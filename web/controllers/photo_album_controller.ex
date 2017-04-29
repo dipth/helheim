@@ -48,7 +48,7 @@ defmodule Helheim.PhotoAlbumController do
       |> Repo.get!(id)
     photos =
       assoc(photo_album, :photos)
-      |> Photo.chronologically
+      |> Photo.in_positional_order
       |> preload(:photo_album)
       |> Repo.all
     Helheim.VisitorLogEntry.track! current_resource(conn), photo_album

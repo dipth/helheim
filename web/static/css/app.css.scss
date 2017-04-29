@@ -90,8 +90,9 @@
 // Animate.css
 @import "../vendor/css/animate.min";
 
-// Dropzone
+// 3rd party depedencies
 @import "../vendor/css/dropzone";
+@import "node_modules/dragula/dist/dragula";
 
 // Custom styles
 @import "custom";

@@ -400,7 +400,7 @@ msgstr ""
 #: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/admin/term/index.html.eex:35
 #: web/templates/blog_post/show.html.eex:28 web/templates/photo/show.html.eex:39
-#: web/templates/photo_album/show.html.eex:58
+#: web/templates/photo_album/show.html.eex:67
 msgid "Are you sure?"
 msgstr ""
 
@@ -417,7 +417,7 @@ msgid "Blog post updated successfully."
 msgstr ""
 
 #: web/templates/blog_post/show.html.eex:30 web/templates/photo/show.html.eex:41
-#: web/templates/photo_album/show.html.eex:60
+#: web/templates/photo_album/show.html.eex:69
 msgid "Delete"
 msgstr ""
 
@@ -565,7 +565,7 @@ msgid "Description"
 msgstr ""
 
 #: web/templates/photo_album/edit.html.eex:3
-#: web/templates/photo_album/show.html.eex:55
+#: web/templates/photo_album/show.html.eex:64
 msgid "Edit Photo Album"
 msgstr ""
 
@@ -598,7 +598,7 @@ msgstr ""
 msgid "Visibility"
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:48
+#: web/templates/photo_album/show.html.eex:57
 msgid "Drop photos here (or click) to upload..."
 msgstr ""
 
@@ -626,7 +626,7 @@ msgstr ""
 msgid "Save Photo Details"
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:32
+#: web/templates/photo_album/show.html.eex:41
 msgid "Upload Photos"
 msgstr ""
 
@@ -1179,7 +1179,7 @@ msgstr[1] ""
 msgid "NSFW?"
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:40
+#: web/templates/photo_album/show.html.eex:49
 msgid "Please turn on this switch before uploading NSFW photos:"
 msgstr ""
 
@@ -1213,4 +1213,16 @@ msgstr ""
 
 #: web/templates/blog_post/form.html.eex:26
 msgid "Your blog post will only be visible to yourself as a draft until you publish it, at which point it will receive it's position in lists of posts."
+msgstr ""
+
+#: web/templates/photo_album/show.html.eex:28
+msgid "(only in desktop browsers)"
+msgstr ""
+
+#: web/templates/photo_album/show.html.eex:26
+msgid "Did you know"
+msgstr ""
+
+#: web/templates/photo_album/show.html.eex:27
+msgid "that you can reorder your photos by dragging and dropping them!"
 msgstr ""
