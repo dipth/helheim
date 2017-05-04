@@ -162,6 +162,13 @@ defmodule Helheim.ForumTopicControllerTest do
       conn  = get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}"
       assert html_response(conn, 200) =~ topic.title
     end
+
+    test "redirects to the last possible page when specifying 'last' as page number", %{conn: conn} do
+      topic = insert(:forum_topic)
+      insert_list(27, :forum_reply, forum_topic: topic)
+      conn = get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}?page=last"
+      assert redirected_to(conn) == "/forums/#{topic.forum.id}/forum_topics/#{topic.id}?page=2"
+    end
   end
 
   describe "show/2 when not signed in" do

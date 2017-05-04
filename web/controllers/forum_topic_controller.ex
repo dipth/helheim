@@ -27,6 +27,13 @@ defmodule Helheim.ForumTopicController do
     end
   end
 
+  def show(conn, %{"forum_id" => _, "id" => _, "page" => "last"}) do
+    forum_replies = assoc(conn.assigns[:forum_topic], :forum_replies)
+                    |> Repo.paginate(page: 1)
+    redirect(conn, to: forum_forum_topic_path(
+      conn, :show, conn.assigns[:forum], conn.assigns[:forum_topic], page: forum_replies.total_pages
+    ))
+  end
   def show(conn, %{"forum_id" => _, "id" => _} = params) do
     forum_replies = assoc(conn.assigns[:forum_topic], :forum_replies)
                     |> ForumReply.in_order
