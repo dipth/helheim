@@ -28,6 +28,7 @@
 <%= lpaginate @conn, @forum_replies %>
 
 <%= unless @forum_replies.page_number < @forum_replies.total_pages do %>
+  <a name="reply"></a>
   <%= render Helheim.ForumReplyView,
              "new.html",
              conn: @conn,

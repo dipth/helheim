@@ -20,7 +20,7 @@ defmodule Helheim.ForumReplyControllerTest do
       expected_topic = ForumTopic |> preload(:user) |> Repo.get!(topic.id)
       conn = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
       assert called ForumReplyService.create!(expected_topic, user, @valid_attrs[:body])
-      assert redirected_to(conn)       == forum_forum_topic_path(conn, :show, topic.forum, topic)
+      assert redirected_to(conn)       =~ forum_forum_topic_path(conn, :show, topic.forum, topic, page: "last")
       assert get_flash(conn, :success) == gettext("Reply created successfully")
     end
 

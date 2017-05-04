@@ -19,7 +19,7 @@ defmodule Helheim.ForumReplyController do
       {:ok, %{forum_reply: _forum_reply}} ->
         conn
         |> put_flash(:success, gettext("Reply created successfully"))
-        |> redirect(to: forum_forum_topic_path(conn, :show, conn.assigns[:forum], conn.assigns[:forum_topic]))
+        |> redirect(to: "#{forum_forum_topic_path(conn, :show, conn.assigns[:forum], conn.assigns[:forum_topic], page: "last")}#reply")
       {:error, _failed_operation, _failed_value, _changes_so_far} ->
         conn
         |> put_flash(:error, gettext("Reply could not be created"))
