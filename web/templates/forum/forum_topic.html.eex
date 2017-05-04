@@ -1,7 +1,7 @@
 <%
   forum = assigns[:forum] || @forum_topic.forum
 %>
-<%= link to: forum_forum_topic_path(@conn, :show, forum, @forum_topic), class: "list-group-item list-group-item-action flex-column align-items-start" do %>
+<%= link to: "#{forum_forum_topic_path(@conn, :show, forum, @forum_topic, page: "last")}#reply", class: "list-group-item list-group-item-action flex-column align-items-start" do %>
   <% forum_reply = List.first(@forum_topic.forum_replies) %>
   <div class="d-flex w-100 justify-content-between">
     <div>
