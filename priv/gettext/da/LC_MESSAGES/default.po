@@ -754,12 +754,12 @@ msgstr "Forum"
 msgid "Forums and Categories"
 msgstr "Forum og kategorier"
 
-#: web/templates/forum_topic/show.html.eex:39
+#: web/templates/forum_topic/show.html.eex:42
 msgid "Go to the last page to reply..."
 msgstr "Hop til den sidste side for at sende et svar"
 
 #: web/templates/blog_post/form.html.eex:20
-#: web/templates/forum_topic/show.html.eex:38
+#: web/templates/forum_topic/show.html.eex:41
 #: web/templates/profile/edit.html.eex:71
 msgid "Hint"
 msgstr "Tip"
@@ -814,7 +814,7 @@ msgstr "Låst?"
 msgid "Only admins can post here"
 msgstr "Låst, undtagen admins"
 
-#: web/controllers/forum_topic_controller.ex:78
+#: web/controllers/forum_topic_controller.ex:85
 msgid "You cannot create a topic in a locked forum!"
 msgstr "Du kan ikke oprette indlæg i et låst forum!"
 
@@ -966,7 +966,7 @@ msgstr "Redigér indlæg"
 msgid "Forum reply updated successfully."
 msgstr "Dit svar blev gemt!"
 
-#: web/controllers/forum_topic_controller.ex:50
+#: web/controllers/forum_topic_controller.ex:57
 msgid "Forum topic updated successfully."
 msgstr "Dit indlæg blev gemt!"
 
@@ -984,7 +984,7 @@ msgstr "Gem ændringer"
 msgid "You can only edit a forum reply in the first 10 minutes!"
 msgstr "Du kan kun redigere dit svar i de første 10 minutter!"
 
-#: web/controllers/forum_topic_controller.ex:89
+#: web/controllers/forum_topic_controller.ex:96
 msgid "You can only edit a forum topic in the first 10 minutes!"
 msgstr "Du kan kun redigere dit indlæg i de første 10 minutter!"
 
@@ -1028,8 +1028,9 @@ msgstr "Forumtråde"
 msgid "Help"
 msgstr "Hjælp"
 
-#: web/templates/help/embeds.html.eex:37 web/templates/help/embeds.html.eex:53
-#: web/templates/help/embeds.html.eex:69 web/templates/help/embeds.html.eex:85
+#: web/templates/help/embeds.html.eex:41 web/templates/help/embeds.html.eex:57
+#: web/templates/help/embeds.html.eex:73 web/templates/help/embeds.html.eex:89
+#: web/templates/help/embeds.html.eex:105
 msgid "How to embed %{type} from %{source}"
 msgstr "Sådan embedder du %{type} fra %{source}"
 
@@ -1049,51 +1050,55 @@ msgstr "Media fra følgende websites kan embeddes ved at bruge de listede kode-t
 msgid "Profile text"
 msgstr "Profiltekst"
 
-#: web/templates/help/embeds.html.eex:69 web/templates/help/embeds.html.eex:85
+#: web/templates/help/embeds.html.eex:73 web/templates/help/embeds.html.eex:89
 msgid "a video"
 msgstr "en video"
 
-#: web/templates/help/embeds.html.eex:37 web/templates/help/embeds.html.eex:53
+#: web/templates/help/embeds.html.eex:41 web/templates/help/embeds.html.eex:57
 msgid "an image"
 msgstr "et billede "
 
-#: web/templates/help/embeds.html.eex:39 web/templates/help/embeds.html.eex:55
-#: web/templates/help/embeds.html.eex:71 web/templates/help/embeds.html.eex:87
+#: web/templates/help/embeds.html.eex:43 web/templates/help/embeds.html.eex:59
+#: web/templates/help/embeds.html.eex:75 web/templates/help/embeds.html.eex:91
+#: web/templates/help/embeds.html.eex:106
 msgid "Find the id of %{type} you want to insert."
 msgstr "Find id’et på %{type} som du gerne vil indsætte."
 
-#: web/templates/help/embeds.html.eex:48 web/templates/help/embeds.html.eex:64
-#: web/templates/help/embeds.html.eex:80 web/templates/help/embeds.html.eex:96
+#: web/templates/help/embeds.html.eex:52 web/templates/help/embeds.html.eex:68
+#: web/templates/help/embeds.html.eex:84 web/templates/help/embeds.html.eex:100
+#: web/templates/help/embeds.html.eex:117
 msgid "Once you have copied the id of %{type}, insert a tag in your post like so:"
 msgstr "Når du har kopieret id’et på %{type}, så indsæt det i din post ved hjælp af dette kode-tag:"
 
-#: web/templates/help/embeds.html.eex:40 web/templates/help/embeds.html.eex:56
-#: web/templates/help/embeds.html.eex:72 web/templates/help/embeds.html.eex:88
+#: web/templates/help/embeds.html.eex:44 web/templates/help/embeds.html.eex:60
+#: web/templates/help/embeds.html.eex:76 web/templates/help/embeds.html.eex:92
 msgid "The id can be found by browsing to %{type} on %{source} and looking at the address bar of the browser."
 msgstr "Id’et kan findes ved at navigere til %{type} på %{source} og kigge i browserens adresselinje."
 
-#: web/templates/help/embeds.html.eex:40 web/templates/help/embeds.html.eex:56
+#: web/templates/help/embeds.html.eex:44 web/templates/help/embeds.html.eex:60
 msgid "the desired image"
 msgstr "det ønskede billede"
 
-#: web/templates/help/embeds.html.eex:72 web/templates/help/embeds.html.eex:88
+#: web/templates/help/embeds.html.eex:76 web/templates/help/embeds.html.eex:92
 msgid "the desired video"
 msgstr "den ønskede video"
 
-#: web/templates/help/embeds.html.eex:39 web/templates/help/embeds.html.eex:48
-#: web/templates/help/embeds.html.eex:50 web/templates/help/embeds.html.eex:55
-#: web/templates/help/embeds.html.eex:64 web/templates/help/embeds.html.eex:66
+#: web/templates/help/embeds.html.eex:43 web/templates/help/embeds.html.eex:52
+#: web/templates/help/embeds.html.eex:54 web/templates/help/embeds.html.eex:59
+#: web/templates/help/embeds.html.eex:68 web/templates/help/embeds.html.eex:70
 msgid "the image"
 msgstr "billedet"
 
-#: web/templates/help/embeds.html.eex:71 web/templates/help/embeds.html.eex:80
-#: web/templates/help/embeds.html.eex:82 web/templates/help/embeds.html.eex:87
-#: web/templates/help/embeds.html.eex:96 web/templates/help/embeds.html.eex:98
+#: web/templates/help/embeds.html.eex:75 web/templates/help/embeds.html.eex:84
+#: web/templates/help/embeds.html.eex:86 web/templates/help/embeds.html.eex:91
+#: web/templates/help/embeds.html.eex:100
+#: web/templates/help/embeds.html.eex:102
 msgid "the video"
 msgstr "videoen"
 
-#: web/templates/help/embeds.html.eex:50 web/templates/help/embeds.html.eex:66
-#: web/templates/help/embeds.html.eex:82 web/templates/help/embeds.html.eex:98
+#: web/templates/help/embeds.html.eex:54 web/templates/help/embeds.html.eex:70
+#: web/templates/help/embeds.html.eex:86 web/templates/help/embeds.html.eex:102
+#: web/templates/help/embeds.html.eex:119
 msgid "where ID is the id of %{type}."
 msgstr "hvor ID er id’et på %{type}."
 
@@ -1254,3 +1259,25 @@ msgstr "Vidste du"
 #: web/templates/photo_album/show.html.eex:27
 msgid "that you can reorder your photos by dragging and dropping them!"
 msgstr "at du kan omarrangere dine billeder ved at trække og slippe dem!"
+
+#: web/templates/help/embeds.html.eex:108
+msgid "For instance, if the generated code is:"
+msgstr "Hvis den genererede kode fx er:"
+
+#: web/templates/help/embeds.html.eex:107
+msgid "The id can be found by browsing to the desired track on Soundcloud.com, clicking the share-button, then selecting 'embed', copying the generated code, pasting that code into a text-document and and finding the number right after the text 'api.soundcloud.com/tracks/'."
+msgstr "Id’et kan findes ved at gå til det ønskede track på Soundcloud.com og klikke på share-knappen, herefter vælge “embed” og kopiere den genererede kode. Indsæt derefter koden i et tekstdokument og find tallet lige efter teksten “api.soundcloud.com/tracks/“."
+
+#: web/templates/help/embeds.html.eex:110
+msgid "Then the track id would be:"
+msgstr "Så ville track id’et være:"
+
+#: web/templates/help/embeds.html.eex:105
+msgid "a track"
+msgstr "et track"
+
+#: web/templates/help/embeds.html.eex:106
+#: web/templates/help/embeds.html.eex:117
+#: web/templates/help/embeds.html.eex:119
+msgid "the track"
+msgstr "tracket"
