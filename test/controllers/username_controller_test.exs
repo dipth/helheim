@@ -1,4 +1,4 @@
-defmodule Helheim.ProfileControllerTest do
+defmodule Helheim.UsernameControllerTest do
   use Helheim.ConnCase
 
   ##############################################################################
