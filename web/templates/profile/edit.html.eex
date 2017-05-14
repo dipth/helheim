@@ -18,7 +18,10 @@
               <%= if message = f.errors[:avatar] do %>
                 <div class="form-control-feedback"><%= translate_error(message) %></div>
               <% else %>
-                <small><%= gettext "Maximum file size: %{file_size}", file_size: Helheim.Avatar.max_file_size |> Crutches.Format.Number.as_human_size %></small>
+                <small>
+                  <%= gettext "Maximum file size: %{file_size}", file_size: Helheim.Avatar.max_file_size |> Crutches.Format.Number.as_human_size %><br>
+                  <%= gettext "Submit your changes to upload the image" %>
+                </small>
               <% end %>
             </div>
 

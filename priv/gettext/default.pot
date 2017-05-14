@@ -327,7 +327,7 @@ msgstr ""
 msgid "does not match your current password"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:21
+#: web/templates/profile/edit.html.eex:22
 msgid "Maximum file size: %{file_size}"
 msgstr ""
 
@@ -343,7 +343,7 @@ msgstr ""
 msgid "Profile Settings"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:77
+#: web/templates/profile/edit.html.eex:80
 msgid "Profile Text"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgstr ""
 msgid "Profile updated!"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:94
+#: web/templates/profile/edit.html.eex:97
 msgid "Update Profile"
 msgstr ""
 
@@ -521,19 +521,19 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:26
+#: web/templates/profile/edit.html.eex:29
 msgid "Basic Details"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:35 web/templates/profile/edit.html.eex:57
+#: web/templates/profile/edit.html.eex:38 web/templates/profile/edit.html.eex:60
 msgid "Custom"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:33
+#: web/templates/profile/edit.html.eex:36
 msgid "Female"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:29 web/templates/profile/show.html.eex:20
+#: web/templates/profile/edit.html.eex:32 web/templates/profile/show.html.eex:20
 msgid "Gender"
 msgstr ""
 
@@ -541,15 +541,15 @@ msgstr ""
 msgid "Joined"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:43 web/templates/profile/show.html.eex:44
+#: web/templates/profile/edit.html.eex:46 web/templates/profile/show.html.eex:44
 msgid "Location"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:33
+#: web/templates/profile/edit.html.eex:36
 msgid "Male"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:33 web/templates/profile/edit.html.eex:53
+#: web/templates/profile/edit.html.eex:36 web/templates/profile/edit.html.eex:56
 msgid "Not specified"
 msgstr ""
 
@@ -657,7 +657,7 @@ msgstr ""
 #: web/templates/blog_post/form.html.eex:12
 #: web/templates/forum_reply/form.html.eex:4
 #: web/templates/forum_topic/form.html.eex:12
-#: web/templates/profile/edit.html.eex:80
+#: web/templates/profile/edit.html.eex:83
 msgid "Content"
 msgstr ""
 
@@ -738,7 +738,7 @@ msgstr ""
 
 #: web/templates/blog_post/form.html.eex:20
 #: web/templates/forum_topic/show.html.eex:41
-#: web/templates/profile/edit.html.eex:88
+#: web/templates/profile/edit.html.eex:91
 msgid "Hint"
 msgstr ""
 
@@ -797,7 +797,7 @@ msgid "You cannot create a topic in a locked forum!"
 msgstr ""
 
 #: web/templates/blog_post/form.html.eex:20
-#: web/templates/profile/edit.html.eex:88
+#: web/templates/profile/edit.html.eex:91
 msgid "You can insert pictures from your photo albums by copying the image url and pasting it into the source-field when clicking the image button in the editor"
 msgstr ""
 
@@ -1085,7 +1085,7 @@ msgstr ""
 msgid "August"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:65
+#: web/templates/profile/edit.html.eex:68
 msgid "Birthday"
 msgstr ""
 
@@ -1129,7 +1129,7 @@ msgstr ""
 msgid "September"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:73
+#: web/templates/profile/edit.html.eex:76
 msgid "We never show your birthday directly to other users, only your age, although some users might be able to guess it by observing your age increasing..."
 msgstr ""
 
@@ -1256,26 +1256,30 @@ msgstr ""
 msgid "Only letters, numbers, dots, hyphens and underscores are allowed"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:53
+#: web/templates/profile/edit.html.eex:56
 msgid "In a relationship"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:54
+#: web/templates/profile/edit.html.eex:57
 msgid "In an open relationship"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:53
+#: web/templates/profile/edit.html.eex:56
 msgid "Married"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:48 web/templates/profile/show.html.eex:36
+#: web/templates/profile/edit.html.eex:51 web/templates/profile/show.html.eex:36
 msgid "Partnership status"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:53
+#: web/templates/profile/edit.html.eex:56
 msgid "Single"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:54
+#: web/templates/profile/edit.html.eex:57
 msgid "None of your business"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:23
+msgid "Submit your changes to upload the image"
 msgstr ""

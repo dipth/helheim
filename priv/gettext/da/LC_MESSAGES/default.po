@@ -339,7 +339,7 @@ msgstr "Opdatér Konto"
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
-#: web/templates/profile/edit.html.eex:21
+#: web/templates/profile/edit.html.eex:22
 msgid "Maximum file size: %{file_size}"
 msgstr "Maksimum fil størrelse: %{file_size}"
 
@@ -356,7 +356,7 @@ msgstr "Profilbillede"
 msgid "Profile Settings"
 msgstr "Profil Indstillinger"
 
-#: web/templates/profile/edit.html.eex:77
+#: web/templates/profile/edit.html.eex:80
 msgid "Profile Text"
 msgstr "Profiltekst"
 
@@ -364,7 +364,7 @@ msgstr "Profiltekst"
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
-#: web/templates/profile/edit.html.eex:94
+#: web/templates/profile/edit.html.eex:97
 msgid "Update Profile"
 msgstr "Opdatér Profil"
 
@@ -538,20 +538,20 @@ msgstr "Privat samtale med %{username}"
 msgid "Admin"
 msgstr "Admin"
 
-#: web/templates/profile/edit.html.eex:26
+#: web/templates/profile/edit.html.eex:29
 msgid "Basic Details"
 msgstr "Basis detaljer"
 
-#: web/templates/profile/edit.html.eex:35
-#: web/templates/profile/edit.html.eex:57
+#: web/templates/profile/edit.html.eex:38
+#: web/templates/profile/edit.html.eex:60
 msgid "Custom"
 msgstr "Brugerdefineret"
 
-#: web/templates/profile/edit.html.eex:33
+#: web/templates/profile/edit.html.eex:36
 msgid "Female"
 msgstr "Kvinde"
 
-#: web/templates/profile/edit.html.eex:29
+#: web/templates/profile/edit.html.eex:32
 #: web/templates/profile/show.html.eex:20
 msgid "Gender"
 msgstr "Køn"
@@ -560,17 +560,17 @@ msgstr "Køn"
 msgid "Joined"
 msgstr "Tilmeldt"
 
-#: web/templates/profile/edit.html.eex:43
+#: web/templates/profile/edit.html.eex:46
 #: web/templates/profile/show.html.eex:44
 msgid "Location"
 msgstr "Lokation"
 
-#: web/templates/profile/edit.html.eex:33
+#: web/templates/profile/edit.html.eex:36
 msgid "Male"
 msgstr "Mand"
 
-#: web/templates/profile/edit.html.eex:33
-#: web/templates/profile/edit.html.eex:53
+#: web/templates/profile/edit.html.eex:36
+#: web/templates/profile/edit.html.eex:56
 msgid "Not specified"
 msgstr "Ikke udspecificeret"
 
@@ -680,7 +680,7 @@ msgstr "Administration"
 #: web/templates/blog_post/form.html.eex:12
 #: web/templates/forum_reply/form.html.eex:4
 #: web/templates/forum_topic/form.html.eex:12
-#: web/templates/profile/edit.html.eex:80
+#: web/templates/profile/edit.html.eex:83
 msgid "Content"
 msgstr "Indhold"
 
@@ -762,7 +762,7 @@ msgstr "Hop til den sidste side for at sende et svar"
 
 #: web/templates/blog_post/form.html.eex:20
 #: web/templates/forum_topic/show.html.eex:41
-#: web/templates/profile/edit.html.eex:88
+#: web/templates/profile/edit.html.eex:91
 msgid "Hint"
 msgstr "Tip"
 
@@ -821,7 +821,7 @@ msgid "You cannot create a topic in a locked forum!"
 msgstr "Du kan ikke oprette indlæg i et låst forum!"
 
 #: web/templates/blog_post/form.html.eex:20
-#: web/templates/profile/edit.html.eex:88
+#: web/templates/profile/edit.html.eex:91
 msgid "You can insert pictures from your photo albums by copying the image url and pasting it into the source-field when clicking the image button in the editor"
 msgstr "Du kan indsætte billeder fra dine fotoalbums ved at kopiere billedets url og indsætte det i “source”-feltet når du klikker på billed-knappen i editoren"
 
@@ -1116,7 +1116,7 @@ msgstr "April"
 msgid "August"
 msgstr "August"
 
-#: web/templates/profile/edit.html.eex:65
+#: web/templates/profile/edit.html.eex:68
 msgid "Birthday"
 msgstr "Fødselsdato"
 
@@ -1160,7 +1160,7 @@ msgstr "Oktober"
 msgid "September"
 msgstr "September"
 
-#: web/templates/profile/edit.html.eex:73
+#: web/templates/profile/edit.html.eex:76
 msgid "We never show your birthday directly to other users, only your age, although some users might be able to guess it by observing your age increasing..."
 msgstr "Vi viser aldrig din fødselsdato til andre brugere, kun din alder. Det er dog muligt at andre vil kunne gætte din fødselsdato ved at observere hvornår din alder skifter…"
 
@@ -1288,27 +1288,31 @@ msgstr "tracket"
 msgid "Only letters, numbers, dots, hyphens and underscores are allowed"
 msgstr "Må kun indeholde bogstaver, tal, punktum, bindestreg og underscore"
 
-#: web/templates/profile/edit.html.eex:53
+#: web/templates/profile/edit.html.eex:56
 msgid "In a relationship"
 msgstr "I et fast forhold"
 
-#: web/templates/profile/edit.html.eex:54
+#: web/templates/profile/edit.html.eex:57
 msgid "In an open relationship"
 msgstr "I et åbent forhold"
 
-#: web/templates/profile/edit.html.eex:53
+#: web/templates/profile/edit.html.eex:56
 msgid "Married"
 msgstr "Gift"
 
-#: web/templates/profile/edit.html.eex:48
+#: web/templates/profile/edit.html.eex:51
 #: web/templates/profile/show.html.eex:36
 msgid "Partnership status"
 msgstr "Partnerskabsstatus"
 
-#: web/templates/profile/edit.html.eex:53
+#: web/templates/profile/edit.html.eex:56
 msgid "Single"
 msgstr "Single"
 
-#: web/templates/profile/edit.html.eex:54
+#: web/templates/profile/edit.html.eex:57
 msgid "None of your business"
 msgstr "Hvad rager det dig"
+
+#: web/templates/profile/edit.html.eex:23
+msgid "Submit your changes to upload the image"
+msgstr "Gem dine ændringer for at uploade billedet"
