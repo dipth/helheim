@@ -9,7 +9,7 @@
       </small>
     </div>
   </div>
-  <div class="embeds">
+  <div class="embeds mentionable">
     <%= text_to_html @comment.body %>
   </div>
   <hr>

@@ -51,7 +51,7 @@
     </div>
   </div>
 
-  <div class="col-lg-8 embeds">
+  <div class="col-lg-8 embeds mentionable">
     <%= raw @user.profile_text %>
   </div>
 </div>

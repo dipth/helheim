@@ -2,7 +2,7 @@
   <div class="card-block">
     <div class="form-group <%= if f.errors[:body] do 'has-danger' end %>">
       <%= label f, :body, gettext("Content"), class: "control-label" %>
-      <%= textarea f, :body, class: "form-control", rows: 10 %>
+      <%= textarea f, :body, class: "form-control mentionable-input", rows: 10 %>
       <%= if message = f.errors[:body] do %>
         <div class="form-control-feedback"><%= translate_error(message) %></div>
       <% end %>

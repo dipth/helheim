@@ -10,7 +10,7 @@
         <strong><%= time_ago_in_words @message.inserted_at %></strong>
       </div>
     </div>
-    <div class="message-body">
+    <div class="message-body mentionable">
       <%= text_to_html @message.body %>
     </div>
   </div>

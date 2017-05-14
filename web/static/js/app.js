@@ -30,6 +30,8 @@ import { AdminTermsForm } from "web/static/js/admin_terms_form";
 import { Embeds } from "web/static/js/embeds/embeds";
 import { NotificationsSwitch } from "web/static/js/notifications_switch";
 import { PhotoSorter } from "web/static/js/photo_sorter";
+import { MentionableInput } from "web/static/js/mentionable"
+import { Mentionable } from "web/static/js/mentionable"
 
 export var App = {
   run: function(){
@@ -45,6 +47,8 @@ export var App = {
     AdminTermsForm.run();
     NotificationsSwitch.run();
     PhotoSorter.run();
+    MentionableInput.run();
+    Mentionable.run();
   }
 }
 

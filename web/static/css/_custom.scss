@@ -229,3 +229,22 @@ code {
     white-space: normal;
   }
 }
+
+.atwho-view {
+  background-color: $gray-dark;
+  color: $body-color;
+  border-color: $gray-lighter;
+  box-shadow: none;
+
+  ul li {
+    border-color: $gray-lighter;
+  }
+
+  .cur {
+    background-color: $brand-primary;
+  }
+
+  strong {
+    color: $brand-primary;
+  }
+}

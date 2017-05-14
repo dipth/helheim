@@ -14,7 +14,7 @@
     </span>
   </div>
 </div>
-<div class="embeds">
+<div class="embeds mentionable">
   <%= text_to_html @forum_topic.body %>
 </div>
 <%= if ForumTopic.editable_by?(@forum_topic, current_resource(@conn)) do %>

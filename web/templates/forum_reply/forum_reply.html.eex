@@ -10,7 +10,7 @@
     </small>
   </div>
 </div>
-<div class="embeds">
+<div class="embeds mentionable">
   <%= text_to_html @forum_reply.body %>
 </div>
 <%= if ForumReply.editable_by?(@forum_reply, current_resource(@conn)) do %>
