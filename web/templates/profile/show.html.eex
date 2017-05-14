@@ -31,6 +31,14 @@
             </span>
           </div>
         <% end %>
+        <%= if @user.partnership_status do %>
+          <div>
+            <strong><%= gettext "Partnership status" %>:</strong>
+            <span class="float-right mentionable">
+              <%= @user.partnership_status %>
+            </span>
+          </div>
+        <% end %>
         <%= if @user.location do %>
           <div>
             <strong><%= gettext "Location" %>:</strong>

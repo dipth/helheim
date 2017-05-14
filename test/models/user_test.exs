@@ -80,6 +80,36 @@ defmodule Helheim.UserTest do
       assert user.gender == nil
     end
 
+    test "it allows changing the partnership_status", %{user: user} do
+      user = User.profile_changeset(user, %{partnership_status: "Foo"})
+             |> Repo.update!
+      assert user.partnership_status == "Foo"
+    end
+
+    test "it trims the partnership_status value", %{user: user} do
+      user = User.profile_changeset(user, %{partnership_status: "   Foo   "})
+             |> Repo.update!
+      assert user.partnership_status == "Foo"
+    end
+
+    test "it allows a custom value for partnership_status", %{user: user} do
+      user = User.profile_changeset(user, %{partnership_status: "%%CUSTOM%%", partnership_status_custom: "Bar"})
+             |> Repo.update!
+      assert user.partnership_status == "Bar"
+    end
+
+    test "it trims the custom value for partnership_status", %{user: user} do
+      user = User.profile_changeset(user, %{partnership_status: "%%CUSTOM%%", partnership_status_custom: "   Bar   "})
+             |> Repo.update!
+      assert user.partnership_status == "Bar"
+    end
+
+    test "it clears the partnership_status if trying to set a custom value without providing a custom value", %{user: user} do
+      user = User.profile_changeset(user, %{partnership_status: "%%CUSTOM%%"})
+             |> Repo.update!
+      assert user.partnership_status == nil
+    end
+
     test "it allows changing the location", %{user: user} do
       user = User.profile_changeset(user, %{location: "Foo"})
              |> Repo.update!

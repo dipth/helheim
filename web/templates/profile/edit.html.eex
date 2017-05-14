@@ -45,6 +45,23 @@
               </div>
 
               <div class="form-group">
+                <%= label f, :partnership_status, gettext("Partnership status") %>
+                <%=
+                  select f,
+                         :partnership_status,
+                         [
+                           {gettext("Not specified"), ""}, gettext("Single"), gettext("In a relationship"), gettext("Married"),
+                           gettext("In an open relationship"), gettext("None of your business")
+                         ],
+                         class: "form-control",
+                         "data-custom-label": gettext("Custom"),
+                         "data-custom-input": "#user_partnership_status_custom",
+                         "data-custom-value": @changeset.data.partnership_status || ""
+                %>
+                <%= text_input f, :partnership_status_custom, class: "form-control mentionable-input" %>
+              </div>
+
+              <div class="form-group">
                 <%= label f, :birthday, gettext("Birthday") %><br>
                 <%= date_select f, :birthday, builder: fn b -> %>
                   <%= b.(:day, prompt: "", class: "custom-select") %> /

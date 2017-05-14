@@ -323,7 +323,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:178
+#: web/models/user.ex:180
 msgid "does not match your current password"
 msgstr ""
 
@@ -343,7 +343,7 @@ msgstr ""
 msgid "Profile Settings"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:60
+#: web/templates/profile/edit.html.eex:77
 msgid "Profile Text"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgstr ""
 msgid "Profile updated!"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:77
+#: web/templates/profile/edit.html.eex:94
 msgid "Update Profile"
 msgstr ""
 
@@ -360,12 +360,12 @@ msgid "Remember me"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:4
-#: web/templates/profile/show.html.eex:62
+#: web/templates/profile/show.html.eex:70
 msgid "Newest Blogs"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:13
-#: web/templates/profile/show.html.eex:73
+#: web/templates/profile/show.html.eex:81
 msgid "Newest Forum Posts"
 msgstr ""
 
@@ -461,7 +461,7 @@ msgstr ""
 #: web/templates/page/front_page.html.eex:8
 #: web/templates/page/front_page.html.eex:37
 #: web/templates/page/front_page.html.eex:50
-#: web/templates/profile/show.html.eex:67 web/templates/profile/show.html.eex:91
+#: web/templates/profile/show.html.eex:75 web/templates/profile/show.html.eex:99
 msgid "Show All"
 msgstr ""
 
@@ -481,7 +481,7 @@ msgstr ""
 msgid "Send Message"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:46
+#: web/templates/profile/show.html.eex:54
 msgid "Send private message"
 msgstr ""
 
@@ -525,7 +525,7 @@ msgstr ""
 msgid "Basic Details"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:35
+#: web/templates/profile/edit.html.eex:35 web/templates/profile/edit.html.eex:57
 msgid "Custom"
 msgstr ""
 
@@ -541,7 +541,7 @@ msgstr ""
 msgid "Joined"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:43 web/templates/profile/show.html.eex:36
+#: web/templates/profile/edit.html.eex:43 web/templates/profile/show.html.eex:44
 msgid "Location"
 msgstr ""
 
@@ -549,7 +549,7 @@ msgstr ""
 msgid "Male"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:33
+#: web/templates/profile/edit.html.eex:33 web/templates/profile/edit.html.eex:53
 msgid "Not specified"
 msgstr ""
 
@@ -606,7 +606,7 @@ msgstr ""
 msgid "Edit Photo Details"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:85
+#: web/templates/profile/show.html.eex:93
 msgid "Newest Public Photos"
 msgstr ""
 
@@ -657,7 +657,7 @@ msgstr ""
 #: web/templates/blog_post/form.html.eex:12
 #: web/templates/forum_reply/form.html.eex:4
 #: web/templates/forum_topic/form.html.eex:12
-#: web/templates/profile/edit.html.eex:63
+#: web/templates/profile/edit.html.eex:80
 msgid "Content"
 msgstr ""
 
@@ -738,7 +738,7 @@ msgstr ""
 
 #: web/templates/blog_post/form.html.eex:20
 #: web/templates/forum_topic/show.html.eex:41
-#: web/templates/profile/edit.html.eex:71
+#: web/templates/profile/edit.html.eex:88
 msgid "Hint"
 msgstr ""
 
@@ -797,7 +797,7 @@ msgid "You cannot create a topic in a locked forum!"
 msgstr ""
 
 #: web/templates/blog_post/form.html.eex:20
-#: web/templates/profile/edit.html.eex:71
+#: web/templates/profile/edit.html.eex:88
 msgid "You can insert pictures from your photo albums by copying the image url and pasting it into the source-field when clicking the image button in the editor"
 msgstr ""
 
@@ -1085,7 +1085,7 @@ msgstr ""
 msgid "August"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:48
+#: web/templates/profile/edit.html.eex:65
 msgid "Birthday"
 msgstr ""
 
@@ -1129,7 +1129,7 @@ msgstr ""
 msgid "September"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:56
+#: web/templates/profile/edit.html.eex:73
 msgid "We never show your birthday directly to other users, only your age, although some users might be able to guess it by observing your age increasing..."
 msgstr ""
 
@@ -1254,4 +1254,28 @@ msgstr ""
 
 #: web/templates/registration/new.html.eex:14
 msgid "Only letters, numbers, dots, hyphens and underscores are allowed"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:53
+msgid "In a relationship"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:54
+msgid "In an open relationship"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:53
+msgid "Married"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:48 web/templates/profile/show.html.eex:36
+msgid "Partnership status"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:53
+msgid "Single"
+msgstr ""
+
+#: web/templates/profile/edit.html.eex:54
+msgid "None of your business"
 msgstr ""

@@ -23,6 +23,8 @@ defmodule Helheim.User do
     field :gender,                          :string
     field :gender_custom,                   :string, virtual: true
     field :location,                        :string
+    field :partnership_status,              :string
+    field :partnership_status_custom,       :string, virtual: true
     field :birthday,                        :date
     field :visitor_count,                   :integer
     field :comment_count,                   :integer
@@ -98,9 +100,9 @@ defmodule Helheim.User do
 
   def profile_changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:gender, :gender_custom, :location, :profile_text, :birthday])
-    |> allow_custom_value_for_fields([{:gender, :gender_custom}])
-    |> trim_fields([:gender, :location])
+    |> cast(params, [:gender, :gender_custom, :location, :partnership_status, :partnership_status_custom, :profile_text, :birthday])
+    |> allow_custom_value_for_fields([{:gender, :gender_custom}, {:partnership_status, :partnership_status_custom}])
+    |> trim_fields([:gender, :location, :partnership_status])
     |> cast_attachments(params, [:avatar])
     |> scrub_profile_text()
   end
