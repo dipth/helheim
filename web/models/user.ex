@@ -57,6 +57,7 @@ defmodule Helheim.User do
     |> trim_fields([:name, :email, :username])
     |> validate_required([:name, :email, :username])
     |> validate_format(:email, ~r/@/)
+    |> validate_format(:username, ~r/\A[\w\-\.\x{00C0}-\x{017F}]+\z/u)
     |> unique_constraint(:email)
     |> unique_constraint(:username)
   end

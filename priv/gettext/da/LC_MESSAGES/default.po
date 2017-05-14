@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -44,14 +44,14 @@ msgstr "Helheim"
 msgid "Click here if you did not get your confirmation e-mail"
 msgstr "Klik her hvis du ikke har modtaget din aktiveringsmail"
 
-#: web/templates/registration/new.html.eex:78
+#: web/templates/registration/new.html.eex:80
 msgid "Create Account"
 msgstr "Opret Profil"
 
 #: web/templates/account/edit.html.eex:24
 #: web/templates/confirmation/new.html.eex:10
 #: web/templates/password_reset/new.html.eex:10
-#: web/templates/registration/new.html.eex:35
+#: web/templates/registration/new.html.eex:37
 #: web/templates/session/new.html.eex:9
 msgid "E-mail"
 msgstr "E-mail"
@@ -65,7 +65,7 @@ msgid "If for some reason you did not receive your confirmation e-mail, then ent
 msgstr "Hvis du ikke har modtaget din aktiveringsmail, kan du indtaste din e-mail adresse herunder, så sender vi den igen."
 
 #: web/templates/account/edit.html.eex:14
-#: web/templates/registration/new.html.eex:21
+#: web/templates/registration/new.html.eex:23
 msgid "Name"
 msgstr "Navn"
 
@@ -74,7 +74,7 @@ msgid "New Registration"
 msgstr "Opret Profil"
 
 #: web/templates/account/edit.html.eex:41
-#: web/templates/registration/new.html.eex:49
+#: web/templates/registration/new.html.eex:51
 #: web/templates/session/new.html.eex:21
 msgid "Password"
 msgstr "Kodeord"
@@ -102,7 +102,7 @@ msgid "Welcome to %{site_name}"
 msgstr "Velkommen til %{site_name}"
 
 #: web/templates/account/edit.html.eex:19
-#: web/templates/registration/new.html.eex:26
+#: web/templates/registration/new.html.eex:28
 msgid "Will only be shown to administrators"
 msgstr "Vil kun blive vist til administratorer"
 
@@ -261,12 +261,12 @@ msgstr "Forside"
 
 #: web/templates/account/edit.html.eex:46
 #: web/templates/password_reset/show.html.eex:17
-#: web/templates/registration/new.html.eex:54
+#: web/templates/registration/new.html.eex:56
 msgid "Must be at least 6 characters long"
 msgstr "Skal være minimum 6 tegn langt"
 
 #: web/templates/account/edit.html.eex:29
-#: web/templates/registration/new.html.eex:40
+#: web/templates/registration/new.html.eex:42
 msgid "Will never be shown to other users. Only used for login, notifications and password recovery"
 msgstr "Vil aldrig blive vist til andre brugere. Bruges udelukkende til login, notifikationer og nulstilling af kodeord"
 
@@ -276,13 +276,13 @@ msgstr "Du skal først bekræfte din e-mail adresse før du kan logge ind"
 
 #: web/templates/account/edit.html.eex:51
 #: web/templates/password_reset/show.html.eex:26
-#: web/templates/registration/new.html.eex:63
+#: web/templates/registration/new.html.eex:65
 msgid "Confirm Password"
 msgstr "Bekræft Kodeord"
 
 #: web/templates/account/edit.html.eex:56
 #: web/templates/password_reset/show.html.eex:31
-#: web/templates/registration/new.html.eex:68
+#: web/templates/registration/new.html.eex:70
 msgid "To ensure that you didn't make any typos"
 msgstr "For at sikre dig imod tastefejl"
 
@@ -335,7 +335,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:177
+#: web/models/user.ex:178
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -878,7 +878,7 @@ msgstr "Følgende data vil ikke blive slettet, men vil blive anonymiseret:"
 msgid "Your profile along with text, details and avatar"
 msgstr "Din profil inklusive tekst, detaljer og profilbillede"
 
-#: web/templates/registration/new.html.eex:74
+#: web/templates/registration/new.html.eex:76
 msgid "By signing up you agree to the "
 msgstr "Når du tilmelder dig accepterer du samtidig"
 
@@ -950,7 +950,7 @@ msgstr "Det lader ikke til at der nogle betingelser skrevet ned endnu…"
 msgid "Updated at"
 msgstr "Opdateret"
 
-#: web/templates/registration/new.html.eex:75
+#: web/templates/registration/new.html.eex:77
 msgid "terms and rules"
 msgstr "betingelser og regler"
 
@@ -1028,9 +1028,9 @@ msgstr "Forumtråde"
 msgid "Help"
 msgstr "Hjælp"
 
-#: web/templates/help/embeds.html.eex:41 web/templates/help/embeds.html.eex:57
-#: web/templates/help/embeds.html.eex:73 web/templates/help/embeds.html.eex:89
-#: web/templates/help/embeds.html.eex:105
+#: web/templates/help/embeds.html.eex:42 web/templates/help/embeds.html.eex:59
+#: web/templates/help/embeds.html.eex:76 web/templates/help/embeds.html.eex:93
+#: web/templates/help/embeds.html.eex:110
 msgid "How to embed %{type} from %{source}"
 msgstr "Sådan embedder du %{type} fra %{source}"
 
@@ -1050,55 +1050,55 @@ msgstr "Media fra følgende websites kan embeddes ved at bruge de listede kode-t
 msgid "Profile text"
 msgstr "Profiltekst"
 
-#: web/templates/help/embeds.html.eex:73 web/templates/help/embeds.html.eex:89
+#: web/templates/help/embeds.html.eex:76 web/templates/help/embeds.html.eex:93
 msgid "a video"
 msgstr "en video"
 
-#: web/templates/help/embeds.html.eex:41 web/templates/help/embeds.html.eex:57
+#: web/templates/help/embeds.html.eex:42 web/templates/help/embeds.html.eex:59
 msgid "an image"
 msgstr "et billede "
 
-#: web/templates/help/embeds.html.eex:43 web/templates/help/embeds.html.eex:59
-#: web/templates/help/embeds.html.eex:75 web/templates/help/embeds.html.eex:91
-#: web/templates/help/embeds.html.eex:106
+#: web/templates/help/embeds.html.eex:44 web/templates/help/embeds.html.eex:61
+#: web/templates/help/embeds.html.eex:78 web/templates/help/embeds.html.eex:95
+#: web/templates/help/embeds.html.eex:111
 msgid "Find the id of %{type} you want to insert."
 msgstr "Find id’et på %{type} som du gerne vil indsætte."
 
-#: web/templates/help/embeds.html.eex:52 web/templates/help/embeds.html.eex:68
-#: web/templates/help/embeds.html.eex:84 web/templates/help/embeds.html.eex:100
-#: web/templates/help/embeds.html.eex:117
+#: web/templates/help/embeds.html.eex:53 web/templates/help/embeds.html.eex:70
+#: web/templates/help/embeds.html.eex:87 web/templates/help/embeds.html.eex:104
+#: web/templates/help/embeds.html.eex:122
 msgid "Once you have copied the id of %{type}, insert a tag in your post like so:"
 msgstr "Når du har kopieret id’et på %{type}, så indsæt det i din post ved hjælp af dette kode-tag:"
 
-#: web/templates/help/embeds.html.eex:44 web/templates/help/embeds.html.eex:60
-#: web/templates/help/embeds.html.eex:76 web/templates/help/embeds.html.eex:92
+#: web/templates/help/embeds.html.eex:45 web/templates/help/embeds.html.eex:62
+#: web/templates/help/embeds.html.eex:79 web/templates/help/embeds.html.eex:96
 msgid "The id can be found by browsing to %{type} on %{source} and looking at the address bar of the browser."
 msgstr "Id’et kan findes ved at navigere til %{type} på %{source} og kigge i browserens adresselinje."
 
-#: web/templates/help/embeds.html.eex:44 web/templates/help/embeds.html.eex:60
+#: web/templates/help/embeds.html.eex:45 web/templates/help/embeds.html.eex:62
 msgid "the desired image"
 msgstr "det ønskede billede"
 
-#: web/templates/help/embeds.html.eex:76 web/templates/help/embeds.html.eex:92
+#: web/templates/help/embeds.html.eex:79 web/templates/help/embeds.html.eex:96
 msgid "the desired video"
 msgstr "den ønskede video"
 
-#: web/templates/help/embeds.html.eex:43 web/templates/help/embeds.html.eex:52
-#: web/templates/help/embeds.html.eex:54 web/templates/help/embeds.html.eex:59
-#: web/templates/help/embeds.html.eex:68 web/templates/help/embeds.html.eex:70
+#: web/templates/help/embeds.html.eex:44 web/templates/help/embeds.html.eex:53
+#: web/templates/help/embeds.html.eex:55 web/templates/help/embeds.html.eex:61
+#: web/templates/help/embeds.html.eex:70 web/templates/help/embeds.html.eex:72
 msgid "the image"
 msgstr "billedet"
 
-#: web/templates/help/embeds.html.eex:75 web/templates/help/embeds.html.eex:84
-#: web/templates/help/embeds.html.eex:86 web/templates/help/embeds.html.eex:91
-#: web/templates/help/embeds.html.eex:100
-#: web/templates/help/embeds.html.eex:102
+#: web/templates/help/embeds.html.eex:78 web/templates/help/embeds.html.eex:87
+#: web/templates/help/embeds.html.eex:89 web/templates/help/embeds.html.eex:95
+#: web/templates/help/embeds.html.eex:104
+#: web/templates/help/embeds.html.eex:106
 msgid "the video"
 msgstr "videoen"
 
-#: web/templates/help/embeds.html.eex:54 web/templates/help/embeds.html.eex:70
-#: web/templates/help/embeds.html.eex:86 web/templates/help/embeds.html.eex:102
-#: web/templates/help/embeds.html.eex:119
+#: web/templates/help/embeds.html.eex:55 web/templates/help/embeds.html.eex:72
+#: web/templates/help/embeds.html.eex:89 web/templates/help/embeds.html.eex:106
+#: web/templates/help/embeds.html.eex:124
 msgid "where ID is the id of %{type}."
 msgstr "hvor ID er id’et på %{type}."
 
@@ -1260,24 +1260,28 @@ msgstr "Vidste du"
 msgid "that you can reorder your photos by dragging and dropping them!"
 msgstr "at du kan omarrangere dine billeder ved at trække og slippe dem!"
 
-#: web/templates/help/embeds.html.eex:108
+#: web/templates/help/embeds.html.eex:113
 msgid "For instance, if the generated code is:"
 msgstr "Hvis den genererede kode fx er:"
 
-#: web/templates/help/embeds.html.eex:107
+#: web/templates/help/embeds.html.eex:112
 msgid "The id can be found by browsing to the desired track on Soundcloud.com, clicking the share-button, then selecting 'embed', copying the generated code, pasting that code into a text-document and and finding the number right after the text 'api.soundcloud.com/tracks/'."
 msgstr "Id’et kan findes ved at gå til det ønskede track på Soundcloud.com og klikke på share-knappen, herefter vælge “embed” og kopiere den genererede kode. Indsæt derefter koden i et tekstdokument og find tallet lige efter teksten “api.soundcloud.com/tracks/“."
 
-#: web/templates/help/embeds.html.eex:110
+#: web/templates/help/embeds.html.eex:115
 msgid "Then the track id would be:"
 msgstr "Så ville track id’et være:"
 
-#: web/templates/help/embeds.html.eex:105
+#: web/templates/help/embeds.html.eex:110
 msgid "a track"
 msgstr "et track"
 
-#: web/templates/help/embeds.html.eex:106
-#: web/templates/help/embeds.html.eex:117
-#: web/templates/help/embeds.html.eex:119
+#: web/templates/help/embeds.html.eex:111
+#: web/templates/help/embeds.html.eex:122
+#: web/templates/help/embeds.html.eex:124
 msgid "the track"
 msgstr "tracket"
+
+#: web/templates/registration/new.html.eex:14
+msgid "Only letters, numbers, dots, hyphens and underscores are allowed"
+msgstr "Må kun indeholde bogstaver, tal, punktum, bindestreg og underscore"

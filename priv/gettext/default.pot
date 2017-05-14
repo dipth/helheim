@@ -33,14 +33,14 @@ msgstr ""
 msgid "Click here if you did not get your confirmation e-mail"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:78
+#: web/templates/registration/new.html.eex:80
 msgid "Create Account"
 msgstr ""
 
 #: web/templates/account/edit.html.eex:24
 #: web/templates/confirmation/new.html.eex:10
 #: web/templates/password_reset/new.html.eex:10
-#: web/templates/registration/new.html.eex:35
+#: web/templates/registration/new.html.eex:37
 #: web/templates/session/new.html.eex:9
 msgid "E-mail"
 msgstr ""
@@ -54,7 +54,7 @@ msgid "If for some reason you did not receive your confirmation e-mail, then ent
 msgstr ""
 
 #: web/templates/account/edit.html.eex:14
-#: web/templates/registration/new.html.eex:21
+#: web/templates/registration/new.html.eex:23
 msgid "Name"
 msgstr ""
 
@@ -63,7 +63,7 @@ msgid "New Registration"
 msgstr ""
 
 #: web/templates/account/edit.html.eex:41
-#: web/templates/registration/new.html.eex:49
+#: web/templates/registration/new.html.eex:51
 #: web/templates/session/new.html.eex:21
 msgid "Password"
 msgstr ""
@@ -91,7 +91,7 @@ msgid "Welcome to %{site_name}"
 msgstr ""
 
 #: web/templates/account/edit.html.eex:19
-#: web/templates/registration/new.html.eex:26
+#: web/templates/registration/new.html.eex:28
 msgid "Will only be shown to administrators"
 msgstr ""
 
@@ -250,12 +250,12 @@ msgstr ""
 
 #: web/templates/account/edit.html.eex:46
 #: web/templates/password_reset/show.html.eex:17
-#: web/templates/registration/new.html.eex:54
+#: web/templates/registration/new.html.eex:56
 msgid "Must be at least 6 characters long"
 msgstr ""
 
 #: web/templates/account/edit.html.eex:29
-#: web/templates/registration/new.html.eex:40
+#: web/templates/registration/new.html.eex:42
 msgid "Will never be shown to other users. Only used for login, notifications and password recovery"
 msgstr ""
 
@@ -265,13 +265,13 @@ msgstr ""
 
 #: web/templates/account/edit.html.eex:51
 #: web/templates/password_reset/show.html.eex:26
-#: web/templates/registration/new.html.eex:63
+#: web/templates/registration/new.html.eex:65
 msgid "Confirm Password"
 msgstr ""
 
 #: web/templates/account/edit.html.eex:56
 #: web/templates/password_reset/show.html.eex:31
-#: web/templates/registration/new.html.eex:68
+#: web/templates/registration/new.html.eex:70
 msgid "To ensure that you didn't make any typos"
 msgstr ""
 
@@ -323,7 +323,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:177
+#: web/models/user.ex:178
 msgid "does not match your current password"
 msgstr ""
 
@@ -856,7 +856,7 @@ msgstr ""
 msgid "Your profile along with text, details and avatar"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:74
+#: web/templates/registration/new.html.eex:76
 msgid "By signing up you agree to the "
 msgstr ""
 
@@ -927,7 +927,7 @@ msgstr ""
 msgid "Updated at"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:75
+#: web/templates/registration/new.html.eex:77
 msgid "terms and rules"
 msgstr ""
 
@@ -1000,9 +1000,9 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:41 web/templates/help/embeds.html.eex:57
-#: web/templates/help/embeds.html.eex:73 web/templates/help/embeds.html.eex:89
-#: web/templates/help/embeds.html.eex:105
+#: web/templates/help/embeds.html.eex:42 web/templates/help/embeds.html.eex:59
+#: web/templates/help/embeds.html.eex:76 web/templates/help/embeds.html.eex:93
+#: web/templates/help/embeds.html.eex:110
 msgid "How to embed %{type} from %{source}"
 msgstr ""
 
@@ -1022,54 +1022,54 @@ msgstr ""
 msgid "Profile text"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:73 web/templates/help/embeds.html.eex:89
+#: web/templates/help/embeds.html.eex:76 web/templates/help/embeds.html.eex:93
 msgid "a video"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:41 web/templates/help/embeds.html.eex:57
+#: web/templates/help/embeds.html.eex:42 web/templates/help/embeds.html.eex:59
 msgid "an image"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:43 web/templates/help/embeds.html.eex:59
-#: web/templates/help/embeds.html.eex:75 web/templates/help/embeds.html.eex:91
-#: web/templates/help/embeds.html.eex:106
+#: web/templates/help/embeds.html.eex:44 web/templates/help/embeds.html.eex:61
+#: web/templates/help/embeds.html.eex:78 web/templates/help/embeds.html.eex:95
+#: web/templates/help/embeds.html.eex:111
 msgid "Find the id of %{type} you want to insert."
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:52 web/templates/help/embeds.html.eex:68
-#: web/templates/help/embeds.html.eex:84 web/templates/help/embeds.html.eex:100
-#: web/templates/help/embeds.html.eex:117
+#: web/templates/help/embeds.html.eex:53 web/templates/help/embeds.html.eex:70
+#: web/templates/help/embeds.html.eex:87 web/templates/help/embeds.html.eex:104
+#: web/templates/help/embeds.html.eex:122
 msgid "Once you have copied the id of %{type}, insert a tag in your post like so:"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:44 web/templates/help/embeds.html.eex:60
-#: web/templates/help/embeds.html.eex:76 web/templates/help/embeds.html.eex:92
+#: web/templates/help/embeds.html.eex:45 web/templates/help/embeds.html.eex:62
+#: web/templates/help/embeds.html.eex:79 web/templates/help/embeds.html.eex:96
 msgid "The id can be found by browsing to %{type} on %{source} and looking at the address bar of the browser."
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:44 web/templates/help/embeds.html.eex:60
+#: web/templates/help/embeds.html.eex:45 web/templates/help/embeds.html.eex:62
 msgid "the desired image"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:76 web/templates/help/embeds.html.eex:92
+#: web/templates/help/embeds.html.eex:79 web/templates/help/embeds.html.eex:96
 msgid "the desired video"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:43 web/templates/help/embeds.html.eex:52
-#: web/templates/help/embeds.html.eex:54 web/templates/help/embeds.html.eex:59
-#: web/templates/help/embeds.html.eex:68 web/templates/help/embeds.html.eex:70
+#: web/templates/help/embeds.html.eex:44 web/templates/help/embeds.html.eex:53
+#: web/templates/help/embeds.html.eex:55 web/templates/help/embeds.html.eex:61
+#: web/templates/help/embeds.html.eex:70 web/templates/help/embeds.html.eex:72
 msgid "the image"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:75 web/templates/help/embeds.html.eex:84
-#: web/templates/help/embeds.html.eex:86 web/templates/help/embeds.html.eex:91
-#: web/templates/help/embeds.html.eex:100 web/templates/help/embeds.html.eex:102
+#: web/templates/help/embeds.html.eex:78 web/templates/help/embeds.html.eex:87
+#: web/templates/help/embeds.html.eex:89 web/templates/help/embeds.html.eex:95
+#: web/templates/help/embeds.html.eex:104 web/templates/help/embeds.html.eex:106
 msgid "the video"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:54 web/templates/help/embeds.html.eex:70
-#: web/templates/help/embeds.html.eex:86 web/templates/help/embeds.html.eex:102
-#: web/templates/help/embeds.html.eex:119
+#: web/templates/help/embeds.html.eex:55 web/templates/help/embeds.html.eex:72
+#: web/templates/help/embeds.html.eex:89 web/templates/help/embeds.html.eex:106
+#: web/templates/help/embeds.html.eex:124
 msgid "where ID is the id of %{type}."
 msgstr ""
 
@@ -1231,23 +1231,27 @@ msgstr ""
 msgid "that you can reorder your photos by dragging and dropping them!"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:108
+#: web/templates/help/embeds.html.eex:113
 msgid "For instance, if the generated code is:"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:107
+#: web/templates/help/embeds.html.eex:112
 msgid "The id can be found by browsing to the desired track on Soundcloud.com, clicking the share-button, then selecting 'embed', copying the generated code, pasting that code into a text-document and and finding the number right after the text 'api.soundcloud.com/tracks/'."
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:110
+#: web/templates/help/embeds.html.eex:115
 msgid "Then the track id would be:"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:105
+#: web/templates/help/embeds.html.eex:110
 msgid "a track"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:106 web/templates/help/embeds.html.eex:117
-#: web/templates/help/embeds.html.eex:119
+#: web/templates/help/embeds.html.eex:111 web/templates/help/embeds.html.eex:122
+#: web/templates/help/embeds.html.eex:124
 msgid "the track"
+msgstr ""
+
+#: web/templates/registration/new.html.eex:14
+msgid "Only letters, numbers, dots, hyphens and underscores are allowed"
 msgstr ""

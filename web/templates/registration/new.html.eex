@@ -10,6 +10,8 @@
           </div>
           <%= if message = f.errors[:username] do %>
             <div class="form-control-feedback"><%= translate_error(message) %></div>
+          <% else %>
+            <small class="pl-3"><%= gettext "Only letters, numbers, dots, hyphens and underscores are allowed" %></small>
           <% end %>
         </div>
       </div>
