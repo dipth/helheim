@@ -93,7 +93,7 @@ defmodule Helheim.Router do
     end
     resources "/notifications", NotificationController, only: [:show]
     resources "/navbar", NavbarController, singleton: true, only: [:show]
-    resources "/usernames", UsernameController, only: [:show]
+    resources "/usernames", UsernameController, only: [:index, :show]
   end
 
   scope "/admin", Helheim.Admin, as: :admin do

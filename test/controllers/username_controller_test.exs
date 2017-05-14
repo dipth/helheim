@@ -2,6 +2,25 @@ defmodule Helheim.UsernameControllerTest do
   use Helheim.ConnCase
 
   ##############################################################################
+  # index/2
+  describe "index/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "returns a successful response containing all usernames", %{conn: conn, user: user1} do
+      user2 = insert(:user, username: "zzz")
+      conn = get conn, "/usernames"
+      assert json_response(conn, 200) == [user1.username, user2.username]
+    end
+  end
+
+  describe "index/2 when not signed in" do
+    test "it redirects to the login page", %{conn: conn} do
+      conn = get conn, "/usernames"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
   # show/2
   describe "show/2 when signed in" do
     setup [:create_and_sign_in_user]
