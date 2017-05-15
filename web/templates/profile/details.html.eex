@@ -1,0 +1,36 @@
+<table class="table table-sm">
+  <tbody>
+    <tr>
+      <th><%= gettext "Joined" %>:</th>
+      <td><%= time_ago_in_words @user.inserted_at %></td>
+    </tr>
+
+    <%= if @user.gender do %>
+      <tr>
+        <th><%= gettext "Gender" %>:</th>
+        <td><%= @user.gender %></td>
+      </tr>
+    <% end %>
+
+    <%= if @user.birthday do %>
+      <tr>
+        <th><%= gettext "Age" %>:</th>
+        <td><%= User.age @user %></td>
+      </tr>
+    <% end %>
+
+    <%= if @user.partnership_status do %>
+      <tr>
+        <th><%= gettext "Partner status" %>:</th>
+        <td class="mentionable"><%= @user.partnership_status %></td>
+      </tr>
+    <% end %>
+
+    <%= if @user.location do %>
+      <tr>
+        <th><%= gettext "Location" %>:</th>
+        <td><%= @user.location %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

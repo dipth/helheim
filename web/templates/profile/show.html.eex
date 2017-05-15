@@ -1,5 +1,5 @@
 <div class="row mt-1">
-  <div class="col-lg-4">
+  <div class="col-xl-5 col-lg-6">
     <div class="card">
       <div class="card-block">
         <img
@@ -9,44 +9,9 @@
         >
         <h1><%= @user.username %></h1>
         <p class="mb-1"><%= visitor_count_badge @conn, @user %></p>
-        <div>
-          <strong><%= gettext "Joined" %>:</strong>
-          <span class="float-right">
-            <%= time_ago_in_words @user.inserted_at %>
-          </span>
-        </div>
-        <%= if @user.gender do %>
-          <div>
-            <strong><%= gettext "Gender" %>:</strong>
-            <span class="float-right">
-              <%= @user.gender %>
-            </span>
-          </div>
-        <% end %>
-        <%= if @user.birthday do %>
-          <div>
-            <strong><%= gettext "Age" %>:</strong>
-            <span class="float-right">
-              <%= User.age @user %>
-            </span>
-          </div>
-        <% end %>
-        <%= if @user.partnership_status do %>
-          <div>
-            <strong><%= gettext "Partnership status" %>:</strong>
-            <span class="float-right mentionable">
-              <%= @user.partnership_status %>
-            </span>
-          </div>
-        <% end %>
-        <%= if @user.location do %>
-          <div>
-            <strong><%= gettext "Location" %>:</strong>
-            <span class="float-right">
-              <%= @user.location %>
-            </span>
-          </div>
-        <% end %>
+
+        <%= render "details.html", conn: @conn, user: @user %>
+
         <%= if @user.id != Guardian.Plug.current_resource(@conn).id do %>
           <p class="mb-0 mt-1">
             <%= link to: private_conversation_path(@conn, :show, @user.id), class: "btn btn-primary btn-block" do %>
@@ -59,7 +24,7 @@
     </div>
   </div>
 
-  <div class="col-lg-8 embeds mentionable">
+  <div class="col-xl-7 col-lg-6 embeds mentionable">
     <%= raw @user.profile_text %>
   </div>
 </div>

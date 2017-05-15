@@ -48,7 +48,7 @@
               </div>
 
               <div class="form-group">
-                <%= label f, :partnership_status, gettext("Partnership status") %>
+                <%= label f, :partnership_status, gettext("Partner status") %>
                 <%=
                   select f,
                          :partnership_status,

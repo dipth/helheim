@@ -373,12 +373,12 @@ msgid "Remember me"
 msgstr "Husk mig i 30 dage"
 
 #: web/templates/page/front_page.html.eex:4
-#: web/templates/profile/show.html.eex:70
+#: web/templates/profile/show.html.eex:35
 msgid "Newest Blogs"
 msgstr "Nyeste Blogs"
 
 #: web/templates/page/front_page.html.eex:13
-#: web/templates/profile/show.html.eex:81
+#: web/templates/profile/show.html.eex:46
 msgid "Newest Forum Posts"
 msgstr "Nyeste Forumindlæg"
 
@@ -477,8 +477,8 @@ msgstr "Tilføj Kommentar"
 #: web/templates/page/front_page.html.eex:8
 #: web/templates/page/front_page.html.eex:37
 #: web/templates/page/front_page.html.eex:50
-#: web/templates/profile/show.html.eex:75
-#: web/templates/profile/show.html.eex:99
+#: web/templates/profile/show.html.eex:40
+#: web/templates/profile/show.html.eex:64
 msgid "Show All"
 msgstr "Vis alle"
 
@@ -498,7 +498,7 @@ msgstr "Din besked blev sendt!"
 msgid "Send Message"
 msgstr "Send Besked"
 
-#: web/templates/profile/show.html.eex:54
+#: web/templates/profile/show.html.eex:19
 msgid "Send private message"
 msgstr "Send privat besked"
 
@@ -551,17 +551,17 @@ msgstr "Brugerdefineret"
 msgid "Female"
 msgstr "Kvinde"
 
+#: web/templates/profile/details.html.eex:10
 #: web/templates/profile/edit.html.eex:32
-#: web/templates/profile/show.html.eex:20
 msgid "Gender"
 msgstr "Køn"
 
-#: web/templates/profile/show.html.eex:13
+#: web/templates/profile/details.html.eex:4
 msgid "Joined"
 msgstr "Tilmeldt"
 
+#: web/templates/profile/details.html.eex:31
 #: web/templates/profile/edit.html.eex:46
-#: web/templates/profile/show.html.eex:44
 msgid "Location"
 msgstr "Lokation"
 
@@ -629,7 +629,7 @@ msgstr "Slip billeder her (eller klik) for at uploade…"
 msgid "Edit Photo Details"
 msgstr "Redigér billed-detaljer"
 
-#: web/templates/profile/show.html.eex:93
+#: web/templates/profile/show.html.eex:58
 msgid "Newest Public Photos"
 msgstr "Nyeste offentlige billeder"
 
@@ -1104,7 +1104,7 @@ msgstr "videoen"
 msgid "where ID is the id of %{type}."
 msgstr "hvor ID er id’et på %{type}."
 
-#: web/templates/profile/show.html.eex:28
+#: web/templates/profile/details.html.eex:17
 msgid "Age"
 msgstr "Alder"
 
@@ -1300,11 +1300,6 @@ msgstr "I et åbent forhold"
 msgid "Married"
 msgstr "Gift"
 
-#: web/templates/profile/edit.html.eex:51
-#: web/templates/profile/show.html.eex:36
-msgid "Partnership status"
-msgstr "Partnerskabsstatus"
-
 #: web/templates/profile/edit.html.eex:56
 msgid "Single"
 msgstr "Single"
@@ -1316,3 +1311,8 @@ msgstr "Hvad rager det dig"
 #: web/templates/profile/edit.html.eex:23
 msgid "Submit your changes to upload the image"
 msgstr "Gem dine ændringer for at uploade billedet"
+
+#: web/templates/profile/details.html.eex:24
+#: web/templates/profile/edit.html.eex:51
+msgid "Partner status"
+msgstr "Partnerstatus"
