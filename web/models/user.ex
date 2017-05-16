@@ -26,6 +26,8 @@ defmodule Helheim.User do
     field :partnership_status,              :string
     field :partnership_status_custom,       :string, virtual: true
     field :birthday,                        :date
+    field :banned_until,                    Calecto.DateTimeUTC
+    field :ban_reason,                      :string
     field :visitor_count,                   :integer
     field :comment_count,                   :integer
 
@@ -150,6 +152,11 @@ defmodule Helheim.User do
     else
       now.year - birthday.year
     end
+  end
+
+  def banned?(%{banned_until: nil}), do: false
+  def banned?(user) do
+    Timex.after?(user.banned_until, Timex.now)
   end
 
   defp put_password_hash(changeset) do

@@ -323,7 +323,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:180
+#: web/models/user.ex:187
 msgid "does not match your current password"
 msgstr ""
 
@@ -1285,4 +1285,16 @@ msgstr ""
 #: web/templates/profile/details.html.eex:24
 #: web/templates/profile/edit.html.eex:51
 msgid "Partner status"
+msgstr ""
+
+#: web/templates/page/banned.html.eex:4
+msgid "The reason for your ban:"
+msgstr ""
+
+#: web/templates/page/banned.html.eex:3
+msgid "You have been banned!"
+msgstr ""
+
+#: web/templates/page/banned.html.eex:8
+msgid "Your ban will expire"
 msgstr ""

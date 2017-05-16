@@ -335,7 +335,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:180
+#: web/models/user.ex:187
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -1316,3 +1316,15 @@ msgstr "Gem dine ændringer for at uploade billedet"
 #: web/templates/profile/edit.html.eex:51
 msgid "Partner status"
 msgstr "Partnerstatus"
+
+#: web/templates/page/banned.html.eex:4
+msgid "The reason for your ban:"
+msgstr "Grunden til at du er blevet bandlyst:"
+
+#: web/templates/page/banned.html.eex:3
+msgid "You have been banned!"
+msgstr "Du er blevet bandlyst!"
+
+#: web/templates/page/banned.html.eex:8
+msgid "Your ban will expire"
+msgstr "Din bandlysning udløber"

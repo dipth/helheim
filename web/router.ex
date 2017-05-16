@@ -22,6 +22,7 @@ defmodule Helheim.Router do
     plug Guardian.Plug.LoadResource
     plug Helheim.Plug.LoadNotifications
     plug Helheim.Plug.LoadUnreadPrivateConversations
+    plug Helheim.Plug.EnforceBan
   end
 
   pipeline :browser_admin_auth do
@@ -48,6 +49,7 @@ defmodule Helheim.Router do
   scope "/", Helheim do
     pipe_through [:browser, :browser_auth]
 
+    get "/banned", PageController, :banned
     get "/help/embeds", HelpController, :embeds
     get "/signed_in", PageController, :signed_in
     get "/front_page", PageController, :front_page

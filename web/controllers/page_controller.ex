@@ -52,6 +52,10 @@ defmodule Helheim.PageController do
     render(conn, "terms.html", term: term, layout: {Helheim.LayoutView, "app_special.html"})
   end
 
+  def banned(conn, _params) do
+    render(conn, "banned.html", layout: {Helheim.LayoutView, "app_special.html"})
+  end
+
   def debug(conn, _params) do
     user = Repo.one(from x in User, order_by: [desc: x.id], limit: 1)
     render conn, "debug.html", user: user, layout: {Helheim.LayoutView, "app_special.html"}

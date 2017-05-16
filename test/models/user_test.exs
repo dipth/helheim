@@ -247,4 +247,21 @@ defmodule Helheim.UserTest do
       assert Repo.get(Helheim.ForumReply, forum_reply.id).user_id == nil
     end
   end
+
+  describe "banned?/1" do
+    test "returns false for a user with a blank banned_until value" do
+      user = insert(:user, banned_until: nil)
+      refute User.banned?(user)
+    end
+
+    test "returns false for a user with a banned_until value in the past" do
+      user = insert(:user, banned_until: Timex.shift(Timex.now, minutes: -1))
+      refute User.banned?(user)
+    end
+
+    test "returns true for a user with a banned_until value in the future" do
+      user = insert(:user, banned_until: Timex.shift(Timex.now, minutes: 1))
+      assert User.banned?(user)
+    end
+  end
 end

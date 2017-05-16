@@ -1,0 +1,12 @@
+<div class="text-center mb-2">
+  <hr>
+  <h1><%= gettext "You have been banned!" %></h1>
+  <p><strong><%= gettext "The reason for your ban:" %></strong></p>
+  <%= text_to_html(current_resource(@conn).ban_reason || "") %>
+  <p>
+    <strong>
+      <%= gettext "Your ban will expire" %>
+      <%= time_ago_in_words current_resource(@conn).banned_until %>
+    </strong>
+  </p>
+</div>
