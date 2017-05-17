@@ -82,6 +82,13 @@ defmodule Helheim.PrivateConversationControllerTest do
       get conn, "/private_conversations/#{user_b.id}"
       assert called PrivateMessage.mark_as_read!(conversation_id, user_a)
     end
+
+    test "it does not show the message form when the partner is blocking the current user", %{conn: conn, user: user} do
+      block = insert(:block, blockee: user)
+      conn = get conn, "/private_conversations/#{block.blocker.id}"
+      assert html_response(conn, 200)
+      refute conn.resp_body =~ gettext("Write new message:")
+    end
   end
 
   describe "show/2 when not signed in" do

@@ -62,6 +62,12 @@ defmodule Helheim.PhotoAlbumControllerTest do
       refute conn.resp_body =~ photo_album_2.title
       refute conn.resp_body =~ photo_album_3.title
     end
+
+    test "it redirects to a block page when the specified profile is blocking the current user", %{conn: conn, user: user} do
+      block = insert(:block, blockee: user)
+      conn  = get conn, "/profiles/#{block.blocker.id}/photo_albums"
+      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
+    end
   end
 
   describe "index/2 when not signed in" do
@@ -201,6 +207,13 @@ defmodule Helheim.PhotoAlbumControllerTest do
       photo_album = insert(:photo_album)
       get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"
       assert called Helheim.VisitorLogEntry.track!(user, Repo.get(PhotoAlbum, photo_album.id))
+    end
+
+    test "it redirects to a block page when the specified profile is blocking the current user", %{conn: conn, user: user} do
+      block = insert(:block, blockee: user)
+      photo_album = insert(:photo_album, user: block.blocker)
+      conn  = get conn, "/profiles/#{block.blocker.id}/photo_albums/#{photo_album.id}"
+      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
     end
   end
 

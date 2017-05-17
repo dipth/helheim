@@ -128,4 +128,12 @@ defmodule Helheim.Factory do
       user: build(:user)
     }
   end
+
+  def block_factory do
+    %Helheim.Block{
+      blocker: build(:user),
+      blockee: build(:user),
+      enabled: true
+    }
+  end
 end

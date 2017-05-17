@@ -1,0 +1,38 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item active"><%= gettext("Blocks") %></li>
+</ol>
+
+<div class="card card-dark">
+  <div class="card-block">
+    <h4 class="card-title"><%= gettext "These are the users that you have blocked" %>:</h4>
+    <p class="mb-2">
+      <i class="fa fa-info-circle"></i>
+      <%= gettext "The user will be unable to see your profile, blog posts, photos or send you messages while blocked" %>
+    </p>
+    <table class="table">
+      <tbody>
+        <%= for block <- @blocks.entries do %>
+          <tr>
+            <td>
+              <strong>
+                <%= link block.blockee.username, to: public_profile_path(@conn, :show, block.blockee) %><br>
+              </strong>
+              <small>
+                <%= gettext "Blocked since:" %>
+                <%= lt(block.updated_at, "%d. %b %Y kl. %H:%M") %>
+              </small>
+            </td>
+            <td class="text-right">
+              <%= link to: public_profile_block_path(@conn, :create, block.blockee), class: "rest", "data-method": "DELETE" do %>
+                <i class="fa fa-unlock" title="<%= gettext "Unblock user" %>"></i>
+                <span class="hidden-xs-down"><%= gettext "Unblock user" %></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= lpaginate @conn, @blocks %>

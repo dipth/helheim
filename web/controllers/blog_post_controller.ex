@@ -4,8 +4,11 @@ defmodule Helheim.BlogPostController do
   alias Helheim.User
   alias Helheim.Comment
 
-  def index(conn, params = %{"profile_id" => user_id}) do
-    user = Repo.get!(User, user_id)
+  plug :find_user when action in [:index, :show]
+  plug Helheim.Plug.EnforceBlock when action in [:index, :show]
+
+  def index(conn, params = %{"profile_id" => _}) do
+    user = conn.assigns[:user]
     blog_posts =
       assoc(user, :blog_posts)
       |> BlogPost.published_by_owner(user, current_resource(conn))
@@ -51,8 +54,8 @@ defmodule Helheim.BlogPostController do
     end
   end
 
-  def show(conn, params = %{"profile_id" => user_id, "id" => id}) do
-    user = Repo.get!(User, user_id)
+  def show(conn, params = %{"profile_id" => _, "id" => id}) do
+    user = conn.assigns[:user]
     blog_post =
       assoc(user, :blog_posts)
       |> BlogPost.published_by_owner(user, current_resource(conn))
@@ -98,4 +101,14 @@ defmodule Helheim.BlogPostController do
     |> put_flash(:success, gettext("Blog post deleted successfully."))
     |> redirect(to: public_profile_blog_post_path(conn, :index, user))
   end
+
+  defp find_user(conn, _) do
+    assign_user(conn, conn.params)
+  end
+
+  defp assign_user(conn, %{"profile_id" => profile_id}) do
+    conn
+    |> assign(:user, Repo.get!(User, profile_id))
+  end
+  defp assign_user(conn, _), do: conn
 end

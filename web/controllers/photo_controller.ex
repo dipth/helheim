@@ -6,6 +6,9 @@ defmodule Helheim.PhotoController do
   alias Helheim.Comment
   import Helheim.ErrorHelpers, only: [translate_error: 1]
 
+  plug :find_user when action in [:show]
+  plug Helheim.Plug.EnforceBlock when action in [:show]
+
   def index(conn, params) do
     photos = Photo
              |> Photo.public
@@ -33,8 +36,8 @@ defmodule Helheim.PhotoController do
     end
   end
 
-  def show(conn, %{"profile_id" => user_id, "photo_album_id" => photo_album_id, "id" => id} = params) do
-    user        = Repo.get!(User, user_id)
+  def show(conn, %{"profile_id" => _, "photo_album_id" => photo_album_id, "id" => id} = params) do
+    user        = conn.assigns[:user]
     photo_album = assoc(user, :photo_albums)
                   |> PhotoAlbum.viewable_by(user, current_resource(conn))
                   |> Repo.get!(photo_album_id)
@@ -83,4 +86,14 @@ defmodule Helheim.PhotoController do
     |> put_flash(:success, gettext("Photo deleted successfully."))
     |> redirect(to: public_profile_photo_album_path(conn, :show, user, photo_album))
   end
+
+  defp find_user(conn, _) do
+    assign_user(conn, conn.params)
+  end
+
+  defp assign_user(conn, %{"profile_id" => profile_id}) do
+    conn
+    |> assign(:user, Repo.get!(User, profile_id))
+  end
+  defp assign_user(conn, _), do: conn
 end

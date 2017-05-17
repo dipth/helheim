@@ -1,0 +1,21 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item active"><%= gettext("Blocked") %></li>
+</ol>
+
+<div class="text-center mb-2">
+  <%= img_tag(static_path(@conn, "/images/block_owl.png"), class: "img-fluid") %>
+  <hr class="mt-0">
+  <h1><%= gettext "You have been blocked by %{username}!", username: @blocker.username %></h1>
+  <p><%= gettext "While the block is active you will not be able to see or contact this user" %></p>
+
+  <%= if Helheim.Block.blocked?(current_resource(@conn), @blocker) do %>
+    <strong class="text-danger"><%= gettext "You are also blocking %{username}", username: @blocker.username %>!</strong>
+  <% else %>
+    <p class="mb-0 mt-1">
+      <%= link to: public_profile_block_path(@conn, :delete, @blocker), class: "btn btn-default btn-block rest", "data-method": "POST" do %>
+        <i class="fa fa-lock"></i>
+        <%= gettext "Click here to also block %{username}", username: @blocker.username %>
+      <% end %>
+    </p>
+  <% end %>
+</div>

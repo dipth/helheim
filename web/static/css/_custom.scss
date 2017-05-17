@@ -248,3 +248,11 @@ code {
     color: $brand-primary;
   }
 }
+
+.card .table {
+  border-bottom: 1px solid $table-border-color;
+}
+
+.card.card-dark {
+  background-color: $gray;
+}
