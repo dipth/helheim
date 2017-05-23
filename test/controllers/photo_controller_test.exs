@@ -209,6 +209,14 @@ defmodule Helheim.PhotoControllerTest do
       photo = Photo |> preload(:photo_album) |> Repo.get(photo.id)
       assert called Helheim.VisitorLogEntry.track!(user, photo)
     end
+
+    test "it redirects to a block page when the specified profile is blocking the current user", %{conn: conn, user: user} do
+      block       = insert(:block, blockee: user)
+      photo_album = insert(:photo_album, user: block.blocker)
+      photo       = create_photo(photo_album)
+      conn        = get conn, "/profiles/#{block.blocker.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
+      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
+    end
   end
 
   describe "show/2 when not signed in" do

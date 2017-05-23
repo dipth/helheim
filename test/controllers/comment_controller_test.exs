@@ -41,6 +41,12 @@ defmodule Helheim.CommentControllerTest do
         get conn, "/profiles/1/comments"
       end
     end
+
+    test "it redirects to a block page when the specified profile is blocking the current user", %{conn: conn, user: user} do
+      block = insert(:block, blockee: user)
+      conn  = get conn, "/profiles/#{block.blocker.id}/comments"
+      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
+    end
   end
 
   describe "index/2 for a profile when not signed in" do
@@ -82,6 +88,14 @@ defmodule Helheim.CommentControllerTest do
       assert_error_sent :not_found, fn ->
         post conn, "/profiles/1/comments", comment: @comment_attrs
       end
+    end
+
+    test_with_mock "it does not invoke the CommentService if the profile is blocking the current user but instead redirects to a block page", %{conn: conn, user: user},
+      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+
+      block = insert(:block, blockee: user)
+      conn  = post conn, "/profiles/#{block.blocker.id}/comments", comment: @comment_attrs
+      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
     end
   end
 
@@ -132,6 +146,15 @@ defmodule Helheim.CommentControllerTest do
         post conn, "/blog_posts/1/comments", comment: @comment_attrs
       end
     end
+
+    test_with_mock "it does not invoke the CommentService if the author of the blog is blocking the current user but instead redirects to a block page", %{conn: conn, user: user},
+      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+
+      block     = insert(:block, blockee: user)
+      blog_post = insert(:blog_post, user: block.blocker)
+      conn      = post conn, "/blog_posts/#{blog_post.id}/comments", comment: @comment_attrs
+      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
+    end
   end
 
   describe "create/2 for a blog post when not signed in" do
@@ -157,7 +180,7 @@ defmodule Helheim.CommentControllerTest do
     test_with_mock "it redirects to the photo page with a success flash message when successfull", %{conn: conn, user: user},
       CommentService, [], [create!: fn(_commentable, _author, _body) -> {:ok, %{comment: %{}}} end] do
 
-      photo = Photo |> preload(:photo_album) |> Repo.get!(insert(:photo).id)
+      photo = Photo |> preload(photo_album: :user) |> Repo.get!(insert(:photo).id)
       conn  = post conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/comments", comment: @comment_attrs
       assert called CommentService.create!(photo, user, @comment_attrs[:body])
       assert redirected_to(conn)       == public_profile_photo_album_photo_path(conn, :show, photo.photo_album.user_id, photo.photo_album.id, photo)
@@ -167,7 +190,7 @@ defmodule Helheim.CommentControllerTest do
     test_with_mock "it redirects to the photo page with an error flash message when unsuccessfull", %{conn: conn, user: user},
       CommentService, [], [create!: fn(_commentable, _author, _body) -> {:error, :comment, %{}, []} end] do
 
-      photo = Photo |> preload(:photo_album) |> Repo.get!(insert(:photo).id)
+      photo = Photo |> preload(photo_album: :user) |> Repo.get!(insert(:photo).id)
       conn  = post conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/comments", comment: @comment_attrs
       assert called CommentService.create!(photo, user, @comment_attrs[:body])
       assert redirected_to(conn)     == public_profile_photo_album_photo_path(conn, :show, photo.photo_album.user_id, photo.photo_album.id, photo)
@@ -180,6 +203,16 @@ defmodule Helheim.CommentControllerTest do
       assert_error_sent :not_found, fn ->
         post conn, "/photo_albums/1/photos/1/comments", comment: @comment_attrs
       end
+    end
+
+    test_with_mock "it does not invoke the CommentService if the author of the photo is blocking the current user but instead redirects to a block page", %{conn: conn, user: user},
+      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+
+      block       = insert(:block, blockee: user)
+      photo_album = insert(:photo_album, user: block.blocker)
+      photo       = insert(:photo, photo_album: photo_album)
+      conn        = post conn, "/photo_albums/#{photo_album.id}/photos/#{photo.id}/comments", comment: @comment_attrs
+      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
     end
   end
 

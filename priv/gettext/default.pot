@@ -95,7 +95,7 @@ msgstr ""
 msgid "Will only be shown to administrators"
 msgstr ""
 
-#: web/templates/navbar/show.html.eex:23
+#: web/templates/navbar/show.html.eex:24
 msgid "Sign Out"
 msgstr ""
 
@@ -347,7 +347,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:67
+#: web/controllers/profile_controller.ex:66
 msgid "Profile updated!"
 msgstr ""
 
@@ -360,12 +360,12 @@ msgid "Remember me"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:4
-#: web/templates/profile/show.html.eex:35
+#: web/templates/profile/show.html.eex:55
 msgid "Newest Blogs"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:13
-#: web/templates/profile/show.html.eex:46
+#: web/templates/profile/show.html.eex:66
 msgid "Newest Forum Posts"
 msgstr ""
 
@@ -404,15 +404,15 @@ msgstr ""
 msgid "Are you sure?"
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:47
+#: web/controllers/blog_post_controller.ex:50
 msgid "Blog post created successfully."
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:98
+#: web/controllers/blog_post_controller.ex:101
 msgid "Blog post deleted successfully."
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:85
+#: web/controllers/blog_post_controller.ex:88
 msgid "Blog post updated successfully."
 msgstr ""
 
@@ -441,7 +441,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:39
+#: web/controllers/comment_controller.ex:26
 msgid "Comment created successfully"
 msgstr ""
 
@@ -461,11 +461,11 @@ msgstr ""
 #: web/templates/page/front_page.html.eex:8
 #: web/templates/page/front_page.html.eex:37
 #: web/templates/page/front_page.html.eex:50
-#: web/templates/profile/show.html.eex:40 web/templates/profile/show.html.eex:64
+#: web/templates/profile/show.html.eex:60 web/templates/profile/show.html.eex:84
 msgid "Show All"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:43
+#: web/controllers/comment_controller.ex:30
 msgid "Unable to create comment"
 msgstr ""
 
@@ -473,11 +473,11 @@ msgstr ""
 msgid "Write new comment:"
 msgstr ""
 
-#: web/controllers/private_message_controller.ex:16
+#: web/controllers/private_message_controller.ex:19
 msgid "Message successfully sent"
 msgstr ""
 
-#: web/templates/private_conversation/form.html.eex:10
+#: web/templates/private_conversation/form.html.eex:11
 msgid "Send Message"
 msgstr ""
 
@@ -493,11 +493,11 @@ msgstr ""
 msgid "There are no messages in this conversation..."
 msgstr ""
 
-#: web/controllers/private_message_controller.ex:20
+#: web/controllers/private_message_controller.ex:23
 msgid "Unable to send message"
 msgstr ""
 
-#: web/templates/private_conversation/form.html.eex:4
+#: web/templates/private_conversation/form.html.eex:5
 msgid "Write new message:"
 msgstr ""
 
@@ -582,11 +582,11 @@ msgstr ""
 msgid "Photo Albums"
 msgstr ""
 
-#: web/controllers/photo_album_controller.ex:36
+#: web/controllers/photo_album_controller.ex:39
 msgid "Photo album created successfully."
 msgstr ""
 
-#: web/controllers/photo_album_controller.ex:73
+#: web/controllers/photo_album_controller.ex:76
 msgid "Photo album updated successfully."
 msgstr ""
 
@@ -608,19 +608,19 @@ msgstr ""
 msgid "Edit Photo Details"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:58
+#: web/templates/profile/show.html.eex:78
 msgid "Newest Public Photos"
 msgstr ""
 
-#: web/controllers/photo_album_controller.ex:87
+#: web/controllers/photo_album_controller.ex:90
 msgid "Photo Album deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:83
+#: web/controllers/photo_controller.ex:86
 msgid "Photo deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:68
+#: web/controllers/photo_controller.ex:71
 msgid "Photo details updated successfully."
 msgstr ""
 
@@ -1297,4 +1297,74 @@ msgstr ""
 
 #: web/templates/page/banned.html.eex:8
 msgid "Your ban will expire"
+msgstr ""
+
+#: web/templates/profile/show.html.eex:38
+msgid "Block user"
+msgstr ""
+
+#: web/templates/block/index.html.eex:10 web/templates/profile/show.html.eex:26
+msgid "The user will be unable to see your profile, blog posts, photos or send you messages while blocked"
+msgstr ""
+
+#: web/templates/profile/show.html.eex:25
+msgid "This user is blocked"
+msgstr ""
+
+#: web/controllers/block_controller.ex:36
+msgid "Unable to block user!"
+msgstr ""
+
+#: web/controllers/block_controller.ex:50
+msgid "Unable to unblock user!"
+msgstr ""
+
+#: web/templates/block/index.html.eex:27 web/templates/block/index.html.eex:28
+#: web/templates/profile/show.html.eex:30
+msgid "Unblock user"
+msgstr ""
+
+#: web/controllers/block_controller.ex:32
+msgid "User blocked!"
+msgstr ""
+
+#: web/controllers/block_controller.ex:46
+msgid "User unblocked!"
+msgstr ""
+
+#: web/templates/block/index.html.eex:21
+msgid "Blocked since:"
+msgstr ""
+
+#: web/templates/block/index.html.eex:2 web/templates/navbar/show.html.eex:23
+msgid "Blocks"
+msgstr ""
+
+#: web/templates/block/index.html.eex:7
+msgid "These are the users that you have blocked"
+msgstr ""
+
+#: web/templates/block/show.html.eex:2
+msgid "Blocked"
+msgstr ""
+
+#: web/templates/block/show.html.eex:17
+msgid "Click here to also block %{username}"
+msgstr ""
+
+#: web/templates/block/show.html.eex:9
+msgid "While the block is active you will not be able to see or contact this user"
+msgstr ""
+
+#: web/templates/block/show.html.eex:12
+msgid "You are also blocking %{username}"
+msgstr ""
+
+#: web/templates/block/show.html.eex:8
+#: web/templates/private_conversation/form.html.eex:17
+msgid "You have been blocked by %{username}!"
+msgstr ""
+
+#: web/templates/private_conversation/form.html.eex:18
+msgid "You will not be able to send new messages to this user while the block is active"
 msgstr ""

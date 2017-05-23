@@ -12,13 +12,33 @@
 
         <%= render "details.html", conn: @conn, user: @user %>
 
-        <%= if @user.id != Guardian.Plug.current_resource(@conn).id do %>
+        <%= if @user.id != current_resource(@conn).id do %>
           <p class="mb-0 mt-1">
             <%= link to: private_conversation_path(@conn, :show, @user.id), class: "btn btn-primary btn-block" do %>
               <i class="fa fa-envelope"></i>
               <%= gettext "Send private message" %>
             <% end %>
           </p>
+
+          <%= if Block.blocked?(current_resource(@conn), @user) do %>
+            <div class="alert alert-warning mt-1" role="alert">
+              <strong><%= gettext "This user is blocked" %>!</strong>
+              <%= gettext "The user will be unable to see your profile, blog posts, photos or send you messages while blocked" %>.
+              <p class="mb-0 mt-1">
+                <%= link to: public_profile_block_path(@conn, :create, @user.id), class: "btn btn-default btn-block rest", "data-method": "DELETE" do %>
+                  <i class="fa fa-unlock"></i>
+                  <%= gettext "Unblock user" %>
+                <% end %>
+              </p>
+            </div>
+          <% else %>
+            <p class="mb-0 mt-1">
+              <%= link to: public_profile_block_path(@conn, :delete, @user.id), class: "btn btn-default btn-block rest", "data-method": "POST" do %>
+                <i class="fa fa-lock"></i>
+                <%= gettext "Block user" %>
+              <% end %>
+            </p>
+          <% end %>
         <% end %>
       </div>
     </div>

@@ -69,6 +69,7 @@ defmodule Helheim.Router do
       end
       resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
+      resources "/block", BlockController, singleton: true, only: [:create, :delete, :show]
     end
     resources "/blog_posts", BlogPostController, only: [:index, :new, :create, :edit, :update, :delete] do
       resources "/comments", CommentController, only: [:create]
@@ -96,6 +97,7 @@ defmodule Helheim.Router do
     resources "/notifications", NotificationController, only: [:show]
     resources "/navbar", NavbarController, singleton: true, only: [:show]
     resources "/usernames", UsernameController, only: [:index, :show]
+    resources "/blocks", BlockController, only: [:index]
   end
 
   scope "/admin", Helheim.Admin, as: :admin do

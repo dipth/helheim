@@ -1,13 +1,20 @@
-<%= form_for Helheim.PrivateMessage.create_changeset(%Helheim.PrivateMessage{}, @me, @partner), private_conversation_message_path(@conn, :create, @partner), fn f -> %>
-  <div class="card">
-    <div class="card-header">
-      <%= label f, :body, gettext("Write new message:"), class: "control-label mb-0" %>
+<%= unless Helheim.Block.blocked?(@partner, @me) do %>
+  <%= form_for Helheim.PrivateMessage.create_changeset(%Helheim.PrivateMessage{}, @me, @partner), private_conversation_message_path(@conn, :create, @partner), fn f -> %>
+    <div class="card">
+      <div class="card-header">
+        <%= label f, :body, gettext("Write new message:"), class: "control-label mb-0" %>
+      </div>
+      <div class="card-block">
+        <%= textarea f, :body, class: "form-control mentionable-input", rows: 5 %>
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Send Message" %></button>
+      </div>
     </div>
-    <div class="card-block">
-      <%= textarea f, :body, class: "form-control mentionable-input", rows: 5 %>
-    </div>
-    <div class="card-footer">
-      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Send Message" %></button>
-    </div>
+  <% end %>
+<% else %>
+  <div class="alert alert-warning" role="alert">
+    <h4 class="alert-heading"><%= gettext "You have been blocked by %{username}!", username: @partner.username %></h4>
+    <p class="mb-0"><%= gettext "You will not be able to send new messages to this user while the block is active" %></p>
   </div>
 <% end %>

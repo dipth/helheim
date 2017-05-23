@@ -67,6 +67,13 @@ defmodule Helheim.ProfileControllerTest do
       get conn, "/profiles/#{profile.id}"
       assert called Helheim.VisitorLogEntry.track!(user, profile)
     end
+
+    test "redirects to the block page if the specified profile blocks the current user", %{conn: conn, user: user} do
+      profile = insert(:user)
+      insert(:block, blocker: profile, blockee: user)
+      conn = get conn, "/profiles/#{profile.id}"
+      assert redirected_to(conn) == public_profile_block_path(conn, :show, profile)
+    end
   end
 
   describe "show/2 when not signed in" do

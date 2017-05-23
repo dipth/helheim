@@ -6,6 +6,9 @@ defmodule Helheim.ProfileController do
   alias Helheim.Photo
   alias Helheim.ForumTopic
 
+  plug :find_user when action in [:show]
+  plug Helheim.Plug.EnforceBlock when action in [:show]
+
   def index(conn, params) do
     users = User
             |> User.newest
@@ -13,12 +16,8 @@ defmodule Helheim.ProfileController do
     render(conn, "index.html", users: users)
   end
 
-  def show(conn, params) do
-    user = if params["id"] do
-      Repo.get!(User, params["id"])
-    else
-      Guardian.Plug.current_resource(conn)
-    end
+  def show(conn, _) do
+    user = conn.assigns[:user]
 
     newest_blog_posts =
       assoc(user, :blog_posts)
@@ -70,5 +69,15 @@ defmodule Helheim.ProfileController do
         conn
         |> render("edit.html", changeset: changeset)
     end
+  end
+
+  defp find_user(conn, _) do
+    user = if conn.params["id"] do
+      Repo.get!(User, conn.params["id"])
+    else
+      Guardian.Plug.current_resource(conn)
+    end
+
+    assign conn, :user, user
   end
 end

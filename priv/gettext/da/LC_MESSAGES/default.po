@@ -106,7 +106,7 @@ msgstr "Velkommen til %{site_name}"
 msgid "Will only be shown to administrators"
 msgstr "Vil kun blive vist til administratorer"
 
-#: web/templates/navbar/show.html.eex:23
+#: web/templates/navbar/show.html.eex:24
 msgid "Sign Out"
 msgstr "Log ud"
 
@@ -360,7 +360,7 @@ msgstr "Profil Indstillinger"
 msgid "Profile Text"
 msgstr "Profiltekst"
 
-#: web/controllers/profile_controller.ex:67
+#: web/controllers/profile_controller.ex:66
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
@@ -373,12 +373,12 @@ msgid "Remember me"
 msgstr "Husk mig i 30 dage"
 
 #: web/templates/page/front_page.html.eex:4
-#: web/templates/profile/show.html.eex:35
+#: web/templates/profile/show.html.eex:55
 msgid "Newest Blogs"
 msgstr "Nyeste Blogs"
 
 #: web/templates/page/front_page.html.eex:13
-#: web/templates/profile/show.html.eex:46
+#: web/templates/profile/show.html.eex:66
 msgid "Newest Forum Posts"
 msgstr "Nyeste Forumindlæg"
 
@@ -419,15 +419,15 @@ msgstr "Dine Blogs"
 msgid "Are you sure?"
 msgstr "Er du sikker?"
 
-#: web/controllers/blog_post_controller.ex:47
+#: web/controllers/blog_post_controller.ex:50
 msgid "Blog post created successfully."
 msgstr "Din blog er oprettet!"
 
-#: web/controllers/blog_post_controller.ex:98
+#: web/controllers/blog_post_controller.ex:101
 msgid "Blog post deleted successfully."
 msgstr "Din blog er nu slettet!"
 
-#: web/controllers/blog_post_controller.ex:85
+#: web/controllers/blog_post_controller.ex:88
 msgid "Blog post updated successfully."
 msgstr "Din blog er opdateret!"
 
@@ -457,7 +457,7 @@ msgstr "Redigér Blog"
 msgid "Title"
 msgstr "Titel"
 
-#: web/controllers/comment_controller.ex:39
+#: web/controllers/comment_controller.ex:26
 msgid "Comment created successfully"
 msgstr "Din kommentar er tilføjet!"
 
@@ -477,12 +477,12 @@ msgstr "Tilføj Kommentar"
 #: web/templates/page/front_page.html.eex:8
 #: web/templates/page/front_page.html.eex:37
 #: web/templates/page/front_page.html.eex:50
-#: web/templates/profile/show.html.eex:40
-#: web/templates/profile/show.html.eex:64
+#: web/templates/profile/show.html.eex:60
+#: web/templates/profile/show.html.eex:84
 msgid "Show All"
 msgstr "Vis alle"
 
-#: web/controllers/comment_controller.ex:43
+#: web/controllers/comment_controller.ex:30
 msgid "Unable to create comment"
 msgstr "Din kommentar kunne ikke tilføjes!"
 
@@ -490,11 +490,11 @@ msgstr "Din kommentar kunne ikke tilføjes!"
 msgid "Write new comment:"
 msgstr "Skriv ny kommentar:"
 
-#: web/controllers/private_message_controller.ex:16
+#: web/controllers/private_message_controller.ex:19
 msgid "Message successfully sent"
 msgstr "Din besked blev sendt!"
 
-#: web/templates/private_conversation/form.html.eex:10
+#: web/templates/private_conversation/form.html.eex:11
 msgid "Send Message"
 msgstr "Send Besked"
 
@@ -510,11 +510,11 @@ msgstr "Start med at skrive en besked nedenfor!"
 msgid "There are no messages in this conversation..."
 msgstr "Der er ingen beskeder i denne samtale…"
 
-#: web/controllers/private_message_controller.ex:20
+#: web/controllers/private_message_controller.ex:23
 msgid "Unable to send message"
 msgstr "Din besked kunne ikke sendes!"
 
-#: web/templates/private_conversation/form.html.eex:4
+#: web/templates/private_conversation/form.html.eex:5
 msgid "Write new message:"
 msgstr "Skriv en ny besked:"
 
@@ -603,11 +603,11 @@ msgstr "Nyt Fotoalbum"
 msgid "Photo Albums"
 msgstr "Fotoalbum"
 
-#: web/controllers/photo_album_controller.ex:36
+#: web/controllers/photo_album_controller.ex:39
 msgid "Photo album created successfully."
 msgstr "Fotoalbummet blev oprettet!"
 
-#: web/controllers/photo_album_controller.ex:73
+#: web/controllers/photo_album_controller.ex:76
 msgid "Photo album updated successfully."
 msgstr "Fotoalbummet blev opdateret!"
 
@@ -629,19 +629,19 @@ msgstr "Slip billeder her (eller klik) for at uploade…"
 msgid "Edit Photo Details"
 msgstr "Redigér billed-detaljer"
 
-#: web/templates/profile/show.html.eex:58
+#: web/templates/profile/show.html.eex:78
 msgid "Newest Public Photos"
 msgstr "Nyeste offentlige billeder"
 
-#: web/controllers/photo_album_controller.ex:87
+#: web/controllers/photo_album_controller.ex:90
 msgid "Photo Album deleted successfully."
 msgstr "Fotoalbummet blev slettet!"
 
-#: web/controllers/photo_controller.ex:83
+#: web/controllers/photo_controller.ex:86
 msgid "Photo deleted successfully."
 msgstr "Billedet blev slettet!"
 
-#: web/controllers/photo_controller.ex:68
+#: web/controllers/photo_controller.ex:71
 msgid "Photo details updated successfully."
 msgstr "Billed-detaljerne blev opdateret!"
 
@@ -1328,3 +1328,73 @@ msgstr "Du er blevet bandlyst!"
 #: web/templates/page/banned.html.eex:8
 msgid "Your ban will expire"
 msgstr "Din bandlysning udløber"
+
+#: web/templates/profile/show.html.eex:38
+msgid "Block user"
+msgstr "Blokér bruger"
+
+#: web/templates/block/index.html.eex:10 web/templates/profile/show.html.eex:26
+msgid "The user will be unable to see your profile, blog posts, photos or send you messages while blocked"
+msgstr "Brugeren vil ikke være i stand til at se din profil, blogs, billeder eller kontakte dig så længe blokeringen er aktiv"
+
+#: web/templates/profile/show.html.eex:25
+msgid "This user is blocked"
+msgstr "Denne bruger er blokeret"
+
+#: web/controllers/block_controller.ex:36
+msgid "Unable to block user!"
+msgstr "Brugeren kunne ikke blokeres!"
+
+#: web/controllers/block_controller.ex:50
+msgid "Unable to unblock user!"
+msgstr "Blokeringen kunne ikke fjernes!"
+
+#: web/templates/block/index.html.eex:27 web/templates/block/index.html.eex:28
+#: web/templates/profile/show.html.eex:30
+msgid "Unblock user"
+msgstr "Fjern blokering"
+
+#: web/controllers/block_controller.ex:32
+msgid "User blocked!"
+msgstr "Brugeren er blokeret!"
+
+#: web/controllers/block_controller.ex:46
+msgid "User unblocked!"
+msgstr "Blokering fjernet!"
+
+#: web/templates/block/index.html.eex:21
+msgid "Blocked since:"
+msgstr "Blokeret siden:"
+
+#: web/templates/block/index.html.eex:2 web/templates/navbar/show.html.eex:23
+msgid "Blocks"
+msgstr "Blokeringer"
+
+#: web/templates/block/index.html.eex:7
+msgid "These are the users that you have blocked"
+msgstr "Du har blokeret disse brugere"
+
+#: web/templates/block/show.html.eex:2
+msgid "Blocked"
+msgstr "Blokeret"
+
+#: web/templates/block/show.html.eex:17
+msgid "Click here to also block %{username}"
+msgstr "Klik her for også at blokere %{username}"
+
+#: web/templates/block/show.html.eex:9
+msgid "While the block is active you will not be able to see or contact this user"
+msgstr "Du vil ikke være i stand til at se eller kontakte denne bruger imens blokeringen er aktiv"
+
+#: web/templates/block/show.html.eex:12
+msgid "You are also blocking %{username}"
+msgstr "Du blokerer også %{username}"
+
+#: web/templates/block/show.html.eex:8
+#: web/templates/private_conversation/form.html.eex:17
+msgid "You have been blocked by %{username}!"
+msgstr "Du er blevet blokeret af %{username}!"
+
+#: web/templates/private_conversation/form.html.eex:18
+msgid "You will not be able to send new messages to this user while the block is active"
+msgstr "Du vil ikke kunne sende nye beskeder til denne bruger så længe blokeringen er aktiv"

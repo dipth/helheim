@@ -47,6 +47,14 @@ defmodule Helheim.PrivateMessageControllerTest do
         post conn, "/private_conversations/#{user.id}/messages", private_message: @post_attrs
       end
     end
+
+    test_with_mock "it does not invoke the PrivateMessageService if the partner is blocking the current user but instead redirects to a block page", %{conn: conn, user: user},
+      PrivateMessageService, [], [insert: fn(_sender,_recipient,_body) -> raise("PrivateMessageService was called!") end] do
+
+      block = insert(:block, blockee: user)
+      conn  = post conn, "/private_conversations/#{block.blocker.id}/messages", private_message: @post_attrs
+      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
+    end
   end
 
   describe "create/2 when not signed in" do

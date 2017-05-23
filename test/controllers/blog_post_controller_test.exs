@@ -41,6 +41,12 @@ defmodule Helheim.BlogPostControllerTest do
       conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts"
       assert conn.resp_body =~ blog_post.title
     end
+
+    test "it redirects to a block page when the specified profile is blocking the current user", %{conn: conn, user: user} do
+      block = insert(:block, blockee: user)
+      conn  = get conn, "/profiles/#{block.blocker.id}/blog_posts"
+      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
+    end
   end
 
   describe "index/2 for a single user when not signed in" do
@@ -193,6 +199,13 @@ defmodule Helheim.BlogPostControllerTest do
       blog_post = insert(:blog_post, published: false, user: user)
       conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
       assert html_response(conn, 200)
+    end
+
+    test "it redirects to a block page when the specified profile is blocking the current user", %{conn: conn, user: user} do
+      block = insert(:block, blockee: user)
+      blog_post = insert(:blog_post, user: block.blocker)
+      conn  = get conn, "/profiles/#{block.blocker.id}/blog_posts/#{blog_post.id}"
+      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
     end
   end
 

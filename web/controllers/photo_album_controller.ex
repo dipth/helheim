@@ -4,8 +4,11 @@ defmodule Helheim.PhotoAlbumController do
   alias Helheim.PhotoAlbum
   alias Helheim.Photo
 
-  def index(conn, params = %{"profile_id" => user_id}) do
-    user = Repo.get!(User, user_id)
+  plug :find_user when action in [:index, :show]
+  plug Helheim.Plug.EnforceBlock when action in [:index, :show]
+
+  def index(conn, params = %{"profile_id" => _}) do
+    user = conn.assigns[:user]
     photo_albums =
       assoc(user, :photo_albums)
       |> PhotoAlbum.viewable_by(user, current_resource(conn))
@@ -40,8 +43,8 @@ defmodule Helheim.PhotoAlbumController do
     end
   end
 
-  def show(conn, %{"profile_id" => user_id, "id" => id}) do
-    user = Repo.get!(User, user_id)
+  def show(conn, %{"profile_id" => _, "id" => id}) do
+    user = conn.assigns[:user]
     photo_album =
       assoc(user, :photo_albums)
       |> PhotoAlbum.viewable_by(user, current_resource(conn))
@@ -87,4 +90,14 @@ defmodule Helheim.PhotoAlbumController do
     |> put_flash(:success, gettext("Photo Album deleted successfully."))
     |> redirect(to: public_profile_photo_album_path(conn, :index, user))
   end
+
+  defp find_user(conn, _) do
+    assign_user(conn, conn.params)
+  end
+
+  defp assign_user(conn, %{"profile_id" => profile_id}) do
+    conn
+    |> assign(:user, Repo.get!(User, profile_id))
+  end
+  defp assign_user(conn, _), do: conn
 end
