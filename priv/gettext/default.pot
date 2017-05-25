@@ -21,6 +21,8 @@ msgstr ""
 #: web/templates/email/registration_email.html.eex:5
 #: web/templates/email/registration_email.html.eex:15
 #: web/templates/email/registration_email.text.eex:1
+#: web/templates/error/404.html.eex:18 web/templates/error/404.html.eex:29
+#: web/templates/error/500.html.eex:18 web/templates/error/500.html.eex:29
 #: web/templates/layout/app.html.eex:22
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
@@ -818,7 +820,8 @@ msgstr ""
 
 #: web/templates/private_conversation/index.html.eex:22
 #: web/templates/private_conversation/show.html.eex:5
-#: web/views/profile_helpers.ex:10 web/views/profile_helpers.ex:51
+#: web/views/notification_view.ex:40 web/views/profile_helpers.ex:10
+#: web/views/profile_helpers.ex:51
 msgid "User deleted"
 msgstr ""
 
@@ -1367,4 +1370,28 @@ msgstr ""
 
 #: web/templates/private_conversation/form.html.eex:18
 msgid "You will not be able to send new messages to this user while the block is active"
+msgstr ""
+
+#: web/templates/error/404.html.eex:36
+msgid "The page you requested does not exist."
+msgstr ""
+
+#: web/templates/error/500.html.eex:36
+msgid "The page you requested is currently broken."
+msgstr ""
+
+#: web/templates/error/404.html.eex:38
+msgid "Maybe you tried loading a page that was deleted,"
+msgstr ""
+
+#: web/templates/error/404.html.eex:35 web/templates/error/500.html.eex:35
+msgid "Oh shit!"
+msgstr ""
+
+#: web/templates/error/500.html.eex:38
+msgid "We will be looking into the problem,"
+msgstr ""
+
+#: web/templates/error/404.html.eex:39 web/templates/error/500.html.eex:39
+msgid "but feel free to contact our support if the problem persists:"
 msgstr ""
