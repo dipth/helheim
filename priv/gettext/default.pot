@@ -325,7 +325,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:187
+#: web/models/user.ex:211
 msgid "does not match your current password"
 msgstr ""
 
@@ -349,7 +349,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:66
+#: web/controllers/profile_controller.ex:67
 msgid "Profile updated!"
 msgstr ""
 
@@ -1146,10 +1146,6 @@ msgstr ""
 msgid "Profiles"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:23
-msgid "Newest users with photo"
-msgstr ""
-
 #: web/views/notification_view.ex:22
 msgid "%{who} wrote a comment in the guest book: %{what}"
 msgstr ""
@@ -1394,4 +1390,8 @@ msgstr ""
 
 #: web/templates/error/404.html.eex:39 web/templates/error/500.html.eex:39
 msgid "but feel free to contact our support if the problem persists:"
+msgstr ""
+
+#: web/templates/page/front_page.html.eex:23
+msgid "Recently logged in users"
 msgstr ""

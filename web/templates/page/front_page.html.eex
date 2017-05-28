@@ -20,7 +20,7 @@
   </div>
   <div class="card">
     <div class="card-block">
-      <h5 class="mb-1"><%= gettext "Newest users with photo" %></h5>
+      <h5 class="mb-1"><%= gettext "Recently logged in users" %></h5>
       <div class="avatar-list">
         <%= for user <- @newest_users do %>
           <a href="<%= public_profile_path(@conn, :show, user.id) %>">

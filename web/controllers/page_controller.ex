@@ -21,7 +21,7 @@ defmodule Helheim.PageController do
   def front_page(conn, _params) do
     newest_users =
       User
-      |> User.newest
+      |> User.recently_logged_in
       |> User.with_avatar
       |> limit(40)
       |> Helheim.Repo.all

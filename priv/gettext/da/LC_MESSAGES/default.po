@@ -337,7 +337,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:187
+#: web/models/user.ex:211
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -362,7 +362,7 @@ msgstr "Profil Indstillinger"
 msgid "Profile Text"
 msgstr "Profiltekst"
 
-#: web/controllers/profile_controller.ex:66
+#: web/controllers/profile_controller.ex:67
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
@@ -1175,10 +1175,6 @@ msgstr "Billeder"
 msgid "Profiles"
 msgstr "Profiler"
 
-#: web/templates/page/front_page.html.eex:23
-msgid "Newest users with photo"
-msgstr "Nyeste brugere med profilbillede"
-
 #: web/views/notification_view.ex:22
 msgid "%{who} wrote a comment in the guest book: %{what}"
 msgstr "%{who} skrev en besked i gæstebogen: %{what}"
@@ -1425,3 +1421,7 @@ msgstr "Vi vil se nærmere på problemet,"
 #: web/templates/error/404.html.eex:39 web/templates/error/500.html.eex:39
 msgid "but feel free to contact our support if the problem persists:"
 msgstr "men du er velkommen til at skrive til vores support hvis problemet fortsætter:"
+
+#: web/templates/page/front_page.html.eex:23
+msgid "Recently logged in users"
+msgstr "Senest logget ind"

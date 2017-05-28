@@ -52,6 +52,12 @@ defmodule Helheim.User do
     order_by: [desc: u.inserted_at]
   end
 
+  def recently_logged_in(query) do
+    from u in query,
+    where: not is_nil(u.last_login_at),
+    order_by: [desc: u.last_login_at]
+  end
+
   def with_avatar(query) do
     from u in query, where: not is_nil(u.avatar)
   end

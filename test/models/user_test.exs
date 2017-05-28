@@ -314,4 +314,22 @@ defmodule Helheim.UserTest do
       assert user.previous_login_ip == "192.168.0.1"
     end
   end
+
+  describe "recently_logged_in/1" do
+    test "it orders users who have recently logged in before older ones" do
+      user1 = insert(:user, last_login_at: Timex.shift(Timex.now, minutes: -1))
+      user2 = insert(:user, last_login_at: Timex.shift(Timex.now, minutes: -2))
+      [first, last] = User |> User.recently_logged_in |> Repo.all
+      assert first.id == user1.id
+      assert last.id  == user2.id
+    end
+
+    test "it does not include users who have never logged in" do
+      user1 = insert(:user, last_login_at: Timex.now)
+      user2 = insert(:user, last_login_at: nil)
+      user_ids = User |> User.recently_logged_in |> Repo.all |> Enum.map(fn(p) -> p.id end)
+      assert Enum.member?(user_ids, user1.id)
+      refute Enum.member?(user_ids, user2.id)
+    end
+  end
 end
