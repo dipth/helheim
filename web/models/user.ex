@@ -30,6 +30,10 @@ defmodule Helheim.User do
     field :ban_reason,                      :string
     field :visitor_count,                   :integer
     field :comment_count,                   :integer
+    field :last_login_at,                   Calecto.DateTimeUTC
+    field :last_login_ip,                   :string
+    field :previous_login_at,               Calecto.DateTimeUTC
+    field :previous_login_ip,               :string
 
     timestamps()
 
@@ -161,6 +165,15 @@ defmodule Helheim.User do
   def banned?(%{banned_until: nil}), do: false
   def banned?(user) do
     Timex.after?(user.banned_until, Timex.now)
+  end
+
+  def track_login!(user, ip_addr) do
+    changeset = Ecto.Changeset.change user,
+      previous_login_at: user.last_login_at,
+      previous_login_ip: user.last_login_ip,
+      last_login_at:     DateTime.utc_now,
+      last_login_ip:     ip_addr
+    Repo.update(changeset)
   end
 
   defp put_password_hash(changeset) do

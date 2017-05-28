@@ -6,6 +6,8 @@ defmodule Helheim.Auth do
   alias Helheim.User
 
   def login(conn, user) do
+    remote_ip = conn.remote_ip |> Tuple.to_list |> Enum.join(".")
+    {:ok, user} = User.track_login!(user, remote_ip)
     conn
     |> Guardian.Plug.sign_in(user)
   end
