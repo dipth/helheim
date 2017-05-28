@@ -52,6 +52,10 @@ defmodule Helheim.User do
     from u in query, where: not is_nil(u.avatar)
   end
 
+  def confirmed(query) do
+    from u in query, where: not is_nil(u.confirmed_at)
+  end
+
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """

@@ -22,6 +22,12 @@ defmodule Helheim.ProfileControllerTest do
       assert conn.resp_body =~ user_1.username
       assert conn.resp_body =~ user_2.username
     end
+
+    test "does not show users who are not confirmed", %{conn: conn} do
+      user = insert(:user, confirmed_at: nil)
+      conn = get conn, "/profiles"
+      refute conn.resp_body =~ user.username
+    end
   end
 
   describe "index/2 when not signed in" do

@@ -264,4 +264,18 @@ defmodule Helheim.UserTest do
       assert User.banned?(user)
     end
   end
+
+  describe "confirmed/1" do
+    test "returns users where confirmed_at is not blank" do
+      id = insert(:user, confirmed_at: Timex.now).id
+      user = User |> User.confirmed |> Repo.one
+      assert user.id == id
+    end
+
+    test "does not return users where confirmed_at is blank" do
+      insert(:user, confirmed_at: nil).id
+      users = User |> User.confirmed |> Repo.all
+      assert length(users) == 0
+    end
+  end
 end

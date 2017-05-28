@@ -11,6 +11,7 @@ defmodule Helheim.ProfileController do
 
   def index(conn, params) do
     users = User
+            |> User.confirmed
             |> User.newest
             |> Repo.paginate(page: sanitized_page(params["page"]))
     render(conn, "index.html", users: users)
