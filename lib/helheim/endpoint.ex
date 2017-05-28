@@ -1,6 +1,8 @@
 defmodule Helheim.Endpoint do
   use Phoenix.Endpoint, otp_app: :helheim
 
+  plug Plug.CloudFlare
+
   socket "/socket", Helheim.UserSocket
 
   if Application.get_env(:helheim, :sql_sandbox) do

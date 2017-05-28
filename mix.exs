@@ -63,7 +63,8 @@ defmodule Helheim.Mixfile do
      {:scrivener_ecto, "~> 1.1"}, # Pagination
      {:scrivener_html, "~> 1.1"}, # Pagination
      {:mock, "~> 0.2.0", only: :test},
-     {:scout_apm, "~> 0.0"}
+     {:scout_apm, "~> 0.0"},
+     {:plug_cloudflare, ">= 1.2.0"}
    ]
   end
 
