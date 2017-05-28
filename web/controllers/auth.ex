@@ -7,7 +7,7 @@ defmodule Helheim.Auth do
 
   def login(conn, user) do
     conn
-    |> Guardian.Plug.sign_in(user, :access)
+    |> Guardian.Plug.sign_in(user)
   end
 
   def login_by_email_and_pass(conn, email, given_pass) do
