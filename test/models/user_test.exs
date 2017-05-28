@@ -179,6 +179,14 @@ defmodule Helheim.UserTest do
       refute called PhotoAlbum.delete!(photo_album3)
     end
 
+    test_with_mock "it tracks the deletion of the user",
+      Helheim.DeletedUser, [], [track_deletion!: fn(_user) -> {:ok, nil} end] do
+
+      user = insert(:user)
+      User.delete! user
+      assert called Helheim.DeletedUser.track_deletion!(user)
+    end
+
     test "it deletes the user" do
       user = insert(:user)
       User.delete! user
