@@ -37,6 +37,7 @@ defmodule Helheim.DeletedUser do
     |> validate_required([:original_id, :username, :email, :name, :original_inserted_at])
   end
 
+  def track_deletion!(nil), do: {:ok, nil}
   def track_deletion!(user) do
     params = %{
       original_id:          user.id,

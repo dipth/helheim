@@ -61,5 +61,9 @@ defmodule Helheim.DeletedUserTest do
       assert deleted_user.original_inserted_at == user.inserted_at
       assert deleted_user.original_updated_at  == user.updated_at
     end
+
+    test "correctly handles edge cases where the specified user is nil" do
+      {:ok, nil} = DeletedUser.track_deletion!(nil)
+    end
   end
 end

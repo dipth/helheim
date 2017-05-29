@@ -313,6 +313,10 @@ defmodule Helheim.UserTest do
       {:ok, user} = User.track_login!(user, "127.0.0.1")
       assert user.previous_login_ip == "192.168.0.1"
     end
+
+    test "correctly handles an edge case where the specified user is nil" do
+      {:ok, nil} = User.track_login!(nil, "127.0.0.1")
+    end
   end
 
   describe "recently_logged_in/1" do

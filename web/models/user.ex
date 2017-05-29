@@ -174,6 +174,7 @@ defmodule Helheim.User do
     Timex.after?(user.banned_until, Timex.now)
   end
 
+  def track_login!(nil, _), do: {:ok, nil}
   def track_login!(user, ip_addr) do
     changeset = Ecto.Changeset.change user,
       previous_login_at: user.last_login_at,
