@@ -3,14 +3,16 @@ defmodule Helheim.CommentController do
   alias Helheim.Repo
   alias Helheim.User
   alias Helheim.Photo
+  alias Helheim.Comment
 
-  plug :find_commentable
-  plug Helheim.Plug.EnforceBlock
+  plug :find_commentable when action in [:index, :create]
+  plug Helheim.Plug.EnforceBlock when action in [:index, :create]
 
   def index(conn, params) do
     comments = assoc(conn.assigns[:commentable], :comments)
-               |> Helheim.Comment.newest
-               |> preload(:author)
+               |> Comment.not_deleted
+               |> Comment.newest
+               |> Comment.with_preloads
                |> Repo.paginate(page: sanitized_page(params["page"]))
     render(conn, "index.html", commentable: conn.assigns[:commentable], comments: comments)
   end
@@ -29,6 +31,16 @@ defmodule Helheim.CommentController do
         conn
         |> put_flash(:error, gettext("Unable to create comment"))
         |> redirect(to: conn.assigns[:redirect_to])
+    end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    comment = Comment |> Comment.with_preloads() |> Repo.get!(id)
+    case Helheim.CommentService.delete!(comment, current_resource(conn)) do
+      {:ok, %{comment: _}} ->
+        render(conn, "delete.js", comment: comment)
+      {:error, _, _, _} ->
+        send_resp(conn, 401, "")
     end
   end
 

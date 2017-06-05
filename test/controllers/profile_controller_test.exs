@@ -80,6 +80,13 @@ defmodule Helheim.ProfileControllerTest do
       conn = get conn, "/profiles/#{profile.id}"
       assert redirected_to(conn) == public_profile_block_path(conn, :show, profile)
     end
+
+    test "does not show deleted comments", %{conn: conn} do
+      comment = insert(:profile_comment, deleted_at: DateTime.utc_now, body: "This is a deleted comment")
+      profile = comment.profile
+      conn    = get conn, "/profiles/#{profile.id}"
+      refute html_response(conn, 200) =~ "This is a deleted comment"
+    end
   end
 
   describe "show/2 when not signed in" do

@@ -43,8 +43,9 @@ defmodule Helheim.PhotoController do
                   |> Repo.get!(photo_album_id)
     photo       = assoc(photo_album, :photos) |> preload(:photo_album) |> Repo.get!(id)
     comments    = assoc(photo, :comments)
+                  |> Comment.not_deleted
                   |> Comment.newest
-                  |> preload(:author)
+                  |> Comment.with_preloads
                   |> Repo.paginate(page: sanitized_page(params["page"]))
     Helheim.VisitorLogEntry.track! current_resource(conn), photo
     render(conn, "show.html", user: user, photo_album: photo_album, photo: photo, comments: comments)

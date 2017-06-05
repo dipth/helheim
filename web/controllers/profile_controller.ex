@@ -29,10 +29,11 @@ defmodule Helheim.ProfileController do
       |> Repo.preload(:user)
     newest_comments =
       assoc(user, :comments)
+      |> Comment.not_deleted
       |> Comment.newest
       |> limit(5)
+      |> Comment.with_preloads
       |> Helheim.Repo.all
-      |> Repo.preload(:author)
     newest_forum_topics = ForumTopic
       |> where(user_id: ^user.id)
       |> ForumTopic.with_latest_reply

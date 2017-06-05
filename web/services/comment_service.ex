@@ -17,6 +17,14 @@ defmodule Helheim.CommentService do
     |> Repo.transaction
   end
 
+  def delete!(comment, user, reason \\ "") do
+    Multi.new
+    |> ensure_deletable(comment, user)
+    |> delete_comment(comment, user, reason)
+    |> dec_comment_count(Comment.commentable(comment))
+    |> Repo.transaction
+  end
+
   defp insert_comment(multi, commentable, author, body) do
     multi
     |> Multi.insert(:comment, build_comment(commentable, author, body))
@@ -39,7 +47,27 @@ defmodule Helheim.CommentService do
     multi |> Multi.update_all(:comment_count, (model |> where(id: ^id)), inc: [comment_count: 1])
   end
 
+  defp dec_comment_count(multi, %User{} = profile),       do: dec_comment_count(multi, User, profile.id)
+  defp dec_comment_count(multi, %BlogPost{} = blog_post), do: dec_comment_count(multi, BlogPost, blog_post.id)
+  defp dec_comment_count(multi, %Photo{} = photo),        do: dec_comment_count(multi, Photo, photo.id)
+  defp dec_comment_count(multi, model, id) do
+    multi |> Multi.update_all(:comment_count, (model |> where(id: ^id)), inc: [comment_count: -1])
+  end
+
   defp trigger_notifications(multi, commentable, author) do
     multi |> Multi.run(:notify, NotificationService, :create_async!, ["comment", commentable, author])
+  end
+
+  defp ensure_deletable(multi, comment, user), do: Multi.run(multi, :ensure_deletable, fn(_) -> ensure_deletable(comment, user) end)
+  defp ensure_deletable(comment, user) do
+    case Comment.deletable_by?(comment, user) do
+      true  -> {:ok, nil}
+      false -> {:error, "Comment not deletable by user!"}
+    end
+  end
+
+  defp delete_comment(multi, comment, user, reason) do
+    multi
+    |> Multi.update(:comment, Comment.delete_changeset(comment, user, %{deletion_reason: reason}))
   end
 end

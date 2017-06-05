@@ -98,6 +98,7 @@ defmodule Helheim.Router do
     resources "/navbar", NavbarController, singleton: true, only: [:show]
     resources "/usernames", UsernameController, only: [:index, :show]
     resources "/blocks", BlockController, only: [:index]
+    resources "/comments", CommentController, only: [:delete]
   end
 
   scope "/admin", Helheim.Admin, as: :admin do

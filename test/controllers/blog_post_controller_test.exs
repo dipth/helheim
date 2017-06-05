@@ -207,6 +207,13 @@ defmodule Helheim.BlogPostControllerTest do
       conn  = get conn, "/profiles/#{block.blocker.id}/blog_posts/#{blog_post.id}"
       assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
     end
+
+    test "does not show deleted comments", %{conn: conn} do
+      comment   = insert(:blog_post_comment, deleted_at: DateTime.utc_now, body: "This is a deleted comment")
+      blog_post = comment.blog_post
+      conn      = get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
+      refute html_response(conn, 200) =~ "This is a deleted comment"
+    end
   end
 
   describe "show/2 when not signed in" do

@@ -63,8 +63,9 @@ defmodule Helheim.BlogPostController do
       |> Repo.preload(:user)
     comments =
       assoc(blog_post, :comments)
+      |> Comment.not_deleted
       |> Comment.newest
-      |> preload(:author)
+      |> Comment.with_preloads
       |> Repo.paginate(page: sanitized_page(params["page"]))
     Helheim.VisitorLogEntry.track! current_resource(conn), blog_post
     render(conn, "show.html", user: user, blog_post: blog_post, comments: comments)
