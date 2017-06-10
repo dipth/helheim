@@ -217,6 +217,15 @@ defmodule Helheim.PhotoControllerTest do
       conn        = get conn, "/profiles/#{block.blocker.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
       assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
     end
+
+    test "does not show deleted comments", %{conn: conn} do
+      comment     = insert(:photo_comment, deleted_at: DateTime.utc_now, body: "This is a deleted comment")
+      photo       = comment.photo
+      photo_album = photo.photo_album
+      profile     = photo_album.user
+      conn        = get conn, "/profiles/#{profile.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
+      refute html_response(conn, 200) =~ "This is a deleted comment"
+    end
   end
 
   describe "show/2 when not signed in" do

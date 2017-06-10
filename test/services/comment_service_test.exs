@@ -173,6 +173,118 @@ defmodule Helheim.CommentServiceTest do
     end
   end
 
+  ##############################################################################
+  # delete!/3
+  describe "delete/3" do
+    setup [:create_user, :create_comment]
+
+    test_with_mock "marks the comment as deleted with the specified reason if it is deletable by the user", %{user: user, comment: comment},
+      Comment, [:passthrough], [deletable_by?: fn(_comment, _user) -> true end] do
+
+      comment = Comment |> Comment.with_preloads |> Repo.get(comment.id)
+      {:ok, %{comment: comment}} = CommentService.delete!(comment, user, "foo bar")
+      {:ok, time_diff, _, _}     = Calendar.DateTime.diff(comment.deleted_at, DateTime.utc_now)
+
+      assert comment.deleter_id      == user.id
+      assert comment.deletion_reason == "foo bar"
+      assert time_diff < 10
+    end
+
+    test_with_mock "decrements the comment count of the commentable if it is deletable by the user", %{user: user},
+      Comment, [:passthrough], [deletable_by?: fn(_comment, _user) -> true end] do
+
+      blog_post = insert :blog_post, comment_count: 1
+      comment   = insert :blog_post_comment, blog_post: blog_post
+      comment   = Comment |> Comment.with_preloads |> Repo.get(comment.id)
+
+      {:ok, %{comment: _comment}} = CommentService.delete!(comment, user, "foo bar")
+
+      blog_post = Repo.get(BlogPost, blog_post.id)
+      assert blog_post.comment_count == 0
+    end
+
+    test_with_mock "does not mark the comment as deleted if it is not deletable by the user", %{user: user, comment: comment},
+      Comment, [:passthrough], [deletable_by?: fn(_comment, _user) -> false end] do
+
+      comment = Comment |> Comment.with_preloads |> Repo.get(comment.id)
+      {:error, _, _, _} = CommentService.delete!(comment, user, "foo bar")
+      comment           = Repo.get(Comment, comment.id)
+
+      refute comment.deleter_id
+      refute comment.deletion_reason
+      refute comment.deleted_at
+    end
+
+    test_with_mock "does not decrement the comment count of the commentable if it is not deletable by the user", %{user: user},
+      Comment, [:passthrough], [deletable_by?: fn(_comment, _user) -> false end] do
+
+      blog_post = insert :blog_post, comment_count: 1
+      comment   = insert :blog_post_comment, blog_post: blog_post
+
+      comment = Comment |> Comment.with_preloads |> Repo.get(comment.id)
+      {:error, _, _, _} = CommentService.delete!(comment, user, "foo bar")
+
+      blog_post = Repo.get(BlogPost, blog_post.id)
+      assert blog_post.comment_count == 1
+    end
+  end
+
+  ##############################################################################
+  # delete!/2
+  describe "delete/2" do
+    setup [:create_user, :create_comment]
+
+    test_with_mock "marks the comment as deleted with a blank reason if it is deletable by the user", %{user: user, comment: comment},
+      Comment, [:passthrough], [deletable_by?: fn(_comment, _user) -> true end] do
+
+      comment = Comment |> Comment.with_preloads |> Repo.get(comment.id)
+      {:ok, %{comment: comment}} = CommentService.delete!(comment, user)
+      {:ok, time_diff, _, _}     = Calendar.DateTime.diff(comment.deleted_at, DateTime.utc_now)
+
+      assert comment.deleter_id == user.id
+      refute comment.deletion_reason
+      assert time_diff < 10
+    end
+
+    test_with_mock "decrements the comment count of the commentable if it is deletable by the user", %{user: user},
+      Comment, [:passthrough], [deletable_by?: fn(_comment, _user) -> true end] do
+
+      blog_post = insert :blog_post, comment_count: 1
+      comment   = insert :blog_post_comment, blog_post: blog_post
+      comment   = Comment |> Comment.with_preloads |> Repo.get(comment.id)
+
+      {:ok, %{comment: _comment}} = CommentService.delete!(comment, user)
+
+      blog_post = Repo.get(BlogPost, blog_post.id)
+      assert blog_post.comment_count == 0
+    end
+
+    test_with_mock "does not mark the comment as deleted if it is not deletable by the user", %{user: user, comment: comment},
+      Comment, [:passthrough], [deletable_by?: fn(_comment, _user) -> false end] do
+
+      comment = Comment |> Comment.with_preloads |> Repo.get(comment.id)
+      {:error, _, _, _} = CommentService.delete!(comment, user)
+      comment           = Repo.get(Comment, comment.id)
+
+      refute comment.deleter_id
+      refute comment.deletion_reason
+      refute comment.deleted_at
+    end
+
+    test_with_mock "does not decrement the comment count of the commentable if it is not deletable by the user", %{user: user},
+      Comment, [:passthrough], [deletable_by?: fn(_comment, _user) -> false end] do
+
+      blog_post = insert :blog_post, comment_count: 1
+      comment   = insert :blog_post_comment, blog_post: blog_post
+
+      comment = Comment |> Comment.with_preloads |> Repo.get(comment.id)
+      {:error, _, _, _} = CommentService.delete!(comment, user)
+
+      blog_post = Repo.get(BlogPost, blog_post.id)
+      assert blog_post.comment_count == 1
+    end
+  end
+
   defp create_author(_context) do
     author = insert(:user)
     [author: author]
@@ -191,5 +303,10 @@ defmodule Helheim.CommentServiceTest do
   defp create_photo(_context) do
     photo = insert(:photo)
     [photo: photo]
+  end
+
+  defp create_comment(_context) do
+    comment = insert(:blog_post_comment)
+    [comment: comment]
   end
 end

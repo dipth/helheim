@@ -41,6 +41,14 @@ defmodule Helheim.Factory do
     }
   end
 
+  def photo_comment_factory do
+    %Helheim.Comment{
+      author: build(:user),
+      photo: build(:photo),
+      body: "My Aweseome Comment"
+    }
+  end
+
   def notification_subscription_factory do
     %Helheim.NotificationSubscription{
       user: build(:user),

@@ -30,8 +30,9 @@ import { AdminTermsForm } from "web/static/js/admin_terms_form";
 import { Embeds } from "web/static/js/embeds/embeds";
 import { NotificationsSwitch } from "web/static/js/notifications_switch";
 import { PhotoSorter } from "web/static/js/photo_sorter";
-import { MentionableInput } from "web/static/js/mentionable"
-import { Mentionable } from "web/static/js/mentionable"
+import { MentionableInput } from "web/static/js/mentionable";
+import { Mentionable } from "web/static/js/mentionable";
+import { PopoverConfirmable } from "web/static/js/popover_confirmable";
 
 export var App = {
   run: function(){
@@ -49,6 +50,7 @@ export var App = {
     PhotoSorter.run();
     MentionableInput.run();
     Mentionable.run();
+    PopoverConfirmable.run();
   }
 }
 

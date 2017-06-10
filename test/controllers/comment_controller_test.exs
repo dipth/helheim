@@ -47,6 +47,13 @@ defmodule Helheim.CommentControllerTest do
       conn  = get conn, "/profiles/#{block.blocker.id}/comments"
       assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
     end
+
+    test "does not show deleted comments", %{conn: conn} do
+      comment = insert(:profile_comment, deleted_at: DateTime.utc_now, body: "This is a deleted comment")
+      profile = comment.profile
+      conn    = get conn, "/profiles/#{profile.id}/comments"
+      refute html_response(conn, 200) =~ "This is a deleted comment"
+    end
   end
 
   describe "index/2 for a profile when not signed in" do
@@ -227,6 +234,46 @@ defmodule Helheim.CommentControllerTest do
     test "it redirects to the login page", %{conn: conn} do
       photo = insert(:photo)
       conn  = post conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/comments", comment: @comment_attrs
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # delete/2
+  describe "delete/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it returns a successfull response when the comment could be deleted", %{conn: conn},
+      CommentService, [], [delete!: fn(_comment, _user) -> {:ok, %{comment: %{}}} end] do
+
+      comment = insert(:blog_post_comment)
+      conn = delete conn, "/comments/#{comment.id}"
+      assert response(conn, 200)
+    end
+
+    test_with_mock "it returns a 401 response when the comment could not be deleted", %{conn: conn},
+      CommentService, [], [delete!: fn(_comment, _user) -> {:error, nil, nil, nil} end] do
+
+      comment = insert(:blog_post_comment)
+      conn = delete conn, "/comments/#{comment.id}"
+      assert response(conn, 401)
+    end
+
+    test_with_mock "it does not invoke the CommentService and instead shows an error page when the comment does not exist", %{conn: conn},
+      CommentService, [], [delete!: fn(_comment, _user) -> raise("CommentService was called!") end] do
+
+      assert_error_sent :not_found, fn ->
+        delete conn, "/comments/1"
+      end
+    end
+  end
+
+  describe "delete/2 when not signed in" do
+    test_with_mock "it does not invoke the CommentService and instead redirects to the login page", %{conn: conn},
+      CommentService, [], [delete!: fn(_comment, _user) -> raise("CommentService was called!") end] do
+
+      comment = insert(:blog_post_comment)
+      conn = delete conn, "/comments/#{comment.id}"
       assert redirected_to(conn) == session_path(conn, :new)
     end
   end

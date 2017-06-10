@@ -1,5 +1,6 @@
 defmodule Helheim.CommentView do
   use Helheim.Web, :view
+  alias Helheim.Comment
   alias Helheim.User
   alias Helheim.BlogPost
   alias Helheim.Photo
@@ -38,5 +39,27 @@ defmodule Helheim.CommentView do
     )
 
     render("comments.html", opts)
+  end
+
+  def delete_comment_button(conn, comment) do
+    cond do
+      Comment.deletable_by?(comment, current_resource(conn)) ->
+        css_class      = "btn btn-link btn-danger btn-sm popover-confirmable"
+        label          = gettext("Delete")
+        question_label = gettext("Are you sure you want to delete this comment?")
+        submit_label   = gettext("Delete")
+        cancel_label   = gettext("Cancel")
+        submit_path    = comment_path(conn, :delete, comment)
+        submit_type    = "DELETE"
+
+        link(to: "#", class: css_class, data: ["question-label": question_label, "submit-label": submit_label, "cancel-label": cancel_label, "submit-path": submit_path, "submit-type": submit_type]) do
+          [
+            content_tag(:i, "", class: "fa fa-trash"),
+            " ",
+            label
+          ]
+        end
+      true -> ""
+    end
   end
 end

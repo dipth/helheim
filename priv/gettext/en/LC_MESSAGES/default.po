@@ -325,7 +325,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:211
+#: web/models/user.ex:212
 msgid "does not match your current password"
 msgstr ""
 
@@ -410,16 +410,17 @@ msgstr ""
 msgid "Blog post created successfully."
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:101
+#: web/controllers/blog_post_controller.ex:102
 msgid "Blog post deleted successfully."
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:88
+#: web/controllers/blog_post_controller.ex:89
 msgid "Blog post updated successfully."
 msgstr ""
 
 #: web/templates/blog_post/show.html.eex:30 web/templates/photo/show.html.eex:41
-#: web/templates/photo_album/show.html.eex:69
+#: web/templates/photo_album/show.html.eex:69 web/views/comment_view.ex:48
+#: web/views/comment_view.ex:50
 msgid "Delete"
 msgstr ""
 
@@ -443,15 +444,15 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:26
+#: web/controllers/comment_controller.ex:27
 msgid "Comment created successfully"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:38 web/views/comment_view.ex:13
+#: web/templates/layout/sidebar.html.eex:38 web/views/comment_view.ex:14
 msgid "Guest Book"
 msgstr ""
 
-#: web/views/comment_view.ex:18
+#: web/views/comment_view.ex:19
 msgid "Newest Guest Book Entries"
 msgstr ""
 
@@ -467,7 +468,7 @@ msgstr ""
 msgid "Show All"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:30
+#: web/controllers/comment_controller.ex:31
 msgid "Unable to create comment"
 msgstr ""
 
@@ -985,7 +986,7 @@ msgstr ""
 msgid "Blog posts"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:12 web/views/comment_view.ex:20
+#: web/templates/help/embeds.html.eex:12 web/views/comment_view.ex:21
 msgid "Comments"
 msgstr ""
 
@@ -1166,7 +1167,7 @@ msgstr ""
 msgid "%{who} wrote a reply to the forum topic: %{what}"
 msgstr ""
 
-#: web/views/comment_view.ex:19
+#: web/views/comment_view.ex:20
 msgid "Guest Book Entries"
 msgstr ""
 
@@ -1394,4 +1395,12 @@ msgstr ""
 
 #: web/templates/page/front_page.html.eex:23
 msgid "Recently logged in users"
+msgstr ""
+
+#: web/views/comment_view.ex:51
+msgid "Cancel"
+msgstr ""
+
+#: web/views/comment_view.ex:49
+msgid "Are you sure you want to delete this comment?"
 msgstr ""

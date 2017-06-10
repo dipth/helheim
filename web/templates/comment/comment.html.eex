@@ -1,4 +1,4 @@
-<div class="">
+<div class="comment" data-id="<%= @comment.id %>">
   <div class="d-flex flex-row justify-content-between mb-1">
     <div>
       <%= username_with_avatar @comment.author, %{avatar_before_username: true} %>
@@ -12,5 +12,6 @@
   <div class="embeds mentionable">
     <%= text_to_html @comment.body %>
   </div>
+  <%= Helheim.CommentView.delete_comment_button(@conn, @comment) %>
   <hr>
 </div>
