@@ -29,7 +29,7 @@ defmodule Helheim.Comment do
 
   def with_preloads(query) do
     query
-    |> preload([:author, :profile, :blog_post, :photo_album, :photo, :deleter])
+    |> preload([:author, :profile, :blog_post, :photo_album, [photo: :photo_album], :deleter])
   end
 
   @doc """
