@@ -31,6 +31,16 @@ defmodule Helheim.PrivateConversationController do
 
     conn
     |> Helheim.Plug.LoadUnreadPrivateConversations.call([]) # We need to reload unread conversations, otherwise the count could be off
-    |> render("show.html", messages: messages, me: me, partner: partner)
+    |> render("show.html", messages: messages, me: me, partner: partner, partner_id: partner_id)
+  end
+
+  def delete(conn, %{"partner_id" => partner_id}) do
+    me              = current_resource(conn)
+    conversation_id = PrivateMessage.calculate_conversation_id(me, partner_id)
+    {:ok, _ }       = PrivateMessage.hide!(conversation_id, %{user: me})
+
+    conn
+    |> put_flash(:success, gettext("The conversation was hidden"))
+    |> redirect(to: private_conversation_path(conn, :index))
   end
 end

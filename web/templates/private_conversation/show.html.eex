@@ -6,6 +6,13 @@
   <% end %>
 </h3>
 
+<p>
+  <%= link to: private_conversation_path(@conn, :delete, @partner_id), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-sm" do %>
+    <i class="fa fa-trash"></i>
+    <span class=""><%= gettext "Hide Conversation" %></span>
+  <% end %>
+</p>
+
 <%= if Enum.empty? @messages do %>
   <div class="alert alert-info text-center" role="alert">
     <%= gettext "There are no messages in this conversation..." %><br>

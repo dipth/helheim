@@ -349,7 +349,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:67
+#: web/controllers/profile_controller.ex:68
 msgid "Profile updated!"
 msgstr ""
 
@@ -403,6 +403,7 @@ msgstr ""
 #: web/templates/admin/term/index.html.eex:35
 #: web/templates/blog_post/show.html.eex:28 web/templates/photo/show.html.eex:39
 #: web/templates/photo_album/show.html.eex:67
+#: web/templates/private_conversation/show.html.eex:10
 msgid "Are you sure?"
 msgstr ""
 
@@ -444,7 +445,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:27
+#: web/controllers/comment_controller.ex:28
 msgid "Comment created successfully"
 msgstr ""
 
@@ -468,7 +469,7 @@ msgstr ""
 msgid "Show All"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:31
+#: web/controllers/comment_controller.ex:32
 msgid "Unable to create comment"
 msgstr ""
 
@@ -488,11 +489,11 @@ msgstr ""
 msgid "Send private message"
 msgstr ""
 
-#: web/templates/private_conversation/show.html.eex:12
+#: web/templates/private_conversation/show.html.eex:19
 msgid "Start by writing a message below!"
 msgstr ""
 
-#: web/templates/private_conversation/show.html.eex:11
+#: web/templates/private_conversation/show.html.eex:18
 msgid "There are no messages in this conversation..."
 msgstr ""
 
@@ -619,11 +620,11 @@ msgstr ""
 msgid "Photo Album deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:86
+#: web/controllers/photo_controller.ex:87
 msgid "Photo deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:71
+#: web/controllers/photo_controller.ex:72
 msgid "Photo details updated successfully."
 msgstr ""
 
@@ -1403,4 +1404,13 @@ msgstr ""
 
 #: web/views/comment_view.ex:49
 msgid "Are you sure you want to delete this comment?"
+msgstr ""
+
+#: web/templates/private_conversation/show.html.eex:12
+msgid "Hide Conversation"
+msgstr ""
+
+#, fuzzy
+#: web/controllers/private_conversation_controller.ex:43
+msgid "The conversation was hidden"
 msgstr ""

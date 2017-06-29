@@ -100,6 +100,31 @@ defmodule Helheim.PrivateConversationControllerTest do
   end
 
   ##############################################################################
+  # delete/2
+  describe "delete/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "hides the conversation", %{conn: conn, user: user_a},
+      PrivateMessage, [:passthrough], [hide!: fn(_conversation_id, %{user: _user}) -> {:ok, 1} end] do
+
+      user_b          = insert(:user)
+      conversation_id = PrivateMessage.calculate_conversation_id(user_a, user_b)
+      delete conn, "/private_conversations/#{user_b.id}"
+      assert called PrivateMessage.hide!(conversation_id, %{user: user_a})
+    end
+  end
+
+  describe "delete/2 when not signed in" do
+    test_with_mock "does not hide the conversation and instead redirects to the sign in page", %{conn: conn},
+      PrivateMessage, [:passthrough], [hide!: fn(_conversation_id, %{user: _user}) -> raise "PrivateMessage.hide! was called!" end] do
+
+      other_user = insert(:user)
+      conn = delete conn, "/private_conversations/#{other_user.id}"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
   # helpers
   defp insert_message(sender, recipient, body) do
     conversation_id = PrivateMessage.calculate_conversation_id(sender, recipient)

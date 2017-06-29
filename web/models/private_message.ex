@@ -5,9 +5,11 @@ defmodule Helheim.PrivateMessage do
   alias Helheim.User
 
   schema "private_messages" do
-    field      :conversation_id, :string
-    field      :body,            :string
-    field      :read_at,         Calecto.DateTimeUTC
+    field      :conversation_id,        :string
+    field      :body,                   :string
+    field      :read_at,                Calecto.DateTimeUTC
+    field      :hidden_by_sender_at,    Calecto.DateTimeUTC
+    field      :hidden_by_recipient_at, Calecto.DateTimeUTC
 
     timestamps()
 
@@ -37,7 +39,9 @@ defmodule Helheim.PrivateMessage do
 
   def by_or_for(query, user) do
     from m in query,
-    where: m.sender_id == ^user.id or m.recipient_id == ^user.id
+    where:
+      (m.sender_id == ^user.id and is_nil(m.hidden_by_sender_at)) or
+      (m.recipient_id == ^user.id and is_nil(m.hidden_by_recipient_at))
   end
 
   def unique_conversations_for(user) do
@@ -95,6 +99,28 @@ defmodule Helheim.PrivateMessage do
       where: m.conversation_id == ^conversation_id and m.recipient_id == ^recipient.id,
       update: [set: [read_at: ^DateTime.utc_now]]
     ) |> Repo.update_all([])
+  end
+
+  def hide!(conversation_id, %{recipient: recipient}) do
+    from(
+      m in PrivateMessage,
+      where: m.conversation_id == ^conversation_id and m.recipient_id == ^recipient.id,
+      update: [set: [hidden_by_recipient_at: ^DateTime.utc_now]]
+    ) |> Repo.update_all([])
+  end
+
+  def hide!(conversation_id, %{sender: sender}) do
+    from(
+      m in PrivateMessage,
+      where: m.conversation_id == ^conversation_id and m.sender_id == ^sender.id,
+      update: [set: [hidden_by_sender_at: ^DateTime.utc_now]]
+    ) |> Repo.update_all([])
+  end
+
+  def hide!(conversation_id, %{user: user}) do
+    with {num1, _} <- hide!(conversation_id, %{recipient: user}),
+         {num2, _} <- hide!(conversation_id, %{sender: user}),
+      do: {:ok, num1 + num2}
   end
 
   defp last_conversation_msg_ids_for(user) do

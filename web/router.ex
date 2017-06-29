@@ -83,7 +83,7 @@ defmodule Helheim.Router do
       resources "/photo_positions", PhotoPositionController, singleton: true, only: [:update], as: :photo_positions
     end
     resources "/photos", PhotoController, only: [:index]
-    resources "/private_conversations", PrivateConversationController, param: "partner_id", only: [:index, :show] do
+    resources "/private_conversations", PrivateConversationController, param: "partner_id", only: [:index, :show, :delete] do
       resources "/messages", PrivateMessageController, only: [:create], as: :message
     end
     resources "/forums", ForumController, only: [:index, :show] do
