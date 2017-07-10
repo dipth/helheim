@@ -1,0 +1,15 @@
+<div class="d-flex justify-content-between">
+  <%= if @prev_photo do %>
+    <%= link to: public_profile_photo_album_photo_path(@conn, :show, @user, @photo_album, @prev_photo), class: "btn btn-sm btn-outline-primary" do %>
+      <i class="fa fa-arrow-left"></i>
+      <%= gettext "Previous" %>
+    <% end %>
+  <% end %>
+
+  <%= if @next_photo do %>
+    <%= link to: public_profile_photo_album_photo_path(@conn, :show, @user, @photo_album, @next_photo), class: "ml-auto btn btn-sm btn-outline-primary" do %>
+      <%= gettext "Next" %>
+      <i class="fa fa-arrow-right"></i>
+    <% end %>
+  <% end %>
+</div>

@@ -96,6 +96,26 @@ defmodule Helheim.Photo do
     order_by: [p.position, p.inserted_at]
   end
 
+  def previous(photo) do
+    from(
+      p in Helheim.Photo,
+      where:    p.photo_album_id == ^photo.photo_album_id,
+      where:    p.position < ^photo.position or (p.position == ^photo.position and p.inserted_at < ^photo.inserted_at),
+      order_by: [desc: p.position, desc: p.inserted_at],
+      limit:    1
+    ) |> Repo.one
+  end
+
+  def next(photo) do
+    from(
+      p in Helheim.Photo,
+      where:    p.photo_album_id == ^photo.photo_album_id,
+      where:    p.position > ^photo.position or (p.position == ^photo.position and p.inserted_at > ^photo.inserted_at),
+      order_by: [p.position, p.inserted_at],
+      limit:    1
+    ) |> Repo.one
+  end
+
   def total_used_space_by(user) do
     ((from p in Helheim.Photo,
       join:   pa in Helheim.PhotoAlbum, on: pa.id == p.photo_album_id,

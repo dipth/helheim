@@ -232,6 +232,72 @@ defmodule Helheim.PhotoTest do
     end
   end
 
+  describe "previous/1" do
+    test "returns the previous photo in the same album by position" do
+      album      = insert(:photo_album)
+      photo1     = insert(:photo, position: 1, photo_album: album)
+      photo2     = insert(:photo, position: 2, photo_album: album)
+      _photo3    = insert(:photo, position: 3, photo_album: album)
+      prev_photo = Photo.previous(photo2)
+      assert prev_photo.id == photo1.id
+    end
+
+    test "returns the previous photo in the same album by inserted_at if another photo with the same position exists" do
+      album      = insert(:photo_album)
+      _photo1    = insert(:photo, position: 1, photo_album: album)
+      photo2     = insert(:photo, position: 2, photo_album: album)
+      photo3     = insert(:photo, position: 2, photo_album: album)
+      prev_photo = Photo.previous(photo3)
+      assert prev_photo.id == photo2.id
+    end
+
+    test "returns nil if there are no previous photos in the same album" do
+      photo1     = insert(:photo, position: 1)
+      prev_photo = Photo.previous(photo1)
+      refute prev_photo
+    end
+
+    test "does not return photos from other albums" do
+      _photo1    = insert(:photo, position: 1)
+      photo2     = insert(:photo, position: 2)
+      prev_photo = Photo.previous(photo2)
+      refute prev_photo
+    end
+  end
+
+  describe "next/1" do
+    test "returns the next photo in the same album by position" do
+      album      = insert(:photo_album)
+      _photo1    = insert(:photo, position: 1, photo_album: album)
+      photo2     = insert(:photo, position: 2, photo_album: album)
+      photo3     = insert(:photo, position: 3, photo_album: album)
+      next_photo = Photo.next(photo2)
+      assert next_photo.id == photo3.id
+    end
+
+    test "returns the next photo in the same album by inserted_at if another photo with the same position exists" do
+      album      = insert(:photo_album)
+      photo1     = insert(:photo, position: 1, photo_album: album)
+      photo2     = insert(:photo, position: 1, photo_album: album)
+      _photo3    = insert(:photo, position: 2, photo_album: album)
+      next_photo = Photo.next(photo1)
+      assert next_photo.id == photo2.id
+    end
+
+    test "returns nil if there are no next photos in the same album" do
+      photo1     = insert(:photo, position: 1)
+      next_photo = Photo.next(photo1)
+      refute next_photo
+    end
+
+    test "does not return photos from other albums" do
+      photo1     = insert(:photo, position: 1)
+      _photo2    = insert(:photo, position: 2)
+      next_photo = Photo.next(photo1)
+      refute next_photo
+    end
+  end
+
   def new_changeset(attrs \\ %{}, photo_album \\ insert(:photo_album)) do
     photo_album |> Ecto.build_assoc(:photos) |> Photo.changeset(attrs)
   end

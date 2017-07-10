@@ -401,7 +401,7 @@ msgstr ""
 #: web/templates/admin/forum_category/index.html.eex:13
 #: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/admin/term/index.html.eex:35
-#: web/templates/blog_post/show.html.eex:28 web/templates/photo/show.html.eex:39
+#: web/templates/blog_post/show.html.eex:28 web/templates/photo/show.html.eex:42
 #: web/templates/photo_album/show.html.eex:67
 #: web/templates/private_conversation/show.html.eex:10
 msgid "Are you sure?"
@@ -419,7 +419,7 @@ msgstr ""
 msgid "Blog post updated successfully."
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:30 web/templates/photo/show.html.eex:41
+#: web/templates/blog_post/show.html.eex:30 web/templates/photo/show.html.eex:44
 #: web/templates/photo_album/show.html.eex:69 web/views/comment_view.ex:48
 #: web/views/comment_view.ex:50
 msgid "Delete"
@@ -608,7 +608,7 @@ msgstr ""
 msgid "Drop photos here (or click) to upload..."
 msgstr ""
 
-#: web/templates/photo/edit.html.eex:3 web/templates/photo/show.html.eex:36
+#: web/templates/photo/edit.html.eex:3 web/templates/photo/show.html.eex:39
 msgid "Edit Photo Details"
 msgstr ""
 
@@ -620,11 +620,11 @@ msgstr ""
 msgid "Photo Album deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:87
+#: web/controllers/photo_controller.ex:89
 msgid "Photo deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:72
+#: web/controllers/photo_controller.ex:74
 msgid "Photo details updated successfully."
 msgstr ""
 
@@ -636,7 +636,7 @@ msgstr ""
 msgid "Upload Photos"
 msgstr ""
 
-#: web/templates/photo/show.html.eex:26
+#: web/templates/photo/show.html.eex:27
 msgid "Uploaded"
 msgstr ""
 
@@ -1412,4 +1412,12 @@ msgstr ""
 
 #: web/controllers/private_conversation_controller.ex:43
 msgid "The conversation was hidden"
+msgstr ""
+
+#: web/templates/photo/_navigation.html.eex:11
+msgid "Next"
+msgstr ""
+
+#: web/templates/photo/_navigation.html.eex:5
+msgid "Previous"
 msgstr ""

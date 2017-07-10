@@ -41,14 +41,16 @@ defmodule Helheim.PhotoController do
     photo_album = assoc(user, :photo_albums)
                   |> PhotoAlbum.viewable_by(user, current_resource(conn))
                   |> Repo.get!(photo_album_id)
-    photo       = assoc(photo_album, :photos) |> preload(:photo_album) |> Repo.get!(id)
-    comments    = assoc(photo, :comments)
-                  |> Comment.not_deleted
-                  |> Comment.newest
-                  |> Comment.with_preloads
-                  |> Repo.paginate(page: sanitized_page(params["page"]))
+    photo      = assoc(photo_album, :photos) |> preload(:photo_album) |> Repo.get!(id)
+    prev_photo = Photo.previous(photo)
+    next_photo = Photo.next(photo)
+    comments   = assoc(photo, :comments)
+                 |> Comment.not_deleted
+                 |> Comment.newest
+                 |> Comment.with_preloads
+                 |> Repo.paginate(page: sanitized_page(params["page"]))
     Helheim.VisitorLogEntry.track! current_resource(conn), photo
-    render(conn, "show.html", user: user, photo_album: photo_album, photo: photo, comments: comments)
+    render(conn, "show.html", user: user, photo_album: photo_album, photo: photo, prev_photo: prev_photo, next_photo: next_photo, comments: comments)
   end
 
   def edit(conn, %{"photo_album_id" => photo_album_id, "id" => id}) do
