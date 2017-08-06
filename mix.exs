@@ -4,7 +4,7 @@ defmodule Helheim.Mixfile do
   def project do
     [app: :helheim,
      version: "0.0.1",
-     elixir: "~> 1.2",
+     elixir: "~> 1.5",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -31,7 +31,7 @@ defmodule Helheim.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.2.1"},
+    [{:phoenix, "~> 1.3"},
      {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_ecto, "~> 3.0"},
      {:postgrex, ">= 0.0.0"},
@@ -39,25 +39,27 @@ defmodule Helheim.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:comeonin, "~> 3.0"},
+     {:comeonin, "~> 4.0"},
+     {:bcrypt_elixir, "~> 0.12.0"},
+     {:pbkdf2_elixir, "~> 0.12"},
      {:guardian, "~> 0.14"},
      {:secure_random, "~> 0.5.0"},
      {:bamboo, "~> 0.7"},
-     {:bamboo_postmark, "~> 0.2.0"},
+     {:bamboo_postmark, "~> 0.4.1"},
      {:calendar, "~> 0.17"},
      {:calendar_translations, "~> 0.0.4"},
      {:calecto, "~> 0.16.0"},
      {:timex, "~> 3.0"},
      {:timex_ecto, "~> 3.0"},
-     {:wallaby, "~> 0.16.1"},
-     {:ex_machina, "~> 1.0", only: :test},
-     {:sentry, "~> 2.1"},
-     {:arc, "~> 0.6.0"},
-     {:arc_ecto, "~> 0.5.0"},
-     {:hackney, "1.6.5", override: true}, # Used by arc
-     {:ex_aws, "~> 1.0.0"},               # Used by arc
-     {:poison, "~> 2.0"},                 # Used by arc
-     {:sweet_xml, "~> 0.5"},              # Used by arc
+     {:wallaby, "~> 0.18.1"},
+     {:ex_machina, "~> 2.0", only: :test},
+     {:sentry, "~> 5.0.1"},
+     {:arc, "~> 0.8.0"},
+     {:arc_ecto, "~> 0.7.0"},
+     {:hackney, "~> 1.9", override: true},# Used by arc
+     {:ex_aws, "~> 1.1.3"},               # Used by arc
+     {:poison, "~> 3.1"},                 # Used by arc
+     {:sweet_xml, "~> 0.6"},              # Used by arc
      {:html_sanitize_ex, "~> 1.1"},
      {:crutches, "~> 1.0.0"},
      {:scrivener_ecto, "~> 1.1"}, # Pagination

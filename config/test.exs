@@ -27,8 +27,8 @@ config :guardian, Guardian,
   secret_key: "MHtXjXB4jXOtVQAJE39RxEaHOPj8jJiAI5HLW+p8xC1IeUcnc+T81t9KiC/9a4wh"
 
 # Make password hashing faster during tests
-config :comeonin, :bcrypt_log_rounds, 4
-config :comeonin, :pbkdf2_rounds, 1
+config :bcrypt_elixir, :log_rounds, 4
+config :pbkdf2_elixir, :rounds, 1
 
 # Configure mailer
 config :helheim, Helheim.Mailer,
