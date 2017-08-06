@@ -36,7 +36,9 @@ config :guardian, Guardian,
 # Configure Sentry
 config :sentry,
   environment_name: Mix.env,
-  included_environments: [:prod]
+  included_environments: [:prod],
+  enable_source_code_context: true,
+  root_source_code_path: File.cwd!
 
 # Configure Scout APM
 config :scout_apm,
