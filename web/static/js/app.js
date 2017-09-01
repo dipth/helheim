@@ -19,7 +19,6 @@
 // paths "./socket" or full ones "web/static/js/socket".
 
 import { Leaf } from "web/static/js/leaf";
-import { RestfulizerTweak } from "web/static/js/restfulizer";
 import { BootstrapStuff } from "web/static/js/bootstrap_stuff";
 import { ProfileSettings } from "web/static/js/profile_settings";
 import { BlogPostForm } from "web/static/js/blog_post_form";
@@ -38,7 +37,6 @@ export var App = {
   run: function(){
     Embeds.run();
     Leaf.run();
-    RestfulizerTweak.run();
     BootstrapStuff.run();
     ProfileSettings.run();
     BlogPostForm.run();

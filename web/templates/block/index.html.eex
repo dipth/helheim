@@ -23,7 +23,7 @@
               </small>
             </td>
             <td class="text-right">
-              <%= link to: public_profile_block_path(@conn, :create, block.blockee), class: "rest", "data-method": "DELETE" do %>
+              <%= link to: public_profile_block_path(@conn, :create, block.blockee), method: "DELETE" do %>
                 <i class="fa fa-unlock" title="<%= gettext "Unblock user" %>"></i>
                 <span class="hidden-xs-down"><%= gettext "Unblock user" %></span>
               <% end %>

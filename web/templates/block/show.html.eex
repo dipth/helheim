@@ -12,7 +12,7 @@
     <strong class="text-danger"><%= gettext "You are also blocking %{username}", username: @blocker.username %>!</strong>
   <% else %>
     <p class="mb-0 mt-1">
-      <%= link to: public_profile_block_path(@conn, :delete, @blocker), class: "btn btn-default btn-block rest", "data-method": "POST" do %>
+      <%= link to: public_profile_block_path(@conn, :create, @blocker), class: "btn btn-default btn-block", method: "POST" do %>
         <i class="fa fa-lock"></i>
         <%= gettext "Click here to also block %{username}", username: @blocker.username %>
       <% end %>
