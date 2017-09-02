@@ -84,6 +84,7 @@ msgstr ""
 msgid "Sign In"
 msgstr ""
 
+#: web/templates/profile/index.html.eex:15
 #: web/templates/registration/new.html.eex:9
 msgid "Username"
 msgstr ""
@@ -325,7 +326,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:212
+#: web/models/user.ex:233
 msgid "does not match your current password"
 msgstr ""
 
@@ -349,7 +350,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:68
+#: web/controllers/profile_controller.ex:77
 msgid "Profile updated!"
 msgstr ""
 
@@ -375,7 +376,7 @@ msgstr ""
 msgid "Newest Photos"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:33
+#: web/templates/layout/sidebar.html.eex:39
 msgid "Your Profile"
 msgstr ""
 
@@ -394,7 +395,7 @@ msgstr ""
 
 #: web/templates/blog_post/edit.html.eex:2
 #: web/templates/blog_post/new.html.eex:2
-#: web/templates/layout/sidebar.html.eex:48
+#: web/templates/layout/sidebar.html.eex:54
 msgid "Your Blog Posts"
 msgstr ""
 
@@ -449,7 +450,7 @@ msgstr ""
 msgid "Comment created successfully"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:38 web/views/comment_view.ex:14
+#: web/templates/layout/sidebar.html.eex:44 web/views/comment_view.ex:14
 msgid "Guest Book"
 msgstr ""
 
@@ -511,7 +512,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/layout/sidebar.html.eex:44
+#: web/templates/layout/sidebar.html.eex:50
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr ""
@@ -548,6 +549,7 @@ msgstr ""
 
 #: web/templates/profile/details.html.eex:31
 #: web/templates/profile/edit.html.eex:46
+#: web/templates/profile/index.html.eex:20
 msgid "Location"
 msgstr ""
 
@@ -640,7 +642,7 @@ msgstr ""
 msgid "Uploaded"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:53
+#: web/templates/layout/sidebar.html.eex:59
 msgid "Your Photo Albums"
 msgstr ""
 
@@ -786,7 +788,7 @@ msgstr ""
 msgid "Submit new reply"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:30
+#: web/templates/layout/sidebar.html.eex:36
 msgid "You"
 msgstr ""
 
@@ -991,7 +993,7 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:3 web/templates/layout/sidebar.html.eex:23
+#: web/templates/help/embeds.html.eex:3 web/templates/layout/sidebar.html.eex:29
 msgid "Embeds"
 msgstr ""
 
@@ -1003,7 +1005,7 @@ msgstr ""
 msgid "Forum topics"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:2 web/templates/layout/sidebar.html.eex:17
+#: web/templates/help/embeds.html.eex:2 web/templates/layout/sidebar.html.eex:23
 msgid "Help"
 msgstr ""
 
@@ -1144,6 +1146,7 @@ msgstr ""
 msgid "Photos"
 msgstr ""
 
+#: web/templates/layout/sidebar.html.eex:16
 #: web/templates/profile/index.html.eex:2
 msgid "Profiles"
 msgstr ""
@@ -1420,4 +1423,9 @@ msgstr ""
 
 #: web/templates/photo/_navigation.html.eex:5
 msgid "Previous"
+msgstr ""
+
+#: web/templates/profile/index.html.eex:8
+#: web/templates/profile/index.html.eex:24
+msgid "Search"
 msgstr ""
