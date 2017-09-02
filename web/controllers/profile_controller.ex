@@ -9,6 +9,15 @@ defmodule Helheim.ProfileController do
   plug :find_user when action in [:show]
   plug Helheim.Plug.EnforceBlock when action in [:show]
 
+  def index(conn, %{"search" => search_params} = params) do
+    users = User
+            |> User.confirmed
+            |> User.newest
+            |> User.search(search_params)
+            |> Repo.paginate(page: sanitized_page(params["page"]))
+    render(conn, "index.html", users: users)
+  end
+
   def index(conn, params) do
     users = User
             |> User.confirmed

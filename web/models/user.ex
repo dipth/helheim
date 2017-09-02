@@ -66,6 +66,27 @@ defmodule Helheim.User do
     from u in query, where: not is_nil(u.confirmed_at)
   end
 
+  def search(query, search_params) do
+    IO.inspect(query)
+    IO.inspect(search_params)
+    query
+    |> search_by_username(search_params["username"])
+    |> search_by_location(search_params["location"])
+  end
+
+  def search_by_username(query, nil), do: query
+  def search_by_username(query, ""), do: query
+  def search_by_username(query, username) do
+    IO.inspect username
+    from u in query, where: ilike(u.username, ^"%#{username}%")
+  end
+
+  def search_by_location(query, nil), do: query
+  def search_by_location(query, ""), do: query
+  def search_by_location(query, location) do
+    from u in query, where: ilike(u.location, ^"%#{location}%")
+  end
+
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """

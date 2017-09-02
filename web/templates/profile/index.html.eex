@@ -2,6 +2,31 @@
   <li class="breadcrumb-item"><%= gettext "Profiles" %></li>
 </ol>
 
+<div class="card" id="search-outer">
+  <div class="card-header">
+    <a data-toggle="collapse" data-parent="#search-outer" href="#search-body">
+      <%= gettext "Search" %>
+    </a>
+  </div>
+  <div id="search-body" class="collapse hide">
+    <div class="card-block">
+      <%= form_for @conn, public_profile_path(@conn, :index), [as: :search, method: :get], fn f -> %>
+        <div class="form-group">
+          <%= label f, :username, gettext("Username") %>
+          <%= text_input f, :username, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= label f, :location, gettext("Location") %>
+          <%= text_input f, :location, class: "form-control" %>
+        </div>
+
+        <%= submit gettext("Search"), class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
 <div class="card-group card-group-photos">
   <%= for user <- @users.entries do %>
     <div class="card">

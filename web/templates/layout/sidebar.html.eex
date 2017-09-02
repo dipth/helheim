@@ -10,6 +10,12 @@
           <%= gettext("Forums") %>
         <% end %>
       </li>
+      <li class="nav-item">
+        <%= link to: public_profile_path(@conn, :index), class: "nav-link" do %>
+          <i class="fa fa-users"></i>
+          <%= gettext("Profiles") %>
+        <% end %>
+      </li>
 
       <li class="nav-item nav-dropdown">
         <a class="nav-link nav-dropdown-toggle" href="#">

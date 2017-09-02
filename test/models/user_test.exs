@@ -336,4 +336,68 @@ defmodule Helheim.UserTest do
       refute Enum.member?(user_ids, user2.id)
     end
   end
+
+  describe "search_by_username/2" do
+    test "it finds users where the username match the search term case insensitive" do
+      user1 = insert(:user, username: "FoO")
+      user2 = insert(:user, username: "FoOo")
+      user3 = insert(:user, username: "Bar")
+      user_ids = User |> User.search_by_username("oo") |> Repo.all |> Enum.map(fn(p) -> p.id end)
+      assert Enum.member?(user_ids, user1.id)
+      assert Enum.member?(user_ids, user2.id)
+      refute Enum.member?(user_ids, user3.id)
+    end
+
+    test "it returns all users if the search term is blank" do
+      user1 = insert(:user, username: "FoO")
+      user2 = insert(:user, username: "FoOo")
+      user3 = insert(:user, username: "Bar")
+      user_ids = User |> User.search_by_username("") |> Repo.all |> Enum.map(fn(p) -> p.id end)
+      assert Enum.member?(user_ids, user1.id)
+      assert Enum.member?(user_ids, user2.id)
+      assert Enum.member?(user_ids, user3.id)
+    end
+
+    test "it returns all users if the search term is nil" do
+      user1 = insert(:user, username: "FoO")
+      user2 = insert(:user, username: "FoOo")
+      user3 = insert(:user, username: "Bar")
+      user_ids = User |> User.search_by_username(nil) |> Repo.all |> Enum.map(fn(p) -> p.id end)
+      assert Enum.member?(user_ids, user1.id)
+      assert Enum.member?(user_ids, user2.id)
+      assert Enum.member?(user_ids, user3.id)
+    end
+  end
+
+  describe "search_by_location/2" do
+    test "it finds users where the location match the search term case insensitive" do
+      user1 = insert(:user, location: "FoO")
+      user2 = insert(:user, location: "FoOo")
+      user3 = insert(:user, location: "Bar")
+      user_ids = User |> User.search_by_location("oo") |> Repo.all |> Enum.map(fn(p) -> p.id end)
+      assert Enum.member?(user_ids, user1.id)
+      assert Enum.member?(user_ids, user2.id)
+      refute Enum.member?(user_ids, user3.id)
+    end
+
+    test "it returns all users if the search term is blank" do
+      user1 = insert(:user, location: "FoO")
+      user2 = insert(:user, location: "FoOo")
+      user3 = insert(:user, location: "Bar")
+      user_ids = User |> User.search_by_location("") |> Repo.all |> Enum.map(fn(p) -> p.id end)
+      assert Enum.member?(user_ids, user1.id)
+      assert Enum.member?(user_ids, user2.id)
+      assert Enum.member?(user_ids, user3.id)
+    end
+
+    test "it returns all users if the search term is nil" do
+      user1 = insert(:user, location: "FoO")
+      user2 = insert(:user, location: "FoOo")
+      user3 = insert(:user, location: "Bar")
+      user_ids = User |> User.search_by_location(nil) |> Repo.all |> Enum.map(fn(p) -> p.id end)
+      assert Enum.member?(user_ids, user1.id)
+      assert Enum.member?(user_ids, user2.id)
+      assert Enum.member?(user_ids, user3.id)
+    end
+  end
 end
