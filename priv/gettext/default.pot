@@ -326,7 +326,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:233
+#: web/models/user.ex:238
 msgid "does not match your current password"
 msgstr ""
 
@@ -350,7 +350,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:77
+#: web/controllers/profile_controller.ex:70
 msgid "Profile updated!"
 msgstr ""
 
@@ -1426,6 +1426,26 @@ msgid "Previous"
 msgstr ""
 
 #: web/templates/profile/index.html.eex:8
-#: web/templates/profile/index.html.eex:24
+#: web/templates/profile/index.html.eex:33
 msgid "Search"
+msgstr ""
+
+#: web/templates/profile/index.html.eex:51
+msgid "Created"
+msgstr ""
+
+#: web/templates/profile/index.html.eex:55
+msgid "Login"
+msgstr ""
+
+#: web/templates/profile/index.html.eex:27
+msgid "Sort by creation"
+msgstr ""
+
+#: web/templates/profile/index.html.eex:28
+msgid "Sort by login"
+msgstr ""
+
+#: web/templates/profile/index.html.eex:25
+msgid "Sorting"
 msgstr ""

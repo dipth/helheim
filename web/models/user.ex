@@ -84,6 +84,14 @@ defmodule Helheim.User do
     from u in query, where: ilike(u.location, ^"%#{location}%")
   end
 
+  def sort(query, nil), do: query
+  def sort(query, "creation") do
+    from u in query, order_by: [desc: u.inserted_at]
+  end
+  def sort(query, "login") do
+    from u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_at)]
+  end
+
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """

@@ -400,4 +400,32 @@ defmodule Helheim.UserTest do
       assert Enum.member?(user_ids, user3.id)
     end
   end
+
+  describe "sort/2" do
+    test "orders newer users before older users when passing `creation` as the ordering key" do
+      user1 = insert(:user, inserted_at: Timex.shift(Timex.now, minutes: -1))
+      user2 = insert(:user, inserted_at: Timex.shift(Timex.now, minutes: -2))
+      [first, last] = User |> User.sort("creation") |> Repo.all
+      assert first.id == user1.id
+      assert last.id  == user2.id
+    end
+
+    test "orders recently logged in users before others when passing `login` as the ordering key" do
+      user1 = insert(:user, last_login_at: Timex.shift(Timex.now, minutes: -1))
+      user2 = insert(:user, last_login_at: Timex.shift(Timex.now, minutes: -2))
+      user3 = insert(:user, last_login_at: nil)
+      [first, second, last] = User |> User.sort("login") |> Repo.all
+      assert first.id  == user1.id
+      assert second.id == user2.id
+      assert last.id   == user3.id
+    end
+
+    test "does not order the users in any explicit way when passing `nil` as the ordering key" do
+      user1 = insert(:user)
+      user2 = insert(:user)
+      [first, last] = User |> User.sort(nil) |> Repo.all
+      assert first.id == user1.id
+      assert last.id  == user2.id
+    end
+  end
 end
