@@ -556,7 +556,7 @@ msgstr "Brugerdefineret"
 msgid "Female"
 msgstr "Kvinde"
 
-#: web/templates/profile/details.html.eex:10
+#: web/templates/profile/details.html.eex:15
 #: web/templates/profile/edit.html.eex:32
 msgid "Gender"
 msgstr "Køn"
@@ -565,7 +565,7 @@ msgstr "Køn"
 msgid "Joined"
 msgstr "Tilmeldt"
 
-#: web/templates/profile/details.html.eex:31
+#: web/templates/profile/details.html.eex:36
 #: web/templates/profile/edit.html.eex:46
 #: web/templates/profile/index.html.eex:20
 msgid "Location"
@@ -1111,7 +1111,7 @@ msgstr "videoen"
 msgid "where ID is the id of %{type}."
 msgstr "hvor ID er id’et på %{type}."
 
-#: web/templates/profile/details.html.eex:17
+#: web/templates/profile/details.html.eex:22
 msgid "Age"
 msgstr "Alder"
 
@@ -1316,7 +1316,7 @@ msgstr "Hvad rager det dig"
 msgid "Submit your changes to upload the image"
 msgstr "Gem dine ændringer for at uploade billedet"
 
-#: web/templates/profile/details.html.eex:24
+#: web/templates/profile/details.html.eex:29
 #: web/templates/profile/edit.html.eex:51
 msgid "Partner status"
 msgstr "Partnerstatus"
@@ -1479,3 +1479,7 @@ msgstr "Sorter efter senest logget ind"
 #: web/templates/profile/index.html.eex:25
 msgid "Sorting"
 msgstr "Sortering"
+
+#: web/templates/profile/details.html.eex:9
+msgid "Last login"
+msgstr "Seneste login"

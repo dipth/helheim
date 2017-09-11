@@ -5,6 +5,11 @@
       <td><%= time_ago_in_words @user.inserted_at %></td>
     </tr>
 
+    <tr>
+      <th><%= gettext "Last login" %>:</th>
+      <td><%= time_ago_in_words(@user.last_login_at || @user.inserted_at) %></td>
+    </tr>
+
     <%= if @user.gender do %>
       <tr>
         <th><%= gettext "Gender" %>:</th>

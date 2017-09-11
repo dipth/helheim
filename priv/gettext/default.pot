@@ -538,7 +538,7 @@ msgstr ""
 msgid "Female"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:10
+#: web/templates/profile/details.html.eex:15
 #: web/templates/profile/edit.html.eex:32
 msgid "Gender"
 msgstr ""
@@ -547,7 +547,7 @@ msgstr ""
 msgid "Joined"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:31
+#: web/templates/profile/details.html.eex:36
 #: web/templates/profile/edit.html.eex:46
 #: web/templates/profile/index.html.eex:20
 msgid "Location"
@@ -1082,7 +1082,7 @@ msgstr ""
 msgid "where ID is the id of %{type}."
 msgstr ""
 
-#: web/templates/profile/details.html.eex:17
+#: web/templates/profile/details.html.eex:22
 msgid "Age"
 msgstr ""
 
@@ -1286,7 +1286,7 @@ msgstr ""
 msgid "Submit your changes to upload the image"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:24
+#: web/templates/profile/details.html.eex:29
 #: web/templates/profile/edit.html.eex:51
 msgid "Partner status"
 msgstr ""
@@ -1448,4 +1448,8 @@ msgstr ""
 
 #: web/templates/profile/index.html.eex:25
 msgid "Sorting"
+msgstr ""
+
+#: web/templates/profile/details.html.eex:9
+msgid "Last login"
 msgstr ""
