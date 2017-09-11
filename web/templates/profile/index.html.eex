@@ -26,8 +26,7 @@
           <%= select f, :sorting, [
             [key: gettext("Sort by creation"), value: "creation"],
             [key: gettext("Sort by login"), value: "login"]],
-            class: "form-control",
-            name: "sorting" %>
+            class: "form-control" %>
         </div>
 
         <%= submit gettext("Search"), class: "btn btn-primary" %>
@@ -60,4 +59,4 @@
   <% end %>
 </div>
 
-<%= lpaginate @conn, @users %>
+<%= lpaginate @conn, @users, search: @conn.params["search"], sorting: @conn.params["sorting"] %>

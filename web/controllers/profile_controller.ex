@@ -10,11 +10,12 @@ defmodule Helheim.ProfileController do
   plug Helheim.Plug.EnforceBlock when action in [:show]
 
   def index(conn, params) do
-    sort = params["sorting"] || "creation"
+    search  = params["search"] || %{}
+    sorting = search["sorting"] || "creation"
     users = User
             |> User.confirmed
-            |> User.search(params["search"])
-            |> User.sort(sort)
+            |> User.search(search)
+            |> User.sort(sorting)
             |> Repo.paginate(page: sanitized_page(params["page"]))
     render(conn, "index.html", users: users)
   end
