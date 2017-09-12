@@ -44,6 +44,7 @@ defmodule Helheim.Web do
       import Helheim.Router.Helpers
       import Helheim.Gettext
       import Helheim.PaginationSanitization
+      import Helheim.ScrubGetParams, only: [scrub_get_params: 2]
     end
   end
 

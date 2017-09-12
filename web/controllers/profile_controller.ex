@@ -6,6 +6,7 @@ defmodule Helheim.ProfileController do
   alias Helheim.Photo
   alias Helheim.ForumTopic
 
+  plug :scrub_get_params when action in [:index]
   plug :find_user when action in [:show]
   plug Helheim.Plug.EnforceBlock when action in [:show]
 
