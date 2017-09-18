@@ -41,7 +41,7 @@ defmodule Helheim.PhotoFile do
 
   defp current_max_file_size(user) do
     space_used  = Helheim.Photo.total_used_space_by user
-    total_space = Helheim.Photo.max_total_file_size_per_user
+    total_space = user.max_total_file_size
     space_left  = Enum.max [total_space - space_used, 0]
     Enum.min [space_left, Helheim.Photo.max_file_size()]
   end

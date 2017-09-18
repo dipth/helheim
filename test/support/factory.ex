@@ -10,7 +10,8 @@ defmodule Helheim.Factory do
       confirmation_token: "ZUhtaHI4R29mZVdYSjdVRUNvMWhzZz09",
       confirmed_at: DateTime.utc_now,
       profile_text: "Foo Bar",
-      visitor_count: 0
+      visitor_count: 0,
+      max_total_file_size: (25 * 1024 * 1024)
     }
   end
 

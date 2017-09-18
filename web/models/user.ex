@@ -34,6 +34,7 @@ defmodule Helheim.User do
     field :last_login_ip,                   :string
     field :previous_login_at,               Calecto.DateTimeUTC
     field :previous_login_ip,               :string
+    field :max_total_file_size,             :integer
 
     timestamps()
 

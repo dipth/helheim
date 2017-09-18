@@ -1,7 +1,7 @@
 <div id="photo-space-used">
   <%
     space_used = Helheim.Photo.total_used_space_by @user
-    max_space  = Helheim.Photo.max_total_file_size_per_user
+    max_space  = current_resource(@conn).max_total_file_size
   %>
   <%= if space_used > 0 do %>
     <% percent_used = round(space_used / max_space * 100) %>

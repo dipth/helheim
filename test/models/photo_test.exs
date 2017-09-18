@@ -76,9 +76,10 @@ defmodule Helheim.PhotoTest do
       refute changeset.valid?
     end
 
-    test_with_mock "does not allow uploading files bigger than the total space left for the user",
-      Helheim.Photo, [:passthrough], [max_total_file_size_per_user: fn() -> 0.9 * 1000 * 1000 end] do
-      changeset = new_changeset @valid_attrs
+    test "does not allow uploading files bigger than the total space left for the user" do
+      user = insert(:user, max_total_file_size: round(0.9 * 1000 * 1000))
+      album = insert(:photo_album, user: user)
+      changeset = new_changeset @valid_attrs, album
       refute changeset.valid?
     end
   end

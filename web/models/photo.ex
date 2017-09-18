@@ -7,9 +7,6 @@ defmodule Helheim.Photo do
   @max_file_size 3 * 1000 * 1000 # MB
   def max_file_size, do: @max_file_size
 
-  @max_total_file_size_per_user 25 * 1000 * 1000 # MB
-  def max_total_file_size_per_user, do: @max_total_file_size_per_user
-
   schema "photos" do
     field      :uuid,          :string
     field      :title,         :string
