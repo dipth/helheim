@@ -15,6 +15,6 @@
 </div>
 <%= if ForumReply.editable_by?(@forum_reply, current_resource(@conn)) do %>
   <%= link gettext("Edit"), to: forum_forum_topic_forum_reply_path(@conn, :edit, @forum, @forum_topic, @forum_reply), class: "btn btn-outline-secondary btn-sm" %>
-  <small><%= gettext "Only possible for up to 10 minutes after posting..." %></small>
+  <small><%= gettext "Only possible for up to %{minutes} minutes after posting...", minutes: ForumReply.edit_timelimit_in_minutes %></small>
 <% end %>
 <hr>

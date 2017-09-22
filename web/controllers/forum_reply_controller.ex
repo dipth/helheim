@@ -70,7 +70,7 @@ defmodule Helheim.ForumReplyController do
   defp enforce_editable_by(conn, _) do
     unless ForumReply.editable_by?(conn.assigns[:forum_reply], conn.assigns[:user]) do
       conn
-      |> put_flash(:error, gettext("You can only edit a forum reply in the first 10 minutes!"))
+      |> put_flash(:error, gettext("You can only edit a forum reply in the first %{minutes} minutes!", minutes: ForumReply.edit_timelimit_in_minutes))
       |> redirect(to: forum_forum_topic_path(conn, :show, conn.assigns[:forum], conn.assigns[:forum_topic]))
       |> halt
     else

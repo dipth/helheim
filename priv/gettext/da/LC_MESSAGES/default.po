@@ -338,7 +338,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:238
+#: web/models/user.ex:239
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -363,7 +363,7 @@ msgstr "Profil Indstillinger"
 msgid "Profile Text"
 msgstr "Profiltekst"
 
-#: web/controllers/profile_controller.ex:70
+#: web/controllers/profile_controller.ex:72
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
@@ -979,23 +979,10 @@ msgstr "Dit svar blev gemt!"
 msgid "Forum topic updated successfully."
 msgstr "Dit indlæg blev gemt!"
 
-#: web/templates/forum_reply/forum_reply.html.eex:18
-#: web/templates/forum_topic/forum_topic.html.eex:22
-msgid "Only possible for up to 10 minutes after posting..."
-msgstr "Det er kun muligt at redigere i op til 10 minutter…"
-
 #: web/templates/forum_reply/edit.html.eex:12
 #: web/templates/forum_topic/edit.html.eex:19
 msgid "Save Changes"
 msgstr "Gem ændringer"
-
-#: web/controllers/forum_reply_controller.ex:73
-msgid "You can only edit a forum reply in the first 10 minutes!"
-msgstr "Du kan kun redigere dit svar i de første 10 minutter!"
-
-#: web/controllers/forum_topic_controller.ex:96
-msgid "You can only edit a forum topic in the first 10 minutes!"
-msgstr "Du kan kun redigere dit indlæg i de første 10 minutter!"
 
 #: web/views/visitor_log_entry_view.ex:15
 #: web/views/visitor_log_entry_view.ex:33
@@ -1456,15 +1443,15 @@ msgid "Previous"
 msgstr "Forrige"
 
 #: web/templates/profile/index.html.eex:8
-#: web/templates/profile/index.html.eex:33
+#: web/templates/profile/index.html.eex:32
 msgid "Search"
 msgstr "Søg"
 
-#: web/templates/profile/index.html.eex:51
+#: web/templates/profile/index.html.eex:50
 msgid "Created"
 msgstr "Oprettet"
 
-#: web/templates/profile/index.html.eex:55
+#: web/templates/profile/index.html.eex:54
 msgid "Login"
 msgstr "Login"
 
@@ -1483,3 +1470,16 @@ msgstr "Sortering"
 #: web/templates/profile/details.html.eex:9
 msgid "Last login"
 msgstr "Seneste login"
+
+#: web/templates/forum_reply/forum_reply.html.eex:18
+#: web/templates/forum_topic/forum_topic.html.eex:22
+msgid "Only possible for up to %{minutes} minutes after posting..."
+msgstr "Det er kun muligt at redigere i op til %{minutes} minutter…"
+
+#: web/controllers/forum_reply_controller.ex:73
+msgid "You can only edit a forum reply in the first %{minutes} minutes!"
+msgstr "Du kan kun redigere dit svar i de første %{minutes} minutter!"
+
+#: web/controllers/forum_topic_controller.ex:96
+msgid "You can only edit a forum topic in the first %{minutes} minutes!"
+msgstr "Du kan kun redigere dit indlæg i de første %{minutes} minutter!"

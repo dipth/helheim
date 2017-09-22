@@ -126,15 +126,15 @@ defmodule Helheim.ForumTopicTest do
   end
 
   describe "editable_by?/2" do
-    test "it returns true if the user is the author of the topic and it is no older than 10 minutes" do
+    test "it returns true if the user is the author of the topic and it is no older than 60 minutes" do
       user  = insert(:user)
-      topic = insert(:forum_topic, user: user, inserted_at: Timex.shift(Timex.now, minutes: -9))
+      topic = insert(:forum_topic, user: user, inserted_at: Timex.shift(Timex.now, minutes: -59))
       assert ForumTopic.editable_by?(topic, user)
     end
 
-    test "it returns false if the topic is older than 10 minutes" do
+    test "it returns false if the topic is older than 60 minutes" do
       user  = insert(:user)
-      topic = insert(:forum_topic, user: user, inserted_at: Timex.shift(Timex.now, minutes: -11))
+      topic = insert(:forum_topic, user: user, inserted_at: Timex.shift(Timex.now, minutes: -61))
       refute ForumTopic.editable_by?(topic, user)
     end
 

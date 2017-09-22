@@ -93,7 +93,7 @@ defmodule Helheim.ForumTopicController do
   defp enforce_editable_by(conn, _) do
     unless ForumTopic.editable_by?(conn.assigns[:forum_topic], conn.assigns[:user]) do
       conn
-      |> put_flash(:error, gettext("You can only edit a forum topic in the first 10 minutes!"))
+      |> put_flash(:error, gettext("You can only edit a forum topic in the first %{minutes} minutes!", minutes: ForumTopic.edit_timelimit_in_minutes))
       |> redirect(to: forum_forum_topic_path(conn, :show, conn.assigns[:forum], conn.assigns[:forum_topic]))
       |> halt
     else
