@@ -99,6 +99,8 @@ defmodule Helheim.Router do
     resources "/usernames", UsernameController, only: [:index, :show]
     resources "/blocks", BlockController, only: [:index]
     resources "/comments", CommentController, only: [:delete]
+    resources "/donations", DonationController, only: [:new, :create]
+    get "/donations/thank_you", DonationController, :thank_you
   end
 
   scope "/admin", Helheim.Admin, as: :admin do

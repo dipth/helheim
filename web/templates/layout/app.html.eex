@@ -42,6 +42,7 @@
 
     </div>
 
+    <%= render_existing view_module(@conn), "scripts.html", assigns %>
     <script src="//cloud.tinymce.com/stable/tinymce.min.js?apiKey=qm4hmp6umu1xldkbq8nkvayb455wevb3mu6gpydobmdwozxo"></script>
     <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

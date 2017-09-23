@@ -32,6 +32,13 @@
         </ul>
       </li>
 
+      <li class="nav-item">
+        <%= link to: donation_path(@conn, :new), class: "nav-link" do %>
+          <i class="fa fa-heart"></i>
+          <%= gettext("Support %{site}", site: gettext("Helheim")) %>
+        <% end %>
+      </li>
+
 
       <li class="nav-title"><%= gettext "You" %></li>
 

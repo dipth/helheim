@@ -35,6 +35,8 @@ defmodule Helheim.User do
     field :previous_login_at,               Calecto.DateTimeUTC
     field :previous_login_ip,               :string
     field :max_total_file_size,             :integer
+    field :last_donation_at,                Calecto.DateTimeUTC
+    field :total_donated,                   :integer
 
     timestamps()
 
@@ -46,6 +48,7 @@ defmodule Helheim.User do
     has_many :received_private_messages, Helheim.PrivateMessage, foreign_key: :recipient_id
     has_many :photo_albums,              Helheim.PhotoAlbum
     has_many :visitor_log_entries,       Helheim.VisitorLogEntry, foreign_key: :profile_id
+    has_many :donations,                 Helheim.Donation
   end
 
   def newest(query) do

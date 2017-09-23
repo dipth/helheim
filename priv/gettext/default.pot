@@ -14,7 +14,8 @@ msgstr ""
 msgid "%{site_name} is a community for alternative people."
 msgstr ""
 
-#: web/email.ex:8 web/email.ex:16
+#: web/email.ex:8 web/email.ex:16 web/templates/donation/new.html.eex:7
+#: web/templates/donation/new.html.eex:38
 #: web/templates/email/password_reset_email.html.eex:5
 #: web/templates/email/password_reset_email.html.eex:15
 #: web/templates/email/password_reset_email.text.eex:1
@@ -27,7 +28,7 @@ msgstr ""
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
-#: web/templates/page/index.html.eex:3
+#: web/templates/layout/sidebar.html.eex:38 web/templates/page/index.html.eex:3
 msgid "Helheim"
 msgstr ""
 
@@ -326,7 +327,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:239
+#: web/models/user.ex:242
 msgid "does not match your current password"
 msgstr ""
 
@@ -376,7 +377,7 @@ msgstr ""
 msgid "Newest Photos"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:39
+#: web/templates/layout/sidebar.html.eex:46
 msgid "Your Profile"
 msgstr ""
 
@@ -395,7 +396,7 @@ msgstr ""
 
 #: web/templates/blog_post/edit.html.eex:2
 #: web/templates/blog_post/new.html.eex:2
-#: web/templates/layout/sidebar.html.eex:54
+#: web/templates/layout/sidebar.html.eex:61
 msgid "Your Blog Posts"
 msgstr ""
 
@@ -427,7 +428,7 @@ msgid "Delete"
 msgstr ""
 
 #: web/templates/blog_post/show.html.eex:26
-#: web/templates/forum_reply/forum_reply.html.eex:17
+#: web/templates/forum_reply/forum_reply.html.eex:18
 #: web/templates/forum_topic/forum_topic.html.eex:21
 msgid "Edit"
 msgstr ""
@@ -450,7 +451,7 @@ msgstr ""
 msgid "Comment created successfully"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:44 web/views/comment_view.ex:14
+#: web/templates/layout/sidebar.html.eex:51 web/views/comment_view.ex:14
 msgid "Guest Book"
 msgstr ""
 
@@ -512,7 +513,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/layout/sidebar.html.eex:50
+#: web/templates/layout/sidebar.html.eex:57
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr ""
@@ -538,16 +539,16 @@ msgstr ""
 msgid "Female"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:15
+#: web/templates/profile/details.html.eex:26
 #: web/templates/profile/edit.html.eex:32
 msgid "Gender"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:4
+#: web/templates/profile/details.html.eex:15
 msgid "Joined"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:36
+#: web/templates/profile/details.html.eex:47
 #: web/templates/profile/edit.html.eex:46
 #: web/templates/profile/index.html.eex:20
 msgid "Location"
@@ -642,7 +643,7 @@ msgstr ""
 msgid "Uploaded"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:59
+#: web/templates/layout/sidebar.html.eex:66
 msgid "Your Photo Albums"
 msgstr ""
 
@@ -788,7 +789,7 @@ msgstr ""
 msgid "Submit new reply"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:36
+#: web/templates/layout/sidebar.html.eex:43
 msgid "You"
 msgstr ""
 
@@ -824,8 +825,8 @@ msgstr ""
 
 #: web/templates/private_conversation/index.html.eex:22
 #: web/templates/private_conversation/show.html.eex:5
-#: web/views/notification_view.ex:40 web/views/profile_helpers.ex:10
-#: web/views/profile_helpers.ex:51
+#: web/views/notification_view.ex:40 web/views/profile_helpers.ex:11
+#: web/views/profile_helpers.ex:52 web/views/profile_helpers.ex:96
 msgid "User deleted"
 msgstr ""
 
@@ -1069,7 +1070,7 @@ msgstr ""
 msgid "where ID is the id of %{type}."
 msgstr ""
 
-#: web/templates/profile/details.html.eex:22
+#: web/templates/profile/details.html.eex:33
 msgid "Age"
 msgstr ""
 
@@ -1273,7 +1274,7 @@ msgstr ""
 msgid "Submit your changes to upload the image"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:29
+#: web/templates/profile/details.html.eex:40
 #: web/templates/profile/edit.html.eex:51
 msgid "Partner status"
 msgstr ""
@@ -1437,11 +1438,11 @@ msgstr ""
 msgid "Sorting"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:9
+#: web/templates/profile/details.html.eex:20
 msgid "Last login"
 msgstr ""
 
-#: web/templates/forum_reply/forum_reply.html.eex:18
+#: web/templates/forum_reply/forum_reply.html.eex:19
 #: web/templates/forum_topic/forum_topic.html.eex:22
 msgid "Only possible for up to %{minutes} minutes after posting..."
 msgstr ""
@@ -1452,4 +1453,69 @@ msgstr ""
 
 #: web/controllers/forum_topic_controller.ex:96
 msgid "You can only edit a forum topic in the first %{minutes} minutes!"
+msgstr ""
+
+#: web/templates/donation/new.html.eex:19
+msgid "As a small thank you, we will give you %{extra_file_size} extra photo space for every %{min_amount} you donate!"
+msgstr ""
+
+#: web/templates/donation/new.html.eex:58
+msgid "Donate"
+msgstr ""
+
+#: web/templates/donation/new.html.eex:39
+msgid "Donation"
+msgstr ""
+
+#: web/templates/donation/new.html.eex:27
+msgid "How much would you like to donate?"
+msgstr ""
+
+#: web/templates/donation/new.html.eex:7
+#: web/templates/layout/sidebar.html.eex:38
+msgid "Support %{site}"
+msgstr ""
+
+#: web/templates/donation/new.html.eex:53
+msgid "This donation will grant you"
+msgstr ""
+
+#: web/templates/donation/new.html.eex:12
+msgid "Unfortunately it is not free for us to run this site."
+msgstr ""
+
+#: web/templates/donation/new.html.eex:13
+msgid "We have expenses for server hosting, web traffic etc."
+msgstr ""
+
+#: web/templates/donation/new.html.eex:55
+msgid "extra space for photos"
+msgstr ""
+
+#: web/templates/profile/details.html.eex:8
+msgid "Has recently supported Helheim"
+msgstr ""
+
+#: web/templates/donation/new.html.eex:17
+msgid "Help us keep this community open and free of ads by giving a small donation."
+msgstr ""
+
+#: web/controllers/donation_controller.ex:28
+msgid "Something went wrong..."
+msgstr ""
+
+#: web/templates/donation/thank_you.html.eex:10
+msgid "Our owls also made me promise to send you their eternal love!"
+msgstr ""
+
+#: web/templates/donation/thank_you.html.eex:7
+msgid "Thank you for your support!"
+msgstr ""
+
+#: web/templates/donation/thank_you.html.eex:12
+msgid "With love"
+msgstr ""
+
+#: web/templates/donation/thank_you.html.eex:9
+msgid "We have received your donation and humbly thank you for helping make Helheim the best community for alternative people."
 msgstr ""
