@@ -31,7 +31,7 @@
     <%= if @user.birthday do %>
       <tr>
         <th><%= gettext "Age" %>:</th>
-        <td><%= User.age @user %></td>
+        <td><%= User.age @user, Timex.now %></td>
       </tr>
     <% end %>
 

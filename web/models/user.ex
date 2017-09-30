@@ -188,8 +188,7 @@ defmodule Helheim.User do
     Repo.delete!(user)
   end
 
-  def age(user) do
-    now      = Timex.now
+  def age(user, now) do
     birthday = user.birthday
 
     if now.month < birthday.month || (now.month == birthday.month && now.day < birthday.day) do
