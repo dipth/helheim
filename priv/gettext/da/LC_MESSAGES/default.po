@@ -314,8 +314,7 @@ msgstr "Dine kontoindstillinger blev opdateret!"
 msgid "Be aware!"
 msgstr "Advarsel!"
 
-#: web/templates/account/edit.html.eex:64
-#: web/templates/account/edit.html.eex:68
+#: web/templates/account/edit.html.eex:64 web/templates/account/edit.html.eex:68
 msgid "Existing Password"
 msgstr "Nuværende Kodeord"
 
@@ -339,7 +338,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:242
+#: web/models/user.ex:241
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -351,8 +350,7 @@ msgstr "Maksimum fil størrelse: %{file_size}"
 msgid "Profile"
 msgstr "Profil"
 
-#: web/templates/profile/edit.html.eex:11
-#: web/templates/profile/edit.html.eex:14
+#: web/templates/profile/edit.html.eex:11 web/templates/profile/edit.html.eex:14
 msgid "Profile Photo"
 msgstr "Profilbillede"
 
@@ -399,8 +397,7 @@ msgid "Blog Posts"
 msgstr "Blogs"
 
 #: web/templates/blog_post/index.html.eex:10
-#: web/templates/blog_post/new.html.eex:3
-#: web/templates/blog_post/new.html.eex:8
+#: web/templates/blog_post/new.html.eex:3 web/templates/blog_post/new.html.eex:8
 msgid "New Blog Post"
 msgstr "Ny Blog"
 
@@ -417,8 +414,7 @@ msgstr "Dine Blogs"
 #: web/templates/admin/forum_category/index.html.eex:13
 #: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/admin/term/index.html.eex:35
-#: web/templates/blog_post/show.html.eex:28
-#: web/templates/photo/show.html.eex:42
+#: web/templates/blog_post/show.html.eex:28 web/templates/photo/show.html.eex:42
 #: web/templates/photo_album/show.html.eex:67
 #: web/templates/private_conversation/show.html.eex:10
 msgid "Are you sure?"
@@ -436,8 +432,7 @@ msgstr "Din blog er nu slettet!"
 msgid "Blog post updated successfully."
 msgstr "Din blog er opdateret!"
 
-#: web/templates/blog_post/show.html.eex:30
-#: web/templates/photo/show.html.eex:44
+#: web/templates/blog_post/show.html.eex:30 web/templates/photo/show.html.eex:44
 #: web/templates/photo_album/show.html.eex:69 web/views/comment_view.ex:48
 #: web/views/comment_view.ex:50
 msgid "Delete"
@@ -483,8 +478,7 @@ msgstr "Tilføj Kommentar"
 #: web/templates/page/front_page.html.eex:8
 #: web/templates/page/front_page.html.eex:37
 #: web/templates/page/front_page.html.eex:50
-#: web/templates/profile/show.html.eex:60
-#: web/templates/profile/show.html.eex:84
+#: web/templates/profile/show.html.eex:60 web/templates/profile/show.html.eex:84
 msgid "Show All"
 msgstr "Vis alle"
 
@@ -548,8 +542,7 @@ msgstr "Admin"
 msgid "Basic Details"
 msgstr "Basis detaljer"
 
-#: web/templates/profile/edit.html.eex:38
-#: web/templates/profile/edit.html.eex:60
+#: web/templates/profile/edit.html.eex:38 web/templates/profile/edit.html.eex:60
 msgid "Custom"
 msgstr "Brugerdefineret"
 
@@ -576,8 +569,7 @@ msgstr "Lokation"
 msgid "Male"
 msgstr "Mand"
 
-#: web/templates/profile/edit.html.eex:36
-#: web/templates/profile/edit.html.eex:56
+#: web/templates/profile/edit.html.eex:36 web/templates/profile/edit.html.eex:56
 msgid "Not specified"
 msgstr "Ikke udspecificeret"
 
@@ -587,8 +579,7 @@ msgstr "Opret ny"
 
 #: web/templates/admin/forum/form.html.eex:12
 #: web/templates/admin/forum_category/form.html.eex:12
-#: web/templates/admin/term/form.html.eex:4
-#: web/templates/photo/form.html.eex:18
+#: web/templates/admin/term/form.html.eex:4 web/templates/photo/form.html.eex:18
 #: web/templates/photo_album/form.html.eex:12
 msgid "Description"
 msgstr "Beskrivelse"
@@ -605,8 +596,7 @@ msgstr "Nyt Fotoalbum"
 #: web/templates/photo/show.html.eex:3
 #: web/templates/photo_album/index.html.eex:3
 #: web/templates/photo_album/show.html.eex:3
-#: web/views/visitor_log_entry_view.ex:46
-#: web/views/visitor_log_entry_view.ex:65
+#: web/views/visitor_log_entry_view.ex:46 web/views/visitor_log_entry_view.ex:65
 msgid "Photo Albums"
 msgstr "Fotoalbum"
 
@@ -699,8 +689,7 @@ msgstr "Opret ny forum kategori"
 msgid "Create new forum"
 msgstr "Opret nyt forum"
 
-#: web/templates/forum/show.html.eex:24
-#: web/templates/forum_topic/new.html.eex:6
+#: web/templates/forum/show.html.eex:24 web/templates/forum_topic/new.html.eex:6
 msgid "Create new topic"
 msgstr "Opret nyt indlæg"
 
@@ -935,8 +924,7 @@ msgstr "Vis Betingelser"
 msgid "Terms"
 msgstr "Betingelser"
 
-#: web/templates/admin/term/show.html.eex:11
-#: web/templates/page/terms.html.eex:3
+#: web/templates/admin/term/show.html.eex:11 web/templates/page/terms.html.eex:3
 msgid "Terms and rules"
 msgstr "Betingelser og regler"
 
@@ -985,10 +973,8 @@ msgstr "Dit indlæg blev gemt!"
 msgid "Save Changes"
 msgstr "Gem ændringer"
 
-#: web/views/visitor_log_entry_view.ex:15
-#: web/views/visitor_log_entry_view.ex:33
-#: web/views/visitor_log_entry_view.ex:51
-#: web/views/visitor_log_entry_view.ex:73
+#: web/views/visitor_log_entry_view.ex:15 web/views/visitor_log_entry_view.ex:33
+#: web/views/visitor_log_entry_view.ex:51 web/views/visitor_log_entry_view.ex:73
 msgid "Visitors"
 msgstr "Lurelog"
 
@@ -998,8 +984,7 @@ msgstr "Du har ikke adgang til den forespurgte side!"
 
 #: web/templates/blog_post/index.html.eex:3
 #: web/templates/blog_post/index_all_public.html.eex:2
-#: web/templates/blog_post/show.html.eex:3
-#: web/templates/help/embeds.html.eex:11
+#: web/templates/blog_post/show.html.eex:3 web/templates/help/embeds.html.eex:11
 msgid "Blog posts"
 msgstr "Blog posts"
 
@@ -1007,8 +992,7 @@ msgstr "Blog posts"
 msgid "Comments"
 msgstr "Kommentarer"
 
-#: web/templates/help/embeds.html.eex:3
-#: web/templates/layout/sidebar.html.eex:29
+#: web/templates/help/embeds.html.eex:3 web/templates/layout/sidebar.html.eex:29
 msgid "Embeds"
 msgstr "Embeds"
 
@@ -1020,8 +1004,7 @@ msgstr "Forumsvar"
 msgid "Forum topics"
 msgstr "Forumtråde"
 
-#: web/templates/help/embeds.html.eex:2
-#: web/templates/layout/sidebar.html.eex:23
+#: web/templates/help/embeds.html.eex:2 web/templates/layout/sidebar.html.eex:23
 msgid "Help"
 msgstr "Hjælp"
 
@@ -1088,8 +1071,7 @@ msgstr "billedet"
 
 #: web/templates/help/embeds.html.eex:78 web/templates/help/embeds.html.eex:87
 #: web/templates/help/embeds.html.eex:89 web/templates/help/embeds.html.eex:95
-#: web/templates/help/embeds.html.eex:104
-#: web/templates/help/embeds.html.eex:106
+#: web/templates/help/embeds.html.eex:104 web/templates/help/embeds.html.eex:106
 msgid "the video"
 msgstr "videoen"
 
@@ -1270,8 +1252,7 @@ msgstr "Så ville track id’et være:"
 msgid "a track"
 msgstr "et track"
 
-#: web/templates/help/embeds.html.eex:111
-#: web/templates/help/embeds.html.eex:122
+#: web/templates/help/embeds.html.eex:111 web/templates/help/embeds.html.eex:122
 #: web/templates/help/embeds.html.eex:124
 msgid "the track"
 msgstr "tracket"
@@ -1530,7 +1511,7 @@ msgstr "Har støttet Helheim for nylig"
 msgid "Help us keep this community open and free of ads by giving a small donation."
 msgstr "Hjælp os med at holde dette community åbent og fri for reklamer ved at donere et lille beløb."
 
-#: web/controllers/donation_controller.ex:28
+#: web/controllers/donation_controller.ex:24
 msgid "Something went wrong..."
 msgstr "Noget gik galt…"
 

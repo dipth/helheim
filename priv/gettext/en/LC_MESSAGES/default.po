@@ -327,7 +327,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:242
+#: web/models/user.ex:241
 msgid "does not match your current password"
 msgstr ""
 
@@ -1500,7 +1500,7 @@ msgstr ""
 msgid "Help us keep this community open and free of ads by giving a small donation."
 msgstr ""
 
-#: web/controllers/donation_controller.ex:28
+#: web/controllers/donation_controller.ex:24
 msgid "Something went wrong..."
 msgstr ""
 
@@ -1516,7 +1516,6 @@ msgstr ""
 msgid "With love"
 msgstr ""
 
-#, fuzzy
 #: web/templates/donation/thank_you.html.eex:9
 msgid "We have received your donation and humbly thank you for helping make Helheim the best community for alternative people."
 msgstr ""
