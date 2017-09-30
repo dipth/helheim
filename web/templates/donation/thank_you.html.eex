@@ -1,0 +1,15 @@
+<div class="row mt-2">
+  <div class="col-md-4 text-center">
+    <%= img_tag static_path(@conn, "/images/donation_owl.png"), class: "img-fluid" %>
+  </div>
+
+  <div class="col-md-8">
+    <h1 class="mb-2 display-3"><%= gettext("Thank you for your support!") %></h1>
+    <p>
+      <%= gettext "We have received your donation and humbly thank you for helping make Helheim the best community for alternative people." %><br>
+      <%= gettext "Our owls also made me promise to send you their eternal love!" %>
+    </p>
+    <p><%= gettext "With love" %></p>
+    <%= img_tag static_path(@conn, "/images/daddy_signature.png"), class: "img-fluid mb-2" %>
+  </div>
+</div>

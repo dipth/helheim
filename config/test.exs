@@ -37,3 +37,9 @@ config :helheim, Helheim.Mailer,
 # Configure arc
 config :arc,
   storage: Arc.Storage.Local
+
+# Configure Stripe
+config :helheim, :stripe,
+  public_key: "pk_test_abababababababababababab"
+config :stripity_stripe,
+  secret_key: "sk_test_abababababababababababab"

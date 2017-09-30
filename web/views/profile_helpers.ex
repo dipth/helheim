@@ -6,6 +6,7 @@ defmodule Helheim.ProfileHelpers do
   alias Helheim.Endpoint
   alias Helheim.User
   alias Helheim.Avatar
+  alias Helheim.Donation
 
   def user_badge(nil, opts), do: user_badge(gettext("User deleted"), false, opts)
   def user_badge(%User{} = user, opts), do: user_badge(user.username, User.admin?(user), opts)
@@ -91,6 +92,50 @@ defmodule Helheim.ProfileHelpers do
 
     Enum.reject(result, fn(e) -> is_nil(e) end)
   end
+
+  def user_link(nil), do: gettext("User deleted")
+  def user_link(user) do
+    link(user.username, to: public_profile_path(Endpoint, :show, user))
+  end
+
+  defp admin_badge?(%User{role: "admin"}), do: true
+  defp admin_badge?(%User{}), do: false
+
+  defp donor_badge?(%User{last_donation_at: nil}), do: false
+  defp donor_badge?(%User{} = user) do
+    Donation.recently_donated?(user)
+  end
+
+  defp badge_type(nil), do: nil
+  defp badge_type(user) do
+    cond do
+      admin_badge?(user) -> :admin
+      donor_badge?(user) -> :donor
+      true -> nil
+    end
+  end
+
+  def user_link_with_badge(user) do
+    case badge_type(user) do
+      :admin ->
+        [user_link(user), {:safe, ["&nbsp;"]}, content_tag(:span, "admin", class: "badge badge-primary")]
+      :donor ->
+        [user_link(user), {:safe, ["&nbsp;"]}, content_tag(:span, content_tag(:i, "", class: "fa fa-heart"), class: "text-warning")]
+      _ ->
+        [user_link(user)]
+    end
+  end
+
+  def user_link_with_avatar_and_badge(user) do
+    [
+      avatar_tag(user),
+      {:safe, ["&nbsp;"]},
+      user_link_with_badge(user)
+    ]
+  end
+
+  def avatar_tag(nil), do: img_tag(static_path(Endpoint, "/images/deleted_user_avatar_tiny.png"), class: "img-avatar")
+  def avatar_tag(user), do: img_tag(Avatar.url({user.avatar, user}, :tiny), class: "img-avatar")
 
   def me?(conn, user) do
     Guardian.Plug.current_resource(conn).id == user.id

@@ -1,3 +1,13 @@
 .badge-pill {
   border-radius: $badge-pill-border-radius;
 }
+
+.badge-success, .badge-primary, .badge-warning {
+  color: $gray-dark;
+}
+
+a:hover {
+  .badge-success, .badge-primary, .badge-warning {
+    color: white !important;
+  }
+}

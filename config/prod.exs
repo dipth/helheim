@@ -60,6 +60,12 @@ config :ex_aws,
     region: System.get_env("AWS_REGION")
   ]
 
+# Configure Stripe
+config :helheim, :stripe,
+  public_key: System.get_env("STRIPE_PUBLIC_KEY")
+config :stripity_stripe,
+  secret_key: System.get_env("STRIPE_PRIVATE_KEY")
+
 # Filter sensitive data from logs
 config :phoenix, :filter_parameters, ["password", "guardian_token"]
 

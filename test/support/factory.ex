@@ -11,7 +11,9 @@ defmodule Helheim.Factory do
       confirmed_at: DateTime.utc_now,
       profile_text: "Foo Bar",
       visitor_count: 0,
-      max_total_file_size: (25 * 1024 * 1024)
+      max_total_file_size: (25 * 1024 * 1024),
+      last_donation_at: Timex.shift(Timex.now, days: -30),
+      total_donated: 1000
     }
   end
 

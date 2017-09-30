@@ -32,6 +32,7 @@ import { PhotoSorter } from "web/static/js/photo_sorter";
 import { MentionableInput } from "web/static/js/mentionable";
 import { Mentionable } from "web/static/js/mentionable";
 import { PopoverConfirmable } from "web/static/js/popover_confirmable";
+import { DonationForm } from "web/static/js/donation_form";
 
 export var App = {
   run: function(){
@@ -49,6 +50,7 @@ export var App = {
     MentionableInput.run();
     Mentionable.run();
     PopoverConfirmable.run();
+    DonationForm.run();
   }
 }
 

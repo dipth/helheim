@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.0.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -25,7 +25,8 @@ msgstr ""
 msgid "%{site_name} is a community for alternative people."
 msgstr "%{site_name} er et community for alternative folk."
 
-#: web/email.ex:8 web/email.ex:16
+#: web/email.ex:8 web/email.ex:16 web/templates/donation/new.html.eex:7
+#: web/templates/donation/new.html.eex:38
 #: web/templates/email/password_reset_email.html.eex:5
 #: web/templates/email/password_reset_email.html.eex:15
 #: web/templates/email/password_reset_email.text.eex:1
@@ -38,7 +39,7 @@ msgstr "%{site_name} er et community for alternative folk."
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
-#: web/templates/page/index.html.eex:3
+#: web/templates/layout/sidebar.html.eex:38 web/templates/page/index.html.eex:3
 msgid "Helheim"
 msgstr "Helheim"
 
@@ -313,8 +314,7 @@ msgstr "Dine kontoindstillinger blev opdateret!"
 msgid "Be aware!"
 msgstr "Advarsel!"
 
-#: web/templates/account/edit.html.eex:64
-#: web/templates/account/edit.html.eex:68
+#: web/templates/account/edit.html.eex:64 web/templates/account/edit.html.eex:68
 msgid "Existing Password"
 msgstr "Nuværende Kodeord"
 
@@ -338,7 +338,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:239
+#: web/models/user.ex:241
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -350,8 +350,7 @@ msgstr "Maksimum fil størrelse: %{file_size}"
 msgid "Profile"
 msgstr "Profil"
 
-#: web/templates/profile/edit.html.eex:11
-#: web/templates/profile/edit.html.eex:14
+#: web/templates/profile/edit.html.eex:11 web/templates/profile/edit.html.eex:14
 msgid "Profile Photo"
 msgstr "Profilbillede"
 
@@ -389,7 +388,7 @@ msgstr "Nyeste Forumindlæg"
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
 
-#: web/templates/layout/sidebar.html.eex:39
+#: web/templates/layout/sidebar.html.eex:46
 msgid "Your Profile"
 msgstr "Din Profil"
 
@@ -398,8 +397,7 @@ msgid "Blog Posts"
 msgstr "Blogs"
 
 #: web/templates/blog_post/index.html.eex:10
-#: web/templates/blog_post/new.html.eex:3
-#: web/templates/blog_post/new.html.eex:8
+#: web/templates/blog_post/new.html.eex:3 web/templates/blog_post/new.html.eex:8
 msgid "New Blog Post"
 msgstr "Ny Blog"
 
@@ -409,15 +407,14 @@ msgstr "Gem Blog"
 
 #: web/templates/blog_post/edit.html.eex:2
 #: web/templates/blog_post/new.html.eex:2
-#: web/templates/layout/sidebar.html.eex:54
+#: web/templates/layout/sidebar.html.eex:61
 msgid "Your Blog Posts"
 msgstr "Dine Blogs"
 
 #: web/templates/admin/forum_category/index.html.eex:13
 #: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/admin/term/index.html.eex:35
-#: web/templates/blog_post/show.html.eex:28
-#: web/templates/photo/show.html.eex:42
+#: web/templates/blog_post/show.html.eex:28 web/templates/photo/show.html.eex:42
 #: web/templates/photo_album/show.html.eex:67
 #: web/templates/private_conversation/show.html.eex:10
 msgid "Are you sure?"
@@ -435,15 +432,14 @@ msgstr "Din blog er nu slettet!"
 msgid "Blog post updated successfully."
 msgstr "Din blog er opdateret!"
 
-#: web/templates/blog_post/show.html.eex:30
-#: web/templates/photo/show.html.eex:44
+#: web/templates/blog_post/show.html.eex:30 web/templates/photo/show.html.eex:44
 #: web/templates/photo_album/show.html.eex:69 web/views/comment_view.ex:48
 #: web/views/comment_view.ex:50
 msgid "Delete"
 msgstr "Slet"
 
 #: web/templates/blog_post/show.html.eex:26
-#: web/templates/forum_reply/forum_reply.html.eex:17
+#: web/templates/forum_reply/forum_reply.html.eex:18
 #: web/templates/forum_topic/forum_topic.html.eex:21
 msgid "Edit"
 msgstr "Redigér"
@@ -466,7 +462,7 @@ msgstr "Titel"
 msgid "Comment created successfully"
 msgstr "Din kommentar er tilføjet!"
 
-#: web/templates/layout/sidebar.html.eex:44 web/views/comment_view.ex:14
+#: web/templates/layout/sidebar.html.eex:51 web/views/comment_view.ex:14
 msgid "Guest Book"
 msgstr "Gæstebog"
 
@@ -482,8 +478,7 @@ msgstr "Tilføj Kommentar"
 #: web/templates/page/front_page.html.eex:8
 #: web/templates/page/front_page.html.eex:37
 #: web/templates/page/front_page.html.eex:50
-#: web/templates/profile/show.html.eex:60
-#: web/templates/profile/show.html.eex:84
+#: web/templates/profile/show.html.eex:60 web/templates/profile/show.html.eex:84
 msgid "Show All"
 msgstr "Vis alle"
 
@@ -529,7 +524,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] "Du har %{count} notifikation"
 msgstr[1] "Du har %{count} notifikationer"
 
-#: web/templates/layout/sidebar.html.eex:50
+#: web/templates/layout/sidebar.html.eex:57
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr "Private Beskeder"
@@ -547,8 +542,7 @@ msgstr "Admin"
 msgid "Basic Details"
 msgstr "Basis detaljer"
 
-#: web/templates/profile/edit.html.eex:38
-#: web/templates/profile/edit.html.eex:60
+#: web/templates/profile/edit.html.eex:38 web/templates/profile/edit.html.eex:60
 msgid "Custom"
 msgstr "Brugerdefineret"
 
@@ -556,16 +550,16 @@ msgstr "Brugerdefineret"
 msgid "Female"
 msgstr "Kvinde"
 
-#: web/templates/profile/details.html.eex:15
+#: web/templates/profile/details.html.eex:26
 #: web/templates/profile/edit.html.eex:32
 msgid "Gender"
 msgstr "Køn"
 
-#: web/templates/profile/details.html.eex:4
+#: web/templates/profile/details.html.eex:15
 msgid "Joined"
 msgstr "Tilmeldt"
 
-#: web/templates/profile/details.html.eex:36
+#: web/templates/profile/details.html.eex:47
 #: web/templates/profile/edit.html.eex:46
 #: web/templates/profile/index.html.eex:20
 msgid "Location"
@@ -575,8 +569,7 @@ msgstr "Lokation"
 msgid "Male"
 msgstr "Mand"
 
-#: web/templates/profile/edit.html.eex:36
-#: web/templates/profile/edit.html.eex:56
+#: web/templates/profile/edit.html.eex:36 web/templates/profile/edit.html.eex:56
 msgid "Not specified"
 msgstr "Ikke udspecificeret"
 
@@ -586,8 +579,7 @@ msgstr "Opret ny"
 
 #: web/templates/admin/forum/form.html.eex:12
 #: web/templates/admin/forum_category/form.html.eex:12
-#: web/templates/admin/term/form.html.eex:4
-#: web/templates/photo/form.html.eex:18
+#: web/templates/admin/term/form.html.eex:4 web/templates/photo/form.html.eex:18
 #: web/templates/photo_album/form.html.eex:12
 msgid "Description"
 msgstr "Beskrivelse"
@@ -604,8 +596,7 @@ msgstr "Nyt Fotoalbum"
 #: web/templates/photo/show.html.eex:3
 #: web/templates/photo_album/index.html.eex:3
 #: web/templates/photo_album/show.html.eex:3
-#: web/views/visitor_log_entry_view.ex:46
-#: web/views/visitor_log_entry_view.ex:65
+#: web/views/visitor_log_entry_view.ex:46 web/views/visitor_log_entry_view.ex:65
 msgid "Photo Albums"
 msgstr "Fotoalbum"
 
@@ -663,7 +654,7 @@ msgstr "Upload billeder"
 msgid "Uploaded"
 msgstr "Uploadet"
 
-#: web/templates/layout/sidebar.html.eex:59
+#: web/templates/layout/sidebar.html.eex:66
 msgid "Your Photo Albums"
 msgstr "Dine Fotoalbums"
 
@@ -698,8 +689,7 @@ msgstr "Opret ny forum kategori"
 msgid "Create new forum"
 msgstr "Opret nyt forum"
 
-#: web/templates/forum/show.html.eex:24
-#: web/templates/forum_topic/new.html.eex:6
+#: web/templates/forum/show.html.eex:24 web/templates/forum_topic/new.html.eex:6
 msgid "Create new topic"
 msgstr "Opret nyt indlæg"
 
@@ -810,7 +800,7 @@ msgstr "Gem forum kategori"
 msgid "Submit new reply"
 msgstr "Send nyt svar"
 
-#: web/templates/layout/sidebar.html.eex:36
+#: web/templates/layout/sidebar.html.eex:43
 msgid "You"
 msgstr "Dig"
 
@@ -846,8 +836,8 @@ msgstr "Håber vi ses igen engang!"
 
 #: web/templates/private_conversation/index.html.eex:22
 #: web/templates/private_conversation/show.html.eex:5
-#: web/views/notification_view.ex:40 web/views/profile_helpers.ex:10
-#: web/views/profile_helpers.ex:51
+#: web/views/notification_view.ex:40 web/views/profile_helpers.ex:11
+#: web/views/profile_helpers.ex:52 web/views/profile_helpers.ex:96
 msgid "User deleted"
 msgstr "Slettet bruger"
 
@@ -934,8 +924,7 @@ msgstr "Vis Betingelser"
 msgid "Terms"
 msgstr "Betingelser"
 
-#: web/templates/admin/term/show.html.eex:11
-#: web/templates/page/terms.html.eex:3
+#: web/templates/admin/term/show.html.eex:11 web/templates/page/terms.html.eex:3
 msgid "Terms and rules"
 msgstr "Betingelser og regler"
 
@@ -984,10 +973,8 @@ msgstr "Dit indlæg blev gemt!"
 msgid "Save Changes"
 msgstr "Gem ændringer"
 
-#: web/views/visitor_log_entry_view.ex:15
-#: web/views/visitor_log_entry_view.ex:33
-#: web/views/visitor_log_entry_view.ex:51
-#: web/views/visitor_log_entry_view.ex:73
+#: web/views/visitor_log_entry_view.ex:15 web/views/visitor_log_entry_view.ex:33
+#: web/views/visitor_log_entry_view.ex:51 web/views/visitor_log_entry_view.ex:73
 msgid "Visitors"
 msgstr "Lurelog"
 
@@ -997,8 +984,7 @@ msgstr "Du har ikke adgang til den forespurgte side!"
 
 #: web/templates/blog_post/index.html.eex:3
 #: web/templates/blog_post/index_all_public.html.eex:2
-#: web/templates/blog_post/show.html.eex:3
-#: web/templates/help/embeds.html.eex:11
+#: web/templates/blog_post/show.html.eex:3 web/templates/help/embeds.html.eex:11
 msgid "Blog posts"
 msgstr "Blog posts"
 
@@ -1006,8 +992,7 @@ msgstr "Blog posts"
 msgid "Comments"
 msgstr "Kommentarer"
 
-#: web/templates/help/embeds.html.eex:3
-#: web/templates/layout/sidebar.html.eex:29
+#: web/templates/help/embeds.html.eex:3 web/templates/layout/sidebar.html.eex:29
 msgid "Embeds"
 msgstr "Embeds"
 
@@ -1019,8 +1004,7 @@ msgstr "Forumsvar"
 msgid "Forum topics"
 msgstr "Forumtråde"
 
-#: web/templates/help/embeds.html.eex:2
-#: web/templates/layout/sidebar.html.eex:23
+#: web/templates/help/embeds.html.eex:2 web/templates/layout/sidebar.html.eex:23
 msgid "Help"
 msgstr "Hjælp"
 
@@ -1087,8 +1071,7 @@ msgstr "billedet"
 
 #: web/templates/help/embeds.html.eex:78 web/templates/help/embeds.html.eex:87
 #: web/templates/help/embeds.html.eex:89 web/templates/help/embeds.html.eex:95
-#: web/templates/help/embeds.html.eex:104
-#: web/templates/help/embeds.html.eex:106
+#: web/templates/help/embeds.html.eex:104 web/templates/help/embeds.html.eex:106
 msgid "the video"
 msgstr "videoen"
 
@@ -1098,7 +1081,7 @@ msgstr "videoen"
 msgid "where ID is the id of %{type}."
 msgstr "hvor ID er id’et på %{type}."
 
-#: web/templates/profile/details.html.eex:22
+#: web/templates/profile/details.html.eex:33
 msgid "Age"
 msgstr "Alder"
 
@@ -1269,8 +1252,7 @@ msgstr "Så ville track id’et være:"
 msgid "a track"
 msgstr "et track"
 
-#: web/templates/help/embeds.html.eex:111
-#: web/templates/help/embeds.html.eex:122
+#: web/templates/help/embeds.html.eex:111 web/templates/help/embeds.html.eex:122
 #: web/templates/help/embeds.html.eex:124
 msgid "the track"
 msgstr "tracket"
@@ -1303,7 +1285,7 @@ msgstr "Hvad rager det dig"
 msgid "Submit your changes to upload the image"
 msgstr "Gem dine ændringer for at uploade billedet"
 
-#: web/templates/profile/details.html.eex:29
+#: web/templates/profile/details.html.eex:40
 #: web/templates/profile/edit.html.eex:51
 msgid "Partner status"
 msgstr "Partnerstatus"
@@ -1467,11 +1449,11 @@ msgstr "Sorter efter senest logget ind"
 msgid "Sorting"
 msgstr "Sortering"
 
-#: web/templates/profile/details.html.eex:9
+#: web/templates/profile/details.html.eex:20
 msgid "Last login"
 msgstr "Seneste login"
 
-#: web/templates/forum_reply/forum_reply.html.eex:18
+#: web/templates/forum_reply/forum_reply.html.eex:19
 #: web/templates/forum_topic/forum_topic.html.eex:22
 msgid "Only possible for up to %{minutes} minutes after posting..."
 msgstr "Det er kun muligt at redigere i op til %{minutes} minutter…"
@@ -1483,3 +1465,68 @@ msgstr "Du kan kun redigere dit svar i de første %{minutes} minutter!"
 #: web/controllers/forum_topic_controller.ex:96
 msgid "You can only edit a forum topic in the first %{minutes} minutes!"
 msgstr "Du kan kun redigere dit indlæg i de første %{minutes} minutter!"
+
+#: web/templates/donation/new.html.eex:19
+msgid "As a small thank you, we will give you %{extra_file_size} extra photo space for every %{min_amount} you donate!"
+msgstr "Som tak giver vi dig %{extra_file_size} ekstra plads til dine billeder for hver %{min_amount} du donerer!"
+
+#: web/templates/donation/new.html.eex:58
+msgid "Donate"
+msgstr "Donér"
+
+#: web/templates/donation/new.html.eex:39
+msgid "Donation"
+msgstr "Donation"
+
+#: web/templates/donation/new.html.eex:27
+msgid "How much would you like to donate?"
+msgstr "Hvor meget vil du donere?"
+
+#: web/templates/donation/new.html.eex:7
+#: web/templates/layout/sidebar.html.eex:38
+msgid "Support %{site}"
+msgstr "Støt %{site}"
+
+#: web/templates/donation/new.html.eex:53
+msgid "This donation will grant you"
+msgstr "Denne donation vil give dig"
+
+#: web/templates/donation/new.html.eex:12
+msgid "Unfortunately it is not free for us to run this site."
+msgstr "Desværre er det ikke gratis for os at drive dette website."
+
+#: web/templates/donation/new.html.eex:13
+msgid "We have expenses for server hosting, web traffic etc."
+msgstr "Vi har udgifter til webhosting, trafik osv."
+
+#: web/templates/donation/new.html.eex:55
+msgid "extra space for photos"
+msgstr "ekstra plads til dine billeder"
+
+#: web/templates/profile/details.html.eex:8
+msgid "Has recently supported Helheim"
+msgstr "Har støttet Helheim for nylig"
+
+#: web/templates/donation/new.html.eex:17
+msgid "Help us keep this community open and free of ads by giving a small donation."
+msgstr "Hjælp os med at holde dette community åbent og fri for reklamer ved at donere et lille beløb."
+
+#: web/controllers/donation_controller.ex:24
+msgid "Something went wrong..."
+msgstr "Noget gik galt…"
+
+#: web/templates/donation/thank_you.html.eex:10
+msgid "Our owls also made me promise to send you their eternal love!"
+msgstr "Jeg har også lovet vores ugler at sende dig deres evige kærlighed!"
+
+#: web/templates/donation/thank_you.html.eex:7
+msgid "Thank you for your support!"
+msgstr "Tak for din støtte!"
+
+#: web/templates/donation/thank_you.html.eex:12
+msgid "With love"
+msgstr "Kærlig hilsen"
+
+#: web/templates/donation/thank_you.html.eex:9
+msgid "We have received your donation and humbly thank you for helping make Helheim the best community for alternative people."
+msgstr "Vi har modtaget din donation og takker ydmygt for din hjælp med at gøre Helheim til det bedste community for alternative mennesker."

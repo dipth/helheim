@@ -1,5 +1,5 @@
 <ol class="breadcrumb">
-  <li class="breadcrumb-item"><%= link @user.username, to: public_profile_path(@conn, :show, @user) %></li>
+  <li class="breadcrumb-item"><%= user_link_with_badge @user %></li>
   <li class="breadcrumb-item"><%= link gettext("Blog posts"), to: public_profile_blog_post_path(@conn, :index, @user) %></li>
   <li class="breadcrumb-item active"><%= @blog_post.title %></li>
 </ol>

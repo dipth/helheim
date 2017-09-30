@@ -1,0 +1,61 @@
+<div class="row mt-2">
+  <div class="col-md-4 text-center">
+    <%= img_tag static_path(@conn, "/images/donation_hero.png"), class: "img-fluid mb-1" %>
+  </div>
+
+  <div class="col-md-8">
+    <h1 class="display-3"><%= gettext("Support %{site}", site: gettext("Helheim")) %></h1>
+
+    <hr>
+
+    <p>
+      <%= gettext "Unfortunately it is not free for us to run this site." %><br>
+      <%= gettext "We have expenses for server hosting, web traffic etc." %>
+    </p>
+
+    <p>
+      <%= gettext "Help us keep this community open and free of ads by giving a small donation." %><br>
+      <%=
+        gettext "As a small thank you, we will give you %{extra_file_size} extra photo space for every %{min_amount} you donate!",
+        extra_file_size: Number.as_human_size(Donation.extra_space_per_step),
+        min_amount: Number.as_currency(Donation.min_amount / 100, unit: "kr. ", separator: ",", delimiter: ".")
+      %>
+    </p>
+
+    <hr>
+
+    <h3 class="mb-2"><%= gettext "How much would you like to donate?" %></h3>
+
+    <%= form_for @changeset,
+        donation_path(@conn, :create),
+        [
+          id: "donation-form",
+          data: [
+            step_size: Donation.step,
+            extra_space_per_step: Donation.extra_space_per_step,
+            stripe_key: Application.get_env(:helheim, :stripe)[:public_key],
+            logo_path: static_path(@conn, "/images/logo2.png"),
+            name: gettext("Helheim"),
+            description: gettext("Donation")
+          ]
+        ],
+        fn f -> %>
+
+      <%= hidden_input f, :token %>
+
+      <%= range_input f, :amount,
+          min: Donation.min_amount,
+          max: Donation.max_amount,
+          step: Donation.step
+      %>
+
+      <p class="mt-2 mb-2">
+        <%= gettext "This donation will grant you" %>
+        <code id="total-extra-space-gain"></code>
+        <%= gettext "extra space for photos"%>
+      </p>
+
+      <button type="button" name="donate" class="btn btn-lg btn-primary mb-3" id="donate-button"><%= gettext "Donate" %>!</button>
+    <% end %>
+  </div>
+</div>
