@@ -15,7 +15,12 @@ defmodule Helheim.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/", from: :helheim, gzip: false,
-    only: ~w(css fonts images js sounds robots.txt android-chrome-192x192.png apple-touch-icon.png browserconfig.xml favicon-16x16.png favicon-32x32.png favicon.ico manifest.json mstile-150x150.png safari-pinned-tab.svg)
+    only: ~w(
+      css fonts images js sounds robots.txt android-chrome-192x192.png
+      apple-touch-icon.png browserconfig.xml favicon-16x16.png favicon-32x32.png
+      favicon.ico manifest.json mstile-150x150.png safari-pinned-tab.svg
+      .well-known
+    )
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
