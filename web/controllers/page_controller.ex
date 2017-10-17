@@ -23,22 +23,22 @@ defmodule Helheim.PageController do
       User
       |> User.recently_logged_in
       |> User.with_avatar
-      |> limit(40)
+      |> limit(42)
       |> Helheim.Repo.all
 
     newest_blog_posts =
       BlogPost
       |> BlogPost.published
       |> BlogPost.newest
-      |> limit(5)
+      |> limit(8)
       |> preload(:user)
       |> Helheim.Repo.all
 
-    newest_forum_topics = ForumTopic.newest_for_frontpage(6)
+    newest_forum_topics = ForumTopic.newest_for_frontpage(11)
                           |> ForumTopic.with_latest_reply
                           |> Repo.all
 
-    newest_photos = Helheim.Photo.newest_for_frontpage(15)
+    newest_photos = Helheim.Photo.newest_for_frontpage(24)
 
     render conn, "front_page.html",
       newest_users: newest_users,
