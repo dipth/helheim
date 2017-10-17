@@ -256,3 +256,19 @@ code {
 .card.card-dark {
   background-color: $gray;
 }
+
+.ejs-embed {
+  img {
+    @include img-fluid;
+  }
+}
+
+.ejs-preview {
+  border: 1px solid $gray-lighter;
+  background-color: $gray;
+}
+
+.twitter-tweet {
+  border-left: 5px solid $twitter;
+  padding-left: 1rem;
+}
