@@ -72,6 +72,35 @@ defmodule Helheim.BlogPostTest do
     end
   end
 
+  describe "newest_for_frontpage/1" do
+    test "orders a post with a more recent published_at date before one with an older published_at date" do
+      blog_post1 = insert(:blog_post, published_at: Timex.shift(Timex.now, minutes: -1))
+      blog_post2 = insert(:blog_post, published_at: Timex.shift(Timex.now, minutes: -2))
+      blog_posts = BlogPost.newest_for_frontpage(10) |> Repo.all
+      ids        = Enum.map blog_posts, fn(c) -> c.id end
+      assert [blog_post1.id, blog_post2.id] == ids
+    end
+
+    test "only includes the latest published blog post for each user" do
+      blog_post1 = insert(:blog_post, published_at: Timex.shift(Timex.now, minutes: -1), published: false)
+      blog_post2 = insert(:blog_post, published_at: Timex.shift(Timex.now, minutes: -2), published: true, user: blog_post1.user)
+      blog_post3 = insert(:blog_post, published_at: Timex.shift(Timex.now, minutes: -3), published: true, user: blog_post1.user)
+      blog_post4 = insert(:blog_post, published_at: Timex.shift(Timex.now, minutes: -4), published: true)
+      blog_posts = BlogPost.newest_for_frontpage(10) |> Repo.all
+      ids        = Enum.map blog_posts, fn(c) -> c.id end
+      refute Enum.member?(ids, blog_post1.id)
+      assert Enum.member?(ids, blog_post2.id)
+      refute Enum.member?(ids, blog_post3.id)
+      assert Enum.member?(ids, blog_post4.id)
+    end
+
+    test "only returns a maximun number of blog posts as specified" do
+      insert_list(3, :blog_post, published: true)
+      blog_posts = BlogPost.newest_for_frontpage(2) |> Repo.all
+      assert length(blog_posts) == 2
+    end
+  end
+
   describe "published/1" do
     test "only returns published blog posts" do
       _blog_post1 = insert(:blog_post, published_at: DateTime.utc_now, published: false)

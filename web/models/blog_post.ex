@@ -18,7 +18,20 @@ defmodule Helheim.BlogPost do
 
   def newest(query) do
     from p in query,
-    order_by: [desc: [p.published_at, p.inserted_at]]
+    order_by: [desc: p.published_at, desc: p.inserted_at]
+  end
+
+  @newest_for_frontpage_partition_query """
+    SELECT blog_posts.id, row_number() OVER (
+      PARTITION BY blog_posts.user_id
+      ORDER BY blog_posts.published_at DESC
+    ) FROM blog_posts WHERE blog_posts.published = TRUE
+  """
+  def newest_for_frontpage(limit) do
+    from bp in (Helheim.BlogPost |> published |> newest),
+    join: partition in fragment(@newest_for_frontpage_partition_query),
+    where: partition.row_number <= ^1 and partition.id == bp.id,
+    limit: ^limit
   end
 
   def published(query) do
