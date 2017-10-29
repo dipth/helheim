@@ -14,6 +14,7 @@ defmodule Helheim.RegistrationFlowTest do
     |> fill_in(Query.text_field(gettext("E-mail")), with: "foo@bar.dk")
     |> fill_in(Query.text_field(gettext("Password")), with: "password")
     |> fill_in(Query.text_field(gettext("Confirm Password")), with: "password")
+    |> fill_in(Query.text_field("g-recaptcha-response"), with: "valid_response")
     |> click(Query.button(gettext("Create Account")))
     |> find(success_alert())
     |> Element.text

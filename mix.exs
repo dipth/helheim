@@ -21,7 +21,7 @@ defmodule Helheim.Mixfile do
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :comeonin, :bamboo, :calendar, :sentry, :scout_apm,
                     :ex_aws, :hackney, :poison, :timex, :scrivener_html, :timex_ecto,
-                    :stripity_stripe]]
+                    :stripity_stripe, :recaptcha]]
   end
 
   # Specifies which paths to compile per environment.
@@ -68,7 +68,8 @@ defmodule Helheim.Mixfile do
      {:mock, "~> 0.3.1", only: :test},
      {:scout_apm, "~> 0.0"},
      {:plug_cloudflare, ">= 1.2.0"},
-     {:stripity_stripe, "~> 1.6.0"}
+     {:stripity_stripe, "~> 1.6.0"},
+     {:recaptcha, "~> 2.2"}
    ]
   end
 

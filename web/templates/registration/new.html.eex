@@ -72,6 +72,15 @@
         </div>
       </div>
 
+      <div class="form-group mb-2 <%= if f.errors[:captcha] do 'has-danger' end %>">
+        <div class="controls">
+          <%= raw Recaptcha.Template.display %>
+          <%= if message = f.errors[:captcha] do %>
+            <div class="form-control-feedback"><%= translate_error(message) %></div>
+          <% end %>
+        </div>
+      </div>
+
       <p class="mb-2">
         <%= gettext "By signing up you agree to the "%>
         <%= link gettext("terms and rules"), to: page_path(@conn, :terms), target: "_blank" %>
