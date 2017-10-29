@@ -66,6 +66,11 @@ config :helheim, :stripe,
 config :stripity_stripe,
   secret_key: System.get_env("STRIPE_PRIVATE_KEY")
 
+# Configure ReCaptcha
+config :recaptcha,
+    public_key: {:system, System.get_env("RECAPTCHA_PUBLIC_KEY")},
+    secret: {:system, System.get_env("RECAPTCHA_SECRET_KEY")}
+
 # Filter sensitive data from logs
 config :phoenix, :filter_parameters, ["password", "guardian_token"]
 
