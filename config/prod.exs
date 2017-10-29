@@ -68,8 +68,8 @@ config :stripity_stripe,
 
 # Configure ReCaptcha
 config :recaptcha,
-    public_key: System.get_env("RECAPTCHA_PUBLIC_KEY"),
-    secret: System.get_env("RECAPTCHA_SECRET_KEY")
+  public_key: System.get_env("RECAPTCHA_PUBLIC_KEY"),
+  secret: System.get_env("RECAPTCHA_SECRET_KEY")
 
 # Filter sensitive data from logs
 config :phoenix, :filter_parameters, ["password", "guardian_token"]
