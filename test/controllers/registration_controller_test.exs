@@ -16,7 +16,7 @@ defmodule Helheim.RegistrationControllerTest do
     @invalid_params %{name: "   ", username: "   ", email: "   ", password: "password", password_confirmation: "password"}
 
     test "it creates a user, sends a registration e-mail and redirects when posting valid params", %{conn: conn} do
-      conn = post conn, "/registrations", user: @valid_params
+      conn = post conn, "/registrations", user: @valid_params, "g-recaptcha-response": "valid_response"
       assert html_response(conn, 302)
       user = Repo.get_by(User, email: @valid_params[:email])
       assert user
@@ -24,14 +24,14 @@ defmodule Helheim.RegistrationControllerTest do
     end
 
     test "it does not create a user but re-renders the new template when posting invalid params", %{conn: conn} do
-      conn = post conn, "/registrations", user: @invalid_params
+      conn = post conn, "/registrations", user: @invalid_params, "g-recaptcha-response": "invalid_response"
       assert html_response(conn, 200) =~ gettext("New Registration")
       refute Repo.get_by(User, email: @valid_params[:email])
       assert_no_emails_delivered()
     end
 
     test "extra spaces are stripped during registration", %{conn: conn} do
-      conn = post conn, "/registrations", user: Map.merge(@valid_params, %{name: "   Foo Bar   ", username: "   foobar   ", email: "   foo@bar.dk   "})
+      conn = post conn, "/registrations", user: Map.merge(@valid_params, %{name: "   Foo Bar   ", username: "   foobar   ", email: "   foo@bar.dk   "}), "g-recaptcha-response": "valid_response"
       assert html_response(conn, 302)
       user = Repo.one(User)
       assert user.name == "Foo Bar"

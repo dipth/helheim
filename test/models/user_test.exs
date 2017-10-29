@@ -7,7 +7,7 @@ defmodule Helheim.UserTest do
   import Helheim.Factory
 
   describe "registration_changeset/2" do
-    @valid_registration_attrs %{name: "Foo Bar", username: "foobar", email: "foo@bar.dk", password: "password"}
+    @valid_registration_attrs %{name: "Foo Bar", username: "foobar", email: "foo@bar.dk", password: "password", captcha: "valid_response"}
     @invalid_registration_attrs %{}
 
     test "it accepts valid attributes" do

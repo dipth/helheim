@@ -37,6 +37,7 @@ defmodule Helheim.User do
     field :max_total_file_size,             :integer
     field :last_donation_at,                Calecto.DateTimeUTC
     field :total_donated,                   :integer
+    field :captcha,                         :string, virtual: true
 
     timestamps()
 
@@ -101,7 +102,7 @@ defmodule Helheim.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :email, :username, :password, :password_confirmation])
+    |> cast(params, [:name, :email, :username, :password, :password_confirmation, :captcha])
     |> trim_fields([:name, :email, :username])
     |> validate_required([:name, :email, :username])
     |> validate_format(:email, ~r/@/)
@@ -113,9 +114,10 @@ defmodule Helheim.User do
   def registration_changeset(struct, params \\ %{}) do
     struct
     |> changeset(params)
-    |> validate_required([:password])
+    |> validate_required([:password, :captcha])
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password)
+    |> validate_captcha(:captcha)
     |> put_password_hash()
     |> reset_confirmed_state_if_email_changed()
   end
@@ -264,6 +266,15 @@ defmodule Helheim.User do
         put_change(changeset, :profile_text, profile_text |> HtmlSanitizeEx.Scrubber.scrub(Helheim.Scrubber))
       _ ->
         changeset
+    end
+  end
+
+  defp validate_captcha(changeset, field, options \\ []) do
+    validate_change changeset, field, fn _, captcha ->
+      case Recaptcha.verify(captcha) do
+        {:ok, _} -> []
+        {:error, _} -> [{field, options[:message] || gettext("I too enjoy registering on websites, fellow human... Bleep Bloop!")}]
+      end
     end
   end
 end
