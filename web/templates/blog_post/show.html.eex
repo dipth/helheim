@@ -16,7 +16,7 @@
     <%= visitor_count_badge @conn, @blog_post %>
     <small>
       <i class="fa fa-clock-o"></i>
-      <%= time_ago_in_words (@blog_post.published_at || @blog_post.inserted_at) %>
+      <%= time_ago_in_words @blog_post.updated_at %>
     </small>
   </div>
   <div>

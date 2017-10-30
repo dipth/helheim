@@ -5,7 +5,7 @@
   <footer class="blockquote-footer">
     <%= user_link_with_badge @blog_post.user %>
     -
-    <%= time_ago_in_words (@blog_post.published_at || @blog_post.inserted_at) %>
+    <%= time_ago_in_words @blog_post.updated_at %>
     <br>
     <%= visitor_count_badge @conn, @blog_post %>
     <%= comment_count_badge @blog_post %>
