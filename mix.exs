@@ -67,9 +67,9 @@ defmodule Helheim.Mixfile do
      {:scrivener_html, "~> 1.1"}, # Pagination
      {:mock, "~> 0.3.1", only: :test},
      {:scout_apm, "~> 0.0"},
-     {:plug_cloudflare, ">= 1.2.0"},
      {:stripity_stripe, "~> 1.6.0"},
-     {:recaptcha, "~> 2.2"}
+     {:recaptcha, "~> 2.2"},
+     {:remote_ip, "0.1.3"}
    ]
   end
 
