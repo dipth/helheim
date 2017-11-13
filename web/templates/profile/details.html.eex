@@ -3,9 +3,10 @@
     <%= if Helheim.Donation.recently_donated?(@user) do %>
       <tr>
         <th colspan="2" class="text-center text-success">
-          <%= link to: donation_path(@conn, :new), class: "btn btn-warning btn-sm" do %>
-            <i class="fa fa-fw fa-heart"></i>
+          <%= link to: donation_path(@conn, :new), class: "" do %>
+            <%= img_tag static_path(@conn, "/images/donor_icon.png"), class: "donor-icon mr-1" %>
             <%= gettext "Has recently supported Helheim" %>
+            <%= img_tag static_path(@conn, "/images/donor_icon.png"), class: "donor-icon ml-1" %>
           <% end %>
         </th>
       </tr>

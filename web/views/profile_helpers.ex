@@ -120,7 +120,11 @@ defmodule Helheim.ProfileHelpers do
       :admin ->
         [user_link(user), {:safe, ["&nbsp;"]}, content_tag(:span, "admin", class: "badge badge-primary")]
       :donor ->
-        [user_link(user), {:safe, ["&nbsp;"]}, content_tag(:span, content_tag(:i, "", class: "fa fa-heart"), class: "text-warning")]
+        [
+          user_link(user),
+          {:safe, ["&nbsp;"]},
+          img_tag(Endpoint.static_path("/images/donor_icon.png"), class: "donor-icon")
+        ]
       _ ->
         [user_link(user)]
     end
