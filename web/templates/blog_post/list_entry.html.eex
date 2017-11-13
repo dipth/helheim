@@ -9,8 +9,6 @@
     <br>
     <%= visitor_count_badge @conn, @blog_post %>
     <%= comment_count_badge @blog_post %>
-    <%= if Helheim.BlogPost.edited?(@blog_post) do %>
-      <span class="badge badge-default"><i class="fa fa-fw fa-pencil"></i> <%= gettext "Edited" %></span>
-    <% end %>
+    <%= Helheim.BlogPostView.edited_label(@blog_post) %>
   </footer>
 </blockquote>

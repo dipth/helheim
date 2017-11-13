@@ -14,6 +14,7 @@
 <div class="d-flex w-100 justify-content-between">
   <div class="align-self-center">
     <%= visitor_count_badge @conn, @blog_post %>
+    <%= edited_label(@blog_post) %>
     <small>
       <i class="fa fa-clock-o"></i>
       <%= time_ago_in_words @blog_post.updated_at %>
