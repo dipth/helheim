@@ -58,6 +58,11 @@ defmodule Helheim.BlogPost do
     |> set_published_at()
   end
 
+  def edited?(%{published_at: nil}), do: false
+  def edited?(blog_post) do
+    Timex.diff(blog_post.updated_at, blog_post.published_at, :minutes) > 0
+  end
+
   defp scrub_body(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{body: body}} ->

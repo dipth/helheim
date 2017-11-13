@@ -131,4 +131,25 @@ defmodule Helheim.BlogPostTest do
       assert [blog_post1.id, blog_post2.id] == ids
     end
   end
+
+  describe "edited/1" do
+    test "returns true if the blog post has been updated more than one minute after it was published" do
+      now       = DateTime.utc_now
+      later     = Timex.shift(Timex.now, seconds: 60)
+      blog_post = insert(:blog_post, published_at: now, updated_at: later)
+      assert BlogPost.edited?(blog_post)
+    end
+
+    test "returns false if the blog post has been updated less than one minute after it was published" do
+      now       = DateTime.utc_now
+      later     = Timex.shift(Timex.now, seconds: 59)
+      blog_post = insert(:blog_post, published_at: now, updated_at: later)
+      refute BlogPost.edited?(blog_post)
+    end
+
+    test "returns false if the blog post has not been published" do
+      blog_post = insert(:blog_post, published_at: nil)
+      refute BlogPost.edited?(blog_post)
+    end
+  end
 end

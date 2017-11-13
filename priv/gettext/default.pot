@@ -36,7 +36,7 @@ msgstr ""
 msgid "Click here if you did not get your confirmation e-mail"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:80
+#: web/templates/registration/new.html.eex:89
 msgid "Create Account"
 msgstr ""
 
@@ -135,7 +135,7 @@ msgstr ""
 msgid "User confirmed!"
 msgstr ""
 
-#: web/controllers/registration_controller.ex:17
+#: web/controllers/registration_controller.ex:18
 msgid "User created!"
 msgstr ""
 
@@ -327,7 +327,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:241
+#: web/models/user.ex:243
 msgid "does not match your current password"
 msgstr ""
 
@@ -866,7 +866,7 @@ msgstr ""
 msgid "Your profile along with text, details and avatar"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:76
+#: web/templates/registration/new.html.eex:85
 msgid "By signing up you agree to the "
 msgstr ""
 
@@ -937,7 +937,7 @@ msgstr ""
 msgid "Updated at"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:77
+#: web/templates/registration/new.html.eex:86
 msgid "terms and rules"
 msgstr ""
 
@@ -1518,4 +1518,12 @@ msgstr ""
 
 #: web/templates/donation/thank_you.html.eex:9
 msgid "We have received your donation and humbly thank you for helping make Helheim the best community for alternative people."
+msgstr ""
+
+#: web/templates/blog_post/list_entry.html.eex:13
+msgid "Edited"
+msgstr ""
+
+#: web/models/user.ex:276
+msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr ""
