@@ -1,0 +1,4 @@
+<%= link to: public_profile_friendship_request_path(@conn, :create, @user.id), class: "btn btn-primary btn-block", method: "POST" do %>
+  <i class="fa fa-user-plus"></i>
+  <%= gettext "Add to Contacts" %>
+<% end %>

@@ -22,6 +22,7 @@ defmodule Helheim.Router do
     plug Guardian.Plug.LoadResource
     plug Helheim.Plug.LoadNotifications
     plug Helheim.Plug.LoadUnreadPrivateConversations
+    plug Helheim.Plug.LoadPendingFriendships
     plug Helheim.Plug.EnforceBan
   end
 
@@ -70,6 +71,9 @@ defmodule Helheim.Router do
       resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
       resources "/block", BlockController, singleton: true, only: [:create, :delete, :show]
+      resources "/contact_request", FriendshipRequestController, singleton: true, only: [:create, :delete]
+      resources "/contact", FriendshipController, singleton: true, only: [:create, :delete]
+      resources "/contacts", FriendshipController, only: [:index]
     end
     resources "/blog_posts", BlogPostController, only: [:index, :new, :create, :edit, :update, :delete] do
       resources "/comments", CommentController, only: [:create]
@@ -101,6 +105,7 @@ defmodule Helheim.Router do
     resources "/comments", CommentController, only: [:delete]
     resources "/donations", DonationController, only: [:new, :create]
     get "/donations/thank_you", DonationController, :thank_you
+    resources "/contacts", FriendshipController, only: [:index]
   end
 
   scope "/admin", Helheim.Admin, as: :admin do

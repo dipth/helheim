@@ -1,0 +1,11 @@
+<div class="friendship-requests-dropdown-items">
+  <div class="dropdown-header text-center">
+    <strong><%= ngettext "You have %{count} pending contact", "You have %{count} pending contacts", @conn.assigns[:pending_friendships_count] %></strong>
+  </div>
+
+  <%= for friendship <- @conn.assigns[:pending_friendships] do %>
+    <%= link to: friendship_path(@conn, :index), class: "dropdown-item" do %>
+      <%= friendship.sender.username %>
+    <% end %>
+  <% end %>
+</div>

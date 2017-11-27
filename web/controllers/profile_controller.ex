@@ -5,6 +5,7 @@ defmodule Helheim.ProfileController do
   alias Helheim.Comment
   alias Helheim.Photo
   alias Helheim.ForumTopic
+  alias Helheim.Friendship
 
   plug :scrub_get_params when action in [:index]
   plug :find_user when action in [:show]

@@ -1,0 +1,38 @@
+<%= if Enum.any? @pending_friendships do %>
+  <h3><%= gettext "Pending Requests" %>:</h3>
+
+  <ul class="list-group">
+    <%= for friendship <- @pending_friendships do %>
+      <% friend = friendship.sender %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span>
+          <%= user_link_with_avatar_and_badge friend %>
+          <p class="d-sm-inline d-md-none">
+            <span class="badge badge-secondary">
+              <%= gettext "Last login" %>:
+              <%= time_ago_in_words(friend.last_login_at || friend.inserted_at) %>
+            </span>
+          </p>
+        </span>
+        <span>
+          <span class="badge badge-secondary d-none d-md-inline">
+            <%= gettext "Last login" %>:
+            <%= time_ago_in_words(friend.last_login_at || friend.inserted_at) %>
+          </span>
+
+          <%= link to: public_profile_friendship_path(@conn, :create, friendship.sender), method: :post, class: "btn btn-success btn-link" do %>
+            <i class="fa fa-check"></i>
+            <span class="d-none d-md-inline"><%= gettext "Accept" %></span>
+          <% end %>
+
+          <%= link to: public_profile_friendship_request_path(@conn, :delete, friendship.sender), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-link" do %>
+            <i class="fa fa-ban"></i>
+            <span class="d-none d-md-inline"><%= gettext "Reject" %></span>
+          <% end %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+
+  <hr class="mt-0">
+<% end %>

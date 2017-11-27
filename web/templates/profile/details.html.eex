@@ -49,5 +49,14 @@
         <td><%= @user.location %></td>
       </tr>
     <% end %>
+
+    <tr>
+      <th><%= gettext "Contacts" %>:</th>
+      <td>
+        <%= link to: public_profile_friendship_path(@conn, :index, @user) do %>
+          <%= Friendship.count(@user) %>
+        <% end %>
+      </td>
+    </tr>
   </tbody>
 </table>

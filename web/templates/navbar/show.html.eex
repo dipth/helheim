@@ -1,10 +1,11 @@
 <ul class="nav navbar-nav ml-auto" id="navbar">
   <%= render Helheim.PrivateConversationView, "menu_item.html", conn: @conn %>
   <%= render Helheim.NotificationView, "menu_item.html", conn: @conn %>
+  <%= render Helheim.FriendshipView, "menu_item.html", conn: @conn %>
   <li class="nav-item dropdown nav-item-user-menu">
     <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
       <img src="<%= Helheim.Avatar.url({Guardian.Plug.current_resource(@conn).avatar, Guardian.Plug.current_resource(@conn)}, :tiny) %>" class="img-avatar" alt="<%= Guardian.Plug.current_resource(@conn).username %>">
-      <%= count_badge(@conn, %{notifications: true, unread_messages: true, class: "hidden-lg-up"}) %>
+      <%= count_badge(@conn, %{notifications: true, unread_messages: true, pending_friendships: true, class: "hidden-lg-up"}) %>
       <span class="hidden-md-down"><%= Guardian.Plug.current_resource(@conn).username %></span>
     </a>
     <div class="dropdown-menu dropdown-menu-right">
@@ -13,6 +14,9 @@
       </div>
       <div class="hidden-lg-up dropdown-menu-notifications">
         <%= render Helheim.NotificationView, "dropdown_items.html", conn: @conn %>
+      </div>
+      <div class="hidden-lg-up dropdown-menu-friendship-requests">
+        <%= render Helheim.FriendshipView, "dropdown_items.html", conn: @conn %>
       </div>
       <div class="dropdown-header text-center">
         <strong><%= gettext("Settings") %></strong>

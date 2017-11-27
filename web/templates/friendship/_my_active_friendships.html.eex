@@ -1,0 +1,33 @@
+<h3><%= gettext "Your Contacts" %>:</h3>
+
+<%= if Enum.any? @active_friendships do %>
+  <ul class="list-group mb-1">
+    <%= for friendship <- @active_friendships.entries do %>
+      <% friend = Friendship.friend(current_resource(@conn), friendship) %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span>
+          <%= user_link_with_avatar_and_badge friend %>
+          <p class="d-sm-inline d-md-none">
+            <span class="badge badge-secondary">
+              <%= gettext "Last login" %>:
+              <%= time_ago_in_words(friend.last_login_at || friend.inserted_at) %>
+            </span>
+          </p>
+        </span>
+        <span>
+          <span class="badge badge-secondary d-none d-md-inline">
+            <%= gettext "Last login" %>:
+            <%= time_ago_in_words(friend.last_login_at || friend.inserted_at) %>
+          </span>
+
+          <%= link to: public_profile_friendship_path(@conn, :delete, friend), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-link" do %>
+            <i class="fa fa-trash"></i>
+            <span class="d-none d-md-inline"><%= gettext "Remove" %></span>
+          <% end %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p><%= gettext "You don't have any contacts..." %></p>
+<% end %>
