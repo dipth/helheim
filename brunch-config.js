@@ -74,7 +74,8 @@ exports.config = {
   npm: {
     enabled: true,
     globals: {
-      dragula: 'dragula'
+      dragula: 'dragula',
+      Favico: 'favico.js'
     }
   }
 };

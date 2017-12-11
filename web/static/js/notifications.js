@@ -5,6 +5,7 @@ export var Notifications = {
     let env = jQuery('meta[name="env"]').attr('content')
     let guardianToken = jQuery('meta[name="guardian_token"]').attr('content')
     let userId = jQuery('meta[name="user_id"]').attr('content')
+    let favicon = new Favico({animation:'popFade'})
     let notification_sound_path = jQuery('meta[name="notification_sound"]').attr('content')
     let notification_sound
 
@@ -35,7 +36,15 @@ export var Notifications = {
     let handleRefreshedNavbar = (data) => {
       $('#navbar').replaceWith(data)
       $('#navbar .badge').animateCss('wobble')
+      updateFavicon()
       playNotificationSound()
+    }
+
+    let updateFavicon = () => {
+      let messageCount = parseInt($('#nav-link-unread-messages .badge').html()) || 0
+      let notificationCount = parseInt($('#nav-link-notifications .badge').html()) || 0
+      let totalCount = messageCount + notificationCount
+      favicon.badge(totalCount)
     }
 
     let playNotificationSound = () => {
@@ -45,5 +54,6 @@ export var Notifications = {
     }
 
     channel.on("notification", handleIncomingNotification)
+    updateFavicon()
   },
 }
