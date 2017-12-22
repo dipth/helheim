@@ -11,11 +11,11 @@ defmodule Helheim.FriendshipRequestController do
   def create(conn, %{"profile_id" => _recipient_id}) do
     recipient = conn.assigns[:user]
     case Friendship.request_friendship!(current_resource(conn), recipient) do
-      {:ok, _friendship} ->
+      {:ok, _multi} ->
         conn
         |> put_flash(:success, gettext("A request has been sent!"))
         |> redirect(to: public_profile_path(conn, :show, recipient))
-      {:error, changeset} ->
+      {:error, :friendship, changeset, _changes_so_far} ->
         conn
         |> put_flash(
              :error,
