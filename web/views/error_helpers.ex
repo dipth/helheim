@@ -39,7 +39,7 @@ defmodule Helheim.ErrorHelpers do
   end
 
   def error_string_from_changeset(changeset) do
-    Enum.map(changeset.errors, fn {k, v} ->
+    Enum.map(changeset.errors, fn {_k, v} ->
        "#{translate_error(v)}"
     end) |> Enum.join(". ")
   end
