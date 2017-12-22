@@ -1,0 +1,4 @@
+<button type="button" class="btn btn-secondary btn-block" disabled>
+  <i class="fa fa-user-plus"></i>
+  <%= gettext "Contact Request Pending" %>
+</button>

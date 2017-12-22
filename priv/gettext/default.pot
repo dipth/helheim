@@ -24,7 +24,7 @@ msgstr ""
 #: web/templates/email/registration_email.text.eex:1
 #: web/templates/error/404.html.eex:18 web/templates/error/404.html.eex:29
 #: web/templates/error/500.html.eex:18 web/templates/error/500.html.eex:29
-#: web/templates/layout/app.html.eex:22
+#: web/templates/layout/app.html.eex:21
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
@@ -99,7 +99,7 @@ msgstr ""
 msgid "Will only be shown to administrators"
 msgstr ""
 
-#: web/templates/navbar/show.html.eex:24
+#: web/templates/navbar/show.html.eex:28
 msgid "Sign Out"
 msgstr ""
 
@@ -283,11 +283,11 @@ msgstr ""
 msgid "You need to confirm your e-mail address before you can reset your password"
 msgstr ""
 
-#: web/templates/navbar/show.html.eex:18 web/views/account_view.ex:4
+#: web/templates/navbar/show.html.eex:22 web/views/account_view.ex:4
 msgid "Settings"
 msgstr ""
 
-#: web/templates/navbar/show.html.eex:22 web/views/account_view.ex:4
+#: web/templates/navbar/show.html.eex:26 web/views/account_view.ex:4
 msgid "Account"
 msgstr ""
 
@@ -335,7 +335,7 @@ msgstr ""
 msgid "Maximum file size: %{file_size}"
 msgstr ""
 
-#: web/templates/navbar/show.html.eex:21
+#: web/templates/navbar/show.html.eex:25
 msgid "Profile"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:72
+#: web/controllers/profile_controller.ex:73
 msgid "Profile updated!"
 msgstr ""
 
@@ -364,12 +364,12 @@ msgid "Remember me"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:4
-#: web/templates/profile/show.html.eex:55
+#: web/templates/profile/show.html.eex:62
 msgid "Newest Blogs"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:13
-#: web/templates/profile/show.html.eex:66
+#: web/templates/profile/show.html.eex:73
 msgid "Newest Forum Posts"
 msgstr ""
 
@@ -396,14 +396,17 @@ msgstr ""
 
 #: web/templates/blog_post/edit.html.eex:2
 #: web/templates/blog_post/new.html.eex:2
-#: web/templates/layout/sidebar.html.eex:61
+#: web/templates/layout/sidebar.html.eex:67
 msgid "Your Blog Posts"
 msgstr ""
 
 #: web/templates/admin/forum_category/index.html.eex:13
 #: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/admin/term/index.html.eex:35
-#: web/templates/blog_post/show.html.eex:28 web/templates/photo/show.html.eex:42
+#: web/templates/blog_post/show.html.eex:29
+#: web/templates/friendship/_my_active_friendships.html.eex:23
+#: web/templates/friendship/_my_pending_friendships.html.eex:28
+#: web/templates/photo/show.html.eex:42
 #: web/templates/photo_album/show.html.eex:67
 #: web/templates/private_conversation/show.html.eex:10
 msgid "Are you sure?"
@@ -421,13 +424,13 @@ msgstr ""
 msgid "Blog post updated successfully."
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:30 web/templates/photo/show.html.eex:44
+#: web/templates/blog_post/show.html.eex:31 web/templates/photo/show.html.eex:44
 #: web/templates/photo_album/show.html.eex:69 web/views/comment_view.ex:48
 #: web/views/comment_view.ex:50
 msgid "Delete"
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:26
+#: web/templates/blog_post/show.html.eex:27
 #: web/templates/forum_reply/forum_reply.html.eex:18
 #: web/templates/forum_topic/forum_topic.html.eex:21
 msgid "Edit"
@@ -467,7 +470,7 @@ msgstr ""
 #: web/templates/page/front_page.html.eex:8
 #: web/templates/page/front_page.html.eex:37
 #: web/templates/page/front_page.html.eex:50
-#: web/templates/profile/show.html.eex:60 web/templates/profile/show.html.eex:84
+#: web/templates/profile/show.html.eex:67 web/templates/profile/show.html.eex:91
 msgid "Show All"
 msgstr ""
 
@@ -513,7 +516,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/layout/sidebar.html.eex:57
+#: web/templates/layout/sidebar.html.eex:63
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr ""
@@ -539,16 +542,16 @@ msgstr ""
 msgid "Female"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:26
+#: web/templates/profile/details.html.eex:27
 #: web/templates/profile/edit.html.eex:32
 msgid "Gender"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:15
+#: web/templates/profile/details.html.eex:16
 msgid "Joined"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:47
+#: web/templates/profile/details.html.eex:48
 #: web/templates/profile/edit.html.eex:46
 #: web/templates/profile/index.html.eex:20
 msgid "Location"
@@ -615,7 +618,7 @@ msgstr ""
 msgid "Edit Photo Details"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:78
+#: web/templates/profile/show.html.eex:85
 msgid "Newest Public Photos"
 msgstr ""
 
@@ -643,7 +646,7 @@ msgstr ""
 msgid "Uploaded"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:66
+#: web/templates/layout/sidebar.html.eex:72
 msgid "Your Photo Albums"
 msgstr ""
 
@@ -1070,7 +1073,7 @@ msgstr ""
 msgid "where ID is the id of %{type}."
 msgstr ""
 
-#: web/templates/profile/details.html.eex:33
+#: web/templates/profile/details.html.eex:34
 msgid "Age"
 msgstr ""
 
@@ -1274,7 +1277,7 @@ msgstr ""
 msgid "Submit your changes to upload the image"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:40
+#: web/templates/profile/details.html.eex:41
 #: web/templates/profile/edit.html.eex:51
 msgid "Partner status"
 msgstr ""
@@ -1291,15 +1294,15 @@ msgstr ""
 msgid "Your ban will expire"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:38
+#: web/templates/profile/show.html.eex:45
 msgid "Block user"
 msgstr ""
 
-#: web/templates/block/index.html.eex:10 web/templates/profile/show.html.eex:26
+#: web/templates/block/index.html.eex:10 web/templates/profile/show.html.eex:33
 msgid "The user will be unable to see your profile, blog posts, photos or send you messages while blocked"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:25
+#: web/templates/profile/show.html.eex:32
 msgid "This user is blocked"
 msgstr ""
 
@@ -1312,7 +1315,7 @@ msgid "Unable to unblock user!"
 msgstr ""
 
 #: web/templates/block/index.html.eex:27 web/templates/block/index.html.eex:28
-#: web/templates/profile/show.html.eex:30
+#: web/templates/profile/show.html.eex:37
 msgid "Unblock user"
 msgstr ""
 
@@ -1328,7 +1331,7 @@ msgstr ""
 msgid "Blocked since:"
 msgstr ""
 
-#: web/templates/block/index.html.eex:2 web/templates/navbar/show.html.eex:23
+#: web/templates/block/index.html.eex:2 web/templates/navbar/show.html.eex:27
 msgid "Blocks"
 msgstr ""
 
@@ -1438,7 +1441,13 @@ msgstr ""
 msgid "Sorting"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:20
+#: web/templates/friendship/_active_friendships.html.eex:12
+#: web/templates/friendship/_active_friendships.html.eex:19
+#: web/templates/friendship/_my_active_friendships.html.eex:12
+#: web/templates/friendship/_my_active_friendships.html.eex:19
+#: web/templates/friendship/_my_pending_friendships.html.eex:12
+#: web/templates/friendship/_my_pending_friendships.html.eex:19
+#: web/templates/profile/details.html.eex:21
 msgid "Last login"
 msgstr ""
 
@@ -1520,10 +1529,106 @@ msgstr ""
 msgid "We have received your donation and humbly thank you for helping make Helheim the best community for alternative people."
 msgstr ""
 
-#: web/templates/blog_post/list_entry.html.eex:13
+#: web/views/blog_post_view.ex:11
 msgid "Edited"
 msgstr ""
 
 #: web/models/user.ex:276
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
+msgstr ""
+
+#: web/templates/friendship/dropdown_items.html.eex:3
+msgid "You have %{count} pending contact"
+msgid_plural "You have %{count} pending contacts"
+msgstr[0] ""
+msgstr[1] ""
+
+#: web/templates/friendship/_active_friendships.html.eex:27
+msgid "%{username} does not have any contacts..."
+msgstr ""
+
+#: web/controllers/friendship_controller.ex:28
+msgid "%{username} has been added to your contact list!"
+msgstr ""
+
+#: web/controllers/friendship_controller.ex:48
+msgid "%{username} has been removed from your contact list!"
+msgstr ""
+
+#: web/templates/friendship/_friend_request_button_friends.html.eex:3
+msgid "%{username} is on your contact list"
+msgstr ""
+
+#: web/controllers/friendship_request_controller.ex:16
+msgid "A request has been sent!"
+msgstr ""
+
+#: web/templates/friendship/_my_pending_friendships.html.eex:25
+msgid "Accept"
+msgstr ""
+
+#: web/templates/friendship/_friend_request_button_not_friends.html.eex:3
+msgid "Add to Contacts"
+msgstr ""
+
+#: web/templates/friendship/index.html.eex:3
+#: web/templates/layout/sidebar.html.eex:57
+msgid "Contact List"
+msgstr ""
+
+#: web/templates/friendship/_friend_request_button_pending.html.eex:3
+msgid "Contact Request Pending"
+msgstr ""
+
+#: web/templates/friendship/_active_friendships.html.eex:1
+#: web/templates/profile/details.html.eex:54
+msgid "Contacts"
+msgstr ""
+
+#: web/templates/friendship/_my_pending_friendships.html.eex:2
+msgid "Pending Requests"
+msgstr ""
+
+#: web/templates/friendship/_my_pending_friendships.html.eex:30
+msgid "Reject"
+msgstr ""
+
+#: web/templates/friendship/_my_active_friendships.html.eex:25
+msgid "Remove"
+msgstr ""
+
+#: web/controllers/friendship_request_controller.ex:36
+msgid "The request has been rejected!"
+msgstr ""
+
+#: web/models/friendship.ex:168
+msgid "There is already a pending request between the two of you!"
+msgstr ""
+
+#: web/controllers/friendship_controller.ex:34
+msgid "Unable to accept request: %{error}"
+msgstr ""
+
+#: web/controllers/friendship_request_controller.ex:42
+msgid "Unable to reject request: %{error}"
+msgstr ""
+
+#: web/controllers/friendship_controller.ex:54
+msgid "Unable to remove contact: %{error}"
+msgstr ""
+
+#: web/controllers/friendship_request_controller.ex:22
+msgid "Unable to send request: %{error}"
+msgstr ""
+
+#: web/models/friendship.ex:152
+msgid "You can't add yourself to your own contact list!"
+msgstr ""
+
+#: web/templates/friendship/_my_active_friendships.html.eex:32
+msgid "You don't have any contacts..."
+msgstr ""
+
+#: web/templates/friendship/_my_active_friendships.html.eex:1
+msgid "Your Contacts"
 msgstr ""

@@ -43,7 +43,8 @@ export var Notifications = {
     let updateFavicon = () => {
       let messageCount = parseInt($('#nav-link-unread-messages .badge').html()) || 0
       let notificationCount = parseInt($('#nav-link-notifications .badge').html()) || 0
-      let totalCount = messageCount + notificationCount
+      let pendingFriendshipCount = parseInt($('#nav-link-pending-friendships .badge').html()) || 0
+      let totalCount = messageCount + notificationCount + pendingFriendshipCount
       favicon.badge(totalCount)
     }
 

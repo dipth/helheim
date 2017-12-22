@@ -20,6 +20,13 @@
             <% end %>
           </p>
 
+          <p class="mb-0 mt-1">
+            <%= render FriendshipView,
+                       "_friend_request_button_#{Friendship.status(current_resource(@conn), @user)}.html",
+                       conn: @conn,
+                       user: @user %>
+          </p>
+
           <%= if Block.blocked?(current_resource(@conn), @user) do %>
             <div class="alert alert-warning mt-1" role="alert">
               <strong><%= gettext "This user is blocked" %>!</strong>

@@ -147,4 +147,20 @@ defmodule Helheim.Factory do
       enabled: true
     }
   end
+
+  def friendship_request_factory do
+    %Helheim.Friendship{
+      sender:      build(:user),
+      recipient:   build(:user),
+      accepted_at: nil
+    }
+  end
+
+  def friendship_factory do
+    %Helheim.Friendship{
+      sender:      build(:user),
+      recipient:   build(:user),
+      accepted_at: DateTime.utc_now
+    }
+  end
 end

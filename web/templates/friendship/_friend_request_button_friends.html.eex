@@ -1,0 +1,4 @@
+<button type="button" class="btn btn-success btn-block" disabled>
+  <i class="fa fa-user-plus"></i>
+  <%= gettext "%{username} is on your contact list", username: @user.username %>
+</button>

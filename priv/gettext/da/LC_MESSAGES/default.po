@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -35,7 +35,7 @@ msgstr "%{site_name} er et community for alternative folk."
 #: web/templates/email/registration_email.text.eex:1
 #: web/templates/error/404.html.eex:18 web/templates/error/404.html.eex:29
 #: web/templates/error/500.html.eex:18 web/templates/error/500.html.eex:29
-#: web/templates/layout/app.html.eex:22
+#: web/templates/layout/app.html.eex:21
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
@@ -110,7 +110,7 @@ msgstr "Velkommen til %{site_name}"
 msgid "Will only be shown to administrators"
 msgstr "Vil kun blive vist til administratorer"
 
-#: web/templates/navbar/show.html.eex:24
+#: web/templates/navbar/show.html.eex:28
 msgid "Sign Out"
 msgstr "Log ud"
 
@@ -294,11 +294,11 @@ msgstr "For at sikre dig imod tastefejl"
 msgid "You need to confirm your e-mail address before you can reset your password"
 msgstr "Du skal først bekræfte din e-mail adresse før du kan nulstille dit kodeord"
 
-#: web/templates/navbar/show.html.eex:18 web/views/account_view.ex:4
+#: web/templates/navbar/show.html.eex:22 web/views/account_view.ex:4
 msgid "Settings"
 msgstr "Indstillinger"
 
-#: web/templates/navbar/show.html.eex:22 web/views/account_view.ex:4
+#: web/templates/navbar/show.html.eex:26 web/views/account_view.ex:4
 msgid "Account"
 msgstr "Konto"
 
@@ -347,7 +347,7 @@ msgstr "matcher ikke dit nuværende kodeord"
 msgid "Maximum file size: %{file_size}"
 msgstr "Maksimum fil størrelse: %{file_size}"
 
-#: web/templates/navbar/show.html.eex:21
+#: web/templates/navbar/show.html.eex:25
 msgid "Profile"
 msgstr "Profil"
 
@@ -364,7 +364,7 @@ msgstr "Profil Indstillinger"
 msgid "Profile Text"
 msgstr "Profiltekst"
 
-#: web/controllers/profile_controller.ex:72
+#: web/controllers/profile_controller.ex:73
 msgid "Profile updated!"
 msgstr "Din profil blev opdateret!"
 
@@ -377,12 +377,12 @@ msgid "Remember me"
 msgstr "Husk mig i 30 dage"
 
 #: web/templates/page/front_page.html.eex:4
-#: web/templates/profile/show.html.eex:55
+#: web/templates/profile/show.html.eex:62
 msgid "Newest Blogs"
 msgstr "Nyeste Blogs"
 
 #: web/templates/page/front_page.html.eex:13
-#: web/templates/profile/show.html.eex:66
+#: web/templates/profile/show.html.eex:73
 msgid "Newest Forum Posts"
 msgstr "Nyeste Forumindlæg"
 
@@ -410,14 +410,16 @@ msgstr "Gem Blog"
 
 #: web/templates/blog_post/edit.html.eex:2
 #: web/templates/blog_post/new.html.eex:2
-#: web/templates/layout/sidebar.html.eex:61
+#: web/templates/layout/sidebar.html.eex:67
 msgid "Your Blog Posts"
 msgstr "Dine Blogs"
 
 #: web/templates/admin/forum_category/index.html.eex:13
 #: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/admin/term/index.html.eex:35
-#: web/templates/blog_post/show.html.eex:28
+#: web/templates/blog_post/show.html.eex:29
+#: web/templates/friendship/_my_active_friendships.html.eex:23
+#: web/templates/friendship/_my_pending_friendships.html.eex:28
 #: web/templates/photo/show.html.eex:42
 #: web/templates/photo_album/show.html.eex:67
 #: web/templates/private_conversation/show.html.eex:10
@@ -436,14 +438,14 @@ msgstr "Din blog er nu slettet!"
 msgid "Blog post updated successfully."
 msgstr "Din blog er opdateret!"
 
-#: web/templates/blog_post/show.html.eex:30
+#: web/templates/blog_post/show.html.eex:31
 #: web/templates/photo/show.html.eex:44
 #: web/templates/photo_album/show.html.eex:69 web/views/comment_view.ex:48
 #: web/views/comment_view.ex:50
 msgid "Delete"
 msgstr "Slet"
 
-#: web/templates/blog_post/show.html.eex:26
+#: web/templates/blog_post/show.html.eex:27
 #: web/templates/forum_reply/forum_reply.html.eex:18
 #: web/templates/forum_topic/forum_topic.html.eex:21
 msgid "Edit"
@@ -483,8 +485,8 @@ msgstr "Tilføj Kommentar"
 #: web/templates/page/front_page.html.eex:8
 #: web/templates/page/front_page.html.eex:37
 #: web/templates/page/front_page.html.eex:50
-#: web/templates/profile/show.html.eex:60
-#: web/templates/profile/show.html.eex:84
+#: web/templates/profile/show.html.eex:67
+#: web/templates/profile/show.html.eex:91
 msgid "Show All"
 msgstr "Vis alle"
 
@@ -530,7 +532,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] "Du har %{count} notifikation"
 msgstr[1] "Du har %{count} notifikationer"
 
-#: web/templates/layout/sidebar.html.eex:57
+#: web/templates/layout/sidebar.html.eex:63
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr "Private Beskeder"
@@ -557,16 +559,16 @@ msgstr "Brugerdefineret"
 msgid "Female"
 msgstr "Kvinde"
 
-#: web/templates/profile/details.html.eex:26
+#: web/templates/profile/details.html.eex:27
 #: web/templates/profile/edit.html.eex:32
 msgid "Gender"
 msgstr "Køn"
 
-#: web/templates/profile/details.html.eex:15
+#: web/templates/profile/details.html.eex:16
 msgid "Joined"
 msgstr "Tilmeldt"
 
-#: web/templates/profile/details.html.eex:47
+#: web/templates/profile/details.html.eex:48
 #: web/templates/profile/edit.html.eex:46
 #: web/templates/profile/index.html.eex:20
 msgid "Location"
@@ -636,7 +638,7 @@ msgstr "Slip billeder her (eller klik) for at uploade…"
 msgid "Edit Photo Details"
 msgstr "Redigér billed-detaljer"
 
-#: web/templates/profile/show.html.eex:78
+#: web/templates/profile/show.html.eex:85
 msgid "Newest Public Photos"
 msgstr "Nyeste offentlige billeder"
 
@@ -664,7 +666,7 @@ msgstr "Upload billeder"
 msgid "Uploaded"
 msgstr "Uploadet"
 
-#: web/templates/layout/sidebar.html.eex:66
+#: web/templates/layout/sidebar.html.eex:72
 msgid "Your Photo Albums"
 msgstr "Dine Fotoalbums"
 
@@ -1099,7 +1101,7 @@ msgstr "videoen"
 msgid "where ID is the id of %{type}."
 msgstr "hvor ID er id’et på %{type}."
 
-#: web/templates/profile/details.html.eex:33
+#: web/templates/profile/details.html.eex:34
 msgid "Age"
 msgstr "Alder"
 
@@ -1304,7 +1306,7 @@ msgstr "Hvad rager det dig"
 msgid "Submit your changes to upload the image"
 msgstr "Gem dine ændringer for at uploade billedet"
 
-#: web/templates/profile/details.html.eex:40
+#: web/templates/profile/details.html.eex:41
 #: web/templates/profile/edit.html.eex:51
 msgid "Partner status"
 msgstr "Partnerstatus"
@@ -1321,15 +1323,15 @@ msgstr "Du er blevet bandlyst!"
 msgid "Your ban will expire"
 msgstr "Din bandlysning udløber"
 
-#: web/templates/profile/show.html.eex:38
+#: web/templates/profile/show.html.eex:45
 msgid "Block user"
 msgstr "Blokér bruger"
 
-#: web/templates/block/index.html.eex:10 web/templates/profile/show.html.eex:26
+#: web/templates/block/index.html.eex:10 web/templates/profile/show.html.eex:33
 msgid "The user will be unable to see your profile, blog posts, photos or send you messages while blocked"
 msgstr "Brugeren vil ikke være i stand til at se din profil, blogs, billeder eller kontakte dig så længe blokeringen er aktiv"
 
-#: web/templates/profile/show.html.eex:25
+#: web/templates/profile/show.html.eex:32
 msgid "This user is blocked"
 msgstr "Denne bruger er blokeret"
 
@@ -1342,7 +1344,7 @@ msgid "Unable to unblock user!"
 msgstr "Blokeringen kunne ikke fjernes!"
 
 #: web/templates/block/index.html.eex:27 web/templates/block/index.html.eex:28
-#: web/templates/profile/show.html.eex:30
+#: web/templates/profile/show.html.eex:37
 msgid "Unblock user"
 msgstr "Fjern blokering"
 
@@ -1358,7 +1360,7 @@ msgstr "Blokering fjernet!"
 msgid "Blocked since:"
 msgstr "Blokeret siden:"
 
-#: web/templates/block/index.html.eex:2 web/templates/navbar/show.html.eex:23
+#: web/templates/block/index.html.eex:2 web/templates/navbar/show.html.eex:27
 msgid "Blocks"
 msgstr "Blokeringer"
 
@@ -1468,7 +1470,13 @@ msgstr "Sorter efter senest logget ind"
 msgid "Sorting"
 msgstr "Sortering"
 
-#: web/templates/profile/details.html.eex:20
+#: web/templates/friendship/_active_friendships.html.eex:12
+#: web/templates/friendship/_active_friendships.html.eex:19
+#: web/templates/friendship/_my_active_friendships.html.eex:12
+#: web/templates/friendship/_my_active_friendships.html.eex:19
+#: web/templates/friendship/_my_pending_friendships.html.eex:12
+#: web/templates/friendship/_my_pending_friendships.html.eex:19
+#: web/templates/profile/details.html.eex:21
 msgid "Last login"
 msgstr "Seneste login"
 
@@ -1550,10 +1558,106 @@ msgstr "Kærlig hilsen"
 msgid "We have received your donation and humbly thank you for helping make Helheim the best community for alternative people."
 msgstr "Vi har modtaget din donation og takker ydmygt for din hjælp med at gøre Helheim til det bedste community for alternative mennesker."
 
-#: web/templates/blog_post/list_entry.html.eex:13
+#: web/views/blog_post_view.ex:11
 msgid "Edited"
 msgstr "Redigeret"
 
 #: web/models/user.ex:276
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr "I too enjoy registering on websites, fellow human… Bleep Bloop!"
+
+#: web/templates/friendship/dropdown_items.html.eex:3
+msgid "You have %{count} pending contact"
+msgid_plural "You have %{count} pending contacts"
+msgstr[0] "Du har %{count} kontaktanmodning"
+msgstr[1] "Du har %{count} kontaktanmodninger"
+
+#: web/templates/friendship/_active_friendships.html.eex:27
+msgid "%{username} does not have any contacts..."
+msgstr "%{username} har ingen kontakter…"
+
+#: web/controllers/friendship_controller.ex:28
+msgid "%{username} has been added to your contact list!"
+msgstr "%{username} er nu tilføjet til din kontaktliste!"
+
+#: web/controllers/friendship_controller.ex:48
+msgid "%{username} has been removed from your contact list!"
+msgstr "%{username} er nu fjernet fra din kontaktliste!"
+
+#: web/templates/friendship/_friend_request_button_friends.html.eex:3
+msgid "%{username} is on your contact list"
+msgstr "%{username} er på din kontaktliste"
+
+#: web/controllers/friendship_request_controller.ex:16
+msgid "A request has been sent!"
+msgstr "En anmodning er blevet sendt!"
+
+#: web/templates/friendship/_my_pending_friendships.html.eex:25
+msgid "Accept"
+msgstr "Acceptér"
+
+#: web/templates/friendship/_friend_request_button_not_friends.html.eex:3
+msgid "Add to Contacts"
+msgstr "Føj til kontaktliste"
+
+#: web/templates/friendship/index.html.eex:3
+#: web/templates/layout/sidebar.html.eex:57
+msgid "Contact List"
+msgstr "Kontaktliste"
+
+#: web/templates/friendship/_friend_request_button_pending.html.eex:3
+msgid "Contact Request Pending"
+msgstr "Kontaktanmodning venter"
+
+#: web/templates/friendship/_active_friendships.html.eex:1
+#: web/templates/profile/details.html.eex:54
+msgid "Contacts"
+msgstr "Kontakter"
+
+#: web/templates/friendship/_my_pending_friendships.html.eex:2
+msgid "Pending Requests"
+msgstr "Ventende anmodninger"
+
+#: web/templates/friendship/_my_pending_friendships.html.eex:30
+msgid "Reject"
+msgstr "Afvis"
+
+#: web/templates/friendship/_my_active_friendships.html.eex:25
+msgid "Remove"
+msgstr "Fjern"
+
+#: web/controllers/friendship_request_controller.ex:36
+msgid "The request has been rejected!"
+msgstr "Anmodningen blev afvist!"
+
+#: web/models/friendship.ex:168
+msgid "There is already a pending request between the two of you!"
+msgstr "Der findes allerede en ventende kontaktanmodning imellem jer!"
+
+#: web/controllers/friendship_controller.ex:34
+msgid "Unable to accept request: %{error}"
+msgstr "Anmodningen kunne ikke accepteres: %{error}"
+
+#: web/controllers/friendship_request_controller.ex:42
+msgid "Unable to reject request: %{error}"
+msgstr "Anmodningen kunne ikke afvises: %{error}"
+
+#: web/controllers/friendship_controller.ex:54
+msgid "Unable to remove contact: %{error}"
+msgstr "Personen kunne ikke fjernes: %{error}"
+
+#: web/controllers/friendship_request_controller.ex:22
+msgid "Unable to send request: %{error}"
+msgstr "Kunne ikke sende anmodning: %{error}"
+
+#: web/models/friendship.ex:152
+msgid "You can't add yourself to your own contact list!"
+msgstr "Du kan ikke tilføje dig selv til din egen kontaktliste!"
+
+#: web/templates/friendship/_my_active_friendships.html.eex:32
+msgid "You don't have any contacts..."
+msgstr "Du har ingen kontakter..."
+
+#: web/templates/friendship/_my_active_friendships.html.eex:1
+msgid "Your Contacts"
+msgstr "Dine kontakter"
