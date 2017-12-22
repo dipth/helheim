@@ -203,7 +203,7 @@ defmodule Helheim.UserTest do
     end
 
     test "it correctly subtracts 1 if the current month is before the month of the birthday" do
-      now = Timex.set(Timex.now, day: 1)
+      now = Timex.set(Timex.now, day: 1, month: 5)
       birthday = Timex.set(now, year: now.year - 10, month: now.month + 1) |> Timex.to_date
       user = insert(:user, birthday: birthday)
       assert User.age(user, now) == 9
