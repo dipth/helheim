@@ -18,6 +18,8 @@
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
+import 'intl/locale-data/jsonp/da.js';
+
 import { Leaf } from "web/static/js/leaf";
 import { BootstrapStuff } from "web/static/js/bootstrap_stuff";
 import { ProfileSettings } from "web/static/js/profile_settings";

@@ -75,7 +75,8 @@ exports.config = {
     enabled: true,
     globals: {
       dragula: 'dragula',
-      Favico: 'favico.js'
+      Favico: 'favico.js',
+      Intl: 'intl'
     }
   }
 };
