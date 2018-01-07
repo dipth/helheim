@@ -20,6 +20,14 @@
       <%= gettext "Hint" %>: <%= gettext "You can insert pictures from your photo albums by copying the image url and pasting it into the source-field when clicking the image button in the editor" %>
     </p>
 
+    <div class="form-group <%= if f.errors[:visibility] do 'has-danger' end %>">
+      <%= label f, :visibility, gettext("Visibility"), class: "control-label" %>
+      <%= select f, :visibility, Helheim.Visibility.visibilities_with_human, class: "form-control" %>
+      <%= if message = f.errors[:visibility] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% end %>
+    </div>
+
     <div class="alert alert-info">
       <h4 class="alert-heading"><%= gettext "Publish?" %></h4>
       <p class="mb-1">

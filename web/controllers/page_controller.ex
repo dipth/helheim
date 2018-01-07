@@ -27,7 +27,7 @@ defmodule Helheim.PageController do
       |> Repo.all
 
     newest_blog_posts =
-      BlogPost.newest_for_frontpage(8)
+      BlogPost.newest_for_frontpage(current_resource(conn), 8)
       |> preload(:user)
       |> Repo.all
 

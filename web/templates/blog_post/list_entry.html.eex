@@ -7,6 +7,7 @@
     -
     <%= time_ago_in_words @blog_post.updated_at %>
     <br>
+    <%= visibility_badge @blog_post %>
     <%= visitor_count_badge @conn, @blog_post %>
     <%= comment_count_badge @blog_post %>
     <%= Helheim.BlogPostView.edited_label(@blog_post) %>

@@ -351,7 +351,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:73
+#: web/controllers/profile_controller.ex:72
 msgid "Profile updated!"
 msgstr ""
 
@@ -390,7 +390,7 @@ msgstr ""
 msgid "New Blog Post"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:39
+#: web/templates/blog_post/form.html.eex:47
 msgid "Save Blog Post"
 msgstr ""
 
@@ -604,7 +604,7 @@ msgstr ""
 msgid "Save Photo Album"
 msgstr ""
 
-#: web/templates/photo/show.html.eex:10
+#: web/templates/blog_post/form.html.eex:24 web/templates/photo/show.html.eex:10
 #: web/templates/photo_album/form.html.eex:20
 #: web/templates/photo_album/show.html.eex:10
 msgid "Visibility"
@@ -1188,7 +1188,7 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:32
+#: web/templates/blog_post/form.html.eex:40
 msgid "No"
 msgstr ""
 
@@ -1196,7 +1196,7 @@ msgstr ""
 msgid "Only you can currently view this blog post. Edit it to publish it."
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:24
+#: web/templates/blog_post/form.html.eex:32
 msgid "Publish?"
 msgstr ""
 
@@ -1204,15 +1204,15 @@ msgstr ""
 msgid "This blog post is not published!"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:32
+#: web/templates/blog_post/form.html.eex:40
 msgid "Yes"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:27
+#: web/templates/blog_post/form.html.eex:35
 msgid "You are always free to unpublish a post again, but re-publishing it will not bump the post further up on lists."
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:26
+#: web/templates/blog_post/form.html.eex:34
 msgid "Your blog post will only be visible to yourself as a draft until you publish it, at which point it will receive it's position in lists of posts."
 msgstr ""
 

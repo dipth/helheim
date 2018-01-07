@@ -24,7 +24,8 @@ defmodule Helheim.Factory do
       body: "My Aweseome Text",
       published: true,
       published_at: DateTime.utc_now,
-      visitor_count: 0
+      visitor_count: 0,
+      visibility: "public"
     }
   end
 

@@ -4,19 +4,11 @@
   <li class="breadcrumb-item active"><%= @photo_album.title %></li>
 </ol>
 
-<%= if @photo_album.visibility != "public" do %>
-  <div class="alert alert-warning" role="alert">
-    <i class="fa fa-lock"></i>
-    <%= gettext "Visibility" %>:
-    <%= Helheim.Visibility.human_visibility @photo_album.visibility %>
-  </div>
-<% end %>
-
-
 <blockquote class="blockquote text-left">
   <%= if @photo_album.description do %>
     <p><%= text_to_html @photo_album.description %></p>
   <% end %>
+  <%= visibility_badge @photo_album %>
   <%= visitor_count_badge @conn, @photo_album %>
 </blockquote>
 
