@@ -3,8 +3,8 @@ defmodule Helheim.BlogPostControllerTest do
   import Mock
   alias Helheim.BlogPost
 
-  @valid_attrs %{body: "Body Text", title: "Title String"}
-  @invalid_attrs %{body: "   ", title: "   "}
+  @valid_attrs %{body: "Body Text", title: "Title String", visibility: "public"}
+  @invalid_attrs %{body: "   ", title: "   ", visibility: ""}
 
   ##############################################################################
   # index/2 for a single user
@@ -213,6 +213,29 @@ defmodule Helheim.BlogPostControllerTest do
       blog_post = comment.blog_post
       conn      = get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
       refute html_response(conn, 200) =~ "This is a deleted comment"
+    end
+
+    test "redirects to an error page when the blog post is set to private and the current user is not the author of the blog post", %{conn: conn, user: user} do
+      blog_post = insert(:blog_post, visibility: "private")
+      assert_error_sent :not_found, fn ->
+        get conn, "/profiles/#{user.id}/blog_posts/#{blog_post.id}"
+      end
+    end
+
+    test "redirects to an error page when the blog post is set to friends_only and the current user is not friends with the author of the blog post", %{conn: conn, user: user} do
+      blog_post = insert(:blog_post, visibility: "friends_only")
+      assert_error_sent :not_found, fn ->
+        get conn, "/profiles/#{user.id}/blog_posts/#{blog_post.id}"
+      end
+    end
+
+    test "redirects to an error page when the blog post is set to friends_only and the current user is only pending friends with the author of the blog post", %{conn: conn, user: user} do
+      author = insert(:user)
+      insert(:friendship_request, sender: user, recipient: author)
+      blog_post = insert(:blog_post, user: author, visibility: "friends_only")
+      assert_error_sent :not_found, fn ->
+        get conn, "/profiles/#{user.id}/blog_posts/#{blog_post.id}"
+      end
     end
   end
 

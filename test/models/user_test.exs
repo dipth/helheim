@@ -196,7 +196,7 @@ defmodule Helheim.UserTest do
 
   describe "age/2" do
     test "it returns the number of full years between the birthday of a user and the current date" do
-      now = Timex.set(Timex.now, day: 1)
+      now = Timex.set(Timex.now, day: 1, month: 5)
       birthday = Timex.set(now, year: now.year - 10) |> Timex.to_date
       user = insert(:user, birthday: birthday)
       assert User.age(user, now) == 10
@@ -210,14 +210,14 @@ defmodule Helheim.UserTest do
     end
 
     test "it correctly subtracts 1 if the current month is the same as the month of the birthday but the current day is before" do
-      now = Timex.set(Timex.now, day: 1)
+      now = Timex.set(Timex.now, day: 1, month: 5)
       birthday = Timex.set(now, year: now.year - 10, day: now.day + 1) |> Timex.to_date
       user = insert(:user, birthday: birthday)
       assert User.age(user, now) == 9
     end
 
     test "it does not subtract 1 if the current day is before the day of the birthday but the current month is after" do
-      now = Timex.set(Timex.now, day: 1)
+      now = Timex.set(Timex.now, day: 1, month: 5)
       birthday = Timex.set(now, year: now.year - 10, month: now.month - 1, day: now.day + 1) |> Timex.to_date
       user = insert(:user, birthday: birthday)
       assert User.age(user, now) == 10

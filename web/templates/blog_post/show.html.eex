@@ -13,6 +13,7 @@
 <% end %>
 <div class="d-flex w-100 justify-content-between">
   <div class="align-self-center">
+    <%= visibility_badge @blog_post %>
     <%= visitor_count_badge @conn, @blog_post %>
     <%= edited_label(@blog_post) %>
     <small>

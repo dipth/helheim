@@ -8,6 +8,7 @@ defmodule Helheim.BlogPost do
     field :comment_count, :integer
     field :published,     :boolean
     field :published_at,  Calecto.DateTimeUTC
+    field :visibility,    :string
 
     timestamps()
 
@@ -27,8 +28,8 @@ defmodule Helheim.BlogPost do
       ORDER BY blog_posts.published_at DESC
     ) FROM blog_posts WHERE blog_posts.published = TRUE
   """
-  def newest_for_frontpage(limit) do
-    from bp in (Helheim.BlogPost |> published |> newest),
+  def newest_for_frontpage(current_user, limit) do
+    from bp in (Helheim.BlogPost |> published |> visible_by(current_user) |> newest),
     join: partition in fragment(@newest_for_frontpage_partition_query),
     where: partition.row_number <= ^1 and partition.id == bp.id,
     limit: ^limit
@@ -46,14 +47,33 @@ defmodule Helheim.BlogPost do
     end
   end
 
+  def visible_by(query, user) do
+    from p in query,
+    where: p.visibility == "public" or p.user_id == ^user.id or (
+      p.visibility == "friends_only" and fragment(
+        "EXISTS(?)",
+        fragment(
+          "
+            SELECT 1 FROM friendships
+            WHERE
+              friendships.accepted_at IS NOT NULL AND
+              friendships.sender_id IN (?,?) AND
+              friendships.recipient_id IN (?,?)
+          ", p.user_id, ^user.id, p.user_id, ^user.id
+        )
+      )
+    )
+  end
+
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :body, :published])
+    |> cast(params, [:title, :body, :published, :visibility])
     |> trim_fields(:title)
-    |> validate_required([:title, :body])
+    |> validate_required([:title, :body, :visibility])
+    |> validate_inclusion(:visibility, Helheim.Visibility.visibilities)
     |> scrub_body()
     |> set_published_at()
   end

@@ -13,6 +13,7 @@ defmodule Helheim.BlogPostController do
       assoc(user, :blog_posts)
       |> BlogPost.published_by_owner(user, current_resource(conn))
       |> BlogPost.newest
+      |> BlogPost.visible_by(current_resource(conn))
       |> preload(:user)
       |> Repo.paginate(page: sanitized_page(params["page"]))
     render(conn, "index.html", user: user, blog_posts: blog_posts)
@@ -23,6 +24,7 @@ defmodule Helheim.BlogPostController do
       BlogPost
       |> BlogPost.published
       |> BlogPost.newest
+      |> BlogPost.visible_by(current_resource(conn))
       |> preload(:user)
       |> Repo.paginate(page: sanitized_page(params["page"]))
     render(conn, "index_all_public.html", blog_posts: blog_posts)
@@ -59,6 +61,7 @@ defmodule Helheim.BlogPostController do
     blog_post =
       assoc(user, :blog_posts)
       |> BlogPost.published_by_owner(user, current_resource(conn))
+      |> BlogPost.visible_by(current_resource(conn))
       |> Repo.get!(id)
       |> Repo.preload(:user)
     comments =
