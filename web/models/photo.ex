@@ -3,6 +3,8 @@ defmodule Helheim.Photo do
   use Arc.Ecto.Schema
   alias Helheim.Repo
   alias Helheim.PhotoFile
+  alias Helheim.Photo
+  alias Helheim.PhotoAlbum
 
   @max_file_size 3 * 1000 * 1000 # MB
   def max_file_size, do: @max_file_size
@@ -47,29 +49,10 @@ defmodule Helheim.Photo do
     where: pa.visibility == "public"
   end
 
-  def newest_public_photos_by(user, limit) do
-    Repo.all from p in Helheim.Photo,
-      join:     pa in Helheim.PhotoAlbum, on: pa.id == p.photo_album_id,
-      where:    pa.user_id == ^user.id and pa.visibility == "public",
-      order_by: [desc: p.inserted_at],
-      limit:    ^limit,
-      preload:  :photo_album
-  end
-
-  def newest_public_photos(limit) do
-    Repo.all from p in Helheim.Photo,
-      join:     pa in Helheim.PhotoAlbum, on: pa.id == p.photo_album_id,
-      where:    pa.visibility == "public",
-      order_by: [desc: p.inserted_at],
-      limit:    ^limit,
-      preload:  [photo_album: :user]
-  end
-
-  def newest_for_frontpage(limit) do
+  def newest_for_frontpage(user, limit) do
     sq = from(
-      p in Helheim.Photo,
+      p in      (Photo |> Photo.visible_by(user) |> Photo.not_private()),
       join:     pa in Helheim.PhotoAlbum, on: pa.id == p.photo_album_id,
-      where:    pa.visibility == "public",
       group_by: pa.id,
       select:   %{last_public_photo_id: max(p.id)},
       order_by: [desc: max(p.id)],
@@ -91,6 +74,37 @@ defmodule Helheim.Photo do
   def in_positional_order(query) do
     from p in query,
     order_by: [p.position, p.inserted_at]
+  end
+
+  def visible_by(query, user) do
+    from p in query,
+    join:  pa in PhotoAlbum, on: pa.id == p.photo_album_id,
+    where: pa.visibility == "public" or pa.user_id == ^user.id or (
+      pa.visibility == "friends_only" and fragment(
+        "EXISTS(?)",
+        fragment(
+          "
+            SELECT 1 FROM friendships
+            WHERE
+              friendships.accepted_at IS NOT NULL AND
+              friendships.sender_id IN (?,?) AND
+              friendships.recipient_id IN (?,?)
+          ", pa.user_id, ^user.id, pa.user_id, ^user.id
+        )
+      )
+    )
+  end
+
+  def not_private(query) do
+    from p in query,
+    join: pa in Helheim.PhotoAlbum, on: pa.id == p.photo_album_id,
+    where: pa.visibility != "private"
+  end
+
+  def by(query, user) do
+    from p in query,
+    join: pa in Helheim.PhotoAlbum, on: pa.id == p.photo_album_id,
+    where: pa.user_id == ^user.id
   end
 
   def previous(photo) do

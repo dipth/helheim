@@ -44,30 +44,81 @@ defmodule Helheim.PhotoAlbumTest do
     end
   end
 
-  describe "viewable_by/3" do
-    test "when owner and viewer are different it returns only public albums" do
-      owner        = insert(:user)
-      viewer       = insert(:user)
-      public_album = insert(:photo_album, user: owner, visibility: "public")
-      insert(:photo_album, user: owner, visibility: "friends_only")
-      insert(:photo_album, user: owner, visibility: "private")
-      [album] = PhotoAlbum |> PhotoAlbum.viewable_by(owner, viewer) |> Repo.all
-      assert album.id == public_album.id
+  describe "visible_by/2" do
+    test "always returns photo albums that are set to public" do
+      user         = insert(:user)
+      photo_album  = insert(:photo_album, visibility: "public")
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      ids          = Enum.map photo_albums, fn(c) -> c.id end
+      assert [photo_album.id] == ids
     end
 
-    test "when owner and viewer are the same it returns all albums" do
-      owner = insert(:user)
-      expected_albums = [
-        insert(:photo_album, user: owner, visibility: "public"),
-        insert(:photo_album, user: owner, visibility: "friends_only"),
-        insert(:photo_album, user: owner, visibility: "private")
-      ]
-      expected_album_ids = expected_albums |> Enum.map(fn(a) -> a.id end) |> Enum.sort
+    test "always returns private photo albums if the user is the same as the user of the photo album" do
+      user         = insert(:user)
+      photo_album  = insert(:photo_album, user: user, visibility: "private")
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      ids          = Enum.map photo_albums, fn(c) -> c.id end
+      assert [photo_album.id] == ids
+    end
 
-      albums = PhotoAlbum |> PhotoAlbum.viewable_by(owner, owner) |> Repo.all
-      album_ids = albums |> Enum.map(fn(a) -> a.id end) |> Enum.sort
+    test "always returns friends_only photo albums if the user is the same as the user of the photo album" do
+      user         = insert(:user)
+      photo_album  = insert(:photo_album, user: user, visibility: "friends_only")
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      ids          = Enum.map photo_albums, fn(c) -> c.id end
+      assert [photo_album.id] == ids
+    end
 
-      assert expected_album_ids == album_ids
+    test "never returns private photo albums if the user is not the same as the user of the photo album" do
+      user         = insert(:user)
+      _photo_album = insert(:photo_album, visibility: "private")
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      assert photo_albums == []
+    end
+
+    test "never returns friends_only photo albums if the user is not friends with the user of the photo album" do
+      user         = insert(:user)
+      _photo_album = insert(:photo_album, visibility: "friends_only")
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      assert photo_albums == []
+    end
+
+    test "always returns friends_only photo albums if the user is befriended by the user of the photo album" do
+      author       = insert(:user)
+      user         = insert(:user)
+      photo_album  = insert(:photo_album, user: author, visibility: "friends_only")
+      _friendship  = insert(:friendship, sender: author, recipient: user)
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      ids          = Enum.map photo_albums, fn(c) -> c.id end
+      assert [photo_album.id] == ids
+    end
+
+    test "always returns friends_only photo albums if the user of the photo album is befriended by the user" do
+      author       = insert(:user)
+      user         = insert(:user)
+      photo_album  = insert(:photo_album, user: author, visibility: "friends_only")
+      _friendship  = insert(:friendship, sender: user, recipient: author)
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      ids          = Enum.map photo_albums, fn(c) -> c.id end
+      assert [photo_album.id] == ids
+    end
+
+    test "never returns friends_only photo albums if the user is pending friendship from the user of the photo album" do
+      author       = insert(:user)
+      user         = insert(:user)
+      _photo_album = insert(:photo_album, user: author, visibility: "friends_only")
+      _friendship  = insert(:friendship_request, sender: author, recipient: user)
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      assert photo_albums == []
+    end
+
+    test "never returns friends_only photo albums if the user of the photo album is pending friendship from the user" do
+      author       = insert(:user)
+      user         = insert(:user)
+      _photo_album = insert(:photo_album, user: author, visibility: "friends_only")
+      _friendship  = insert(:friendship_request, sender: user, recipient: author)
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      assert photo_albums == []
     end
   end
 

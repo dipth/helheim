@@ -46,7 +46,14 @@ defmodule Helheim.ProfileController do
       |> preload([:forum, :user])
       |> limit(6)
       |> Repo.all
-    newest_photos = Photo.newest_public_photos_by(user, 5)
+    newest_photos = Photo
+      |> Photo.by(user)
+      |> Photo.newest
+      |> Photo.visible_by(current_resource(conn))
+      |> Photo.not_private
+      |> limit(10)
+      |> Repo.all
+      |> Repo.preload(:photo_album)
 
     Helheim.VisitorLogEntry.track! current_resource(conn), user
 

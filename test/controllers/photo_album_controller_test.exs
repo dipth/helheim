@@ -68,6 +68,46 @@ defmodule Helheim.PhotoAlbumControllerTest do
       conn  = get conn, "/profiles/#{block.blocker.id}/photo_albums"
       assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
     end
+
+    test "does not show photo albums that are set to private and the current user is not the author of the photo album", %{conn: conn} do
+      photo_album = insert(:photo_album, visibility: "private", title: "My private photo album")
+      conn = get conn, "/profiles/#{photo_album.user.id}/photo_albums"
+      refute conn.resp_body =~ photo_album.title
+    end
+
+    test "shows photo albums that are set to private and the current user is the author of the photo album", %{conn: conn, user: user} do
+      photo_album = insert(:photo_album, user: user, visibility: "private", title: "My private photo album")
+      conn = get conn, "/profiles/#{photo_album.user.id}/photo_albums"
+      assert conn.resp_body =~ photo_album.title
+    end
+
+    test "does not show photo albums that are set to friends_only and the current user is not friends with the author of the photo album", %{conn: conn} do
+      photo_album = insert(:photo_album, visibility: "friends_only", title: "My friends_only photo album")
+      conn = get conn, "/profiles/#{photo_album.user.id}/photo_albums"
+      refute conn.resp_body =~ photo_album.title
+    end
+
+    test "shows photo albums that are set to friends_only and the current user is friends with the author of the photo album", %{conn: conn, user: user} do
+      author = insert(:user)
+      insert(:friendship, sender: user, recipient: author)
+      photo_album = insert(:photo_album, user: author, visibility: "friends_only", title: "My friends_only photo album")
+      conn = get conn, "/profiles/#{photo_album.user.id}/photo_albums"
+      assert conn.resp_body =~ photo_album.title
+    end
+
+    test "shows photo albums that are set to friends_only and the current user is the author of the photo album", %{conn: conn, user: user} do
+      photo_album = insert(:photo_album, user: user, visibility: "friends_only", title: "My friends_only photo album")
+      conn = get conn, "/profiles/#{photo_album.user.id}/photo_albums"
+      assert conn.resp_body =~ photo_album.title
+    end
+
+    test "does not show photo albums that are set to friends_only and the current user is only pending friends with the author of the photo album", %{conn: conn, user: user} do
+      author = insert(:user)
+      insert(:friendship_request, sender: user, recipient: author)
+      photo_album = insert(:photo_album, user: author, visibility: "friends_only", title: "My friends_only photo album")
+      conn = get conn, "/profiles/#{photo_album.user.id}/photo_albums"
+      refute conn.resp_body =~ photo_album.title
+    end
   end
 
   describe "index/2 when not signed in" do
@@ -214,6 +254,49 @@ defmodule Helheim.PhotoAlbumControllerTest do
       photo_album = insert(:photo_album, user: block.blocker)
       conn  = get conn, "/profiles/#{block.blocker.id}/photo_albums/#{photo_album.id}"
       assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
+    end
+
+    test "redirects to an error page when the photo album is set to private and the current user is not the author of the photo album", %{conn: conn} do
+      photo_album = insert(:photo_album, visibility: "private")
+      assert_error_sent :not_found, fn ->
+        get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"
+      end
+    end
+
+    test "successfully shows a photo album that is set to private when the current user is the author of the photo album", %{conn: conn, user: user} do
+      photo_album = insert(:photo_album, user: user, visibility: "private")
+      conn = get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"
+      assert html_response(conn, 200)
+    end
+
+    test "redirects to an error page when the photo album is set to friends_only and the current user is not friends with the author of the photo album", %{conn: conn} do
+      photo_album = insert(:photo_album, visibility: "friends_only")
+      assert_error_sent :not_found, fn ->
+        get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"
+      end
+    end
+
+    test "successfully shows a photo album that is set to friends_only when the current user is the author of the photo album", %{conn: conn, user: user} do
+      photo_album = insert(:photo_album, user: user, visibility: "friends_only")
+      conn = get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"
+      assert html_response(conn, 200)
+    end
+
+    test "successfully shows a photo album that is set to private when the current user is friends with the author of the photo album", %{conn: conn, user: user} do
+      author = insert(:user)
+      insert(:friendship, sender: user, recipient: author)
+      photo_album = insert(:photo_album, user: author, visibility: "friends_only")
+      conn = get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"
+      assert html_response(conn, 200)
+    end
+
+    test "redirects to an error page when the photo album is set to friends_only and the current user is only pending friends with the author of the photo album", %{conn: conn, user: user} do
+      author = insert(:user)
+      insert(:friendship_request, sender: user, recipient: author)
+      photo_album = insert(:photo_album, user: author, visibility: "friends_only")
+      assert_error_sent :not_found, fn ->
+        get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"
+      end
     end
   end
 

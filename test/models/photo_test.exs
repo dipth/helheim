@@ -109,64 +109,79 @@ defmodule Helheim.PhotoTest do
     end
   end
 
-  describe "newest_public_photos_by/2" do
-    test "it returns the n newest public photos uploaded by the specified user" do
-      user = insert(:user)
-      expected_last = insert(:photo, photo_album: insert(:photo_album, user: user))
-      insert(:photo, photo_album: insert(:photo_album, user: user, visibility: "friends_only"))
-      expected_first = insert(:photo, photo_album: insert(:photo_album, user: user))
-      insert(:photo)
-      [first, last] = Photo.newest_public_photos_by(user, 2)
-      assert first.id == expected_first.id
-      assert last.id == expected_last.id
-    end
-  end
-
-  describe "newest_public_photos/1" do
-    test "it returns the n newest public photos" do
-      insert(:photo)
-      expected_last = insert(:photo)
-      insert(:photo, photo_album: insert(:photo_album, visibility: "friends_only"))
-      expected_first = insert(:photo)
-      [first, last] = Photo.newest_public_photos(2)
-      assert first.id == expected_first.id
-      assert last.id == expected_last.id
-    end
-  end
-
   describe "newest_for_frontpage/1" do
-    test "only returns public photos" do
-      public_album       = insert(:photo_album, visibility: "public")
-      public_photo       = insert(:photo, photo_album: public_album)
-      friends_only_album = insert(:photo_album, visibility: "friends_only")
-      friends_only_photo = insert(:photo, photo_album: friends_only_album)
-      private_album      = insert(:photo_album, visibility: "private")
-      private_photo      = insert(:photo, photo_album: private_album)
-      photos             = Photo.newest_for_frontpage(10)
-      assert Enum.find(photos, fn(p) -> p.id == public_photo.id end)
-      refute Enum.find(photos, fn(p) -> p.id == friends_only_photo.id end)
-      refute Enum.find(photos, fn(p) -> p.id == private_photo.id end)
+    test "always returns public photos" do
+      viewer      = insert(:user)
+      photo_album = insert(:photo_album, visibility: "public")
+      photo       = insert(:photo, photo_album: photo_album)
+      photos      = Photo.newest_for_frontpage(viewer, 10)
+      assert Enum.find(photos, fn(p) -> p.id == photo.id end)
+    end
+
+    test "returns friends_only photos if the viewer is the author of the photo" do
+      viewer      = insert(:user)
+      photo_album = insert(:photo_album, user: viewer, visibility: "friends_only")
+      photo       = insert(:photo, photo_album: photo_album)
+      photos      = Photo.newest_for_frontpage(viewer, 10)
+      assert Enum.find(photos, fn(p) -> p.id == photo.id end)
+    end
+
+    test "returns friends_only photos if the viewer is friends with the author of the photo" do
+      viewer      = insert(:user)
+      photo_album = insert(:photo_album, visibility: "friends_only")
+      photo       = insert(:photo, photo_album: photo_album)
+      _friendship = insert(:friendship, sender: viewer, recipient: photo_album.user)
+      photos      = Photo.newest_for_frontpage(viewer, 10)
+      assert Enum.find(photos, fn(p) -> p.id == photo.id end)
+    end
+
+    test "does not return friends_only photos if the viewer is not the author of the photo or friends with the author of the photo" do
+      viewer      = insert(:user)
+      photo_album = insert(:photo_album, visibility: "friends_only")
+      photo       = insert(:photo, photo_album: photo_album)
+      photos      = Photo.newest_for_frontpage(viewer, 10)
+      refute Enum.find(photos, fn(p) -> p.id == photo.id end)
+    end
+
+    test "does not return friends_only photos if the viewer is only pending friends with the author of the photo" do
+      viewer      = insert(:user)
+      photo_album = insert(:photo_album, visibility: "friends_only")
+      photo       = insert(:photo, photo_album: photo_album)
+      _friendship = insert(:friendship_request, sender: viewer, recipient: photo_album.user)
+      photos      = Photo.newest_for_frontpage(viewer, 10)
+      refute Enum.find(photos, fn(p) -> p.id == photo.id end)
+    end
+
+    test "never returns private photos" do
+      viewer      = insert(:user)
+      photo_album = insert(:photo_album, user: viewer, visibility: "private")
+      photo       = insert(:photo, photo_album: photo_album)
+      photos      = Photo.newest_for_frontpage(viewer, 10)
+      refute Enum.find(photos, fn(p) -> p.id == photo.id end)
     end
 
     test "returns only the latest photo from each album" do
+      viewer  = insert(:user)
       album   = insert(:photo_album, visibility: "public")
       photo_1 = insert(:photo, photo_album: album)
       photo_2 = insert(:photo, photo_album: album)
-      photos  = Photo.newest_for_frontpage(10)
+      photos  = Photo.newest_for_frontpage(viewer, 10)
       refute Enum.find(photos, fn(p) -> p.id == photo_1.id end)
       assert Enum.find(photos, fn(p) -> p.id == photo_2.id end)
     end
 
     test "only returns the specified number of photos" do
+      viewer = insert(:user)
       insert_list(3, :photo)
-      photos = Photo.newest_for_frontpage(2)
+      photos = Photo.newest_for_frontpage(viewer, 2)
       assert length(photos) == 2
     end
 
     test "sorts the photos from newest to oldest" do
+      viewer        = insert(:user)
       photo_1       = insert(:photo)
       photo_2       = insert(:photo)
-      [first, last] = Photo.newest_for_frontpage(2)
+      [first, last] = Photo.newest_for_frontpage(viewer, 2)
       assert first.id == photo_2.id
       assert last.id  == photo_1.id
     end
@@ -197,6 +212,128 @@ defmodule Helheim.PhotoTest do
       [first, last] = Photo |> Photo.in_positional_order() |> Repo.all
       assert first.id == expected_first.id
       assert last.id  == expected_last.id
+    end
+  end
+
+  describe "visible_by/2" do
+    test "always returns photos from albums that are set to public" do
+      user         = insert(:user)
+      photo_album  = insert(:photo_album, visibility: "public")
+      photo        = insert(:photo, photo_album: photo_album)
+      photos       = Photo |> Photo.visible_by(user) |> Repo.all
+      ids          = Enum.map photos, fn(c) -> c.id end
+      assert [photo.id] == ids
+    end
+
+    test "always returns photos from private albums if the user is the same as the user of the photo album" do
+      user        = insert(:user)
+      photo_album = insert(:photo_album, user: user, visibility: "private")
+      photo       = insert(:photo, photo_album: photo_album)
+      photos      = Photo |> Photo.visible_by(user) |> Repo.all
+      ids         = Enum.map photos, fn(c) -> c.id end
+      assert [photo.id] == ids
+    end
+
+    test "always returns photos from friends_only albums if the user is the same as the user of the photo album" do
+      user        = insert(:user)
+      photo_album = insert(:photo_album, user: user, visibility: "friends_only")
+      photo       = insert(:photo, photo_album: photo_album)
+      photos      = Photo |> Photo.visible_by(user) |> Repo.all
+      ids         = Enum.map photos, fn(c) -> c.id end
+      assert [photo.id] == ids
+    end
+
+    test "never returns photos from private albums if the user is not the same as the user of the photo album" do
+      user        = insert(:user)
+      photo_album = insert(:photo_album, visibility: "private")
+      _photo      = insert(:photo, photo_album: photo_album)
+      photos      = Photo |> Photo.visible_by(user) |> Repo.all
+      assert photos == []
+    end
+
+    test "never returns photos from friends_only albums if the user is not friends with the user of the photo album" do
+      user        = insert(:user)
+      photo_album = insert(:photo_album, visibility: "friends_only")
+      _photo      = insert(:photo, photo_album: photo_album)
+      photos      = Photo |> Photo.visible_by(user) |> Repo.all
+      assert photos == []
+    end
+
+    test "always returns photos from friends_only albums if the user is befriended by the user of the photo album" do
+      author       = insert(:user)
+      user         = insert(:user)
+      photo_album  = insert(:photo_album, user: author, visibility: "friends_only")
+      photo        = insert(:photo, photo_album: photo_album)
+      _friendship  = insert(:friendship, sender: author, recipient: user)
+      photos       = Photo |> Photo.visible_by(user) |> Repo.all
+      ids          = Enum.map photos, fn(c) -> c.id end
+      assert [photo.id] == ids
+    end
+
+    test "always returns photos from friends_only photo albums if the user of the photo album is befriended by the user" do
+      author       = insert(:user)
+      user         = insert(:user)
+      photo_album  = insert(:photo_album, user: author, visibility: "friends_only")
+      photo        = insert(:photo, photo_album: photo_album)
+      _friendship  = insert(:friendship, sender: user, recipient: author)
+      photos       = Photo |> Photo.visible_by(user) |> Repo.all
+      ids          = Enum.map photos, fn(c) -> c.id end
+      assert [photo.id] == ids
+    end
+
+    test "never returns photos from friends_only albums if the user is pending friendship from the user of the photo album" do
+      author      = insert(:user)
+      user        = insert(:user)
+      photo_album = insert(:photo_album, user: author, visibility: "friends_only")
+      _photo      = insert(:photo, photo_album: photo_album)
+      _friendship = insert(:friendship_request, sender: author, recipient: user)
+      photos      = Photo |> Photo.visible_by(user) |> Repo.all
+      assert photos == []
+    end
+
+    test "never returns photos from friends_only albums if the user of the photo album is pending friendship from the user" do
+      author      = insert(:user)
+      user        = insert(:user)
+      photo_album = insert(:photo_album, user: author, visibility: "friends_only")
+      _photo      = insert(:photo, photo_album: photo_album)
+      _friendship = insert(:friendship_request, sender: user, recipient: author)
+      photos      = Photo |> Photo.visible_by(user) |> Repo.all
+      assert photos == []
+    end
+  end
+
+  describe "not_private/1" do
+    test "returns photos from public albums" do
+      album  = insert(:photo_album, visibility: "public")
+      photo  = insert(:photo, photo_album: album)
+      photos = Photo |> Photo.not_private |> Repo.all
+      assert Enum.find(photos, fn(p) -> p.id == photo.id end)
+    end
+
+    test "returns photos from friends_only albums" do
+      album  = insert(:photo_album, visibility: "friends_only")
+      photo  = insert(:photo, photo_album: album)
+      photos = Photo |> Photo.not_private |> Repo.all
+      assert Enum.find(photos, fn(p) -> p.id == photo.id end)
+    end
+
+    test "does not return photos from private albums" do
+      album  = insert(:photo_album, visibility: "private")
+      photo  = insert(:photo, photo_album: album)
+      photos = Photo |> Photo.not_private |> Repo.all
+      refute Enum.find(photos, fn(p) -> p.id == photo.id end)
+    end
+  end
+
+  describe "by/2" do
+    test "only returns photos from albums owned by the specified user" do
+      album1 = insert(:photo_album)
+      photo1 = insert(:photo, photo_album: album1)
+      album2 = insert(:photo_album)
+      photo2 = insert(:photo, photo_album: album2)
+      photos = Photo |> Photo.by(album1.user) |> Repo.all
+      assert Enum.find(photos, fn(p) -> p.id == photo1.id end)
+      refute Enum.find(photos, fn(p) -> p.id == photo2.id end)
     end
   end
 

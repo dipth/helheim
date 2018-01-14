@@ -11,7 +11,7 @@ defmodule Helheim.PhotoAlbumController do
     user = conn.assigns[:user]
     photo_albums =
       assoc(user, :photo_albums)
-      |> PhotoAlbum.viewable_by(user, current_resource(conn))
+      |> PhotoAlbum.visible_by(current_resource(conn))
       |> preload(:photos)
       |> Repo.paginate(page: sanitized_page(params["page"]))
     render(conn, "index.html", user: user, photo_albums: photo_albums)
@@ -47,7 +47,7 @@ defmodule Helheim.PhotoAlbumController do
     user = conn.assigns[:user]
     photo_album =
       assoc(user, :photo_albums)
-      |> PhotoAlbum.viewable_by(user, current_resource(conn))
+      |> PhotoAlbum.visible_by(current_resource(conn))
       |> Repo.get!(id)
     photos =
       assoc(photo_album, :photos)

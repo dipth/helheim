@@ -26,12 +26,22 @@ defmodule Helheim.PhotoAlbum do
     |> validate_inclusion(:visibility, Helheim.Visibility.visibilities)
   end
 
-  def viewable_by(query, owner, viewer) do
-    if owner.id == viewer.id do
-      query
-    else
-      from pa in query, where: pa.visibility == "public"
-    end
+  def visible_by(query, user) do
+    from pa in query,
+    where: pa.visibility == "public" or pa.user_id == ^user.id or (
+      pa.visibility == "friends_only" and fragment(
+        "EXISTS(?)",
+        fragment(
+          "
+            SELECT 1 FROM friendships
+            WHERE
+              friendships.accepted_at IS NOT NULL AND
+              friendships.sender_id IN (?,?) AND
+              friendships.recipient_id IN (?,?)
+          ", pa.user_id, ^user.id, pa.user_id, ^user.id
+        )
+      )
+    )
   end
 
   def reposition_photos!(photo_album, photo_ids) do

@@ -82,7 +82,7 @@
 
 <div class="card">
   <div class="card-block">
-    <h5 class="mb-1"><%= gettext "Newest Public Photos" %></h5>
+    <h5 class="mb-1"><%= gettext "Newest Photos" %></h5>
     <div class="card-group card-group-photos">
       <%= for photo <- @newest_photos do %>
         <%= render Helheim.PhotoView, "thumb.html", conn: @conn, user: @user, photo: photo %>

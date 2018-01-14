@@ -11,8 +11,9 @@ defmodule Helheim.PhotoController do
 
   def index(conn, params) do
     photos = Photo
-             |> Photo.public
+             |> Photo.visible_by(current_resource(conn))
              |> Photo.newest
+             |> Photo.not_private
              |> preload(photo_album: :user)
              |> Repo.paginate(page: sanitized_page(params["page"]))
     render(conn, "index.html", photos: photos)
@@ -39,7 +40,7 @@ defmodule Helheim.PhotoController do
   def show(conn, %{"profile_id" => _, "photo_album_id" => photo_album_id, "id" => id} = params) do
     user        = conn.assigns[:user]
     photo_album = assoc(user, :photo_albums)
-                  |> PhotoAlbum.viewable_by(user, current_resource(conn))
+                  |> PhotoAlbum.visible_by(current_resource(conn))
                   |> Repo.get!(photo_album_id)
     photo      = assoc(photo_album, :photos) |> preload(:photo_album) |> Repo.get!(id)
     prev_photo = Photo.previous(photo)

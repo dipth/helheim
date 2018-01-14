@@ -20,12 +20,6 @@
         <% end %>
       <div class="card-block">
         <p class="card-text">
-          <%= if photo_album.visibility != "public" do %>
-            <span class="badge badge-danger">
-              <i class="fa fa-lock"></i>
-              <%= Helheim.Visibility.human_visibility photo_album.visibility %>
-            </span>
-          <% end %>
           <strong class="text-break-up"><%= photo_album.title %></strong>
           <br>
           <%= if photo do %>
@@ -33,6 +27,7 @@
           <% end %>
           <%= visitor_count_badge @conn, photo_album %>
         </p>
+        <%= visibility_badge photo_album %>
       </div>
     </div>
   <% end %>

@@ -25,5 +25,6 @@
         <small><%= time_ago_in_words @photo.inserted_at %></small>
       </p>
     <% end %>
+    <%= visibility_badge photo_album %>
   </div>
 </div>
