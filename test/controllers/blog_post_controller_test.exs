@@ -47,6 +47,46 @@ defmodule Helheim.BlogPostControllerTest do
       conn  = get conn, "/profiles/#{block.blocker.id}/blog_posts"
       assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
     end
+
+    test "does not show blog posts that are set to private and the current user is not the author of the blog post", %{conn: conn} do
+      blog_post = insert(:blog_post, visibility: "private", title: "My private blog post")
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts"
+      refute conn.resp_body =~ blog_post.title
+    end
+
+    test "shows blog posts that are set to private and the current user is the author of the blog post", %{conn: conn, user: user} do
+      blog_post = insert(:blog_post, user: user, visibility: "private", title: "My private blog post")
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts"
+      assert conn.resp_body =~ blog_post.title
+    end
+
+    test "does not show blog posts that are set to friends_only and the current user is not friends with the author of the blog post", %{conn: conn} do
+      blog_post = insert(:blog_post, visibility: "friends_only", title: "My friends_only blog post")
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts"
+      refute conn.resp_body =~ blog_post.title
+    end
+
+    test "shows blog posts that are set to friends_only and the current user is friends with the author of the blog post", %{conn: conn, user: user} do
+      author = insert(:user)
+      insert(:friendship, sender: user, recipient: author)
+      blog_post = insert(:blog_post, user: author, visibility: "friends_only", title: "My friends_only blog post")
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts"
+      assert conn.resp_body =~ blog_post.title
+    end
+
+    test "shows blog posts that are set to friends_only and the current user is the author of the blog post", %{conn: conn, user: user} do
+      blog_post = insert(:blog_post, user: user, visibility: "friends_only", title: "My friends_only blog post")
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts"
+      assert conn.resp_body =~ blog_post.title
+    end
+
+    test "does not show blog posts that are set to friends_only and the current user is only pending friends with the author of the blog post", %{conn: conn, user: user} do
+      author = insert(:user)
+      insert(:friendship_request, sender: user, recipient: author)
+      blog_post = insert(:blog_post, user: author, visibility: "friends_only", title: "My friends_only blog post")
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts"
+      refute conn.resp_body =~ blog_post.title
+    end
   end
 
   describe "index/2 for a single user when not signed in" do
@@ -77,6 +117,46 @@ defmodule Helheim.BlogPostControllerTest do
 
     test "it does not show unpublished blog posts", %{conn: conn} do
       blog_post = insert(:blog_post, published: false)
+      conn = get conn, "/blog_posts"
+      refute conn.resp_body =~ blog_post.title
+    end
+
+    test "does not show blog post that are set to private and the current user is not the author of the blog post", %{conn: conn} do
+      blog_post = insert(:blog_post, visibility: "private", title: "My private blog post")
+      conn = get conn, "/blog_posts"
+      refute conn.resp_body =~ blog_post.title
+    end
+
+    test "shows blog post that are set to private and the current user is the author of the blog post", %{conn: conn, user: user} do
+      blog_post = insert(:blog_post, user: user, visibility: "private", title: "My private blog post")
+      conn = get conn, "/blog_posts"
+      assert conn.resp_body =~ blog_post.title
+    end
+
+    test "does not show blog posts that are set to friends_only and the current user is not friends with the author of the blog post", %{conn: conn} do
+      blog_post = insert(:blog_post, visibility: "friends_only", title: "My friends_only blog post")
+      conn = get conn, "/blog_posts"
+      refute conn.resp_body =~ blog_post.title
+    end
+
+    test "shows blog posts that are set to friends_only and the current user is friends with the author of the blog post", %{conn: conn, user: user} do
+      author = insert(:user)
+      insert(:friendship, sender: user, recipient: author)
+      blog_post = insert(:blog_post, user: author, visibility: "friends_only", title: "My friends_only blog post")
+      conn = get conn, "/blog_posts"
+      assert conn.resp_body =~ blog_post.title
+    end
+
+    test "shows blog post that are set to friends_only and the current user is the author of the blog post", %{conn: conn, user: user} do
+      blog_post = insert(:blog_post, user: user, visibility: "friends_only", title: "My friends_only blog post")
+      conn = get conn, "/blog_posts"
+      assert conn.resp_body =~ blog_post.title
+    end
+
+    test "does not show blog posts that are set to friends_only and the current user is only pending friends with the author of the blog post", %{conn: conn, user: user} do
+      author = insert(:user)
+      insert(:friendship_request, sender: user, recipient: author)
+      blog_post = insert(:blog_post, user: author, visibility: "friends_only", title: "My friends_only blog post")
       conn = get conn, "/blog_posts"
       refute conn.resp_body =~ blog_post.title
     end
@@ -215,18 +295,38 @@ defmodule Helheim.BlogPostControllerTest do
       refute html_response(conn, 200) =~ "This is a deleted comment"
     end
 
-    test "redirects to an error page when the blog post is set to private and the current user is not the author of the blog post", %{conn: conn, user: user} do
+    test "redirects to an error page when the blog post is set to private and the current user is not the author of the blog post", %{conn: conn} do
       blog_post = insert(:blog_post, visibility: "private")
       assert_error_sent :not_found, fn ->
         get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
       end
     end
 
-    test "redirects to an error page when the blog post is set to friends_only and the current user is not friends with the author of the blog post", %{conn: conn, user: user} do
+    test "successfully shows a blog post that is set to private when the current user is the author of the blog post", %{conn: conn, user: user} do
+      blog_post = insert(:blog_post, user: user, visibility: "private")
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
+      assert html_response(conn, 200)
+    end
+
+    test "redirects to an error page when the blog post is set to friends_only and the current user is not friends with the author of the blog post", %{conn: conn} do
       blog_post = insert(:blog_post, visibility: "friends_only")
       assert_error_sent :not_found, fn ->
         get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
       end
+    end
+
+    test "successfully shows a blog post that is set to friends_only when the current user is the author of the blog post", %{conn: conn, user: user} do
+      blog_post = insert(:blog_post, user: user, visibility: "friends_only")
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
+      assert html_response(conn, 200)
+    end
+
+    test "successfully shows a blog post that is set to private when the current user is friends with the author of the blog post", %{conn: conn, user: user} do
+      author = insert(:user)
+      insert(:friendship, sender: user, recipient: author)
+      blog_post = insert(:blog_post, user: author, visibility: "friends_only")
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
+      assert html_response(conn, 200)
     end
 
     test "redirects to an error page when the blog post is set to friends_only and the current user is only pending friends with the author of the blog post", %{conn: conn, user: user} do
