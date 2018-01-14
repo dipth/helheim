@@ -25,6 +25,7 @@ defmodule Helheim.BlogPostController do
       |> BlogPost.published
       |> BlogPost.newest
       |> BlogPost.visible_by(current_resource(conn))
+      |> BlogPost.not_private
       |> preload(:user)
       |> Repo.paginate(page: sanitized_page(params["page"]))
     render(conn, "index_all_public.html", blog_posts: blog_posts)

@@ -29,6 +29,7 @@ defmodule Helheim.ProfileController do
       |> BlogPost.published
       |> BlogPost.newest
       |> BlogPost.visible_by(current_resource(conn))
+      |> BlogPost.not_private
       |> limit(4)
       |> Helheim.Repo.all
       |> Repo.preload(:user)

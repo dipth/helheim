@@ -121,16 +121,10 @@ defmodule Helheim.BlogPostControllerTest do
       refute conn.resp_body =~ blog_post.title
     end
 
-    test "does not show blog post that are set to private and the current user is not the author of the blog post", %{conn: conn} do
-      blog_post = insert(:blog_post, visibility: "private", title: "My private blog post")
-      conn = get conn, "/blog_posts"
-      refute conn.resp_body =~ blog_post.title
-    end
-
-    test "shows blog post that are set to private and the current user is the author of the blog post", %{conn: conn, user: user} do
+    test "does not show blog posts that are set to private even when the current user is the author of the blog post", %{conn: conn, user: user} do
       blog_post = insert(:blog_post, user: user, visibility: "private", title: "My private blog post")
       conn = get conn, "/blog_posts"
-      assert conn.resp_body =~ blog_post.title
+      refute conn.resp_body =~ blog_post.title
     end
 
     test "does not show blog posts that are set to friends_only and the current user is not friends with the author of the blog post", %{conn: conn} do

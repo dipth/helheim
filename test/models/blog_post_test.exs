@@ -1,9 +1,7 @@
 defmodule Helheim.BlogPostTest do
   use Helheim.ModelCase
-  import Mock
   alias Helheim.BlogPost
   alias Helheim.Repo
-  alias Helheim.User
 
   @valid_attrs %{body: "some content", title: "some content", visibility: "public"}
 
@@ -90,6 +88,50 @@ defmodule Helheim.BlogPostTest do
   end
 
   describe "newest_for_frontpage/1" do
+    test "always returns public blog posts" do
+      viewer      = insert(:user)
+      blog_post   = insert(:blog_post, visibility: "public")
+      blog_posts  = BlogPost.newest_for_frontpage(viewer, 10) |> Repo.all
+      assert Enum.find(blog_posts, fn(p) -> p.id == blog_post.id end)
+    end
+
+    test "returns friends_only blog posts if the viewer is the author of the blog post" do
+      viewer      = insert(:user)
+      blog_post   = insert(:blog_post, user: viewer, visibility: "friends_only")
+      blog_posts  = BlogPost.newest_for_frontpage(viewer, 10) |> Repo.all
+      assert Enum.find(blog_posts, fn(p) -> p.id == blog_post.id end)
+    end
+
+    test "returns friends_only blog posts if the viewer is friends with the author of the blog post" do
+      viewer      = insert(:user)
+      blog_post   = insert(:blog_post, visibility: "friends_only")
+      _friendship = insert(:friendship, sender: viewer, recipient: blog_post.user)
+      blog_posts  = BlogPost.newest_for_frontpage(viewer, 10) |> Repo.all
+      assert Enum.find(blog_posts, fn(p) -> p.id == blog_post.id end)
+    end
+
+    test "does not return friends_only blog posts if the viewer is not the author of the blost post or friends with the author of the blog post" do
+      viewer      = insert(:user)
+      blog_post   = insert(:blog_post, visibility: "friends_only")
+      blog_posts  = BlogPost.newest_for_frontpage(viewer, 10) |> Repo.all
+      refute Enum.find(blog_posts, fn(p) -> p.id == blog_post.id end)
+    end
+
+    test "does not return friends_only blog posts if the viewer is only pending friends with the author of the blog post" do
+      viewer      = insert(:user)
+      blog_post   = insert(:blog_post, visibility: "friends_only")
+      _friendship = insert(:friendship_request, sender: viewer, recipient: blog_post.user)
+      blog_posts  = BlogPost.newest_for_frontpage(viewer, 10) |> Repo.all
+      refute Enum.find(blog_posts, fn(p) -> p.id == blog_post.id end)
+    end
+
+    test "never returns private blog posts" do
+      viewer      = insert(:user)
+      blog_post   = insert(:blog_post, user: viewer, visibility: "private")
+      blog_posts  = BlogPost.newest_for_frontpage(viewer, 10) |> Repo.all
+      refute Enum.find(blog_posts, fn(p) -> p.id == blog_post.id end)
+    end
+
     test "orders a post with a more recent published_at date before one with an older published_at date" do
       user       = insert(:user)
       blog_post1 = insert(:blog_post, published_at: Timex.shift(Timex.now, minutes: -1))
@@ -158,14 +200,14 @@ defmodule Helheim.BlogPostTest do
 
     test "never returns private blog posts if the user is not the same as the user of the blog post" do
       user       = insert(:user)
-      blog_post  = insert(:blog_post, visibility: "private")
+      _blog_post = insert(:blog_post, visibility: "private")
       blog_posts = BlogPost |> BlogPost.visible_by(user) |> Repo.all
       assert blog_posts == []
     end
 
     test "never returns friends_only blog posts if the user is not friends with the user of the blog post" do
       user       = insert(:user)
-      blog_post  = insert(:blog_post, visibility: "friends_only")
+      _blog_post = insert(:blog_post, visibility: "friends_only")
       blog_posts = BlogPost |> BlogPost.visible_by(user) |> Repo.all
       assert blog_posts == []
     end
@@ -193,7 +235,7 @@ defmodule Helheim.BlogPostTest do
     test "never returns friends_only blog posts if the user is pending friendship from the user of the blog post" do
       author      = insert(:user)
       user        = insert(:user)
-      blog_post   = insert(:blog_post, user: author, visibility: "friends_only")
+      _blog_post  = insert(:blog_post, user: author, visibility: "friends_only")
       _friendship = insert(:friendship_request, sender: author, recipient: user)
       blog_posts = BlogPost |> BlogPost.visible_by(user) |> Repo.all
       assert blog_posts == []
@@ -202,10 +244,30 @@ defmodule Helheim.BlogPostTest do
     test "never returns friends_only blog posts if the user of the blog post is pending friendship from the user" do
       author      = insert(:user)
       user        = insert(:user)
-      blog_post   = insert(:blog_post, user: author, visibility: "friends_only")
+      _blog_post  = insert(:blog_post, user: author, visibility: "friends_only")
       _friendship = insert(:friendship_request, sender: user, recipient: author)
       blog_posts = BlogPost |> BlogPost.visible_by(user) |> Repo.all
       assert blog_posts == []
+    end
+  end
+
+  describe "not_private/1" do
+    test "returns public blog posts" do
+      blog_post  = insert(:blog_post, visibility: "public")
+      blog_posts = BlogPost |> BlogPost.not_private |> Repo.all
+      assert Enum.find(blog_posts, fn(p) -> p.id == blog_post.id end)
+    end
+
+    test "returns friends_only blog posts" do
+      blog_post  = insert(:blog_post, visibility: "friends_only")
+      blog_posts = BlogPost |> BlogPost.not_private |> Repo.all
+      assert Enum.find(blog_posts, fn(p) -> p.id == blog_post.id end)
+    end
+
+    test "does not return private blog posts" do
+      blog_post  = insert(:blog_post, visibility: "private")
+      blog_posts = BlogPost |> BlogPost.not_private |> Repo.all
+      refute Enum.find(blog_posts, fn(p) -> p.id == blog_post.id end)
     end
   end
 

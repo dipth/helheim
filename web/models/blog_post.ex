@@ -29,7 +29,7 @@ defmodule Helheim.BlogPost do
     ) FROM blog_posts WHERE blog_posts.published = TRUE
   """
   def newest_for_frontpage(current_user, limit) do
-    from bp in (Helheim.BlogPost |> published |> visible_by(current_user) |> newest),
+    from bp in (Helheim.BlogPost |> published |> visible_by(current_user) |> not_private |> newest),
     join: partition in fragment(@newest_for_frontpage_partition_query),
     where: partition.row_number <= ^1 and partition.id == bp.id,
     limit: ^limit
@@ -63,6 +63,11 @@ defmodule Helheim.BlogPost do
         )
       )
     )
+  end
+
+  def not_private(query) do
+    from p in query,
+    where: p.visibility != "private"
   end
 
   @doc """
