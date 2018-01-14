@@ -218,14 +218,14 @@ defmodule Helheim.BlogPostControllerTest do
     test "redirects to an error page when the blog post is set to private and the current user is not the author of the blog post", %{conn: conn, user: user} do
       blog_post = insert(:blog_post, visibility: "private")
       assert_error_sent :not_found, fn ->
-        get conn, "/profiles/#{user.id}/blog_posts/#{blog_post.id}"
+        get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
       end
     end
 
     test "redirects to an error page when the blog post is set to friends_only and the current user is not friends with the author of the blog post", %{conn: conn, user: user} do
       blog_post = insert(:blog_post, visibility: "friends_only")
       assert_error_sent :not_found, fn ->
-        get conn, "/profiles/#{user.id}/blog_posts/#{blog_post.id}"
+        get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
       end
     end
 
@@ -234,7 +234,7 @@ defmodule Helheim.BlogPostControllerTest do
       insert(:friendship_request, sender: user, recipient: author)
       blog_post = insert(:blog_post, user: author, visibility: "friends_only")
       assert_error_sent :not_found, fn ->
-        get conn, "/profiles/#{user.id}/blog_posts/#{blog_post.id}"
+        get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
       end
     end
   end
