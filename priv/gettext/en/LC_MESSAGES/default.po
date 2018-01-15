@@ -351,7 +351,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:72
+#: web/controllers/profile_controller.ex:81
 msgid "Profile updated!"
 msgstr ""
 
@@ -374,6 +374,7 @@ msgid "Newest Forum Posts"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:45
+#: web/templates/profile/show.html.eex:85
 msgid "Newest Photos"
 msgstr ""
 
@@ -390,7 +391,7 @@ msgstr ""
 msgid "New Blog Post"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:47
+#: web/templates/blog_post/form.html.eex:56
 msgid "Save Blog Post"
 msgstr ""
 
@@ -403,34 +404,34 @@ msgstr ""
 #: web/templates/admin/forum_category/index.html.eex:13
 #: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/admin/term/index.html.eex:35
-#: web/templates/blog_post/show.html.eex:29
+#: web/templates/blog_post/show.html.eex:30
 #: web/templates/friendship/_my_active_friendships.html.eex:23
 #: web/templates/friendship/_my_pending_friendships.html.eex:28
 #: web/templates/photo/show.html.eex:42
-#: web/templates/photo_album/show.html.eex:67
+#: web/templates/photo_album/show.html.eex:59
 #: web/templates/private_conversation/show.html.eex:10
 msgid "Are you sure?"
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:50
+#: web/controllers/blog_post_controller.ex:53
 msgid "Blog post created successfully."
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:102
+#: web/controllers/blog_post_controller.ex:106
 msgid "Blog post deleted successfully."
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:89
+#: web/controllers/blog_post_controller.ex:93
 msgid "Blog post updated successfully."
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:31 web/templates/photo/show.html.eex:44
-#: web/templates/photo_album/show.html.eex:69 web/views/comment_view.ex:48
+#: web/templates/blog_post/show.html.eex:32 web/templates/photo/show.html.eex:44
+#: web/templates/photo_album/show.html.eex:61 web/views/comment_view.ex:48
 #: web/views/comment_view.ex:50
 msgid "Delete"
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:27
+#: web/templates/blog_post/show.html.eex:28
 #: web/templates/forum_reply/forum_reply.html.eex:18
 #: web/templates/forum_topic/forum_topic.html.eex:21
 msgid "Edit"
@@ -565,7 +566,7 @@ msgstr ""
 msgid "Not specified"
 msgstr ""
 
-#: web/templates/photo_album/index.html.eex:43
+#: web/templates/photo_album/index.html.eex:38
 msgid "Create New"
 msgstr ""
 
@@ -577,7 +578,7 @@ msgid "Description"
 msgstr ""
 
 #: web/templates/photo_album/edit.html.eex:3
-#: web/templates/photo_album/show.html.eex:64
+#: web/templates/photo_album/show.html.eex:56
 msgid "Edit Photo Album"
 msgstr ""
 
@@ -606,11 +607,10 @@ msgstr ""
 
 #: web/templates/blog_post/form.html.eex:24 web/templates/photo/show.html.eex:10
 #: web/templates/photo_album/form.html.eex:20
-#: web/templates/photo_album/show.html.eex:10
 msgid "Visibility"
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:57
+#: web/templates/photo_album/show.html.eex:49
 msgid "Drop photos here (or click) to upload..."
 msgstr ""
 
@@ -618,19 +618,15 @@ msgstr ""
 msgid "Edit Photo Details"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:85
-msgid "Newest Public Photos"
-msgstr ""
-
 #: web/controllers/photo_album_controller.ex:90
 msgid "Photo Album deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:89
+#: web/controllers/photo_controller.ex:90
 msgid "Photo deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:74
+#: web/controllers/photo_controller.ex:75
 msgid "Photo details updated successfully."
 msgstr ""
 
@@ -638,7 +634,7 @@ msgstr ""
 msgid "Save Photo Details"
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:41
+#: web/templates/photo_album/show.html.eex:33
 msgid "Upload Photos"
 msgstr ""
 
@@ -1180,7 +1176,7 @@ msgstr[1] ""
 msgid "NSFW?"
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:49
+#: web/templates/photo_album/show.html.eex:41
 msgid "Please turn on this switch before uploading NSFW photos:"
 msgstr ""
 
@@ -1188,7 +1184,8 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:40
+#: web/templates/blog_post/form.html.eex:35
+#: web/templates/blog_post/form.html.eex:49
 msgid "No"
 msgstr ""
 
@@ -1196,7 +1193,7 @@ msgstr ""
 msgid "Only you can currently view this blog post. Edit it to publish it."
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:32
+#: web/templates/blog_post/form.html.eex:41
 msgid "Publish?"
 msgstr ""
 
@@ -1204,27 +1201,28 @@ msgstr ""
 msgid "This blog post is not published!"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:40
+#: web/templates/blog_post/form.html.eex:35
+#: web/templates/blog_post/form.html.eex:49
 msgid "Yes"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:35
+#: web/templates/blog_post/form.html.eex:44
 msgid "You are always free to unpublish a post again, but re-publishing it will not bump the post further up on lists."
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:34
+#: web/templates/blog_post/form.html.eex:43
 msgid "Your blog post will only be visible to yourself as a draft until you publish it, at which point it will receive it's position in lists of posts."
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:28
+#: web/templates/photo_album/show.html.eex:20
 msgid "(only in desktop browsers)"
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:26
+#: web/templates/photo_album/show.html.eex:18
 msgid "Did you know"
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:27
+#: web/templates/photo_album/show.html.eex:19
 msgid "that you can reorder your photos by dragging and dropping them!"
 msgstr ""
 
@@ -1631,4 +1629,12 @@ msgstr ""
 
 #: web/templates/friendship/_my_active_friendships.html.eex:1
 msgid "Your Contacts"
+msgstr ""
+
+#: web/templates/blog_post/show.html.eex:50
+msgid "Comments have been disabled for this blog post"
+msgstr ""
+
+#: web/templates/blog_post/form.html.eex:32
+msgid "Hide comments?"
 msgstr ""

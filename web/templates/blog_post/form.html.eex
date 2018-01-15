@@ -28,6 +28,15 @@
       <% end %>
     </div>
 
+    <div class="form-group <%= if f.errors[:hide_comments] do 'has-danger' end %>">
+      <strong><%= gettext "Hide comments?" %></strong><br>
+      <%= label f, :hide_comments, class: "switch switch-text switch-primary" do %>
+        <%= checkbox f, :hide_comments, class: "switch-input" %>
+        <span class="switch-label" data-on="<%= gettext "Yes" %>" data-off="<%= gettext "No" %>"></span>
+        <span class="switch-handle"></span>
+      <% end %>
+    </div>
+
     <div class="alert alert-info">
       <h4 class="alert-heading"><%= gettext "Publish?" %></h4>
       <p class="mb-1">

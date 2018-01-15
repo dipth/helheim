@@ -9,6 +9,7 @@ defmodule Helheim.BlogPost do
     field :published,     :boolean
     field :published_at,  Calecto.DateTimeUTC
     field :visibility,    :string
+    field :hide_comments, :boolean
 
     timestamps()
 
@@ -75,7 +76,7 @@ defmodule Helheim.BlogPost do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :body, :published, :visibility])
+    |> cast(params, [:title, :body, :published, :visibility, :hide_comments])
     |> trim_fields(:title)
     |> validate_required([:title, :body, :visibility])
     |> validate_inclusion(:visibility, Helheim.Visibility.visibilities)

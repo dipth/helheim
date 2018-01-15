@@ -289,6 +289,14 @@ defmodule Helheim.BlogPostControllerTest do
       refute html_response(conn, 200) =~ "This is a deleted comment"
     end
 
+    test "does not show comments if comments are disabled for the blog post", %{conn: conn} do
+      blog_post = insert(:blog_post, hide_comments: true)
+      _comment  = insert(:blog_post_comment, body: "This is a comment")
+      conn      = get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
+      refute html_response(conn, 200) =~ "This is a comment"
+      assert html_response(conn, 200) =~ gettext("Comments have been disabled for this blog post")
+    end
+
     test "redirects to an error page when the blog post is set to private and the current user is not the author of the blog post", %{conn: conn} do
       blog_post = insert(:blog_post, visibility: "private")
       assert_error_sent :not_found, fn ->

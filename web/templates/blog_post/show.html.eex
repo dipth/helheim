@@ -41,4 +41,12 @@
   <%= raw @blog_post.body %>
 </div>
 
-<%= Helheim.CommentView.render_comments @conn, @comments, @blog_post %>
+<%= unless @blog_post.hide_comments do %>
+  <%= Helheim.CommentView.render_comments @conn, @comments, @blog_post %>
+<% else %>
+  <hr>
+  <samp>
+    <i class="fa fa-fw fa-info"></i>
+    <%= gettext "Comments have been disabled for this blog post" %>
+  </samp>
+<% end %>
