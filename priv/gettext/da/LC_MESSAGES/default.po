@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.5\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -39,7 +39,7 @@ msgstr "%{site_name} er et community for alternative folk."
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
-#: web/templates/layout/sidebar.html.eex:38 web/templates/page/index.html.eex:3
+#: web/templates/layout/sidebar.html.eex:44 web/templates/page/index.html.eex:3
 msgid "Helheim"
 msgstr "Helheim"
 
@@ -391,7 +391,7 @@ msgstr "Nyeste Forumindlæg"
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
 
-#: web/templates/layout/sidebar.html.eex:46
+#: web/templates/layout/sidebar.html.eex:52
 msgid "Your Profile"
 msgstr "Din Profil"
 
@@ -411,7 +411,7 @@ msgstr "Gem Blog"
 
 #: web/templates/blog_post/edit.html.eex:2
 #: web/templates/blog_post/new.html.eex:2
-#: web/templates/layout/sidebar.html.eex:67
+#: web/templates/layout/sidebar.html.eex:73
 msgid "Your Blog Posts"
 msgstr "Dine Blogs"
 
@@ -470,7 +470,7 @@ msgstr "Titel"
 msgid "Comment created successfully"
 msgstr "Din kommentar er tilføjet!"
 
-#: web/templates/layout/sidebar.html.eex:51 web/views/comment_view.ex:14
+#: web/templates/layout/sidebar.html.eex:57 web/views/comment_view.ex:14
 msgid "Guest Book"
 msgstr "Gæstebog"
 
@@ -533,7 +533,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] "Du har %{count} notifikation"
 msgstr[1] "Du har %{count} notifikationer"
 
-#: web/templates/layout/sidebar.html.eex:63
+#: web/templates/layout/sidebar.html.eex:69
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr "Private Beskeder"
@@ -663,7 +663,7 @@ msgstr "Upload billeder"
 msgid "Uploaded"
 msgstr "Uploadet"
 
-#: web/templates/layout/sidebar.html.eex:72
+#: web/templates/layout/sidebar.html.eex:78
 msgid "Your Photo Albums"
 msgstr "Dine Fotoalbums"
 
@@ -810,7 +810,7 @@ msgstr "Gem forum kategori"
 msgid "Submit new reply"
 msgstr "Send nyt svar"
 
-#: web/templates/layout/sidebar.html.eex:43
+#: web/templates/layout/sidebar.html.eex:49
 msgid "You"
 msgstr "Dig"
 
@@ -1007,7 +1007,7 @@ msgid "Comments"
 msgstr "Kommentarer"
 
 #: web/templates/help/embeds.html.eex:3
-#: web/templates/layout/sidebar.html.eex:29
+#: web/templates/layout/sidebar.html.eex:35
 msgid "Embeds"
 msgstr "Embeds"
 
@@ -1509,7 +1509,7 @@ msgid "How much would you like to donate?"
 msgstr "Hvor meget vil du donere?"
 
 #: web/templates/donation/new.html.eex:7
-#: web/templates/layout/sidebar.html.eex:38
+#: web/templates/layout/sidebar.html.eex:44
 msgid "Support %{site}"
 msgstr "Støt %{site}"
 
@@ -1600,7 +1600,7 @@ msgid "Add to Contacts"
 msgstr "Føj til kontaktliste"
 
 #: web/templates/friendship/index.html.eex:3
-#: web/templates/layout/sidebar.html.eex:57
+#: web/templates/layout/sidebar.html.eex:63
 msgid "Contact List"
 msgstr "Kontaktliste"
 
@@ -1668,3 +1668,7 @@ msgstr "Kommentarer er deaktiveret på denne blog"
 #: web/templates/blog_post/form.html.eex:32
 msgid "Hide comments?"
 msgstr "Skjul kommentarer?"
+
+#: web/templates/layout/sidebar.html.eex:29
+msgid "Terms and Rules"
+msgstr "Betingelser og Regler"

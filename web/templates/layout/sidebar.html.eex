@@ -24,6 +24,12 @@
         </a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">
+            <%= link to: "/terms", class: "nav-link" do %>
+              <i class="fa fa-legal"></i>
+              <%= gettext "Terms and Rules" %>
+            <% end %>
+          </li>
+          <li class="nav-item">
             <%= link to: help_path(@conn, :embeds), class: "nav-link" do %>
               <i class="fa fa-youtube-play"></i>
               <%= gettext "Embeds" %>

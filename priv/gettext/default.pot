@@ -28,7 +28,7 @@ msgstr ""
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
-#: web/templates/layout/sidebar.html.eex:38 web/templates/page/index.html.eex:3
+#: web/templates/layout/sidebar.html.eex:44 web/templates/page/index.html.eex:3
 msgid "Helheim"
 msgstr ""
 
@@ -378,7 +378,7 @@ msgstr ""
 msgid "Newest Photos"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:46
+#: web/templates/layout/sidebar.html.eex:52
 msgid "Your Profile"
 msgstr ""
 
@@ -397,7 +397,7 @@ msgstr ""
 
 #: web/templates/blog_post/edit.html.eex:2
 #: web/templates/blog_post/new.html.eex:2
-#: web/templates/layout/sidebar.html.eex:67
+#: web/templates/layout/sidebar.html.eex:73
 msgid "Your Blog Posts"
 msgstr ""
 
@@ -455,7 +455,7 @@ msgstr ""
 msgid "Comment created successfully"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:51 web/views/comment_view.ex:14
+#: web/templates/layout/sidebar.html.eex:57 web/views/comment_view.ex:14
 msgid "Guest Book"
 msgstr ""
 
@@ -517,7 +517,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/layout/sidebar.html.eex:63
+#: web/templates/layout/sidebar.html.eex:69
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr ""
@@ -642,7 +642,7 @@ msgstr ""
 msgid "Uploaded"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:72
+#: web/templates/layout/sidebar.html.eex:78
 msgid "Your Photo Albums"
 msgstr ""
 
@@ -788,7 +788,7 @@ msgstr ""
 msgid "Submit new reply"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:43
+#: web/templates/layout/sidebar.html.eex:49
 msgid "You"
 msgstr ""
 
@@ -980,7 +980,7 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:3 web/templates/layout/sidebar.html.eex:29
+#: web/templates/help/embeds.html.eex:3 web/templates/layout/sidebar.html.eex:35
 msgid "Embeds"
 msgstr ""
 
@@ -1479,7 +1479,7 @@ msgid "How much would you like to donate?"
 msgstr ""
 
 #: web/templates/donation/new.html.eex:7
-#: web/templates/layout/sidebar.html.eex:38
+#: web/templates/layout/sidebar.html.eex:44
 msgid "Support %{site}"
 msgstr ""
 
@@ -1570,7 +1570,7 @@ msgid "Add to Contacts"
 msgstr ""
 
 #: web/templates/friendship/index.html.eex:3
-#: web/templates/layout/sidebar.html.eex:57
+#: web/templates/layout/sidebar.html.eex:63
 msgid "Contact List"
 msgstr ""
 
@@ -1637,4 +1637,8 @@ msgstr ""
 
 #: web/templates/blog_post/form.html.eex:32
 msgid "Hide comments?"
+msgstr ""
+
+#: web/templates/layout/sidebar.html.eex:29
+msgid "Terms and Rules"
 msgstr ""
