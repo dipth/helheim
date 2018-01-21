@@ -22,8 +22,8 @@
     <%= for term <- @terms do %>
       <tr>
         <th scope="row"><%= term.id %></th>
-        <td><%= lt term.inserted_at, "{ISOdate} {ISOtime}" %></td>
-        <td><%= lt term.updated_at, "{ISOdate} {ISOtime}" %></td>
+        <td><%= time_ago_in_words term.inserted_at %></td>
+        <td><%= time_ago_in_words term.updated_at %></td>
         <td><%= term.published %></td>
         <td class="text-right">
           <%= link to: admin_term_path(@conn, :show, term), class: "btn btn-primary btn-sm" do %>
