@@ -186,7 +186,6 @@ defmodule Helheim.User do
   def delete!(user) do
     photo_albums = assoc(user, :photo_albums) |> Repo.all
     Parallel.pmap(photo_albums, fn(pa) -> Helheim.PhotoAlbum.delete!(pa) end)
-    {:ok, _} = Helheim.DeletedUser.track_deletion!(user)
     Repo.delete!(user)
   end
 
