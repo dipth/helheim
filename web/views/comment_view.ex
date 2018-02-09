@@ -26,6 +26,14 @@ defmodule Helheim.CommentView do
   def post_path(conn, %BlogPost{} = blog_post), do: blog_post_comment_path(conn, :create, blog_post)
   def post_path(conn, %Photo{} = photo), do: photo_album_photo_comment_path(conn, :create, photo.photo_album_id, photo)
 
+  def edit_path(conn, comment, %User{} = profile), do: public_profile_comment_path(conn, :edit, profile, comment)
+  def edit_path(conn, comment, %BlogPost{} = blog_post), do: blog_post_comment_path(conn, :edit, blog_post, comment)
+  def edit_path(conn, comment, %Photo{} = photo), do: photo_album_photo_comment_path(conn, :edit, photo.photo_album_id, photo, comment)
+
+  def patch_path(conn, comment, %User{} = profile), do: public_profile_comment_path(conn, :update, profile, comment)
+  def patch_path(conn, comment, %BlogPost{} = blog_post), do: blog_post_comment_path(conn, :update, blog_post, comment)
+  def patch_path(conn, comment, %Photo{} = photo), do: photo_album_photo_comment_path(conn, :update, photo.photo_album_id, photo, comment)
+
   def render_comments(conn, comments, commentable, opts \\ []) do
     opts = Keyword.merge(
       [

@@ -5,8 +5,11 @@ defmodule Helheim.CommentController do
   alias Helheim.Photo
   alias Helheim.Comment
 
-  plug :find_commentable when action in [:index, :create]
+  plug :find_commentable when action in [:index, :create, :edit, :update]
   plug Helheim.Plug.EnforceBlock when action in [:index, :create]
+  plug :find_comment when action in [:edit, :update]
+  plug :build_edit_changeset when action in [:edit, :update]
+  plug :enforce_editable_by when action in [:edit, :update]
 
   def index(conn, params) do
     comments = assoc(conn.assigns[:commentable], :comments)
@@ -31,6 +34,21 @@ defmodule Helheim.CommentController do
         conn
         |> put_flash(:error, gettext("Unable to create comment"))
         |> redirect(to: conn.assigns[:redirect_to])
+    end
+  end
+
+  def edit(conn, %{"id" => _}) do
+    render(conn, "edit.html", commentable: conn.assigns[:commentable], comment: conn.assigns[:comment])
+  end
+
+  def update(conn, %{"id" => _, "comment" => _}) do
+    case Repo.update(conn.assigns[:changeset]) do
+      {:ok, _forum_reply} ->
+        conn
+        |> put_flash(:success, gettext("Comment updated successfully."))
+        |> redirect(to: conn.assigns[:redirect_to])
+      {:error, changeset} ->
+        render(conn, "edit.html", changeset: changeset, commentable: conn.assigns[:commentable], comment: conn.assigns[:comment])
     end
   end
 
@@ -70,5 +88,30 @@ defmodule Helheim.CommentController do
     |> assign(:user, photo.photo_album.user) # For blocking
     |> assign(:commentable, photo)
     |> assign(:redirect_to, public_profile_photo_album_photo_path(conn, :show, photo.photo_album.user, photo.photo_album, photo))
+  end
+
+  defp find_comment(conn, _) do
+    comment = assoc(conn.assigns[:commentable], :comments)
+              |> preload(:author)
+              |> Repo.get!(conn.params["id"])
+    assign conn, :comment, comment
+  end
+
+  defp enforce_editable_by(conn, _) do
+    unless Comment.editable_by?(conn.assigns[:comment], current_resource(conn)) do
+      conn
+      |> put_flash(:error, gettext("You can only edit a comment in the first %{minutes} minutes!", minutes: Comment.edit_timelimit_in_minutes))
+      |> redirect(to: conn.assigns[:redirect_to])
+      |> halt
+    else
+      conn
+    end
+  end
+
+  defp build_edit_changeset(conn, _) do
+    comment_params = conn.params["comment"] || %{}
+    changeset = conn.assigns[:comment]
+                |> Comment.changeset(comment_params)
+    assign conn, :changeset, changeset
   end
 end

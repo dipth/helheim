@@ -1,0 +1,16 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <div class="card">
+    <div class="card-header">
+      <%= label f, :body, gettext("Write new comment:"), class: "control-label mb-0" %>
+    </div>
+    <div class="card-block">
+      <%= textarea f, :body, class: "form-control mentionable-input", rows: 5 %>
+      <%= if message = f.errors[:body] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% end %>
+    </div>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= @button_label %></button>
+    </div>
+  </div>
+<% end %>

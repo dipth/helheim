@@ -59,4 +59,30 @@ defmodule Helheim.CommentTest do
       refute Comment.deletable_by?(comment3, user)
     end
   end
+
+  describe "editable_by?/2" do
+    test "it returns true if the user is the author of the comment and it is no older than 60 minutes" do
+      user    = insert(:user)
+      comment = insert(:profile_comment, author: user, inserted_at: Timex.shift(Timex.now, minutes: -59))
+      assert Comment.editable_by?(comment, user)
+    end
+
+    test "it returns false if the comment is older than 60 minutes" do
+      user    = insert(:user)
+      comment = insert(:profile_comment, author: user, inserted_at: Timex.shift(Timex.now, minutes: -61))
+      refute Comment.editable_by?(comment, user)
+    end
+
+    test "it returns false if the user is not the author of the comment" do
+      user    = insert(:user)
+      comment = insert(:profile_comment, inserted_at: Timex.shift(Timex.now, minutes: -9))
+      refute Comment.editable_by?(comment, user)
+    end
+
+    test "it returns true if the user is an admin" do
+      user    = insert(:user, role: "admin")
+      comment = insert(:profile_comment, inserted_at: Timex.shift(Timex.now, minutes: -11))
+      assert Comment.editable_by?(comment, user)
+    end
+  end
 end

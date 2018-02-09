@@ -327,7 +327,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:243
+#: web/models/user.ex:242
 msgid "does not match your current password"
 msgstr ""
 
@@ -426,12 +426,13 @@ msgid "Blog post updated successfully."
 msgstr ""
 
 #: web/templates/blog_post/show.html.eex:32 web/templates/photo/show.html.eex:44
-#: web/templates/photo_album/show.html.eex:61 web/views/comment_view.ex:48
-#: web/views/comment_view.ex:50
+#: web/templates/photo_album/show.html.eex:61 web/views/comment_view.ex:56
+#: web/views/comment_view.ex:58
 msgid "Delete"
 msgstr ""
 
 #: web/templates/blog_post/show.html.eex:28
+#: web/templates/comment/comment.html.eex:16
 #: web/templates/forum_reply/forum_reply.html.eex:18
 #: web/templates/forum_topic/forum_topic.html.eex:21
 msgid "Edit"
@@ -451,7 +452,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:28
+#: web/controllers/comment_controller.ex:31
 msgid "Comment created successfully"
 msgstr ""
 
@@ -475,11 +476,12 @@ msgstr ""
 msgid "Show All"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:32
+#: web/controllers/comment_controller.ex:35
 msgid "Unable to create comment"
 msgstr ""
 
 #: web/templates/comment/comments.html.eex:33
+#: web/templates/comment/form.html.eex:4
 msgid "Write new comment:"
 msgstr ""
 
@@ -956,6 +958,7 @@ msgstr ""
 msgid "Forum topic updated successfully."
 msgstr ""
 
+#: web/templates/comment/edit.html.eex:4
 #: web/templates/forum_reply/edit.html.eex:12
 #: web/templates/forum_topic/edit.html.eex:19
 msgid "Save Changes"
@@ -1390,11 +1393,11 @@ msgstr ""
 msgid "Recently logged in users"
 msgstr ""
 
-#: web/views/comment_view.ex:51
+#: web/views/comment_view.ex:59
 msgid "Cancel"
 msgstr ""
 
-#: web/views/comment_view.ex:49
+#: web/views/comment_view.ex:57
 msgid "Are you sure you want to delete this comment?"
 msgstr ""
 
@@ -1449,6 +1452,7 @@ msgstr ""
 msgid "Last login"
 msgstr ""
 
+#: web/templates/comment/comment.html.eex:17
 #: web/templates/forum_reply/forum_reply.html.eex:19
 #: web/templates/forum_topic/forum_topic.html.eex:22
 msgid "Only possible for up to %{minutes} minutes after posting..."
@@ -1531,7 +1535,7 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-#: web/models/user.ex:276
+#: web/models/user.ex:275
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr ""
 
@@ -1641,4 +1645,16 @@ msgstr ""
 
 #: web/templates/layout/sidebar.html.eex:29
 msgid "Terms and Rules"
+msgstr ""
+
+#: web/controllers/comment_controller.ex:48
+msgid "Comment updated successfully."
+msgstr ""
+
+#: web/templates/comment/edit.html.eex:1
+msgid "Edit comment"
+msgstr ""
+
+#: web/controllers/comment_controller.ex:103
+msgid "You can only edit a comment in the first %{minutes} minutes!"
 msgstr ""

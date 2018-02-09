@@ -12,6 +12,10 @@
   <div class="embeds mentionable">
     <%= text_to_html @comment.body %>
   </div>
+  <%= if Comment.editable_by?(@comment, current_resource(@conn)) do %>
+    <%= link gettext("Edit"), to: Helheim.CommentView.edit_path(@conn, @comment, Comment.commentable(@comment)), class: "btn btn-outline-secondary btn-sm" %>
+    <small><%= gettext "Only possible for up to %{minutes} minutes after posting...", minutes: Comment.edit_timelimit_in_minutes %></small><br>
+  <% end %>
   <%= Helheim.CommentView.delete_comment_button(@conn, @comment) %>
   <hr>
 </div>

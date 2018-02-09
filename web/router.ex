@@ -61,7 +61,7 @@ defmodule Helheim.Router do
       resources "/blog_posts", BlogPostController, only: [:index, :show] do
         resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
       end
-      resources "/comments", CommentController, only: [:index, :create]
+      resources "/comments", CommentController, only: [:index, :create, :edit, :update]
       resources "/photo_albums", PhotoAlbumController, only: [:index, :show] do
         resources "/photos", PhotoController, only: [:show] do
           resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
@@ -76,12 +76,12 @@ defmodule Helheim.Router do
       resources "/contacts", FriendshipController, only: [:index]
     end
     resources "/blog_posts", BlogPostController, only: [:index, :new, :create, :edit, :update, :delete] do
-      resources "/comments", CommentController, only: [:create]
+      resources "/comments", CommentController, only: [:create, :edit, :update]
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
     end
     resources "/photo_albums", PhotoAlbumController, only: [:new, :create, :edit, :update, :delete] do
       resources "/photos", PhotoController, only: [:create, :edit, :update, :delete] do
-        resources "/comments", CommentController, only: [:create]
+        resources "/comments", CommentController, only: [:create, :edit, :update]
         resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
       end
       resources "/photo_positions", PhotoPositionController, singleton: true, only: [:update], as: :photo_positions

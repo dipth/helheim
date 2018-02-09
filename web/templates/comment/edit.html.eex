@@ -1,0 +1,6 @@
+<h1 class="mt-2"><%= gettext "Edit comment" %></h1>
+<div class="card">
+  <%= render "form.html", changeset: @changeset,
+                          button_label: gettext("Save Changes"),
+                          action: Helheim.CommentView.patch_path(@conn, @comment, @commentable) %>
+</div>

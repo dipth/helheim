@@ -339,7 +339,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:243
+#: web/models/user.ex:242
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -441,12 +441,13 @@ msgstr "Din blog er opdateret!"
 
 #: web/templates/blog_post/show.html.eex:32
 #: web/templates/photo/show.html.eex:44
-#: web/templates/photo_album/show.html.eex:61 web/views/comment_view.ex:48
-#: web/views/comment_view.ex:50
+#: web/templates/photo_album/show.html.eex:61 web/views/comment_view.ex:56
+#: web/views/comment_view.ex:58
 msgid "Delete"
 msgstr "Slet"
 
 #: web/templates/blog_post/show.html.eex:28
+#: web/templates/comment/comment.html.eex:16
 #: web/templates/forum_reply/forum_reply.html.eex:18
 #: web/templates/forum_topic/forum_topic.html.eex:21
 msgid "Edit"
@@ -466,7 +467,7 @@ msgstr "Redigér Blog"
 msgid "Title"
 msgstr "Titel"
 
-#: web/controllers/comment_controller.ex:28
+#: web/controllers/comment_controller.ex:31
 msgid "Comment created successfully"
 msgstr "Din kommentar er tilføjet!"
 
@@ -491,11 +492,12 @@ msgstr "Tilføj Kommentar"
 msgid "Show All"
 msgstr "Vis alle"
 
-#: web/controllers/comment_controller.ex:32
+#: web/controllers/comment_controller.ex:35
 msgid "Unable to create comment"
 msgstr "Din kommentar kunne ikke tilføjes!"
 
 #: web/templates/comment/comments.html.eex:33
+#: web/templates/comment/form.html.eex:4
 msgid "Write new comment:"
 msgstr "Skriv ny kommentar:"
 
@@ -979,6 +981,7 @@ msgstr "Dit svar blev gemt!"
 msgid "Forum topic updated successfully."
 msgstr "Dit indlæg blev gemt!"
 
+#: web/templates/comment/edit.html.eex:4
 #: web/templates/forum_reply/edit.html.eex:12
 #: web/templates/forum_topic/edit.html.eex:19
 msgid "Save Changes"
@@ -1420,11 +1423,11 @@ msgstr "men du er velkommen til at skrive til vores support hvis problemet forts
 msgid "Recently logged in users"
 msgstr "Senest logget ind"
 
-#: web/views/comment_view.ex:51
+#: web/views/comment_view.ex:59
 msgid "Cancel"
 msgstr "Annullér"
 
-#: web/views/comment_view.ex:49
+#: web/views/comment_view.ex:57
 msgid "Are you sure you want to delete this comment?"
 msgstr "Er du sikker på at du vil slette denne kommentar?"
 
@@ -1479,6 +1482,7 @@ msgstr "Sortering"
 msgid "Last login"
 msgstr "Seneste login"
 
+#: web/templates/comment/comment.html.eex:17
 #: web/templates/forum_reply/forum_reply.html.eex:19
 #: web/templates/forum_topic/forum_topic.html.eex:22
 msgid "Only possible for up to %{minutes} minutes after posting..."
@@ -1561,7 +1565,7 @@ msgstr "Vi har modtaget din donation og takker ydmygt for din hjælp med at gør
 msgid "Edited"
 msgstr "Redigeret"
 
-#: web/models/user.ex:276
+#: web/models/user.ex:275
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr "I too enjoy registering on websites, fellow human… Bleep Bloop!"
 
@@ -1672,3 +1676,15 @@ msgstr "Skjul kommentarer?"
 #: web/templates/layout/sidebar.html.eex:29
 msgid "Terms and Rules"
 msgstr "Betingelser og Regler"
+
+#: web/controllers/comment_controller.ex:48
+msgid "Comment updated successfully."
+msgstr "Kommentaren blev opdateret."
+
+#: web/templates/comment/edit.html.eex:1
+msgid "Edit comment"
+msgstr "Redigér kommentar"
+
+#: web/controllers/comment_controller.ex:103
+msgid "You can only edit a comment in the first %{minutes} minutes!"
+msgstr "Du kan kun redigere din kommentar i den første %{minutes} minutter!"

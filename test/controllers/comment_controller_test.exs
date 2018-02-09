@@ -6,8 +6,10 @@ defmodule Helheim.CommentControllerTest do
   alias Helheim.User
   alias Helheim.BlogPost
   alias Helheim.Photo
+  alias Helheim.Comment
 
   @comment_attrs %{body: "My Comment"}
+  @invalid_attrs %{body: ""}
 
   ##############################################################################
   # index/2 for a profile
@@ -235,6 +237,407 @@ defmodule Helheim.CommentControllerTest do
       photo = insert(:photo)
       conn  = post conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/comments", comment: @comment_attrs
       assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # edit/2 for a profile
+  describe "edit/2 for a profile when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it returns a successful response", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment = insert(:profile_comment)
+      profile = comment.profile
+      conn  = get conn, "/profiles/#{profile.id}/comments/#{comment.id}/edit"
+      assert html_response(conn, 200) =~ gettext("Edit comment")
+    end
+
+    test_with_mock "it redirects to an error page when supplying an non-existing profile_id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      assert_error_sent :not_found, fn ->
+        comment = insert(:profile_comment)
+        profile = comment.profile
+        get conn, "/profiles/#{profile.id + 1}/comments/#{comment.id}/edit"
+      end
+    end
+
+    test_with_mock "it redirects to an error page when supplying an non-existing id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      assert_error_sent :not_found, fn ->
+        comment = insert(:profile_comment)
+        profile = comment.profile
+        get conn, "/profiles/#{profile.id}/comments/#{comment.id + 1}/edit"
+      end
+    end
+
+    test_with_mock "it redirects back to the guest book if the reply is not editable by the user", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> false end] do
+
+      comment = insert(:profile_comment)
+      profile = comment.profile
+      conn  = get conn, "/profiles/#{profile.id}/comments/#{comment.id}/edit"
+      assert redirected_to(conn) == public_profile_comment_path(conn, :index, profile.id)
+    end
+  end
+
+  describe "edit/2 for a profile when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      comment = insert(:profile_comment)
+      profile = comment.profile
+      conn  = get conn, "/profiles/#{profile.id}/comments/#{comment.id}/edit"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # edit/2 for a blog post
+  describe "edit/2 for a blog post when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it returns a successful response", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment = insert(:blog_post_comment)
+      blog_post = comment.blog_post
+      conn  = get conn, "/blog_posts/#{blog_post.id}/comments/#{comment.id}/edit"
+      assert html_response(conn, 200) =~ gettext("Edit comment")
+    end
+
+    test_with_mock "it redirects to an error page when supplying an non-existing blog_post_id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      assert_error_sent :not_found, fn ->
+        comment = insert(:blog_post_comment)
+        blog_post = comment.blog_post
+        get conn, "/blog_posts/#{blog_post.id + 1}/comments/#{comment.id}/edit"
+      end
+    end
+
+    test_with_mock "it redirects to an error page when supplying an non-existing id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      assert_error_sent :not_found, fn ->
+        comment = insert(:blog_post_comment)
+        blog_post = comment.blog_post
+        get conn, "/blog_posts/#{blog_post.id}/comments/#{comment.id + 1}/edit"
+      end
+    end
+
+    test_with_mock "it redirects back to the blog post if the reply is not editable by the user", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> false end] do
+
+      comment = insert(:blog_post_comment)
+      blog_post = comment.blog_post
+      conn  = get conn, "/blog_posts/#{blog_post.id}/comments/#{comment.id}/edit"
+      assert redirected_to(conn) == public_profile_blog_post_path(conn, :show, blog_post.user, blog_post)
+    end
+  end
+
+  describe "edit/2 for a blog post when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      comment = insert(:blog_post_comment)
+      blog_post = comment.blog_post
+      conn  = get conn, "/blog_posts/#{blog_post.id}/comments/#{comment.id}/edit"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # edit/2 for a photo
+  describe "edit/2 for a photo when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it returns a successful response", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment = insert(:photo_comment)
+      photo = comment.photo
+      album = photo.photo_album
+      conn  = get conn, "/photo_albums/#{album.id}/photos/#{photo.id}/comments/#{comment.id}/edit"
+      assert html_response(conn, 200) =~ gettext("Edit comment")
+    end
+
+    test_with_mock "it redirects to an error page when supplying an non-existing photo_id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      assert_error_sent :not_found, fn ->
+        comment = insert(:photo_comment)
+        photo = comment.photo
+        album = photo.photo_album
+        get conn, "/photo_albums/#{album.id}/photos/#{photo.id + 1}/comments/#{comment.id}/edit"
+      end
+    end
+
+    test_with_mock "it redirects to an error page when supplying an non-existing id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      assert_error_sent :not_found, fn ->
+        comment = insert(:photo_comment)
+        photo = comment.photo
+        album = photo.photo_album
+        get conn, "/photo_albums/#{album.id}/photos/#{photo.id}/comments/#{comment.id + 1}/edit"
+      end
+    end
+
+    test_with_mock "it redirects back to the photo if the reply is not editable by the user", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> false end] do
+
+      comment = insert(:photo_comment)
+      photo = comment.photo
+      album = photo.photo_album
+      conn  = get conn, "/photo_albums/#{album.id}/photos/#{photo.id}/comments/#{comment.id}/edit"
+      assert redirected_to(conn) == public_profile_photo_album_photo_path(conn, :show, album.user_id, album.id, photo)
+    end
+  end
+
+  describe "edit/2 for a photo when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      comment = insert(:photo_comment)
+      photo = comment.photo
+      album = photo.photo_album
+      conn  = get conn, "/photo_albums/#{album.id}/photos/#{photo.id}/comments/#{comment.id}/edit"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # update/2 for a profile
+  describe "update/2 for a profile when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it updates the comment and redirects back to the guest book", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      user    = insert(:user)
+      comment = insert(:profile_comment, author: user, body: "Before")
+      profile = comment.profile
+      conn    = put conn, "/profiles/#{profile.id}/comments/#{comment.id}", comment: @comment_attrs
+      comment = Repo.one(Comment)
+      assert redirected_to(conn) == public_profile_comment_path(conn, :index, profile.id)
+      assert comment.profile_id  == profile.id
+      assert comment.author_id   == user.id
+      assert comment.body        == @comment_attrs.body
+    end
+
+    test_with_mock "it does not update the comment but re-renders the edit template when posting invalid attrs", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment = insert(:profile_comment, body: "Before")
+      profile = comment.profile
+      conn    = put conn, "/profiles/#{profile.id}/comments/#{comment.id}", comment: @invalid_attrs
+      comment = Repo.one(Comment)
+      assert html_response(conn, 200) =~ gettext("Edit comment")
+      assert comment.body == "Before"
+    end
+
+    test_with_mock "does not update the comment but redirects to an error page when supplying an non-existing profile_id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment = insert(:profile_comment, body: "Before")
+      profile = comment.profile
+      assert_error_sent :not_found, fn ->
+        put conn, "/profiles/#{profile.id + 1}/comments/#{comment.id}", comment: @comment_attrs
+      end
+      comment = Repo.one(Comment)
+      assert comment.body == "Before"
+    end
+
+    test_with_mock "it does not update the comment but redirects to an error page when supplying an non-existing id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment = insert(:profile_comment, body: "Before")
+      profile = comment.profile
+      assert_error_sent :not_found, fn ->
+        put conn, "/profiles/#{profile.id}/comments/#{comment.id + 1}", comment: @comment_attrs
+      end
+      comment = Repo.one(Comment)
+      assert comment.body == "Before"
+    end
+
+    test_with_mock "it does not update the comment but redirects back to the guest book if it is not editable by the user", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> false end] do
+
+      comment = insert(:profile_comment, body: "Before")
+      profile = comment.profile
+      conn    = put conn, "/profiles/#{profile.id}/comments/#{comment.id}", comment: @comment_attrs
+      comment = Repo.one(Comment)
+      assert redirected_to(conn) == public_profile_comment_path(conn, :index, profile.id)
+      assert comment.body        == "Before"
+    end
+  end
+
+  describe "update/2 for a profile when not signed in" do
+    test "it does not update the comment but redirects to the sign in page", %{conn: conn} do
+      comment = insert(:profile_comment, body: "Before")
+      profile = comment.profile
+      conn    = put conn, "/profiles/#{profile.id}/comments/#{comment.id}", comment: @comment_attrs
+      comment = Repo.one(Comment)
+      assert redirected_to(conn) == session_path(conn, :new)
+      assert comment.body        == "Before"
+    end
+  end
+
+  ##############################################################################
+  # update/2 for a blog post
+  describe "update/2 for a blog post when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it updates the comment and redirects back to the blog post", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      user      = insert(:user)
+      comment   = insert(:blog_post_comment, author: user, body: "Before")
+      blog_post = comment.blog_post
+      conn      = put conn, "/blog_posts/#{blog_post.id}/comments/#{comment.id}", comment: @comment_attrs
+      comment   = Repo.one(Comment)
+      assert redirected_to(conn)  == public_profile_blog_post_path(conn, :show, blog_post.user, blog_post)
+      assert comment.blog_post_id == blog_post.id
+      assert comment.author_id    == user.id
+      assert comment.body         == @comment_attrs.body
+    end
+
+    test_with_mock "it does not update the comment but re-renders the edit template when posting invalid attrs", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment   = insert(:blog_post_comment, body: "Before")
+      blog_post = comment.blog_post
+      conn    = put conn, "/blog_posts/#{blog_post.id}/comments/#{comment.id}", comment: @invalid_attrs
+      comment = Repo.one(Comment)
+      assert html_response(conn, 200) =~ gettext("Edit comment")
+      assert comment.body == "Before"
+    end
+
+    test_with_mock "does not update the comment but redirects to an error page when supplying an non-existing blog_post_id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment   = insert(:blog_post_comment, body: "Before")
+      blog_post = comment.blog_post
+      assert_error_sent :not_found, fn ->
+        put conn, "/blog_posts/#{blog_post.id + 1}/comments/#{comment.id}", comment: @comment_attrs
+      end
+      comment = Repo.one(Comment)
+      assert comment.body == "Before"
+    end
+
+    test_with_mock "it does not update the comment but redirects to an error page when supplying an non-existing id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment   = insert(:blog_post_comment, body: "Before")
+      blog_post = comment.blog_post
+      assert_error_sent :not_found, fn ->
+        put conn, "/blog_posts/#{blog_post.id}/comments/#{comment.id + 1}", comment: @comment_attrs
+      end
+      comment = Repo.one(Comment)
+      assert comment.body == "Before"
+    end
+
+    test_with_mock "it does not update the comment but redirects back to the blog post if it is not editable by the user", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> false end] do
+
+      comment   = insert(:blog_post_comment, body: "Before")
+      blog_post = comment.blog_post
+      conn    = put conn, "/blog_posts/#{blog_post.id}/comments/#{comment.id}", comment: @comment_attrs
+      comment = Repo.one(Comment)
+      assert redirected_to(conn) == public_profile_blog_post_path(conn, :show, blog_post.user, blog_post)
+      assert comment.body        == "Before"
+    end
+  end
+
+  describe "update/2 for a blog post when not signed in" do
+    test "it does not update the comment but redirects to the sign in page", %{conn: conn} do
+      comment   = insert(:blog_post_comment, body: "Before")
+      blog_post = comment.blog_post
+      conn    = put conn, "/blog_posts/#{blog_post.id}/comments/#{comment.id}", comment: @comment_attrs
+      comment = Repo.one(Comment)
+      assert redirected_to(conn) == session_path(conn, :new)
+      assert comment.body        == "Before"
+    end
+  end
+
+  ##############################################################################
+  # update/2 for a photo
+  describe "update/2 for a photo when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it updates the comment and redirects back to the photo", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      user    = insert(:user)
+      comment = insert(:photo_comment, author: user, body: "Before")
+      photo   = comment.photo
+      album   = photo.photo_album
+      conn    = put conn, "/photo_albums/#{album.id}/photos/#{photo.id}/comments/#{comment.id}", comment: @comment_attrs
+      comment = Repo.one(Comment)
+      assert redirected_to(conn) == public_profile_photo_album_photo_path(conn, :show, album.user_id, album.id, photo)
+      assert comment.photo_id    == photo.id
+      assert comment.author_id   == user.id
+      assert comment.body        == @comment_attrs.body
+    end
+
+    test_with_mock "it does not update the comment but re-renders the edit template when posting invalid attrs", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment = insert(:photo_comment, body: "Before")
+      photo   = comment.photo
+      album   = photo.photo_album
+      conn    = put conn, "/photo_albums/#{album.id}/photos/#{photo.id}/comments/#{comment.id}", comment: @invalid_attrs
+      comment = Repo.one(Comment)
+      assert html_response(conn, 200) =~ gettext("Edit comment")
+      assert comment.body == "Before"
+    end
+
+    test_with_mock "does not update the comment but redirects to an error page when supplying an non-existing photo_id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment = insert(:photo_comment, body: "Before")
+      photo   = comment.photo
+      album   = photo.photo_album
+      assert_error_sent :not_found, fn ->
+        put conn, "/photo_albums/#{album.id}/photos/#{photo.id + 1}/comments/#{comment.id}", comment: @comment_attrs
+      end
+      comment = Repo.one(Comment)
+      assert comment.body == "Before"
+    end
+
+    test_with_mock "it does not update the comment but redirects to an error page when supplying an non-existing id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment = insert(:photo_comment, body: "Before")
+      photo   = comment.photo
+      album   = photo.photo_album
+      assert_error_sent :not_found, fn ->
+        put conn, "/photo_albums/#{album.id}/photos/#{photo.id}/comments/#{comment.id + 1}", comment: @comment_attrs
+      end
+      comment = Repo.one(Comment)
+      assert comment.body == "Before"
+    end
+
+    test_with_mock "it does not update the comment but redirects back to the photo if it is not editable by the user", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> false end] do
+
+      comment = insert(:photo_comment, body: "Before")
+      photo   = comment.photo
+      album   = photo.photo_album
+      conn    = put conn, "/photo_albums/#{album.id}/photos/#{photo.id}/comments/#{comment.id}", comment: @comment_attrs
+      comment = Repo.one(Comment)
+      assert redirected_to(conn) == public_profile_photo_album_photo_path(conn, :show, album.user_id, album.id, photo)
+      assert comment.body        == "Before"
+    end
+  end
+
+  describe "update/2 for a photo when not signed in" do
+    test "it does not update the comment but redirects to the sign in page", %{conn: conn} do
+      comment = insert(:photo_comment, body: "Before")
+      photo   = comment.photo
+      album   = photo.photo_album
+      conn    = put conn, "/photo_albums/#{album.id}/photos/#{photo.id}/comments/#{comment.id}", comment: @comment_attrs
+      comment = Repo.one(Comment)
+      assert redirected_to(conn) == session_path(conn, :new)
+      assert comment.body        == "Before"
     end
   end
 

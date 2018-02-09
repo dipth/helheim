@@ -6,13 +6,16 @@ defmodule Helheim.TimeLimitedEditableConcern do
 
       def editable_by?(struct, user) do
         Helheim.User.admin?(user) || (
-          struct.user_id == user.id &&
+          user_id(struct) == user.id &&
           Timex.after?(
             struct.inserted_at,
             Timex.shift(Timex.now, minutes: (edit_timelimit_in_minutes() * -1))
           )
         )
       end
+
+      defp user_id(%{author_id: author_id}), do: author_id
+      defp user_id(%{user_id: user_id}), do: user_id
     end
   end
 end

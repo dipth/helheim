@@ -1,5 +1,6 @@
 defmodule Helheim.Comment do
   use Helheim.Web, :model
+  use Helheim.TimeLimitedEditableConcern
   alias Helheim.Comment
   alias Helheim.User
 
