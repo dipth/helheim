@@ -18,6 +18,8 @@
     <meta name='guardian_token' content="<%= Guardian.Plug.current_token(@conn) %>">
     <meta name='notification_sound' content="<%= static_path(@conn, "/sounds/notification.mp3") %>">
 
+    <meta name="base-url" content="<%= Helheim.Endpoint.url %>">
+
     <title><%= gettext("Helheim") %></title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link href="https://fonts.googleapis.com/css?family=Pirata+One|Roboto" rel="stylesheet">
