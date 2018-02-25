@@ -1,6 +1,6 @@
 <div class="d-flex w-100 justify-content-between">
   <div>
-    <%= user_link_with_avatar_and_badge @forum_topic.user %>
+    <%= avatar_with_username @forum_topic.user, true %>
     <h4 class="mb-1 mt-1">
       <%= if @forum_topic.pinned do %>
         <i class="fa fa-fw fa-thumb-tack"></i>

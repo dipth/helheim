@@ -21,7 +21,10 @@
           </div>
           <%= if forum_topic do %>
             <small>
-              <%= user_badge forum_topic.user, icon: "fa-commenting-o", prefix: "#{forum_topic.title} - ", postfix: " - #{time_ago_in_words(forum_topic.inserted_at, simple: true)}" %>
+              <%= avatar_with_username(forum_topic.user) %>:
+              <i class="fa fa-fw fa-commenting-o"></i>
+              <%= forum_topic.title %>
+              - <%= time_ago_in_words(forum_topic.inserted_at, simple: true) %>
             </small>
           <% end %>
         <% end %>

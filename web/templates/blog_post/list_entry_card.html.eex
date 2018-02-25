@@ -5,13 +5,13 @@
         <%= link @blog_post.title, to: public_profile_blog_post_path(@conn, :show, @user, @blog_post) %>
       </h4>
       <div class="hidden-sm-down">
-        <%= username_with_avatar @user, %{} %>
+        <%= username_with_avatar @user %>
       </div>
     </div>
     <%= unless @blog_post.published do %>
       <span class="badge badge-primary"><%= gettext "Draft" %></span>
     <% end %>
-    <span class="hidden-md-up"><%= user_badge @user, [] %></span>
+    <span class="hidden-md-up"><%= username @user %></span>
     <%= visibility_badge @blog_post %>
     <%= visitor_count_badge @conn, @blog_post %>
     <%= comment_count_badge @blog_post %>

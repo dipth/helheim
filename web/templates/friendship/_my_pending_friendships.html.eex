@@ -6,7 +6,7 @@
       <% friend = friendship.sender %>
       <li class="list-group-item d-flex justify-content-between align-items-center">
         <span>
-          <%= user_link_with_avatar_and_badge friend %>
+          <%= avatar_with_username friend, true %>
           <p class="d-sm-inline d-md-none">
             <span class="badge badge-secondary">
               <%= gettext "Last login" %>:

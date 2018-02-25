@@ -1,7 +1,7 @@
 <div class="comment" data-id="<%= @comment.id %>">
   <div class="d-flex flex-row justify-content-between mb-1">
     <div>
-      <%= user_link_with_avatar_and_badge @comment.author %>
+      <%= avatar_with_username @comment.author, true %>
     </div>
     <div class="hidden-xs-down">
       <small>

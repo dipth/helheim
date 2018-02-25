@@ -8,140 +8,38 @@ defmodule Helheim.ProfileHelpers do
   alias Helheim.Avatar
   alias Helheim.Donation
 
-  def user_badge(nil, opts), do: user_badge(gettext("User deleted"), false, opts)
-  def user_badge(%User{} = user, opts), do: user_badge(user.username, User.admin?(user), opts)
-  def user_badge(username, is_admin, opts) do
-    opts      = Keyword.merge([icon: "fa-user"], opts)
-    css_class = "badge"
-    text      = username
+  def username(user), do: username(user, false)
+  def username(nil, _), do: gettext("User deleted")
+  def username(%User{} = user, false), do: [donor_badge(user), {:safe, user.username}, role_badge(user.role)]
+  def username(%User{} = user, true), do: [donor_badge(user), link(user.username, to: public_profile_path(Endpoint, :show, user)), role_badge(user.role)]
 
-    {css_class, text} = if is_admin do
-      {
-        css_class <> " badge-primary",
-        text      <> " (admin)"
-      }
-    else
-      {
-        css_class <> " badge-default",
-        text
-      }
-    end
+  def username_with_avatar(user), do: username_with_avatar(user, false)
+  def username_with_avatar(user, link), do: [username(user, link), {:safe, " "}, avatar(user)]
 
-    text = if opts[:prefix] do
-      opts[:prefix] <> text
-    else
-      text
-    end
+  def avatar_with_username(user), do: avatar_with_username(user, false)
+  def avatar_with_username(user, link), do: Enum.reverse(username_with_avatar(user, link))
 
-    text = if opts[:postfix] do
-      text <> opts[:postfix]
-    else
-      text
-    end
+  def me?(conn, user), do: Guardian.Plug.current_resource(conn).id == user.id
 
-    content_tag :span, class: css_class do
-      [
-        content_tag(:i, "", class: "fa fa-fw #{opts[:icon]}"),
-        {:safe, [" "]},
-        {:safe, [text]}
-      ]
-    end
-  end
+  ### PRIVATE
 
-  def username_with_avatar(nil, opts) do
-    username = username_with_avatar(gettext("User deleted"), nil, false, opts)
-    avatar   = img_tag(static_path(Endpoint, "/images/deleted_user_avatar_tiny.png"), class: "img-avatar")
-    username_with_avatar(username, avatar, false, opts)
-  end
-  def username_with_avatar(%User{} = user, %{no_link: true} = opts) do
-    username = user.username
-    avatar   = img_tag(Avatar.url({user.avatar, user}, :tiny), class: "img-avatar")
-    is_admin = User.admin?(user)
-    username_with_avatar(username, avatar, is_admin, opts)
-  end
-  def username_with_avatar(%User{} = user, opts) do
-    username = link(user.username, to: public_profile_path(Endpoint, :show, user))
-    avatar   = link(img_tag(Avatar.url({user.avatar, user}, :tiny), class: "img-avatar"), to: public_profile_path(Endpoint, :show, user))
-    is_admin = User.admin?(user)
-    username_with_avatar(username, avatar, is_admin, opts)
-  end
-  def username_with_avatar(username, avatar, is_admin, opts) do
-    opts = Map.merge(%{avatar_before_username: false}, opts)
-
-    username = if is_admin do
-      [
-        username,
-        {:safe, ["&nbsp;"]},
-        content_tag(:span, "admin", class: "badge badge-primary")
-      ]
-    else
-      [username]
-    end
-
-    result = [
-      username,
-      {:safe, ["&nbsp;"]},
-      avatar
-    ]
-
-    result = if opts[:avatar_before_username] do
-      Enum.reverse(result)
-    else
-      result
-    end
-
-    Enum.reject(result, fn(e) -> is_nil(e) end)
-  end
-
-  def user_link(nil), do: gettext("User deleted")
-  def user_link(user) do
-    link(user.username, to: public_profile_path(Endpoint, :show, user))
-  end
-
-  defp admin_badge?(%User{role: "admin"}), do: true
-  defp admin_badge?(%User{}), do: false
-
-  defp donor_badge?(%User{last_donation_at: nil}), do: false
-  defp donor_badge?(%User{} = user) do
-    Donation.recently_donated?(user)
-  end
-
-  defp badge_type(nil), do: nil
-  defp badge_type(user) do
+  defp donor_badge(nil), do: {:safe, ""}
+  defp donor_badge(user) do
     cond do
-      admin_badge?(user) -> :admin
-      donor_badge?(user) -> :donor
-      true -> nil
-    end
-  end
-
-  def user_link_with_badge(user) do
-    case badge_type(user) do
-      :admin ->
-        [user_link(user), {:safe, ["&nbsp;"]}, content_tag(:span, "admin", class: "badge badge-primary")]
-      :donor ->
+      Donation.recently_donated?(user) ->
         [
           img_tag(Endpoint.static_path("/images/donor_icon.png"), class: "donor-icon"),
-          {:safe, ["&nbsp;"]},
-          user_link(user)
+          {:safe, [" "]}
         ]
-      _ ->
-        [user_link(user)]
+      true ->
+        {:safe, [""]}
     end
   end
 
-  def user_link_with_avatar_and_badge(user) do
-    [
-      avatar_tag(user),
-      {:safe, ["&nbsp;"]},
-      user_link_with_badge(user)
-    ]
-  end
+  defp role_badge("admin"), do: [{:safe, " "}, content_tag(:span, "admin", class: "badge badge-primary")]
+  defp role_badge("moderator"), do: [{:safe, " "}, content_tag(:span, "mod", class: "badge badge-primary")]
+  defp role_badge(_), do: {:safe, ""}
 
-  def avatar_tag(nil), do: img_tag(static_path(Endpoint, "/images/deleted_user_avatar_tiny.png"), class: "img-avatar")
-  def avatar_tag(user), do: img_tag(Avatar.url({user.avatar, user}, :tiny), class: "img-avatar")
-
-  def me?(conn, user) do
-    Guardian.Plug.current_resource(conn).id == user.id
-  end
+  defp avatar(nil), do: img_tag(static_path(Endpoint, "/images/deleted_user_avatar_tiny.png"), class: "img-avatar")
+  defp avatar(%User{} = user), do: img_tag(Avatar.url({user.avatar, user}, :tiny), class: "img-avatar")
 end

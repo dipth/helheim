@@ -7,7 +7,7 @@
           class="rounded img-fluid mx-auto d-block mb-1"
           alt="<%= @user.username %>"
         >
-        <h1><%= @user.username %></h1>
+        <h1><%= username @user %></h1>
         <p class="mb-1"><%= visitor_count_badge @conn, @user %></p>
 
         <%= render "details.html", conn: @conn, user: @user %>

@@ -3,7 +3,7 @@
     <%= link @blog_post.title, to: public_profile_blog_post_path(@conn, :show, @blog_post.user, @blog_post) %>
   </p>
   <footer class="blockquote-footer">
-    <%= user_link_with_badge @blog_post.user %>
+    <%= username @blog_post.user %>
     -
     <%= time_ago_in_words @blog_post.updated_at %>
     <br>

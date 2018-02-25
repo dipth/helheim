@@ -1,5 +1,5 @@
 <ol class="breadcrumb">
-  <li class="breadcrumb-item"><%= user_link_with_badge @user %></li>
+  <li class="breadcrumb-item"><%= username @user, true %></li>
   <li class="breadcrumb-item active"><%= gettext("Contact List") %></li>
 </ol>
 

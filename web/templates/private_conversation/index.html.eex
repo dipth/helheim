@@ -17,7 +17,7 @@
                 <i class="fa fa-fw fa-circle text-primary animated infinite pulse"></i>
               <% end %>
               <%= unless is_number(partner) do %>
-                <%= partner.username %>
+                <%= username partner %>
               <% else %>
                 <%= gettext "User deleted" %>
               <% end %>

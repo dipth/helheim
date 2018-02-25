@@ -13,7 +13,11 @@
   <% end %>
   <div class="card-block">
     <div class="d-flex w-100 justify-content-between">
-      <div><%= user_badge user, [] %></div>
+      <div>
+        <small>
+          <%= username user %>
+        </small>
+      </div>
       <div>
         <%= visitor_count_badge @conn, @photo %>
         <%= comment_count_badge @photo %>
