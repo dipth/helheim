@@ -115,6 +115,7 @@ defmodule Helheim.Router do
       resources "/forums", ForumController, only: [:new, :create, :edit, :update, :delete]
     end
     resources "/terms", TermController
+    resources "/users", UserController, only: [:index, :show, :edit, :update]
   end
 
   # Other scopes may use custom stacks.

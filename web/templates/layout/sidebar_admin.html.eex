@@ -9,4 +9,8 @@
     <i class="fa fa-file-text-o"></i>
     <%= gettext("Terms") %>
   <% end %>
+  <%= link to: admin_user_path(@conn, :index), class: "nav-link" do %>
+    <i class="fa fa-users"></i>
+    <%= gettext("Users") %>
+  <% end %>
 </li>

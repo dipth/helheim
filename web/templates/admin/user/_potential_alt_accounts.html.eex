@@ -1,0 +1,9 @@
+<h4><%= gettext "Potential alt accounts" %>:</h4>
+<%= if Enum.any?(@potential_alts) do %>
+  <%= render "_users.html", conn: @conn, users: @potential_alts %>
+<% else %>
+  <hr>
+  <p class="text-center">
+    <%= gettext "None found" %>
+  </p>
+<% end %>

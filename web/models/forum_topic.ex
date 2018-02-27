@@ -67,4 +67,9 @@ defmodule Helheim.ForumTopic do
     from ft in query,
       order_by: [desc: :pinned, desc: :updated_at]
   end
+  
+  def newest(query) do
+    from ft in query,
+      order_by: [desc: :inserted_at]
+  end
 end

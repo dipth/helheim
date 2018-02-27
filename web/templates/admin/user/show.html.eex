@@ -1,0 +1,24 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><i class="fa fa-lock"></i> <%= gettext("Administration") %></li>
+  <li class="breadcrumb-item"><%= link gettext("Users"), to: admin_user_path(@conn, :index) %></li>
+  <li class="breadcrumb-item active"><%= @user.id%>: <%= @user.username %></li>
+</ol>
+
+<div class="row mt-1">
+  <div class="col-lg-5">
+    <%= render "_avatar.html", assigns %>
+    <%= render "_account_details.html", assigns %>
+    <%= render "_personal_details.html", assigns %>
+    <%= render "_login_details.html", assigns %>
+  </div>
+
+  <div class="col-lg-7">
+    <%= render "_profile_text.html", assigns %>
+    <%= render "_potential_alt_accounts.html", assigns %>
+    <%= render "_recent_blog_posts.html", assigns %>
+    <%= render "_recent_comments.html", assigns %>
+    <%= render "_recent_forum_topics.html", assigns %>
+    <%= render "_recent_forum_replies.html", assigns %>
+    <%= render "_recent_photos.html", assigns %>
+  </div>
+</div>

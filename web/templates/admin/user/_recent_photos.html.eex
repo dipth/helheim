@@ -1,0 +1,24 @@
+<h4><%= gettext "Recent photos" %>:</h4>
+<hr>
+
+<%= if Enum.any?(@recent_photos) do %>
+  <div class="d-flex justify-content-between">
+    <%= for photo <- @recent_photos do %>
+      <figure class="figure">
+        <%= link to: public_profile_photo_album_photo_path(@conn, :show, photo.photo_album.user_id, photo.photo_album, photo) do %>
+          <%= img_tag(Helheim.PhotoFile.url({photo.file, photo}, :thumb), class: "figure-img img-fluid rounded") %>
+        <% end %>
+        <figcaption class="figure-caption">
+          <%= photo.title %>
+          <%= if photo.nsfw do %>
+            <span class="badge badge-primary">NSFW</span>
+          <% end %>
+        </figcaption>
+      </figure>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-center">
+    <%= gettext "None found" %>
+  </p>
+<% end %>

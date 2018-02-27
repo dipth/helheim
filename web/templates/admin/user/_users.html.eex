@@ -1,0 +1,48 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        <%= sort_link(gettext("ID"), "id", @conn.params, fn(p) -> admin_user_path(@conn, :index, p) end) %>
+      </th>
+      <th>
+        <%= sort_link(gettext("Username"), "username", @conn.params, fn(p) -> admin_user_path(@conn, :index, p) end) %>
+      </th>
+      <th>
+        <%= sort_link(gettext("Name"), "name", @conn.params, fn(p) -> admin_user_path(@conn, :index, p) end) %>
+      </th>
+      <th>
+        <%= sort_link(gettext("E-mail"), "email", @conn.params, fn(p) -> admin_user_path(@conn, :index, p) end) %>
+      </th>
+      <th>
+        <%= sort_link(gettext("Created at"), "inserted_at", @conn.params, fn(p) -> admin_user_path(@conn, :index, p) end) %>
+      </th>
+      <th>
+        <%= sort_link(gettext("Confirmed at"), "confirmed_at", @conn.params, fn(p) -> admin_user_path(@conn, :index, p) end) %>
+      </th>
+      <th>
+        <%= sort_link(gettext("Last Login at"), "last_login_at", @conn.params, fn(p) -> admin_user_path(@conn, :index, p) end) %>
+      </th>
+      <th>
+        <%= sort_link(gettext("IP"), "last_login_ip", @conn.params, fn(p) -> admin_user_path(@conn, :index, p) end) %>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for user <- @users do %>
+      <tr>
+        <td><samp><%= link user.id, to: admin_user_path(@conn, :show, user) %></samp></td>
+        <td><%= user.username %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><samp><%= lt user.inserted_at, "%Y-%m-%d %H:%M:%S" %></samp></td>
+        <td><samp><%= lt user.confirmed_at, "%Y-%m-%d %H:%M:%S" %></samp></td>
+        <td><samp><%= lt user.last_login_at, "%Y-%m-%d %H:%M:%S" %></samp></td>
+        <td>
+          <samp><%= user.last_login_ip || "-" %></samp><br>
+          <samp><%= user.previous_login_ip || "-" %></samp>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>

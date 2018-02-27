@@ -176,4 +176,14 @@ defmodule Helheim.ForumTopicTest do
       assert last.id == forum_topic2.id
     end
   end
+
+  describe "newest/1" do
+    test "orders topics by descending inserted_at" do
+      topic1 = insert(:forum_topic, inserted_at: Timex.shift(Timex.now, minutes: -1))
+      topic2 = insert(:forum_topic, inserted_at: Timex.shift(Timex.now, minutes: -2))
+      topics = ForumTopic |> ForumTopic.newest |> Repo.all
+      ids        = Enum.map topics, fn(c) -> c.id end
+      assert [topic1.id,topic2.id] == ids
+    end
+  end
 end

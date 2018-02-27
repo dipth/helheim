@@ -96,4 +96,14 @@ defmodule Helheim.ForumReplyTest do
       assert last.id == forum_reply1.id
     end
   end
+
+  describe "newest/1" do
+    test "orders replies by descending inserted_at" do
+      reply1 = insert(:forum_reply, inserted_at: Timex.shift(Timex.now, minutes: -1))
+      reply2 = insert(:forum_reply, inserted_at: Timex.shift(Timex.now, minutes: -2))
+      replies = ForumReply |> ForumReply.newest |> Repo.all
+      ids        = Enum.map replies, fn(c) -> c.id end
+      assert [reply1.id, reply2.id] == ids
+    end
+  end
 end

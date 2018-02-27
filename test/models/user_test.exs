@@ -226,6 +226,11 @@ defmodule Helheim.UserTest do
       user = insert(:user, birthday: birthday)
       assert User.age(user, now) == 10
     end
+
+    test "returns nil for a user without a birthday" do
+      user = build(:user, birthday: nil)
+      assert User.age(user, Timex.now) == nil
+    end
   end
 
   describe "foreign keys" do
@@ -287,6 +292,20 @@ defmodule Helheim.UserTest do
     test "does not return users where confirmed_at is blank" do
       insert(:user, confirmed_at: nil).id
       users = User |> User.confirmed |> Repo.all
+      assert length(users) == 0
+    end
+  end
+
+  describe "not_confirmed/1" do
+    test "returns users where confirmed_at is blank" do
+      id = insert(:user, confirmed_at: nil).id
+      user = User |> User.not_confirmed |> Repo.one
+      assert user.id == id
+    end
+
+    test "does not return users where confirmed_at is not blank" do
+      insert(:user, confirmed_at: Timex.now).id
+      users = User |> User.not_confirmed |> Repo.all
       assert length(users) == 0
     end
   end
@@ -405,31 +424,161 @@ defmodule Helheim.UserTest do
     end
   end
 
-  describe "sort/2" do
-    test "orders newer users before older users when passing `creation` as the ordering key" do
-      user1 = insert(:user, inserted_at: Timex.shift(Timex.now, minutes: -1))
-      user2 = insert(:user, inserted_at: Timex.shift(Timex.now, minutes: -2))
-      [first, last] = User |> User.sort("creation") |> Repo.all
-      assert first.id == user1.id
-      assert last.id  == user2.id
-    end
+  test "search_by_confirmed/2" do
+    user1 = insert(:user, confirmed_at: nil)
+    user2 = insert(:user, confirmed_at: Timex.now)
+    assert user1 == User |> User.search_by_confirmed("0") |> Repo.one
+    assert user2 == User |> User.search_by_confirmed("1") |> Repo.one
+    assert [user1, user2] == User |> User.search_by_confirmed(nil) |> Repo.all
+  end
 
-    test "orders recently logged in users before others when passing `login` as the ordering key" do
-      user1 = insert(:user, last_login_at: Timex.shift(Timex.now, minutes: -1))
-      user2 = insert(:user, last_login_at: Timex.shift(Timex.now, minutes: -2))
-      user3 = insert(:user, last_login_at: nil)
-      [first, second, last] = User |> User.sort("login") |> Repo.all
-      assert first.id  == user1.id
-      assert second.id == user2.id
-      assert last.id   == user3.id
-    end
+  test "search_by_name/2" do
+    user1 = insert(:user, name: "Foof")
+    user2 = insert(:user, name: "Barb")
+    assert user1 == User |> User.search_by_name("Oo") |> Repo.one
+    assert user2 == User |> User.search_by_name("Ar") |> Repo.one
+    assert [user1, user2] == User |> User.search_by_name("") |> Repo.all
+    assert [user1, user2] == User |> User.search_by_name(nil) |> Repo.all
+  end
 
-    test "does not order the users in any explicit way when passing `nil` as the ordering key" do
-      user1 = insert(:user)
-      user2 = insert(:user)
-      [first, last] = User |> User.sort(nil) |> Repo.all
-      assert first.id == user1.id
-      assert last.id  == user2.id
-    end
+  test "search_by_email/2" do
+    user1 = insert(:user, email: "foof@test.com")
+    user2 = insert(:user, email: "barb@test.com")
+    assert user1 == User |> User.search_by_email("Oo") |> Repo.one
+    assert user2 == User |> User.search_by_email("Ar") |> Repo.one
+    assert [user1, user2] == User |> User.search_by_email("") |> Repo.all
+    assert [user1, user2] == User |> User.search_by_email(nil) |> Repo.all
+  end
+
+  test "search_by_ip/2" do
+    user1 = insert(:user, last_login_ip: "1.2.3.4", previous_login_ip: "2.3.4.5")
+    user2 = insert(:user, last_login_ip: "2.3.4.5", previous_login_ip: "1.2.3.4")
+    user3 = insert(:user, last_login_ip: "1.2.3.4", previous_login_ip: "3.4.5.6")
+    user4 = insert(:user, last_login_ip: "3.4.5.6", previous_login_ip: "1.2.3.4")
+    user5 = insert(:user, last_login_ip: "1.2.3.4", previous_login_ip: nil)
+    user6 = insert(:user, last_login_ip: nil, previous_login_ip: "1.2.3.4")
+    user7 = insert(:user, last_login_ip: nil, previous_login_ip: nil)
+
+    assert [user1, user2, user3, user4, user5, user6] == User |> User.search_by_ip("1.2.3.4") |> Repo.all
+    assert [user1, user2] == User |> User.search_by_ip("2.3.4.5") |> Repo.all
+    assert [user3, user4] == User |> User.search_by_ip("3.4.5.6") |> Repo.all
+    assert [user1, user2, user3, user4, user5, user6, user7] == User |> User.search_by_ip("") |> Repo.all
+    assert [user1, user2, user3, user4, user5, user6, user7] == User |> User.search_by_ip(nil) |> Repo.all
+  end
+
+  test "search_by_last_and_previous_ip/3" do
+    user1 = insert(:user, last_login_ip: "1.2.3.4", previous_login_ip: "2.3.4.5")
+    user2 = insert(:user, last_login_ip: "2.3.4.5", previous_login_ip: "1.2.3.4")
+    user3 = insert(:user, last_login_ip: "1.2.3.4", previous_login_ip: "3.4.5.6")
+    user4 = insert(:user, last_login_ip: "3.4.5.6", previous_login_ip: "1.2.3.4")
+    user5 = insert(:user, last_login_ip: "1.2.3.4", previous_login_ip: nil)
+    user6 = insert(:user, last_login_ip: nil, previous_login_ip: "1.2.3.4")
+    _user7 = insert(:user, last_login_ip: nil, previous_login_ip: nil)
+
+    assert [user1, user2, user3, user4, user5, user6] == User |> User.search_by_last_and_previous_ip("1.2.3.4", "") |> Repo.all
+    assert [user1, user2, user3, user4, user5, user6] == User |> User.search_by_last_and_previous_ip("1.2.3.4", nil) |> Repo.all
+    assert [user1, user2, user3, user4, user5, user6] == User |> User.search_by_last_and_previous_ip("", "1.2.3.4") |> Repo.all
+    assert [user1, user2, user3, user4, user5, user6] == User |> User.search_by_last_and_previous_ip(nil, "1.2.3.4") |> Repo.all
+    assert [user1, user2, user3, user4] == User |> User.search_by_last_and_previous_ip("2.3.4.5", "3.4.5.6") |> Repo.all
+    assert [] == User |> User.search_by_last_and_previous_ip("", "") |> Repo.all
+    assert [] == User |> User.search_by_last_and_previous_ip(nil, nil) |> Repo.all
+  end
+
+  test "sort/2" do
+    insert(:user,
+      id: 1,
+      username: "aaa",
+      name: "Aaa",
+      email: "aaa@aaa.aaa",
+      inserted_at: Timex.shift(Timex.now, minutes: -1),
+      last_login_at: Timex.shift(Timex.now, minutes: -1),
+      last_login_ip: "127.0.0.1",
+      confirmed_at: Timex.shift(Timex.now, minutes: -1)
+    )
+    
+    insert(:user,
+      id: 2,
+      username: "bbb",
+      name: "Bbb",
+      email: "bbb@bbb.bbb",
+      inserted_at: Timex.shift(Timex.now, minutes: -2),
+      last_login_at: Timex.shift(Timex.now, minutes: -2),
+      last_login_ip: "127.0.0.2",
+      confirmed_at: Timex.shift(Timex.now, minutes: -2)
+    )
+
+    insert(:user,
+      id: 3,
+      username: "ccc",
+      name: "Ccc",
+      email: "ccc@ccc.ccc",
+      inserted_at: Timex.shift(Timex.now, minutes: -3),
+      last_login_at: nil,
+      last_login_ip: nil,
+      confirmed_at: nil
+    )
+
+    assert [1, 2, 3] == User |> User.sort("creation") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [1, 2, 3] == User |> User.sort("login") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [1, 2, 3] == User |> User.sort("id") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [1, 2, 3] == User |> User.sort("username") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [1, 2, 3] == User |> User.sort("name") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [1, 2, 3] == User |> User.sort("email") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [3, 2, 1] == User |> User.sort("inserted_at") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [2, 1, 3] == User |> User.sort("confirmed_at") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [2, 1, 3] == User |> User.sort("last_login_at") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [1, 2, 3] == User |> User.sort("last_login_ip") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+  end
+
+  test "sort/3" do
+    insert(:user,
+      id: 1,
+      username: "aaa",
+      name: "Aaa",
+      email: "aaa@aaa.aaa",
+      inserted_at: Timex.shift(Timex.now, minutes: -1),
+      last_login_at: Timex.shift(Timex.now, minutes: -1),
+      last_login_ip: "127.0.0.1",
+      confirmed_at: Timex.shift(Timex.now, minutes: -1)
+    )
+    
+    insert(:user,
+      id: 2,
+      username: "bbb",
+      name: "Bbb",
+      email: "bbb@bbb.bbb",
+      inserted_at: Timex.shift(Timex.now, minutes: -2),
+      last_login_at: Timex.shift(Timex.now, minutes: -2),
+      last_login_ip: "127.0.0.2",
+      confirmed_at: Timex.shift(Timex.now, minutes: -2)
+    )
+
+    insert(:user,
+      id: 3,
+      username: "ccc",
+      name: "Ccc",
+      email: "ccc@ccc.ccc",
+      inserted_at: Timex.shift(Timex.now, minutes: -3),
+      last_login_at: nil,
+      last_login_ip: nil,
+      confirmed_at: nil
+    )
+
+    assert [1, 2, 3] == User |> User.sort("id", "asc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [3, 2, 1] == User |> User.sort("id", "desc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [1, 2, 3] == User |> User.sort("username", "asc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [3, 2, 1] == User |> User.sort("username", "desc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [1, 2, 3] == User |> User.sort("name", "asc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [3, 2, 1] == User |> User.sort("name", "desc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [1, 2, 3] == User |> User.sort("email", "asc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [3, 2, 1] == User |> User.sort("email", "desc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [3, 2, 1] == User |> User.sort("inserted_at", "asc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [1, 2, 3] == User |> User.sort("inserted_at", "desc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [2, 1, 3] == User |> User.sort("confirmed_at", "asc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [1, 2, 3] == User |> User.sort("confirmed_at", "desc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [2, 1, 3] == User |> User.sort("last_login_at", "asc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [1, 2, 3] == User |> User.sort("last_login_at", "desc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [1, 2, 3] == User |> User.sort("last_login_ip", "asc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
+    assert [2, 1, 3] == User |> User.sort("last_login_ip", "desc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
   end
 end

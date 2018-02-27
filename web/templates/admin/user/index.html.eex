@@ -1,0 +1,58 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><i class="fa fa-lock"></i> <%= gettext("Administration") %></li>
+  <li class="breadcrumb-item active"><%= gettext("Users") %></li>
+</ol>
+
+<div class="card" id="search-outer">
+  <div class="card-header">
+    <a data-toggle="collapse" data-parent="#search-outer" href="#search-body">
+      <%= gettext "Search" %>
+    </a>
+  </div>
+  <div id="search-body" class="collapse hide">
+    <div class="card-block">
+      <%= form_for @conn, admin_user_path(@conn, :index), [as: :search, method: :get], fn f -> %>
+        <div class="form-group">
+          <%= label f, :username, gettext("Username") %>
+          <%= text_input f, :username, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= label f, :name, gettext("Name") %>
+          <%= text_input f, :name, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= label f, :email, gettext("E-mail") %>
+          <%= text_input f, :email, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= label f, :location, gettext("Location") %>
+          <%= text_input f, :location, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= label f, :confirmed, gettext("Confirmed?") %>
+          <%= select f, :confirmed, [{gettext("Any"), ""}, {gettext("Yes"), "1"}, {gettext("No"), "0"}], class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= label f, :ip, gettext("IP Address") %>
+          <%= text_input f, :ip, class: "form-control" %>
+        </div>
+
+        <%= submit gettext("Search"), class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render "_users.html", conn: @conn, users: @users %>
+
+<p class="text-right">
+  <%= gettext "Total users matching the current filter:" %>
+  <code><%= @users.total_entries %></code>
+</p>
+
+<%= lpaginate @conn, @users, sort: @conn.params["sort"], direction: @conn.params["direction"], search: @conn.params["search"] %>

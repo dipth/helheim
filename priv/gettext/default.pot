@@ -24,7 +24,7 @@ msgstr ""
 #: web/templates/email/registration_email.text.eex:1
 #: web/templates/error/404.html.eex:18 web/templates/error/404.html.eex:29
 #: web/templates/error/500.html.eex:18 web/templates/error/500.html.eex:29
-#: web/templates/layout/app.html.eex:21
+#: web/templates/layout/app.html.eex:23
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
@@ -41,6 +41,9 @@ msgid "Create Account"
 msgstr ""
 
 #: web/templates/account/edit.html.eex:24
+#: web/templates/admin/user/_account_details.html.eex:13
+#: web/templates/admin/user/_users.html.eex:14
+#: web/templates/admin/user/index.html.eex:26
 #: web/templates/confirmation/new.html.eex:10
 #: web/templates/password_reset/new.html.eex:10
 #: web/templates/registration/new.html.eex:37
@@ -57,6 +60,9 @@ msgid "If for some reason you did not receive your confirmation e-mail, then ent
 msgstr ""
 
 #: web/templates/account/edit.html.eex:14
+#: web/templates/admin/user/_account_details.html.eex:10
+#: web/templates/admin/user/_users.html.eex:11
+#: web/templates/admin/user/index.html.eex:21
 #: web/templates/registration/new.html.eex:23
 msgid "Name"
 msgstr ""
@@ -85,6 +91,9 @@ msgstr ""
 msgid "Sign In"
 msgstr ""
 
+#: web/templates/admin/user/_account_details.html.eex:7
+#: web/templates/admin/user/_users.html.eex:8
+#: web/templates/admin/user/index.html.eex:16
 #: web/templates/profile/index.html.eex:15
 #: web/templates/registration/new.html.eex:9
 msgid "Username"
@@ -320,6 +329,7 @@ msgid "Leave these fields blank to keep your current password"
 msgstr ""
 
 #: web/templates/account/edit.html.eex:11
+#: web/templates/admin/user/_personal_details.html.eex:1
 msgid "Personal Details"
 msgstr ""
 
@@ -327,7 +337,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:242
+#: web/models/user.ex:313
 msgid "does not match your current password"
 msgstr ""
 
@@ -335,7 +345,7 @@ msgstr ""
 msgid "Maximum file size: %{file_size}"
 msgstr ""
 
-#: web/templates/navbar/show.html.eex:25
+#: web/templates/navbar/show.html.eex:25 web/views/comment_view.ex:41
 msgid "Profile"
 msgstr ""
 
@@ -426,14 +436,14 @@ msgid "Blog post updated successfully."
 msgstr ""
 
 #: web/templates/blog_post/show.html.eex:32 web/templates/photo/show.html.eex:44
-#: web/templates/photo_album/show.html.eex:61 web/views/comment_view.ex:56
-#: web/views/comment_view.ex:58
+#: web/templates/photo_album/show.html.eex:61 web/views/comment_view.ex:64
+#: web/views/comment_view.ex:66
 msgid "Delete"
 msgstr ""
 
 #: web/templates/blog_post/show.html.eex:28
 #: web/templates/comment/comment.html.eex:16
-#: web/templates/forum_reply/forum_reply.html.eex:18
+#: web/templates/forum_reply/forum_reply.html.eex:17
 #: web/templates/forum_topic/forum_topic.html.eex:21
 msgid "Edit"
 msgstr ""
@@ -545,6 +555,7 @@ msgstr ""
 msgid "Female"
 msgstr ""
 
+#: web/templates/admin/user/_personal_details.html.eex:4
 #: web/templates/profile/details.html.eex:27
 #: web/templates/profile/edit.html.eex:32
 msgid "Gender"
@@ -554,6 +565,8 @@ msgstr ""
 msgid "Joined"
 msgstr ""
 
+#: web/templates/admin/user/_personal_details.html.eex:16
+#: web/templates/admin/user/index.html.eex:31
 #: web/templates/profile/details.html.eex:48
 #: web/templates/profile/edit.html.eex:46
 #: web/templates/profile/index.html.eex:20
@@ -564,6 +577,9 @@ msgstr ""
 msgid "Male"
 msgstr ""
 
+#: web/templates/admin/user/_personal_details.html.eex:5
+#: web/templates/admin/user/_personal_details.html.eex:14
+#: web/templates/admin/user/_personal_details.html.eex:17
 #: web/templates/profile/edit.html.eex:36 web/templates/profile/edit.html.eex:56
 msgid "Not specified"
 msgstr ""
@@ -661,6 +677,8 @@ msgstr ""
 #: web/templates/admin/term/index.html.eex:2
 #: web/templates/admin/term/new.html.eex:2
 #: web/templates/admin/term/show.html.eex:2
+#: web/templates/admin/user/index.html.eex:2
+#: web/templates/admin/user/show.html.eex:2
 msgid "Administration"
 msgstr ""
 
@@ -826,8 +844,7 @@ msgstr ""
 
 #: web/templates/private_conversation/index.html.eex:22
 #: web/templates/private_conversation/show.html.eex:5
-#: web/views/notification_view.ex:40 web/views/profile_helpers.ex:11
-#: web/views/profile_helpers.ex:52 web/views/profile_helpers.ex:96
+#: web/views/notification_view.ex:40 web/views/profile_helpers.ex:12
 msgid "User deleted"
 msgstr ""
 
@@ -1017,6 +1034,7 @@ msgstr ""
 msgid "Media from the following websites can be embedded by using the provided code-tags: "
 msgstr ""
 
+#: web/templates/admin/user/_profile_text.html.eex:1
 #: web/templates/help/embeds.html.eex:10
 msgid "Profile text"
 msgstr ""
@@ -1072,59 +1090,61 @@ msgstr ""
 msgid "where ID is the id of %{type}."
 msgstr ""
 
+#: web/templates/admin/user/_personal_details.html.eex:10
 #: web/templates/profile/details.html.eex:34
 msgid "Age"
 msgstr ""
 
-#: web/views/time_helpers.ex:29
+#: web/views/time_helpers.ex:30
 msgid "April"
 msgstr ""
 
-#: web/views/time_helpers.ex:33
+#: web/views/time_helpers.ex:34
 msgid "August"
 msgstr ""
 
+#: web/templates/admin/user/_personal_details.html.eex:7
 #: web/templates/profile/edit.html.eex:68
 msgid "Birthday"
 msgstr ""
 
-#: web/views/time_helpers.ex:37
+#: web/views/time_helpers.ex:38
 msgid "December"
 msgstr ""
 
-#: web/views/time_helpers.ex:27
+#: web/views/time_helpers.ex:28
 msgid "February"
 msgstr ""
 
-#: web/views/time_helpers.ex:26
+#: web/views/time_helpers.ex:27
 msgid "January"
 msgstr ""
 
-#: web/views/time_helpers.ex:32
+#: web/views/time_helpers.ex:33
 msgid "July"
 msgstr ""
 
-#: web/views/time_helpers.ex:31
+#: web/views/time_helpers.ex:32
 msgid "June"
 msgstr ""
 
-#: web/views/time_helpers.ex:28
+#: web/views/time_helpers.ex:29
 msgid "March"
 msgstr ""
 
-#: web/views/time_helpers.ex:30
+#: web/views/time_helpers.ex:31
 msgid "May"
 msgstr ""
 
-#: web/views/time_helpers.ex:36
+#: web/views/time_helpers.ex:37
 msgid "November"
 msgstr ""
 
-#: web/views/time_helpers.ex:35
+#: web/views/time_helpers.ex:36
 msgid "October"
 msgstr ""
 
-#: web/views/time_helpers.ex:34
+#: web/views/time_helpers.ex:35
 msgid "September"
 msgstr ""
 
@@ -1187,6 +1207,7 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
+#: web/templates/admin/user/index.html.eex:37
 #: web/templates/blog_post/form.html.eex:35
 #: web/templates/blog_post/form.html.eex:49
 msgid "No"
@@ -1204,6 +1225,7 @@ msgstr ""
 msgid "This blog post is not published!"
 msgstr ""
 
+#: web/templates/admin/user/index.html.eex:37
 #: web/templates/blog_post/form.html.eex:35
 #: web/templates/blog_post/form.html.eex:49
 msgid "Yes"
@@ -1278,6 +1300,7 @@ msgstr ""
 msgid "Submit your changes to upload the image"
 msgstr ""
 
+#: web/templates/admin/user/_personal_details.html.eex:13
 #: web/templates/profile/details.html.eex:41
 #: web/templates/profile/edit.html.eex:51
 msgid "Partner status"
@@ -1393,11 +1416,11 @@ msgstr ""
 msgid "Recently logged in users"
 msgstr ""
 
-#: web/views/comment_view.ex:59
+#: web/views/comment_view.ex:67
 msgid "Cancel"
 msgstr ""
 
-#: web/views/comment_view.ex:57
+#: web/views/comment_view.ex:65
 msgid "Are you sure you want to delete this comment?"
 msgstr ""
 
@@ -1417,6 +1440,8 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
+#: web/templates/admin/user/index.html.eex:9
+#: web/templates/admin/user/index.html.eex:45
 #: web/templates/profile/index.html.eex:8
 #: web/templates/profile/index.html.eex:32
 msgid "Search"
@@ -1442,6 +1467,7 @@ msgstr ""
 msgid "Sorting"
 msgstr ""
 
+#: web/templates/admin/user/_login_details.html.eex:4
 #: web/templates/friendship/_active_friendships.html.eex:12
 #: web/templates/friendship/_active_friendships.html.eex:19
 #: web/templates/friendship/_my_active_friendships.html.eex:12
@@ -1453,7 +1479,7 @@ msgid "Last login"
 msgstr ""
 
 #: web/templates/comment/comment.html.eex:17
-#: web/templates/forum_reply/forum_reply.html.eex:19
+#: web/templates/forum_reply/forum_reply.html.eex:18
 #: web/templates/forum_topic/forum_topic.html.eex:22
 msgid "Only possible for up to %{minutes} minutes after posting..."
 msgstr ""
@@ -1535,7 +1561,7 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-#: web/models/user.ex:275
+#: web/models/user.ex:346
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr ""
 
@@ -1657,4 +1683,110 @@ msgstr ""
 
 #: web/controllers/comment_controller.ex:103
 msgid "You can only edit a comment in the first %{minutes} minutes!"
+msgstr ""
+
+#: web/templates/admin/user/_account_details.html.eex:1
+msgid "Account Details"
+msgstr ""
+
+#: web/templates/admin/user/index.html.eex:37
+msgid "Any"
+msgstr ""
+
+#: web/views/comment_view.ex:42
+msgid "Blog Post"
+msgstr ""
+
+#: web/templates/admin/user/_account_details.html.eex:19
+#: web/templates/admin/user/_users.html.eex:20
+msgid "Confirmed at"
+msgstr ""
+
+#: web/templates/admin/user/index.html.eex:36
+msgid "Confirmed?"
+msgstr ""
+
+#: web/templates/admin/user/_account_details.html.eex:16
+#: web/templates/admin/user/_users.html.eex:17
+msgid "Created at"
+msgstr ""
+
+#: web/templates/admin/user/_account_details.html.eex:4
+#: web/templates/admin/user/_users.html.eex:5
+msgid "ID"
+msgstr ""
+
+#: web/templates/admin/user/index.html.eex:41
+msgid "IP Address"
+msgstr ""
+
+#: web/templates/admin/user/_login_details.html.eex:1
+msgid "Login Details"
+msgstr ""
+
+#: web/templates/admin/user/_potential_alt_accounts.html.eex:7
+#: web/templates/admin/user/_recent_blog_posts.html.eex:38
+#: web/templates/admin/user/_recent_comments.html.eex:29
+#: web/templates/admin/user/_recent_forum_replies.html.eex:32
+#: web/templates/admin/user/_recent_forum_topics.html.eex:32
+#: web/templates/admin/user/_recent_photos.html.eex:22
+msgid "None found"
+msgstr ""
+
+#: web/templates/admin/user/_account_details.html.eex:23
+msgid "Not Verified!"
+msgstr ""
+
+#: web/views/comment_view.ex:43
+msgid "Photo"
+msgstr ""
+
+#: web/templates/admin/user/_potential_alt_accounts.html.eex:1
+msgid "Potential alt accounts"
+msgstr ""
+
+#: web/templates/admin/user/_login_details.html.eex:13
+msgid "Previous login"
+msgstr ""
+
+#: web/templates/admin/user/_recent_blog_posts.html.eex:1
+msgid "Recent blog posts"
+msgstr ""
+
+#: web/templates/admin/user/_recent_comments.html.eex:1
+msgid "Recent comments"
+msgstr ""
+
+#: web/templates/admin/user/_recent_forum_replies.html.eex:1
+msgid "Recent forum replies"
+msgstr ""
+
+#: web/templates/admin/user/_recent_forum_topics.html.eex:1
+msgid "Recent forum topics"
+msgstr ""
+
+#: web/templates/admin/user/_recent_photos.html.eex:1
+msgid "Recent photos"
+msgstr ""
+
+#: web/templates/admin/user/index.html.eex:3
+#: web/templates/admin/user/show.html.eex:3
+#: web/templates/layout/sidebar_admin.html.eex:14
+msgid "Users"
+msgstr ""
+
+#: web/templates/admin/user/_account_details.html.eex:22
+msgid "Verified at"
+msgstr ""
+
+#: web/templates/admin/user/_users.html.eex:26
+msgid "IP"
+msgstr ""
+
+#: web/templates/admin/user/_users.html.eex:23
+msgid "Last Login at"
+msgstr ""
+
+#: web/templates/admin/user/index.html.eex:54
+msgid "Total users matching the current filter:"
 msgstr ""
