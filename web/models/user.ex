@@ -3,6 +3,7 @@ defmodule Helheim.User do
   use Arc.Ecto.Schema
   use Timex
   alias Helheim.Repo
+  alias Helheim.User
   import Helheim.Gettext
 
   schema "users" do
@@ -179,9 +180,11 @@ defmodule Helheim.User do
     Timex.before?(user.password_reset_token_updated_at, Timex.shift(Timex.now, days: -1))
   end
 
-  def admin?(user) do
-    user.role == "admin"
-  end
+  def admin?(%User{role: "admin"}), do: true
+  def admin?(_), do: false
+
+  def moderator?(%User{role: "moderator"}), do: true
+  def moderator?(_), do: false
 
   def delete!(user) do
     photo_albums = assoc(user, :photo_albums) |> Repo.all
