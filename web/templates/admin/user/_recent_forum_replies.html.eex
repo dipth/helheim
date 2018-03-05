@@ -1,0 +1,34 @@
+<h4><%= gettext "Recent forum replies" %>:</h4>
+
+<%= if Enum.any?(@recent_forum_replies) do %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Topic</th>
+        <th>When</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for reply <- @recent_forum_replies do %>
+        <tr>
+          <td>
+            <samp><%= link reply.id, to: forum_forum_topic_path(@conn, :show, reply.forum_topic.forum_id, reply.forum_topic) %></samp>
+          </td>
+          <td>
+            <strong><%= reply.forum_topic.title %></strong>
+            <p><small><%= Crutches.String.truncate(reply.body, 200) %></small></p>
+          </td>
+          <td>
+            <samp><%= lt(reply.inserted_at, "%Y-%m-%d %H:%M:%S") %></samp>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <hr>
+  <p class="text-center">
+    <%= gettext "None found" %>
+  </p>
+<% end %>

@@ -1,0 +1,31 @@
+<h4><%= gettext "Recent comments" %>:</h4>
+
+<%= if Enum.any?(@recent_comments) do %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Content</th>
+        <th>When</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for comment <- @recent_comments do %>
+        <tr>
+          <td><samp><%= comment_link(@conn, comment) %></samp></td>
+          <td>
+            <%= Crutches.String.truncate(comment.body, 200) %>
+          </td>
+          <td>
+            <samp><%= lt(comment.inserted_at, "%Y-%m-%d %H:%M:%S") %></samp>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <hr>
+  <p class="text-center">
+    <%= gettext "None found" %>
+  </p>
+<% end %>

@@ -35,7 +35,7 @@ msgstr "%{site_name} er et community for alternative folk."
 #: web/templates/email/registration_email.text.eex:1
 #: web/templates/error/404.html.eex:18 web/templates/error/404.html.eex:29
 #: web/templates/error/500.html.eex:18 web/templates/error/500.html.eex:29
-#: web/templates/layout/app.html.eex:21
+#: web/templates/layout/app.html.eex:23
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
@@ -52,6 +52,9 @@ msgid "Create Account"
 msgstr "Opret Profil"
 
 #: web/templates/account/edit.html.eex:24
+#: web/templates/admin/user/_account_details.html.eex:13
+#: web/templates/admin/user/_users.html.eex:14
+#: web/templates/admin/user/index.html.eex:26
 #: web/templates/confirmation/new.html.eex:10
 #: web/templates/password_reset/new.html.eex:10
 #: web/templates/registration/new.html.eex:37
@@ -68,6 +71,9 @@ msgid "If for some reason you did not receive your confirmation e-mail, then ent
 msgstr "Hvis du ikke har modtaget din aktiveringsmail, kan du indtaste din e-mail adresse herunder, så sender vi den igen."
 
 #: web/templates/account/edit.html.eex:14
+#: web/templates/admin/user/_account_details.html.eex:10
+#: web/templates/admin/user/_users.html.eex:11
+#: web/templates/admin/user/index.html.eex:21
 #: web/templates/registration/new.html.eex:23
 msgid "Name"
 msgstr "Navn"
@@ -96,6 +102,9 @@ msgstr "Gensend aktiveringsmail"
 msgid "Sign In"
 msgstr "Log ind"
 
+#: web/templates/admin/user/_account_details.html.eex:7
+#: web/templates/admin/user/_users.html.eex:8
+#: web/templates/admin/user/index.html.eex:16
 #: web/templates/profile/index.html.eex:15
 #: web/templates/registration/new.html.eex:9
 msgid "Username"
@@ -332,6 +341,7 @@ msgid "Leave these fields blank to keep your current password"
 msgstr "Udfyld kun disse to felter hvis du ønsker at ændre dit kodeord"
 
 #: web/templates/account/edit.html.eex:11
+#: web/templates/admin/user/_personal_details.html.eex:1
 msgid "Personal Details"
 msgstr "Personlige detaljer"
 
@@ -339,7 +349,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:242
+#: web/models/user.ex:313
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -347,7 +357,7 @@ msgstr "matcher ikke dit nuværende kodeord"
 msgid "Maximum file size: %{file_size}"
 msgstr "Maksimum fil størrelse: %{file_size}"
 
-#: web/templates/navbar/show.html.eex:25
+#: web/templates/navbar/show.html.eex:25 web/views/comment_view.ex:41
 msgid "Profile"
 msgstr "Profil"
 
@@ -441,14 +451,14 @@ msgstr "Din blog er opdateret!"
 
 #: web/templates/blog_post/show.html.eex:32
 #: web/templates/photo/show.html.eex:44
-#: web/templates/photo_album/show.html.eex:61 web/views/comment_view.ex:56
-#: web/views/comment_view.ex:58
+#: web/templates/photo_album/show.html.eex:61 web/views/comment_view.ex:64
+#: web/views/comment_view.ex:66
 msgid "Delete"
 msgstr "Slet"
 
 #: web/templates/blog_post/show.html.eex:28
 #: web/templates/comment/comment.html.eex:16
-#: web/templates/forum_reply/forum_reply.html.eex:18
+#: web/templates/forum_reply/forum_reply.html.eex:17
 #: web/templates/forum_topic/forum_topic.html.eex:21
 msgid "Edit"
 msgstr "Redigér"
@@ -562,6 +572,7 @@ msgstr "Brugerdefineret"
 msgid "Female"
 msgstr "Kvinde"
 
+#: web/templates/admin/user/_personal_details.html.eex:4
 #: web/templates/profile/details.html.eex:27
 #: web/templates/profile/edit.html.eex:32
 msgid "Gender"
@@ -571,6 +582,8 @@ msgstr "Køn"
 msgid "Joined"
 msgstr "Tilmeldt"
 
+#: web/templates/admin/user/_personal_details.html.eex:16
+#: web/templates/admin/user/index.html.eex:31
 #: web/templates/profile/details.html.eex:48
 #: web/templates/profile/edit.html.eex:46
 #: web/templates/profile/index.html.eex:20
@@ -581,6 +594,9 @@ msgstr "Lokation"
 msgid "Male"
 msgstr "Mand"
 
+#: web/templates/admin/user/_personal_details.html.eex:5
+#: web/templates/admin/user/_personal_details.html.eex:14
+#: web/templates/admin/user/_personal_details.html.eex:17
 #: web/templates/profile/edit.html.eex:36
 #: web/templates/profile/edit.html.eex:56
 msgid "Not specified"
@@ -682,6 +698,8 @@ msgstr "Du har brugt %{used_space} ud af maksimum %{max_space} fordelt over alle
 #: web/templates/admin/term/index.html.eex:2
 #: web/templates/admin/term/new.html.eex:2
 #: web/templates/admin/term/show.html.eex:2
+#: web/templates/admin/user/index.html.eex:2
+#: web/templates/admin/user/show.html.eex:2
 msgid "Administration"
 msgstr "Administration"
 
@@ -848,8 +866,7 @@ msgstr "Håber vi ses igen engang!"
 
 #: web/templates/private_conversation/index.html.eex:22
 #: web/templates/private_conversation/show.html.eex:5
-#: web/views/notification_view.ex:40 web/views/profile_helpers.ex:11
-#: web/views/profile_helpers.ex:52 web/views/profile_helpers.ex:96
+#: web/views/notification_view.ex:40 web/views/profile_helpers.ex:12
 msgid "User deleted"
 msgstr "Slettet bruger"
 
@@ -1045,6 +1062,7 @@ msgstr "Det er muligt at embedde media i følgende typer poster:"
 msgid "Media from the following websites can be embedded by using the provided code-tags: "
 msgstr "Media fra følgende websites kan embeddes ved at bruge de listede kode-tags:"
 
+#: web/templates/admin/user/_profile_text.html.eex:1
 #: web/templates/help/embeds.html.eex:10
 msgid "Profile text"
 msgstr "Profiltekst"
@@ -1101,59 +1119,61 @@ msgstr "videoen"
 msgid "where ID is the id of %{type}."
 msgstr "hvor ID er id’et på %{type}."
 
+#: web/templates/admin/user/_personal_details.html.eex:10
 #: web/templates/profile/details.html.eex:34
 msgid "Age"
 msgstr "Alder"
 
-#: web/views/time_helpers.ex:29
+#: web/views/time_helpers.ex:30
 msgid "April"
 msgstr "April"
 
-#: web/views/time_helpers.ex:33
+#: web/views/time_helpers.ex:34
 msgid "August"
 msgstr "August"
 
+#: web/templates/admin/user/_personal_details.html.eex:7
 #: web/templates/profile/edit.html.eex:68
 msgid "Birthday"
 msgstr "Fødselsdato"
 
-#: web/views/time_helpers.ex:37
+#: web/views/time_helpers.ex:38
 msgid "December"
 msgstr "December"
 
-#: web/views/time_helpers.ex:27
+#: web/views/time_helpers.ex:28
 msgid "February"
 msgstr "Februar"
 
-#: web/views/time_helpers.ex:26
+#: web/views/time_helpers.ex:27
 msgid "January"
 msgstr "Januar"
 
-#: web/views/time_helpers.ex:32
+#: web/views/time_helpers.ex:33
 msgid "July"
 msgstr "Juli"
 
-#: web/views/time_helpers.ex:31
+#: web/views/time_helpers.ex:32
 msgid "June"
 msgstr "Juni"
 
-#: web/views/time_helpers.ex:28
+#: web/views/time_helpers.ex:29
 msgid "March"
 msgstr "Marts"
 
-#: web/views/time_helpers.ex:30
+#: web/views/time_helpers.ex:31
 msgid "May"
 msgstr "Maj"
 
-#: web/views/time_helpers.ex:36
+#: web/views/time_helpers.ex:37
 msgid "November"
 msgstr "November"
 
-#: web/views/time_helpers.ex:35
+#: web/views/time_helpers.ex:36
 msgid "October"
 msgstr "Oktober"
 
-#: web/views/time_helpers.ex:34
+#: web/views/time_helpers.ex:35
 msgid "September"
 msgstr "September"
 
@@ -1216,6 +1236,7 @@ msgstr "Aktivér venligst denne kontakt inden du uploader NSFW billeder:"
 msgid "Draft"
 msgstr "Udkast"
 
+#: web/templates/admin/user/index.html.eex:37
 #: web/templates/blog_post/form.html.eex:35
 #: web/templates/blog_post/form.html.eex:49
 msgid "No"
@@ -1233,6 +1254,7 @@ msgstr "Udgiv?"
 msgid "This blog post is not published!"
 msgstr "Denne blog er ikke udgivet!"
 
+#: web/templates/admin/user/index.html.eex:37
 #: web/templates/blog_post/form.html.eex:35
 #: web/templates/blog_post/form.html.eex:49
 msgid "Yes"
@@ -1308,6 +1330,7 @@ msgstr "Hvad rager det dig"
 msgid "Submit your changes to upload the image"
 msgstr "Gem dine ændringer for at uploade billedet"
 
+#: web/templates/admin/user/_personal_details.html.eex:13
 #: web/templates/profile/details.html.eex:41
 #: web/templates/profile/edit.html.eex:51
 msgid "Partner status"
@@ -1423,11 +1446,11 @@ msgstr "men du er velkommen til at skrive til vores support hvis problemet forts
 msgid "Recently logged in users"
 msgstr "Senest logget ind"
 
-#: web/views/comment_view.ex:59
+#: web/views/comment_view.ex:67
 msgid "Cancel"
 msgstr "Annullér"
 
-#: web/views/comment_view.ex:57
+#: web/views/comment_view.ex:65
 msgid "Are you sure you want to delete this comment?"
 msgstr "Er du sikker på at du vil slette denne kommentar?"
 
@@ -1447,6 +1470,8 @@ msgstr "Næste"
 msgid "Previous"
 msgstr "Forrige"
 
+#: web/templates/admin/user/index.html.eex:9
+#: web/templates/admin/user/index.html.eex:45
 #: web/templates/profile/index.html.eex:8
 #: web/templates/profile/index.html.eex:32
 msgid "Search"
@@ -1472,6 +1497,7 @@ msgstr "Sorter efter senest logget ind"
 msgid "Sorting"
 msgstr "Sortering"
 
+#: web/templates/admin/user/_login_details.html.eex:4
 #: web/templates/friendship/_active_friendships.html.eex:12
 #: web/templates/friendship/_active_friendships.html.eex:19
 #: web/templates/friendship/_my_active_friendships.html.eex:12
@@ -1483,7 +1509,7 @@ msgid "Last login"
 msgstr "Seneste login"
 
 #: web/templates/comment/comment.html.eex:17
-#: web/templates/forum_reply/forum_reply.html.eex:19
+#: web/templates/forum_reply/forum_reply.html.eex:18
 #: web/templates/forum_topic/forum_topic.html.eex:22
 msgid "Only possible for up to %{minutes} minutes after posting..."
 msgstr "Det er kun muligt at redigere i op til %{minutes} minutter…"
@@ -1565,7 +1591,7 @@ msgstr "Vi har modtaget din donation og takker ydmygt for din hjælp med at gør
 msgid "Edited"
 msgstr "Redigeret"
 
-#: web/models/user.ex:275
+#: web/models/user.ex:346
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr "I too enjoy registering on websites, fellow human… Bleep Bloop!"
 
@@ -1688,3 +1714,109 @@ msgstr "Redigér kommentar"
 #: web/controllers/comment_controller.ex:103
 msgid "You can only edit a comment in the first %{minutes} minutes!"
 msgstr "Du kan kun redigere din kommentar i den første %{minutes} minutter!"
+
+#: web/templates/admin/user/_account_details.html.eex:1
+msgid "Account Details"
+msgstr "Kontodetaljer"
+
+#: web/templates/admin/user/index.html.eex:37
+msgid "Any"
+msgstr "Alle"
+
+#: web/views/comment_view.ex:42
+msgid "Blog Post"
+msgstr "Blog"
+
+#: web/templates/admin/user/_account_details.html.eex:19
+#: web/templates/admin/user/_users.html.eex:20
+msgid "Confirmed at"
+msgstr "Bekræftelsesdato"
+
+#: web/templates/admin/user/index.html.eex:36
+msgid "Confirmed?"
+msgstr "Bekræftet?"
+
+#: web/templates/admin/user/_account_details.html.eex:16
+#: web/templates/admin/user/_users.html.eex:17
+msgid "Created at"
+msgstr "Oprettelsesdato"
+
+#: web/templates/admin/user/_account_details.html.eex:4
+#: web/templates/admin/user/_users.html.eex:5
+msgid "ID"
+msgstr "ID"
+
+#: web/templates/admin/user/index.html.eex:41
+msgid "IP Address"
+msgstr "IP Adresse"
+
+#: web/templates/admin/user/_login_details.html.eex:1
+msgid "Login Details"
+msgstr "Logindetaljer"
+
+#: web/templates/admin/user/_potential_alt_accounts.html.eex:7
+#: web/templates/admin/user/_recent_blog_posts.html.eex:38
+#: web/templates/admin/user/_recent_comments.html.eex:29
+#: web/templates/admin/user/_recent_forum_replies.html.eex:32
+#: web/templates/admin/user/_recent_forum_topics.html.eex:32
+#: web/templates/admin/user/_recent_photos.html.eex:22
+msgid "None found"
+msgstr "Ingen"
+
+#: web/templates/admin/user/_account_details.html.eex:23
+msgid "Not Verified!"
+msgstr "Ikke verificeret!"
+
+#: web/views/comment_view.ex:43
+msgid "Photo"
+msgstr "Foto"
+
+#: web/templates/admin/user/_potential_alt_accounts.html.eex:1
+msgid "Potential alt accounts"
+msgstr "Potentielle alt-konti"
+
+#: web/templates/admin/user/_login_details.html.eex:13
+msgid "Previous login"
+msgstr "Forrige login"
+
+#: web/templates/admin/user/_recent_blog_posts.html.eex:1
+msgid "Recent blog posts"
+msgstr "Seneste blogs"
+
+#: web/templates/admin/user/_recent_comments.html.eex:1
+msgid "Recent comments"
+msgstr "Seneste kommentarer"
+
+#: web/templates/admin/user/_recent_forum_replies.html.eex:1
+msgid "Recent forum replies"
+msgstr "Seneste forumsvar"
+
+#: web/templates/admin/user/_recent_forum_topics.html.eex:1
+msgid "Recent forum topics"
+msgstr "Seneste forumtråde"
+
+#: web/templates/admin/user/_recent_photos.html.eex:1
+msgid "Recent photos"
+msgstr "Seneste fotos"
+
+#: web/templates/admin/user/index.html.eex:3
+#: web/templates/admin/user/show.html.eex:3
+#: web/templates/layout/sidebar_admin.html.eex:14
+msgid "Users"
+msgstr "Brugere"
+
+#: web/templates/admin/user/_account_details.html.eex:22
+msgid "Verified at"
+msgstr "Verifikationsdato"
+
+#: web/templates/admin/user/_users.html.eex:26
+msgid "IP"
+msgstr "IP"
+
+#: web/templates/admin/user/_users.html.eex:23
+msgid "Last Login at"
+msgstr "Seneste logindato"
+
+#: web/templates/admin/user/index.html.eex:54
+msgid "Total users matching the current filter:"
+msgstr "Antal brugere som matcher det nuværende filter:"

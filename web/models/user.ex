@@ -39,6 +39,7 @@ defmodule Helheim.User do
     field :last_donation_at,                Calecto.DateTimeUTC
     field :total_donated,                   :integer
     field :captcha,                         :string, virtual: true
+    field :verified_at,                     Calecto.DateTimeUTC
 
     timestamps()
 
@@ -51,6 +52,8 @@ defmodule Helheim.User do
     has_many :photo_albums,              Helheim.PhotoAlbum
     has_many :visitor_log_entries,       Helheim.VisitorLogEntry, foreign_key: :profile_id
     has_many :donations,                 Helheim.Donation
+    has_many :forum_topics,              Helheim.ForumTopic
+    has_many :forum_replies,             Helheim.ForumReply
   end
 
   def newest(query) do
@@ -72,10 +75,22 @@ defmodule Helheim.User do
     from u in query, where: not is_nil(u.confirmed_at)
   end
 
+  def not_confirmed(query) do
+    from u in query, where: is_nil(u.confirmed_at)
+  end
+
   def search(query, search_params) do
     query
     |> search_by_username(search_params["username"])
     |> search_by_location(search_params["location"])
+  end
+
+  def search_as_admin(query, search_params) do
+    search(query, search_params)
+    |> search_by_name(search_params["name"])
+    |> search_by_email(search_params["email"])
+    |> search_by_confirmed(search_params["confirmed"])
+    |> search_by_ip(search_params["ip"])
   end
 
   def search_by_username(query, nil), do: query
@@ -90,13 +105,65 @@ defmodule Helheim.User do
     from u in query, where: ilike(u.location, ^"%#{location}%")
   end
 
-  def sort(query, nil), do: query
-  def sort(query, "creation") do
-    from u in query, order_by: [desc: u.inserted_at]
+  def search_by_confirmed(query, "1"), do: query |> confirmed()
+  def search_by_confirmed(query, "0"), do: query |> not_confirmed()
+  def search_by_confirmed(query, _), do: query
+
+  def search_by_name(query, nil), do: query
+  def search_by_name(query, ""), do: query
+  def search_by_name(query, name) do
+    from u in query, where: ilike(u.name, ^"%#{name}%")
   end
-  def sort(query, "login") do
-    from u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_at)]
+
+  def search_by_email(query, nil), do: query
+  def search_by_email(query, ""), do: query
+  def search_by_email(query, email) do
+    from u in query, where: ilike(u.email, ^"%#{email}%")
   end
+
+  def search_by_ip(query, nil), do: query
+  def search_by_ip(query, ""), do: query
+  def search_by_ip(query, ip) do
+    from u in query, where: ilike(u.last_login_ip, ^"%#{ip}%") or ilike(u.previous_login_ip, ^"%#{ip}%")
+  end
+
+  def search_by_last_and_previous_ip(query, nil, nil), do: search_by_last_and_previous_ip(query, "-", "-")
+  def search_by_last_and_previous_ip(query, last_ip, nil), do: search_by_last_and_previous_ip(query, last_ip, "-")
+  def search_by_last_and_previous_ip(query, nil, previous_ip), do: search_by_last_and_previous_ip(query, "-", previous_ip)
+  def search_by_last_and_previous_ip(query, last_ip, previous_ip) do
+    from u in query,
+      where: u.last_login_ip == ^last_ip or u.previous_login_ip == ^last_ip or u.last_login_ip == ^previous_ip or u.previous_login_ip == ^previous_ip
+  end
+
+  def sort(query, nil),             do: query
+  def sort(query, "creation"),      do: from u in query, order_by: [desc: u.inserted_at]
+  def sort(query, "login"),         do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_at)]
+  def sort(query, "id"),            do: sort(query, "id", "asc")
+  def sort(query, "username"),      do: sort(query, "username", "asc")
+  def sort(query, "name"),          do: sort(query, "name", "asc")
+  def sort(query, "email"),         do: sort(query, "email", "asc")
+  def sort(query, "inserted_at"),   do: sort(query, "inserted_at", "asc")
+  def sort(query, "confirmed_at"),  do: sort(query, "confirmed_at", "asc")
+  def sort(query, "last_login_at"), do: sort(query, "last_login_at", "asc")
+  def sort(query, "last_login_ip"), do: sort(query, "last_login_ip", "asc")
+  
+  def sort(query, nil, _),                  do: query
+  def sort(query, "id", "asc"),             do: from u in query, order_by: [asc: u.id]
+  def sort(query, "id", "desc"),            do: from u in query, order_by: [desc: u.id]
+  def sort(query, "username", "asc"),       do: from u in query, order_by: [asc: u.username]
+  def sort(query, "username", "desc"),      do: from u in query, order_by: [desc: u.username]
+  def sort(query, "name", "asc"),           do: from u in query, order_by: [asc: u.name]
+  def sort(query, "name", "desc"),          do: from u in query, order_by: [desc: u.name]
+  def sort(query, "email", "asc"),          do: from u in query, order_by: [asc: u.email]
+  def sort(query, "email", "desc"),         do: from u in query, order_by: [desc: u.email]
+  def sort(query, "inserted_at", "asc"),    do: from u in query, order_by: [asc: u.inserted_at]
+  def sort(query, "inserted_at", "desc"),   do: from u in query, order_by: [desc: u.inserted_at]
+  def sort(query, "confirmed_at", "asc"),   do: from u in query, order_by: [fragment("? ASC NULLS LAST", u.confirmed_at)]
+  def sort(query, "confirmed_at", "desc"),  do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.confirmed_at)]
+  def sort(query, "last_login_at", "asc"),  do: from u in query, order_by: [fragment("? ASC NULLS LAST", u.last_login_at)]
+  def sort(query, "last_login_at", "desc"), do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_at)]
+  def sort(query, "last_login_ip", "asc"),  do: from u in query, order_by: [fragment("? ASC NULLS LAST", u.last_login_ip)]
+  def sort(query, "last_login_ip", "desc"), do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_ip)]
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
@@ -192,6 +259,7 @@ defmodule Helheim.User do
     Repo.delete!(user)
   end
 
+  def age(%User{birthday: nil}, _), do: nil
   def age(user, now) do
     birthday = user.birthday
 

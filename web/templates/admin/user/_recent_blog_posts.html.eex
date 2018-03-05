@@ -1,0 +1,40 @@
+<h4><%= gettext "Recent blog posts" %>:</h4>
+
+<%= if Enum.any?(@recent_blog_posts) do %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Published</th>
+        <th>Views/Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for blog_post <- @recent_blog_posts do %>
+        <tr>
+          <td>
+            <samp><%= link blog_post.id, to: public_profile_blog_post_path(@conn, :show, blog_post.user, blog_post) %></samp>
+          </td>
+          <td>
+            <strong><%= blog_post.title %></strong>
+            <p><small><%= Crutches.String.truncate(blog_post.body, 200) %></small></p>
+          </td>
+          <td>
+            <samp><%= lt(blog_post.published_at, "%Y-%m-%d %H:%M:%S") %></samp>
+            <%= Helheim.BlogPostView.edited_label(blog_post) %>
+          </td>
+          <td>
+            <%= visitor_count_badge @conn, blog_post %>
+            <%= comment_count_badge blog_post %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <hr>
+  <p class="text-center">
+    <%= gettext "None found" %>
+  </p>
+<% end %>

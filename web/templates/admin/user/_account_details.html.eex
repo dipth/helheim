@@ -1,0 +1,24 @@
+<h4><%= gettext "Account Details" %>:</h4>
+<hr>
+<dl class="row">
+  <dt class="col-sm-3"><%= gettext "ID" %></dt>
+  <dd class="col-sm-9"><samp><%= @user.id %></samp></dd>
+
+  <dt class="col-sm-3"><%= gettext "Username" %></dt>
+  <dd class="col-sm-9"><%= username @user %></dd>
+
+  <dt class="col-sm-3"><%= gettext "Name" %></dt>
+  <dd class="col-sm-9"><%= @user.name %></dd>
+
+  <dt class="col-sm-3"><%= gettext "E-mail" %></dt>
+  <dd class="col-sm-9"><%= link @user.email, to: "mailto:#{@user.email}" %></dd>
+
+  <dt class="col-sm-3"><%= gettext "Created at" %></dt>
+  <dd class="col-sm-9"><samp><%= lt @user.inserted_at, "%Y-%m-%d %H:%M:%S" %></samp></dd>
+
+  <dt class="col-sm-3"><%= gettext "Confirmed at" %></dt>
+  <dd class="col-sm-9"><samp><%= lt @user.confirmed_at, "%Y-%m-%d %H:%M:%S" %></samp></dd>
+
+  <dt class="col-sm-3"><%= gettext "Verified at" %></dt>
+  <dd class="col-sm-9"><samp><%= lt(@user.verified_at, "%Y-%m-%d %H:%M:%S") || gettext("Not Verified!") %></samp></dd>
+</dl>

@@ -70,6 +70,7 @@ defmodule Helheim.Web do
       import Helheim.NotificationHelpers
       import Helheim.CommentHelpers
       import Helheim.VisibilityHelpers
+      import Helheim.TableHelpers
     end
   end
 

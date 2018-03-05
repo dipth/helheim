@@ -1,0 +1,6 @@
+<h4><%= gettext "Profile text" %>:</h4>
+<hr>
+
+<div class="embeds mentionable">
+  <%= raw @user.profile_text %>
+</div>

@@ -39,4 +39,9 @@ defmodule Helheim.ForumReply do
     from fr in query,
       order_by: [asc: :inserted_at]
   end
+
+  def newest(query) do
+    from fr in query,
+      order_by: [desc: :inserted_at]
+  end
 end

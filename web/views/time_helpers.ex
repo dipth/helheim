@@ -1,6 +1,7 @@
 defmodule Helheim.TimeHelpers do
   import Helheim.Gettext
 
+  def lt(nil, _), do: nil
   def lt(timestamp, format) do
     {:ok, string} = timestamp
       |> Calendar.DateTime.shift_zone!("Europe/Copenhagen")

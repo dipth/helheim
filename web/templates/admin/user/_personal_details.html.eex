@@ -1,0 +1,18 @@
+<h4><%= gettext "Personal Details" %>:</h4>
+<hr>
+<dl class="row">
+  <dt class="col-sm-3"><%= gettext "Gender" %></dt>
+  <dd class="col-sm-9"><%= @user.gender || gettext("Not specified") %></dd>
+
+  <dt class="col-sm-3"><%= gettext "Birthday" %></dt>
+  <dd class="col-sm-9"><samp><%= @user.birthday || "-" %></samp></dd>
+
+  <dt class="col-sm-3"><%= gettext "Age" %></dt>
+  <dd class="col-sm-9"><%= Helheim.User.age(@user, Timex.now) || "-" %></dd>
+
+  <dt class="col-sm-3"><%= gettext "Partner status" %></dt>
+  <dd class="col-sm-9 mentionable"><%= @user.partnership_status || gettext("Not specified") %></dd>
+
+  <dt class="col-sm-3"><%= gettext "Location" %></dt>
+  <dd class="col-sm-9"><%= @user.location || gettext("Not specified") %></dd>
+</dl>

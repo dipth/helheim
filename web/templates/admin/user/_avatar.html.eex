@@ -1,0 +1,5 @@
+<img
+  src="<%= Helheim.Avatar.url({@user.avatar, @user}, :large) %>"
+  class="img-thumbnail img-fluid d-block mb-1"
+  alt="<%= @user.username %>"
+>

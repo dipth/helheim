@@ -1,0 +1,21 @@
+<h4><%= gettext "Login Details" %>:</h4>
+<hr>
+<dl class="row">
+  <dt class="col-sm-3"><%= gettext "Last login" %></dt>
+  <dd class="col-sm-9">
+    <i class="fa fa-fw fa-calendar"></i>
+    <samp><%= lt(@user.last_login_at, "%Y-%m-%d %H:%M:%S") || "-" %></samp><br>
+
+    <i class="fa fa-fw fa-globe"></i>
+    <samp><%= ip_lookup_link(@user.last_login_ip) || "-" %></samp>
+  </dd>
+
+  <dt class="col-sm-3"><%= gettext "Previous login" %></dt>
+  <dd class="col-sm-9">
+    <i class="fa fa-fw fa-calendar"></i>
+    <samp><%= lt(@user.previous_login_at, "%Y-%m-%d %H:%M:%S") || "-" %></samp><br>
+
+    <i class="fa fa-fw fa-globe"></i>
+    <samp><%= ip_lookup_link(@user.previous_login_ip) || "-" %></samp>
+  </dd>
+</dl>
