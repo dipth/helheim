@@ -337,7 +337,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:313
+#: web/models/user.ex:333
 msgid "does not match your current password"
 msgstr ""
 
@@ -1561,7 +1561,7 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-#: web/models/user.ex:346
+#: web/models/user.ex:366
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr ""
 
@@ -1733,7 +1733,7 @@ msgstr ""
 msgid "None found"
 msgstr ""
 
-#: web/templates/admin/user/_account_details.html.eex:23
+#: web/templates/admin/user/_account_details.html.eex:24
 msgid "Not Verified!"
 msgstr ""
 
@@ -1789,4 +1789,28 @@ msgstr ""
 
 #: web/templates/admin/user/index.html.eex:54
 msgid "Total users matching the current filter:"
+msgstr ""
+
+#: web/controllers/admin/user/verification_controller.ex:29
+msgid "The user is could not be unverified!"
+msgstr ""
+
+#: web/controllers/admin/user/verification_controller.ex:15
+msgid "The user is could not be verified!"
+msgstr ""
+
+#: web/controllers/admin/user/verification_controller.ex:25
+msgid "The user is no longer verified."
+msgstr ""
+
+#: web/controllers/admin/user/verification_controller.ex:11
+msgid "The user is now verified."
+msgstr ""
+
+#: web/templates/admin/user/_account_details.html.eex:27
+msgid "Unverify!"
+msgstr ""
+
+#: web/templates/admin/user/_account_details.html.eex:30
+msgid "Verify!"
 msgstr ""
