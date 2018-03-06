@@ -115,7 +115,9 @@ defmodule Helheim.Router do
       resources "/forums", ForumController, only: [:new, :create, :edit, :update, :delete]
     end
     resources "/terms", TermController
-    resources "/users", UserController, only: [:index, :show, :edit, :update]
+    resources "/users", UserController, only: [:index, :show, :edit, :update] do
+      resources "/verification", User.VerificationController, singleton: true, only: [:create, :delete]
+    end
   end
 
   # Other scopes may use custom stacks.

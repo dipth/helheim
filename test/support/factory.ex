@@ -14,7 +14,9 @@ defmodule Helheim.Factory do
       max_total_file_size: (25 * 1024 * 1024),
       last_donation_at: Timex.shift(Timex.now, days: -30),
       total_donated: 1000,
-      comment_count: 0
+      comment_count: 0,
+      verified_at: nil,
+      verifier_id: nil
     }
   end
 

@@ -2,6 +2,7 @@ defmodule Helheim.Admin.UserView do
   use Helheim.Web, :view
   import Phoenix.HTML.Link
   alias Helheim.Comment
+  alias Helheim.User
 
   def ip_lookup_link(nil), do: nil
   def ip_lookup_link(ip) do

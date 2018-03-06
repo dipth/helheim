@@ -581,4 +581,27 @@ defmodule Helheim.UserTest do
     assert [1, 2, 3] == User |> User.sort("last_login_ip", "asc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
     assert [2, 1, 3] == User |> User.sort("last_login_ip", "desc") |> Repo.all |> Enum.map(fn(u) -> u.id end)
   end
+
+  test "verify!/2" do
+    user = insert(:user, role: nil, verified_at: nil, verifier_id: nil)
+    admin = insert(:user, role: "admin")
+    {:ok, user} = User.verify!(user, admin)
+    assert user.verified_at
+    assert user.verifier_id == admin.id
+    {:ok, time_diff, _, _} = Calendar.DateTime.diff(user.verified_at, DateTime.utc_now)
+    assert time_diff < 10
+  end
+
+  test "unverify!/1" do
+    admin = insert(:user, role: "admin")
+    user = insert(:user, verified_at: Timex.now, verifier_id: admin.id)
+    {:ok, user} = User.unverify!(user)
+    refute user.verified_at
+    refute user.verifier_id
+  end
+
+  test "verified?/1" do
+    refute User.verified?(insert(:user, verified_at: nil))
+    assert User.verified?(insert(:user, verified_at: Timex.now))
+  end
 end
