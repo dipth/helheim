@@ -54,6 +54,7 @@ defmodule Helheim.User do
     has_many :donations,                 Helheim.Donation
     has_many :forum_topics,              Helheim.ForumTopic
     has_many :forum_replies,             Helheim.ForumReply
+    belongs_to :verifier,                Helheim.User
   end
 
   def newest(query) do
@@ -234,6 +235,25 @@ defmodule Helheim.User do
 
   def confirmed?(user) do
     !is_nil(user.confirmed_at)
+  end
+
+  def verify!(_, %User{role: role}) when role != "admin", do: {:error, "Only admins can verify users!"}
+  def verify!(user, admin) do
+    case user.verified_at do
+      nil ->
+        Ecto.Changeset.change(user, verified_at: DateTime.utc_now, verifier_id: admin.id)
+        |> Repo.update
+      _ -> {:ok, user}
+    end
+  end
+
+  def unverify!(user) do
+    Ecto.Changeset.change(user, verified_at: nil, verifier_id: nil)
+    |> Repo.update
+  end
+
+  def verified?(user) do
+    !is_nil(user.verified_at)
   end
 
   def update_password_reset_token!(user) do
