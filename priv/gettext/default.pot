@@ -28,7 +28,7 @@ msgstr ""
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
-#: web/templates/layout/sidebar.html.eex:44 web/templates/page/index.html.eex:3
+#: web/templates/layout/sidebar.html.eex:50 web/templates/page/index.html.eex:3
 msgid "Helheim"
 msgstr ""
 
@@ -374,21 +374,21 @@ msgid "Remember me"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:4
-#: web/templates/profile/show.html.eex:62
+#: web/templates/profile/show.html.eex:70
 msgid "Newest Blogs"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:13
-#: web/templates/profile/show.html.eex:73
+#: web/templates/profile/show.html.eex:81
 msgid "Newest Forum Posts"
 msgstr ""
 
 #: web/templates/page/front_page.html.eex:45
-#: web/templates/profile/show.html.eex:85
+#: web/templates/profile/show.html.eex:93
 msgid "Newest Photos"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:52
+#: web/templates/layout/sidebar.html.eex:58
 msgid "Your Profile"
 msgstr ""
 
@@ -407,7 +407,7 @@ msgstr ""
 
 #: web/templates/blog_post/edit.html.eex:2
 #: web/templates/blog_post/new.html.eex:2
-#: web/templates/layout/sidebar.html.eex:73
+#: web/templates/layout/sidebar.html.eex:79
 msgid "Your Blog Posts"
 msgstr ""
 
@@ -466,7 +466,7 @@ msgstr ""
 msgid "Comment created successfully"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:57 web/views/comment_view.ex:14
+#: web/templates/layout/sidebar.html.eex:63 web/views/comment_view.ex:14
 msgid "Guest Book"
 msgstr ""
 
@@ -482,7 +482,7 @@ msgstr ""
 #: web/templates/page/front_page.html.eex:8
 #: web/templates/page/front_page.html.eex:37
 #: web/templates/page/front_page.html.eex:50
-#: web/templates/profile/show.html.eex:67 web/templates/profile/show.html.eex:91
+#: web/templates/profile/show.html.eex:75 web/templates/profile/show.html.eex:99
 msgid "Show All"
 msgstr ""
 
@@ -503,7 +503,7 @@ msgstr ""
 msgid "Send Message"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:19
+#: web/templates/profile/show.html.eex:27
 msgid "Send private message"
 msgstr ""
 
@@ -529,7 +529,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/layout/sidebar.html.eex:69
+#: web/templates/layout/sidebar.html.eex:75
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr ""
@@ -660,7 +660,7 @@ msgstr ""
 msgid "Uploaded"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:78
+#: web/templates/layout/sidebar.html.eex:84
 msgid "Your Photo Albums"
 msgstr ""
 
@@ -808,7 +808,7 @@ msgstr ""
 msgid "Submit new reply"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:49
+#: web/templates/layout/sidebar.html.eex:55
 msgid "You"
 msgstr ""
 
@@ -1012,7 +1012,9 @@ msgstr ""
 msgid "Forum topics"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:2 web/templates/layout/sidebar.html.eex:23
+#: web/templates/help/embeds.html.eex:2
+#: web/templates/help/verification.html.eex:2
+#: web/templates/layout/sidebar.html.eex:23
 msgid "Help"
 msgstr ""
 
@@ -1318,15 +1320,15 @@ msgstr ""
 msgid "Your ban will expire"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:45
+#: web/templates/profile/show.html.eex:53
 msgid "Block user"
 msgstr ""
 
-#: web/templates/block/index.html.eex:10 web/templates/profile/show.html.eex:33
+#: web/templates/block/index.html.eex:10 web/templates/profile/show.html.eex:41
 msgid "The user will be unable to see your profile, blog posts, photos or send you messages while blocked"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:32
+#: web/templates/profile/show.html.eex:40
 msgid "This user is blocked"
 msgstr ""
 
@@ -1339,7 +1341,7 @@ msgid "Unable to unblock user!"
 msgstr ""
 
 #: web/templates/block/index.html.eex:27 web/templates/block/index.html.eex:28
-#: web/templates/profile/show.html.eex:37
+#: web/templates/profile/show.html.eex:45
 msgid "Unblock user"
 msgstr ""
 
@@ -1509,7 +1511,7 @@ msgid "How much would you like to donate?"
 msgstr ""
 
 #: web/templates/donation/new.html.eex:7
-#: web/templates/layout/sidebar.html.eex:44
+#: web/templates/layout/sidebar.html.eex:50
 msgid "Support %{site}"
 msgstr ""
 
@@ -1600,7 +1602,7 @@ msgid "Add to Contacts"
 msgstr ""
 
 #: web/templates/friendship/index.html.eex:3
-#: web/templates/layout/sidebar.html.eex:63
+#: web/templates/layout/sidebar.html.eex:69
 msgid "Contact List"
 msgstr ""
 
@@ -1813,4 +1815,69 @@ msgstr ""
 
 #: web/templates/admin/user/_account_details.html.eex:30
 msgid "Verify!"
+msgstr ""
+
+#: web/templates/help/verification.html.eex:16
+msgid "Being a verified user gives you a special badge on your profile and will allow you to access certain blog posts and photos that users have marked as only being available for verified users."
+msgstr ""
+
+#: web/templates/help/verification.html.eex:11
+msgid "Did the user sign up with a genuine name and e-mail address?"
+msgstr ""
+
+#: web/templates/help/verification.html.eex:12
+msgid "Does the user have a constructive and interesting profile text?"
+msgstr ""
+
+#: web/templates/help/verification.html.eex:10
+msgid "Does the user have a profile photo?"
+msgstr ""
+
+#: web/templates/help/verification.html.eex:14
+msgid "Has the user demonstrated an ability to understand and follow the rules of the site?"
+msgstr ""
+
+#: web/templates/help/verification.html.eex:13
+msgid "Has the user engaged positively with the community?"
+msgstr ""
+
+#: web/templates/help/verification.html.eex:24
+msgid "If you feel that you do meet the criteria and should be verified, then feel free to contact any of the admins via a private message."
+msgstr ""
+
+#: web/templates/help/verification.html.eex:20
+msgid "It appears that you have already been verified. But please be aware that your verification can be revoked at any time should you no longer meet the criteria for verification."
+msgstr ""
+
+#: web/templates/help/verification.html.eex:8
+msgid "Some of the criteria that is used for determining whether a user should be verified includes, but is not limited to:"
+msgstr ""
+
+#: web/templates/help/verification.html.eex:23
+msgid "This can either mean that an admin has not yet had the time to decide on your verification state, or it has been decided that you do not meet the criteria for verification."
+msgstr ""
+
+#: web/templates/help/verification.html.eex:3
+#: web/templates/layout/sidebar.html.eex:41
+msgid "User verification"
+msgstr ""
+
+#: web/templates/profile/show.html.eex:16
+msgid "Verified user"
+msgstr ""
+
+#: web/templates/help/verification.html.eex:6
+msgid "What is a verified user?"
+msgstr ""
+
+#: web/templates/help/verification.html.eex:22
+msgid "You are not verified"
+msgstr ""
+
+#: web/templates/help/verification.html.eex:19
+msgid "You are verified!"
+msgstr ""
+
+#: web/templates/help/verification.html.eex:7
+msgid "In short, a verified user is a user that an admin has deemed as not being a fake or empty profile."
 msgstr ""

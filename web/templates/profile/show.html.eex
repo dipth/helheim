@@ -8,7 +8,15 @@
           alt="<%= @user.username %>"
         >
         <h1><%= username @user %></h1>
-        <p class="mb-1"><%= visitor_count_badge @conn, @user %></p>
+        <p class="mb-1">
+          <%= visitor_count_badge @conn, @user %>
+          <%= if User.verified?(@user) do %>
+            <%= link to: help_path(@conn, :verification), class: "badge badge-success" do %>
+              <i class="fa fa-fw fa-check-circle"></i>
+              <%= gettext "Verified user" %>
+            <% end %>
+          <% end %>
+        </p>
 
         <%= render "details.html", conn: @conn, user: @user %>
 

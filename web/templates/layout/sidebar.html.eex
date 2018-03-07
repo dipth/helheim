@@ -35,6 +35,12 @@
               <%= gettext "Embeds" %>
             <% end %>
           </li>
+          <li class="nav-item">
+            <%= link to: help_path(@conn, :verification), class: "nav-link" do %>
+              <i class="fa fa-check-circle"></i>
+              <%= gettext "User verification" %>
+            <% end %>
+          </li>
         </ul>
       </li>
 
