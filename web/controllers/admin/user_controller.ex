@@ -18,11 +18,11 @@ defmodule Helheim.Admin.UserController do
             |> User.sort(sort, direction)
             |> Repo.paginate(page: page)
     
-    render conn, "index.html", users: users
+    render conn, "index.html", users: users, search: search, sort: sort, direction: direction
   end
 
   def show(conn, %{"id" => id}) do
-    user = Repo.get(User, id)
+    user = Repo.get!(User, id)
     render conn, "show.html",
       user: user,
       potential_alts:

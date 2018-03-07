@@ -86,6 +86,7 @@ defmodule Helheim.User do
     |> search_by_location(search_params["location"])
   end
 
+  def search_as_admin(query, ""), do: query
   def search_as_admin(query, search_params) do
     search(query, search_params)
     |> search_by_name(search_params["name"])
@@ -149,6 +150,7 @@ defmodule Helheim.User do
   def sort(query, "last_login_ip"), do: sort(query, "last_login_ip", "asc")
   
   def sort(query, nil, _),                  do: query
+  def sort(query, "", _),                   do: query
   def sort(query, "id", "asc"),             do: from u in query, order_by: [asc: u.id]
   def sort(query, "id", "desc"),            do: from u in query, order_by: [desc: u.id]
   def sort(query, "username", "asc"),       do: from u in query, order_by: [asc: u.username]
