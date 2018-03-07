@@ -17,13 +17,16 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.6\n"
 
 msgid "private"
 msgstr "Private"
 
 msgid "friends_only"
 msgstr "Friends only"
+
+msgid "verified_only"
+msgstr "Verified users only"
 
 msgid "public"
 msgstr "All users"

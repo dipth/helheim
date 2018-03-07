@@ -4,5 +4,8 @@ msgstr ""
 msgid "friends_only"
 msgstr ""
 
+msgid "verified_only"
+msgstr ""
+
 msgid "public"
 msgstr ""

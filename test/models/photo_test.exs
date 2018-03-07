@@ -118,6 +118,22 @@ defmodule Helheim.PhotoTest do
       assert Enum.find(photos, fn(p) -> p.id == photo.id end)
     end
 
+    test "returns verified_users_only photos if the viewer is the author of the photo" do
+      viewer      = insert(:user, verified_at: nil)
+      photo_album = insert(:photo_album, user: viewer, visibility: "verified_users_only")
+      photo       = insert(:photo, photo_album: photo_album)
+      photos      = Photo.newest_for_frontpage(viewer, 10)
+      assert Enum.find(photos, fn(p) -> p.id == photo.id end)
+    end
+
+    test "returns verified_users_only photos if the viewer is verified" do
+      viewer      = insert(:user, verified_at: Timex.now)
+      photo_album = insert(:photo_album, visibility: "verified_users_only")
+      photo       = insert(:photo, photo_album: photo_album)
+      photos      = Photo.newest_for_frontpage(viewer, 10)
+      assert Enum.find(photos, fn(p) -> p.id == photo.id end)
+    end
+
     test "returns friends_only photos if the viewer is the author of the photo" do
       viewer      = insert(:user)
       photo_album = insert(:photo_album, user: viewer, visibility: "friends_only")
@@ -148,6 +164,14 @@ defmodule Helheim.PhotoTest do
       photo_album = insert(:photo_album, visibility: "friends_only")
       photo       = insert(:photo, photo_album: photo_album)
       _friendship = insert(:friendship_request, sender: viewer, recipient: photo_album.user)
+      photos      = Photo.newest_for_frontpage(viewer, 10)
+      refute Enum.find(photos, fn(p) -> p.id == photo.id end)
+    end
+
+    test "does not return verified_users_only photos if the viewer is not the author of the photo or verified" do
+      viewer      = insert(:user, verified_at: nil)
+      photo_album = insert(:photo_album, visibility: "verified_users_only")
+      photo       = insert(:photo, photo_album: photo_album)
       photos      = Photo.newest_for_frontpage(viewer, 10)
       refute Enum.find(photos, fn(p) -> p.id == photo.id end)
     end

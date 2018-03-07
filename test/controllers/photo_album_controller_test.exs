@@ -42,25 +42,30 @@ defmodule Helheim.PhotoAlbumControllerTest do
       refute conn.resp_body =~ gettext("Create New")
     end
 
-    test "it shows both public, friends_only and private albums when browsing your own photo albums", %{conn: conn, user: user} do
+    test "it shows both public, verified_users_only, friends_only and private albums when browsing your own photo albums", %{conn: conn, user: user} do
+      refute user.verified_at
       photo_album_1 = insert(:photo_album, user: user, title: "Album 1", visibility: "public")
       photo_album_2 = insert(:photo_album, user: user, title: "Album 2", visibility: "friends_only")
       photo_album_3 = insert(:photo_album, user: user, title: "Album 3", visibility: "private")
+      photo_album_4 = insert(:photo_album, user: user, title: "Album 4", visibility: "verified_users_only")
       conn = get conn, "/profiles/#{user.id}/photo_albums"
       assert conn.resp_body =~ photo_album_1.title
       assert conn.resp_body =~ photo_album_2.title
       assert conn.resp_body =~ photo_album_3.title
+      assert conn.resp_body =~ photo_album_4.title
     end
 
     test "it shows only public albums when browsing another users photo albums", %{conn: conn} do
-      user = insert(:user)
+      user = insert(:user, verified_at: nil)
       photo_album_1 = insert(:photo_album, user: user, title: "Album 1", visibility: "public")
       photo_album_2 = insert(:photo_album, user: user, title: "Album 2", visibility: "friends_only")
       photo_album_3 = insert(:photo_album, user: user, title: "Album 3", visibility: "private")
+      photo_album_4 = insert(:photo_album, user: user, title: "Album 3", visibility: "verified_users_only")
       conn = get conn, "/profiles/#{user.id}/photo_albums"
       assert conn.resp_body =~ photo_album_1.title
       refute conn.resp_body =~ photo_album_2.title
       refute conn.resp_body =~ photo_album_3.title
+      refute conn.resp_body =~ photo_album_4.title
     end
 
     test "it redirects to a block page when the specified profile is blocking the current user", %{conn: conn, user: user} do
@@ -85,6 +90,15 @@ defmodule Helheim.PhotoAlbumControllerTest do
       photo_album = insert(:photo_album, visibility: "friends_only", title: "My friends_only photo album")
       conn = get conn, "/profiles/#{photo_album.user.id}/photo_albums"
       refute conn.resp_body =~ photo_album.title
+    end
+
+    test "shows photo albums that are set to verified_users_only and the current user is verified", %{conn: conn} do
+      user = insert(:user, verified_at: Timex.now)
+      photo_album = insert(:photo_album, user: user, visibility: "private", title: "My verified_users_only photo album")
+      conn = conn
+             |> sign_in(user)
+             |> get("/profiles/#{photo_album.user.id}/photo_albums")
+      assert conn.resp_body =~ photo_album.title
     end
 
     test "shows photo albums that are set to friends_only and the current user is friends with the author of the photo album", %{conn: conn, user: user} do
@@ -206,6 +220,23 @@ defmodule Helheim.PhotoAlbumControllerTest do
 
       photo_album = insert(:photo_album, visibility: "public")
       conn = get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"
+      assert html_response(conn, 200)
+    end
+
+    test "it only allows viewing a verified_users_only photo_album if you are verified or own it", %{conn: conn, user: user} do
+      refute user.verified_at
+      photo_album = insert(:photo_album, user: user, visibility: "verified_users_only")
+      conn = get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"
+      assert html_response(conn, 200)
+ 
+      photo_album = insert(:photo_album, visibility: "verified_users_only")
+      assert_error_sent :not_found, fn ->
+        get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"
+      end
+
+      user = insert(:user, verified_at: Timex.now)
+      photo_album = insert(:photo_album, user: user, visibility: "verified_users_only")
+      conn = build_conn() |> sign_in(user) |> get("/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}")
       assert html_response(conn, 200)
     end
 

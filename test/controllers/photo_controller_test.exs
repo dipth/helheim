@@ -51,6 +51,30 @@ defmodule Helheim.PhotoControllerTest do
       refute conn.resp_body =~ photo.title
     end
 
+    test "does not show photos from albums that are set to verified_users_only when the current users is not verified or the author of the album", %{conn: conn, user: user} do
+      refute user.verified_at
+      photo_album = insert(:photo_album, visibility: "verified_users_only")
+      photo       = insert(:photo, photo_album: photo_album, title: "My verified_users_only photo")
+      conn        = get conn, "/photos"
+      refute conn.resp_body =~ photo.title
+    end
+
+    test "shows photos from albums that are set to verified_users_only when the current users is the author of the album", %{conn: conn, user: user} do
+      refute user.verified_at
+      photo_album = insert(:photo_album, user: user, visibility: "verified_users_only")
+      photo       = insert(:photo, photo_album: photo_album, title: "My verified_users_only photo")
+      conn        = get conn, "/photos"
+      assert conn.resp_body =~ photo.title
+    end
+
+    test "shows photos from albums that are set to verified_users_only when the current users is verified", %{conn: conn} do
+      user        = insert(:user, verified_at: Timex.now)
+      photo_album = insert(:photo_album, user: user, visibility: "verified_users_only")
+      photo       = insert(:photo, photo_album: photo_album, title: "My verified_users_only photo")
+      conn        = conn |> sign_in(user) |> get("/photos")
+      assert conn.resp_body =~ photo.title
+    end
+
     test "does not show photos from albums that are set to friends_only when the current user is not friends with the author of the photo", %{conn: conn} do
       photo_album = insert(:photo_album, visibility: "friends_only")
       photo       = insert(:photo, photo_album: photo_album, title: "My friends_only photo")
@@ -202,18 +226,50 @@ defmodule Helheim.PhotoControllerTest do
       assert html_response(conn, 200)
     end
 
-    test "it only allows viewing a friends_only photo if you own it", %{conn: conn, user: user} do
+    test "it only allows viewing a verified_users_only photo if you are verified or own it", %{conn: conn, user: user} do
+      refute user.verified_at
+      photo_album = insert(:photo_album, user: user, visibility: "verified_users_only")
+      photo       = create_photo(photo_album)
+      conn        = get conn, "/profiles/#{user.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
+      assert html_response(conn, 200)
+
+      photo_album = insert(:photo_album, visibility: "verified_users_only")
+      photo       = create_photo(photo_album)
+      assert_error_sent :not_found, fn ->
+        get conn, "/profiles/#{user.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
+      end
+
+      user = insert(:user, verified_at: Timex.now)
+      photo_album = insert(:photo_album, visibility: "verified_users_only")
+      photo       = create_photo(photo_album)
+      conn        = build_conn() |> sign_in(user) |> get("/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}")
+      assert html_response(conn, 200)
+    end
+
+    test "it only allows viewing a friends_only photo if you own it or are friends with the owner", %{conn: conn, user: user} do
       photo_album = insert(:photo_album, user: user, visibility: "friends_only")
       photo       = create_photo(photo_album)
       conn        = get conn, "/profiles/#{user.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
       assert html_response(conn, 200)
 
-      user        = insert(:user)
-      photo_album = insert(:photo_album, user: user, visibility: "friends_only")
+      owner       = insert(:user)
+      photo_album = insert(:photo_album, user: owner, visibility: "friends_only")
       photo       = create_photo(photo_album)
       assert_error_sent :not_found, fn ->
-        get conn, "/profiles/#{user.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
+        get conn, "/profiles/#{owner.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
       end
+
+      insert(:friendship_request, sender: user, recipient: owner)
+      assert_error_sent :not_found, fn ->
+        get conn, "/profiles/#{owner.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
+      end
+
+      owner       = insert(:user)
+      photo_album = insert(:photo_album, user: owner, visibility: "friends_only")
+      photo       = create_photo(photo_album)
+      insert(:friendship, sender: user, recipient: owner)
+      conn = get conn, "/profiles/#{owner.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
+      assert html_response(conn, 200)
     end
 
     test "it only allows viewing a private photo if you own it", %{conn: conn, user: user} do

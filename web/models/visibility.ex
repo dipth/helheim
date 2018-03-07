@@ -1,5 +1,5 @@
 defmodule Helheim.Visibility do
-  @visibilities ["private", "friends_only", "public"]
+  @visibilities ["private", "friends_only", "verified_only", "public"]
   def visibilities, do: @visibilities
 
   def human_visibility(visibility) do

@@ -190,6 +190,22 @@ defmodule Helheim.BlogPostTest do
       assert [blog_post.id] == ids
     end
 
+    test "always returns verified_users_only blog posts if the user is the same as the user of the blog post" do
+      user       = insert(:user, verified_at: nil)
+      blog_post  = insert(:blog_post, user: user, visibility: "verified_users_only")
+      blog_posts = BlogPost |> BlogPost.visible_by(user) |> Repo.all
+      ids        = Enum.map blog_posts, fn(c) -> c.id end
+      assert [blog_post.id] == ids
+    end
+
+    test "always returns verified_users_only blog posts if the user is verified" do
+      user = insert(:user, verified_at: Timex.now)
+      blog_post  = insert(:blog_post, visibility: "verified_users_only")
+      blog_posts = BlogPost |> BlogPost.visible_by(user) |> Repo.all
+      ids        = Enum.map blog_posts, fn(c) -> c.id end
+      assert [blog_post.id] == ids
+    end
+
     test "always returns friends_only blog posts if the user is the same as the user of the blog post" do
       user       = insert(:user)
       blog_post  = insert(:blog_post, user: user, visibility: "friends_only")
@@ -201,6 +217,13 @@ defmodule Helheim.BlogPostTest do
     test "never returns private blog posts if the user is not the same as the user of the blog post" do
       user       = insert(:user)
       _blog_post = insert(:blog_post, visibility: "private")
+      blog_posts = BlogPost |> BlogPost.visible_by(user) |> Repo.all
+      assert blog_posts == []
+    end
+
+    test "never returns verified_users_only blog posts if the user is not verified" do
+      user = insert(:user, verified_at: nil)
+      _blog_post  = insert(:blog_post, visibility: "verified_users_only")
       blog_posts = BlogPost |> BlogPost.visible_by(user) |> Repo.all
       assert blog_posts == []
     end

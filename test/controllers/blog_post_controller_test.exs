@@ -60,6 +60,29 @@ defmodule Helheim.BlogPostControllerTest do
       assert conn.resp_body =~ blog_post.title
     end
 
+    test "does not show blog posts that are set to verified_users_only when the current user is not verified", %{conn: conn, user: user} do
+      refute user.verified_at
+      blog_post = insert(:blog_post, visibility: "verified_users_only", title: "My verified_users_only blog post")
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts"
+      refute conn.resp_body =~ blog_post.title
+    end
+
+    test "shows blog posts that are set to verified_users_only and the current user is the author of the blog post", %{conn: conn, user: user} do
+      blog_post = insert(:blog_post, user: user, visibility: "verified_users_only", title: "My verified_users_only blog post")
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts"
+      assert conn.resp_body =~ blog_post.title
+    end
+
+    test "shows blog posts that are set to verified_users_only and the current user is verified", %{conn: conn} do
+      # {:ok, _user} = Ecto.Changeset.change(user, verified_at: Timex.now) |> Repo.update
+      user = insert(:user, verified_at: Timex.now)
+      blog_post = insert(:blog_post, visibility: "verified_users_only", title: "My verified_users_only blog post")
+      conn = conn
+             |> sign_in(user)
+             |> get("/profiles/#{blog_post.user.id}/blog_posts")
+      assert conn.resp_body =~ blog_post.title
+    end
+
     test "does not show blog posts that are set to friends_only and the current user is not friends with the author of the blog post", %{conn: conn} do
       blog_post = insert(:blog_post, visibility: "friends_only", title: "My friends_only blog post")
       conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts"
@@ -125,6 +148,29 @@ defmodule Helheim.BlogPostControllerTest do
       blog_post = insert(:blog_post, user: user, visibility: "private", title: "My private blog post")
       conn = get conn, "/blog_posts"
       refute conn.resp_body =~ blog_post.title
+    end
+
+    test "does not show blog posts that are set to verified_users_only when the current user is not verified", %{conn: conn, user: user} do
+      refute user.verified_at
+      blog_post = insert(:blog_post, visibility: "verified_users_only", title: "My verified_users_only blog post")
+      conn = get conn, "/blog_posts"
+      refute conn.resp_body =~ blog_post.title
+    end
+
+    test "shows blog posts that are set to verified_users_only when the current user is the author of the blog post", %{conn: conn, user: user} do
+      refute user.verified_at
+      blog_post = insert(:blog_post, user: user, visibility: "verified_users_only", title: "My verified_users_only blog post")
+      conn = get conn, "/blog_posts"
+      assert conn.resp_body =~ blog_post.title
+    end
+
+    test "shows blog posts that are set to verified_users_only when the current user is verified", %{conn: conn} do
+      user = insert(:user, verified_at: Timex.now)
+      blog_post = insert(:blog_post, user: user, visibility: "verified_users_only", title: "My verified_users_only blog post")
+      conn = conn
+             |> sign_in(user)
+             |> get("/blog_posts")
+      assert conn.resp_body =~ blog_post.title
     end
 
     test "does not show blog posts that are set to friends_only and the current user is not friends with the author of the blog post", %{conn: conn} do
@@ -307,6 +353,30 @@ defmodule Helheim.BlogPostControllerTest do
     test "successfully shows a blog post that is set to private when the current user is the author of the blog post", %{conn: conn, user: user} do
       blog_post = insert(:blog_post, user: user, visibility: "private")
       conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
+      assert html_response(conn, 200)
+    end
+
+    test "redirects to an error page when the blog post is set to verified_users_only and the current user is not verified or the author of the blog post", %{conn: conn, user: user} do
+      refute user.verified_at
+      blog_post = insert(:blog_post, visibility: "verified_users_only")
+      assert_error_sent :not_found, fn ->
+        get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
+      end
+    end
+
+    test "successfully shows a blog post that is set to verified_users_only when the current user is the author of the blog post", %{conn: conn, user: user} do
+      refute user.verified_at
+      blog_post = insert(:blog_post, user: user, visibility: "verified_users_only")
+      conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
+      assert html_response(conn, 200)
+    end
+
+    test "successfully shows a blog post that is set to verified_users_only when the current user is verified", %{conn: conn} do
+      user = insert(:user, verified_at: Timex.now)
+      blog_post = insert(:blog_post, user: user, visibility: "verified_users_only")
+      conn = conn
+             |> sign_in(user)
+             |> get("/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}")
       assert html_response(conn, 200)
     end
 

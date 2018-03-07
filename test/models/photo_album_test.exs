@@ -61,6 +61,22 @@ defmodule Helheim.PhotoAlbumTest do
       assert [photo_album.id] == ids
     end
 
+    test "always returns verified_users_only photo albums if the user is the same as the user of the photo album" do
+      user         = insert(:user, verified_at: nil)
+      photo_album  = insert(:photo_album, user: user, visibility: "verified_users_only")
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      ids          = Enum.map photo_albums, fn(c) -> c.id end
+      assert [photo_album.id] == ids
+    end
+
+    test "always returns verified_users_only photo albums if the user is verified" do
+      user         = insert(:user, verified_at: Timex.now)
+      photo_album  = insert(:photo_album, visibility: "verified_users_only")
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      ids          = Enum.map photo_albums, fn(c) -> c.id end
+      assert [photo_album.id] == ids
+    end
+
     test "always returns friends_only photo albums if the user is the same as the user of the photo album" do
       user         = insert(:user)
       photo_album  = insert(:photo_album, user: user, visibility: "friends_only")
@@ -72,6 +88,13 @@ defmodule Helheim.PhotoAlbumTest do
     test "never returns private photo albums if the user is not the same as the user of the photo album" do
       user         = insert(:user)
       _photo_album = insert(:photo_album, visibility: "private")
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      assert photo_albums == []
+    end
+
+    test "never returns verified_users_only photo albums if the user is not verified" do
+      user = insert(:user, verified_at: nil)
+      _photo_album = insert(:photo_album, visibility: "verified_users_only")
       photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
       assert photo_albums == []
     end
