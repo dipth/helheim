@@ -455,6 +455,8 @@ msgstr ""
 
 #: web/templates/admin/forum/form.html.eex:4
 #: web/templates/admin/forum_category/form.html.eex:4
+#: web/templates/admin/user/_recent_blog_posts.html.eex:8
+#: web/templates/admin/user/_recent_forum_topics.html.eex:8
 #: web/templates/blog_post/form.html.eex:4
 #: web/templates/forum_topic/form.html.eex:4
 #: web/templates/photo/form.html.eex:10
@@ -682,6 +684,7 @@ msgstr ""
 msgid "Administration"
 msgstr ""
 
+#: web/templates/admin/user/_recent_comments.html.eex:8
 #: web/templates/blog_post/form.html.eex:12
 #: web/templates/forum_reply/form.html.eex:4
 #: web/templates/forum_topic/form.html.eex:12
@@ -1357,6 +1360,7 @@ msgstr ""
 msgid "Blocked since:"
 msgstr ""
 
+#: web/templates/admin/user/_blocks.html.eex:1
 #: web/templates/block/index.html.eex:2 web/templates/navbar/show.html.eex:27
 msgid "Blocks"
 msgstr ""
@@ -1714,6 +1718,10 @@ msgid "Created at"
 msgstr ""
 
 #: web/templates/admin/user/_account_details.html.eex:4
+#: web/templates/admin/user/_recent_blog_posts.html.eex:7
+#: web/templates/admin/user/_recent_comments.html.eex:7
+#: web/templates/admin/user/_recent_forum_replies.html.eex:7
+#: web/templates/admin/user/_recent_forum_topics.html.eex:7
 #: web/templates/admin/user/_users.html.eex:5
 msgid "ID"
 msgstr ""
@@ -1726,6 +1734,7 @@ msgstr ""
 msgid "Login Details"
 msgstr ""
 
+#: web/templates/admin/user/_blocks.html.eex:32
 #: web/templates/admin/user/_potential_alt_accounts.html.eex:7
 #: web/templates/admin/user/_recent_blog_posts.html.eex:38
 #: web/templates/admin/user/_recent_comments.html.eex:29
@@ -1880,4 +1889,31 @@ msgstr ""
 
 #: web/templates/help/verification.html.eex:7
 msgid "In short, a verified user is a user that an admin has deemed as not being a fake or empty profile."
+msgstr ""
+
+#: web/templates/admin/user/_blocks.html.eex:9
+msgid "Blockee"
+msgstr ""
+
+#: web/templates/admin/user/_blocks.html.eex:7
+msgid "Blocker"
+msgstr ""
+
+#: web/templates/admin/user/_recent_blog_posts.html.eex:9
+msgid "Published At"
+msgstr ""
+
+#: web/templates/admin/user/_recent_forum_replies.html.eex:8
+msgid "Topic"
+msgstr ""
+
+#: web/templates/admin/user/_recent_blog_posts.html.eex:10
+msgid "Views/Comments"
+msgstr ""
+
+#: web/templates/admin/user/_blocks.html.eex:10
+#: web/templates/admin/user/_recent_comments.html.eex:9
+#: web/templates/admin/user/_recent_forum_replies.html.eex:9
+#: web/templates/admin/user/_recent_forum_topics.html.eex:9
+msgid "When"
 msgstr ""

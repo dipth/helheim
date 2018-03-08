@@ -29,6 +29,37 @@ defmodule Helheim.BlockTest do
   end
 
   ##############################################################################
+  # involving_user/2
+  describe "involving_user/2" do
+    test "finds only blocks created by or against the given user" do
+      user    = insert(:user)
+      block_1 = insert(:block, blockee: user)
+      block_2 = insert(:block, blockee: user)
+      block_3 = insert(:block)
+      block_ids = Block |> Block.involving_user(user) |> Repo.all |> Enum.map(&(&1.id))
+      assert Enum.member?(block_ids, block_1.id)
+      assert Enum.member?(block_ids, block_2.id)
+      refute Enum.member?(block_ids, block_3.id)
+    end
+  end
+
+  ##############################################################################
+  # order_by_blocker_and_blockee_username/2
+  describe "order_by_blocker_and_blockee_username/2" do
+    test "orders the blocks first by the username of the associated blocker and then by the username of the blockee" do
+      user_1  = insert(:user, username: "Adam")
+      user_2  = insert(:user, username: "Bob")
+      user_3  = insert(:user, username: "Charlie")
+      block_1 = insert(:block, blocker: user_1, blockee: user_2)
+      block_2 = insert(:block, blocker: user_1, blockee: user_3)
+      block_3 = insert(:block, blocker: user_2, blockee: user_3)
+      block_4 = insert(:block, blocker: user_2, blockee: user_1)
+      block_ids = Block |> Block.order_by_blocker_and_blockee_username() |> Repo.all |> Enum.map(&(&1.id))
+      assert [block_1.id, block_2.id, block_4.id, block_3.id] == block_ids
+    end
+  end
+
+  ##############################################################################
   # order_by_blockee_username/2
   describe "order_by_blockee_username/2" do
     test "orders the blocks by the username of the associated blockee" do

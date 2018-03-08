@@ -25,6 +25,17 @@ defmodule Helheim.Block do
     from b in query, where: b.blockee_id == ^blockee.id
   end
 
+  def involving_user(query, user) do
+    from b in query, where: b.blocker_id == ^user.id or b.blockee_id == ^user.id
+  end
+
+  def order_by_blocker_and_blockee_username(query) do
+    from b in query,
+      join: blocker in User, on: blocker.id == b.blocker_id,  
+      join: blockee in User, on: blockee.id == b.blockee_id,
+      order_by: [blocker.username, blockee.username]
+  end
+
   def order_by_blockee_username(query) do
     from b in query,
       join: u in User, on: u.id == b.blockee_id,

@@ -14,6 +14,7 @@
 
   <div class="col-lg-7">
     <%= render "_profile_text.html", assigns %>
+    <%= render "_blocks.html", assigns %>
     <%= render "_potential_alt_accounts.html", assigns %>
     <%= render "_recent_blog_posts.html", assigns %>
     <%= render "_recent_comments.html", assigns %>

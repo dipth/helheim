@@ -6,6 +6,7 @@ defmodule Helheim.Admin.UserController do
   alias Helheim.ForumTopic
   alias Helheim.ForumReply
   alias Helheim.Photo
+  alias Helheim.Block
 
   def index(conn, params) do
     search    = params["search"] || %{}
@@ -31,7 +32,8 @@ defmodule Helheim.Admin.UserController do
       recent_comments: recent_comments(user),
       recent_forum_topics: recent_forum_topics(user),
       recent_forum_replies: recent_forum_replies(user),
-      recent_photos: recent_photos(user)
+      recent_photos: recent_photos(user),
+      blocks: blocks(user)
   end
 
   defp potential_alts(user) do
@@ -82,6 +84,15 @@ defmodule Helheim.Admin.UserController do
     |> Photo.not_private
     |> preload(:photo_album)
     |> limit(5)
+    |> Repo.all
+  end
+
+  defp blocks(user) do
+    Block
+    |> Block.enabled
+    |> Block.involving_user(user)
+    |> Block.order_by_blocker_and_blockee_username
+    |> preload([:blocker, :blockee])
     |> Repo.all
   end
 end

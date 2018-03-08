@@ -1,0 +1,34 @@
+<h4><%= gettext "Blocks" %>:</h4>
+
+<%= if Enum.any?(@blocks) do %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= gettext "Blocker" %></th>
+        <th></th>
+        <th><%= gettext "Blockee" %></th>
+        <th><%= gettext "When" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for block <- @blocks do %>
+        <tr>
+          <td><%= block_user_link @conn, @user, block.blocker %></td>
+          <td class="text-center">
+            <i class="fa fa-ban text-danger"></i>
+            <i class="fa fa-arrow-left"></i>
+          </td>
+          <td><%= block_user_link @conn, @user, block.blockee %></td>
+          <td>
+            <samp><%= lt(block.updated_at, "%Y-%m-%d %H:%M:%S") %></samp>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <hr>
+  <p class="text-center">
+    <%= gettext "None found" %>
+  </p>
+<% end %>

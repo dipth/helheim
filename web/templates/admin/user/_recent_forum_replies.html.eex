@@ -4,9 +4,9 @@
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Topic</th>
-        <th>When</th>
+        <th><%= gettext "ID" %></th>
+        <th><%= gettext "Topic" %></th>
+        <th><%= gettext "When" %></th>
       </tr>
     </thead>
     <tbody>

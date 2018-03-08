@@ -470,6 +470,8 @@ msgstr "Redigér Blog"
 
 #: web/templates/admin/forum/form.html.eex:4
 #: web/templates/admin/forum_category/form.html.eex:4
+#: web/templates/admin/user/_recent_blog_posts.html.eex:8
+#: web/templates/admin/user/_recent_forum_topics.html.eex:8
 #: web/templates/blog_post/form.html.eex:4
 #: web/templates/forum_topic/form.html.eex:4
 #: web/templates/photo/form.html.eex:10
@@ -703,6 +705,7 @@ msgstr "Du har brugt %{used_space} ud af maksimum %{max_space} fordelt over alle
 msgid "Administration"
 msgstr "Administration"
 
+#: web/templates/admin/user/_recent_comments.html.eex:8
 #: web/templates/blog_post/form.html.eex:12
 #: web/templates/forum_reply/form.html.eex:4
 #: web/templates/forum_topic/form.html.eex:12
@@ -1386,6 +1389,7 @@ msgstr "Blokering fjernet!"
 msgid "Blocked since:"
 msgstr "Blokeret siden:"
 
+#: web/templates/admin/user/_blocks.html.eex:1
 #: web/templates/block/index.html.eex:2 web/templates/navbar/show.html.eex:27
 msgid "Blocks"
 msgstr "Blokeringer"
@@ -1743,6 +1747,10 @@ msgid "Created at"
 msgstr "Oprettelsesdato"
 
 #: web/templates/admin/user/_account_details.html.eex:4
+#: web/templates/admin/user/_recent_blog_posts.html.eex:7
+#: web/templates/admin/user/_recent_comments.html.eex:7
+#: web/templates/admin/user/_recent_forum_replies.html.eex:7
+#: web/templates/admin/user/_recent_forum_topics.html.eex:7
 #: web/templates/admin/user/_users.html.eex:5
 msgid "ID"
 msgstr "ID"
@@ -1755,6 +1763,7 @@ msgstr "IP Adresse"
 msgid "Login Details"
 msgstr "Logindetaljer"
 
+#: web/templates/admin/user/_blocks.html.eex:32
 #: web/templates/admin/user/_potential_alt_accounts.html.eex:7
 #: web/templates/admin/user/_recent_blog_posts.html.eex:38
 #: web/templates/admin/user/_recent_comments.html.eex:29
@@ -1910,3 +1919,30 @@ msgstr "Du er verificeret!"
 #: web/templates/help/verification.html.eex:7
 msgid "In short, a verified user is a user that an admin has deemed as not being a fake or empty profile."
 msgstr "Kort fortalt bliver man en verificeret bruger når en admin har vurderet at man ikke har en tom eller uærlig profil og samtidig lever op til sitets regler."
+
+#: web/templates/admin/user/_blocks.html.eex:9
+msgid "Blockee"
+msgstr "Hvem er blokeret"
+
+#: web/templates/admin/user/_blocks.html.eex:7
+msgid "Blocker"
+msgstr "Hvem har blokeret"
+
+#: web/templates/admin/user/_recent_blog_posts.html.eex:9
+msgid "Published At"
+msgstr "Udgivelsesdato"
+
+#: web/templates/admin/user/_recent_forum_replies.html.eex:8
+msgid "Topic"
+msgstr "Tråd"
+
+#: web/templates/admin/user/_recent_blog_posts.html.eex:10
+msgid "Views/Comments"
+msgstr "Visninger/Kommentarer"
+
+#: web/templates/admin/user/_blocks.html.eex:10
+#: web/templates/admin/user/_recent_comments.html.eex:9
+#: web/templates/admin/user/_recent_forum_replies.html.eex:9
+#: web/templates/admin/user/_recent_forum_topics.html.eex:9
+msgid "When"
+msgstr "Hvornår"

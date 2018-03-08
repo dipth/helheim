@@ -4,10 +4,10 @@
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Published</th>
-        <th>Views/Comments</th>
+        <th><%= gettext "ID" %></th>
+        <th><%= gettext "Title" %></th>
+        <th><%= gettext "Published At" %></th>
+        <th><%= gettext "Views/Comments" %></th>
       </tr>
     </thead>
     <tbody>
