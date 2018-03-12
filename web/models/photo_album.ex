@@ -30,7 +30,7 @@ defmodule Helheim.PhotoAlbum do
     verified = Helheim.User.verified?(user)
 
     from pa in query,
-    where: pa.visibility == "public" or pa.user_id == ^user.id or (pa.visibility == "verified_users_only" and ^verified) or (
+    where: pa.visibility == "public" or pa.user_id == ^user.id or (pa.visibility == "verified_only" and ^verified) or (
       pa.visibility == "friends_only" and fragment(
         "EXISTS(?)",
         fragment(

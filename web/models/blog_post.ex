@@ -52,7 +52,7 @@ defmodule Helheim.BlogPost do
     verified = Helheim.User.verified?(user)
 
     from p in query,
-    where: p.visibility == "public" or p.user_id == ^user.id or (p.visibility == "verified_users_only" and ^verified) or (
+    where: p.visibility == "public" or p.user_id == ^user.id or (p.visibility == "verified_only" and ^verified) or (
       p.visibility == "friends_only" and fragment(
         "EXISTS(?)",
         fragment(

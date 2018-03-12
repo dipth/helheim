@@ -60,23 +60,23 @@ defmodule Helheim.BlogPostControllerTest do
       assert conn.resp_body =~ blog_post.title
     end
 
-    test "does not show blog posts that are set to verified_users_only when the current user is not verified", %{conn: conn, user: user} do
+    test "does not show blog posts that are set to verified_only when the current user is not verified", %{conn: conn, user: user} do
       refute user.verified_at
-      blog_post = insert(:blog_post, visibility: "verified_users_only", title: "My verified_users_only blog post")
+      blog_post = insert(:blog_post, visibility: "verified_only", title: "My verified_only blog post")
       conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts"
       refute conn.resp_body =~ blog_post.title
     end
 
-    test "shows blog posts that are set to verified_users_only and the current user is the author of the blog post", %{conn: conn, user: user} do
-      blog_post = insert(:blog_post, user: user, visibility: "verified_users_only", title: "My verified_users_only blog post")
+    test "shows blog posts that are set to verified_only and the current user is the author of the blog post", %{conn: conn, user: user} do
+      blog_post = insert(:blog_post, user: user, visibility: "verified_only", title: "My verified_only blog post")
       conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts"
       assert conn.resp_body =~ blog_post.title
     end
 
-    test "shows blog posts that are set to verified_users_only and the current user is verified", %{conn: conn} do
+    test "shows blog posts that are set to verified_only and the current user is verified", %{conn: conn} do
       # {:ok, _user} = Ecto.Changeset.change(user, verified_at: Timex.now) |> Repo.update
       user = insert(:user, verified_at: Timex.now)
-      blog_post = insert(:blog_post, visibility: "verified_users_only", title: "My verified_users_only blog post")
+      blog_post = insert(:blog_post, visibility: "verified_only", title: "My verified_only blog post")
       conn = conn
              |> sign_in(user)
              |> get("/profiles/#{blog_post.user.id}/blog_posts")
@@ -150,23 +150,23 @@ defmodule Helheim.BlogPostControllerTest do
       refute conn.resp_body =~ blog_post.title
     end
 
-    test "does not show blog posts that are set to verified_users_only when the current user is not verified", %{conn: conn, user: user} do
+    test "does not show blog posts that are set to verified_only when the current user is not verified", %{conn: conn, user: user} do
       refute user.verified_at
-      blog_post = insert(:blog_post, visibility: "verified_users_only", title: "My verified_users_only blog post")
+      blog_post = insert(:blog_post, visibility: "verified_only", title: "My verified_only blog post")
       conn = get conn, "/blog_posts"
       refute conn.resp_body =~ blog_post.title
     end
 
-    test "shows blog posts that are set to verified_users_only when the current user is the author of the blog post", %{conn: conn, user: user} do
+    test "shows blog posts that are set to verified_only when the current user is the author of the blog post", %{conn: conn, user: user} do
       refute user.verified_at
-      blog_post = insert(:blog_post, user: user, visibility: "verified_users_only", title: "My verified_users_only blog post")
+      blog_post = insert(:blog_post, user: user, visibility: "verified_only", title: "My verified_only blog post")
       conn = get conn, "/blog_posts"
       assert conn.resp_body =~ blog_post.title
     end
 
-    test "shows blog posts that are set to verified_users_only when the current user is verified", %{conn: conn} do
+    test "shows blog posts that are set to verified_only when the current user is verified", %{conn: conn} do
       user = insert(:user, verified_at: Timex.now)
-      blog_post = insert(:blog_post, user: user, visibility: "verified_users_only", title: "My verified_users_only blog post")
+      blog_post = insert(:blog_post, user: user, visibility: "verified_only", title: "My verified_only blog post")
       conn = conn
              |> sign_in(user)
              |> get("/blog_posts")
@@ -356,24 +356,24 @@ defmodule Helheim.BlogPostControllerTest do
       assert html_response(conn, 200)
     end
 
-    test "redirects to an error page when the blog post is set to verified_users_only and the current user is not verified or the author of the blog post", %{conn: conn, user: user} do
+    test "redirects to an error page when the blog post is set to verified_only and the current user is not verified or the author of the blog post", %{conn: conn, user: user} do
       refute user.verified_at
-      blog_post = insert(:blog_post, visibility: "verified_users_only")
+      blog_post = insert(:blog_post, visibility: "verified_only")
       assert_error_sent :not_found, fn ->
         get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
       end
     end
 
-    test "successfully shows a blog post that is set to verified_users_only when the current user is the author of the blog post", %{conn: conn, user: user} do
+    test "successfully shows a blog post that is set to verified_only when the current user is the author of the blog post", %{conn: conn, user: user} do
       refute user.verified_at
-      blog_post = insert(:blog_post, user: user, visibility: "verified_users_only")
+      blog_post = insert(:blog_post, user: user, visibility: "verified_only")
       conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
       assert html_response(conn, 200)
     end
 
-    test "successfully shows a blog post that is set to verified_users_only when the current user is verified", %{conn: conn} do
+    test "successfully shows a blog post that is set to verified_only when the current user is verified", %{conn: conn} do
       user = insert(:user, verified_at: Timex.now)
-      blog_post = insert(:blog_post, user: user, visibility: "verified_users_only")
+      blog_post = insert(:blog_post, user: user, visibility: "verified_only")
       conn = conn
              |> sign_in(user)
              |> get("/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}")

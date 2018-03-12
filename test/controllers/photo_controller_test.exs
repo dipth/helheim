@@ -51,26 +51,26 @@ defmodule Helheim.PhotoControllerTest do
       refute conn.resp_body =~ photo.title
     end
 
-    test "does not show photos from albums that are set to verified_users_only when the current users is not verified or the author of the album", %{conn: conn, user: user} do
+    test "does not show photos from albums that are set to verified_only when the current users is not verified or the author of the album", %{conn: conn, user: user} do
       refute user.verified_at
-      photo_album = insert(:photo_album, visibility: "verified_users_only")
-      photo       = insert(:photo, photo_album: photo_album, title: "My verified_users_only photo")
+      photo_album = insert(:photo_album, visibility: "verified_only")
+      photo       = insert(:photo, photo_album: photo_album, title: "My verified_only photo")
       conn        = get conn, "/photos"
       refute conn.resp_body =~ photo.title
     end
 
-    test "shows photos from albums that are set to verified_users_only when the current users is the author of the album", %{conn: conn, user: user} do
+    test "shows photos from albums that are set to verified_only when the current users is the author of the album", %{conn: conn, user: user} do
       refute user.verified_at
-      photo_album = insert(:photo_album, user: user, visibility: "verified_users_only")
-      photo       = insert(:photo, photo_album: photo_album, title: "My verified_users_only photo")
+      photo_album = insert(:photo_album, user: user, visibility: "verified_only")
+      photo       = insert(:photo, photo_album: photo_album, title: "My verified_only photo")
       conn        = get conn, "/photos"
       assert conn.resp_body =~ photo.title
     end
 
-    test "shows photos from albums that are set to verified_users_only when the current users is verified", %{conn: conn} do
+    test "shows photos from albums that are set to verified_only when the current users is verified", %{conn: conn} do
       user        = insert(:user, verified_at: Timex.now)
-      photo_album = insert(:photo_album, user: user, visibility: "verified_users_only")
-      photo       = insert(:photo, photo_album: photo_album, title: "My verified_users_only photo")
+      photo_album = insert(:photo_album, user: user, visibility: "verified_only")
+      photo       = insert(:photo, photo_album: photo_album, title: "My verified_only photo")
       conn        = conn |> sign_in(user) |> get("/photos")
       assert conn.resp_body =~ photo.title
     end
@@ -226,21 +226,21 @@ defmodule Helheim.PhotoControllerTest do
       assert html_response(conn, 200)
     end
 
-    test "it only allows viewing a verified_users_only photo if you are verified or own it", %{conn: conn, user: user} do
+    test "it only allows viewing a verified_only photo if you are verified or own it", %{conn: conn, user: user} do
       refute user.verified_at
-      photo_album = insert(:photo_album, user: user, visibility: "verified_users_only")
+      photo_album = insert(:photo_album, user: user, visibility: "verified_only")
       photo       = create_photo(photo_album)
       conn        = get conn, "/profiles/#{user.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
       assert html_response(conn, 200)
 
-      photo_album = insert(:photo_album, visibility: "verified_users_only")
+      photo_album = insert(:photo_album, visibility: "verified_only")
       photo       = create_photo(photo_album)
       assert_error_sent :not_found, fn ->
         get conn, "/profiles/#{user.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
       end
 
       user = insert(:user, verified_at: Timex.now)
-      photo_album = insert(:photo_album, visibility: "verified_users_only")
+      photo_album = insert(:photo_album, visibility: "verified_only")
       photo       = create_photo(photo_album)
       conn        = build_conn() |> sign_in(user) |> get("/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}")
       assert html_response(conn, 200)
