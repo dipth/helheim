@@ -119,7 +119,8 @@ defmodule Helheim.Factory do
       forum: build(:forum),
       user: build(:user),
       title: "A Topic",
-      body: "Some Content"
+      body: "Some Content",
+      locked_at: nil
     }
   end
 

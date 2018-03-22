@@ -8,6 +8,7 @@ defmodule Helheim.ForumTopic do
     field      :pinned,              :boolean
     field      :forum_replies_count, :integer
     field      :deleted_at,          Calecto.DateTimeUTC
+    field      :locked_at,           Calecto.DateTimeUTC
 
     timestamps()
 
@@ -71,5 +72,9 @@ defmodule Helheim.ForumTopic do
   def newest(query) do
     from ft in query,
       order_by: [desc: :inserted_at]
+  end
+
+  def locked?(forum_topic) do
+    forum_topic.locked_at != nil
   end
 end

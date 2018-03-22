@@ -52,6 +52,14 @@ defmodule Helheim.ForumReplyControllerTest do
         post conn, "/forums/#{topic.forum.id + 1}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
       end
     end
+
+    test_with_mock "it does not invoke the ForumReplyService if the topic is locked but instead shows a 404 error", %{conn: conn},
+      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body) -> raise("ForumReplyService was called!") end] do
+
+      topic = insert(:forum_topic, locked_at: DateTime.utc_now)
+      conn = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
+      assert conn.status == 404
+    end
   end
 
   describe "create/2 when not signed in" do

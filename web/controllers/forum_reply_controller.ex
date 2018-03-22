@@ -2,10 +2,12 @@ defmodule Helheim.ForumReplyController do
   use Helheim.Web, :controller
   alias Helheim.Forum
   alias Helheim.ForumReply
+  alias Helheim.ForumTopic
 
   plug :find_forum
   plug :find_user
   plug :find_forum_topic
+  plug :enforce_lock when action in [:create]
   plug :find_forum_reply when action in [:edit, :update]
   plug :build_edit_changeset when action in [:edit, :update]
   plug :enforce_editable_by when action in [:edit, :update]
@@ -58,6 +60,16 @@ defmodule Helheim.ForumReplyController do
                   |> preload(:user)
                   |> Repo.get!(conn.params["forum_topic_id"])
     assign conn, :forum_topic, forum_topic
+  end
+
+  defp enforce_lock(conn, _) do
+    if ForumTopic.locked?(conn.assigns[:forum_topic]) do
+      conn
+      |> put_status(:not_found)
+      |> halt()
+    else
+      conn
+    end
   end
 
   defp find_forum_reply(conn, _) do

@@ -5,6 +5,7 @@ defmodule Helheim.ForumReply do
   schema "forum_replies" do
     field      :body,                :string
     field      :deleted_at,          Calecto.DateTimeUTC
+    field      :notice,              :boolean
 
     timestamps()
 
