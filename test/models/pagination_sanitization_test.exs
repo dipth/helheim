@@ -19,8 +19,8 @@ defmodule Helheim.PaginationSanitizationTest do
       assert PaginationSanitization.sanitized_page("-1") == 1
     end
 
-    test "it returns 100 when passing an integer above 100 as a string" do
-      assert PaginationSanitization.sanitized_page("101") == 100
+    test "it returns 1000 when passing an integer above 1000 as a string" do
+      assert PaginationSanitization.sanitized_page("1001") == 1000
     end
 
     test "it returns 1 when passing zero as a string" do
