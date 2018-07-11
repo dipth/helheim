@@ -1,40 +1,54 @@
+<div class="card mt-1">
+  <div class="card-block">
+    <h5 class="mb-1 d-flex justify-content-between">
+      <%= gettext "Recently logged in users" %>
+      <%= link gettext("Show All"), to: public_profile_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
+    </h5>
+    <div class="avatar-list">
+      <%= for user <- @newest_users do %>
+        <a href="<%= public_profile_path(@conn, :show, user.id) %>">
+          <img
+            src="<%= Helheim.Avatar.url({user.avatar, user}, :tiny) %>"
+            class="rounded"
+            alt="<%= user.username %>"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="<%= user.username %>"
+          >
+        </a>
+      <% end %>
+    </div>
+  </div>
+</div>
+
 <div class="card-group mt-1">
   <div class="card">
     <div class="card-block">
-      <h5 class="mb-1"><%= gettext "Newest Blogs" %></h5>
-      <%= for blog_post <- @newest_blog_posts do %>
-        <%= render Helheim.BlogPostView, "list_entry.html", conn: @conn, blog_post: blog_post %>
-      <% end %>
-      <%= link gettext("Show All"), to: blog_post_path(@conn, :index), class: "btn btn-outline-secondary btn-block mb-0" %>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-block">
-      <h5 class="mb-1"><%= gettext "Newest Forum Posts" %></h5>
-      <div class="list-group">
-        <%= for forum_topic <- @newest_forum_topics do %>
-          <%= render Helheim.ForumView, "forum_topic.html", conn: @conn, forum_topic: forum_topic %>
+      <h5 class="mb-1 d-flex justify-content-between">
+        <%= gettext "Newest Blogs" %>
+        <%= link gettext("Show All"), to: blog_post_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
+      </h5>
+      <div class="row">
+        <%= for blog_post_group <- Enum.chunk_every(@newest_blog_posts, 8) do %>
+          <div class="col-md">
+            <%= for blog_post <- blog_post_group do %>
+              <%= render Helheim.BlogPostView, "list_entry.html", conn: @conn, blog_post: blog_post %>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
   <div class="card">
     <div class="card-block">
-      <h5 class="mb-1"><%= gettext "Recently logged in users" %></h5>
-      <div class="avatar-list">
-        <%= for user <- @newest_users do %>
-          <a href="<%= public_profile_path(@conn, :show, user.id) %>">
-            <img
-              src="<%= Helheim.Avatar.url({user.avatar, user}, :tiny) %>"
-              class="rounded"
-              alt="<%= user.username %>"
-              data-toggle="tooltip"
-              data-placement="bottom"
-              title="<%= user.username %>"
-            >
-          </a>
+      <h5 class="mb-1 d-flex justify-content-between">
+        <%= gettext "Newest Forum Posts" %>
+        <%= link gettext("Show All"), to: forum_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
+      </h5>
+      <div class="list-group">
+        <%= for forum_topic <- @newest_forum_topics do %>
+          <%= render Helheim.ForumView, "forum_topic.html", conn: @conn, forum_topic: forum_topic %>
         <% end %>
-        <%= link gettext("Show All"), to: public_profile_path(@conn, :index), class: "btn btn-outline-secondary btn-block mb-0" %>
       </div>
     </div>
   </div>

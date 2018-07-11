@@ -23,11 +23,11 @@ defmodule Helheim.PageController do
       User
       |> User.recently_logged_in
       |> User.with_avatar
-      |> limit(42)
+      |> limit(140)
       |> Repo.all
 
     newest_blog_posts =
-      BlogPost.newest_for_frontpage(current_resource(conn), 8)
+      BlogPost.newest_for_frontpage(current_resource(conn), 16)
       |> preload(:user)
       |> Repo.all
 

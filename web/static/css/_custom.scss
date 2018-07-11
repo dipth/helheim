@@ -44,6 +44,8 @@ label {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  max-height: 190px;
+  overflow: hidden;
 
   img {
     width: 50px;
