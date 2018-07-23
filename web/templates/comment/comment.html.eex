@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="embeds mentionable">
-    <%= text_to_html @comment.body %>
+    <%= Helheim.EmbedHelpers.replace_urls(@comment.body) %>
   </div>
   <%= if Comment.editable_by?(@comment, current_resource(@conn)) do %>
     <%= link gettext("Edit"), to: Helheim.CommentView.edit_path(@conn, @comment, Comment.commentable(@comment)), class: "btn btn-outline-secondary btn-sm" %>

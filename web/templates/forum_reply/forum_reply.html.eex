@@ -21,7 +21,7 @@
 <% else %>
 
   <div class="embeds mentionable">
-    <%= text_to_html @forum_reply.body %>
+    <%= Helheim.EmbedHelpers.replace_urls(@forum_reply.body) %>
   </div>
 
 <% end %>

@@ -15,7 +15,7 @@
   </div>
 </div>
 <div class="embeds mentionable">
-  <%= text_to_html @forum_topic.body %>
+  <%= Helheim.EmbedHelpers.replace_urls(@forum_topic.body) %>
 </div>
 <%= if ForumTopic.editable_by?(@forum_topic, current_resource(@conn)) do %>
   <%= link gettext("Edit"), to: forum_forum_topic_path(@conn, :edit, @forum, @forum_topic), class: "btn btn-outline-secondary btn-sm" %>
