@@ -49,54 +49,78 @@ defmodule Helheim.EmbedHelpers do
 
   def replace_youtube(nil), do: ""
   def replace_youtube(match) do
-    [_,_,_,_,_,id] = Regex.run(@youtube_id_regex, match)
-    """
-    <div class="embed-responsive embed-responsive-16by9">
-      <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube-nocookie.com/embed/#{id}?rel=0" frameborder="0" allowfullscreen></iframe>
-    </div>
-    """
+    try do
+      [_,_,_,_,_,id] = Regex.run(@youtube_id_regex, match)
+      """
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube-nocookie.com/embed/#{id}?rel=0" frameborder="0" allowfullscreen></iframe>
+      </div>
+      """
+    rescue
+      _ -> match
+    end
   end
 
   def replace_giphy(nil), do: ""
   def replace_giphy(match) do
-    [_,id] = Regex.run(@giphy_id_regex, match)
-    IO.inspect Regex.run(@giphy_id_regex, match)
-    """
-    <div class="embed-responsive embed-responsive-1by1">
-      <iframe src="//giphy.com/embed/#{id}?hideSocial=true" width="480" height="600" frameborder="0" class="giphy-embed embed-responsive-item" allowfullscreen=""></iframe>
-    </div>
-    """
+    try do
+      [_,id] = Regex.run(@giphy_id_regex, match)
+      IO.inspect Regex.run(@giphy_id_regex, match)
+      """
+      <div class="embed-responsive embed-responsive-1by1">
+        <iframe src="//giphy.com/embed/#{id}?hideSocial=true" width="480" height="600" frameborder="0" class="giphy-embed embed-responsive-item" allowfullscreen=""></iframe>
+      </div>
+      """
+    rescue
+      _ -> match
+    end
   end
 
   def replace_imgur(nil), do: ""
   def replace_imgur(match) do
-    [_,_type,id] = Regex.run(@imgur_id_regex, match)
-    """
-    <blockquote class="imgur-embed-pub" lang="en" data-id="a/#{id}"><a href="//imgur.com/#{id}"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
-    """
+    try do
+      [_,_type,id] = Regex.run(@imgur_id_regex, match)
+      """
+      <blockquote class="imgur-embed-pub" lang="en" data-id="a/#{id}"><a href="//imgur.com/#{id}"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+      """
+    rescue
+      _ -> match
+    end
   end
 
   def replace_vimeo(nil), do: ""
   def replace_vimeo(match) do
-    [_,id] = Regex.run(@vimeo_id_regex, match)
-    """
-    <div class="embed-responsive embed-responsive-16by9">
-      <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/#{id}?color=ffffff&title=0&byline=0&portrait=0" width="640" height="268" frameborder="0" allowfullscreen></iframe>
-    </div>
-    """
+    try do
+      [_,id] = Regex.run(@vimeo_id_regex, match)
+      """
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/#{id}?color=ffffff&title=0&byline=0&portrait=0" width="640" height="268" frameborder="0" allowfullscreen></iframe>
+      </div>
+      """
+    rescue
+      _ -> match
+    end
   end
 
   def replace_helheim_cloudfront(nil), do: ""
   def replace_helheim_cloudfront(match) do
-    """
-    <img src="#{match}" class="img-fluid" alt="">
-    """
+    try do
+      """
+      <img src="#{match}" class="img-fluid" alt="">
+      """
+    rescue
+      _ -> match
+    end
   end
 
   def autolink(nil), do: ""
   def autolink(match) do
-    """
-    <a href="#{match}" target="_blank">#{match}</a>
-    """
+    try do
+      """
+      <a href="#{match}" target="_blank">#{match}</a>
+      """
+    rescue
+      _ -> match
+    end
   end
 end
