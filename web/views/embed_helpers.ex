@@ -18,6 +18,9 @@ defmodule Helheim.EmbedHelpers do
   @vimeo_hosts ["vimeo.com"]
   @vimeo_id_regex ~r/\/(\d+)$/
 
+  @spotify_hosts ["open.spotify.com"]
+  @spotify_id_regex ~r/open.spotify.com\/(.+)/i
+
   @helheim_cloudfront_hosts ["d3ki6vg87hrfvz.cloudfront.net"]
 
   def replace_urls(content) do
@@ -42,6 +45,8 @@ defmodule Helheim.EmbedHelpers do
         replace_vimeo(match)
       String.contains?(host, @helheim_cloudfront_hosts) ->
         replace_helheim_cloudfront(match)
+      String.contains?(host, @spotify_hosts) ->
+        replace_spotify(match)
       true ->
         autolink(match)
     end
@@ -95,6 +100,20 @@ defmodule Helheim.EmbedHelpers do
       """
       <div class="embed-responsive embed-responsive-16by9">
         <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/#{id}?color=ffffff&title=0&byline=0&portrait=0" width="640" height="268" frameborder="0" allowfullscreen></iframe>
+      </div>
+      """
+    rescue
+      _ -> match
+    end
+  end
+
+  def replace_spotify(nil), do: ""
+  def replace_spotify(match) do
+    try do
+      [_,id] = Regex.run(@spotify_id_regex, match)
+      """
+      <div>
+        <iframe src="https://open.spotify.com/embed/#{id}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
       </div>
       """
     rescue
