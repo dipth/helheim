@@ -12,8 +12,8 @@ defmodule Helheim.EmbedHelpers do
   @giphy_hosts ["giphy.com"]
   @giphy_id_regex ~r/giphy\.com\/(?:(?:media|gifs)\/)?(?:[a-z-]{2,}-)?(.+?)(?:\/giphy)?(?:\.gif|$)/i
 
-  @imgur_hosts ["imgur.com"]
-  @imgur_id_regex ~r/imgur\.com\/(gallery|a)\/(.+)/i
+  @imgur_hosts ["imgur.com", "i.imgur.com"]
+  @imgur_id_regex ~r/(gallery|a)?\/([a-zA-Z0-9]+?)\.?(?:jpg|png|gif)?$/i
 
   @vimeo_hosts ["vimeo.com"]
   @vimeo_id_regex ~r/\/(\d+)$/
@@ -70,7 +70,6 @@ defmodule Helheim.EmbedHelpers do
   def replace_giphy(match) do
     try do
       [_,id] = Regex.run(@giphy_id_regex, match)
-      IO.inspect Regex.run(@giphy_id_regex, match)
       """
       <div class="embed-responsive embed-responsive-1by1">
         <iframe src="//giphy.com/embed/#{id}?hideSocial=true" width="480" height="600" frameborder="0" class="giphy-embed embed-responsive-item" allowfullscreen=""></iframe>
@@ -84,10 +83,17 @@ defmodule Helheim.EmbedHelpers do
   def replace_imgur(nil), do: ""
   def replace_imgur(match) do
     try do
-      [_,_type,id] = Regex.run(@imgur_id_regex, match)
-      """
-      <blockquote class="imgur-embed-pub" lang="en" data-id="a/#{id}"><a href="//imgur.com/#{id}"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
-      """
+      [_,prefix,id] = Regex.run(@imgur_id_regex, match)
+      cond do
+        prefix != "" ->
+          """
+          <blockquote class="imgur-embed-pub" lang="en" data-id="a/#{id}"><a href="//imgur.com/#{id}"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+          """
+        true ->
+          """
+          <blockquote class="imgur-embed-pub" lang="en" data-id="#{id}"><a href="//imgur.com/#{id}"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+          """
+      end
     rescue
       _ -> match
     end
