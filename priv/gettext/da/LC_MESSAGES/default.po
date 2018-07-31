@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -39,7 +39,7 @@ msgstr "%{site_name} er et community for alternative folk."
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
-#: web/templates/layout/sidebar.html.eex:50 web/templates/page/index.html.eex:3
+#: web/templates/layout/sidebar.html.eex:56 web/templates/page/index.html.eex:3
 msgid "Helheim"
 msgstr "Helheim"
 
@@ -349,15 +349,16 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:335
+#: web/models/user.ex:336
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
+#: web/templates/calendar_event/_form.html.eex:63
 #: web/templates/profile/edit.html.eex:22
 msgid "Maximum file size: %{file_size}"
 msgstr "Maksimum fil størrelse: %{file_size}"
 
-#: web/templates/navbar/show.html.eex:25 web/views/comment_view.ex:41
+#: web/templates/navbar/show.html.eex:25 web/views/comment_view.ex:46
 msgid "Profile"
 msgstr "Profil"
 
@@ -386,22 +387,22 @@ msgstr "Opdatér Profil"
 msgid "Remember me"
 msgstr "Husk mig i 30 dage"
 
-#: web/templates/page/front_page.html.eex:4
+#: web/templates/page/front_page.html.eex:28
 #: web/templates/profile/show.html.eex:70
 msgid "Newest Blogs"
 msgstr "Nyeste Blogs"
 
-#: web/templates/page/front_page.html.eex:13
+#: web/templates/page/front_page.html.eex:45
 #: web/templates/profile/show.html.eex:81
 msgid "Newest Forum Posts"
 msgstr "Nyeste Forumindlæg"
 
-#: web/templates/page/front_page.html.eex:45
+#: web/templates/page/front_page.html.eex:59
 #: web/templates/profile/show.html.eex:93
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
 
-#: web/templates/layout/sidebar.html.eex:58
+#: web/templates/layout/sidebar.html.eex:64
 msgid "Your Profile"
 msgstr "Din Profil"
 
@@ -421,10 +422,11 @@ msgstr "Gem Blog"
 
 #: web/templates/blog_post/edit.html.eex:2
 #: web/templates/blog_post/new.html.eex:2
-#: web/templates/layout/sidebar.html.eex:79
+#: web/templates/layout/sidebar.html.eex:85
 msgid "Your Blog Posts"
 msgstr "Dine Blogs"
 
+#: web/templates/admin/calendar_event/_admin_links.html.eex:8
 #: web/templates/admin/forum_category/index.html.eex:13
 #: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/admin/term/index.html.eex:35
@@ -449,13 +451,15 @@ msgstr "Din blog er nu slettet!"
 msgid "Blog post updated successfully."
 msgstr "Din blog er opdateret!"
 
+#: web/templates/admin/calendar_event/_admin_links.html.eex:10
 #: web/templates/blog_post/show.html.eex:32
 #: web/templates/photo/show.html.eex:44
-#: web/templates/photo_album/show.html.eex:61 web/views/comment_view.ex:64
-#: web/views/comment_view.ex:66
+#: web/templates/photo_album/show.html.eex:61 web/views/comment_view.ex:70
+#: web/views/comment_view.ex:72
 msgid "Delete"
 msgstr "Slet"
 
+#: web/templates/admin/calendar_event/_admin_links.html.eex:6
 #: web/templates/blog_post/show.html.eex:28
 #: web/templates/comment/comment.html.eex:16
 #: web/templates/forum_reply/forum_reply.html.eex:30
@@ -468,11 +472,13 @@ msgstr "Redigér"
 msgid "Edit Blog Post"
 msgstr "Redigér Blog"
 
+#: web/templates/admin/calendar_event/index.html.eex:10
 #: web/templates/admin/forum/form.html.eex:4
 #: web/templates/admin/forum_category/form.html.eex:4
 #: web/templates/admin/user/_recent_blog_posts.html.eex:8
 #: web/templates/admin/user/_recent_forum_topics.html.eex:8
 #: web/templates/blog_post/form.html.eex:4
+#: web/templates/calendar_event/_form.html.eex:4
 #: web/templates/forum_topic/form.html.eex:4
 #: web/templates/photo/form.html.eex:10
 #: web/templates/photo_album/form.html.eex:4
@@ -483,11 +489,11 @@ msgstr "Titel"
 msgid "Comment created successfully"
 msgstr "Din kommentar er tilføjet!"
 
-#: web/templates/layout/sidebar.html.eex:63 web/views/comment_view.ex:14
+#: web/templates/layout/sidebar.html.eex:69 web/views/comment_view.ex:15
 msgid "Guest Book"
 msgstr "Gæstebog"
 
-#: web/views/comment_view.ex:19
+#: web/views/comment_view.ex:20
 msgid "Newest Guest Book Entries"
 msgstr "Nyeste gæstebogsindlæg"
 
@@ -496,9 +502,10 @@ msgid "Post Comment"
 msgstr "Tilføj Kommentar"
 
 #: web/templates/comment/comments.html.eex:9
-#: web/templates/page/front_page.html.eex:8
-#: web/templates/page/front_page.html.eex:37
-#: web/templates/page/front_page.html.eex:50
+#: web/templates/page/front_page.html.eex:5
+#: web/templates/page/front_page.html.eex:29
+#: web/templates/page/front_page.html.eex:46
+#: web/templates/page/front_page.html.eex:64
 #: web/templates/profile/show.html.eex:75
 #: web/templates/profile/show.html.eex:99
 msgid "Show All"
@@ -547,7 +554,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] "Du har %{count} notifikation"
 msgstr[1] "Du har %{count} notifikationer"
 
-#: web/templates/layout/sidebar.html.eex:75
+#: web/templates/layout/sidebar.html.eex:81
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr "Private Beskeder"
@@ -683,7 +690,7 @@ msgstr "Upload billeder"
 msgid "Uploaded"
 msgstr "Uploadet"
 
-#: web/templates/layout/sidebar.html.eex:84
+#: web/templates/layout/sidebar.html.eex:90
 msgid "Your Photo Albums"
 msgstr "Dine Fotoalbums"
 
@@ -691,6 +698,8 @@ msgstr "Dine Fotoalbums"
 msgid "You have used %{used_space} out of a maximum of %{max_space} across all your photo albums"
 msgstr "Du har brugt %{used_space} ud af maksimum %{max_space} fordelt over alle dine fotoalbums"
 
+#: web/templates/admin/calendar_event/index.html.eex:2
+#: web/templates/admin/calendar_event/show.html.eex:2
 #: web/templates/admin/forum/edit.html.eex:2
 #: web/templates/admin/forum/new.html.eex:2
 #: web/templates/admin/forum_category/edit.html.eex:2
@@ -834,7 +843,7 @@ msgstr "Gem forum kategori"
 msgid "Submit new reply"
 msgstr "Send nyt svar"
 
-#: web/templates/layout/sidebar.html.eex:55
+#: web/templates/layout/sidebar.html.eex:61
 msgid "You"
 msgstr "Dig"
 
@@ -870,7 +879,7 @@ msgstr "Håber vi ses igen engang!"
 
 #: web/templates/private_conversation/index.html.eex:22
 #: web/templates/private_conversation/show.html.eex:5
-#: web/views/notification_view.ex:40 web/views/profile_helpers.ex:12
+#: web/views/notification_view.ex:43 web/views/profile_helpers.ex:12
 msgid "User deleted"
 msgstr "Slettet bruger"
 
@@ -927,6 +936,7 @@ msgstr "Redigér Betingelser"
 msgid "However, that doesn't meant that you should be an dick, so behave!"
 msgstr "Det betyder dog ikke at du har lov til at være et røvhul, så opfør dig pænt!"
 
+#: web/templates/admin/calendar_event/index.html.eex:13
 #: web/templates/admin/term/index.html.eex:15
 msgid "Inserted at"
 msgstr "Oprettet"
@@ -1026,12 +1036,12 @@ msgstr "Du har ikke adgang til den forespurgte side!"
 msgid "Blog posts"
 msgstr "Blog posts"
 
-#: web/templates/help/embeds.html.eex:12 web/views/comment_view.ex:21
+#: web/templates/help/embeds.html.eex:12 web/views/comment_view.ex:22
 msgid "Comments"
 msgstr "Kommentarer"
 
 #: web/templates/help/embeds.html.eex:3
-#: web/templates/layout/sidebar.html.eex:35
+#: web/templates/layout/sidebar.html.eex:41
 msgid "Embeds"
 msgstr "Embeds"
 
@@ -1045,7 +1055,7 @@ msgstr "Forumtråde"
 
 #: web/templates/help/embeds.html.eex:2
 #: web/templates/help/verification.html.eex:2
-#: web/templates/layout/sidebar.html.eex:23
+#: web/templates/layout/sidebar.html.eex:29
 msgid "Help"
 msgstr "Hjælp"
 
@@ -1129,11 +1139,11 @@ msgstr "hvor ID er id’et på %{type}."
 msgid "Age"
 msgstr "Alder"
 
-#: web/views/time_helpers.ex:30
+#: web/views/time_helpers.ex:35
 msgid "April"
 msgstr "April"
 
-#: web/views/time_helpers.ex:34
+#: web/views/time_helpers.ex:39
 msgid "August"
 msgstr "August"
 
@@ -1142,43 +1152,43 @@ msgstr "August"
 msgid "Birthday"
 msgstr "Fødselsdato"
 
-#: web/views/time_helpers.ex:38
+#: web/views/time_helpers.ex:43
 msgid "December"
 msgstr "December"
 
-#: web/views/time_helpers.ex:28
+#: web/views/time_helpers.ex:33
 msgid "February"
 msgstr "Februar"
 
-#: web/views/time_helpers.ex:27
+#: web/views/time_helpers.ex:32
 msgid "January"
 msgstr "Januar"
 
-#: web/views/time_helpers.ex:33
+#: web/views/time_helpers.ex:38
 msgid "July"
 msgstr "Juli"
 
-#: web/views/time_helpers.ex:32
+#: web/views/time_helpers.ex:37
 msgid "June"
 msgstr "Juni"
 
-#: web/views/time_helpers.ex:29
+#: web/views/time_helpers.ex:34
 msgid "March"
 msgstr "Marts"
 
-#: web/views/time_helpers.ex:31
+#: web/views/time_helpers.ex:36
 msgid "May"
 msgstr "Maj"
 
-#: web/views/time_helpers.ex:37
+#: web/views/time_helpers.ex:42
 msgid "November"
 msgstr "November"
 
-#: web/views/time_helpers.ex:36
+#: web/views/time_helpers.ex:41
 msgid "October"
 msgstr "Oktober"
 
-#: web/views/time_helpers.ex:35
+#: web/views/time_helpers.ex:40
 msgid "September"
 msgstr "September"
 
@@ -1215,11 +1225,11 @@ msgstr "%{who} skrev en kommentar til fotoet: %{what}"
 msgid "%{who} wrote a reply to the forum topic: %{what}"
 msgstr "%{who} skrev et svar til forumtråden: %{what}"
 
-#: web/views/comment_view.ex:20
+#: web/views/comment_view.ex:21
 msgid "Guest Book Entries"
 msgstr "Gæstebogsindlæg"
 
-#: web/views/notification_helpers.ex:35
+#: web/views/notification_helpers.ex:41
 msgid "Notifications:"
 msgstr "Notifikationer:"
 
@@ -1448,15 +1458,15 @@ msgstr "Vi vil se nærmere på problemet,"
 msgid "but feel free to contact our support if the problem persists:"
 msgstr "men du er velkommen til at skrive til vores support hvis problemet fortsætter:"
 
-#: web/templates/page/front_page.html.eex:23
+#: web/templates/page/front_page.html.eex:4
 msgid "Recently logged in users"
 msgstr "Senest logget ind"
 
-#: web/views/comment_view.ex:67
+#: web/views/comment_view.ex:73
 msgid "Cancel"
 msgstr "Annullér"
 
-#: web/views/comment_view.ex:65
+#: web/views/comment_view.ex:71
 msgid "Are you sure you want to delete this comment?"
 msgstr "Er du sikker på at du vil slette denne kommentar?"
 
@@ -1545,7 +1555,7 @@ msgid "How much would you like to donate?"
 msgstr "Hvor meget vil du donere?"
 
 #: web/templates/donation/new.html.eex:7
-#: web/templates/layout/sidebar.html.eex:50
+#: web/templates/layout/sidebar.html.eex:56
 msgid "Support %{site}"
 msgstr "Støt %{site}"
 
@@ -1597,7 +1607,7 @@ msgstr "Vi har modtaget din donation og takker ydmygt for din hjælp med at gør
 msgid "Edited"
 msgstr "Redigeret"
 
-#: web/models/user.ex:368
+#: web/models/user.ex:369
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr "I too enjoy registering on websites, fellow human… Bleep Bloop!"
 
@@ -1636,7 +1646,7 @@ msgid "Add to Contacts"
 msgstr "Føj til kontaktliste"
 
 #: web/templates/friendship/index.html.eex:3
-#: web/templates/layout/sidebar.html.eex:69
+#: web/templates/layout/sidebar.html.eex:75
 msgid "Contact List"
 msgstr "Kontaktliste"
 
@@ -1653,6 +1663,7 @@ msgstr "Kontakter"
 msgid "Pending Requests"
 msgstr "Ventende anmodninger"
 
+#: web/templates/admin/calendar_event/show.html.eex:27
 #: web/templates/friendship/_my_pending_friendships.html.eex:30
 msgid "Reject"
 msgstr "Afvis"
@@ -1705,7 +1716,7 @@ msgstr "Kommentarer er deaktiveret på denne blog"
 msgid "Hide comments?"
 msgstr "Skjul kommentarer?"
 
-#: web/templates/layout/sidebar.html.eex:29
+#: web/templates/layout/sidebar.html.eex:35
 msgid "Terms and Rules"
 msgstr "Betingelser og Regler"
 
@@ -1717,7 +1728,7 @@ msgstr "Kommentaren blev opdateret."
 msgid "Edit comment"
 msgstr "Redigér kommentar"
 
-#: web/controllers/comment_controller.ex:103
+#: web/controllers/comment_controller.ex:110
 msgid "You can only edit a comment in the first %{minutes} minutes!"
 msgstr "Du kan kun redigere din kommentar i den første %{minutes} minutter!"
 
@@ -1729,7 +1740,7 @@ msgstr "Kontodetaljer"
 msgid "Any"
 msgstr "Alle"
 
-#: web/views/comment_view.ex:42
+#: web/views/comment_view.ex:47
 msgid "Blog Post"
 msgstr "Blog"
 
@@ -1778,7 +1789,7 @@ msgstr "Ingen"
 msgid "Not Verified!"
 msgstr "Ikke verificeret!"
 
-#: web/views/comment_view.ex:43
+#: web/views/comment_view.ex:48
 msgid "Photo"
 msgstr "Foto"
 
@@ -1897,7 +1908,7 @@ msgid "This can either mean that an admin has not yet had the time to decide on 
 msgstr "Dette kan betyde at en admin endnu ikke har haft tid til at vurdere om du kan verificeres, eller det kan være at det blev vurderet at du ikke levede op til kriterierne for verifikation."
 
 #: web/templates/help/verification.html.eex:3
-#: web/templates/layout/sidebar.html.eex:41
+#: web/templates/layout/sidebar.html.eex:47
 msgid "User verification"
 msgstr "Brugerverifikation"
 
@@ -1941,6 +1952,7 @@ msgstr "Tråd"
 msgid "Views/Comments"
 msgstr "Visninger/Kommentarer"
 
+#: web/templates/admin/calendar_event/index.html.eex:11
 #: web/templates/admin/user/_blocks.html.eex:10
 #: web/templates/admin/user/_recent_comments.html.eex:9
 #: web/templates/admin/user/_recent_forum_replies.html.eex:9
@@ -1955,3 +1967,106 @@ msgstr "Administratorbesked"
 #: web/templates/forum_topic/show.html.eex:34
 msgid "This topic is locked"
 msgstr "Dette emne er låst"
+
+#: web/templates/calendar_event/index.html.eex:5
+#: web/templates/calendar_event/new.html.eex:1
+msgid "Create event"
+msgstr "Opret begivenhed"
+
+#: web/templates/admin/calendar_event/index.html.eex:3
+#: web/templates/admin/calendar_event/show.html.eex:3
+#: web/templates/calendar_event/index.html.eex:1
+#: web/templates/calendar_event/show.html.eex:2
+#: web/templates/layout/sidebar.html.eex:22
+#: web/templates/layout/sidebar_admin.html.eex:18
+msgid "Event calendar"
+msgstr "Eventkalender"
+
+#: web/templates/calendar_event/_form.html.eex:12
+msgid "Give a good description of the event"
+msgstr "Giv en god beskrivelse af begivenheden"
+
+#: web/templates/calendar_event/_form.html.eex:52
+#: web/templates/calendar_event/_form.html.eex:55
+msgid "Image"
+msgstr "Billede"
+
+#: web/templates/calendar_event/_form.html.eex:69
+msgid "Save"
+msgstr "Gem"
+
+#: web/templates/calendar_event/_form.html.eex:44
+msgid "Specify a website where there is more information about the event, if available"
+msgstr "Angiv et websted hvor man kan læse mere om begivenheden, hvis det findes"
+
+#: web/controllers/calendar_event_controller.ex:42
+msgid "The event has now been created and will be shown on the site when it has been approved by an administrator."
+msgstr "Begivenheden er nu oprettet og vil blive vist så snart en administrator har godkendt den."
+
+#: web/templates/calendar_event/_form.html.eex:37
+msgid "Venue, address, city etc."
+msgstr "Spillested, adresse, by osv."
+
+#: web/templates/calendar_event/_form.html.eex:20
+msgid "When does the event begin?"
+msgstr "Hvornår starter begivenheden?"
+
+#: web/templates/calendar_event/_form.html.eex:28
+msgid "When does the event end?"
+msgstr "Hvornår slutter begivenheden?"
+
+#: web/templates/calendar_event/_form.html.eex:36
+msgid "Where does the event take place?"
+msgstr "Hvor finder begivenheden sted?"
+
+#: web/views/notification_view.ex:37
+msgid "%{who} wrote a comment on the calendar event: %{what}"
+msgstr "%{who} skrev en kommentar til begivenheden: %{what}"
+
+#: web/templates/admin/calendar_event/show.html.eex:23
+msgid "Approve"
+msgstr "Godkend"
+
+#: web/templates/calendar_event/edit.html.eex:1
+msgid "Edit event"
+msgstr "Redigér begivenhed"
+
+#: web/views/comment_view.ex:49
+msgid "Event"
+msgstr "Begivenhed"
+
+#: web/controllers/calendar_event_controller.ex:72
+msgid "Event deleted successfully."
+msgstr "Begivenheden blev slettet."
+
+#: web/templates/admin/calendar_event/show.html.eex:16
+msgid "Pending approval"
+msgstr "Venter på godkendelse"
+
+#: web/controllers/admin/calendar_events_controller.ex:36
+msgid "The event could not be approved!"
+msgstr "Begivenheden kunne ikke godkendes!"
+
+#: web/controllers/admin/calendar_events_controller.ex:50
+msgid "The event could not be rejected!"
+msgstr "Begivenheden kunne ikke afvises!"
+
+#: web/controllers/admin/calendar_events_controller.ex:32
+msgid "The event is now approved."
+msgstr "Begivenheden er nu godkendt."
+
+#: web/controllers/admin/calendar_events_controller.ex:46
+msgid "The event is now rejected."
+msgstr "Begivenheden er nu afvist."
+
+#: web/controllers/calendar_event_controller.ex:61
+msgid "The event was updated successfully."
+msgstr "Begivenheden blev opdateret."
+
+#: web/templates/admin/calendar_event/show.html.eex:19
+msgid "This event needs to be approved before it will be shown to regular users"
+msgstr "Denne begivenhed skal godkendes før den vil blive vist til normale brugere"
+
+#: web/templates/admin/calendar_event/index.html.eex:12
+msgid "User"
+msgstr "Bruger"

@@ -59,6 +59,12 @@ defmodule Helheim.NotificationTest do
       notification = Notification |> Notification.with_preloads |> Repo.get!(notification.id)
       assert notification.forum_topic
     end
+
+    test "preloads the associated calendar_event" do
+      notification = insert(:notification, calendar_event: insert(:calendar_event))
+      notification = Notification |> Notification.with_preloads |> Repo.get!(notification.id)
+      assert notification.calendar_event
+    end
   end
 
   describe "subject/1" do
@@ -90,6 +96,12 @@ defmodule Helheim.NotificationTest do
       notification = insert(:notification, forum_topic: insert(:forum_topic))
       notification = Notification |> Notification.with_preloads |> Repo.get!(notification.id)
       %Helheim.ForumTopic{} = Notification.subject(notification)
+    end
+
+    test "returns the associated calendar_event" do
+      notification = insert(:notification, calendar_event: insert(:calendar_event))
+      notification = Notification |> Notification.with_preloads |> Repo.get!(notification.id)
+      %Helheim.CalendarEvent{} = Notification.subject(notification)
     end
   end
 end

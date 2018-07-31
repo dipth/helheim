@@ -168,4 +168,29 @@ defmodule Helheim.Factory do
       accepted_at: DateTime.utc_now
     }
   end
+
+  def calendar_event_factory do
+    %Helheim.CalendarEvent{
+      user:           build(:user),
+      uuid:           SecureRandom.uuid(),
+      title:          "Test Event",
+      description:    "This is an awesome event for testing",
+      starts_at:      Timex.shift(Timex.now, days: 14),
+      ends_at:        Timex.shift(Timex.now, days: 15),
+      location:       "The Test Arena",
+      url:            nil,
+      image:          nil,
+      approved_at:    DateTime.utc_now,
+      rejected_at:    nil,
+      comment_count:  0,
+    }
+  end
+
+  def calendar_event_comment_factory do
+    %Helheim.Comment{
+      author: build(:user),
+      calendar_event: build(:calendar_event),
+      body: "My Aweseome Comment"
+    }
+  end
 end

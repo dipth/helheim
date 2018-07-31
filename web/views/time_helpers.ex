@@ -9,6 +9,11 @@ defmodule Helheim.TimeHelpers do
     string
   end
 
+  def lt(timestamp, :long, :no_shift) do
+    {:ok, string} = Timex.lformat(timestamp, "%A d. %d. %B %Y, kl. %H:%M", "da", :strftime)
+    string
+  end
+
   def time_ago_in_words(timestamp, opts \\ []) do
     content = timestamp |> Timex.from_now("da")
     if opts[:simple] == true do

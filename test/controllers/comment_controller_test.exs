@@ -7,6 +7,7 @@ defmodule Helheim.CommentControllerTest do
   alias Helheim.BlogPost
   alias Helheim.Photo
   alias Helheim.Comment
+  alias Helheim.CalendarEvent
 
   @comment_attrs %{body: "My Comment"}
   @invalid_attrs %{body: ""}
@@ -241,6 +242,55 @@ defmodule Helheim.CommentControllerTest do
   end
 
   ##############################################################################
+  # create/2 for a calendar_event
+  describe "create/2 for a calendar_event when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it redirects to the event page with a success flash message when successfull", %{conn: conn, user: user},
+      CommentService, [], [create!: fn(_commentable, _author, _body) -> {:ok, %{comment: %{}}} end] do
+
+      calendar_event = Repo.get(CalendarEvent, insert(:calendar_event).id)
+      conn           = post conn, "/calendar_events/#{calendar_event.id}/comments", comment: @comment_attrs
+      assert called CommentService.create!(calendar_event, user, @comment_attrs[:body])
+      assert redirected_to(conn)       == calendar_event_path(conn, :show, calendar_event.id)
+      assert get_flash(conn, :success) == gettext("Comment created successfully")
+    end
+
+    test_with_mock "it redirects to the event page with an error flash message when unsuccessfull", %{conn: conn, user: user},
+      CommentService, [], [create!: fn(_commentable, _author, _body) -> {:error, :comment, %{}, []} end] do
+
+      calendar_event = Repo.get(CalendarEvent, insert(:calendar_event).id)
+      conn           = post conn, "/calendar_events/#{calendar_event.id}/comments", comment: @comment_attrs
+      assert called CommentService.create!(calendar_event, user, @comment_attrs[:body])
+      assert redirected_to(conn)     == calendar_event_path(conn, :show, calendar_event.id)
+      assert get_flash(conn, :error) == gettext("Unable to create comment")
+    end
+
+    test_with_mock "it does not invoke the CommentService if the event does not exist but instead shows a 404 error", %{conn: conn},
+      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+
+      assert_error_sent :not_found, fn ->
+        post conn, "/calendar_event/1/comments", comment: @comment_attrs
+      end
+    end
+  end
+
+  describe "create/2 for a calendar_event when not signed in" do
+    test_with_mock "it does not invoke the CommentService", %{conn: conn},
+      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+
+      calendar_event = insert(:calendar_event)
+      post conn, "/calendar_events/#{calendar_event.id}/comments", comment: @comment_attrs
+    end
+
+    test "it redirects to the login page", %{conn: conn} do
+      calendar_event = insert(:calendar_event)
+      conn           = post conn, "/calendar_events/#{calendar_event.id}/comments", comment: @comment_attrs
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
   # edit/2 for a profile
   describe "edit/2 for a profile when signed in" do
     setup [:create_and_sign_in_user]
@@ -400,6 +450,59 @@ defmodule Helheim.CommentControllerTest do
       photo = comment.photo
       album = photo.photo_album
       conn  = get conn, "/photo_albums/#{album.id}/photos/#{photo.id}/comments/#{comment.id}/edit"
+      assert redirected_to(conn) == session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # edit/2 for a calendar_event
+  describe "edit/2 for a calendar_event when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it returns a successful response", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment        = insert(:calendar_event_comment)
+      calendar_event = comment.calendar_event
+      conn           = get conn, "/calendar_events/#{calendar_event.id}/comments/#{comment.id}/edit"
+      assert html_response(conn, 200) =~ gettext("Edit comment")
+    end
+
+    test_with_mock "it redirects to an error page when supplying an non-existing calendar_event_id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      assert_error_sent :not_found, fn ->
+        comment        = insert(:calendar_event_comment)
+        calendar_event = comment.calendar_event
+        get conn, "/calendar_events/#{calendar_event.id + 1}/comments/#{comment.id}/edit"
+      end
+    end
+
+    test_with_mock "it redirects to an error page when supplying an non-existing id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      assert_error_sent :not_found, fn ->
+        comment        = insert(:calendar_event_comment)
+        calendar_event = comment.calendar_event
+        get conn, "/calendar_events/#{calendar_event.id}/comments/#{comment.id + 1}/edit"
+      end
+    end
+
+    test_with_mock "it redirects back to the event page if the comment is not editable by the user", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> false end] do
+
+      comment = insert(:calendar_event_comment)
+      calendar_event = comment.calendar_event
+      conn  = get conn, "/calendar_events/#{calendar_event.id}/comments/#{comment.id}/edit"
+      assert redirected_to(conn) == calendar_event_path(conn, :show, calendar_event.id)
+    end
+  end
+
+  describe "edit/2 for a calendar_event when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      comment        = insert(:calendar_event_comment)
+      calendar_event = comment.calendar_event
+      conn           = get conn, "/calendar_events/#{calendar_event.id}/comments/#{comment.id}/edit"
       assert redirected_to(conn) == session_path(conn, :new)
     end
   end
@@ -635,6 +738,83 @@ defmodule Helheim.CommentControllerTest do
       photo   = comment.photo
       album   = photo.photo_album
       conn    = put conn, "/photo_albums/#{album.id}/photos/#{photo.id}/comments/#{comment.id}", comment: @comment_attrs
+      comment = Repo.one(Comment)
+      assert redirected_to(conn) == session_path(conn, :new)
+      assert comment.body        == "Before"
+    end
+  end
+
+  ##############################################################################
+  # update/2 for a calendar_event
+  describe "update/2 for a calendar_event when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it updates the comment and redirects back to the event page", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      user           = insert(:user)
+      comment        = insert(:calendar_event_comment, author: user, body: "Before")
+      calendar_event = comment.calendar_event
+      conn           = put conn, "/calendar_events/#{calendar_event.id}/comments/#{comment.id}", comment: @comment_attrs
+      comment        = Repo.one(Comment)
+      assert redirected_to(conn)       == calendar_event_path(conn, :show, calendar_event.id)
+      assert comment.calendar_event_id == calendar_event.id
+      assert comment.author_id         == user.id
+      assert comment.body              == @comment_attrs.body
+    end
+
+    test_with_mock "it does not update the comment but re-renders the edit template when posting invalid attrs", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment = insert(:calendar_event_comment, body: "Before")
+      calendar_event = comment.calendar_event
+      conn    = put conn, "/calendar_events/#{calendar_event.id}/comments/#{comment.id}", comment: @invalid_attrs
+      comment = Repo.one(Comment)
+      assert html_response(conn, 200) =~ gettext("Edit comment")
+      assert comment.body == "Before"
+    end
+
+    test_with_mock "does not update the comment but redirects to an error page when supplying an non-existing calendar_event_id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment = insert(:calendar_event_comment, body: "Before")
+      calendar_event = comment.calendar_event
+      assert_error_sent :not_found, fn ->
+        put conn, "/calendar_events/#{calendar_event.id + 1}/comments/#{comment.id}", comment: @comment_attrs
+      end
+      comment = Repo.one(Comment)
+      assert comment.body == "Before"
+    end
+
+    test_with_mock "it does not update the comment but redirects to an error page when supplying an non-existing id", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> true end] do
+
+      comment = insert(:calendar_event_comment, body: "Before")
+      calendar_event = comment.calendar_event
+      assert_error_sent :not_found, fn ->
+        put conn, "/calendar_events/#{calendar_event.id}/comments/#{comment.id + 1}", comment: @comment_attrs
+      end
+      comment = Repo.one(Comment)
+      assert comment.body == "Before"
+    end
+
+    test_with_mock "it does not update the comment but redirects back to the guest book if it is not editable by the user", %{conn: conn},
+      Comment, [:passthrough], [editable_by?: fn(_comment, _user) -> false end] do
+
+      comment = insert(:calendar_event_comment, body: "Before")
+      calendar_event = comment.calendar_event
+      conn    = put conn, "/calendar_events/#{calendar_event.id}/comments/#{comment.id}", comment: @comment_attrs
+      comment = Repo.one(Comment)
+      assert redirected_to(conn) == calendar_event_path(conn, :show, calendar_event.id)
+      assert comment.body        == "Before"
+    end
+  end
+
+  describe "update/2 for a calendar_event when not signed in" do
+    test "it does not update the comment but redirects to the sign in page", %{conn: conn} do
+      comment = insert(:calendar_event_comment, body: "Before")
+      calendar_event = comment.calendar_event
+      conn    = put conn, "/calendar_events/#{calendar_event.id}/comments/#{comment.id}", comment: @comment_attrs
       comment = Repo.one(Comment)
       assert redirected_to(conn) == session_path(conn, :new)
       assert comment.body        == "Before"

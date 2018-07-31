@@ -1,0 +1,71 @@
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
+  <div class="card-block">
+    <div class="form-group <%= if f.errors[:title] do 'has-danger' end %>">
+      <%= label f, :title, gettext("Title"), class: "control-label" %>
+      <%= text_input f, :title, class: "form-control" %>
+      <%= if message = f.errors[:title] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% end %>
+    </div>
+
+    <div class="form-group <%= if f.errors[:body] do 'has-danger' end %>">
+      <%= label f, :description, gettext("Give a good description of the event"), class: "control-label" %>
+      <%= textarea f, :description, class: "form-control", rows: 10 %>
+      <%= if message = f.errors[:description] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% end %>
+    </div>
+
+    <div class="form-group starts-at <%= if f.errors[:starts_at] do 'has-danger' end %>">
+      <%= label f, :starts_at, gettext("When does the event begin?"), class: "control-label" %>
+      <%= text_input f, :starts_at, class: "form-control d-none" %>
+      <%= if message = f.errors[:starts_at] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% end %>
+    </div>
+
+    <div class="form-group ends-at <%= if f.errors[:ends_at] do 'has-danger' end %>">
+      <%= label f, :ends_at, gettext("When does the event end?"), class: "control-label" %>
+      <%= text_input f, :ends_at, class: "form-control d-none" %>
+      <%= if message = f.errors[:ends_at] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% end %>
+    </div>
+
+    <div class="form-group <%= if f.errors[:location] do 'has-danger' end %>">
+      <%= label f, :location, gettext("Where does the event take place?"), class: "control-label" %>
+      <%= text_input f, :location, class: "form-control", placeholder: gettext("Venue, address, city etc.") %>
+      <%= if message = f.errors[:location] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% end %>
+    </div>
+
+    <div class="form-group <%= if f.errors[:url] do 'has-danger' end %>">
+      <%= label f, :url, gettext("Specify a website where there is more information about the event, if available"), class: "control-label" %>
+      <%= text_input f, :url, class: "form-control", placeholder: "http://www." %>
+      <%= if message = f.errors[:url] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% end %>
+    </div>
+
+    <div class="form-group <%= if f.errors[:image] do 'has-danger' end %>">
+      <%= label f, :image, gettext("Image"), class: "control-label" %>
+      <div class="img-thumbnail img-thumbnail-with-form-control">
+        <%= if @changeset.data.image do %>
+          <img src="<%= Helheim.CalendarEventImage.url({@changeset.data.image, @changeset.data}, :large) %>" class="img-fluid mx-auto d-block" alt="<%= gettext "Image" %>">
+        <% end %>
+        <%= file_input f, :image, class: "form-control" %>
+      </div>
+      <%= if message = f.errors[:image] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% else %>
+        <small>
+          <%= gettext "Maximum file size: %{file_size}", file_size: Helheim.CalendarEventImage.max_file_size |> Crutches.Format.Number.as_human_size %><br>
+        </small>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Save" %></button>
+  </div>
+<% end %>

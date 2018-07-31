@@ -1,0 +1,17 @@
+.calendar-event .card-img-top {
+  width: 100%;
+}
+
+.calendar-event-date {
+  text-align: center;
+
+  .month {
+    color: $red;
+    font-weight: bold;
+  }
+
+  .day {
+    font-size: 1.2rem;
+  }
+}
+

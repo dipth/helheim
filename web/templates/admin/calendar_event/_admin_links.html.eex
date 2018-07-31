@@ -1,0 +1,12 @@
+<%= if Helheim.User.admin?(current_resource(@conn)) do %>
+  <p class="mb-1"><strong>ADMIN:</strong></p>
+
+  <%= link to: calendar_event_path(@conn, :edit, @calendar_event), class: "btn btn-sm btn-primary" do %>
+    <i class="fa fa-pencil"></i>
+    <%= gettext("Edit") %>
+  <% end %>
+  <%= link to: calendar_event_path(@conn, :delete, @calendar_event), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-sm" do %>
+    <i class="fa fa-trash"></i>
+    <%= gettext "Delete" %>
+  <% end %>
+<% end %>

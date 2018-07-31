@@ -20,6 +20,10 @@
 
 import 'intl/locale-data/jsonp/da.js';
 
+import moment from 'moment';
+import tz from 'moment-timezone';
+import 'moment/locale/da';
+
 import { Leaf } from "web/static/js/leaf";
 import { BootstrapStuff } from "web/static/js/bootstrap_stuff";
 import { ProfileSettings } from "web/static/js/profile_settings";
@@ -35,6 +39,7 @@ import { MentionableInput } from "web/static/js/mentionable";
 import { Mentionable } from "web/static/js/mentionable";
 import { PopoverConfirmable } from "web/static/js/popover_confirmable";
 import { DonationForm } from "web/static/js/donation_form";
+import { CalendarEventForm } from "web/static/js/calendar_event_form";
 
 export var App = {
   run: function(){
@@ -53,6 +58,7 @@ export var App = {
     Mentionable.run();
     PopoverConfirmable.run();
     DonationForm.run();
+    CalendarEventForm.run();
   }
 }
 

@@ -356,6 +356,96 @@ defmodule Helheim.NotificationSubscriptionControllerTest do
     end
   end
 
+  ##############################################################################
+  # update/2 for a calendar_event
+  describe "update/2 for a calendar_event when signed in" do
+    setup [:create_and_sign_in_user, :create_calendar_event]
+
+    test "creates an enabled subscription for the user for the given calendar_event when enabling", %{conn: conn, user: user, calendar_event: calendar_event} do
+      conn = put conn, "/calendar_events/#{calendar_event.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.one(NotificationSubscription)
+      assert conn.status                    == 200
+      assert subscription.user_id           == user.id
+      assert subscription.calendar_event_id == calendar_event.id
+      assert subscription.type              == @type_attr
+      assert subscription.enabled           == true
+    end
+
+    test "enables an existing disabled subscription for the user for the given calendar_event when enabling", %{conn: conn, user: user, calendar_event: calendar_event} do
+      subscription = insert(:notification_subscription, user: user, calendar_event: calendar_event, type: @type_attr, enabled: false)
+      conn = put conn, "/calendar_events/#{calendar_event.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert conn.status                    == 200
+      assert subscription.user_id           == user.id
+      assert subscription.calendar_event_id == calendar_event.id
+      assert subscription.type              == @type_attr
+      assert subscription.enabled           == true
+    end
+
+    test "enables an existing enabled subscription for the user for the given calendar_event when enabling", %{conn: conn, user: user, calendar_event: calendar_event} do
+      subscription = insert(:notification_subscription, user: user, calendar_event: calendar_event, type: @type_attr, enabled: true)
+      conn = put conn, "/calendar_events/#{calendar_event.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert conn.status                    == 200
+      assert subscription.user_id           == user.id
+      assert subscription.calendar_event_id == calendar_event.id
+      assert subscription.type              == @type_attr
+      assert subscription.enabled           == true
+    end
+
+    test "does not change subscriptions for other users", %{conn: conn, user: user, calendar_event: calendar_event} do
+      subscription = insert(:notification_subscription, calendar_event: calendar_event, type: @type_attr, enabled: false)
+      conn = put conn, "/calendar_events/#{calendar_event.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert conn.status                    == 200
+      refute subscription.user_id           == user.id
+      assert subscription.calendar_event_id == calendar_event.id
+      assert subscription.type              == @type_attr
+      assert subscription.enabled           == false
+    end
+
+    test "does not change subscriptions for other calendar_events", %{conn: conn, user: user, calendar_event: calendar_event} do
+      subscription = insert(:notification_subscription, user: user, profile: insert(:user), type: @type_attr, enabled: false)
+      conn = put conn, "/calendar_events/#{calendar_event.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert conn.status                    == 200
+      assert subscription.user_id           == user.id
+      refute subscription.calendar_event_id == calendar_event.id
+      assert subscription.type              == @type_attr
+      assert subscription.enabled           == false
+    end
+
+    test "does not change subscriptions with other types", %{conn: conn, user: user, calendar_event: calendar_event} do
+      subscription = insert(:notification_subscription, user: user, calendar_event: calendar_event, type: "blog_post", enabled: false)
+      conn = put conn, "/calendar_events/#{calendar_event.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert conn.status                    == 200
+      assert subscription.user_id           == user.id
+      assert subscription.calendar_event_id == calendar_event.id
+      refute subscription.type              == @type_attr
+      assert subscription.enabled           == false
+    end
+
+    test "it does not create a subscription but instead shows an error page if the calendar_event does not exist", %{conn: conn, calendar_event: calendar_event} do
+      assert_error_sent :not_found, fn ->
+        put conn, "/calendar_events/#{calendar_event.id + 1}/notification_subscription", type: @type_attr, enabled: "1"
+      end
+      refute Repo.one(NotificationSubscription)
+    end
+  end
+
+  describe "update/2 for a calendar_event when not signed in" do
+    setup [:create_calendar_event]
+
+    test "does not create any subscription and instead redirects to the login page", %{conn: conn, calendar_event: calendar_event} do
+      conn = put conn, "/calendar_events/#{calendar_event.id}/notification_subscription", type: @type_attr, enabled: "1"
+      assert redirected_to(conn) == session_path(conn, :new)
+      refute Repo.one(NotificationSubscription)
+    end
+  end
+
+  ##############################################################################
+  # SETUP
   defp create_profile(_context) do
     [profile: insert(:user)]
   end
@@ -370,5 +460,9 @@ defmodule Helheim.NotificationSubscriptionControllerTest do
 
   defp create_photo(_context) do
     [photo: insert(:photo)]
+  end
+
+  defp create_calendar_event(_context) do
+    [calendar_event: insert(:calendar_event)]
   end
 end

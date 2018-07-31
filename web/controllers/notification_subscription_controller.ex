@@ -5,6 +5,7 @@ defmodule Helheim.NotificationSubscriptionController do
   alias Helheim.BlogPost
   alias Helheim.ForumTopic
   alias Helheim.Photo
+  alias Helheim.CalendarEvent
 
   def update(conn, %{"profile_id" => profile_id, "type" => type, "enabled" => _}),
     do: enable(conn, type, Repo.get!(User, profile_id))
@@ -25,6 +26,11 @@ defmodule Helheim.NotificationSubscriptionController do
     do: enable(conn, type, Repo.get!(Photo, photo_id))
   def update(conn, %{"photo_id" => photo_id, "type" => type}),
     do: disable(conn, type, Repo.get!(Photo, photo_id))
+
+  def update(conn, %{"calendar_event_id" => calendar_event_id, "type" => type, "enabled" => _}),
+    do: enable(conn, type, Repo.get!(CalendarEvent, calendar_event_id))
+  def update(conn, %{"calendar_event_id" => calendar_event_id, "type" => type}),
+    do: disable(conn, type, Repo.get!(CalendarEvent, calendar_event_id))
 
   defp enable(conn, type, subject) do
     {:ok, _} = NotificationSubscription.enable!(current_resource(conn), type, subject)

@@ -17,6 +17,7 @@ defmodule Helheim.Notification do
     belongs_to :photo_album,    Helheim.PhotoAlbum
     belongs_to :photo,          Helheim.Photo
     belongs_to :forum_topic,    Helheim.ForumTopic
+    belongs_to :calendar_event, Helheim.CalendarEvent
   end
 
   def newest(query) do
@@ -31,7 +32,7 @@ defmodule Helheim.Notification do
 
   def with_preloads(query) do
     query
-    |> preload([:trigger_person, :profile, :blog_post, :photo_album, :photo, :forum_topic])
+    |> preload([:trigger_person, :profile, :blog_post, :photo_album, :photo, :forum_topic, :calendar_event])
   end
 
   def subject(notification) do
@@ -39,6 +40,7 @@ defmodule Helheim.Notification do
     notification.blog_post ||
     notification.photo_album ||
     notification.photo ||
-    notification.forum_topic
+    notification.forum_topic ||
+    notification.calendar_event
   end
 end

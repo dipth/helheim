@@ -7,6 +7,7 @@ defmodule Helheim.CommentService do
   alias Helheim.User
   alias Helheim.BlogPost
   alias Helheim.Photo
+  alias Helheim.CalendarEvent
   alias Helheim.NotificationService
 
   def create!(commentable, author, body) do
@@ -36,20 +37,23 @@ defmodule Helheim.CommentService do
     |> put_commentable(commentable)
   end
 
-  defp put_commentable(changeset, %User{} = profile),       do: Changeset.put_assoc(changeset, :profile, profile)
-  defp put_commentable(changeset, %BlogPost{} = blog_post), do: Changeset.put_assoc(changeset, :blog_post, blog_post)
-  defp put_commentable(changeset, %Photo{} = photo),        do: Changeset.put_assoc(changeset, :photo, photo)
+  defp put_commentable(changeset, %User{} = profile),                 do: Changeset.put_assoc(changeset, :profile, profile)
+  defp put_commentable(changeset, %BlogPost{} = blog_post),           do: Changeset.put_assoc(changeset, :blog_post, blog_post)
+  defp put_commentable(changeset, %Photo{} = photo),                  do: Changeset.put_assoc(changeset, :photo, photo)
+  defp put_commentable(changeset, %CalendarEvent{} = calendar_event), do: Changeset.put_assoc(changeset, :calendar_event, calendar_event)
 
-  defp inc_comment_count(multi, %User{} = profile),       do: inc_comment_count(multi, User, profile.id)
-  defp inc_comment_count(multi, %BlogPost{} = blog_post), do: inc_comment_count(multi, BlogPost, blog_post.id)
-  defp inc_comment_count(multi, %Photo{} = photo),        do: inc_comment_count(multi, Photo, photo.id)
+  defp inc_comment_count(multi, %User{} = profile),                 do: inc_comment_count(multi, User, profile.id)
+  defp inc_comment_count(multi, %BlogPost{} = blog_post),           do: inc_comment_count(multi, BlogPost, blog_post.id)
+  defp inc_comment_count(multi, %Photo{} = photo),                  do: inc_comment_count(multi, Photo, photo.id)
+  defp inc_comment_count(multi, %CalendarEvent{} = calendar_event), do: inc_comment_count(multi, CalendarEvent, calendar_event.id)
   defp inc_comment_count(multi, model, id) do
     multi |> Multi.update_all(:comment_count, (model |> where(id: ^id)), inc: [comment_count: 1])
   end
 
-  defp dec_comment_count(multi, %User{} = profile),       do: dec_comment_count(multi, User, profile.id)
-  defp dec_comment_count(multi, %BlogPost{} = blog_post), do: dec_comment_count(multi, BlogPost, blog_post.id)
-  defp dec_comment_count(multi, %Photo{} = photo),        do: dec_comment_count(multi, Photo, photo.id)
+  defp dec_comment_count(multi, %User{} = profile),                 do: dec_comment_count(multi, User, profile.id)
+  defp dec_comment_count(multi, %BlogPost{} = blog_post),           do: dec_comment_count(multi, BlogPost, blog_post.id)
+  defp dec_comment_count(multi, %Photo{} = photo),                  do: dec_comment_count(multi, Photo, photo.id)
+  defp dec_comment_count(multi, %CalendarEvent{} = calendar_event), do: dec_comment_count(multi, CalendarEvent, calendar_event.id)
   defp dec_comment_count(multi, model, id) do
     multi |> Multi.update_all(:comment_count, (model |> where(id: ^id)), inc: [comment_count: -1])
   end

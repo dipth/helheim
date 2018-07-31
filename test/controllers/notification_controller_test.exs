@@ -54,6 +54,15 @@ defmodule Helheim.NotificationControllerTest do
       end
     end
 
+    test "it redirects to the calendar_event page when the subject of the notification is a calendar_event", %{conn: conn, user: user} do
+      subject      = insert(:calendar_event)
+      notification = insert(:notification, recipient: user)
+      with_mock Notification, [:passthrough], [subject: fn(_notification) -> subject end] do
+        conn = get conn, "/notifications/#{notification.id}"
+        assert redirected_to(conn) == calendar_event_path(conn, :show, subject)
+      end
+    end
+
     test "it marks the notification as clicked", %{conn: conn, user: user} do
       with_mocks([
         {Notification, [:passthrough], [subject: fn(_notification) -> insert(:user) end]},

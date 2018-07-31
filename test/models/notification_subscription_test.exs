@@ -85,6 +85,15 @@ defmodule Helheim.NotificationSubscriptionTest do
       [subscription] = NotificationSubscription |> NotificationSubscription.for_subject(photo) |> Repo.all
       assert subscription.id == subscription_1.id
     end
+
+    test "returns only subscriptions for the specified calendar_event" do
+      calendar_event  = insert(:calendar_event)
+      blog_post       = insert(:blog_post)
+      subscription_1  = insert(:notification_subscription, calendar_event: calendar_event)
+      _subscription_2 = insert(:notification_subscription, blog_post: blog_post)
+      [subscription] = NotificationSubscription |> NotificationSubscription.for_subject(calendar_event) |> Repo.all
+      assert subscription.id == subscription_1.id
+    end
   end
 
   ##############################################################################
@@ -130,6 +139,12 @@ defmodule Helheim.NotificationSubscriptionTest do
       [subscription] = NotificationSubscription |> NotificationSubscription.with_preloads() |> Repo.all
       assert subscription.photo
     end
+
+    test "preloads the associated calendar_event" do
+      insert(:notification_subscription, calendar_event: insert(:calendar_event))
+      [subscription] = NotificationSubscription |> NotificationSubscription.with_preloads() |> Repo.all
+      assert subscription.calendar_event
+    end
   end
 
   ##############################################################################
@@ -165,6 +180,14 @@ defmodule Helheim.NotificationSubscriptionTest do
       insert(:notification_subscription, photo: photo)
       subscription = NotificationSubscription |> NotificationSubscription.with_preloads() |> Repo.one
       %Helheim.Photo{id: ^id} = NotificationSubscription.subject(subscription)
+    end
+
+    test "returns the calendar_event if it is set" do
+      calendar_event = insert(:calendar_event)
+      id             = calendar_event.id
+      insert(:notification_subscription, calendar_event: calendar_event)
+      subscription = NotificationSubscription |> NotificationSubscription.with_preloads() |> Repo.one
+      %Helheim.CalendarEvent{id: ^id} = NotificationSubscription.subject(subscription)
     end
   end
 
@@ -339,6 +362,50 @@ defmodule Helheim.NotificationSubscriptionTest do
     test "it does not touch subscriptions for other types of events", %{user: user, forum_topic: forum_topic} do
       subscription = insert(:notification_subscription, user: user, forum_topic: forum_topic, type: "comment", enabled: false)
       NotificationSubscription.enable!(user, "forum_reply", forum_topic)
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert subscription.enabled == false
+    end
+  end
+
+  ##############################################################################
+  # enable!/3 for comments on a calendar_event
+  describe "enable! for comments on a calendar_event" do
+    setup [:create_user, :create_calendar_event]
+
+    test "it creates a new enabled subscription when none exists", %{user: user, calendar_event: calendar_event} do
+      NotificationSubscription.enable!(user, "comment", calendar_event)
+      subscription = Repo.one(NotificationSubscription)
+      assert subscription.user_id           == user.id
+      assert subscription.calendar_event_id == calendar_event.id
+      assert subscription.enabled           == true
+    end
+
+    test "it marks an existing subscription as enabled", %{user: user, calendar_event: calendar_event} do
+      insert(:notification_subscription, user: user, calendar_event: calendar_event, type: "comment", enabled: false)
+      NotificationSubscription.enable!(user, "comment", calendar_event)
+      subscription = Repo.one(NotificationSubscription)
+      assert subscription.user_id           == user.id
+      assert subscription.calendar_event_id == calendar_event.id
+      assert subscription.enabled           == true
+    end
+
+    test "it does not touch another users subscription", %{user: user, calendar_event: calendar_event} do
+      subscription = insert(:notification_subscription, calendar_event: calendar_event, type: "comment", enabled: false)
+      NotificationSubscription.enable!(user, "comment", calendar_event)
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert subscription.enabled == false
+    end
+
+    test "it does not touch subscriptions for other calendar_events", %{user: user, calendar_event: calendar_event} do
+      subscription = insert(:notification_subscription, user: user, calendar_event: insert(:calendar_event), type: "comment", enabled: false)
+      NotificationSubscription.enable!(user, "comment", calendar_event)
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert subscription.enabled == false
+    end
+
+    test "it does not touch subscriptions for other types of events", %{user: user, calendar_event: calendar_event} do
+      subscription = insert(:notification_subscription, user: user, calendar_event: calendar_event, type: "forum_reply", enabled: false)
+      NotificationSubscription.enable!(user, "comment", calendar_event)
       subscription = Repo.get(NotificationSubscription, subscription.id)
       assert subscription.enabled == false
     end
@@ -520,6 +587,52 @@ defmodule Helheim.NotificationSubscriptionTest do
     end
   end
 
+  ##############################################################################
+  # disable!/3 for comments on a calendar_event
+  describe "disable! for comments on a calendar_event" do
+    setup [:create_user, :create_calendar_event]
+
+    test "it creates a new disabled subscription when none exists", %{user: user, calendar_event: calendar_event} do
+      NotificationSubscription.disable!(user, "comment", calendar_event)
+      subscription = Repo.one(NotificationSubscription)
+      assert subscription.user_id           == user.id
+      assert subscription.calendar_event_id == calendar_event.id
+      assert subscription.enabled           == false
+    end
+
+    test "it marks an existing subscription as disabled", %{user: user, calendar_event: calendar_event} do
+      insert(:notification_subscription, user: user, calendar_event: calendar_event, type: "comment", enabled: true)
+      NotificationSubscription.disable!(user, "comment", calendar_event)
+      subscription = Repo.one(NotificationSubscription)
+      assert subscription.user_id           == user.id
+      assert subscription.calendar_event_id == calendar_event.id
+      assert subscription.enabled           == false
+    end
+
+    test "it does not touch another users subscription", %{user: user, calendar_event: calendar_event} do
+      subscription = insert(:notification_subscription, calendar_event: calendar_event, type: "comment", enabled: true)
+      NotificationSubscription.disable!(user, "comment", calendar_event)
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert subscription.enabled == true
+    end
+
+    test "it does not touch subscriptions for other calendar_events", %{user: user, calendar_event: calendar_event} do
+      subscription = insert(:notification_subscription, user: user, calendar_event: insert(:calendar_event), type: "comment", enabled: true)
+      NotificationSubscription.disable!(user, "comment", calendar_event)
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert subscription.enabled == true
+    end
+
+    test "it does not touch subscriptions for other types of events", %{user: user, calendar_event: calendar_event} do
+      subscription = insert(:notification_subscription, user: user, calendar_event: calendar_event, type: "forum_reply", enabled: true)
+      NotificationSubscription.disable!(user, "comment", calendar_event)
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert subscription.enabled == true
+    end
+  end
+
+  ##############################################################################
+  # SETUP
   defp create_profile(_context) do
     [profile: insert(:user)]
   end
@@ -534,5 +647,9 @@ defmodule Helheim.NotificationSubscriptionTest do
 
   defp create_forum_topic(_context) do
     [forum_topic: insert(:forum_topic)]
+  end
+
+  defp create_calendar_event(_context) do
+    [calendar_event: insert(:calendar_event)]
   end
 end

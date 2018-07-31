@@ -90,6 +90,13 @@ defmodule Helheim.CommentController do
     |> assign(:redirect_to, public_profile_photo_album_photo_path(conn, :show, photo.photo_album.user, photo.photo_album, photo))
   end
 
+  defp assign_commentable(conn, %{"calendar_event_id" => calendar_event_id}) do
+    calendar_event = Repo.get!(Helheim.CalendarEvent, calendar_event_id)
+    conn
+    |> assign(:commentable, calendar_event)
+    |> assign(:redirect_to, calendar_event_path(conn, :show, calendar_event))
+  end
+
   defp find_comment(conn, _) do
     comment = assoc(conn.assigns[:commentable], :comments)
               |> preload(:author)

@@ -28,6 +28,12 @@ defmodule Helheim.NotificationHelpers do
     notifications_switch(enabled, type, path)
   end
 
+  def notifications_switch(conn, user, type, %Helheim.CalendarEvent{} = calendar_event) do
+    enabled = find_enabled_subscription(user, type, calendar_event) != nil
+    path    = calendar_event_notification_subscription_path(conn, :update, calendar_event)
+    notifications_switch(enabled, type, path)
+  end
+
   defp notifications_switch(enabled, type, path) do
     form_tag(path, method: :patch) do
       [

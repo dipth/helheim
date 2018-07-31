@@ -54,6 +54,7 @@ defmodule Helheim.User do
     has_many :donations,                 Helheim.Donation
     has_many :forum_topics,              Helheim.ForumTopic
     has_many :forum_replies,             Helheim.ForumReply
+    has_many :calendar_events,           Helheim.CalendarEvent
     belongs_to :verifier,                Helheim.User
   end
 
@@ -148,7 +149,7 @@ defmodule Helheim.User do
   def sort(query, "confirmed_at"),  do: sort(query, "confirmed_at", "asc")
   def sort(query, "last_login_at"), do: sort(query, "last_login_at", "asc")
   def sort(query, "last_login_ip"), do: sort(query, "last_login_ip", "asc")
-  
+
   def sort(query, nil, _),                  do: query
   def sort(query, "", _),                   do: query
   def sort(query, "id", "asc"),             do: from u in query, order_by: [asc: u.id]
