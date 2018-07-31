@@ -4,7 +4,7 @@ defmodule Helheim.EmbedHelpers do
   import Phoenix.HTML.Link
   alias Phoenix.HTML.Safe
 
-  @url_regex ~r/((?:http|https):\/\/)?([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-;]*[\w@?^=%&\/~+#-])?/i
+  @url_regex ~r/(?:https?:\/\/)(?:[a-z0-9]+\.)?[a-z0-9]+\.(?:dk|com|net|de|org|be|io)(?::\d+)?\/?(?:[a-z0-9-_\/?&=\.]+)?/i
 
   @youtube_hosts ["youtube.com", "youtu.be"]
   @youtube_id_regex ~r/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/i
@@ -24,16 +24,20 @@ defmodule Helheim.EmbedHelpers do
   @helheim_cloudfront_hosts ["d3ki6vg87hrfvz.cloudfront.net"]
 
   def replace_urls(content) do
-    content =
-      content
-      |> text_to_html()
-      |> safe_to_string()
-    Regex.replace(@url_regex, content, &(replace_url(&1, &2, &3, &4)))
-    |> raw()
+    try do
+      content =
+        content
+        |> text_to_html()
+        |> safe_to_string()
+      Regex.replace(@url_regex, content, &(replace_url(&1)))
+      |> raw()
+    rescue
+      _ -> content |> text_to_html()
+    end
   end
 
-  defp replace_url(match, _protocol, host, _path) do
-    match
+  defp replace_url(match) do
+    %{host: host} = URI.parse(match)
     cond do
       String.contains?(host, @youtube_hosts) ->
         replace_youtube(match)
