@@ -33,7 +33,7 @@ defmodule Helheim.AcceptanceCase do
   setup tags do
     Gettext.put_locale(Helheim.Gettext, "da")
 
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Helheim.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Helheim.Repo, ownership_timeout: 60000)
 
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(Helheim.Repo, {:shared, self()})

@@ -6,6 +6,7 @@ defmodule Helheim.CommentServiceTest do
   alias Helheim.User
   alias Helheim.BlogPost
   alias Helheim.Photo
+  alias Helheim.CalendarEvent
   alias Helheim.NotificationService
 
   @valid_body "My Comment"
@@ -174,6 +175,60 @@ defmodule Helheim.CommentServiceTest do
   end
 
   ##############################################################################
+  # create!/3 for a calendar_event
+  describe "create/3 for a calendar_event with valid author and body" do
+    setup [:create_author, :create_calendar_event]
+
+    test "creates a comment on the calendar_event from the author with the specified body", %{author: author, calendar_event: calendar_event} do
+      {:ok, %{comment: comment}} = CommentService.create!(calendar_event, author, @valid_body)
+      assert comment.author_id         == author.id
+      assert comment.calendar_event_id == calendar_event.id
+      assert comment.body              == @valid_body
+    end
+
+    test "increments the comment_count of the calendar_event", %{author: author, calendar_event: calendar_event} do
+      CommentService.create!(calendar_event, author, @valid_body)
+      calendar_event = Repo.get(CalendarEvent, calendar_event.id)
+      assert calendar_event.comment_count == 1
+    end
+
+    test_with_mock "triggers notifications", %{author: author, calendar_event: calendar_event},
+      NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
+
+      CommentService.create!(calendar_event, author, @valid_body)
+      assert called NotificationService.create_async!(:_, "comment", calendar_event, author)
+    end
+  end
+
+  describe "create/3 for a calendar_event with invalid body" do
+    setup [:create_author, :create_calendar_event]
+
+    test "does not create any comments", %{author: author, calendar_event: calendar_event} do
+      CommentService.create!(calendar_event, author, @invalid_body)
+      refute Repo.one(Comment)
+    end
+
+    test "returns :error, the failed operation, the failed value and changes so far", %{author: author, calendar_event: calendar_event} do
+      {:error, failed_operation, failed_value, changes_so_far} = CommentService.create!(calendar_event, author, @invalid_body)
+      assert failed_operation
+      assert failed_value
+      assert changes_so_far
+    end
+
+    test "does not increment the comment_count of the calendar_event", %{author: author, calendar_event: calendar_event} do
+      CommentService.create!(calendar_event, author, @invalid_body)
+      calendar_event = Repo.get(CalendarEvent, calendar_event.id)
+      assert calendar_event.comment_count == 0
+    end
+
+    test_with_mock "does not trigger notifications", %{author: author, calendar_event: calendar_event},
+      NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> raise "NotificationService was called!" end] do
+
+      CommentService.create!(calendar_event, author, @invalid_body)
+    end
+  end
+
+  ##############################################################################
   # delete!/3
   describe "delete/3" do
     setup [:create_user, :create_comment]
@@ -285,6 +340,8 @@ defmodule Helheim.CommentServiceTest do
     end
   end
 
+  ##############################################################################
+  # SETUP
   defp create_author(_context) do
     author = insert(:user)
     [author: author]
@@ -303,6 +360,11 @@ defmodule Helheim.CommentServiceTest do
   defp create_photo(_context) do
     photo = insert(:photo)
     [photo: photo]
+  end
+
+  defp create_calendar_event(_context) do
+    calendar_event = insert(:calendar_event)
+    [calendar_event: calendar_event]
   end
 
   defp create_comment(_context) do

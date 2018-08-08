@@ -1,0 +1,22 @@
+<h1 class="mt-2"><%= gettext "Event calendar" %></h1>
+
+<%= link to: calendar_event_path(@conn, :new), class: "btn btn-sm btn-outline-primary" do %>
+  <i class="fa fa-plus"></i>
+  <%= gettext "Create event" %>
+<% end %>
+
+<hr>
+
+<%= for {_year, _month, title} = key <- @months do %>
+  <h4 class="mb-1">
+    <i class="fa fa-fw fa-calendar"></i>
+    <%= title %>
+  </h4>
+  <%= for calendar_event <- @grouped_calendar_events[key] do %>
+    <%= render "_list_entry_card.html", conn: @conn,
+                                        calendar_event: calendar_event %>
+  <% end %>
+  <hr>
+<% end %>
+
+<%= lpaginate @conn, @calendar_events %>

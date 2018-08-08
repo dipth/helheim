@@ -1,0 +1,12 @@
+<div class="media mb-2">
+  <%= img_tag(Helheim.CalendarEventImage.url({@calendar_event.image, @calendar_event}, :tiny), class: "mr-1") %>
+  <div class="media-body">
+    <h5 class="mb-0"><%= link @calendar_event.title, to: calendar_event_path(@conn, :show, @calendar_event) %></h5>
+    <%= comment_count_badge @calendar_event %>
+    <span class="badge badge-default">
+      <i class="fa fa-fw fa-calendar"></i>
+      <%= calendar_event_timestamp(@calendar_event.starts_at) |> elem(1) %>
+    </span>
+    <p><%= Crutches.String.truncate(@calendar_event.description, 250) %></p>
+  </div>
+</div>

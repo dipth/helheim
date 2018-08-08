@@ -204,6 +204,56 @@ defmodule Helheim.NotificationServiceTest do
   end
 
   ##############################################################################
+  # create!/3 for a comment on a calendar_event
+  describe "create!/3 for a comment on a calendar_event" do
+    setup [:create_user, :create_trigger_person, :create_calendar_event]
+
+    test "creates a notification for a subscription that matches the arguments",
+      %{user: user, trigger_person: trigger_person, calendar_event: calendar_event} do
+
+      insert(:notification_subscription, user: user, type: "comment", calendar_event: calendar_event, enabled: true)
+      NotificationService.create!("comment", calendar_event, trigger_person)
+      notification = Repo.one!(Notification)
+      assert notification.recipient_id      == user.id
+      assert notification.type              == "comment"
+      assert notification.calendar_event_id == calendar_event.id
+      assert notification.trigger_person_id == trigger_person.id
+    end
+
+    test "does not create a notification for a subscription with a different type value",
+      %{user: user, trigger_person: trigger_person, calendar_event: calendar_event} do
+
+      insert(:notification_subscription, user: user, type: "foo", calendar_event: calendar_event, enabled: true)
+      NotificationService.create!("comment", calendar_event, trigger_person)
+      refute Repo.one(Notification)
+    end
+
+    test "does not create a notification for a subscription with a different subject",
+      %{user: user, trigger_person: trigger_person, calendar_event: calendar_event} do
+
+      insert(:notification_subscription, user: user, type: "comment", calendar_event: insert(:calendar_event), enabled: true)
+      NotificationService.create!("comment", calendar_event, trigger_person)
+      refute Repo.one(Notification)
+    end
+
+    test "does not create a notification for a subscription that is disabled",
+      %{user: user, trigger_person: trigger_person, calendar_event: calendar_event} do
+
+      insert(:notification_subscription, user: user, type: "comment", calendar_event: calendar_event, enabled: false)
+      NotificationService.create!("comment", calendar_event, trigger_person)
+      refute Repo.one(Notification)
+    end
+
+    test "does not create a notification if the trigger person is the same as the subscriber",
+      %{trigger_person: trigger_person, calendar_event: calendar_event} do
+
+      insert(:notification_subscription, user: trigger_person, type: "comment", calendar_event: calendar_event, enabled: true)
+      NotificationService.create!("comment", calendar_event, trigger_person)
+      refute Repo.one(Notification)
+    end
+  end
+
+  ##############################################################################
   # mark_as_clicked!/1
   describe "mark_as_clicked!/1" do
     test "updates the clicked_at value of the notification to the current utc time" do
@@ -214,9 +264,12 @@ defmodule Helheim.NotificationServiceTest do
     end
   end
 
+  ##############################################################################
+  # SETUP
   defp create_trigger_person(_context), do: [trigger_person: insert(:user)]
   defp create_profile(_context),        do: [profile: insert(:user)]
   defp create_blog_post(_context),      do: [blog_post: insert(:blog_post)]
   defp create_forum_topic(_context),    do: [forum_topic: insert(:forum_topic)]
   defp create_photo(_context),          do: [photo: insert(:photo)]
+  defp create_calendar_event(_context), do: [calendar_event: insert(:calendar_event)]
 end

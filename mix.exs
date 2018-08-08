@@ -52,7 +52,7 @@ defmodule Helheim.Mixfile do
      {:calecto, "~> 0.16.0"},
      {:timex, "~> 3.0"},
      {:timex_ecto, "~> 3.0"},
-     {:wallaby, "~> 0.18.1"},
+     {:wallaby, "~> 0.20.0", [runtime: false, only: :test]},
      {:ex_machina, "~> 2.0", only: :test},
      {:sentry, "~> 5.0.1"},
      {:arc, "~> 0.8.0"},
@@ -80,8 +80,20 @@ defmodule Helheim.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"],
-     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
+    [
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "test": [
+        "assets.compile --quiet",
+        "ecto.create --quiet",
+        "ecto.migrate",
+        "test"
+      ],
+      "assets.compile": &compile_assets/1
+    ]
+  end
+
+  defp compile_assets(_) do
+    Mix.shell.cmd("brunch build")
   end
 end

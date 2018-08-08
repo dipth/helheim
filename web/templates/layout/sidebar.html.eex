@@ -16,6 +16,12 @@
           <%= gettext("Profiles") %>
         <% end %>
       </li>
+      <li class="nav-item">
+        <%= link to: calendar_event_path(@conn, :index), class: "nav-link" do %>
+          <i class="fa fa-calendar"></i>
+          <%= gettext("Event calendar") %>
+        <% end %>
+      </li>
 
       <li class="nav-item nav-dropdown">
         <a class="nav-link nav-dropdown-toggle" href="#">

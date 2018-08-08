@@ -28,7 +28,7 @@ msgstr ""
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
-#: web/templates/layout/sidebar.html.eex:50 web/templates/page/index.html.eex:3
+#: web/templates/layout/sidebar.html.eex:56 web/templates/page/index.html.eex:3
 msgid "Helheim"
 msgstr ""
 
@@ -337,15 +337,16 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:335
+#: web/models/user.ex:336
 msgid "does not match your current password"
 msgstr ""
 
+#: web/templates/calendar_event/_form.html.eex:63
 #: web/templates/profile/edit.html.eex:22
 msgid "Maximum file size: %{file_size}"
 msgstr ""
 
-#: web/templates/navbar/show.html.eex:25 web/views/comment_view.ex:41
+#: web/templates/navbar/show.html.eex:25 web/views/comment_view.ex:46
 msgid "Profile"
 msgstr ""
 
@@ -373,22 +374,22 @@ msgstr ""
 msgid "Remember me"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:4
+#: web/templates/page/front_page.html.eex:28
 #: web/templates/profile/show.html.eex:70
 msgid "Newest Blogs"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:13
+#: web/templates/page/front_page.html.eex:45
 #: web/templates/profile/show.html.eex:81
 msgid "Newest Forum Posts"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:45
+#: web/templates/page/front_page.html.eex:59
 #: web/templates/profile/show.html.eex:93
 msgid "Newest Photos"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:58
+#: web/templates/layout/sidebar.html.eex:64
 msgid "Your Profile"
 msgstr ""
 
@@ -407,10 +408,11 @@ msgstr ""
 
 #: web/templates/blog_post/edit.html.eex:2
 #: web/templates/blog_post/new.html.eex:2
-#: web/templates/layout/sidebar.html.eex:79
+#: web/templates/layout/sidebar.html.eex:85
 msgid "Your Blog Posts"
 msgstr ""
 
+#: web/templates/admin/calendar_event/_admin_links.html.eex:8
 #: web/templates/admin/forum_category/index.html.eex:13
 #: web/templates/admin/forum_category/index.html.eex:39
 #: web/templates/admin/term/index.html.eex:35
@@ -435,12 +437,14 @@ msgstr ""
 msgid "Blog post updated successfully."
 msgstr ""
 
+#: web/templates/admin/calendar_event/_admin_links.html.eex:10
 #: web/templates/blog_post/show.html.eex:32 web/templates/photo/show.html.eex:44
-#: web/templates/photo_album/show.html.eex:61 web/views/comment_view.ex:64
-#: web/views/comment_view.ex:66
+#: web/templates/photo_album/show.html.eex:61 web/views/comment_view.ex:70
+#: web/views/comment_view.ex:72
 msgid "Delete"
 msgstr ""
 
+#: web/templates/admin/calendar_event/_admin_links.html.eex:6
 #: web/templates/blog_post/show.html.eex:28
 #: web/templates/comment/comment.html.eex:16
 #: web/templates/forum_reply/forum_reply.html.eex:30
@@ -453,11 +457,13 @@ msgstr ""
 msgid "Edit Blog Post"
 msgstr ""
 
+#: web/templates/admin/calendar_event/index.html.eex:10
 #: web/templates/admin/forum/form.html.eex:4
 #: web/templates/admin/forum_category/form.html.eex:4
 #: web/templates/admin/user/_recent_blog_posts.html.eex:8
 #: web/templates/admin/user/_recent_forum_topics.html.eex:8
 #: web/templates/blog_post/form.html.eex:4
+#: web/templates/calendar_event/_form.html.eex:4
 #: web/templates/forum_topic/form.html.eex:4
 #: web/templates/photo/form.html.eex:10
 #: web/templates/photo_album/form.html.eex:4
@@ -468,11 +474,11 @@ msgstr ""
 msgid "Comment created successfully"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:63 web/views/comment_view.ex:14
+#: web/templates/layout/sidebar.html.eex:69 web/views/comment_view.ex:15
 msgid "Guest Book"
 msgstr ""
 
-#: web/views/comment_view.ex:19
+#: web/views/comment_view.ex:20
 msgid "Newest Guest Book Entries"
 msgstr ""
 
@@ -481,9 +487,10 @@ msgid "Post Comment"
 msgstr ""
 
 #: web/templates/comment/comments.html.eex:9
-#: web/templates/page/front_page.html.eex:8
-#: web/templates/page/front_page.html.eex:37
-#: web/templates/page/front_page.html.eex:50
+#: web/templates/page/front_page.html.eex:5
+#: web/templates/page/front_page.html.eex:29
+#: web/templates/page/front_page.html.eex:46
+#: web/templates/page/front_page.html.eex:64
 #: web/templates/profile/show.html.eex:75 web/templates/profile/show.html.eex:99
 msgid "Show All"
 msgstr ""
@@ -531,7 +538,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/layout/sidebar.html.eex:75
+#: web/templates/layout/sidebar.html.eex:81
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr ""
@@ -662,7 +669,7 @@ msgstr ""
 msgid "Uploaded"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:84
+#: web/templates/layout/sidebar.html.eex:90
 msgid "Your Photo Albums"
 msgstr ""
 
@@ -670,6 +677,8 @@ msgstr ""
 msgid "You have used %{used_space} out of a maximum of %{max_space} across all your photo albums"
 msgstr ""
 
+#: web/templates/admin/calendar_event/index.html.eex:2
+#: web/templates/admin/calendar_event/show.html.eex:2
 #: web/templates/admin/forum/edit.html.eex:2
 #: web/templates/admin/forum/new.html.eex:2
 #: web/templates/admin/forum_category/edit.html.eex:2
@@ -812,7 +821,7 @@ msgstr ""
 msgid "Submit new reply"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:55
+#: web/templates/layout/sidebar.html.eex:61
 msgid "You"
 msgstr ""
 
@@ -848,7 +857,7 @@ msgstr ""
 
 #: web/templates/private_conversation/index.html.eex:22
 #: web/templates/private_conversation/show.html.eex:5
-#: web/views/notification_view.ex:40 web/views/profile_helpers.ex:12
+#: web/views/notification_view.ex:43 web/views/profile_helpers.ex:12
 msgid "User deleted"
 msgstr ""
 
@@ -905,6 +914,7 @@ msgstr ""
 msgid "However, that doesn't meant that you should be an dick, so behave!"
 msgstr ""
 
+#: web/templates/admin/calendar_event/index.html.eex:13
 #: web/templates/admin/term/index.html.eex:15
 msgid "Inserted at"
 msgstr ""
@@ -1000,11 +1010,11 @@ msgstr ""
 msgid "Blog posts"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:12 web/views/comment_view.ex:21
+#: web/templates/help/embeds.html.eex:12 web/views/comment_view.ex:22
 msgid "Comments"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:3 web/templates/layout/sidebar.html.eex:35
+#: web/templates/help/embeds.html.eex:3 web/templates/layout/sidebar.html.eex:41
 msgid "Embeds"
 msgstr ""
 
@@ -1018,7 +1028,7 @@ msgstr ""
 
 #: web/templates/help/embeds.html.eex:2
 #: web/templates/help/verification.html.eex:2
-#: web/templates/layout/sidebar.html.eex:23
+#: web/templates/layout/sidebar.html.eex:29
 msgid "Help"
 msgstr ""
 
@@ -1101,11 +1111,11 @@ msgstr ""
 msgid "Age"
 msgstr ""
 
-#: web/views/time_helpers.ex:30
+#: web/views/time_helpers.ex:35
 msgid "April"
 msgstr ""
 
-#: web/views/time_helpers.ex:34
+#: web/views/time_helpers.ex:39
 msgid "August"
 msgstr ""
 
@@ -1114,43 +1124,43 @@ msgstr ""
 msgid "Birthday"
 msgstr ""
 
-#: web/views/time_helpers.ex:38
+#: web/views/time_helpers.ex:43
 msgid "December"
 msgstr ""
 
-#: web/views/time_helpers.ex:28
+#: web/views/time_helpers.ex:33
 msgid "February"
 msgstr ""
 
-#: web/views/time_helpers.ex:27
+#: web/views/time_helpers.ex:32
 msgid "January"
 msgstr ""
 
-#: web/views/time_helpers.ex:33
+#: web/views/time_helpers.ex:38
 msgid "July"
 msgstr ""
 
-#: web/views/time_helpers.ex:32
+#: web/views/time_helpers.ex:37
 msgid "June"
 msgstr ""
 
-#: web/views/time_helpers.ex:29
+#: web/views/time_helpers.ex:34
 msgid "March"
 msgstr ""
 
-#: web/views/time_helpers.ex:31
+#: web/views/time_helpers.ex:36
 msgid "May"
 msgstr ""
 
-#: web/views/time_helpers.ex:37
+#: web/views/time_helpers.ex:42
 msgid "November"
 msgstr ""
 
-#: web/views/time_helpers.ex:36
+#: web/views/time_helpers.ex:41
 msgid "October"
 msgstr ""
 
-#: web/views/time_helpers.ex:35
+#: web/views/time_helpers.ex:40
 msgid "September"
 msgstr ""
 
@@ -1187,11 +1197,11 @@ msgstr ""
 msgid "%{who} wrote a reply to the forum topic: %{what}"
 msgstr ""
 
-#: web/views/comment_view.ex:20
+#: web/views/comment_view.ex:21
 msgid "Guest Book Entries"
 msgstr ""
 
-#: web/views/notification_helpers.ex:35
+#: web/views/notification_helpers.ex:41
 msgid "Notifications:"
 msgstr ""
 
@@ -1419,15 +1429,15 @@ msgstr ""
 msgid "but feel free to contact our support if the problem persists:"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:23
+#: web/templates/page/front_page.html.eex:4
 msgid "Recently logged in users"
 msgstr ""
 
-#: web/views/comment_view.ex:67
+#: web/views/comment_view.ex:73
 msgid "Cancel"
 msgstr ""
 
-#: web/views/comment_view.ex:65
+#: web/views/comment_view.ex:71
 msgid "Are you sure you want to delete this comment?"
 msgstr ""
 
@@ -1516,7 +1526,7 @@ msgid "How much would you like to donate?"
 msgstr ""
 
 #: web/templates/donation/new.html.eex:7
-#: web/templates/layout/sidebar.html.eex:50
+#: web/templates/layout/sidebar.html.eex:56
 msgid "Support %{site}"
 msgstr ""
 
@@ -1568,7 +1578,7 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-#: web/models/user.ex:368
+#: web/models/user.ex:369
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr ""
 
@@ -1607,7 +1617,7 @@ msgid "Add to Contacts"
 msgstr ""
 
 #: web/templates/friendship/index.html.eex:3
-#: web/templates/layout/sidebar.html.eex:69
+#: web/templates/layout/sidebar.html.eex:75
 msgid "Contact List"
 msgstr ""
 
@@ -1624,6 +1634,7 @@ msgstr ""
 msgid "Pending Requests"
 msgstr ""
 
+#: web/templates/admin/calendar_event/show.html.eex:27
 #: web/templates/friendship/_my_pending_friendships.html.eex:30
 msgid "Reject"
 msgstr ""
@@ -1676,7 +1687,7 @@ msgstr ""
 msgid "Hide comments?"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:29
+#: web/templates/layout/sidebar.html.eex:35
 msgid "Terms and Rules"
 msgstr ""
 
@@ -1688,7 +1699,7 @@ msgstr ""
 msgid "Edit comment"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:103
+#: web/controllers/comment_controller.ex:110
 msgid "You can only edit a comment in the first %{minutes} minutes!"
 msgstr ""
 
@@ -1700,7 +1711,7 @@ msgstr ""
 msgid "Any"
 msgstr ""
 
-#: web/views/comment_view.ex:42
+#: web/views/comment_view.ex:47
 msgid "Blog Post"
 msgstr ""
 
@@ -1749,7 +1760,7 @@ msgstr ""
 msgid "Not Verified!"
 msgstr ""
 
-#: web/views/comment_view.ex:43
+#: web/views/comment_view.ex:48
 msgid "Photo"
 msgstr ""
 
@@ -1868,7 +1879,7 @@ msgid "This can either mean that an admin has not yet had the time to decide on 
 msgstr ""
 
 #: web/templates/help/verification.html.eex:3
-#: web/templates/layout/sidebar.html.eex:41
+#: web/templates/layout/sidebar.html.eex:47
 msgid "User verification"
 msgstr ""
 
@@ -1912,6 +1923,7 @@ msgstr ""
 msgid "Views/Comments"
 msgstr ""
 
+#: web/templates/admin/calendar_event/index.html.eex:11
 #: web/templates/admin/user/_blocks.html.eex:10
 #: web/templates/admin/user/_recent_comments.html.eex:9
 #: web/templates/admin/user/_recent_forum_replies.html.eex:9
@@ -1925,4 +1937,107 @@ msgstr ""
 
 #: web/templates/forum_topic/show.html.eex:34
 msgid "This topic is locked"
+msgstr ""
+
+#: web/templates/calendar_event/index.html.eex:5
+#: web/templates/calendar_event/new.html.eex:1
+msgid "Create event"
+msgstr ""
+
+#: web/templates/admin/calendar_event/index.html.eex:3
+#: web/templates/admin/calendar_event/show.html.eex:3
+#: web/templates/calendar_event/index.html.eex:1
+#: web/templates/calendar_event/show.html.eex:2
+#: web/templates/layout/sidebar.html.eex:22
+#: web/templates/layout/sidebar_admin.html.eex:18
+msgid "Event calendar"
+msgstr ""
+
+#: web/templates/calendar_event/_form.html.eex:12
+msgid "Give a good description of the event"
+msgstr ""
+
+#: web/templates/calendar_event/_form.html.eex:52
+#: web/templates/calendar_event/_form.html.eex:55
+msgid "Image"
+msgstr ""
+
+#: web/templates/calendar_event/_form.html.eex:69
+msgid "Save"
+msgstr ""
+
+#: web/templates/calendar_event/_form.html.eex:44
+msgid "Specify a website where there is more information about the event, if available"
+msgstr ""
+
+#: web/controllers/calendar_event_controller.ex:42
+msgid "The event has now been created and will be shown on the site when it has been approved by an administrator."
+msgstr ""
+
+#: web/templates/calendar_event/_form.html.eex:37
+msgid "Venue, address, city etc."
+msgstr ""
+
+#: web/templates/calendar_event/_form.html.eex:20
+msgid "When does the event begin?"
+msgstr ""
+
+#: web/templates/calendar_event/_form.html.eex:28
+msgid "When does the event end?"
+msgstr ""
+
+#: web/templates/calendar_event/_form.html.eex:36
+msgid "Where does the event take place?"
+msgstr ""
+
+#: web/views/notification_view.ex:37
+msgid "%{who} wrote a comment on the calendar event: %{what}"
+msgstr ""
+
+#: web/templates/admin/calendar_event/show.html.eex:23
+msgid "Approve"
+msgstr ""
+
+#: web/templates/calendar_event/edit.html.eex:1
+msgid "Edit event"
+msgstr ""
+
+#: web/views/comment_view.ex:49
+msgid "Event"
+msgstr ""
+
+#: web/controllers/calendar_event_controller.ex:72
+msgid "Event deleted successfully."
+msgstr ""
+
+#: web/templates/admin/calendar_event/show.html.eex:16
+msgid "Pending approval"
+msgstr ""
+
+#: web/controllers/admin/calendar_events_controller.ex:36
+msgid "The event could not be approved!"
+msgstr ""
+
+#: web/controllers/admin/calendar_events_controller.ex:50
+msgid "The event could not be rejected!"
+msgstr ""
+
+#: web/controllers/admin/calendar_events_controller.ex:32
+msgid "The event is now approved."
+msgstr ""
+
+#: web/controllers/admin/calendar_events_controller.ex:46
+msgid "The event is now rejected."
+msgstr ""
+
+#: web/controllers/calendar_event_controller.ex:61
+msgid "The event was updated successfully."
+msgstr ""
+
+#: web/templates/admin/calendar_event/show.html.eex:19
+msgid "This event needs to be approved before it will be shown to regular users"
+msgstr ""
+
+#: web/templates/admin/calendar_event/index.html.eex:12
+msgid "User"
 msgstr ""

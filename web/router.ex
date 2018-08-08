@@ -24,6 +24,7 @@ defmodule Helheim.Router do
     plug Helheim.Plug.LoadUnreadPrivateConversations
     plug Helheim.Plug.LoadPendingFriendships
     plug Helheim.Plug.EnforceBan
+    plug Helheim.Plug.LoadPendingCalendarEvents
   end
 
   pipeline :browser_admin_auth do
@@ -107,6 +108,10 @@ defmodule Helheim.Router do
     resources "/donations", DonationController, only: [:new, :create]
     get "/donations/thank_you", DonationController, :thank_you
     resources "/contacts", FriendshipController, only: [:index]
+    resources "/calendar_events", CalendarEventController do
+      resources "/comments", CommentController, only: [:create, :edit, :update]
+      resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
+    end
   end
 
   scope "/admin", Helheim.Admin, as: :admin do
@@ -119,6 +124,7 @@ defmodule Helheim.Router do
     resources "/users", UserController, only: [:index, :show, :edit, :update] do
       resources "/verification", User.VerificationController, singleton: true, only: [:create, :delete]
     end
+    resources "/calendar_events", CalendarEventController, only: [:index, :show, :update, :delete]
   end
 
   # Other scopes may use custom stacks.

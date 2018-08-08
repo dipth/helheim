@@ -1,0 +1,6 @@
+<h1 class="mt-2"><%= gettext "Create event" %></h1>
+
+<div class="card">
+  <%= render "_form.html", changeset: @changeset,
+                           action: calendar_event_path(@conn, :create) %>
+</div>

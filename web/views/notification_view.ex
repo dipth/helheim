@@ -3,7 +3,7 @@ defmodule Helheim.NotificationView do
   import Phoenix.HTML.Link
   import Phoenix.HTML.Tag
   import Helheim.Gettext
-  alias Helheim.{Notification, User, BlogPost, PhotoAlbum, Photo, ForumTopic}
+  alias Helheim.{Notification, User, BlogPost, PhotoAlbum, Photo, ForumTopic, CalendarEvent}
 
   def notification_item(conn, notification, opts \\ %{}) do
     subject = Notification.subject(notification)
@@ -32,6 +32,9 @@ defmodule Helheim.NotificationView do
   end
   defp notification_text(trigger_person, "forum_reply", %ForumTopic{} = forum_topic) do
     gettext "%{who} wrote a reply to the forum topic: %{what}", who: trigger_person_name(trigger_person), what: forum_topic.title
+  end
+  defp notification_text(trigger_person, "comment", %CalendarEvent{} = calendar_event) do
+    gettext "%{who} wrote a comment on the calendar event: %{what}", who: trigger_person_name(trigger_person), what: calendar_event.title
   end
 
   defp notification_icon("comment"), do: "fa fa-fw fa-comment-o"

@@ -25,4 +25,6 @@ defmodule Helheim.NotificationController do
   end
   defp redirect_path(conn, %Helheim.ForumTopic{} = forum_topic),
     do: forum_forum_topic_path(conn, :show, forum_topic.forum_id, forum_topic)
+  defp redirect_path(conn, %Helheim.CalendarEvent{} = calendar_event),
+    do: calendar_event_path(conn, :show, calendar_event)
 end
