@@ -1,6 +1,10 @@
 defmodule Helheim.Endpoint do
   use Phoenix.Endpoint, otp_app: :helheim
 
+  if Application.get_env(:helheim, :sql_sandbox) do
+    plug Phoenix.Ecto.SQL.Sandbox
+  end
+
   plug RemoteIp, proxies: ~w[
     103.21.244.0/22
     103.22.200.0/22
@@ -19,10 +23,6 @@ defmodule Helheim.Endpoint do
   ]
 
   socket "/socket", Helheim.UserSocket
-
-  if Application.get_env(:helheim, :sql_sandbox) do
-    plug Phoenix.Ecto.SQL.Sandbox
-  end
 
   # Serve at "/" the static files from "priv/static" directory.
   #

@@ -16,26 +16,32 @@ defmodule Helheim.CreateCalendarEventFlowTest do
   defp location_field,        do: Query.text_field(gettext("Where does the event take place?"))
   defp url_field,             do: Query.text_field(gettext("Specify a website where there is more information about the event, if available"))
   defp submit_button,         do: Query.button(gettext("Save"))
+  defp success_alert,         do: Query.css(".alert.alert-success")
 
   setup [:create_and_sign_in_user]
 
   test "users can submit new calendar events", %{session: session} do
-    session
-    |> click(calendar_events_link())
-    |> click(create_link())
-    |> fill_in(title_field(), with: "Super duper event!")
-    |> fill_in(description_field(), with: "This is a super duper test event.")
-    |> assert_has(starts_at_flatpickr())
-    |> click(starts_at_day())
-    |> assert_has(starts_at_hour())
-    |> fill_in(starts_at_hour(), with: "16")
-    |> assert_has(ends_at_flatpickr())
-    |> click(ends_at_day())
-    |> assert_has(ends_at_hour())
-    |> fill_in(ends_at_hour(), with: "20")
-    |> fill_in(location_field(), with: "A super secret location")
-    |> fill_in(url_field(), with: "https://super.duper/event")
-    |> click(submit_button())
+    result =
+      session
+      |> click(calendar_events_link())
+      |> click(create_link())
+      |> fill_in(title_field(), with: "Super duper event!")
+      |> fill_in(description_field(), with: "This is a super duper test event.")
+      |> assert_has(starts_at_flatpickr())
+      |> click(starts_at_day())
+      |> assert_has(starts_at_hour())
+      |> fill_in(starts_at_hour(), with: "16")
+      |> assert_has(ends_at_flatpickr())
+      |> click(ends_at_day())
+      |> assert_has(ends_at_hour())
+      |> fill_in(ends_at_hour(), with: "20")
+      |> fill_in(location_field(), with: "A super secret location")
+      |> fill_in(url_field(), with: "https://super.duper/event")
+      |> click(submit_button())
+      |> find(success_alert())
+      |> Element.text
+
+    assert result =~ gettext("The event has now been created and will be shown on the site when it has been approved by an administrator.")
 
     now = Timex.now
     calendar_event = Repo.one!(CalendarEvent)
