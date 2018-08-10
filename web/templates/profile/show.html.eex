@@ -60,7 +60,7 @@
   </div>
 
   <div class="col-xl-7 col-lg-6 embeds mentionable">
-    <%= raw @user.profile_text %>
+    <%= Helheim.EmbedHelpers.raw_replace_urls(@user.profile_text) %>
   </div>
 </div>
 
