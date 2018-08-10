@@ -88,7 +88,7 @@
               </div>
               <p>
                 <i class="fa fa-info fa-fw"></i>
-                <%= gettext "Hint" %>: <%= gettext "You can insert pictures from your photo albums by copying the image url and pasting it into the source-field when clicking the image button in the editor" %>
+                <%= gettext "Hint" %>: <%= gettext "You can embed pictures from your photo albums or from Imgur, gifs from Giphy, Videos from Youtube and Vimeo and Spotify playlists by simply including a url for the desired media in your post" %>
               </p>
             </div>
           </div>

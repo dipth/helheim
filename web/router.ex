@@ -52,7 +52,6 @@ defmodule Helheim.Router do
     pipe_through [:browser, :browser_auth]
 
     get "/banned", PageController, :banned
-    get "/help/embeds", HelpController, :embeds
     get "/help/verification", HelpController, :verification
     get "/signed_in", PageController, :signed_in
     get "/front_page", PageController, :front_page

@@ -34,6 +34,10 @@
       </div>
       <div class="card-block">
         <%= textarea f, :body, class: "form-control mentionable-input", rows: 5 %>
+        <p class="mt-1">
+          <i class="fa fa-info fa-fw"></i>
+          <%= gettext "Hint" %>: <%= gettext "You can embed pictures from your photo albums or from Imgur, gifs from Giphy, Videos from Youtube and Vimeo and Spotify playlists by simply including a url for the desired media in your post" %>
+        </p>
       </div>
       <div class="card-footer">
         <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Post Comment" %></button>
