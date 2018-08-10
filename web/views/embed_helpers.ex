@@ -32,7 +32,16 @@ defmodule Helheim.EmbedHelpers do
       Regex.replace(@url_regex, content, &(replace_url(&1)))
       |> raw()
     rescue
-      _ -> content |> text_to_html()
+      _ -> text_to_html(content)
+    end
+  end
+
+  def raw_replace_urls(content) do
+    try do
+      Regex.replace(@url_regex, content, &(replace_url(&1)))
+      |> raw()
+    rescue
+      _ -> raw(content)
     end
   end
 

@@ -38,7 +38,7 @@
 <hr>
 
 <div class="embeds blog-post-body mentionable">
-  <%= raw @blog_post.body %>
+  <%= Helheim.EmbedHelpers.raw_replace_urls(@blog_post.body) %>
 </div>
 
 <%= unless @blog_post.hide_comments do %>
