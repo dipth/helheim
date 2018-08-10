@@ -8,6 +8,10 @@
       <%= if message = f.errors[:body] do %>
         <div class="form-control-feedback"><%= translate_error(message) %></div>
       <% end %>
+      <p class="mb-2">
+        <i class="fa fa-info fa-fw"></i>
+        <%= gettext "Hint" %>: <%= gettext "You can embed pictures from your photo albums or from Imgur, gifs from Giphy, Videos from Youtube and Vimeo and Spotify playlists by simply including a url for the desired media in your post" %>
+      </p>
     </div>
     <div class="card-footer">
       <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= @button_label %></button>

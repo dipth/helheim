@@ -482,7 +482,7 @@ msgstr ""
 msgid "Newest Guest Book Entries"
 msgstr ""
 
-#: web/templates/comment/comments.html.eex:39
+#: web/templates/comment/comments.html.eex:43
 msgid "Post Comment"
 msgstr ""
 
@@ -777,6 +777,10 @@ msgid "Go to the last page to reply..."
 msgstr ""
 
 #: web/templates/blog_post/form.html.eex:20
+#: web/templates/comment/comments.html.eex:39
+#: web/templates/comment/form.html.eex:13
+#: web/templates/forum_reply/form.html.eex:11
+#: web/templates/forum_topic/form.html.eex:19
 #: web/templates/forum_topic/show.html.eex:33
 #: web/templates/forum_topic/show.html.eex:48
 #: web/templates/profile/edit.html.eex:91
@@ -837,7 +841,6 @@ msgstr ""
 msgid "You cannot create a topic in a locked forum!"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:20
 #: web/templates/profile/edit.html.eex:91
 msgid "You can insert pictures from your photo albums by copying the image url and pasting it into the source-field when clicking the image button in the editor"
 msgstr ""
@@ -2014,19 +2017,19 @@ msgstr ""
 msgid "Pending approval"
 msgstr ""
 
-#: web/controllers/admin/calendar_events_controller.ex:36
+#: web/controllers/admin/calendar_event_controller.ex:36
 msgid "The event could not be approved!"
 msgstr ""
 
-#: web/controllers/admin/calendar_events_controller.ex:50
+#: web/controllers/admin/calendar_event_controller.ex:50
 msgid "The event could not be rejected!"
 msgstr ""
 
-#: web/controllers/admin/calendar_events_controller.ex:32
+#: web/controllers/admin/calendar_event_controller.ex:32
 msgid "The event is now approved."
 msgstr ""
 
-#: web/controllers/admin/calendar_events_controller.ex:46
+#: web/controllers/admin/calendar_event_controller.ex:46
 msgid "The event is now rejected."
 msgstr ""
 
@@ -2040,4 +2043,12 @@ msgstr ""
 
 #: web/templates/admin/calendar_event/index.html.eex:12
 msgid "User"
+msgstr ""
+
+#: web/templates/blog_post/form.html.eex:20
+#: web/templates/comment/comments.html.eex:39
+#: web/templates/comment/form.html.eex:13
+#: web/templates/forum_reply/form.html.eex:11
+#: web/templates/forum_topic/form.html.eex:19
+msgid "You can embed pictures from your photo albums or from Imgur, gifs from Giphy, Videos from Youtube and Vimeo and Spotify playlists by simply including a url for the desired media in your post"
 msgstr ""
