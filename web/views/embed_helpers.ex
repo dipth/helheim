@@ -21,6 +21,9 @@ defmodule Helheim.EmbedHelpers do
   @spotify_hosts ["open.spotify.com"]
   @spotify_id_regex ~r/open.spotify.com\/(.+)/i
 
+  @instagram_hosts ["instagram.com"]
+  @instagram_id_regex ~r/\/p\/(.+)\//
+
   @helheim_cloudfront_hosts ["d3ki6vg87hrfvz.cloudfront.net"]
 
   def replace_urls(content) do
@@ -60,6 +63,8 @@ defmodule Helheim.EmbedHelpers do
         replace_helheim_cloudfront(match)
       String.contains?(host, @spotify_hosts) ->
         replace_spotify(match)
+      String.contains?(host, @instagram_hosts) ->
+        replace_instagram(match)
       true ->
         autolink(match)
     end
@@ -75,7 +80,7 @@ defmodule Helheim.EmbedHelpers do
       </div>
       """
     rescue
-      _ -> match
+      _ -> autolink(match)
     end
   end
 
@@ -89,7 +94,7 @@ defmodule Helheim.EmbedHelpers do
       </div>
       """
     rescue
-      _ -> match
+      _ -> autolink(match)
     end
   end
 
@@ -108,7 +113,7 @@ defmodule Helheim.EmbedHelpers do
           """
       end
     rescue
-      _ -> match
+      _ -> autolink(match)
     end
   end
 
@@ -122,7 +127,7 @@ defmodule Helheim.EmbedHelpers do
       </div>
       """
     rescue
-      _ -> match
+      _ -> autolink(match)
     end
   end
 
@@ -136,7 +141,21 @@ defmodule Helheim.EmbedHelpers do
       </div>
       """
     rescue
-      _ -> match
+      _ -> autolink(match)
+    end
+  end
+
+  def replace_instagram(nil), do: ""
+  def replace_instagram(match) do
+    try do
+      [_,id] = Regex.run(@instagram_id_regex, match)
+      """
+      <a href="#{match}" target="_blank">
+        <img src="https://instagram.com/p/#{id}/media/?size=t" class="img-fluid" alt="">
+      </a>
+      """
+    rescue
+      _ -> autolink(match)
     end
   end
 
@@ -147,7 +166,7 @@ defmodule Helheim.EmbedHelpers do
       <img src="#{match}" class="img-fluid" alt="">
       """
     rescue
-      _ -> match
+      _ -> autolink(match)
     end
   end
 

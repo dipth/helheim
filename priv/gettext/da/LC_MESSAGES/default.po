@@ -2080,4 +2080,4 @@ msgstr "Bruger"
 #: web/templates/forum_reply/form.html.eex:11
 #: web/templates/forum_topic/form.html.eex:19
 msgid "You can embed pictures from your photo albums or from Imgur, gifs from Giphy, Videos from Youtube and Vimeo and Spotify playlists by simply including a url for the desired media in your post"
-msgstr "Du kan embedde billeder fra dine photoalbums eller fra Imgur, gif-animationer fra Giphy, videoer fra Youtube og Vimeo eller playlister fra Spotify ganske enkelt ved blot at inkludere en url til det ønskede medie i din post"
+msgstr "Du kan embedde billeder fra dine photoalbums, Imgur eller Instagram, gif-animationer fra Giphy, videoer fra Youtube og Vimeo eller playlister fra Spotify ganske enkelt ved blot at inkludere en url til det ønskede medie i din post"
