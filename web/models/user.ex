@@ -168,6 +168,8 @@ defmodule Helheim.User do
   def sort(query, "last_login_at", "desc"), do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_at)]
   def sort(query, "last_login_ip", "asc"),  do: from u in query, order_by: [fragment("? ASC NULLS LAST", u.last_login_ip)]
   def sort(query, "last_login_ip", "desc"), do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_ip)]
+  def sort(query, "verified_at", "asc"),    do: from u in query, order_by: [fragment("? ASC NULLS LAST", u.verified_at)]
+  def sort(query, "verified_at", "desc"),   do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.verified_at)]
 
   @doc """
   Builds a changeset based on the `struct` and `params`.

@@ -25,6 +25,9 @@
       <th>
         <%= sort_link(gettext("IP"), "last_login_ip", @conn.params, fn(p) -> admin_user_path(@conn, :index, p) end) %>
       </th>
+      <th>
+        <%= sort_link(gettext("Verified at"), "verified_at", @conn.params, fn(p) -> admin_user_path(@conn, :index, p) end) %>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -41,6 +44,7 @@
           <samp><%= user.last_login_ip || "-" %></samp><br>
           <samp><%= user.previous_login_ip || "-" %></samp>
         </td>
+        <td><%= lt user.verified_at, "%Y-%m-%d %H:%M:%S" %></td>
       </tr>
     <% end %>
   </tbody>
