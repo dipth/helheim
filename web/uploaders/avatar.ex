@@ -5,7 +5,7 @@ defmodule Helheim.Avatar do
 
   @versions [:original, :large, :thumb, :tiny]
   @extension_whitelist ~w(.jpg .jpeg .gif .png)
-  @max_file_size 3 * 1024 * 1024 # MB
+  @max_file_size 20 * 1024 * 1024 # MB
 
   def acl(:large, _), do: :public_read
   def acl(:thumb, _), do: :public_read

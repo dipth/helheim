@@ -14,7 +14,7 @@ defmodule Helheim.Donation do
   @default 50 * 100 # cents
   def default, do: @default
 
-  @extra_space_per_step 3 * 1024 * 1024 # MB
+  @extra_space_per_step 100 * 1024 * 1024 # MB
   def extra_space_per_step, do: @extra_space_per_step
 
   @recent_days -30 # days

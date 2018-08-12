@@ -49,7 +49,7 @@ defmodule Helheim.DonationTest do
 
   describe "calculate_extra_space/1" do
     test "returns rounded product of the extra space per step and the number of steps in the amount" do
-      assert Donation.calculate_extra_space(1234) == 3881828
+      assert Donation.calculate_extra_space(1234) == 129394278
     end
   end
 end
