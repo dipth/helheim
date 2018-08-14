@@ -58,6 +58,10 @@ defmodule Helheim.User do
     belongs_to :verifier,                Helheim.User
   end
 
+  def with_ids(query, ids) do
+    from u in query, where: u.id in ^ids
+  end
+
   def newest(query) do
     from u in query,
     order_by: [desc: u.inserted_at]

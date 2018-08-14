@@ -26,8 +26,8 @@ export var Notifications = {
     // Now that you are connected, you can join channels with a topic:
     let channel = socket.channel("notifications:" + userId, {guardian_token: guardianToken})
     channel.join()
-      //.receive("ok", resp => { console.log("Joined successfully", resp) })
-      //.receive("error", resp => { console.log("Unable to join", resp) })
+      // .receive("ok", resp => { console.log("notifications.js: Joined successfully", resp) })
+      // .receive("error", resp => { console.log("notifications.js: Unable to join", resp) })
 
     let handleIncomingNotification = payload => {
       $.get('/navbar', handleRefreshedNavbar)

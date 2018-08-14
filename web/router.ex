@@ -111,6 +111,7 @@ defmodule Helheim.Router do
       resources "/comments", CommentController, only: [:create, :edit, :update]
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
     end
+    resources "/online_users", OnlineUserController, only: [:index]
   end
 
   scope "/admin", Helheim.Admin, as: :admin do
