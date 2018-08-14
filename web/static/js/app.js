@@ -29,6 +29,7 @@ import { BootstrapStuff } from "web/static/js/bootstrap_stuff";
 import { ProfileSettings } from "web/static/js/profile_settings";
 import { BlogPostForm } from "web/static/js/blog_post_form";
 import { Notifications } from "web/static/js/notifications";
+import { Status } from "web/static/js/status";
 import { SelectWithCustom } from "web/static/js/select_with_custom";
 import { PhotoUpload } from "web/static/js/photo_upload";
 import { AdminTermsForm } from "web/static/js/admin_terms_form";
@@ -49,6 +50,7 @@ export var App = {
     ProfileSettings.run();
     BlogPostForm.run();
     Notifications.run();
+    Status.run();
     SelectWithCustom.run();
     PhotoUpload.run();
     AdminTermsForm.run();

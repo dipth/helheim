@@ -4,6 +4,7 @@ defmodule Helheim.UserSocket do
 
   ## Channels
   channel "notifications:*", Helheim.NotificationChannel
+  channel "status", Helheim.StatusChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket, timeout: 45_000
