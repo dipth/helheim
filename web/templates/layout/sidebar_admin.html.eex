@@ -20,8 +20,4 @@
       <span class="badge badge-pill badge-danger"><%= @conn.assigns[:pending_calendar_events_count] %></span>
     <% end %>
   <% end %>
-  <%= link to: online_user_path(@conn, :index), class: "nav-link" do %>
-    <i class="fa fa-users"></i>
-    <%= gettext("Online users") %>
-  <% end %>
 </li>
