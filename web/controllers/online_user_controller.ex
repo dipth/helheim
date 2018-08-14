@@ -3,6 +3,9 @@ defmodule Helheim.OnlineUserController do
   alias Helheim.OnlineUsersService
 
   def index(conn, _params) do
-    render conn, "index.html", count: OnlineUsersService.count(), users: OnlineUsersService.list()
+    user = current_resource(conn)
+    users = OnlineUsersService.list(user.id)
+    count = length(users)
+    render conn, "index.html", count: count, users: users
   end
 end

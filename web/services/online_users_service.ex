@@ -3,15 +3,18 @@ defmodule Helheim.OnlineUsersService do
   alias Helheim.User
   alias HelheimWeb.Presence
 
-  def count, do: user_ids() |> length()
+  def count(current_user_id), do: user_ids(current_user_id) |> length()
 
-  def list do
+  def list(current_user_id) do
     User
-    |> User.with_ids(user_ids())
+    |> User.with_ids(user_ids(current_user_id))
     |> User.sort("username", "asc")
     |> Repo.all()
   end
 
   ### PRIVATE
-  defp user_ids(), do: HelheimWeb.Presence.list("status") |> Map.keys
+  defp user_ids(current_user_id) do
+    Map.merge(%{inspect(current_user_id) => %{}}, Presence.list("status"))
+    |> Map.keys
+  end
 end
