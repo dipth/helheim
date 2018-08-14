@@ -39,7 +39,7 @@ msgstr "%{site_name} er et community for alternative folk."
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
-#: web/templates/layout/sidebar.html.eex:56 web/templates/page/index.html.eex:3
+#: web/templates/layout/sidebar.html.eex:57 web/templates/page/index.html.eex:3
 msgid "Helheim"
 msgstr "Helheim"
 
@@ -349,11 +349,11 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:336
+#: web/models/user.ex:342
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
-#: web/templates/calendar_event/_form.html.eex:63
+#: web/templates/calendar_event/_form.html.eex:67
 #: web/templates/profile/edit.html.eex:22
 msgid "Maximum file size: %{file_size}"
 msgstr "Maksimum fil størrelse: %{file_size}"
@@ -402,7 +402,7 @@ msgstr "Nyeste Forumindlæg"
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
 
-#: web/templates/layout/sidebar.html.eex:64
+#: web/templates/layout/sidebar.html.eex:65
 msgid "Your Profile"
 msgstr "Din Profil"
 
@@ -422,7 +422,7 @@ msgstr "Gem Blog"
 
 #: web/templates/blog_post/edit.html.eex:2
 #: web/templates/blog_post/new.html.eex:2
-#: web/templates/layout/sidebar.html.eex:85
+#: web/templates/layout/sidebar.html.eex:86
 msgid "Your Blog Posts"
 msgstr "Dine Blogs"
 
@@ -489,7 +489,7 @@ msgstr "Titel"
 msgid "Comment created successfully"
 msgstr "Din kommentar er tilføjet!"
 
-#: web/templates/layout/sidebar.html.eex:69 web/views/comment_view.ex:15
+#: web/templates/layout/sidebar.html.eex:70 web/views/comment_view.ex:15
 msgid "Guest Book"
 msgstr "Gæstebog"
 
@@ -554,7 +554,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] "Du har %{count} notifikation"
 msgstr[1] "Du har %{count} notifikationer"
 
-#: web/templates/layout/sidebar.html.eex:81
+#: web/templates/layout/sidebar.html.eex:82
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr "Private Beskeder"
@@ -690,7 +690,7 @@ msgstr "Upload billeder"
 msgid "Uploaded"
 msgstr "Uploadet"
 
-#: web/templates/layout/sidebar.html.eex:90
+#: web/templates/layout/sidebar.html.eex:91
 msgid "Your Photo Albums"
 msgstr "Dine Fotoalbums"
 
@@ -799,6 +799,7 @@ msgid "Go to the last page to reply..."
 msgstr "Hop til den sidste side for at sende et svar"
 
 #: web/templates/blog_post/form.html.eex:20
+#: web/templates/calendar_event/_form.html.eex:19
 #: web/templates/comment/comments.html.eex:39
 #: web/templates/comment/form.html.eex:13
 #: web/templates/forum_reply/form.html.eex:11
@@ -847,7 +848,7 @@ msgstr "Gem forum kategori"
 msgid "Submit new reply"
 msgstr "Send nyt svar"
 
-#: web/templates/layout/sidebar.html.eex:61
+#: web/templates/layout/sidebar.html.eex:62
 msgid "You"
 msgstr "Dig"
 
@@ -862,10 +863,6 @@ msgstr "Låst, undtagen admins"
 #: web/controllers/forum_topic_controller.ex:85
 msgid "You cannot create a topic in a locked forum!"
 msgstr "Du kan ikke oprette indlæg i et låst forum!"
-
-#: web/templates/profile/edit.html.eex:91
-msgid "You can insert pictures from your photo albums by copying the image url and pasting it into the source-field when clicking the image button in the editor"
-msgstr "Du kan indsætte billeder fra dine fotoalbums ved at kopiere billedets url og indsætte det i “source”-feltet når du klikker på billed-knappen i editoren"
 
 #: web/templates/account/edit.html.eex:106
 msgid "Are you sure? All your data will be permanently lost!"
@@ -1035,107 +1032,21 @@ msgstr "Du har ikke adgang til den forespurgte side!"
 #: web/templates/blog_post/index.html.eex:3
 #: web/templates/blog_post/index_all_public.html.eex:2
 #: web/templates/blog_post/show.html.eex:3
-#: web/templates/help/embeds.html.eex:11
 msgid "Blog posts"
 msgstr "Blog posts"
 
-#: web/templates/help/embeds.html.eex:12 web/views/comment_view.ex:22
+#: web/views/comment_view.ex:22
 msgid "Comments"
 msgstr "Kommentarer"
 
-#: web/templates/help/embeds.html.eex:3
-#: web/templates/layout/sidebar.html.eex:41
-msgid "Embeds"
-msgstr "Embeds"
-
-#: web/templates/help/embeds.html.eex:14
-msgid "Forum replies"
-msgstr "Forumsvar"
-
-#: web/templates/help/embeds.html.eex:13
-msgid "Forum topics"
-msgstr "Forumtråde"
-
-#: web/templates/help/embeds.html.eex:2
 #: web/templates/help/verification.html.eex:2
-#: web/templates/layout/sidebar.html.eex:29
+#: web/templates/layout/sidebar.html.eex:36
 msgid "Help"
 msgstr "Hjælp"
 
-#: web/templates/help/embeds.html.eex:42 web/templates/help/embeds.html.eex:59
-#: web/templates/help/embeds.html.eex:76 web/templates/help/embeds.html.eex:93
-#: web/templates/help/embeds.html.eex:110
-msgid "How to embed %{type} from %{source}"
-msgstr "Sådan embedder du %{type} fra %{source}"
-
-#: web/templates/help/embeds.html.eex:6
-msgid "How to embed media"
-msgstr "Sådan embedder du media"
-
-#: web/templates/help/embeds.html.eex:8
-msgid "It is possible to embed media in the following type of posts: "
-msgstr "Det er muligt at embedde media i følgende typer poster:"
-
-#: web/templates/help/embeds.html.eex:17
-msgid "Media from the following websites can be embedded by using the provided code-tags: "
-msgstr "Media fra følgende websites kan embeddes ved at bruge de listede kode-tags:"
-
 #: web/templates/admin/user/_profile_text.html.eex:1
-#: web/templates/help/embeds.html.eex:10
 msgid "Profile text"
 msgstr "Profiltekst"
-
-#: web/templates/help/embeds.html.eex:76 web/templates/help/embeds.html.eex:93
-msgid "a video"
-msgstr "en video"
-
-#: web/templates/help/embeds.html.eex:42 web/templates/help/embeds.html.eex:59
-msgid "an image"
-msgstr "et billede "
-
-#: web/templates/help/embeds.html.eex:44 web/templates/help/embeds.html.eex:61
-#: web/templates/help/embeds.html.eex:78 web/templates/help/embeds.html.eex:95
-#: web/templates/help/embeds.html.eex:111
-msgid "Find the id of %{type} you want to insert."
-msgstr "Find id’et på %{type} som du gerne vil indsætte."
-
-#: web/templates/help/embeds.html.eex:53 web/templates/help/embeds.html.eex:70
-#: web/templates/help/embeds.html.eex:87 web/templates/help/embeds.html.eex:104
-#: web/templates/help/embeds.html.eex:122
-msgid "Once you have copied the id of %{type}, insert a tag in your post like so:"
-msgstr "Når du har kopieret id’et på %{type}, så indsæt det i din post ved hjælp af dette kode-tag:"
-
-#: web/templates/help/embeds.html.eex:45 web/templates/help/embeds.html.eex:62
-#: web/templates/help/embeds.html.eex:79 web/templates/help/embeds.html.eex:96
-msgid "The id can be found by browsing to %{type} on %{source} and looking at the address bar of the browser."
-msgstr "Id’et kan findes ved at navigere til %{type} på %{source} og kigge i browserens adresselinje."
-
-#: web/templates/help/embeds.html.eex:45 web/templates/help/embeds.html.eex:62
-msgid "the desired image"
-msgstr "det ønskede billede"
-
-#: web/templates/help/embeds.html.eex:79 web/templates/help/embeds.html.eex:96
-msgid "the desired video"
-msgstr "den ønskede video"
-
-#: web/templates/help/embeds.html.eex:44 web/templates/help/embeds.html.eex:53
-#: web/templates/help/embeds.html.eex:55 web/templates/help/embeds.html.eex:61
-#: web/templates/help/embeds.html.eex:70 web/templates/help/embeds.html.eex:72
-msgid "the image"
-msgstr "billedet"
-
-#: web/templates/help/embeds.html.eex:78 web/templates/help/embeds.html.eex:87
-#: web/templates/help/embeds.html.eex:89 web/templates/help/embeds.html.eex:95
-#: web/templates/help/embeds.html.eex:104
-#: web/templates/help/embeds.html.eex:106
-msgid "the video"
-msgstr "videoen"
-
-#: web/templates/help/embeds.html.eex:55 web/templates/help/embeds.html.eex:72
-#: web/templates/help/embeds.html.eex:89 web/templates/help/embeds.html.eex:106
-#: web/templates/help/embeds.html.eex:124
-msgid "where ID is the id of %{type}."
-msgstr "hvor ID er id’et på %{type}."
 
 #: web/templates/admin/user/_personal_details.html.eex:10
 #: web/templates/profile/details.html.eex:34
@@ -1297,28 +1208,6 @@ msgstr "Vidste du"
 #: web/templates/photo_album/show.html.eex:19
 msgid "that you can reorder your photos by dragging and dropping them!"
 msgstr "at du kan omarrangere dine billeder ved at trække og slippe dem!"
-
-#: web/templates/help/embeds.html.eex:113
-msgid "For instance, if the generated code is:"
-msgstr "Hvis den genererede kode fx er:"
-
-#: web/templates/help/embeds.html.eex:112
-msgid "The id can be found by browsing to the desired track on Soundcloud.com, clicking the share-button, then selecting 'embed', copying the generated code, pasting that code into a text-document and and finding the number right after the text 'api.soundcloud.com/tracks/'."
-msgstr "Id’et kan findes ved at gå til det ønskede track på Soundcloud.com og klikke på share-knappen, herefter vælge “embed” og kopiere den genererede kode. Indsæt derefter koden i et tekstdokument og find tallet lige efter teksten “api.soundcloud.com/tracks/“."
-
-#: web/templates/help/embeds.html.eex:115
-msgid "Then the track id would be:"
-msgstr "Så ville track id’et være:"
-
-#: web/templates/help/embeds.html.eex:110
-msgid "a track"
-msgstr "et track"
-
-#: web/templates/help/embeds.html.eex:111
-#: web/templates/help/embeds.html.eex:122
-#: web/templates/help/embeds.html.eex:124
-msgid "the track"
-msgstr "tracket"
 
 #: web/templates/registration/new.html.eex:14
 msgid "Only letters, numbers, dots, hyphens and underscores are allowed"
@@ -1558,7 +1447,7 @@ msgid "How much would you like to donate?"
 msgstr "Hvor meget vil du donere?"
 
 #: web/templates/donation/new.html.eex:7
-#: web/templates/layout/sidebar.html.eex:56
+#: web/templates/layout/sidebar.html.eex:57
 msgid "Support %{site}"
 msgstr "Støt %{site}"
 
@@ -1610,7 +1499,7 @@ msgstr "Vi har modtaget din donation og takker ydmygt for din hjælp med at gør
 msgid "Edited"
 msgstr "Redigeret"
 
-#: web/models/user.ex:369
+#: web/models/user.ex:375
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr "I too enjoy registering on websites, fellow human… Bleep Bloop!"
 
@@ -1649,7 +1538,7 @@ msgid "Add to Contacts"
 msgstr "Føj til kontaktliste"
 
 #: web/templates/friendship/index.html.eex:3
-#: web/templates/layout/sidebar.html.eex:75
+#: web/templates/layout/sidebar.html.eex:76
 msgid "Contact List"
 msgstr "Kontaktliste"
 
@@ -1719,7 +1608,7 @@ msgstr "Kommentarer er deaktiveret på denne blog"
 msgid "Hide comments?"
 msgstr "Skjul kommentarer?"
 
-#: web/templates/layout/sidebar.html.eex:35
+#: web/templates/layout/sidebar.html.eex:42
 msgid "Terms and Rules"
 msgstr "Betingelser og Regler"
 
@@ -1831,6 +1720,7 @@ msgid "Users"
 msgstr "Brugere"
 
 #: web/templates/admin/user/_account_details.html.eex:22
+#: web/templates/admin/user/_users.html.eex:29
 msgid "Verified at"
 msgstr "Verifikationsdato"
 
@@ -1911,7 +1801,7 @@ msgid "This can either mean that an admin has not yet had the time to decide on 
 msgstr "Dette kan betyde at en admin endnu ikke har haft tid til at vurdere om du kan verificeres, eller det kan være at det blev vurderet at du ikke levede op til kriterierne for verifikation."
 
 #: web/templates/help/verification.html.eex:3
-#: web/templates/layout/sidebar.html.eex:47
+#: web/templates/layout/sidebar.html.eex:48
 msgid "User verification"
 msgstr "Brugerverifikation"
 
@@ -1980,7 +1870,7 @@ msgstr "Opret begivenhed"
 #: web/templates/admin/calendar_event/show.html.eex:3
 #: web/templates/calendar_event/index.html.eex:1
 #: web/templates/calendar_event/show.html.eex:2
-#: web/templates/layout/sidebar.html.eex:22
+#: web/templates/layout/sidebar.html.eex:29
 #: web/templates/layout/sidebar_admin.html.eex:18
 msgid "Event calendar"
 msgstr "Eventkalender"
@@ -1989,16 +1879,16 @@ msgstr "Eventkalender"
 msgid "Give a good description of the event"
 msgstr "Giv en god beskrivelse af begivenheden"
 
-#: web/templates/calendar_event/_form.html.eex:52
-#: web/templates/calendar_event/_form.html.eex:55
+#: web/templates/calendar_event/_form.html.eex:56
+#: web/templates/calendar_event/_form.html.eex:59
 msgid "Image"
 msgstr "Billede"
 
-#: web/templates/calendar_event/_form.html.eex:69
+#: web/templates/calendar_event/_form.html.eex:73
 msgid "Save"
 msgstr "Gem"
 
-#: web/templates/calendar_event/_form.html.eex:44
+#: web/templates/calendar_event/_form.html.eex:48
 msgid "Specify a website where there is more information about the event, if available"
 msgstr "Angiv et websted hvor man kan læse mere om begivenheden, hvis det findes"
 
@@ -2006,19 +1896,19 @@ msgstr "Angiv et websted hvor man kan læse mere om begivenheden, hvis det finde
 msgid "The event has now been created and will be shown on the site when it has been approved by an administrator."
 msgstr "Begivenheden er nu oprettet og vil blive vist så snart en administrator har godkendt den."
 
-#: web/templates/calendar_event/_form.html.eex:37
+#: web/templates/calendar_event/_form.html.eex:41
 msgid "Venue, address, city etc."
 msgstr "Spillested, adresse, by osv."
 
-#: web/templates/calendar_event/_form.html.eex:20
+#: web/templates/calendar_event/_form.html.eex:24
 msgid "When does the event begin?"
 msgstr "Hvornår starter begivenheden?"
 
-#: web/templates/calendar_event/_form.html.eex:28
+#: web/templates/calendar_event/_form.html.eex:32
 msgid "When does the event end?"
 msgstr "Hvornår slutter begivenheden?"
 
-#: web/templates/calendar_event/_form.html.eex:36
+#: web/templates/calendar_event/_form.html.eex:40
 msgid "Where does the event take place?"
 msgstr "Hvor finder begivenheden sted?"
 
@@ -2075,9 +1965,25 @@ msgid "User"
 msgstr "Bruger"
 
 #: web/templates/blog_post/form.html.eex:20
+#: web/templates/calendar_event/_form.html.eex:19
 #: web/templates/comment/comments.html.eex:39
 #: web/templates/comment/form.html.eex:13
 #: web/templates/forum_reply/form.html.eex:11
 #: web/templates/forum_topic/form.html.eex:19
+#: web/templates/profile/edit.html.eex:91
 msgid "You can embed pictures from your photo albums or from Imgur, gifs from Giphy, Videos from Youtube and Vimeo and Spotify playlists by simply including a url for the desired media in your post"
 msgstr "Du kan embedde billeder fra dine photoalbums, Imgur eller Instagram, gif-animationer fra Giphy, videoer fra Youtube og Vimeo eller playlister fra Spotify ganske enkelt ved blot at inkludere en url til det ønskede medie i din post"
+
+#: web/templates/online_user/index.html.eex:2
+msgid "There is currently %{count} online user"
+msgid_plural "There are currently %{count} online users"
+msgstr[0] "Der er i øjeblikket %{count} online bruger"
+msgstr[1] "Der er i øjeblikket %{count} online brugere"
+
+#: web/templates/layout/sidebar.html.eex:22
+msgid "Online users"
+msgstr "Online brugere"
+
+#: web/templates/online_user/index.html.eex:6
+msgid "This list shows whoever is currently online, meaning that they have the site open in a browser-tab"
+msgstr "Denne liste viser de brugere som i øjeblikket er online, hvilket vil sige at de har Helheim åben i en browser-tab"

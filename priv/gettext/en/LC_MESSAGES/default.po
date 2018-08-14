@@ -28,7 +28,7 @@ msgstr ""
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
-#: web/templates/layout/sidebar.html.eex:56 web/templates/page/index.html.eex:3
+#: web/templates/layout/sidebar.html.eex:57 web/templates/page/index.html.eex:3
 msgid "Helheim"
 msgstr ""
 
@@ -337,11 +337,11 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:336
+#: web/models/user.ex:342
 msgid "does not match your current password"
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:63
+#: web/templates/calendar_event/_form.html.eex:67
 #: web/templates/profile/edit.html.eex:22
 msgid "Maximum file size: %{file_size}"
 msgstr ""
@@ -389,7 +389,7 @@ msgstr ""
 msgid "Newest Photos"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:64
+#: web/templates/layout/sidebar.html.eex:65
 msgid "Your Profile"
 msgstr ""
 
@@ -408,7 +408,7 @@ msgstr ""
 
 #: web/templates/blog_post/edit.html.eex:2
 #: web/templates/blog_post/new.html.eex:2
-#: web/templates/layout/sidebar.html.eex:85
+#: web/templates/layout/sidebar.html.eex:86
 msgid "Your Blog Posts"
 msgstr ""
 
@@ -474,7 +474,7 @@ msgstr ""
 msgid "Comment created successfully"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:69 web/views/comment_view.ex:15
+#: web/templates/layout/sidebar.html.eex:70 web/views/comment_view.ex:15
 msgid "Guest Book"
 msgstr ""
 
@@ -538,7 +538,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/layout/sidebar.html.eex:81
+#: web/templates/layout/sidebar.html.eex:82
 #: web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr ""
@@ -669,7 +669,7 @@ msgstr ""
 msgid "Uploaded"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:90
+#: web/templates/layout/sidebar.html.eex:91
 msgid "Your Photo Albums"
 msgstr ""
 
@@ -777,6 +777,7 @@ msgid "Go to the last page to reply..."
 msgstr ""
 
 #: web/templates/blog_post/form.html.eex:20
+#: web/templates/calendar_event/_form.html.eex:19
 #: web/templates/comment/comments.html.eex:39
 #: web/templates/comment/form.html.eex:13
 #: web/templates/forum_reply/form.html.eex:11
@@ -825,7 +826,7 @@ msgstr ""
 msgid "Submit new reply"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:61
+#: web/templates/layout/sidebar.html.eex:62
 msgid "You"
 msgstr ""
 
@@ -839,10 +840,6 @@ msgstr ""
 
 #: web/controllers/forum_topic_controller.ex:85
 msgid "You cannot create a topic in a locked forum!"
-msgstr ""
-
-#: web/templates/profile/edit.html.eex:91
-msgid "You can insert pictures from your photo albums by copying the image url and pasting it into the source-field when clicking the image button in the editor"
 msgstr ""
 
 #: web/templates/account/edit.html.eex:106
@@ -1009,104 +1006,21 @@ msgstr ""
 
 #: web/templates/blog_post/index.html.eex:3
 #: web/templates/blog_post/index_all_public.html.eex:2
-#: web/templates/blog_post/show.html.eex:3 web/templates/help/embeds.html.eex:11
+#: web/templates/blog_post/show.html.eex:3
 msgid "Blog posts"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:12 web/views/comment_view.ex:22
+#: web/views/comment_view.ex:22
 msgid "Comments"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:3 web/templates/layout/sidebar.html.eex:41
-msgid "Embeds"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:14
-msgid "Forum replies"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:13
-msgid "Forum topics"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:2
 #: web/templates/help/verification.html.eex:2
-#: web/templates/layout/sidebar.html.eex:29
+#: web/templates/layout/sidebar.html.eex:36
 msgid "Help"
 msgstr ""
 
-#: web/templates/help/embeds.html.eex:42 web/templates/help/embeds.html.eex:59
-#: web/templates/help/embeds.html.eex:76 web/templates/help/embeds.html.eex:93
-#: web/templates/help/embeds.html.eex:110
-msgid "How to embed %{type} from %{source}"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:6
-msgid "How to embed media"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:8
-msgid "It is possible to embed media in the following type of posts: "
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:17
-msgid "Media from the following websites can be embedded by using the provided code-tags: "
-msgstr ""
-
 #: web/templates/admin/user/_profile_text.html.eex:1
-#: web/templates/help/embeds.html.eex:10
 msgid "Profile text"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:76 web/templates/help/embeds.html.eex:93
-msgid "a video"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:42 web/templates/help/embeds.html.eex:59
-msgid "an image"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:44 web/templates/help/embeds.html.eex:61
-#: web/templates/help/embeds.html.eex:78 web/templates/help/embeds.html.eex:95
-#: web/templates/help/embeds.html.eex:111
-msgid "Find the id of %{type} you want to insert."
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:53 web/templates/help/embeds.html.eex:70
-#: web/templates/help/embeds.html.eex:87 web/templates/help/embeds.html.eex:104
-#: web/templates/help/embeds.html.eex:122
-msgid "Once you have copied the id of %{type}, insert a tag in your post like so:"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:45 web/templates/help/embeds.html.eex:62
-#: web/templates/help/embeds.html.eex:79 web/templates/help/embeds.html.eex:96
-msgid "The id can be found by browsing to %{type} on %{source} and looking at the address bar of the browser."
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:45 web/templates/help/embeds.html.eex:62
-msgid "the desired image"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:79 web/templates/help/embeds.html.eex:96
-msgid "the desired video"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:44 web/templates/help/embeds.html.eex:53
-#: web/templates/help/embeds.html.eex:55 web/templates/help/embeds.html.eex:61
-#: web/templates/help/embeds.html.eex:70 web/templates/help/embeds.html.eex:72
-msgid "the image"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:78 web/templates/help/embeds.html.eex:87
-#: web/templates/help/embeds.html.eex:89 web/templates/help/embeds.html.eex:95
-#: web/templates/help/embeds.html.eex:104 web/templates/help/embeds.html.eex:106
-msgid "the video"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:55 web/templates/help/embeds.html.eex:72
-#: web/templates/help/embeds.html.eex:89 web/templates/help/embeds.html.eex:106
-#: web/templates/help/embeds.html.eex:124
-msgid "where ID is the id of %{type}."
 msgstr ""
 
 #: web/templates/admin/user/_personal_details.html.eex:10
@@ -1268,27 +1182,6 @@ msgstr ""
 
 #: web/templates/photo_album/show.html.eex:19
 msgid "that you can reorder your photos by dragging and dropping them!"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:113
-msgid "For instance, if the generated code is:"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:112
-msgid "The id can be found by browsing to the desired track on Soundcloud.com, clicking the share-button, then selecting 'embed', copying the generated code, pasting that code into a text-document and and finding the number right after the text 'api.soundcloud.com/tracks/'."
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:115
-msgid "Then the track id would be:"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:110
-msgid "a track"
-msgstr ""
-
-#: web/templates/help/embeds.html.eex:111 web/templates/help/embeds.html.eex:122
-#: web/templates/help/embeds.html.eex:124
-msgid "the track"
 msgstr ""
 
 #: web/templates/registration/new.html.eex:14
@@ -1529,7 +1422,7 @@ msgid "How much would you like to donate?"
 msgstr ""
 
 #: web/templates/donation/new.html.eex:7
-#: web/templates/layout/sidebar.html.eex:56
+#: web/templates/layout/sidebar.html.eex:57
 msgid "Support %{site}"
 msgstr ""
 
@@ -1581,7 +1474,7 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-#: web/models/user.ex:369
+#: web/models/user.ex:375
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr ""
 
@@ -1620,7 +1513,7 @@ msgid "Add to Contacts"
 msgstr ""
 
 #: web/templates/friendship/index.html.eex:3
-#: web/templates/layout/sidebar.html.eex:75
+#: web/templates/layout/sidebar.html.eex:76
 msgid "Contact List"
 msgstr ""
 
@@ -1690,7 +1583,7 @@ msgstr ""
 msgid "Hide comments?"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:35
+#: web/templates/layout/sidebar.html.eex:42
 msgid "Terms and Rules"
 msgstr ""
 
@@ -1802,6 +1695,7 @@ msgid "Users"
 msgstr ""
 
 #: web/templates/admin/user/_account_details.html.eex:22
+#: web/templates/admin/user/_users.html.eex:29
 msgid "Verified at"
 msgstr ""
 
@@ -1882,7 +1776,7 @@ msgid "This can either mean that an admin has not yet had the time to decide on 
 msgstr ""
 
 #: web/templates/help/verification.html.eex:3
-#: web/templates/layout/sidebar.html.eex:47
+#: web/templates/layout/sidebar.html.eex:48
 msgid "User verification"
 msgstr ""
 
@@ -1951,7 +1845,7 @@ msgstr ""
 #: web/templates/admin/calendar_event/show.html.eex:3
 #: web/templates/calendar_event/index.html.eex:1
 #: web/templates/calendar_event/show.html.eex:2
-#: web/templates/layout/sidebar.html.eex:22
+#: web/templates/layout/sidebar.html.eex:29
 #: web/templates/layout/sidebar_admin.html.eex:18
 msgid "Event calendar"
 msgstr ""
@@ -1960,16 +1854,16 @@ msgstr ""
 msgid "Give a good description of the event"
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:52
-#: web/templates/calendar_event/_form.html.eex:55
+#: web/templates/calendar_event/_form.html.eex:56
+#: web/templates/calendar_event/_form.html.eex:59
 msgid "Image"
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:69
+#: web/templates/calendar_event/_form.html.eex:73
 msgid "Save"
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:44
+#: web/templates/calendar_event/_form.html.eex:48
 msgid "Specify a website where there is more information about the event, if available"
 msgstr ""
 
@@ -1977,19 +1871,19 @@ msgstr ""
 msgid "The event has now been created and will be shown on the site when it has been approved by an administrator."
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:37
+#: web/templates/calendar_event/_form.html.eex:41
 msgid "Venue, address, city etc."
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:20
+#: web/templates/calendar_event/_form.html.eex:24
 msgid "When does the event begin?"
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:28
+#: web/templates/calendar_event/_form.html.eex:32
 msgid "When does the event end?"
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:36
+#: web/templates/calendar_event/_form.html.eex:40
 msgid "Where does the event take place?"
 msgstr ""
 
@@ -2046,9 +1940,25 @@ msgid "User"
 msgstr ""
 
 #: web/templates/blog_post/form.html.eex:20
+#: web/templates/calendar_event/_form.html.eex:19
 #: web/templates/comment/comments.html.eex:39
 #: web/templates/comment/form.html.eex:13
 #: web/templates/forum_reply/form.html.eex:11
 #: web/templates/forum_topic/form.html.eex:19
+#: web/templates/profile/edit.html.eex:91
 msgid "You can embed pictures from your photo albums or from Imgur, gifs from Giphy, Videos from Youtube and Vimeo and Spotify playlists by simply including a url for the desired media in your post"
+msgstr ""
+
+#: web/templates/online_user/index.html.eex:2
+msgid "There is currently %{count} online user"
+msgid_plural "There are currently %{count} online users"
+msgstr[0] ""
+msgstr[1] ""
+
+#: web/templates/layout/sidebar.html.eex:22
+msgid "Online users"
+msgstr ""
+
+#: web/templates/online_user/index.html.eex:6
+msgid "This list shows whoever is currently online, meaning that they have the site open in a browser-tab"
 msgstr ""

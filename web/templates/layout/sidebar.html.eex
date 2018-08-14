@@ -17,6 +17,13 @@
         <% end %>
       </li>
       <li class="nav-item">
+        <%= link to: online_user_path(@conn, :index), class: "nav-link" do %>
+          <i class="fa fa-signal"></i>
+          <%= gettext("Online users") %>
+          <span class="badge badge-pill badge-secondary"><%= Helheim.OnlineUsersService.count() %></span>
+        <% end %>
+      </li>
+      <li class="nav-item">
         <%= link to: calendar_event_path(@conn, :index), class: "nav-link" do %>
           <i class="fa fa-calendar"></i>
           <%= gettext("Event calendar") %>
