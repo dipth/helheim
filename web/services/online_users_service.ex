@@ -8,7 +8,7 @@ defmodule Helheim.OnlineUsersService do
   def list(current_user_id) do
     User
     |> User.with_ids(user_ids(current_user_id))
-    |> User.sort("username", "asc")
+    |> User.sort("inserted_at", "asc")
     |> Repo.all()
   end
 
