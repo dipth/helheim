@@ -16,7 +16,8 @@
     <meta name='env' content="<%= Mix.env %>">
     <meta name='user_id' content="<%= Guardian.Plug.current_resource(@conn).id %>">
     <meta name='guardian_token' content="<%= Guardian.Plug.current_token(@conn) %>">
-    <meta name='notification_sound' content="<%= static_path(@conn, "/sounds/notification.mp3") %>">
+    <meta name='notification_sound' content="<%= static_path(@conn, Helheim.NotificationSounds.file(current_resource(@conn).notification_sound)) %>">
+    <meta name='mute_notifications' content="<%= current_resource(@conn).mute_notifications %>">
 
     <meta name="base-url" content="<%= Helheim.Endpoint.url %>">
 

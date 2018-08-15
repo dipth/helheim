@@ -24,7 +24,7 @@ msgstr ""
 #: web/templates/email/registration_email.text.eex:1
 #: web/templates/error/404.html.eex:18 web/templates/error/404.html.eex:29
 #: web/templates/error/500.html.eex:18 web/templates/error/500.html.eex:29
-#: web/templates/layout/app.html.eex:23
+#: web/templates/layout/app.html.eex:24
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
@@ -108,7 +108,7 @@ msgstr ""
 msgid "Will only be shown to administrators"
 msgstr ""
 
-#: web/templates/navbar/show.html.eex:28
+#: web/templates/navbar/show.html.eex:29
 msgid "Sign Out"
 msgstr ""
 
@@ -337,7 +337,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:342
+#: web/models/user.ex:350
 msgid "does not match your current password"
 msgstr ""
 
@@ -1268,7 +1268,7 @@ msgid "Blocked since:"
 msgstr ""
 
 #: web/templates/admin/user/_blocks.html.eex:1
-#: web/templates/block/index.html.eex:2 web/templates/navbar/show.html.eex:27
+#: web/templates/block/index.html.eex:2 web/templates/navbar/show.html.eex:28
 msgid "Blocks"
 msgstr ""
 
@@ -1474,7 +1474,7 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-#: web/models/user.ex:375
+#: web/models/user.ex:383
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr ""
 
@@ -1961,4 +1961,29 @@ msgstr ""
 
 #: web/templates/online_user/index.html.eex:6
 msgid "This list shows whoever is currently online, meaning that they have the site open in a browser-tab"
+msgstr ""
+
+#: web/templates/preference/edit.html.eex:26
+msgid "Mute notifications?"
+msgstr ""
+
+#: web/templates/preference/edit.html.eex:10
+msgid "Notification sound"
+msgstr ""
+
+#: web/templates/preference/edit.html.eex:6
+msgid "Notifications"
+msgstr ""
+
+#: web/templates/navbar/show.html.eex:27
+#: web/templates/preference/edit.html.eex:1
+msgid "Preferences"
+msgstr ""
+
+#: web/controllers/preference_controller.ex:17
+msgid "Preferences updated!"
+msgstr ""
+
+#: web/templates/preference/edit.html.eex:31
+msgid "Save preferences"
 msgstr ""

@@ -35,7 +35,7 @@ msgstr "%{site_name} er et community for alternative folk."
 #: web/templates/email/registration_email.text.eex:1
 #: web/templates/error/404.html.eex:18 web/templates/error/404.html.eex:29
 #: web/templates/error/500.html.eex:18 web/templates/error/500.html.eex:29
-#: web/templates/layout/app.html.eex:23
+#: web/templates/layout/app.html.eex:24
 #: web/templates/layout/app_special.html.eex:18
 #: web/templates/layout/app_special.html.eex:29
 #: web/templates/layout/app_special.html.eex:30
@@ -119,7 +119,7 @@ msgstr "Velkommen til %{site_name}"
 msgid "Will only be shown to administrators"
 msgstr "Vil kun blive vist til administratorer"
 
-#: web/templates/navbar/show.html.eex:28
+#: web/templates/navbar/show.html.eex:29
 msgid "Sign Out"
 msgstr "Log ud"
 
@@ -349,7 +349,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: web/models/user.ex:342
+#: web/models/user.ex:350
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -1293,7 +1293,7 @@ msgid "Blocked since:"
 msgstr "Blokeret siden:"
 
 #: web/templates/admin/user/_blocks.html.eex:1
-#: web/templates/block/index.html.eex:2 web/templates/navbar/show.html.eex:27
+#: web/templates/block/index.html.eex:2 web/templates/navbar/show.html.eex:28
 msgid "Blocks"
 msgstr "Blokeringer"
 
@@ -1499,7 +1499,7 @@ msgstr "Vi har modtaget din donation og takker ydmygt for din hjælp med at gør
 msgid "Edited"
 msgstr "Redigeret"
 
-#: web/models/user.ex:375
+#: web/models/user.ex:383
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr "I too enjoy registering on websites, fellow human… Bleep Bloop!"
 
@@ -1987,3 +1987,28 @@ msgstr "Online brugere"
 #: web/templates/online_user/index.html.eex:6
 msgid "This list shows whoever is currently online, meaning that they have the site open in a browser-tab"
 msgstr "Denne liste viser de brugere som i øjeblikket er online, hvilket vil sige at de har Helheim åben i en browser-tab"
+
+#: web/templates/preference/edit.html.eex:26
+msgid "Mute notifications?"
+msgstr "Deaktivér notifikationslyd?"
+
+#: web/templates/preference/edit.html.eex:10
+msgid "Notification sound"
+msgstr "Notifikationslyd"
+
+#: web/templates/preference/edit.html.eex:6
+msgid "Notifications"
+msgstr "Notifikationer"
+
+#: web/templates/navbar/show.html.eex:27
+#: web/templates/preference/edit.html.eex:1
+msgid "Preferences"
+msgstr "Præferencer"
+
+#: web/controllers/preference_controller.ex:17
+msgid "Preferences updated!"
+msgstr "Dine præferencer blev gemt!"
+
+#: web/templates/preference/edit.html.eex:31
+msgid "Save preferences"
+msgstr "Gem præferencer"

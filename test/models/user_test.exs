@@ -123,6 +123,20 @@ defmodule Helheim.UserTest do
     end
   end
 
+  describe "preferences_changeset/2" do
+    @valid_preferences_attrs %{notification_sound: "chime_1", mute_notifications: nil}
+
+    test "it accepts valid attributes" do
+      changeset = User.preferences_changeset(%User{}, @valid_preferences_attrs)
+      assert changeset.valid?
+    end
+
+    test "It rejects invalid notification sounds" do
+      changeset = User.preferences_changeset(%User{}, Map.merge(@valid_registration_attrs, %{notification_sound: "blah"}))
+      refute changeset.valid?
+    end
+  end
+
   describe "confirm!/1" do
     test "it sets the confirmed_at timestamp if it is blank" do
       user = insert(:user, confirmed_at: nil)
@@ -495,7 +509,7 @@ defmodule Helheim.UserTest do
       last_login_ip: "127.0.0.1",
       confirmed_at: Timex.shift(Timex.now, minutes: -1)
     )
-    
+
     insert(:user,
       id: 2,
       username: "bbb",
@@ -541,7 +555,7 @@ defmodule Helheim.UserTest do
       last_login_ip: "127.0.0.1",
       confirmed_at: Timex.shift(Timex.now, minutes: -1)
     )
-    
+
     insert(:user,
       id: 2,
       username: "bbb",

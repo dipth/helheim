@@ -57,6 +57,7 @@ defmodule Helheim.Router do
     get "/front_page", PageController, :front_page
     get "/sessions/sign_out", SessionController, :delete
     resources "/account", AccountController, singleton: true, only: [:edit, :update, :delete]
+    resources "/preferences", PreferenceController, singleton: true, only: [:edit, :update]
     resources "/profile", ProfileController, singleton: true, only: [:show, :edit, :update]
     resources "/profiles", ProfileController, only: [:index, :show], as: :public_profile do
       resources "/blog_posts", BlogPostController, only: [:index, :show] do
