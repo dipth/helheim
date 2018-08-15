@@ -41,6 +41,7 @@ import { Mentionable } from "web/static/js/mentionable";
 import { PopoverConfirmable } from "web/static/js/popover_confirmable";
 import { DonationForm } from "web/static/js/donation_form";
 import { CalendarEventForm } from "web/static/js/calendar_event_form";
+import { PreferencesForm } from "web/static/js/preferences_form";
 
 export var App = {
   run: function(){
@@ -61,6 +62,7 @@ export var App = {
     PopoverConfirmable.run();
     DonationForm.run();
     CalendarEventForm.run();
+    PreferencesForm.run();
   }
 }
 

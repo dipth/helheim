@@ -40,6 +40,8 @@ defmodule Helheim.User do
     field :total_donated,                   :integer
     field :captcha,                         :string, virtual: true
     field :verified_at,                     Calecto.DateTimeUTC
+    field :notification_sound,              :string
+    field :mute_notifications,              :boolean
 
     timestamps()
 
@@ -231,6 +233,12 @@ defmodule Helheim.User do
     |> trim_fields([:gender, :location, :partnership_status])
     |> cast_attachments(params, [:avatar])
     |> scrub_profile_text()
+  end
+
+  def preferences_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:notification_sound, :mute_notifications])
+    |> validate_inclusion(:notification_sound, Helheim.NotificationSounds.sound_keys())
   end
 
   def confirm!(user) do

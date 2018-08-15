@@ -7,6 +7,7 @@ export var Notifications = {
     let userId = jQuery('meta[name="user_id"]').attr('content')
     let favicon = new Favico({animation:'popFade'})
     let notification_sound_path = jQuery('meta[name="notification_sound"]').attr('content')
+    let muteNotifications = jQuery('meta[name="mute_notifications"]').attr('content') == 'true'
     let notification_sound
 
     if (env == 'test') {
@@ -49,7 +50,7 @@ export var Notifications = {
     }
 
     let playNotificationSound = () => {
-      if (notification_sound) {
+      if (notification_sound && !muteNotifications) {
         notification_sound.play()
       }
     }

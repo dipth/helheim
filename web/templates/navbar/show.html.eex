@@ -24,6 +24,7 @@
 
       <a class="dropdown-item" href="<%= profile_path(@conn, :edit) %>"><i class="fa fa-id-card"></i> <%= gettext("Profile") %></a>
       <a class="dropdown-item" href="<%= account_path(@conn, :edit) %>"><i class="fa fa-user"></i> <%= gettext("Account") %></a>
+      <a class="dropdown-item" href="<%= preference_path(@conn, :edit) %>"><i class="fa fa-sliders"></i> <%= gettext("Preferences") %></a>
       <a class="dropdown-item" href="<%= block_path(@conn, :index) %>"><i class="fa fa-lock"></i> <%= gettext("Blocks") %></a>
       <a class="dropdown-item" href="/sessions/sign_out"><i class="fa fa-lock"></i> <%= gettext "Sign Out" %></a>
     </div>
