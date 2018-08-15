@@ -14,7 +14,11 @@ defmodule Helheim.OnlineUsersService do
 
   ### PRIVATE
   defp user_ids(current_user_id) do
-    Map.merge(%{inspect(current_user_id) => %{}}, Presence.list("status"))
+    ids =
+      Presence.list("status")
+      |> Map.drop(["747"])
+
+    Map.merge(%{inspect(current_user_id) => %{}}, ids)
     |> Map.keys
   end
 end
