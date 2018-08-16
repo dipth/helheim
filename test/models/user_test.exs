@@ -177,15 +177,15 @@ defmodule Helheim.UserTest do
     end
   end
 
-  describe "moderator?/1" do
-    test "it returns true if the role of the user is 'moderator'" do
-      user = insert(:user, role: "moderator")
-      assert User.moderator?(user)
+  describe "mod?/1" do
+    test "it returns true if the role of the user is 'mod'" do
+      user = insert(:user, role: "mod")
+      assert User.mod?(user)
     end
 
-    test "it returns false if the role of the user is not 'moderator'" do
+    test "it returns false if the role of the user is not 'mod'" do
       user = insert(:user, role: "nope")
-      refute User.moderator?(user)
+      refute User.mod?(user)
     end
   end
 

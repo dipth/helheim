@@ -61,6 +61,7 @@ defmodule Helheim.Comment do
   end
 
   def deletable_by?(_, %User{role: "admin"}), do: true
+  def deletable_by?(_, %User{role: "mod"}), do: true
   def deletable_by?(%Comment{profile_id: profile_id}, user) when is_integer(profile_id), do: profile_id == user.id
   def deletable_by?(%Comment{blog_post_id: blog_post_id} = comment, user) when is_integer(blog_post_id), do: comment.blog_post.user_id == user.id
   def deletable_by?(%Comment{photo_id: photo_id} = comment, user) when is_integer(photo_id), do: comment.photo.photo_album.user_id == user.id
