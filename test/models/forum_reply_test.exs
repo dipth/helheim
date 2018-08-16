@@ -85,6 +85,12 @@ defmodule Helheim.ForumReplyTest do
       reply = insert(:forum_reply, inserted_at: Timex.shift(Timex.now, minutes: -11))
       assert ForumReply.editable_by?(reply, user)
     end
+
+    test "it returns true if the user is a mod" do
+      user  = insert(:user, role: "mod")
+      reply = insert(:forum_reply, inserted_at: Timex.shift(Timex.now, minutes: -11))
+      assert ForumReply.editable_by?(reply, user)
+    end
   end
 
   describe "in_order/1" do

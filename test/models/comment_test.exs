@@ -25,6 +25,16 @@ defmodule Helheim.CommentTest do
       assert Comment.deletable_by?(comment3, user)
     end
 
+    test "returns true if the specified user is a mod regardless of the type of comment" do
+      comment1 = insert(:blog_post_comment)
+      comment2 = insert(:profile_comment)
+      comment3 = insert(:photo_comment)
+      user     = insert(:user, role: "mod")
+      assert Comment.deletable_by?(comment1, user)
+      assert Comment.deletable_by?(comment2, user)
+      assert Comment.deletable_by?(comment3, user)
+    end
+
     test "returns true if the specified comment is a profile comment and the specified user is the same as the profile of the comment" do
       comment = insert(:profile_comment)
       user1   = comment.profile
@@ -81,6 +91,12 @@ defmodule Helheim.CommentTest do
 
     test "it returns true if the user is an admin" do
       user    = insert(:user, role: "admin")
+      comment = insert(:profile_comment, inserted_at: Timex.shift(Timex.now, minutes: -11))
+      assert Comment.editable_by?(comment, user)
+    end
+
+    test "it returns true if the user is a mod" do
+      user    = insert(:user, role: "mod")
       comment = insert(:profile_comment, inserted_at: Timex.shift(Timex.now, minutes: -11))
       assert Comment.editable_by?(comment, user)
     end

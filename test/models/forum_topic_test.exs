@@ -149,6 +149,12 @@ defmodule Helheim.ForumTopicTest do
       topic = insert(:forum_topic, inserted_at: Timex.shift(Timex.now, minutes: -11))
       assert ForumTopic.editable_by?(topic, user)
     end
+
+    test "it returns true if the user is a mod" do
+      user  = insert(:user, role: "mod")
+      topic = insert(:forum_topic, inserted_at: Timex.shift(Timex.now, minutes: -11))
+      assert ForumTopic.editable_by?(topic, user)
+    end
   end
 
   describe "in_order/1" do

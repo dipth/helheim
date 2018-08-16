@@ -287,8 +287,8 @@ defmodule Helheim.User do
   def admin?(%User{role: "admin"}), do: true
   def admin?(_), do: false
 
-  def moderator?(%User{role: "moderator"}), do: true
-  def moderator?(_), do: false
+  def mod?(%User{role: "mod"}), do: true
+  def mod?(_), do: false
 
   def delete!(user) do
     photo_albums = assoc(user, :photo_albums) |> Repo.all

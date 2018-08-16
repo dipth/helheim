@@ -1,11 +1,13 @@
 defmodule Helheim.TimeLimitedEditableConcern do
+  alias Helheim.User
+
   defmacro __using__(_) do
     quote do
       @edit_timelimit_in_minutes 60
       def edit_timelimit_in_minutes, do: @edit_timelimit_in_minutes
 
       def editable_by?(struct, user) do
-        Helheim.User.admin?(user) || (
+        User.admin?(user) || User.mod?(user) || (
           user_id(struct) == user.id &&
           Timex.after?(
             struct.inserted_at,
