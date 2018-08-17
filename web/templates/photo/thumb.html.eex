@@ -18,7 +18,7 @@
           <%= username user %>
         </small>
       </div>
-      <div>
+      <div class="text-nowrap">
         <%= visitor_count_badge @conn, @photo %>
         <%= comment_count_badge @photo %>
       </div>
