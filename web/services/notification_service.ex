@@ -22,9 +22,8 @@ defmodule Helheim.NotificationService do
   end
 
   def mark_as_clicked!(notification) do
-    notification
-    |> Ecto.Changeset.change(clicked_at: DateTime.utc_now)
-    |> Repo.update
+    Notification.query_duplicate_notifications(notification)
+    |> Repo.update_all(set: [clicked_at: DateTime.utc_now])
   end
 
   defp subscriptions(type, subject) do

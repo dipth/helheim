@@ -857,7 +857,7 @@ msgstr ""
 
 #: web/templates/private_conversation/index.html.eex:22
 #: web/templates/private_conversation/show.html.eex:5
-#: web/views/notification_view.ex:43 web/views/profile_helpers.ex:12
+#: web/views/notification_view.ex:44 web/views/profile_helpers.ex:12
 msgid "User deleted"
 msgstr ""
 
@@ -1986,4 +1986,8 @@ msgstr ""
 
 #: web/templates/preference/edit.html.eex:31
 msgid "Save preferences"
+msgstr ""
+
+#: web/views/notification_view.ex:43
+msgid "%{count} people"
 msgstr ""
