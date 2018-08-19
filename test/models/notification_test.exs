@@ -104,4 +104,54 @@ defmodule Helheim.NotificationTest do
       %Helheim.CalendarEvent{} = Notification.subject(notification)
     end
   end
+
+  describe "list_not_clicked/1" do
+    test "returns a list of all non-clicked notifications for the given recipient sorted from newest to oldest" do
+      recipient = insert(:user)
+      notification1 = insert(:notification, profile: insert(:user), type: "comment", recipient: recipient)
+      notification2 = insert(:notification, profile: insert(:user), type: "comment", recipient: recipient)
+      _notification3 = insert(:notification, profile: insert(:user), type: "comment")
+
+      [entry1, entry2] = Notification.list_not_clicked(recipient)
+      assert entry1.id == notification2.id
+      assert entry2.id == notification1.id
+    end
+
+    test "it groups similar notifications togetherr" do
+      recipient = insert(:user)
+      subject = insert(:user)
+      _notification1 = insert(:notification, profile: subject, type: "comment", recipient: recipient)
+      notification2 = insert(:notification, profile: subject, type: "comment", recipient: recipient)
+
+      [entry1] = Notification.list_not_clicked(recipient)
+      assert entry1.id == notification2.id
+      assert entry1.duplicate_count == 2
+    end
+  end
+
+  describe "query_duplicate_notifications/1" do
+    test "returns an ecto query that will return all similar notifications (same recipient, type and subject)" do
+      recipient1 = insert(:user)
+      recipient2 = insert(:user)
+
+      subject1 = insert(:blog_post)
+      subject2 = insert(:user)
+
+      notification1 = insert(:notification, clicked_at: nil, recipient: recipient1, blog_post: subject1, type: "comment")
+      notification2 = insert(:notification, clicked_at: nil, recipient: recipient1, blog_post: subject1, type: "comment")
+      notification3 = insert(:notification, clicked_at: nil, recipient: recipient2, blog_post: subject1, type: "comment")
+      notification4 = insert(:notification, clicked_at: nil, recipient: recipient1, profile: subject2, type: "comment")
+      notification5 = insert(:notification, clicked_at: nil, recipient: recipient1, blog_post: subject1, type: "blah")
+      notification6 = insert(:notification, clicked_at: DateTime.utc_now, recipient: recipient1, blog_post: subject1, type: "comment")
+
+      notifications = Notification.query_duplicate_notifications(notification1) |> Repo.all()
+
+      assert Enum.any?(notifications, fn(n) -> n.id == notification1.id end)
+      assert Enum.any?(notifications, fn(n) -> n.id == notification2.id end)
+      refute Enum.any?(notifications, fn(n) -> n.id == notification3.id end)
+      refute Enum.any?(notifications, fn(n) -> n.id == notification4.id end)
+      refute Enum.any?(notifications, fn(n) -> n.id == notification5.id end)
+      refute Enum.any?(notifications, fn(n) -> n.id == notification6.id end)
+    end
+  end
 end

@@ -1,5 +1,6 @@
 defmodule Helheim.NotificationServiceTest do
   use Helheim.ModelCase
+  alias Helheim.Repo
   alias Helheim.NotificationService
   alias Helheim.Notification
 
@@ -256,10 +257,37 @@ defmodule Helheim.NotificationServiceTest do
   ##############################################################################
   # mark_as_clicked!/1
   describe "mark_as_clicked!/1" do
-    test "updates the clicked_at value of the notification to the current utc time" do
-      {:ok, notification} = insert(:notification, clicked_at: nil)
-                            |> NotificationService.mark_as_clicked!
-      {:ok, time_diff, _, _} = Calendar.DateTime.diff(notification.clicked_at, DateTime.utc_now)
+    test "sets the clicked_at value to the current utc time of all non-clicked notifications with the same subject, type and recipient" do
+      recipient1 = insert(:user)
+      recipient2 = insert(:user)
+
+      subject1 = insert(:blog_post)
+      subject2 = insert(:user)
+
+      notification1 = insert(:notification, clicked_at: nil, recipient: recipient1, blog_post: subject1, type: "comment")
+      notification2 = insert(:notification, clicked_at: nil, recipient: recipient1, blog_post: subject1, type: "comment")
+      notification3 = insert(:notification, clicked_at: nil, recipient: recipient2, blog_post: subject1, type: "comment")
+      notification4 = insert(:notification, clicked_at: nil, recipient: recipient1, profile: subject2, type: "comment")
+      notification5 = insert(:notification, clicked_at: nil, recipient: recipient1, blog_post: subject1, type: "blah")
+
+      NotificationService.mark_as_clicked!(notification1)
+
+      notification1 = Repo.get!(Notification, notification1.id)
+      notification2 = Repo.get!(Notification, notification2.id)
+      notification3 = Repo.get!(Notification, notification3.id)
+      notification4 = Repo.get!(Notification, notification4.id)
+      notification5 = Repo.get!(Notification, notification5.id)
+
+      assert notification1.clicked_at
+      assert notification2.clicked_at
+      refute notification3.clicked_at
+      refute notification4.clicked_at
+      refute notification5.clicked_at
+
+      {:ok, time_diff, _, _} = Calendar.DateTime.diff(notification1.clicked_at, DateTime.utc_now)
+      assert time_diff < 10
+
+      {:ok, time_diff, _, _} = Calendar.DateTime.diff(notification2.clicked_at, DateTime.utc_now)
       assert time_diff < 10
     end
   end

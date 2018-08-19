@@ -4,11 +4,13 @@ defmodule Helheim.NotificationController do
   alias Helheim.NotificationService
 
   def show(conn, %{"id" => id}) do
-    user                = current_resource(conn)
-    {:ok, notification} = assoc(user, :notifications)
-                          |> Notification.with_preloads
-                          |> Repo.get!(id)
-                          |> NotificationService.mark_as_clicked!
+    user = current_resource(conn)
+    notification =
+      assoc(user, :notifications)
+      |> Notification.with_preloads
+      |> Repo.get!(id)
+
+    NotificationService.mark_as_clicked!(notification)
 
     redirect(conn, to: redirect_path(conn, Notification.subject(notification)))
   end
