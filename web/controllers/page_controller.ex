@@ -28,7 +28,7 @@ defmodule Helheim.PageController do
       |> Repo.all
 
     newest_blog_posts =
-      BlogPost.newest_for_frontpage(current_resource(conn), 16)
+      BlogPost.newest_for_frontpage(current_resource(conn), 8)
       |> preload(:user)
       |> Repo.all
 
@@ -42,11 +42,11 @@ defmodule Helheim.PageController do
       |> CalendarEvent.approved()
       |> CalendarEvent.upcoming()
       |> CalendarEvent.chronological()
-      |> limit(12)
+      |> limit(4)
       |> Repo.all
 
     newest_photos =
-      Helheim.Photo.newest_for_frontpage(current_resource(conn), 20)
+      Helheim.Photo.newest_for_frontpage(current_resource(conn), 24)
 
     render conn, "front_page.html",
       newest_users: newest_users,
