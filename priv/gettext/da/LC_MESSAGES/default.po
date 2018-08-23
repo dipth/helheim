@@ -397,7 +397,7 @@ msgstr "Nyeste Blogs"
 msgid "Newest Forum Posts"
 msgstr "Nyeste Forumindlæg"
 
-#: web/templates/page/front_page.html.eex:59
+#: web/templates/page/front_page.html.eex:80
 #: web/templates/profile/show.html.eex:93
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
@@ -505,7 +505,8 @@ msgstr "Tilføj Kommentar"
 #: web/templates/page/front_page.html.eex:5
 #: web/templates/page/front_page.html.eex:29
 #: web/templates/page/front_page.html.eex:46
-#: web/templates/page/front_page.html.eex:64
+#: web/templates/page/front_page.html.eex:56
+#: web/templates/page/front_page.html.eex:85
 #: web/templates/profile/show.html.eex:75
 #: web/templates/profile/show.html.eex:99
 msgid "Show All"
@@ -1863,6 +1864,7 @@ msgstr "Dette emne er låst"
 
 #: web/templates/calendar_event/index.html.eex:5
 #: web/templates/calendar_event/new.html.eex:1
+#: web/templates/page/front_page.html.eex:70
 msgid "Create event"
 msgstr "Opret begivenhed"
 
@@ -2016,3 +2018,15 @@ msgstr "Gem præferencer"
 #: web/views/notification_view.ex:43
 msgid "%{count} people"
 msgstr "%{count} personer"
+
+#: web/templates/page/front_page.html.eex:64
+msgid "It looks like there are no upcoming events..."
+msgstr "Det ser ud til at der ikke er nogle kommende begivenheder…"
+
+#: web/templates/page/front_page.html.eex:65
+msgid "Tell us about an event so we can add it:"
+msgstr "Fortæl os om en begivenhed så vi kan tilføje den:"
+
+#: web/templates/page/front_page.html.eex:55
+msgid "Upcoming events"
+msgstr "Kommende begivenheder"
