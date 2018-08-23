@@ -50,9 +50,15 @@
           <%= render Helheim.ForumView, "forum_topic.html", conn: @conn, forum_topic: forum_topic %>
         <% end %>
       </div>
+    </div>
+  </div>
+</div>
 
+<div class="card-group mt-1">
+  <div class="card">
+    <div class="card-block">
       <h5 class="mb-1 d-flex justify-content-between">
-        <%= gettext "Upcoming events" %>
+        <%= gettext "Events" %>
         <%= link gettext("Show All"), to: calendar_event_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
       </h5>
       <%= for calendar_event <- @upcoming_events do %>
@@ -73,16 +79,17 @@
       <% end %>
     </div>
   </div>
-</div>
-
-<div class="card">
-  <div class="card-block">
-    <h5 class="mb-0"><%= gettext "Newest Photos" %></h5>
-    <div class="card-group card-group-photos">
-      <%= for photo <- @newest_photos do %>
-        <%= render Helheim.PhotoView, "thumb.html", conn: @conn, photo: photo, hide_title: true %>
-      <% end %>
-      <%= link gettext("Show All"), to: photo_path(@conn, :index), class: "btn btn-outline-secondary btn-block mb-0" %>
+  <div class="card">
+    <div class="card-block">
+      <h5 class="mb-0 d-flex justify-content-between">
+        <%= gettext "Newest Photos" %>
+        <%= link gettext("Show All"), to: photo_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
+      </h5>
+      <div class="card-group card-group-photos">
+        <%= for photo <- @newest_photos do %>
+          <%= render Helheim.PhotoView, "thumb.html", conn: @conn, photo: photo, hide_title: true %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

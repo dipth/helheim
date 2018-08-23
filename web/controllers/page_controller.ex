@@ -33,7 +33,7 @@ defmodule Helheim.PageController do
       |> Repo.all
 
     newest_forum_topics =
-      ForumTopic.newest_for_frontpage(5)
+      ForumTopic.newest_for_frontpage(12)
       |> ForumTopic.with_latest_reply
       |> Repo.all
 
@@ -42,11 +42,11 @@ defmodule Helheim.PageController do
       |> CalendarEvent.approved()
       |> CalendarEvent.upcoming()
       |> CalendarEvent.chronological()
-      |> limit(4)
+      |> limit(12)
       |> Repo.all
 
     newest_photos =
-      Helheim.Photo.newest_for_frontpage(current_resource(conn), 24)
+      Helheim.Photo.newest_for_frontpage(current_resource(conn), 20)
 
     render conn, "front_page.html",
       newest_users: newest_users,
