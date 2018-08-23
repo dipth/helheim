@@ -37,6 +37,20 @@
   <div class="card">
     <div class="card-block">
       <h5 class="mb-1 d-flex justify-content-between">
+        <%= gettext "Newest Forum Posts" %>
+        <%= link gettext("Show All"), to: forum_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
+      </h5>
+      <div class="list-group mb-1">
+        <%= for forum_topic <- @newest_forum_topics do %>
+          <%= render Helheim.ForumView, "forum_topic.html", conn: @conn, forum_topic: forum_topic %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-block">
+      <h5 class="mb-1 d-flex justify-content-between">
         <%= gettext "Events" %>
         <%= link gettext("Show All"), to: calendar_event_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
       </h5>
@@ -56,20 +70,6 @@
           <% end %>
         </p>
       <% end %>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-block">
-      <h5 class="mb-1 d-flex justify-content-between">
-        <%= gettext "Newest Forum Posts" %>
-        <%= link gettext("Show All"), to: forum_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
-      </h5>
-      <div class="list-group mb-1">
-        <%= for forum_topic <- @newest_forum_topics do %>
-          <%= render Helheim.ForumView, "forum_topic.html", conn: @conn, forum_topic: forum_topic %>
-        <% end %>
-      </div>
     </div>
   </div>
 </div>
