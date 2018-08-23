@@ -45,11 +45,32 @@
         <%= gettext "Newest Forum Posts" %>
         <%= link gettext("Show All"), to: forum_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
       </h5>
-      <div class="list-group">
+      <div class="list-group mb-1">
         <%= for forum_topic <- @newest_forum_topics do %>
           <%= render Helheim.ForumView, "forum_topic.html", conn: @conn, forum_topic: forum_topic %>
         <% end %>
       </div>
+
+      <h5 class="mb-1 d-flex justify-content-between">
+        <%= gettext "Upcoming events" %>
+        <%= link gettext("Show All"), to: calendar_event_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
+      </h5>
+      <%= for calendar_event <- @upcoming_events do %>
+        <%= render Helheim.CalendarEventView, "_list_entry_card.html", conn: @conn,
+                                              calendar_event: calendar_event %>
+      <% end %>
+      <%= if length(@upcoming_events) == 0 do %>
+        <p class="text-center">
+          <%= gettext "It looks like there are no upcoming events..." %><br>
+          <%= gettext "Tell us about an event so we can add it:" %><br>
+        </p>
+        <p class="text-center">
+          <%= link to: calendar_event_path(@conn, :new), class: "btn btn-sm btn-outline-primary" do %>
+            <i class="fa fa-plus"></i>
+            <%= gettext "Create event" %>
+          <% end %>
+        </p>
+      <% end %>
     </div>
   </div>
 </div>

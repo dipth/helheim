@@ -5,6 +5,7 @@ defmodule Helheim.PageController do
   alias Helheim.BlogPost
   alias Helheim.ForumTopic
   alias Helheim.Term
+  alias Helheim.CalendarEvent
 
   def index(conn, _params) do
     if Guardian.Plug.current_resource(conn) do
@@ -32,8 +33,16 @@ defmodule Helheim.PageController do
       |> Repo.all
 
     newest_forum_topics =
-      ForumTopic.newest_for_frontpage(11)
+      ForumTopic.newest_for_frontpage(5)
       |> ForumTopic.with_latest_reply
+      |> Repo.all
+
+    upcoming_events =
+      CalendarEvent
+      |> CalendarEvent.approved()
+      |> CalendarEvent.upcoming()
+      |> CalendarEvent.chronological()
+      |> limit(4)
       |> Repo.all
 
     newest_photos =
@@ -43,7 +52,8 @@ defmodule Helheim.PageController do
       newest_users: newest_users,
       newest_blog_posts: newest_blog_posts,
       newest_photos: newest_photos,
-      newest_forum_topics: newest_forum_topics
+      newest_forum_topics: newest_forum_topics,
+      upcoming_events: upcoming_events
   end
 
   def terms(conn, _params) do
