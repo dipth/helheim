@@ -28,33 +28,12 @@
         <%= gettext "Newest Blogs" %>
         <%= link gettext("Show All"), to: blog_post_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
       </h5>
-      <div class="row">
-        <%= for blog_post_group <- Enum.chunk_every(@newest_blog_posts, 8) do %>
-          <div class="col-md">
-            <%= for blog_post <- blog_post_group do %>
-              <%= render Helheim.BlogPostView, "list_entry.html", conn: @conn, blog_post: blog_post %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+      <%= for blog_post <- @newest_blog_posts do %>
+        <%= render Helheim.BlogPostView, "list_entry.html", conn: @conn, blog_post: blog_post %>
+      <% end %>
     </div>
   </div>
-  <div class="card">
-    <div class="card-block">
-      <h5 class="mb-1 d-flex justify-content-between">
-        <%= gettext "Newest Forum Posts" %>
-        <%= link gettext("Show All"), to: forum_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
-      </h5>
-      <div class="list-group mb-1">
-        <%= for forum_topic <- @newest_forum_topics do %>
-          <%= render Helheim.ForumView, "forum_topic.html", conn: @conn, forum_topic: forum_topic %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
 
-<div class="card-group mt-1">
   <div class="card">
     <div class="card-block">
       <h5 class="mb-1 d-flex justify-content-between">
@@ -79,6 +58,23 @@
       <% end %>
     </div>
   </div>
+
+  <div class="card">
+    <div class="card-block">
+      <h5 class="mb-1 d-flex justify-content-between">
+        <%= gettext "Newest Forum Posts" %>
+        <%= link gettext("Show All"), to: forum_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
+      </h5>
+      <div class="list-group mb-1">
+        <%= for forum_topic <- @newest_forum_topics do %>
+          <%= render Helheim.ForumView, "forum_topic.html", conn: @conn, forum_topic: forum_topic %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-group mt-1">
   <div class="card">
     <div class="card-block">
       <h5 class="mb-0 d-flex justify-content-between">
