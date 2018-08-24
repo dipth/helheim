@@ -42,7 +42,7 @@ defmodule Helheim.PageController do
       |> CalendarEvent.approved()
       |> CalendarEvent.upcoming()
       |> CalendarEvent.chronological()
-      |> limit(4)
+      |> limit(5)
       |> Repo.all
 
     newest_photos =
