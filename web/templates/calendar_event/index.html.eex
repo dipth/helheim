@@ -19,4 +19,4 @@
   <hr>
 <% end %>
 
-<%= lpaginate @conn, @calendar_events %>
+<%= pagination_links @conn, @calendar_events %>

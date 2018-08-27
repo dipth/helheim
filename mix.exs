@@ -20,7 +20,7 @@ defmodule Helheim.Mixfile do
     [mod: {Helheim, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :comeonin, :bamboo, :calendar, :sentry, :scout_apm,
-                    :ex_aws, :hackney, :poison, :timex, :scrivener_html, :timex_ecto,
+                    :ex_aws, :hackney, :poison, :timex, :timex_ecto,
                     :stripity_stripe, :recaptcha]]
   end
 
@@ -64,7 +64,6 @@ defmodule Helheim.Mixfile do
      {:html_sanitize_ex, "~> 1.1"},
      {:crutches, "~> 1.0.0"},
      {:scrivener_ecto, "~> 1.1"}, # Pagination
-     {:scrivener_html, "~> 1.1"}, # Pagination
      {:mock, "~> 0.3.1", only: :test},
      {:scout_apm, "~> 0.0"},
      {:stripity_stripe, "~> 1.6.0"},

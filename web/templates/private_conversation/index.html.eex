@@ -31,4 +31,4 @@
   <% end %>
 </div>
 
-<%= lpaginate @conn, @messages %>
+<%= pagination_links @conn, @messages %>

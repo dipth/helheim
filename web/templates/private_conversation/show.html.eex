@@ -24,7 +24,7 @@
       <%= render "message.html", conn: @conn, message: message %>
     <% end %>
   </ul>
-  <%= lpaginate @conn, @messages %>
+  <%= pagination_links @conn, @messages %>
 <% end %>
 <%= if @partner do %>
   <%= render "form.html", conn: @conn, me: @me, partner: @partner %>

@@ -35,4 +35,4 @@
   </div>
 </div>
 
-<%= lpaginate @conn, @blocks %>
+<%= pagination_links @conn, @blocks %>

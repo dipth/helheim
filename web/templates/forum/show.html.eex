@@ -43,4 +43,4 @@
   </div>
 </div>
 
-<%= lpaginate @conn, @forum_topics %>
+<%= pagination_links @conn, @forum_topics %>

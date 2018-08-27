@@ -8,4 +8,4 @@
   <% end %>
 </div>
 
-<%= lpaginate @conn, @photos %>
+<%= pagination_links @conn, @photos %>

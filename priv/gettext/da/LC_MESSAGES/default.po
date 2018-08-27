@@ -392,12 +392,12 @@ msgstr "Husk mig i 30 dage"
 msgid "Newest Blogs"
 msgstr "Nyeste Blogs"
 
-#: web/templates/page/front_page.html.eex:45
+#: web/templates/page/front_page.html.eex:40
 #: web/templates/profile/show.html.eex:81
 msgid "Newest Forum Posts"
 msgstr "Nyeste Forumindlæg"
 
-#: web/templates/page/front_page.html.eex:85
+#: web/templates/page/front_page.html.eex:81
 #: web/templates/profile/show.html.eex:93
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
@@ -504,9 +504,9 @@ msgstr "Tilføj Kommentar"
 #: web/templates/comment/comments.html.eex:9
 #: web/templates/page/front_page.html.eex:5
 #: web/templates/page/front_page.html.eex:29
-#: web/templates/page/front_page.html.eex:46
-#: web/templates/page/front_page.html.eex:62
-#: web/templates/page/front_page.html.eex:86
+#: web/templates/page/front_page.html.eex:41
+#: web/templates/page/front_page.html.eex:55
+#: web/templates/page/front_page.html.eex:82
 #: web/templates/profile/show.html.eex:75
 #: web/templates/profile/show.html.eex:99
 msgid "Show All"
@@ -1864,7 +1864,7 @@ msgstr "Dette emne er låst"
 
 #: web/templates/calendar_event/index.html.eex:5
 #: web/templates/calendar_event/new.html.eex:1
-#: web/templates/page/front_page.html.eex:76
+#: web/templates/page/front_page.html.eex:69
 msgid "Create event"
 msgstr "Opret begivenhed"
 
@@ -2019,14 +2019,18 @@ msgstr "Gem præferencer"
 msgid "%{count} people"
 msgstr "%{count} personer"
 
-#: web/templates/page/front_page.html.eex:70
+#: web/templates/page/front_page.html.eex:63
 msgid "It looks like there are no upcoming events..."
 msgstr "Det ser ud til at der ikke er nogle kommende begivenheder…"
 
-#: web/templates/page/front_page.html.eex:71
+#: web/templates/page/front_page.html.eex:64
 msgid "Tell us about an event so we can add it:"
 msgstr "Fortæl os om en begivenhed så vi kan tilføje den:"
 
-#: web/templates/page/front_page.html.eex:61
+#: web/templates/page/front_page.html.eex:54
 msgid "Events"
 msgstr "Begivenheder"
+
+#: web/views/pagination_helpers.ex:39
+msgid "%{page} of %{total}"
+msgstr "%{page} af %{total}"

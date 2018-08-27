@@ -10,4 +10,4 @@
   <%= render "_active_friendships.html", conn: @conn, user: @user, active_friendships: @active_friendships %>
 <% end %>
 
-<%= lpaginate @conn, @active_friendships %>
+<%= pagination_links @conn, @active_friendships %>

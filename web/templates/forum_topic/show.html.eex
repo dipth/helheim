@@ -19,13 +19,13 @@
              forum_topic: @forum_topic %>
 <% end %>
 
-<%= lpaginate @conn, @forum_replies %>
+<%= pagination_links @conn, @forum_replies %>
 
 <%= for forum_reply <- @forum_replies.entries do %>
   <%= render Helheim.ForumReplyView, "forum_reply.html", conn: @conn, forum: @forum, forum_topic: @forum_topic, forum_reply: forum_reply %>
 <% end %>
 
-<%= lpaginate @conn, @forum_replies %>
+<%= pagination_links @conn, @forum_replies %>
 
 <%= if Helheim.ForumTopic.locked?(@forum_topic) do %>
   <p>

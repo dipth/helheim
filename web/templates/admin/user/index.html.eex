@@ -55,4 +55,4 @@
   <code><%= @users.total_entries %></code>
 </p>
 
-<%= lpaginate @conn, @users, sort: @sort, direction: @direction, search: @search %>
+<%= pagination_links @conn, @users, %{sort: @sort, direction: @direction, search: @search} %>

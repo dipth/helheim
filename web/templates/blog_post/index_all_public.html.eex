@@ -8,4 +8,4 @@
                                      blog_post: blog_post %>
 <% end %>
 
-<%= lpaginate @conn, @blog_posts %>
+<%= pagination_links @conn, @blog_posts %>

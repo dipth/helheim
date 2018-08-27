@@ -59,4 +59,4 @@
   <% end %>
 </div>
 
-<%= lpaginate @conn, @users, search: @conn.params["search"] %>
+<%= pagination_links @conn, @users, %{search: @conn.params["search"]} %>

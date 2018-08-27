@@ -55,10 +55,6 @@ config :helheim, Helheim.Mailer,
   adapter: Bamboo.PostmarkAdapter,
   api_key: "only_applicable_in_production"
 
-# Configure pagination
-config :scrivener_html,
-  routes_helper: Helheim.Router.Helpers
-
 # Configure calendar
 config :calendar, :translation_module, CalendarTranslations.Translations
 

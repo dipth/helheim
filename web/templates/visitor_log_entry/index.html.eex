@@ -15,4 +15,4 @@
   <% end %>
 </div>
 
-<%= lpaginate @conn, @entries %>
+<%= pagination_links @conn, @entries %>

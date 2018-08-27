@@ -24,7 +24,7 @@
   </div>
 
   <%= unless @limited do %>
-    <%= lpaginate @conn, @comments %>
+    <%= pagination_links @conn, @comments %>
   <% end %>
 
   <%= form_for Helheim.Comment.changeset(%Helheim.Comment{}), @post_path, fn f -> %>
