@@ -1,8 +1,6 @@
 defmodule Helheim.EmbedHelpers do
   import Phoenix.HTML
   import Phoenix.HTML.Format
-  import Phoenix.HTML.Link
-  alias Phoenix.HTML.Safe
 
   @url_regex ~r/(?<!["])(?:https?:\/\/)(?:[a-z0-9]+\.)?[a-z0-9]+\.(?:dk|com|net|de|org|be|io)(?::\d+)?\/?(?:[a-z0-9-_\/?%&=\.]+)?(?!["])/i
 
