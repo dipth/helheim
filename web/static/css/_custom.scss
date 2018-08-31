@@ -59,6 +59,10 @@ form.link {
 
 .blog-post-title {
   font-family: 'Pirata One', cursive;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 2rem;
+  }
 }
 
 .blog-post-body {
