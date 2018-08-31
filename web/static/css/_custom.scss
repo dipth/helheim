@@ -57,6 +57,12 @@ form.link {
   display: inline;
 }
 
+.breadcrumb {
+  @include media-breakpoint-down(sm) {
+    .breadcrumb-item.active { display: none; }
+  }
+}
+
 .blog-post-title {
   font-family: 'Pirata One', cursive;
 
