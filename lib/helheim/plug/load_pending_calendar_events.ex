@@ -1,4 +1,4 @@
-defmodule Helheim.Plug.LoadPendingCalendarEvents do
+defmodule HelheimWeb.Plug.LoadPendingCalendarEvents do
   import Plug.Conn
   alias Helheim.CalendarEvent
 

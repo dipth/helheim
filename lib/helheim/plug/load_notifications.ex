@@ -1,4 +1,4 @@
-defmodule Helheim.Plug.LoadNotifications do
+defmodule HelheimWeb.Plug.LoadNotifications do
   import Plug.Conn
   alias Helheim.Notification
 

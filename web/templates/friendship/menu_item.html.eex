@@ -1,9 +1,0 @@
-<li class="nav-item dropdown hidden-md-down" id="nav-item-pending-friendships">
-  <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="nav-link-pending-friendships">
-    <i class="fa fa-users"></i>
-    <%= Helheim.NavbarView.count_badge(@conn, %{pending_friendships: true}) %>
-  </a>
-  <div class="dropdown-menu dropdown-menu-right dropdown-menu-pending-friendships">
-    <%= render "dropdown_items.html", conn: @conn %>
-  </div>
-</li>

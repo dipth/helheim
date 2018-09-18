@@ -25,7 +25,7 @@ defmodule Guardian.Plug.VerifyRememberMe do
       jwt = conn.req_cookies["remember_me"]  # options could specify this
       case exchange!(jwt, "refresh") do # options could specify these too
         {:ok, resource} ->
-          Helheim.Auth.login(conn, resource)
+          HelheimWeb.Auth.login(conn, resource)
         _error -> conn
       end
     end

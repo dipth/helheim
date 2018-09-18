@@ -1,0 +1,36 @@
+<div class="card calendar-event">
+  <%= img_tag(HelheimWeb.CalendarEventImage.url({@calendar_event.image, @calendar_event}, :large), class: "card-img-top img-fluid") %>
+  <div class="card-block">
+    <div class="d-flex flex-row mb-1">
+      <div class="mr-1 calendar-event-date">
+        <div class="month"><%= calendar_event_month(@calendar_event) %></div>
+        <div class="day"><%= calendar_event_day(@calendar_event) %></div>
+      </div>
+      <div class="d-flex align-items-center">
+        <h3 class="mb-0"><%= @calendar_event.title %></h3>
+      </div>
+    </div>
+
+    <p>
+      <i class="fa fa-fw fa-calendar"></i>
+      <strong><%= calendar_event_timespan(@calendar_event) %></strong>
+
+      <br>
+
+      <i class="fa fa-fw fa-map-marker"></i>
+      <strong><%= @calendar_event.location %></strong>
+
+      <%= if @calendar_event.url do %>
+        <br>
+        <i class="fa fa-fw fa-link"></i>
+        <%= link @calendar_event.url, to: @calendar_event.url, target: "_blank" %>
+      <% end %>
+    </p>
+
+    <hr>
+
+    <p class="card-text"><%= HelheimWeb.EmbedHelpers.replace_urls(@calendar_event.description) %></p>
+
+    <%= render HelheimWeb.Admin.CalendarEventView, "_admin_links.html", assigns %>
+  </div>
+</div>

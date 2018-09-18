@@ -1,7 +1,7 @@
-defmodule Helheim.Plug.EnforceBlock do
+defmodule HelheimWeb.Plug.EnforceBlock do
   import Plug.Conn
   import Guardian.Plug, only: [current_resource: 1]
-  import Helheim.Router.Helpers
+  import HelheimWeb.Router.Helpers
   alias Helheim.Block
 
   @doc false

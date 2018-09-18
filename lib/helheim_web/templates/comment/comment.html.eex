@@ -1,0 +1,21 @@
+<div class="comment" data-id="<%= @comment.id %>">
+  <div class="d-flex flex-row justify-content-between mb-1">
+    <div>
+      <%= avatar_with_username @comment.author, true %>
+    </div>
+    <div class="hidden-xs-down">
+      <small>
+        <%= time_ago_in_words @comment.inserted_at %>
+      </small>
+    </div>
+  </div>
+  <div class="embeds mentionable">
+    <%= HelheimWeb.EmbedHelpers.replace_urls(@comment.body) %>
+  </div>
+  <%= if Comment.editable_by?(@comment, current_resource(@conn)) do %>
+    <%= link gettext("Edit"), to: HelheimWeb.CommentView.edit_path(@conn, @comment, Comment.commentable(@comment)), class: "btn btn-outline-secondary btn-sm" %>
+    <small><%= gettext "Only possible for up to %{minutes} minutes after posting...", minutes: Comment.edit_timelimit_in_minutes %></small><br>
+  <% end %>
+  <%= HelheimWeb.CommentView.delete_comment_button(@conn, @comment) %>
+  <hr>
+</div>

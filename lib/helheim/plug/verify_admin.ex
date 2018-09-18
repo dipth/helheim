@@ -1,4 +1,4 @@
-defmodule Helheim.Plug.VerifyAdmin do
+defmodule HelheimWeb.Plug.VerifyAdmin do
   @doc false
   def init(opts \\ %{}), do: Enum.into(opts, %{})
 
@@ -9,7 +9,7 @@ defmodule Helheim.Plug.VerifyAdmin do
       "admin" ->
         conn
       _ ->
-        raise Helheim.Forbidden, message: "Only for admins!"
+        raise HelheimWeb.Forbidden, message: "Only for admins!"
     end
   end
 end

@@ -1,0 +1,15 @@
+<blockquote class="blockquote">
+  <p class="mb-0">
+    <%= link @blog_post.title, to: public_profile_blog_post_path(@conn, :show, @blog_post.user, @blog_post) %>
+  </p>
+  <footer class="blockquote-footer">
+    <%= username @blog_post.user %>
+    -
+    <%= time_ago_in_words @blog_post.updated_at %>
+    <br>
+    <%= visibility_badge @blog_post %>
+    <%= visitor_count_badge @conn, @blog_post %>
+    <%= comment_count_badge @blog_post %>
+    <%= HelheimWeb.BlogPostView.edited_label(@blog_post) %>
+  </footer>
+</blockquote>

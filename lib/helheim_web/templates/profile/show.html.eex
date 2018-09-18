@@ -1,0 +1,103 @@
+<div class="row mt-1">
+  <div class="col-xl-5 col-lg-6">
+    <div class="card">
+      <div class="card-block">
+        <img
+          src="<%= HelheimWeb.Avatar.url({@user.avatar, @user}, :large) %>"
+          class="rounded img-fluid mx-auto d-block mb-1"
+          alt="<%= @user.username %>"
+        >
+        <h1><%= username @user %></h1>
+        <p class="mb-1">
+          <%= visitor_count_badge @conn, @user %>
+          <%= if User.verified?(@user) do %>
+            <%= link to: help_path(@conn, :verification), class: "badge badge-success" do %>
+              <i class="fa fa-fw fa-check-circle"></i>
+              <%= gettext "Verified user" %>
+            <% end %>
+          <% end %>
+        </p>
+
+        <%= render "details.html", conn: @conn, user: @user %>
+
+        <%= if @user.id != current_resource(@conn).id do %>
+          <p class="mb-0 mt-1">
+            <%= link to: private_conversation_path(@conn, :show, @user.id), class: "btn btn-primary btn-block" do %>
+              <i class="fa fa-envelope"></i>
+              <%= gettext "Send private message" %>
+            <% end %>
+          </p>
+
+          <p class="mb-0 mt-1">
+            <%= render FriendshipView,
+                       "_friend_request_button_#{Friendship.status(current_resource(@conn), @user)}.html",
+                       conn: @conn,
+                       user: @user %>
+          </p>
+
+          <%= if Block.blocked?(current_resource(@conn), @user) do %>
+            <div class="alert alert-warning mt-1" role="alert">
+              <strong><%= gettext "This user is blocked" %>!</strong>
+              <%= gettext "The user will be unable to see your profile, blog posts, photos or send you messages while blocked" %>.
+              <p class="mb-0 mt-1">
+                <%= link to: public_profile_block_path(@conn, :delete, @user.id), class: "btn btn-default btn-block", method: "DELETE" do %>
+                  <i class="fa fa-unlock"></i>
+                  <%= gettext "Unblock user" %>
+                <% end %>
+              </p>
+            </div>
+          <% else %>
+            <p class="mb-0 mt-1">
+              <%= link to: public_profile_block_path(@conn, :create, @user.id), class: "btn btn-default btn-block", method: "POST" do %>
+                <i class="fa fa-lock"></i>
+                <%= gettext "Block user" %>
+              <% end %>
+            </p>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-7 col-lg-6 embeds mentionable">
+    <%= HelheimWeb.EmbedHelpers.raw_replace_urls(@user.profile_text) %>
+  </div>
+</div>
+
+<div class="card-group">
+  <div class="card">
+    <div class="card-block">
+      <h5 class="mb-1"><%= gettext "Newest Blogs" %></h5>
+      <%= for blog_post <- @newest_blog_posts do %>
+        <%= render HelheimWeb.BlogPostView, "list_entry.html", conn: @conn, blog_post: blog_post %>
+      <% end %>
+
+      <%= link gettext("Show All"), to: public_profile_blog_post_path(@conn, :index, @user), class: "btn btn-outline-secondary btn-block mb-0" %>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-block">
+      <h5 class="mb-1"><%= gettext "Newest Forum Posts" %></h5>
+      <div class="list-group">
+        <%= for forum_topic <- @newest_forum_topics do %>
+          <%= render HelheimWeb.ForumView, "forum_topic.html", conn: @conn, forum_topic: forum_topic %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-block">
+    <h5 class="mb-1"><%= gettext "Newest Photos" %></h5>
+    <div class="card-group card-group-photos">
+      <%= for photo <- @newest_photos do %>
+        <%= render HelheimWeb.PhotoView, "thumb.html", conn: @conn, user: @user, photo: photo %>
+      <% end %>
+    </div>
+    <%= link gettext("Show All"), to: public_profile_photo_album_path(@conn, :index, @user), class: "btn btn-outline-secondary btn-block mb-0" %>
+  </div>
+</div>
+
+<%= HelheimWeb.CommentView.render_comments @conn, @newest_comments, @user, limited: true %>

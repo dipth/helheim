@@ -1,0 +1,65 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= username @user, true %></li>
+  <li class="breadcrumb-item"><%= link gettext("Photo Albums"), to: public_profile_photo_album_path(@conn, :index, @user) %></li>
+  <li class="breadcrumb-item active"><%= @photo_album.title %></li>
+</ol>
+
+<blockquote class="blockquote text-left">
+  <%= if @photo_album.description do %>
+    <p><%= text_to_html @photo_album.description %></p>
+  <% end %>
+  <%= visibility_badge @photo_album %>
+  <%= visitor_count_badge @conn, @photo_album %>
+</blockquote>
+
+<%= if @photo_album.user_id == current_resource(@conn).id do %>
+  <div class="alert alert-info">
+    <i class="fa fa-info-circle"></i>
+    <strong><%= gettext "Did you know" %></strong>
+    <%= gettext "that you can reorder your photos by dragging and dropping them!" %>
+    <small><%= gettext "(only in desktop browsers)" %></small>
+  </div>
+<% end %>
+
+<div class="card-group card-group-photos<%= if @photo_album.user_id == current_resource(@conn).id do " mine" end %>" id="photos" data-reposition-url="<%= photo_album_photo_positions_path(@conn, :update, @photo_album) %>">
+  <%= for photo <- @photos do %>
+    <%= render HelheimWeb.PhotoView, "thumb.html", conn: @conn, user: @user, photo_album: @photo_album, photo: photo %>
+  <% end %>
+</div>
+
+<%= if me?(@conn, @user) do %>
+  <div class="card">
+    <div class="card-header">
+      <%= gettext "Upload Photos" %>
+    </div>
+    <div class="card-block">
+      <%= render "space_used.html", conn: @conn, user: @user %>
+
+      <%= form_for @conn, photo_album_photo_path(@conn, :create, @photo_album), [as: :photo, multipart: true, id: "photo-dropzone", class: "dropzone"], fn f -> %>
+        <div class="form-group">
+          <span class="text-warning"><i class="fa fa-warning"></i></span>
+          <%= label f, :nsfw, gettext("Please turn on this switch before uploading NSFW photos:"), class: "control-label" %>
+          <%= label f, :nsfw, class: "switch switch-text switch-primary" do %>
+            <%= checkbox f, :nsfw, class: "switch-input" %>
+            <span class="switch-label" data-on="On" data-off="Off"></span>
+            <span class="switch-handle"></span>
+          <% end %>
+        </div>
+        <div class="dz-message">
+          <%= gettext "Drop photos here (or click) to upload..." %>
+        </div>
+      <% end %>
+    </div>
+    <div class="card-footer">
+      <%= link to: photo_album_path(@conn, :edit, @photo_album), class: "btn btn-sm btn-primary" do %>
+        <i class="fa fa-pencil"></i>
+        <%= gettext("Edit Photo Album") %>
+      <% end %>
+
+      <%= link to: photo_album_path(@conn, :delete, @photo_album), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-sm float-right" do %>
+        <i class="fa fa-trash"></i>
+        <%= gettext "Delete" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
