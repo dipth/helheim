@@ -22,6 +22,10 @@ body.app-signed-out {
   }
 }
 
+a {
+  word-wrap: break-word;
+}
+
 .img-thumbnail .form-control {
   border: none;
   border-radius: 0;
