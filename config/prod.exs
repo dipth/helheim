@@ -29,7 +29,7 @@ config :helheim, Helheim.Repo,
   ssl: true
 
 # Configure guardian
-config :guardian, Guardian,
+config :helheim, Helheim.Auth.Guardian,
   secret_key: System.get_env("GUARDIAN_SECRET_KEY")
 
 # Configure mailer

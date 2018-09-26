@@ -21,17 +21,17 @@ defmodule HelheimWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(%{"guardian_token" => jwt}, socket) do
-    case sign_in(socket, jwt) do
-      {:ok, authed_socket, _guardian_params} ->
+  def connect(%{"guardian_token" => token}, socket) do
+    case authenticate(socket, Helheim.Auth.Guardian, token) do
+      {:ok, authed_socket} ->
         {:ok, authed_socket}
       _ ->
-        {:error, :unauthorized}
+        :error
     end
   end
 
   def connect(_params, _socket) do
-    {:error, :unauthorized}
+    :error
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:

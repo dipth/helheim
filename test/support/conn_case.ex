@@ -29,6 +29,7 @@ defmodule HelheimWeb.ConnCase do
       import Helheim.Factory
 
       alias Helheim.Repo
+      alias Helheim.Auth.Guardian
 
       # The default endpoint for testing
       @endpoint HelheimWeb.Endpoint
@@ -51,7 +52,7 @@ defmodule HelheimWeb.ConnCase do
       def sign_in(conn, resource) do
         conn
         |> conn_with_fetched_session
-        |> Guardian.Plug.sign_in(resource, :access)
+        |> Guardian.Plug.sign_in(resource)
       end
 
       defp create_and_sign_in_user(context) do

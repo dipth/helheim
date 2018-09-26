@@ -1,6 +1,7 @@
 defmodule HelheimWeb.AccountController do
   use HelheimWeb, :controller
   alias Helheim.User
+  alias Helheim.Auth.Guardian
 
   def edit(conn, _params) do
     user = Guardian.Plug.current_resource(conn)
@@ -27,8 +28,8 @@ defmodule HelheimWeb.AccountController do
     User.delete!(user)
 
     conn
-    |> Guardian.Plug.sign_out
-    |> put_resp_cookie("remember_me", "", max_age: 1)
+    |> Guardian.Plug.sign_out()
+    |> delete_resp_cookie("guardian_default_token")
     |> put_flash(:success, gettext("Hope to see you again some time!"))
     |> redirect(to: page_path(conn, :index))
   end

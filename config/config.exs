@@ -23,15 +23,14 @@ config :logger, :console,
   metadata: [:user_id]
 
 # Configure guardian
-config :guardian, Guardian,
+config :helheim, Helheim.Auth.Guardian,
   issuer: "Helheim",
   ttl: { 1, :day },
   token_ttl: %{
     "refresh" => {30, :days},
     "access" =>  {1, :days}
   },
-  verify_issuer: true,
-  serializer: HelheimWeb.GuardianSerializer
+  verify_issuer: true
 
 # Configure Sentry
 config :sentry,

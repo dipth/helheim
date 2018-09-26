@@ -2,8 +2,8 @@ defmodule HelheimWeb.NotificationChannel do
   use Phoenix.Channel
   import Guardian.Phoenix.Socket
 
-  def join("notifications:" <> user_id, %{"guardian_token" => token}, socket) do
-    authenticate_channel socket, user_id, token
+  def join("notifications:" <> user_id, %{}, socket) do
+    authorize_channel socket, user_id
   end
 
   def join(_room, _, _socket) do
@@ -18,16 +18,6 @@ defmodule HelheimWeb.NotificationChannel do
 
   def broadcast_notification(recipient_id) do
     HelheimWeb.Endpoint.broadcast("notifications:#{recipient_id}", "notification", %{})
-  end
-
-  # Authenticate users to make sure that they are signed in
-  defp authenticate_channel(socket, user_id, token) do
-    case sign_in(socket, token) do
-      {:ok, socket, _guardian_params} ->
-        authorize_channel(socket, user_id)
-      {:error, reason} ->
-        {:error, reason}
-    end
   end
 
   # Authorize users to make sure that they can only join their own notification

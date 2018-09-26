@@ -3,8 +3,8 @@ defmodule HelheimWeb.StatusChannel do
   alias HelheimWeb.Presence
   import Guardian.Phoenix.Socket
 
-  def join("status", %{"guardian_token" => token}, socket) do
-    authenticate_channel socket, token
+  def join("status", %{}, socket) do
+    authorize_channel(socket)
   end
 
   def join(_room, _, _socket) do
@@ -17,16 +17,6 @@ defmodule HelheimWeb.StatusChannel do
       online_at: inspect(System.system_time(:seconds))
     })
     {:noreply, socket}
-  end
-
-  # Authenticate users to make sure that they are signed in
-  defp authenticate_channel(socket, token) do
-    case sign_in(socket, token) do
-      {:ok, socket, _guardian_params} ->
-        authorize_channel(socket)
-      {:error, reason} ->
-        {:error, reason}
-    end
   end
 
   # Authorize users to make sure that they can only join their own notification

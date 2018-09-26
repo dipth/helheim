@@ -44,7 +44,7 @@ defmodule Helheim.Mixfile do
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 0.12.0"},
       {:pbkdf2_elixir, "~> 0.12"},
-      {:guardian, "~> 0.14"},
+      {:guardian, "~> 1.1"},
       {:secure_random, "~> 0.5.0"},
       {:bamboo, "~> 0.7"},
       {:bamboo_postmark, "~> 0.4.1"},
@@ -70,8 +70,7 @@ defmodule Helheim.Mixfile do
       {:scout_apm, "~> 0.0"},
       {:stripity_stripe, "~> 1.6.0"},
       {:recaptcha, "~> 2.2"},
-      {:remote_ip, "0.1.3"},
-      {:uuid, "~> 1.1"}
+      {:remote_ip, "0.1.3"}
     ]
   end
 

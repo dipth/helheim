@@ -59,7 +59,7 @@ config :helheim, Helheim.Repo,
   pool_size: 10
 
 # Guardian configuration
-config :guardian, Guardian,
+config :helheim, Helheim.Auth.Guardian,
   secret_key: "Af5zLmIvBFsArKwijmXSomDNSsjkXMsoQEQ5c6IJu74o7v0qOSLQRED9NEgsRlqU"
 
 config :helheim, Helheim.Mailer,

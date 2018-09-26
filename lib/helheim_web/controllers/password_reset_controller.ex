@@ -3,6 +3,7 @@ defmodule HelheimWeb.PasswordResetController do
   alias Helheim.User
   alias HelheimWeb.Email
   alias Helheim.Mailer
+  alias Helheim.Auth.Guardian
 
   plug :put_layout, "app_special.html"
 
@@ -62,7 +63,7 @@ defmodule HelheimWeb.PasswordResetController do
         case Repo.update(changeset) do
           {:ok, user} ->
             conn
-            |> HelheimWeb.Auth.login(user)
+            |> Guardian.Plug.sign_in(user)
             |> put_flash(:success, gettext("Your password has now been changed and you have been signed in!"))
             |> redirect(to: page_path(conn, :front_page))
           {:error, changeset} ->

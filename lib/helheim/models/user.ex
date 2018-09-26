@@ -344,8 +344,8 @@ defmodule Helheim.User do
   defp validate_existing_password(changeset) do
     case changeset do
       %Ecto.Changeset{changes: %{existing_password: existing_password}} ->
-        password_hash = get_field(changeset, :password_hash)
-        if HelheimWeb.Auth.password_correct?(password_hash, existing_password) do
+        encrypted_password = get_field(changeset, :password_hash)
+        if Helheim.Auth.password_correct?(existing_password, encrypted_password) do
           changeset
         else
           add_error(changeset, :existing_password, gettext("does not match your current password"))

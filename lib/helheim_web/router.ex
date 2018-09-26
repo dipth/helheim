@@ -9,17 +9,15 @@ defmodule HelheimWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Guardian.Plug.VerifySession
-    plug Guardian.Plug.VerifyRememberMe
-    plug Guardian.Plug.LoadResource
     plug HelheimWeb.Locale
   end
 
-  pipeline :browser_auth do
-    plug Guardian.Plug.VerifySession
-    plug Guardian.Plug.VerifyRememberMe
-    plug Guardian.Plug.EnsureAuthenticated, handler: HelheimWeb.Token
-    plug Guardian.Plug.LoadResource
+  pipeline :auth do
+    plug HelheimWeb.Auth.Pipeline
+  end
+
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
     plug HelheimWeb.Plug.LoadNotifications
     plug HelheimWeb.Plug.LoadUnreadPrivateConversations
     plug HelheimWeb.Plug.LoadPendingFriendships
@@ -27,7 +25,7 @@ defmodule HelheimWeb.Router do
     plug HelheimWeb.Plug.LoadPendingCalendarEvents
   end
 
-  pipeline :browser_admin_auth do
+  pipeline :ensure_admin do
     plug HelheimWeb.Plug.VerifyAdmin
   end
 
@@ -36,7 +34,7 @@ defmodule HelheimWeb.Router do
   end
 
   scope "/", HelheimWeb do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser, :auth] # Use the default browser stack
 
     get "/", PageController, :index
     get "/terms", PageController, :terms
@@ -49,7 +47,7 @@ defmodule HelheimWeb.Router do
   end
 
   scope "/", HelheimWeb do
-    pipe_through [:browser, :browser_auth]
+    pipe_through [:browser, :auth, :ensure_auth]
 
     get "/banned", PageController, :banned
     get "/help/verification", HelpController, :verification
@@ -116,7 +114,7 @@ defmodule HelheimWeb.Router do
   end
 
   scope "/admin", HelheimWeb.Admin, as: :admin do
-    pipe_through [:browser, :browser_auth, :browser_admin_auth]
+    pipe_through [:browser, :auth, :ensure_auth, :ensure_admin]
 
     resources "/forum_categories", ForumCategoryController, only: [:index, :new, :create, :edit, :update, :delete] do
       resources "/forums", ForumController, only: [:new, :create, :edit, :update, :delete]

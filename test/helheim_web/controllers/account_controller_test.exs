@@ -65,14 +65,14 @@ defmodule HelheimWeb.AccountControllerTest do
       conn = put conn, "/account", user: %{name: user.name, email: user.email, password: "newpassword", password_confirmation: "newpassword", existing_password: "password"}
       assert html_response(conn, 302)
       user = Repo.get(User, user.id)
-      assert HelheimWeb.Auth.password_correct?(user.password_hash, "newpassword")
+      assert Helheim.Auth.password_correct?("newpassword", user.password_hash)
     end
 
     test "it allows keeping the existing password", %{conn: conn, user: user} do
       conn = put conn, "/account", user: %{name: user.name, email: user.email, password: "", password_confirmation: "", existing_password: "password"}
       assert html_response(conn, 302)
       user = Repo.get(User, user.id)
-      assert HelheimWeb.Auth.password_correct?(user.password_hash, "password")
+      assert Helheim.Auth.password_correct?("password", user.password_hash)
     end
 
     test "it requires the existing password", %{conn: conn, user: user} do
@@ -81,7 +81,7 @@ defmodule HelheimWeb.AccountControllerTest do
       user = Repo.get(User, user.id)
       refute user.name == "New Name"
       refute user.email == "new@email.com"
-      refute HelheimWeb.Auth.password_correct?(user.password_hash, "newpassword")
+      refute Helheim.Auth.password_correct?("newpassword", user.password_hash)
     end
 
     test "it requires that the existing password is correct", %{conn: conn, user: user} do
@@ -90,7 +90,7 @@ defmodule HelheimWeb.AccountControllerTest do
       user = Repo.get(User, user.id)
       refute user.name == "New Name"
       refute user.email == "new@email.com"
-      refute HelheimWeb.Auth.password_correct?(user.password_hash, "newpassword")
+      refute Helheim.Auth.password_correct?("newpassword", user.password_hash)
     end
 
     test "it trims whitespace", %{conn: conn, user: user} do
