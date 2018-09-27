@@ -10,128 +10,135 @@ msgid ""
 msgstr ""
 "Language: en\n"
 
-#: web/templates/page/index.html.eex:3
+#: lib/helheim_web/templates/page/index.html.eex:3
 msgid "%{site_name} is a community for alternative people."
 msgstr ""
 
-#: web/email.ex:8 web/email.ex:16 web/templates/donation/new.html.eex:7
-#: web/templates/donation/new.html.eex:38
-#: web/templates/email/password_reset_email.html.eex:5
-#: web/templates/email/password_reset_email.html.eex:15
-#: web/templates/email/password_reset_email.text.eex:1
-#: web/templates/email/registration_email.html.eex:5
-#: web/templates/email/registration_email.html.eex:15
-#: web/templates/email/registration_email.text.eex:1
-#: web/templates/error/404.html.eex:18 web/templates/error/404.html.eex:29
-#: web/templates/error/500.html.eex:18 web/templates/error/500.html.eex:29
-#: web/templates/layout/app.html.eex:24
-#: web/templates/layout/app_special.html.eex:18
-#: web/templates/layout/app_special.html.eex:29
-#: web/templates/layout/app_special.html.eex:30
-#: web/templates/layout/sidebar.html.eex:57 web/templates/page/index.html.eex:3
+#: lib/helheim_web/email.ex:8 lib/helheim_web/email.ex:16
+#: lib/helheim_web/templates/donation/new.html.eex:7
+#: lib/helheim_web/templates/donation/new.html.eex:38
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:5
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:15
+#: lib/helheim_web/templates/email/password_reset_email.text.eex:1
+#: lib/helheim_web/templates/email/registration_email.html.eex:5
+#: lib/helheim_web/templates/email/registration_email.html.eex:15
+#: lib/helheim_web/templates/email/registration_email.text.eex:1
+#: lib/helheim_web/templates/error/404.html.eex:18
+#: lib/helheim_web/templates/error/404.html.eex:29
+#: lib/helheim_web/templates/error/500.html.eex:18
+#: lib/helheim_web/templates/error/500.html.eex:29
+#: lib/helheim_web/templates/layout/app.html.eex:24
+#: lib/helheim_web/templates/layout/app_special.html.eex:18
+#: lib/helheim_web/templates/layout/app_special.html.eex:29
+#: lib/helheim_web/templates/layout/app_special.html.eex:30
+#: lib/helheim_web/templates/layout/sidebar.html.eex:57
+#: lib/helheim_web/templates/page/index.html.eex:3
 msgid "Helheim"
 msgstr ""
 
-#: web/templates/session/new.html.eex:42
+#: lib/helheim_web/templates/session/new.html.eex:42
 msgid "Click here if you did not get your confirmation e-mail"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:89
+#: lib/helheim_web/templates/registration/new.html.eex:89
 msgid "Create Account"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:24
-#: web/templates/admin/user/_account_details.html.eex:13
-#: web/templates/admin/user/_users.html.eex:14
-#: web/templates/admin/user/index.html.eex:26
-#: web/templates/confirmation/new.html.eex:10
-#: web/templates/password_reset/new.html.eex:10
-#: web/templates/registration/new.html.eex:37
-#: web/templates/session/new.html.eex:9
+#: lib/helheim_web/templates/account/edit.html.eex:24
+#: lib/helheim_web/templates/admin/user/_account_details.html.eex:13
+#: lib/helheim_web/templates/admin/user/_users.html.eex:14
+#: lib/helheim_web/templates/admin/user/index.html.eex:26
+#: lib/helheim_web/templates/confirmation/new.html.eex:10
+#: lib/helheim_web/templates/password_reset/new.html.eex:10
+#: lib/helheim_web/templates/registration/new.html.eex:37
+#: lib/helheim_web/templates/session/new.html.eex:9
 msgid "E-mail"
 msgstr ""
 
-#: web/templates/page/confirmation_pending.html.eex:3
+#: lib/helheim_web/templates/page/confirmation_pending.html.eex:3
 msgid "Excellent!"
 msgstr ""
 
-#: web/templates/confirmation/new.html.eex:4
+#: lib/helheim_web/templates/confirmation/new.html.eex:4
 msgid "If for some reason you did not receive your confirmation e-mail, then enter your e-mail address below and we will send it again."
 msgstr ""
 
-#: web/templates/account/edit.html.eex:14
-#: web/templates/admin/user/_account_details.html.eex:10
-#: web/templates/admin/user/_users.html.eex:11
-#: web/templates/admin/user/index.html.eex:21
-#: web/templates/registration/new.html.eex:23
+#: lib/helheim_web/templates/account/edit.html.eex:14
+#: lib/helheim_web/templates/admin/user/_account_details.html.eex:10
+#: lib/helheim_web/templates/admin/user/_users.html.eex:11
+#: lib/helheim_web/templates/admin/user/index.html.eex:21
+#: lib/helheim_web/templates/registration/new.html.eex:23
 msgid "Name"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:3 web/views/registration_view.ex:4
+#: lib/helheim_web/templates/registration/new.html.eex:3
+#: lib/helheim_web/views/registration_view.ex:4
 msgid "New Registration"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:41
-#: web/templates/registration/new.html.eex:51
-#: web/templates/session/new.html.eex:21
+#: lib/helheim_web/templates/account/edit.html.eex:41
+#: lib/helheim_web/templates/registration/new.html.eex:51
+#: lib/helheim_web/templates/session/new.html.eex:21
 msgid "Password"
 msgstr ""
 
-#: web/templates/page/index.html.eex:7
+#: lib/helheim_web/templates/page/index.html.eex:7
 msgid "Register Account"
 msgstr ""
 
-#: web/templates/confirmation/new.html.eex:3
-#: web/templates/confirmation/new.html.eex:18 web/views/confirmation_view.ex:4
+#: lib/helheim_web/templates/confirmation/new.html.eex:3
+#: lib/helheim_web/templates/confirmation/new.html.eex:18
+#: lib/helheim_web/views/confirmation_view.ex:4
 msgid "Resend confirmation e-mail"
 msgstr ""
 
-#: web/templates/page/index.html.eex:12 web/templates/session/new.html.eex:3
-#: web/templates/session/new.html.eex:36
+#: lib/helheim_web/templates/page/index.html.eex:12
+#: lib/helheim_web/templates/session/new.html.eex:3
+#: lib/helheim_web/templates/session/new.html.eex:36
 msgid "Sign In"
 msgstr ""
 
-#: web/templates/admin/user/_account_details.html.eex:7
-#: web/templates/admin/user/_users.html.eex:8
-#: web/templates/admin/user/index.html.eex:16
-#: web/templates/profile/index.html.eex:15
-#: web/templates/registration/new.html.eex:9
+#: lib/helheim_web/templates/admin/user/_account_details.html.eex:7
+#: lib/helheim_web/templates/admin/user/_users.html.eex:8
+#: lib/helheim_web/templates/admin/user/index.html.eex:16
+#: lib/helheim_web/templates/profile/index.html.eex:15
+#: lib/helheim_web/templates/registration/new.html.eex:9
 msgid "Username"
 msgstr ""
 
-#: web/templates/email/registration_email.html.eex:5
+#: lib/helheim_web/templates/email/registration_email.html.eex:5
 msgid "Welcome to %{site_name}"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:19
-#: web/templates/registration/new.html.eex:28
+#: lib/helheim_web/templates/account/edit.html.eex:19
+#: lib/helheim_web/templates/registration/new.html.eex:28
 msgid "Will only be shown to administrators"
 msgstr ""
 
-#: web/templates/navbar/show.html.eex:29
+#: lib/helheim_web/templates/navbar/show.html.eex:29
 msgid "Sign Out"
 msgstr ""
 
-#: web/controllers/confirmation_controller.ex:53
+#: lib/helheim_web/controllers/confirmation_controller.ex:53
 msgid "Confirmation e-mail sent!"
 msgstr ""
 
-#: web/controllers/confirmation_controller.ex:17
-#: web/controllers/password_reset_controller.ex:24
+#: lib/helheim_web/controllers/confirmation_controller.ex:17
+#: lib/helheim_web/controllers/password_reset_controller.ex:25
 msgid "No user with that e-mail address!"
 msgstr ""
 
-#: web/controllers/session_controller.ex:33
+#: lib/helheim_web/controllers/session_controller.ex:23
 msgid "See you later!"
 msgstr ""
 
-#: web/controllers/confirmation_controller.ex:28
-#: web/controllers/password_reset_controller.ex:35
-#: web/controllers/password_reset_controller.ex:54
+#: lib/helheim_web/controllers/confirmation_controller.ex:28
+#: lib/helheim_web/controllers/password_reset_controller.ex:36
+#: lib/helheim_web/controllers/password_reset_controller.ex:55
 msgid "Token not found!"
 msgstr ""
 
-#: web/controllers/confirmation_controller.ex:43
+#: lib/helheim_web/controllers/confirmation_controller.ex:43
 msgid "Unable to confirm!"
 msgstr ""
 
@@ -140,19 +147,20 @@ msgstr ""
 msgid "Unknown resource type"
 msgstr ""
 
-#: web/controllers/confirmation_controller.ex:39
+#: lib/helheim_web/controllers/confirmation_controller.ex:39
 msgid "User confirmed!"
 msgstr ""
 
-#: web/controllers/registration_controller.ex:18
+#: lib/helheim_web/controllers/registration_controller.ex:18
 msgid "User created!"
 msgstr ""
 
-#: web/controllers/session_controller.ex:16
+#: lib/helheim_web/controllers/session_controller.ex:34
 msgid "Welcome back %{username}!"
 msgstr ""
 
-#: web/controllers/session_controller.ex:24
+#: lib/helheim_web/controllers/session_controller.ex:43
+#: lib/helheim_web/controllers/session_controller.ex:45
 msgid "Wrong e-mail or password"
 msgstr ""
 
@@ -160,1853 +168,1887 @@ msgstr ""
 msgid "You must be signed in to access this page"
 msgstr ""
 
-#: web/templates/email/password_reset_email.html.eex:38
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:38
 msgid "Choose a new password"
 msgstr ""
 
-#: web/templates/session/new.html.eex:39
+#: lib/helheim_web/templates/session/new.html.eex:39
 msgid "Click here if you forgot your password"
 msgstr ""
 
-#: web/templates/password_reset/new.html.eex:3
+#: lib/helheim_web/templates/password_reset/new.html.eex:3
 msgid "Forgot your password?"
 msgstr ""
 
-#: web/templates/email/password_reset_email.html.eex:16
-#: web/templates/email/password_reset_email.text.eex:3
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:16
+#: lib/helheim_web/templates/email/password_reset_email.text.eex:3
 msgid "If it was you who requested the password reset, then simply click the link below to choose a new password:"
 msgstr ""
 
-#: web/templates/email/password_reset_email.html.eex:58
-#: web/templates/email/password_reset_email.text.eex:9
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:58
+#: lib/helheim_web/templates/email/password_reset_email.text.eex:9
 msgid "If you did not request the password change, then simply delete and ignore this e-mail."
 msgstr ""
 
-#: web/templates/password_reset/new.html.eex:4
+#: lib/helheim_web/templates/password_reset/new.html.eex:4
 msgid "If you forgot your password then fill out your e-mail below and we will send you instructions about how to reset it."
 msgstr ""
 
-#: web/email.ex:16
+#: lib/helheim_web/email.ex:16
 msgid "Password reset instructions for %{site_name}"
 msgstr ""
 
-#: web/controllers/password_reset_controller.ex:82
+#: lib/helheim_web/controllers/password_reset_controller.ex:83
 msgid "Password reset instructions sent!"
 msgstr ""
 
-#: web/templates/password_reset/new.html.eex:18
+#: lib/helheim_web/templates/password_reset/new.html.eex:18
 msgid "Reset Password"
 msgstr ""
 
-#: web/templates/email/password_reset_email.html.eex:5
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:5
 msgid "Reset your password on %{site_name}"
 msgstr ""
 
-#: web/templates/email/password_reset_email.html.eex:15
-#: web/templates/email/password_reset_email.text.eex:1
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:15
+#: lib/helheim_web/templates/email/password_reset_email.text.eex:1
 msgid "Someone has requested a password reset for your user on %{site_name}."
 msgstr ""
 
-#: web/email.ex:8
+#: lib/helheim_web/email.ex:8
 msgid "Welcome to %{site_name}. Please confirm your e-mail address"
 msgstr ""
 
-#: web/templates/email/password_reset_email.html.eex:59
-#: web/templates/email/password_reset_email.text.eex:11
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:59
+#: lib/helheim_web/templates/email/password_reset_email.text.eex:11
 msgid "Your account will remain safe as long as your e-mail account remains uncompromised."
 msgstr ""
 
-#: web/templates/email/registration_email.html.eex:16
-#: web/templates/email/registration_email.text.eex:3
+#: lib/helheim_web/templates/email/registration_email.html.eex:16
+#: lib/helheim_web/templates/email/registration_email.text.eex:3
 msgid "Click the link below to confirm:"
 msgstr ""
 
-#: web/templates/email/registration_email.html.eex:38
+#: lib/helheim_web/templates/email/registration_email.html.eex:38
 msgid "Confirm my e-mail!"
 msgstr ""
 
-#: web/templates/email/registration_email.html.eex:15
-#: web/templates/email/registration_email.text.eex:1
+#: lib/helheim_web/templates/email/registration_email.html.eex:15
+#: lib/helheim_web/templates/email/registration_email.text.eex:1
 msgid "Your profile has now been created on %{site_name}, but you need to confirm your e-mail address before we can let you in."
 msgstr ""
 
-#: web/templates/account/edit.html.eex:37
-#: web/templates/password_reset/show.html.eex:3
-#: web/templates/password_reset/show.html.eex:36
+#: lib/helheim_web/templates/account/edit.html.eex:37
+#: lib/helheim_web/templates/password_reset/show.html.eex:3
+#: lib/helheim_web/templates/password_reset/show.html.eex:36
 msgid "Change Password"
 msgstr ""
 
-#: web/templates/password_reset/show.html.eex:12
+#: lib/helheim_web/templates/password_reset/show.html.eex:12
 msgid "New Password"
 msgstr ""
 
-#: web/templates/password_reset/show.html.eex:4
+#: lib/helheim_web/templates/password_reset/show.html.eex:4
 msgid "Please choose a new password for your account:"
 msgstr ""
 
-#: web/controllers/password_reset_controller.ex:66
+#: lib/helheim_web/controllers/password_reset_controller.ex:67
 msgid "Your password has now been changed and you have been signed in!"
 msgstr ""
 
-#: web/controllers/password_reset_controller.ex:39
-#: web/controllers/password_reset_controller.ex:58
+#: lib/helheim_web/controllers/password_reset_controller.ex:40
+#: lib/helheim_web/controllers/password_reset_controller.ex:59
 msgid "Your password reset token has expired. Please request a new!"
 msgstr ""
 
-#: web/templates/page/confirmation_pending.html.eex:3
+#: lib/helheim_web/templates/page/confirmation_pending.html.eex:3
 msgid "Before we can let you in, you need to confirm your e-mail address. Please check your inbox for further instructions..."
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:5
+#: lib/helheim_web/templates/layout/sidebar.html.eex:5
 msgid "Front Page"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:46
-#: web/templates/password_reset/show.html.eex:17
-#: web/templates/registration/new.html.eex:56
+#: lib/helheim_web/templates/account/edit.html.eex:46
+#: lib/helheim_web/templates/password_reset/show.html.eex:17
+#: lib/helheim_web/templates/registration/new.html.eex:56
 msgid "Must be at least 6 characters long"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:29
-#: web/templates/registration/new.html.eex:42
+#: lib/helheim_web/templates/account/edit.html.eex:29
+#: lib/helheim_web/templates/registration/new.html.eex:42
 msgid "Will never be shown to other users. Only used for login, notifications and password recovery"
 msgstr ""
 
-#: web/controllers/session_controller.ex:20
+#: lib/helheim_web/controllers/session_controller.ex:44
 msgid "You need to confirm your e-mail address before you can log in"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:51
-#: web/templates/password_reset/show.html.eex:26
-#: web/templates/registration/new.html.eex:65
+#: lib/helheim_web/templates/account/edit.html.eex:51
+#: lib/helheim_web/templates/password_reset/show.html.eex:26
+#: lib/helheim_web/templates/registration/new.html.eex:65
 msgid "Confirm Password"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:56
-#: web/templates/password_reset/show.html.eex:31
-#: web/templates/registration/new.html.eex:70
+#: lib/helheim_web/templates/account/edit.html.eex:56
+#: lib/helheim_web/templates/password_reset/show.html.eex:31
+#: lib/helheim_web/templates/registration/new.html.eex:70
 msgid "To ensure that you didn't make any typos"
 msgstr ""
 
-#: web/controllers/password_reset_controller.ex:20
+#: lib/helheim_web/controllers/password_reset_controller.ex:21
 msgid "You need to confirm your e-mail address before you can reset your password"
 msgstr ""
 
-#: web/templates/navbar/show.html.eex:22 web/views/account_view.ex:4
+#: lib/helheim_web/templates/navbar/show.html.eex:22
+#: lib/helheim_web/views/account_view.ex:4
 msgid "Settings"
 msgstr ""
 
-#: web/templates/navbar/show.html.eex:26 web/views/account_view.ex:4
+#: lib/helheim_web/templates/navbar/show.html.eex:26
+#: lib/helheim_web/views/account_view.ex:4
 msgid "Account"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:6
+#: lib/helheim_web/templates/account/edit.html.eex:6
 msgid "Account Settings"
 msgstr ""
 
-#: web/controllers/account_controller.ex:17
+#: lib/helheim_web/controllers/account_controller.ex:18
 msgid "Account updated!"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:30
+#: lib/helheim_web/templates/account/edit.html.eex:30
 msgid "Be aware!"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:64 web/templates/account/edit.html.eex:68
+#: lib/helheim_web/templates/account/edit.html.eex:64
+#: lib/helheim_web/templates/account/edit.html.eex:68
 msgid "Existing Password"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:65
+#: lib/helheim_web/templates/account/edit.html.eex:65
 msgid "For security reasons you must type in your existing password when updating your account settings"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:30
+#: lib/helheim_web/templates/account/edit.html.eex:30
 msgid "If you change your e-mail address, you will be unable to log in again until you have verified the new e-mail address!"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:38
+#: lib/helheim_web/templates/account/edit.html.eex:38
 msgid "Leave these fields blank to keep your current password"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:11
-#: web/templates/admin/user/_personal_details.html.eex:1
+#: lib/helheim_web/templates/account/edit.html.eex:11
+#: lib/helheim_web/templates/admin/user/_personal_details.html.eex:1
 msgid "Personal Details"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:78
+#: lib/helheim_web/templates/account/edit.html.eex:78
 msgid "Update Account"
 msgstr ""
 
-#: web/models/user.ex:350
+#: lib/helheim/models/user.ex:351
 msgid "does not match your current password"
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:67
-#: web/templates/profile/edit.html.eex:22
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:67
+#: lib/helheim_web/templates/profile/edit.html.eex:22
 msgid "Maximum file size: %{file_size}"
 msgstr ""
 
-#: web/templates/navbar/show.html.eex:25 web/views/comment_view.ex:46
+#: lib/helheim_web/templates/navbar/show.html.eex:25
+#: lib/helheim_web/views/comment_view.ex:46
 msgid "Profile"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:11 web/templates/profile/edit.html.eex:14
+#: lib/helheim_web/templates/profile/edit.html.eex:11
+#: lib/helheim_web/templates/profile/edit.html.eex:14
 msgid "Profile Photo"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:6
+#: lib/helheim_web/templates/profile/edit.html.eex:6
 msgid "Profile Settings"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:80
+#: lib/helheim_web/templates/profile/edit.html.eex:80
 msgid "Profile Text"
 msgstr ""
 
-#: web/controllers/profile_controller.ex:81
+#: lib/helheim_web/controllers/profile_controller.ex:81
 msgid "Profile updated!"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:97
+#: lib/helheim_web/templates/profile/edit.html.eex:97
 msgid "Update Profile"
 msgstr ""
 
-#: web/templates/session/new.html.eex:32
+#: lib/helheim_web/templates/session/new.html.eex:32
 msgid "Remember me"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:28
-#: web/templates/profile/show.html.eex:70
+#: lib/helheim_web/templates/page/front_page.html.eex:28
+#: lib/helheim_web/templates/profile/show.html.eex:70
 msgid "Newest Blogs"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:40
-#: web/templates/profile/show.html.eex:81
+#: lib/helheim_web/templates/page/front_page.html.eex:40
+#: lib/helheim_web/templates/profile/show.html.eex:81
 msgid "Newest Forum Posts"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:81
-#: web/templates/profile/show.html.eex:93
+#: lib/helheim_web/templates/page/front_page.html.eex:81
+#: lib/helheim_web/templates/profile/show.html.eex:93
 msgid "Newest Photos"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:65
+#: lib/helheim_web/templates/layout/sidebar.html.eex:65
 msgid "Your Profile"
 msgstr ""
 
-#: web/views/visitor_log_entry_view.ex:28
+#: lib/helheim_web/views/visitor_log_entry_view.ex:28
 msgid "Blog Posts"
 msgstr ""
 
-#: web/templates/blog_post/index.html.eex:10
-#: web/templates/blog_post/new.html.eex:3 web/templates/blog_post/new.html.eex:8
+#: lib/helheim_web/templates/blog_post/index.html.eex:10
+#: lib/helheim_web/templates/blog_post/new.html.eex:3
+#: lib/helheim_web/templates/blog_post/new.html.eex:8
 msgid "New Blog Post"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:56
+#: lib/helheim_web/templates/blog_post/form.html.eex:56
 msgid "Save Blog Post"
 msgstr ""
 
-#: web/templates/blog_post/edit.html.eex:2
-#: web/templates/blog_post/new.html.eex:2
-#: web/templates/layout/sidebar.html.eex:86
+#: lib/helheim_web/templates/blog_post/edit.html.eex:2
+#: lib/helheim_web/templates/blog_post/new.html.eex:2
+#: lib/helheim_web/templates/layout/sidebar.html.eex:86
 msgid "Your Blog Posts"
 msgstr ""
 
-#: web/templates/admin/calendar_event/_admin_links.html.eex:8
-#: web/templates/admin/forum_category/index.html.eex:13
-#: web/templates/admin/forum_category/index.html.eex:39
-#: web/templates/admin/term/index.html.eex:35
-#: web/templates/blog_post/show.html.eex:30
-#: web/templates/friendship/_my_active_friendships.html.eex:23
-#: web/templates/friendship/_my_pending_friendships.html.eex:28
-#: web/templates/photo/show.html.eex:42
-#: web/templates/photo_album/show.html.eex:59
-#: web/templates/private_conversation/show.html.eex:10
+#: lib/helheim_web/templates/admin/calendar_event/_admin_links.html.eex:8
+#: lib/helheim_web/templates/admin/forum_category/index.html.eex:13
+#: lib/helheim_web/templates/admin/forum_category/index.html.eex:39
+#: lib/helheim_web/templates/admin/term/index.html.eex:35
+#: lib/helheim_web/templates/blog_post/show.html.eex:30
+#: lib/helheim_web/templates/friendship/_my_active_friendships.html.eex:23
+#: lib/helheim_web/templates/friendship/_my_pending_friendships.html.eex:28
+#: lib/helheim_web/templates/photo/show.html.eex:42
+#: lib/helheim_web/templates/photo_album/show.html.eex:59
+#: lib/helheim_web/templates/private_conversation/show.html.eex:10
 msgid "Are you sure?"
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:53
+#: lib/helheim_web/controllers/blog_post_controller.ex:53
 msgid "Blog post created successfully."
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:106
+#: lib/helheim_web/controllers/blog_post_controller.ex:106
 msgid "Blog post deleted successfully."
 msgstr ""
 
-#: web/controllers/blog_post_controller.ex:93
+#: lib/helheim_web/controllers/blog_post_controller.ex:93
 msgid "Blog post updated successfully."
 msgstr ""
 
-#: web/templates/admin/calendar_event/_admin_links.html.eex:10
-#: web/templates/blog_post/show.html.eex:32 web/templates/photo/show.html.eex:44
-#: web/templates/photo_album/show.html.eex:61 web/views/comment_view.ex:70
-#: web/views/comment_view.ex:72
+#: lib/helheim_web/templates/admin/calendar_event/_admin_links.html.eex:10
+#: lib/helheim_web/templates/blog_post/show.html.eex:32
+#: lib/helheim_web/templates/photo/show.html.eex:44
+#: lib/helheim_web/templates/photo_album/show.html.eex:61
+#: lib/helheim_web/views/comment_view.ex:70
+#: lib/helheim_web/views/comment_view.ex:72
 msgid "Delete"
 msgstr ""
 
-#: web/templates/admin/calendar_event/_admin_links.html.eex:6
-#: web/templates/blog_post/show.html.eex:28
-#: web/templates/comment/comment.html.eex:16
-#: web/templates/forum_reply/forum_reply.html.eex:30
-#: web/templates/forum_topic/forum_topic.html.eex:21
+#: lib/helheim_web/templates/admin/calendar_event/_admin_links.html.eex:6
+#: lib/helheim_web/templates/blog_post/show.html.eex:28
+#: lib/helheim_web/templates/comment/comment.html.eex:16
+#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:30
+#: lib/helheim_web/templates/forum_topic/forum_topic.html.eex:21
 msgid "Edit"
 msgstr ""
 
-#: web/templates/blog_post/edit.html.eex:3
-#: web/templates/blog_post/edit.html.eex:8
+#: lib/helheim_web/templates/blog_post/edit.html.eex:3
+#: lib/helheim_web/templates/blog_post/edit.html.eex:8
 msgid "Edit Blog Post"
 msgstr ""
 
-#: web/templates/admin/calendar_event/index.html.eex:10
-#: web/templates/admin/forum/form.html.eex:4
-#: web/templates/admin/forum_category/form.html.eex:4
-#: web/templates/admin/user/_recent_blog_posts.html.eex:8
-#: web/templates/admin/user/_recent_forum_topics.html.eex:8
-#: web/templates/blog_post/form.html.eex:4
-#: web/templates/calendar_event/_form.html.eex:4
-#: web/templates/forum_topic/form.html.eex:4
-#: web/templates/photo/form.html.eex:10
-#: web/templates/photo_album/form.html.eex:4
+#: lib/helheim_web/templates/admin/calendar_event/index.html.eex:10
+#: lib/helheim_web/templates/admin/forum/form.html.eex:4
+#: lib/helheim_web/templates/admin/forum_category/form.html.eex:4
+#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:8
+#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:8
+#: lib/helheim_web/templates/blog_post/form.html.eex:4
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:4
+#: lib/helheim_web/templates/forum_topic/form.html.eex:4
+#: lib/helheim_web/templates/photo/form.html.eex:10
+#: lib/helheim_web/templates/photo_album/form.html.eex:4
 msgid "Title"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:31
+#: lib/helheim_web/controllers/comment_controller.ex:31
 msgid "Comment created successfully"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:70 web/views/comment_view.ex:15
+#: lib/helheim_web/templates/layout/sidebar.html.eex:70
+#: lib/helheim_web/views/comment_view.ex:15
 msgid "Guest Book"
 msgstr ""
 
-#: web/views/comment_view.ex:20
+#: lib/helheim_web/views/comment_view.ex:20
 msgid "Newest Guest Book Entries"
 msgstr ""
 
-#: web/templates/comment/comments.html.eex:43
+#: lib/helheim_web/templates/comment/comments.html.eex:43
 msgid "Post Comment"
 msgstr ""
 
-#: web/templates/comment/comments.html.eex:9
-#: web/templates/page/front_page.html.eex:5
-#: web/templates/page/front_page.html.eex:29
-#: web/templates/page/front_page.html.eex:41
-#: web/templates/page/front_page.html.eex:55
-#: web/templates/page/front_page.html.eex:82
-#: web/templates/profile/show.html.eex:75 web/templates/profile/show.html.eex:99
+#: lib/helheim_web/templates/comment/comments.html.eex:9
+#: lib/helheim_web/templates/page/front_page.html.eex:5
+#: lib/helheim_web/templates/page/front_page.html.eex:29
+#: lib/helheim_web/templates/page/front_page.html.eex:41
+#: lib/helheim_web/templates/page/front_page.html.eex:55
+#: lib/helheim_web/templates/page/front_page.html.eex:82
+#: lib/helheim_web/templates/profile/show.html.eex:75
+#: lib/helheim_web/templates/profile/show.html.eex:99
 msgid "Show All"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:35
+#: lib/helheim_web/controllers/comment_controller.ex:35
 msgid "Unable to create comment"
 msgstr ""
 
-#: web/templates/comment/comments.html.eex:33
-#: web/templates/comment/form.html.eex:4
+#: lib/helheim_web/templates/comment/comments.html.eex:33
+#: lib/helheim_web/templates/comment/form.html.eex:4
 msgid "Write new comment:"
 msgstr ""
 
-#: web/controllers/private_message_controller.ex:19
+#: lib/helheim_web/controllers/private_message_controller.ex:19
 msgid "Message successfully sent"
 msgstr ""
 
-#: web/templates/private_conversation/form.html.eex:11
+#: lib/helheim_web/templates/private_conversation/form.html.eex:11
 msgid "Send Message"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:27
+#: lib/helheim_web/templates/profile/show.html.eex:27
 msgid "Send private message"
 msgstr ""
 
-#: web/templates/private_conversation/show.html.eex:19
+#: lib/helheim_web/templates/private_conversation/show.html.eex:19
 msgid "Start by writing a message below!"
 msgstr ""
 
-#: web/templates/private_conversation/show.html.eex:18
+#: lib/helheim_web/templates/private_conversation/show.html.eex:18
 msgid "There are no messages in this conversation..."
 msgstr ""
 
-#: web/controllers/private_message_controller.ex:23
+#: lib/helheim_web/controllers/private_message_controller.ex:23
 msgid "Unable to send message"
 msgstr ""
 
-#: web/templates/private_conversation/form.html.eex:5
+#: lib/helheim_web/templates/private_conversation/form.html.eex:5
 msgid "Write new message:"
 msgstr ""
 
-#: web/templates/notification/dropdown_items.html.eex:3
+#: lib/helheim_web/templates/notification/dropdown_items.html.eex:3
 msgid "You have %{count} notification"
 msgid_plural "You have %{count} notifications"
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/layout/sidebar.html.eex:82
-#: web/templates/private_conversation/index.html.eex:1
+#: lib/helheim_web/templates/layout/sidebar.html.eex:82
+#: lib/helheim_web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr ""
 
-#: web/templates/private_conversation/show.html.eex:3
-#: web/templates/private_conversation/show.html.eex:5
+#: lib/helheim_web/templates/private_conversation/show.html.eex:3
+#: lib/helheim_web/templates/private_conversation/show.html.eex:5
 msgid "Private conversation with %{username}"
 msgstr ""
 
-#: web/templates/layout/sidebar_admin.html.eex:1
+#: lib/helheim_web/templates/layout/sidebar_admin.html.eex:1
 msgid "Admin"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:29
+#: lib/helheim_web/templates/profile/edit.html.eex:29
 msgid "Basic Details"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:38 web/templates/profile/edit.html.eex:60
+#: lib/helheim_web/templates/profile/edit.html.eex:38
+#: lib/helheim_web/templates/profile/edit.html.eex:60
 msgid "Custom"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:36
+#: lib/helheim_web/templates/profile/edit.html.eex:36
 msgid "Female"
 msgstr ""
 
-#: web/templates/admin/user/_personal_details.html.eex:4
-#: web/templates/profile/details.html.eex:27
-#: web/templates/profile/edit.html.eex:32
+#: lib/helheim_web/templates/admin/user/_personal_details.html.eex:4
+#: lib/helheim_web/templates/profile/details.html.eex:27
+#: lib/helheim_web/templates/profile/edit.html.eex:32
 msgid "Gender"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:16
+#: lib/helheim_web/templates/profile/details.html.eex:16
 msgid "Joined"
 msgstr ""
 
-#: web/templates/admin/user/_personal_details.html.eex:16
-#: web/templates/admin/user/index.html.eex:31
-#: web/templates/profile/details.html.eex:48
-#: web/templates/profile/edit.html.eex:46
-#: web/templates/profile/index.html.eex:20
+#: lib/helheim_web/templates/admin/user/_personal_details.html.eex:16
+#: lib/helheim_web/templates/admin/user/index.html.eex:31
+#: lib/helheim_web/templates/profile/details.html.eex:48
+#: lib/helheim_web/templates/profile/edit.html.eex:46
+#: lib/helheim_web/templates/profile/index.html.eex:20
 msgid "Location"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:36
+#: lib/helheim_web/templates/profile/edit.html.eex:36
 msgid "Male"
 msgstr ""
 
-#: web/templates/admin/user/_personal_details.html.eex:5
-#: web/templates/admin/user/_personal_details.html.eex:14
-#: web/templates/admin/user/_personal_details.html.eex:17
-#: web/templates/profile/edit.html.eex:36 web/templates/profile/edit.html.eex:56
+#: lib/helheim_web/templates/admin/user/_personal_details.html.eex:5
+#: lib/helheim_web/templates/admin/user/_personal_details.html.eex:14
+#: lib/helheim_web/templates/admin/user/_personal_details.html.eex:17
+#: lib/helheim_web/templates/profile/edit.html.eex:36
+#: lib/helheim_web/templates/profile/edit.html.eex:56
 msgid "Not specified"
 msgstr ""
 
-#: web/templates/photo_album/index.html.eex:38
+#: lib/helheim_web/templates/photo_album/index.html.eex:38
 msgid "Create New"
 msgstr ""
 
-#: web/templates/admin/forum/form.html.eex:12
-#: web/templates/admin/forum_category/form.html.eex:12
-#: web/templates/admin/term/form.html.eex:4 web/templates/photo/form.html.eex:18
-#: web/templates/photo_album/form.html.eex:12
+#: lib/helheim_web/templates/admin/forum/form.html.eex:12
+#: lib/helheim_web/templates/admin/forum_category/form.html.eex:12
+#: lib/helheim_web/templates/admin/term/form.html.eex:4
+#: lib/helheim_web/templates/photo/form.html.eex:18
+#: lib/helheim_web/templates/photo_album/form.html.eex:12
 msgid "Description"
 msgstr ""
 
-#: web/templates/photo_album/edit.html.eex:3
-#: web/templates/photo_album/show.html.eex:56
+#: lib/helheim_web/templates/photo_album/edit.html.eex:3
+#: lib/helheim_web/templates/photo_album/show.html.eex:56
 msgid "Edit Photo Album"
 msgstr ""
 
-#: web/templates/photo_album/new.html.eex:3
+#: lib/helheim_web/templates/photo_album/new.html.eex:3
 msgid "New Photo Album"
 msgstr ""
 
-#: web/templates/photo/show.html.eex:3
-#: web/templates/photo_album/index.html.eex:3
-#: web/templates/photo_album/show.html.eex:3
-#: web/views/visitor_log_entry_view.ex:46 web/views/visitor_log_entry_view.ex:65
+#: lib/helheim_web/templates/photo/show.html.eex:3
+#: lib/helheim_web/templates/photo_album/index.html.eex:3
+#: lib/helheim_web/templates/photo_album/show.html.eex:3
+#: lib/helheim_web/views/visitor_log_entry_view.ex:46
+#: lib/helheim_web/views/visitor_log_entry_view.ex:65
 msgid "Photo Albums"
 msgstr ""
 
-#: web/controllers/photo_album_controller.ex:39
+#: lib/helheim_web/controllers/photo_album_controller.ex:39
 msgid "Photo album created successfully."
 msgstr ""
 
-#: web/controllers/photo_album_controller.ex:76
+#: lib/helheim_web/controllers/photo_album_controller.ex:76
 msgid "Photo album updated successfully."
 msgstr ""
 
-#: web/templates/photo_album/form.html.eex:28
+#: lib/helheim_web/templates/photo_album/form.html.eex:28
 msgid "Save Photo Album"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:24 web/templates/photo/show.html.eex:10
-#: web/templates/photo_album/form.html.eex:20
+#: lib/helheim_web/templates/blog_post/form.html.eex:24
+#: lib/helheim_web/templates/photo/show.html.eex:10
+#: lib/helheim_web/templates/photo_album/form.html.eex:20
 msgid "Visibility"
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:49
+#: lib/helheim_web/templates/photo_album/show.html.eex:49
 msgid "Drop photos here (or click) to upload..."
 msgstr ""
 
-#: web/templates/photo/edit.html.eex:3 web/templates/photo/show.html.eex:39
+#: lib/helheim_web/templates/photo/edit.html.eex:3
+#: lib/helheim_web/templates/photo/show.html.eex:39
 msgid "Edit Photo Details"
 msgstr ""
 
-#: web/controllers/photo_album_controller.ex:90
+#: lib/helheim_web/controllers/photo_album_controller.ex:90
 msgid "Photo Album deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:90
+#: lib/helheim_web/controllers/photo_controller.ex:90
 msgid "Photo deleted successfully."
 msgstr ""
 
-#: web/controllers/photo_controller.ex:75
+#: lib/helheim_web/controllers/photo_controller.ex:75
 msgid "Photo details updated successfully."
 msgstr ""
 
-#: web/templates/photo/form.html.eex:37
+#: lib/helheim_web/templates/photo/form.html.eex:37
 msgid "Save Photo Details"
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:33
+#: lib/helheim_web/templates/photo_album/show.html.eex:33
 msgid "Upload Photos"
 msgstr ""
 
-#: web/templates/photo/show.html.eex:27
+#: lib/helheim_web/templates/photo/show.html.eex:27
 msgid "Uploaded"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:91
+#: lib/helheim_web/templates/layout/sidebar.html.eex:91
 msgid "Your Photo Albums"
 msgstr ""
 
-#: web/templates/photo_album/space_used.html.eex:9
+#: lib/helheim_web/templates/photo_album/space_used.html.eex:9
 msgid "You have used %{used_space} out of a maximum of %{max_space} across all your photo albums"
 msgstr ""
 
-#: web/templates/admin/calendar_event/index.html.eex:2
-#: web/templates/admin/calendar_event/show.html.eex:2
-#: web/templates/admin/forum/edit.html.eex:2
-#: web/templates/admin/forum/new.html.eex:2
-#: web/templates/admin/forum_category/edit.html.eex:2
-#: web/templates/admin/forum_category/index.html.eex:2
-#: web/templates/admin/forum_category/new.html.eex:2
-#: web/templates/admin/term/edit.html.eex:2
-#: web/templates/admin/term/index.html.eex:2
-#: web/templates/admin/term/new.html.eex:2
-#: web/templates/admin/term/show.html.eex:2
-#: web/templates/admin/user/index.html.eex:2
-#: web/templates/admin/user/show.html.eex:2
+#: lib/helheim_web/templates/admin/calendar_event/index.html.eex:2
+#: lib/helheim_web/templates/admin/calendar_event/show.html.eex:2
+#: lib/helheim_web/templates/admin/forum/edit.html.eex:2
+#: lib/helheim_web/templates/admin/forum/new.html.eex:2
+#: lib/helheim_web/templates/admin/forum_category/edit.html.eex:2
+#: lib/helheim_web/templates/admin/forum_category/index.html.eex:2
+#: lib/helheim_web/templates/admin/forum_category/new.html.eex:2
+#: lib/helheim_web/templates/admin/term/edit.html.eex:2
+#: lib/helheim_web/templates/admin/term/index.html.eex:2
+#: lib/helheim_web/templates/admin/term/new.html.eex:2
+#: lib/helheim_web/templates/admin/term/show.html.eex:2
+#: lib/helheim_web/templates/admin/user/index.html.eex:2
+#: lib/helheim_web/templates/admin/user/show.html.eex:2
 msgid "Administration"
 msgstr ""
 
-#: web/templates/admin/user/_recent_comments.html.eex:8
-#: web/templates/blog_post/form.html.eex:12
-#: web/templates/forum_reply/form.html.eex:4
-#: web/templates/forum_topic/form.html.eex:12
-#: web/templates/profile/edit.html.eex:83
+#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:8
+#: lib/helheim_web/templates/blog_post/form.html.eex:12
+#: lib/helheim_web/templates/forum_reply/form.html.eex:4
+#: lib/helheim_web/templates/forum_topic/form.html.eex:12
+#: lib/helheim_web/templates/profile/edit.html.eex:83
 msgid "Content"
 msgstr ""
 
-#: web/templates/admin/forum_category/index.html.eex:57
+#: lib/helheim_web/templates/admin/forum_category/index.html.eex:57
 msgid "Create New Forum Category"
 msgstr ""
 
-#: web/templates/admin/forum_category/index.html.eex:49
+#: lib/helheim_web/templates/admin/forum_category/index.html.eex:49
 msgid "Create new forum"
 msgstr ""
 
-#: web/templates/forum/show.html.eex:24 web/templates/forum_topic/new.html.eex:6
+#: lib/helheim_web/templates/forum/show.html.eex:24
+#: lib/helheim_web/templates/forum_topic/new.html.eex:6
 msgid "Create new topic"
 msgstr ""
 
-#: web/templates/admin/forum/edit.html.eex:5
-#: web/templates/admin/forum/edit.html.eex:10
+#: lib/helheim_web/templates/admin/forum/edit.html.eex:5
+#: lib/helheim_web/templates/admin/forum/edit.html.eex:10
 msgid "Edit Forum"
 msgstr ""
 
-#: web/templates/admin/forum_category/edit.html.eex:4
-#: web/templates/admin/forum_category/edit.html.eex:9
+#: lib/helheim_web/templates/admin/forum_category/edit.html.eex:4
+#: lib/helheim_web/templates/admin/forum_category/edit.html.eex:9
 msgid "Edit Forum Category"
 msgstr ""
 
-#: web/templates/admin/forum/edit.html.eex:3
-#: web/templates/admin/forum/new.html.eex:3
-#: web/templates/admin/forum_category/edit.html.eex:3
-#: web/templates/admin/forum_category/index.html.eex:3
-#: web/templates/admin/forum_category/new.html.eex:3
+#: lib/helheim_web/templates/admin/forum/edit.html.eex:3
+#: lib/helheim_web/templates/admin/forum/new.html.eex:3
+#: lib/helheim_web/templates/admin/forum_category/edit.html.eex:3
+#: lib/helheim_web/templates/admin/forum_category/index.html.eex:3
+#: lib/helheim_web/templates/admin/forum_category/new.html.eex:3
 msgid "Forum Categories"
 msgstr ""
 
-#: web/controllers/admin/forum_category_controller.ex:20
+#: lib/helheim_web/controllers/admin/forum_category_controller.ex:20
 msgid "Forum category created successfully."
 msgstr ""
 
-#: web/controllers/admin/forum_category_controller.ex:50
+#: lib/helheim_web/controllers/admin/forum_category_controller.ex:50
 msgid "Forum category deleted successfully."
 msgstr ""
 
-#: web/controllers/admin/forum_category_controller.ex:39
+#: lib/helheim_web/controllers/admin/forum_category_controller.ex:39
 msgid "Forum category updated successfully."
 msgstr ""
 
-#: web/controllers/admin/forum_controller.ex:22
+#: lib/helheim_web/controllers/admin/forum_controller.ex:22
 msgid "Forum created successfully."
 msgstr ""
 
-#: web/controllers/admin/forum_controller.ex:55
+#: lib/helheim_web/controllers/admin/forum_controller.ex:55
 msgid "Forum deleted successfully."
 msgstr ""
 
-#: web/controllers/forum_topic_controller.ex:23
+#: lib/helheim_web/controllers/forum_topic_controller.ex:23
 msgid "Forum topic created successfully."
 msgstr ""
 
-#: web/controllers/admin/forum_controller.ex:43
+#: lib/helheim_web/controllers/admin/forum_controller.ex:43
 msgid "Forum updated successfully."
 msgstr ""
 
-#: web/templates/forum/index.html.eex:2 web/templates/forum/show.html.eex:2
-#: web/templates/forum_reply/edit.html.eex:2
-#: web/templates/forum_topic/edit.html.eex:2
-#: web/templates/forum_topic/new.html.eex:2
-#: web/templates/forum_topic/show.html.eex:2
-#: web/templates/layout/sidebar.html.eex:10
+#: lib/helheim_web/templates/forum/index.html.eex:2
+#: lib/helheim_web/templates/forum/show.html.eex:2
+#: lib/helheim_web/templates/forum_reply/edit.html.eex:2
+#: lib/helheim_web/templates/forum_topic/edit.html.eex:2
+#: lib/helheim_web/templates/forum_topic/new.html.eex:2
+#: lib/helheim_web/templates/forum_topic/show.html.eex:2
+#: lib/helheim_web/templates/layout/sidebar.html.eex:10
 msgid "Forums"
 msgstr ""
 
-#: web/templates/layout/sidebar_admin.html.eex:6
+#: lib/helheim_web/templates/layout/sidebar_admin.html.eex:6
 msgid "Forums and Categories"
 msgstr ""
 
-#: web/templates/forum_topic/show.html.eex:49
+#: lib/helheim_web/templates/forum_topic/show.html.eex:49
 msgid "Go to the last page to reply..."
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:20
-#: web/templates/calendar_event/_form.html.eex:19
-#: web/templates/comment/comments.html.eex:39
-#: web/templates/comment/form.html.eex:13
-#: web/templates/forum_reply/form.html.eex:11
-#: web/templates/forum_topic/form.html.eex:19
-#: web/templates/forum_topic/show.html.eex:33
-#: web/templates/forum_topic/show.html.eex:48
-#: web/templates/profile/edit.html.eex:91
+#: lib/helheim_web/templates/blog_post/form.html.eex:20
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:19
+#: lib/helheim_web/templates/comment/comments.html.eex:39
+#: lib/helheim_web/templates/comment/form.html.eex:13
+#: lib/helheim_web/templates/forum_reply/form.html.eex:11
+#: lib/helheim_web/templates/forum_topic/form.html.eex:19
+#: lib/helheim_web/templates/forum_topic/show.html.eex:33
+#: lib/helheim_web/templates/forum_topic/show.html.eex:48
+#: lib/helheim_web/templates/profile/edit.html.eex:91
 msgid "Hint"
 msgstr ""
 
-#: web/templates/admin/forum/new.html.eex:5
-#: web/templates/admin/forum/new.html.eex:10
+#: lib/helheim_web/templates/admin/forum/new.html.eex:5
+#: lib/helheim_web/templates/admin/forum/new.html.eex:10
 msgid "New Forum"
 msgstr ""
 
-#: web/templates/admin/forum_category/new.html.eex:4
-#: web/templates/admin/forum_category/new.html.eex:9
+#: lib/helheim_web/templates/admin/forum_category/new.html.eex:4
+#: lib/helheim_web/templates/admin/forum_category/new.html.eex:9
 msgid "New Forum Category"
 msgstr ""
 
-#: web/templates/forum_reply/new.html.eex:9
+#: lib/helheim_web/templates/forum_reply/new.html.eex:9
 msgid "Post Reply"
 msgstr ""
 
-#: web/templates/forum_topic/new.html.eex:19
+#: lib/helheim_web/templates/forum_topic/new.html.eex:19
 msgid "Post Topic"
 msgstr ""
 
-#: web/controllers/forum_reply_controller.ex:27
+#: lib/helheim_web/controllers/forum_reply_controller.ex:27
 msgid "Reply could not be created"
 msgstr ""
 
-#: web/controllers/forum_reply_controller.ex:23
+#: lib/helheim_web/controllers/forum_reply_controller.ex:23
 msgid "Reply created successfully"
 msgstr ""
 
-#: web/templates/admin/forum/form.html.eex:27
+#: lib/helheim_web/templates/admin/forum/form.html.eex:27
 msgid "Save Forum"
 msgstr ""
 
-#: web/templates/admin/forum_category/form.html.eex:20
+#: lib/helheim_web/templates/admin/forum_category/form.html.eex:20
 msgid "Save Forum Category"
 msgstr ""
 
-#: web/templates/forum_reply/new.html.eex:5
+#: lib/helheim_web/templates/forum_reply/new.html.eex:5
 msgid "Submit new reply"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:62
+#: lib/helheim_web/templates/layout/sidebar.html.eex:62
 msgid "You"
 msgstr ""
 
-#: web/templates/admin/forum/form.html.eex:22
+#: lib/helheim_web/templates/admin/forum/form.html.eex:22
 msgid "Locked?"
 msgstr ""
 
-#: web/templates/forum/show.html.eex:31
+#: lib/helheim_web/templates/forum/show.html.eex:31
 msgid "Only admins can post here"
 msgstr ""
 
-#: web/controllers/forum_topic_controller.ex:85
+#: lib/helheim_web/controllers/forum_topic_controller.ex:85
 msgid "You cannot create a topic in a locked forum!"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:106
+#: lib/helheim_web/templates/account/edit.html.eex:106
 msgid "Are you sure? All your data will be permanently lost!"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:85
-#: web/templates/account/edit.html.eex:108
+#: lib/helheim_web/templates/account/edit.html.eex:85
+#: lib/helheim_web/templates/account/edit.html.eex:108
 msgid "Delete Account"
 msgstr ""
 
-#: web/controllers/account_controller.ex:32
+#: lib/helheim_web/controllers/account_controller.ex:33
 msgid "Hope to see you again some time!"
 msgstr ""
 
-#: web/templates/private_conversation/index.html.eex:22
-#: web/templates/private_conversation/show.html.eex:5
-#: web/views/notification_view.ex:44 web/views/profile_helpers.ex:12
+#: lib/helheim_web/templates/private_conversation/index.html.eex:22
+#: lib/helheim_web/templates/private_conversation/show.html.eex:5
+#: lib/helheim_web/views/notification_view.ex:44
+#: lib/helheim_web/views/profile_helpers.ex:12
 msgid "User deleted"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:94
+#: lib/helheim_web/templates/account/edit.html.eex:94
 msgid "All your blog posts along with all comments"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:95
+#: lib/helheim_web/templates/account/edit.html.eex:95
 msgid "All your photo albums along with all photos"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:101
+#: lib/helheim_web/templates/account/edit.html.eex:101
 msgid "Any comments you posted on stuff from other users"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:102
+#: lib/helheim_web/templates/account/edit.html.eex:102
 msgid "Any forum topics or replies that you posted"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:103
+#: lib/helheim_web/templates/account/edit.html.eex:103
 msgid "Any private message that you sent to someone else"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:89
+#: lib/helheim_web/templates/account/edit.html.eex:89
 msgid "Click the button below to delete your account."
 msgstr ""
 
-#: web/templates/account/edit.html.eex:90
+#: lib/helheim_web/templates/account/edit.html.eex:90
 msgid "Please be aware that the following data will be permanently deleted and therefore unrecoverable:"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:98
+#: lib/helheim_web/templates/account/edit.html.eex:98
 msgid "The following data will not be deleted but will be anonymized:"
 msgstr ""
 
-#: web/templates/account/edit.html.eex:93
+#: lib/helheim_web/templates/account/edit.html.eex:93
 msgid "Your profile along with text, details and avatar"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:85
+#: lib/helheim_web/templates/registration/new.html.eex:85
 msgid "By signing up you agree to the "
 msgstr ""
 
-#: web/templates/admin/term/index.html.eex:8
+#: lib/helheim_web/templates/admin/term/index.html.eex:8
 msgid "Create New Terms"
 msgstr ""
 
-#: web/templates/admin/term/edit.html.eex:4
-#: web/templates/admin/term/edit.html.eex:9
+#: lib/helheim_web/templates/admin/term/edit.html.eex:4
+#: lib/helheim_web/templates/admin/term/edit.html.eex:9
 msgid "Edit Terms"
 msgstr ""
 
-#: web/templates/page/terms.html.eex:9
+#: lib/helheim_web/templates/page/terms.html.eex:9
 msgid "However, that doesn't meant that you should be an dick, so behave!"
 msgstr ""
 
-#: web/templates/admin/calendar_event/index.html.eex:13
-#: web/templates/admin/term/index.html.eex:15
+#: lib/helheim_web/templates/admin/calendar_event/index.html.eex:13
+#: lib/helheim_web/templates/admin/term/index.html.eex:15
 msgid "Inserted at"
 msgstr ""
 
-#: web/templates/admin/term/new.html.eex:4
-#: web/templates/admin/term/new.html.eex:9
+#: lib/helheim_web/templates/admin/term/new.html.eex:4
+#: lib/helheim_web/templates/admin/term/new.html.eex:9
 msgid "New Terms"
 msgstr ""
 
-#: web/templates/admin/term/form.html.eex:14
-#: web/templates/admin/term/index.html.eex:17
+#: lib/helheim_web/templates/admin/term/form.html.eex:14
+#: lib/helheim_web/templates/admin/term/index.html.eex:17
 msgid "Published?"
 msgstr ""
 
-#: web/templates/admin/term/form.html.eex:19
+#: lib/helheim_web/templates/admin/term/form.html.eex:19
 msgid "Save Terms"
 msgstr ""
 
-#: web/templates/admin/term/show.html.eex:4
+#: lib/helheim_web/templates/admin/term/show.html.eex:4
 msgid "Show Terms"
 msgstr ""
 
-#: web/templates/admin/term/edit.html.eex:3
-#: web/templates/admin/term/index.html.eex:3
-#: web/templates/admin/term/new.html.eex:3
-#: web/templates/admin/term/show.html.eex:3
-#: web/templates/layout/sidebar_admin.html.eex:10
+#: lib/helheim_web/templates/admin/term/edit.html.eex:3
+#: lib/helheim_web/templates/admin/term/index.html.eex:3
+#: lib/helheim_web/templates/admin/term/new.html.eex:3
+#: lib/helheim_web/templates/admin/term/show.html.eex:3
+#: lib/helheim_web/templates/layout/sidebar_admin.html.eex:10
 msgid "Terms"
 msgstr ""
 
-#: web/templates/admin/term/show.html.eex:11 web/templates/page/terms.html.eex:3
+#: lib/helheim_web/templates/admin/term/show.html.eex:11
+#: lib/helheim_web/templates/page/terms.html.eex:3
 msgid "Terms and rules"
 msgstr ""
 
-#: web/controllers/admin/term_controller.ex:20
+#: lib/helheim_web/controllers/admin/term_controller.ex:20
 msgid "Terms created successfully."
 msgstr ""
 
-#: web/controllers/admin/term_controller.ex:55
+#: lib/helheim_web/controllers/admin/term_controller.ex:55
 msgid "Terms deleted successfully."
 msgstr ""
 
-#: web/controllers/admin/term_controller.ex:44
+#: lib/helheim_web/controllers/admin/term_controller.ex:44
 msgid "Terms updated successfully."
 msgstr ""
 
-#: web/templates/page/terms.html.eex:8
+#: lib/helheim_web/templates/page/terms.html.eex:8
 msgid "There doesn't seem to be any terms or rules written yet..."
 msgstr ""
 
-#: web/templates/admin/term/index.html.eex:16
+#: lib/helheim_web/templates/admin/term/index.html.eex:16
 msgid "Updated at"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:86
+#: lib/helheim_web/templates/registration/new.html.eex:86
 msgid "terms and rules"
 msgstr ""
 
-#: web/templates/forum_reply/edit.html.eex:7
+#: lib/helheim_web/templates/forum_reply/edit.html.eex:7
 msgid "Edit reply"
 msgstr ""
 
-#: web/templates/forum_topic/edit.html.eex:6
+#: lib/helheim_web/templates/forum_topic/edit.html.eex:6
 msgid "Edit topic"
 msgstr ""
 
-#: web/controllers/forum_reply_controller.ex:40
+#: lib/helheim_web/controllers/forum_reply_controller.ex:40
 msgid "Forum reply updated successfully."
 msgstr ""
 
-#: web/controllers/forum_topic_controller.ex:57
+#: lib/helheim_web/controllers/forum_topic_controller.ex:57
 msgid "Forum topic updated successfully."
 msgstr ""
 
-#: web/templates/comment/edit.html.eex:4
-#: web/templates/forum_reply/edit.html.eex:12
-#: web/templates/forum_topic/edit.html.eex:19
+#: lib/helheim_web/templates/comment/edit.html.eex:4
+#: lib/helheim_web/templates/forum_reply/edit.html.eex:12
+#: lib/helheim_web/templates/forum_topic/edit.html.eex:19
 msgid "Save Changes"
 msgstr ""
 
-#: web/views/visitor_log_entry_view.ex:15 web/views/visitor_log_entry_view.ex:33
-#: web/views/visitor_log_entry_view.ex:51 web/views/visitor_log_entry_view.ex:73
+#: lib/helheim_web/views/visitor_log_entry_view.ex:15
+#: lib/helheim_web/views/visitor_log_entry_view.ex:33
+#: lib/helheim_web/views/visitor_log_entry_view.ex:51
+#: lib/helheim_web/views/visitor_log_entry_view.ex:73
 msgid "Visitors"
 msgstr ""
 
-#: web/controllers/visitor_log_entry_controller.ex:68
+#: lib/helheim_web/controllers/visitor_log_entry_controller.ex:68
 msgid "You do not have access to that page!"
 msgstr ""
 
-#: web/templates/blog_post/index.html.eex:3
-#: web/templates/blog_post/index_all_public.html.eex:2
-#: web/templates/blog_post/show.html.eex:3
+#: lib/helheim_web/templates/blog_post/index.html.eex:3
+#: lib/helheim_web/templates/blog_post/index_all_public.html.eex:2
+#: lib/helheim_web/templates/blog_post/show.html.eex:3
 msgid "Blog posts"
 msgstr ""
 
-#: web/views/comment_view.ex:22
+#: lib/helheim_web/views/comment_view.ex:22
 msgid "Comments"
 msgstr ""
 
-#: web/templates/help/verification.html.eex:2
-#: web/templates/layout/sidebar.html.eex:36
+#: lib/helheim_web/templates/help/verification.html.eex:2
+#: lib/helheim_web/templates/layout/sidebar.html.eex:36
 msgid "Help"
 msgstr ""
 
-#: web/templates/admin/user/_profile_text.html.eex:1
+#: lib/helheim_web/templates/admin/user/_profile_text.html.eex:1
 msgid "Profile text"
 msgstr ""
 
-#: web/templates/admin/user/_personal_details.html.eex:10
-#: web/templates/profile/details.html.eex:34
+#: lib/helheim_web/templates/admin/user/_personal_details.html.eex:10
+#: lib/helheim_web/templates/profile/details.html.eex:34
 msgid "Age"
 msgstr ""
 
-#: web/views/time_helpers.ex:35
+#: lib/helheim_web/views/time_helpers.ex:35
 msgid "April"
 msgstr ""
 
-#: web/views/time_helpers.ex:39
+#: lib/helheim_web/views/time_helpers.ex:39
 msgid "August"
 msgstr ""
 
-#: web/templates/admin/user/_personal_details.html.eex:7
-#: web/templates/profile/edit.html.eex:68
+#: lib/helheim_web/templates/admin/user/_personal_details.html.eex:7
+#: lib/helheim_web/templates/profile/edit.html.eex:68
 msgid "Birthday"
 msgstr ""
 
-#: web/views/time_helpers.ex:43
+#: lib/helheim_web/views/time_helpers.ex:43
 msgid "December"
 msgstr ""
 
-#: web/views/time_helpers.ex:33
+#: lib/helheim_web/views/time_helpers.ex:33
 msgid "February"
 msgstr ""
 
-#: web/views/time_helpers.ex:32
+#: lib/helheim_web/views/time_helpers.ex:32
 msgid "January"
 msgstr ""
 
-#: web/views/time_helpers.ex:38
+#: lib/helheim_web/views/time_helpers.ex:38
 msgid "July"
 msgstr ""
 
-#: web/views/time_helpers.ex:37
+#: lib/helheim_web/views/time_helpers.ex:37
 msgid "June"
 msgstr ""
 
-#: web/views/time_helpers.ex:34
+#: lib/helheim_web/views/time_helpers.ex:34
 msgid "March"
 msgstr ""
 
-#: web/views/time_helpers.ex:36
+#: lib/helheim_web/views/time_helpers.ex:36
 msgid "May"
 msgstr ""
 
-#: web/views/time_helpers.ex:42
+#: lib/helheim_web/views/time_helpers.ex:42
 msgid "November"
 msgstr ""
 
-#: web/views/time_helpers.ex:41
+#: lib/helheim_web/views/time_helpers.ex:41
 msgid "October"
 msgstr ""
 
-#: web/views/time_helpers.ex:40
+#: lib/helheim_web/views/time_helpers.ex:40
 msgid "September"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:76
+#: lib/helheim_web/templates/profile/edit.html.eex:76
 msgid "We never show your birthday directly to other users, only your age, although some users might be able to guess it by observing your age increasing..."
 msgstr ""
 
-#: web/templates/photo/index.html.eex:2
+#: lib/helheim_web/templates/photo/index.html.eex:2
 msgid "Photos"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:16
-#: web/templates/profile/index.html.eex:2
+#: lib/helheim_web/templates/layout/sidebar.html.eex:16
+#: lib/helheim_web/templates/profile/index.html.eex:2
 msgid "Profiles"
 msgstr ""
 
-#: web/views/notification_view.ex:22
+#: lib/helheim_web/views/notification_view.ex:22
 msgid "%{who} wrote a comment in the guest book: %{what}"
 msgstr ""
 
-#: web/views/notification_view.ex:25
+#: lib/helheim_web/views/notification_view.ex:25
 msgid "%{who} wrote a comment on the blog post: %{what}"
 msgstr ""
 
-#: web/views/notification_view.ex:28
+#: lib/helheim_web/views/notification_view.ex:28
 msgid "%{who} wrote a comment on the photo album: %{what}"
 msgstr ""
 
-#: web/views/notification_view.ex:31
+#: lib/helheim_web/views/notification_view.ex:31
 msgid "%{who} wrote a comment on the photo: %{what}"
 msgstr ""
 
-#: web/views/notification_view.ex:34
+#: lib/helheim_web/views/notification_view.ex:34
 msgid "%{who} wrote a reply to the forum topic: %{what}"
 msgstr ""
 
-#: web/views/comment_view.ex:21
+#: lib/helheim_web/views/comment_view.ex:21
 msgid "Guest Book Entries"
 msgstr ""
 
-#: web/views/notification_helpers.ex:41
+#: lib/helheim_web/views/notification_helpers.ex:41
 msgid "Notifications:"
 msgstr ""
 
-#: web/templates/private_conversation/dropdown_items.html.eex:3
+#: lib/helheim_web/templates/private_conversation/dropdown_items.html.eex:3
 msgid "You have %{count} unread message"
 msgid_plural "You have %{count} unread messages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/photo/form.html.eex:26
+#: lib/helheim_web/templates/photo/form.html.eex:26
 msgid "NSFW?"
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:41
+#: lib/helheim_web/templates/photo_album/show.html.eex:41
 msgid "Please turn on this switch before uploading NSFW photos:"
 msgstr ""
 
-#: web/templates/blog_post/list_entry_card.html.eex:12
+#: lib/helheim_web/templates/blog_post/list_entry_card.html.eex:12
 msgid "Draft"
 msgstr ""
 
-#: web/templates/admin/user/index.html.eex:37
-#: web/templates/blog_post/form.html.eex:35
-#: web/templates/blog_post/form.html.eex:49
+#: lib/helheim_web/templates/admin/user/index.html.eex:37
+#: lib/helheim_web/templates/blog_post/form.html.eex:35
+#: lib/helheim_web/templates/blog_post/form.html.eex:49
 msgid "No"
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:11
+#: lib/helheim_web/templates/blog_post/show.html.eex:11
 msgid "Only you can currently view this blog post. Edit it to publish it."
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:41
+#: lib/helheim_web/templates/blog_post/form.html.eex:41
 msgid "Publish?"
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:10
+#: lib/helheim_web/templates/blog_post/show.html.eex:10
 msgid "This blog post is not published!"
 msgstr ""
 
-#: web/templates/admin/user/index.html.eex:37
-#: web/templates/blog_post/form.html.eex:35
-#: web/templates/blog_post/form.html.eex:49
+#: lib/helheim_web/templates/admin/user/index.html.eex:37
+#: lib/helheim_web/templates/blog_post/form.html.eex:35
+#: lib/helheim_web/templates/blog_post/form.html.eex:49
 msgid "Yes"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:44
+#: lib/helheim_web/templates/blog_post/form.html.eex:44
 msgid "You are always free to unpublish a post again, but re-publishing it will not bump the post further up on lists."
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:43
+#: lib/helheim_web/templates/blog_post/form.html.eex:43
 msgid "Your blog post will only be visible to yourself as a draft until you publish it, at which point it will receive it's position in lists of posts."
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:20
+#: lib/helheim_web/templates/photo_album/show.html.eex:20
 msgid "(only in desktop browsers)"
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:18
+#: lib/helheim_web/templates/photo_album/show.html.eex:18
 msgid "Did you know"
 msgstr ""
 
-#: web/templates/photo_album/show.html.eex:19
+#: lib/helheim_web/templates/photo_album/show.html.eex:19
 msgid "that you can reorder your photos by dragging and dropping them!"
 msgstr ""
 
-#: web/templates/registration/new.html.eex:14
+#: lib/helheim_web/templates/registration/new.html.eex:14
 msgid "Only letters, numbers, dots, hyphens and underscores are allowed"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:56
+#: lib/helheim_web/templates/profile/edit.html.eex:56
 msgid "In a relationship"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:57
+#: lib/helheim_web/templates/profile/edit.html.eex:57
 msgid "In an open relationship"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:56
+#: lib/helheim_web/templates/profile/edit.html.eex:56
 msgid "Married"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:56
+#: lib/helheim_web/templates/profile/edit.html.eex:56
 msgid "Single"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:57
+#: lib/helheim_web/templates/profile/edit.html.eex:57
 msgid "None of your business"
 msgstr ""
 
-#: web/templates/profile/edit.html.eex:23
+#: lib/helheim_web/templates/profile/edit.html.eex:23
 msgid "Submit your changes to upload the image"
 msgstr ""
 
-#: web/templates/admin/user/_personal_details.html.eex:13
-#: web/templates/profile/details.html.eex:41
-#: web/templates/profile/edit.html.eex:51
+#: lib/helheim_web/templates/admin/user/_personal_details.html.eex:13
+#: lib/helheim_web/templates/profile/details.html.eex:41
+#: lib/helheim_web/templates/profile/edit.html.eex:51
 msgid "Partner status"
 msgstr ""
 
-#: web/templates/page/banned.html.eex:4
+#: lib/helheim_web/templates/page/banned.html.eex:4
 msgid "The reason for your ban:"
 msgstr ""
 
-#: web/templates/page/banned.html.eex:3
+#: lib/helheim_web/templates/page/banned.html.eex:3
 msgid "You have been banned!"
 msgstr ""
 
-#: web/templates/page/banned.html.eex:8
+#: lib/helheim_web/templates/page/banned.html.eex:8
 msgid "Your ban will expire"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:53
+#: lib/helheim_web/templates/profile/show.html.eex:53
 msgid "Block user"
 msgstr ""
 
-#: web/templates/block/index.html.eex:10 web/templates/profile/show.html.eex:41
+#: lib/helheim_web/templates/block/index.html.eex:10
+#: lib/helheim_web/templates/profile/show.html.eex:41
 msgid "The user will be unable to see your profile, blog posts, photos or send you messages while blocked"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:40
+#: lib/helheim_web/templates/profile/show.html.eex:40
 msgid "This user is blocked"
 msgstr ""
 
-#: web/controllers/block_controller.ex:36
+#: lib/helheim_web/controllers/block_controller.ex:36
 msgid "Unable to block user!"
 msgstr ""
 
-#: web/controllers/block_controller.ex:50
+#: lib/helheim_web/controllers/block_controller.ex:50
 msgid "Unable to unblock user!"
 msgstr ""
 
-#: web/templates/block/index.html.eex:27 web/templates/block/index.html.eex:28
-#: web/templates/profile/show.html.eex:45
+#: lib/helheim_web/templates/block/index.html.eex:27
+#: lib/helheim_web/templates/block/index.html.eex:28
+#: lib/helheim_web/templates/profile/show.html.eex:45
 msgid "Unblock user"
 msgstr ""
 
-#: web/controllers/block_controller.ex:32
+#: lib/helheim_web/controllers/block_controller.ex:32
 msgid "User blocked!"
 msgstr ""
 
-#: web/controllers/block_controller.ex:46
+#: lib/helheim_web/controllers/block_controller.ex:46
 msgid "User unblocked!"
 msgstr ""
 
-#: web/templates/block/index.html.eex:21
+#: lib/helheim_web/templates/block/index.html.eex:21
 msgid "Blocked since:"
 msgstr ""
 
-#: web/templates/admin/user/_blocks.html.eex:1
-#: web/templates/block/index.html.eex:2 web/templates/navbar/show.html.eex:28
+#: lib/helheim_web/templates/admin/user/_blocks.html.eex:1
+#: lib/helheim_web/templates/block/index.html.eex:2
+#: lib/helheim_web/templates/navbar/show.html.eex:28
 msgid "Blocks"
 msgstr ""
 
-#: web/templates/block/index.html.eex:7
+#: lib/helheim_web/templates/block/index.html.eex:7
 msgid "These are the users that you have blocked"
 msgstr ""
 
-#: web/templates/block/show.html.eex:2
+#: lib/helheim_web/templates/block/show.html.eex:2
 msgid "Blocked"
 msgstr ""
 
-#: web/templates/block/show.html.eex:17
+#: lib/helheim_web/templates/block/show.html.eex:17
 msgid "Click here to also block %{username}"
 msgstr ""
 
-#: web/templates/block/show.html.eex:9
+#: lib/helheim_web/templates/block/show.html.eex:9
 msgid "While the block is active you will not be able to see or contact this user"
 msgstr ""
 
-#: web/templates/block/show.html.eex:12
+#: lib/helheim_web/templates/block/show.html.eex:12
 msgid "You are also blocking %{username}"
 msgstr ""
 
-#: web/templates/block/show.html.eex:8
-#: web/templates/private_conversation/form.html.eex:17
+#: lib/helheim_web/templates/block/show.html.eex:8
+#: lib/helheim_web/templates/private_conversation/form.html.eex:17
 msgid "You have been blocked by %{username}!"
 msgstr ""
 
-#: web/templates/private_conversation/form.html.eex:18
+#: lib/helheim_web/templates/private_conversation/form.html.eex:18
 msgid "You will not be able to send new messages to this user while the block is active"
 msgstr ""
 
-#: web/templates/error/404.html.eex:36
+#: lib/helheim_web/templates/error/404.html.eex:36
 msgid "The page you requested does not exist."
 msgstr ""
 
-#: web/templates/error/500.html.eex:36
+#: lib/helheim_web/templates/error/500.html.eex:36
 msgid "The page you requested is currently broken."
 msgstr ""
 
-#: web/templates/error/404.html.eex:38
+#: lib/helheim_web/templates/error/404.html.eex:38
 msgid "Maybe you tried loading a page that was deleted,"
 msgstr ""
 
-#: web/templates/error/404.html.eex:35 web/templates/error/500.html.eex:35
+#: lib/helheim_web/templates/error/404.html.eex:35
+#: lib/helheim_web/templates/error/500.html.eex:35
 msgid "Oh shit!"
 msgstr ""
 
-#: web/templates/error/500.html.eex:38
+#: lib/helheim_web/templates/error/500.html.eex:38
 msgid "We will be looking into the problem,"
 msgstr ""
 
-#: web/templates/error/404.html.eex:39 web/templates/error/500.html.eex:39
+#: lib/helheim_web/templates/error/404.html.eex:39
+#: lib/helheim_web/templates/error/500.html.eex:39
 msgid "but feel free to contact our support if the problem persists:"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:4
+#: lib/helheim_web/templates/page/front_page.html.eex:4
 msgid "Recently logged in users"
 msgstr ""
 
-#: web/views/comment_view.ex:73
+#: lib/helheim_web/views/comment_view.ex:73
 msgid "Cancel"
 msgstr ""
 
-#: web/views/comment_view.ex:71
+#: lib/helheim_web/views/comment_view.ex:71
 msgid "Are you sure you want to delete this comment?"
 msgstr ""
 
-#: web/templates/private_conversation/show.html.eex:12
+#: lib/helheim_web/templates/private_conversation/show.html.eex:12
 msgid "Hide Conversation"
 msgstr ""
 
-#: web/controllers/private_conversation_controller.ex:43
+#: lib/helheim_web/controllers/private_conversation_controller.ex:43
 msgid "The conversation was hidden"
 msgstr ""
 
-#: web/templates/photo/_navigation.html.eex:11
+#: lib/helheim_web/templates/photo/_navigation.html.eex:11
 msgid "Next"
 msgstr ""
 
-#: web/templates/photo/_navigation.html.eex:5
+#: lib/helheim_web/templates/photo/_navigation.html.eex:5
 msgid "Previous"
 msgstr ""
 
-#: web/templates/admin/user/index.html.eex:9
-#: web/templates/admin/user/index.html.eex:45
-#: web/templates/profile/index.html.eex:8
-#: web/templates/profile/index.html.eex:32
+#: lib/helheim_web/templates/admin/user/index.html.eex:9
+#: lib/helheim_web/templates/admin/user/index.html.eex:45
+#: lib/helheim_web/templates/profile/index.html.eex:8
+#: lib/helheim_web/templates/profile/index.html.eex:32
 msgid "Search"
 msgstr ""
 
-#: web/templates/profile/index.html.eex:50
+#: lib/helheim_web/templates/profile/index.html.eex:50
 msgid "Created"
 msgstr ""
 
-#: web/templates/profile/index.html.eex:54
+#: lib/helheim_web/templates/profile/index.html.eex:54
 msgid "Login"
 msgstr ""
 
-#: web/templates/profile/index.html.eex:27
+#: lib/helheim_web/templates/profile/index.html.eex:27
 msgid "Sort by creation"
 msgstr ""
 
-#: web/templates/profile/index.html.eex:28
+#: lib/helheim_web/templates/profile/index.html.eex:28
 msgid "Sort by login"
 msgstr ""
 
-#: web/templates/profile/index.html.eex:25
+#: lib/helheim_web/templates/profile/index.html.eex:25
 msgid "Sorting"
 msgstr ""
 
-#: web/templates/admin/user/_login_details.html.eex:4
-#: web/templates/friendship/_active_friendships.html.eex:12
-#: web/templates/friendship/_active_friendships.html.eex:19
-#: web/templates/friendship/_my_active_friendships.html.eex:12
-#: web/templates/friendship/_my_active_friendships.html.eex:19
-#: web/templates/friendship/_my_pending_friendships.html.eex:12
-#: web/templates/friendship/_my_pending_friendships.html.eex:19
-#: web/templates/profile/details.html.eex:21
+#: lib/helheim_web/templates/admin/user/_login_details.html.eex:4
+#: lib/helheim_web/templates/friendship/_active_friendships.html.eex:12
+#: lib/helheim_web/templates/friendship/_active_friendships.html.eex:19
+#: lib/helheim_web/templates/friendship/_my_active_friendships.html.eex:12
+#: lib/helheim_web/templates/friendship/_my_active_friendships.html.eex:19
+#: lib/helheim_web/templates/friendship/_my_pending_friendships.html.eex:12
+#: lib/helheim_web/templates/friendship/_my_pending_friendships.html.eex:19
+#: lib/helheim_web/templates/profile/details.html.eex:21
 msgid "Last login"
 msgstr ""
 
-#: web/templates/comment/comment.html.eex:17
-#: web/templates/forum_reply/forum_reply.html.eex:31
-#: web/templates/forum_topic/forum_topic.html.eex:22
+#: lib/helheim_web/templates/comment/comment.html.eex:17
+#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:31
+#: lib/helheim_web/templates/forum_topic/forum_topic.html.eex:22
 msgid "Only possible for up to %{minutes} minutes after posting..."
 msgstr ""
 
-#: web/controllers/forum_reply_controller.ex:85
+#: lib/helheim_web/controllers/forum_reply_controller.ex:85
 msgid "You can only edit a forum reply in the first %{minutes} minutes!"
 msgstr ""
 
-#: web/controllers/forum_topic_controller.ex:96
+#: lib/helheim_web/controllers/forum_topic_controller.ex:96
 msgid "You can only edit a forum topic in the first %{minutes} minutes!"
 msgstr ""
 
-#: web/templates/donation/new.html.eex:19
+#: lib/helheim_web/templates/donation/new.html.eex:19
 msgid "As a small thank you, we will give you %{extra_file_size} extra photo space for every %{min_amount} you donate!"
 msgstr ""
 
-#: web/templates/donation/new.html.eex:58
+#: lib/helheim_web/templates/donation/new.html.eex:58
 msgid "Donate"
 msgstr ""
 
-#: web/templates/donation/new.html.eex:39
+#: lib/helheim_web/templates/donation/new.html.eex:39
 msgid "Donation"
 msgstr ""
 
-#: web/templates/donation/new.html.eex:27
+#: lib/helheim_web/templates/donation/new.html.eex:27
 msgid "How much would you like to donate?"
 msgstr ""
 
-#: web/templates/donation/new.html.eex:7
-#: web/templates/layout/sidebar.html.eex:57
+#: lib/helheim_web/templates/donation/new.html.eex:7
+#: lib/helheim_web/templates/layout/sidebar.html.eex:57
 msgid "Support %{site}"
 msgstr ""
 
-#: web/templates/donation/new.html.eex:53
+#: lib/helheim_web/templates/donation/new.html.eex:53
 msgid "This donation will grant you"
 msgstr ""
 
-#: web/templates/donation/new.html.eex:12
+#: lib/helheim_web/templates/donation/new.html.eex:12
 msgid "Unfortunately it is not free for us to run this site."
 msgstr ""
 
-#: web/templates/donation/new.html.eex:13
+#: lib/helheim_web/templates/donation/new.html.eex:13
 msgid "We have expenses for server hosting, web traffic etc."
 msgstr ""
 
-#: web/templates/donation/new.html.eex:55
+#: lib/helheim_web/templates/donation/new.html.eex:55
 msgid "extra space for photos"
 msgstr ""
 
-#: web/templates/profile/details.html.eex:8
+#: lib/helheim_web/templates/profile/details.html.eex:8
 msgid "Has recently supported Helheim"
 msgstr ""
 
-#: web/templates/donation/new.html.eex:17
+#: lib/helheim_web/templates/donation/new.html.eex:17
 msgid "Help us keep this community open and free of ads by giving a small donation."
 msgstr ""
 
-#: web/controllers/donation_controller.ex:24
+#: lib/helheim_web/controllers/donation_controller.ex:24
 msgid "Something went wrong..."
 msgstr ""
 
-#: web/templates/donation/thank_you.html.eex:10
+#: lib/helheim_web/templates/donation/thank_you.html.eex:10
 msgid "Our owls also made me promise to send you their eternal love!"
 msgstr ""
 
-#: web/templates/donation/thank_you.html.eex:7
+#: lib/helheim_web/templates/donation/thank_you.html.eex:7
 msgid "Thank you for your support!"
 msgstr ""
 
-#: web/templates/donation/thank_you.html.eex:12
+#: lib/helheim_web/templates/donation/thank_you.html.eex:12
 msgid "With love"
 msgstr ""
 
-#: web/templates/donation/thank_you.html.eex:9
+#: lib/helheim_web/templates/donation/thank_you.html.eex:9
 msgid "We have received your donation and humbly thank you for helping make Helheim the best community for alternative people."
 msgstr ""
 
-#: web/views/blog_post_view.ex:11
+#: lib/helheim_web/views/blog_post_view.ex:11
 msgid "Edited"
 msgstr ""
 
-#: web/models/user.ex:383
+#: lib/helheim/models/user.ex:384
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr ""
 
-#: web/templates/friendship/dropdown_items.html.eex:3
+#: lib/helheim_web/templates/friendship/dropdown_items.html.eex:3
 msgid "You have %{count} pending contact"
 msgid_plural "You have %{count} pending contacts"
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/friendship/_active_friendships.html.eex:27
+#: lib/helheim_web/templates/friendship/_active_friendships.html.eex:27
 msgid "%{username} does not have any contacts..."
 msgstr ""
 
-#: web/controllers/friendship_controller.ex:28
+#: lib/helheim_web/controllers/friendship_controller.ex:28
 msgid "%{username} has been added to your contact list!"
 msgstr ""
 
-#: web/controllers/friendship_controller.ex:48
+#: lib/helheim_web/controllers/friendship_controller.ex:48
 msgid "%{username} has been removed from your contact list!"
 msgstr ""
 
-#: web/templates/friendship/_friend_request_button_friends.html.eex:3
+#:
+#: lib/helheim_web/templates/friendship/_friend_request_button_friends.html.eex:3
 msgid "%{username} is on your contact list"
 msgstr ""
 
-#: web/controllers/friendship_request_controller.ex:16
+#: lib/helheim_web/controllers/friendship_request_controller.ex:16
 msgid "A request has been sent!"
 msgstr ""
 
-#: web/templates/friendship/_my_pending_friendships.html.eex:25
+#: lib/helheim_web/templates/friendship/_my_pending_friendships.html.eex:25
 msgid "Accept"
 msgstr ""
 
-#: web/templates/friendship/_friend_request_button_not_friends.html.eex:3
+#:
+#: lib/helheim_web/templates/friendship/_friend_request_button_not_friends.html.eex:3
 msgid "Add to Contacts"
 msgstr ""
 
-#: web/templates/friendship/index.html.eex:3
-#: web/templates/layout/sidebar.html.eex:76
+#: lib/helheim_web/templates/friendship/index.html.eex:3
+#: lib/helheim_web/templates/layout/sidebar.html.eex:76
 msgid "Contact List"
 msgstr ""
 
-#: web/templates/friendship/_friend_request_button_pending.html.eex:3
+#:
+#: lib/helheim_web/templates/friendship/_friend_request_button_pending.html.eex:3
 msgid "Contact Request Pending"
 msgstr ""
 
-#: web/templates/friendship/_active_friendships.html.eex:1
-#: web/templates/profile/details.html.eex:54
+#: lib/helheim_web/templates/friendship/_active_friendships.html.eex:1
+#: lib/helheim_web/templates/profile/details.html.eex:54
 msgid "Contacts"
 msgstr ""
 
-#: web/templates/friendship/_my_pending_friendships.html.eex:2
+#: lib/helheim_web/templates/friendship/_my_pending_friendships.html.eex:2
 msgid "Pending Requests"
 msgstr ""
 
-#: web/templates/admin/calendar_event/show.html.eex:27
-#: web/templates/friendship/_my_pending_friendships.html.eex:30
+#: lib/helheim_web/templates/admin/calendar_event/show.html.eex:27
+#: lib/helheim_web/templates/friendship/_my_pending_friendships.html.eex:30
 msgid "Reject"
 msgstr ""
 
-#: web/templates/friendship/_my_active_friendships.html.eex:25
+#: lib/helheim_web/templates/friendship/_my_active_friendships.html.eex:25
 msgid "Remove"
 msgstr ""
 
-#: web/controllers/friendship_request_controller.ex:36
+#: lib/helheim_web/controllers/friendship_request_controller.ex:36
 msgid "The request has been rejected!"
 msgstr ""
 
-#: web/models/friendship.ex:168
+#: lib/helheim/models/friendship.ex:169
 msgid "There is already a pending request between the two of you!"
 msgstr ""
 
-#: web/controllers/friendship_controller.ex:34
+#: lib/helheim_web/controllers/friendship_controller.ex:34
 msgid "Unable to accept request: %{error}"
 msgstr ""
 
-#: web/controllers/friendship_request_controller.ex:42
+#: lib/helheim_web/controllers/friendship_request_controller.ex:42
 msgid "Unable to reject request: %{error}"
 msgstr ""
 
-#: web/controllers/friendship_controller.ex:54
+#: lib/helheim_web/controllers/friendship_controller.ex:54
 msgid "Unable to remove contact: %{error}"
 msgstr ""
 
-#: web/controllers/friendship_request_controller.ex:22
+#: lib/helheim_web/controllers/friendship_request_controller.ex:22
 msgid "Unable to send request: %{error}"
 msgstr ""
 
-#: web/models/friendship.ex:152
+#: lib/helheim/models/friendship.ex:153
 msgid "You can't add yourself to your own contact list!"
 msgstr ""
 
-#: web/templates/friendship/_my_active_friendships.html.eex:32
+#: lib/helheim_web/templates/friendship/_my_active_friendships.html.eex:32
 msgid "You don't have any contacts..."
 msgstr ""
 
-#: web/templates/friendship/_my_active_friendships.html.eex:1
+#: lib/helheim_web/templates/friendship/_my_active_friendships.html.eex:1
 msgid "Your Contacts"
 msgstr ""
 
-#: web/templates/blog_post/show.html.eex:50
+#: lib/helheim_web/templates/blog_post/show.html.eex:50
 msgid "Comments have been disabled for this blog post"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:32
+#: lib/helheim_web/templates/blog_post/form.html.eex:32
 msgid "Hide comments?"
 msgstr ""
 
-#: web/templates/layout/sidebar.html.eex:42
+#: lib/helheim_web/templates/layout/sidebar.html.eex:42
 msgid "Terms and Rules"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:48
+#: lib/helheim_web/controllers/comment_controller.ex:48
 msgid "Comment updated successfully."
 msgstr ""
 
-#: web/templates/comment/edit.html.eex:1
+#: lib/helheim_web/templates/comment/edit.html.eex:1
 msgid "Edit comment"
 msgstr ""
 
-#: web/controllers/comment_controller.ex:110
+#: lib/helheim_web/controllers/comment_controller.ex:110
 msgid "You can only edit a comment in the first %{minutes} minutes!"
 msgstr ""
 
-#: web/templates/admin/user/_account_details.html.eex:1
+#: lib/helheim_web/templates/admin/user/_account_details.html.eex:1
 msgid "Account Details"
 msgstr ""
 
-#: web/templates/admin/user/index.html.eex:37
+#: lib/helheim_web/templates/admin/user/index.html.eex:37
 msgid "Any"
 msgstr ""
 
-#: web/views/comment_view.ex:47
+#: lib/helheim_web/views/comment_view.ex:47
 msgid "Blog Post"
 msgstr ""
 
-#: web/templates/admin/user/_account_details.html.eex:19
-#: web/templates/admin/user/_users.html.eex:20
+#: lib/helheim_web/templates/admin/user/_account_details.html.eex:19
+#: lib/helheim_web/templates/admin/user/_users.html.eex:20
 msgid "Confirmed at"
 msgstr ""
 
-#: web/templates/admin/user/index.html.eex:36
+#: lib/helheim_web/templates/admin/user/index.html.eex:36
 msgid "Confirmed?"
 msgstr ""
 
-#: web/templates/admin/user/_account_details.html.eex:16
-#: web/templates/admin/user/_users.html.eex:17
+#: lib/helheim_web/templates/admin/user/_account_details.html.eex:16
+#: lib/helheim_web/templates/admin/user/_users.html.eex:17
 msgid "Created at"
 msgstr ""
 
-#: web/templates/admin/user/_account_details.html.eex:4
-#: web/templates/admin/user/_recent_blog_posts.html.eex:7
-#: web/templates/admin/user/_recent_comments.html.eex:7
-#: web/templates/admin/user/_recent_forum_replies.html.eex:7
-#: web/templates/admin/user/_recent_forum_topics.html.eex:7
-#: web/templates/admin/user/_users.html.eex:5
+#: lib/helheim_web/templates/admin/user/_account_details.html.eex:4
+#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:7
+#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:7
+#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:7
+#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:7
+#: lib/helheim_web/templates/admin/user/_users.html.eex:5
 msgid "ID"
 msgstr ""
 
-#: web/templates/admin/user/index.html.eex:41
+#: lib/helheim_web/templates/admin/user/index.html.eex:41
 msgid "IP Address"
 msgstr ""
 
-#: web/templates/admin/user/_login_details.html.eex:1
+#: lib/helheim_web/templates/admin/user/_login_details.html.eex:1
 msgid "Login Details"
 msgstr ""
 
-#: web/templates/admin/user/_blocks.html.eex:32
-#: web/templates/admin/user/_potential_alt_accounts.html.eex:7
-#: web/templates/admin/user/_recent_blog_posts.html.eex:38
-#: web/templates/admin/user/_recent_comments.html.eex:29
-#: web/templates/admin/user/_recent_forum_replies.html.eex:32
-#: web/templates/admin/user/_recent_forum_topics.html.eex:32
-#: web/templates/admin/user/_recent_photos.html.eex:22
+#: lib/helheim_web/templates/admin/user/_blocks.html.eex:32
+#: lib/helheim_web/templates/admin/user/_potential_alt_accounts.html.eex:7
+#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:38
+#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:29
+#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:32
+#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:32
+#: lib/helheim_web/templates/admin/user/_recent_photos.html.eex:22
 msgid "None found"
 msgstr ""
 
-#: web/templates/admin/user/_account_details.html.eex:24
+#: lib/helheim_web/templates/admin/user/_account_details.html.eex:24
 msgid "Not Verified!"
 msgstr ""
 
-#: web/views/comment_view.ex:48
+#: lib/helheim_web/views/comment_view.ex:48
 msgid "Photo"
 msgstr ""
 
-#: web/templates/admin/user/_potential_alt_accounts.html.eex:1
+#: lib/helheim_web/templates/admin/user/_potential_alt_accounts.html.eex:1
 msgid "Potential alt accounts"
 msgstr ""
 
-#: web/templates/admin/user/_login_details.html.eex:13
+#: lib/helheim_web/templates/admin/user/_login_details.html.eex:13
 msgid "Previous login"
 msgstr ""
 
-#: web/templates/admin/user/_recent_blog_posts.html.eex:1
+#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:1
 msgid "Recent blog posts"
 msgstr ""
 
-#: web/templates/admin/user/_recent_comments.html.eex:1
+#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:1
 msgid "Recent comments"
 msgstr ""
 
-#: web/templates/admin/user/_recent_forum_replies.html.eex:1
+#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:1
 msgid "Recent forum replies"
 msgstr ""
 
-#: web/templates/admin/user/_recent_forum_topics.html.eex:1
+#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:1
 msgid "Recent forum topics"
 msgstr ""
 
-#: web/templates/admin/user/_recent_photos.html.eex:1
+#: lib/helheim_web/templates/admin/user/_recent_photos.html.eex:1
 msgid "Recent photos"
 msgstr ""
 
-#: web/templates/admin/user/index.html.eex:3
-#: web/templates/admin/user/show.html.eex:3
-#: web/templates/layout/sidebar_admin.html.eex:14
+#: lib/helheim_web/templates/admin/user/index.html.eex:3
+#: lib/helheim_web/templates/admin/user/show.html.eex:3
+#: lib/helheim_web/templates/layout/sidebar_admin.html.eex:14
 msgid "Users"
 msgstr ""
 
-#: web/templates/admin/user/_account_details.html.eex:22
-#: web/templates/admin/user/_users.html.eex:29
+#: lib/helheim_web/templates/admin/user/_account_details.html.eex:22
+#: lib/helheim_web/templates/admin/user/_users.html.eex:29
 msgid "Verified at"
 msgstr ""
 
-#: web/templates/admin/user/_users.html.eex:26
+#: lib/helheim_web/templates/admin/user/_users.html.eex:26
 msgid "IP"
 msgstr ""
 
-#: web/templates/admin/user/_users.html.eex:23
+#: lib/helheim_web/templates/admin/user/_users.html.eex:23
 msgid "Last Login at"
 msgstr ""
 
-#: web/templates/admin/user/index.html.eex:54
+#: lib/helheim_web/templates/admin/user/index.html.eex:54
 msgid "Total users matching the current filter:"
 msgstr ""
 
-#: web/controllers/admin/user/verification_controller.ex:29
+#: lib/helheim_web/controllers/admin/user/verification_controller.ex:29
 msgid "The user is could not be unverified!"
 msgstr ""
 
-#: web/controllers/admin/user/verification_controller.ex:15
+#: lib/helheim_web/controllers/admin/user/verification_controller.ex:15
 msgid "The user is could not be verified!"
 msgstr ""
 
-#: web/controllers/admin/user/verification_controller.ex:25
+#: lib/helheim_web/controllers/admin/user/verification_controller.ex:25
 msgid "The user is no longer verified."
 msgstr ""
 
-#: web/controllers/admin/user/verification_controller.ex:11
+#: lib/helheim_web/controllers/admin/user/verification_controller.ex:11
 msgid "The user is now verified."
 msgstr ""
 
-#: web/templates/admin/user/_account_details.html.eex:27
+#: lib/helheim_web/templates/admin/user/_account_details.html.eex:27
 msgid "Unverify!"
 msgstr ""
 
-#: web/templates/admin/user/_account_details.html.eex:30
+#: lib/helheim_web/templates/admin/user/_account_details.html.eex:30
 msgid "Verify!"
 msgstr ""
 
-#: web/templates/help/verification.html.eex:16
+#: lib/helheim_web/templates/help/verification.html.eex:16
 msgid "Being a verified user gives you a special badge on your profile and will allow you to access certain blog posts and photos that users have marked as only being available for verified users."
 msgstr ""
 
-#: web/templates/help/verification.html.eex:11
+#: lib/helheim_web/templates/help/verification.html.eex:11
 msgid "Did the user sign up with a genuine name and e-mail address?"
 msgstr ""
 
-#: web/templates/help/verification.html.eex:12
+#: lib/helheim_web/templates/help/verification.html.eex:12
 msgid "Does the user have a constructive and interesting profile text?"
 msgstr ""
 
-#: web/templates/help/verification.html.eex:10
+#: lib/helheim_web/templates/help/verification.html.eex:10
 msgid "Does the user have a profile photo?"
 msgstr ""
 
-#: web/templates/help/verification.html.eex:14
+#: lib/helheim_web/templates/help/verification.html.eex:14
 msgid "Has the user demonstrated an ability to understand and follow the rules of the site?"
 msgstr ""
 
-#: web/templates/help/verification.html.eex:13
+#: lib/helheim_web/templates/help/verification.html.eex:13
 msgid "Has the user engaged positively with the community?"
 msgstr ""
 
-#: web/templates/help/verification.html.eex:24
+#: lib/helheim_web/templates/help/verification.html.eex:24
 msgid "If you feel that you do meet the criteria and should be verified, then feel free to contact any of the admins via a private message."
 msgstr ""
 
-#: web/templates/help/verification.html.eex:20
+#: lib/helheim_web/templates/help/verification.html.eex:20
 msgid "It appears that you have already been verified. But please be aware that your verification can be revoked at any time should you no longer meet the criteria for verification."
 msgstr ""
 
-#: web/templates/help/verification.html.eex:8
+#: lib/helheim_web/templates/help/verification.html.eex:8
 msgid "Some of the criteria that is used for determining whether a user should be verified includes, but is not limited to:"
 msgstr ""
 
-#: web/templates/help/verification.html.eex:23
+#: lib/helheim_web/templates/help/verification.html.eex:23
 msgid "This can either mean that an admin has not yet had the time to decide on your verification state, or it has been decided that you do not meet the criteria for verification."
 msgstr ""
 
-#: web/templates/help/verification.html.eex:3
-#: web/templates/layout/sidebar.html.eex:48
+#: lib/helheim_web/templates/help/verification.html.eex:3
+#: lib/helheim_web/templates/layout/sidebar.html.eex:48
 msgid "User verification"
 msgstr ""
 
-#: web/templates/profile/show.html.eex:16
+#: lib/helheim_web/templates/profile/show.html.eex:16
 msgid "Verified user"
 msgstr ""
 
-#: web/templates/help/verification.html.eex:6
+#: lib/helheim_web/templates/help/verification.html.eex:6
 msgid "What is a verified user?"
 msgstr ""
 
-#: web/templates/help/verification.html.eex:22
+#: lib/helheim_web/templates/help/verification.html.eex:22
 msgid "You are not verified"
 msgstr ""
 
-#: web/templates/help/verification.html.eex:19
+#: lib/helheim_web/templates/help/verification.html.eex:19
 msgid "You are verified!"
 msgstr ""
 
-#: web/templates/help/verification.html.eex:7
+#: lib/helheim_web/templates/help/verification.html.eex:7
 msgid "In short, a verified user is a user that an admin has deemed as not being a fake or empty profile."
 msgstr ""
 
-#: web/templates/admin/user/_blocks.html.eex:9
+#: lib/helheim_web/templates/admin/user/_blocks.html.eex:9
 msgid "Blockee"
 msgstr ""
 
-#: web/templates/admin/user/_blocks.html.eex:7
+#: lib/helheim_web/templates/admin/user/_blocks.html.eex:7
 msgid "Blocker"
 msgstr ""
 
-#: web/templates/admin/user/_recent_blog_posts.html.eex:9
+#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:9
 msgid "Published At"
 msgstr ""
 
-#: web/templates/admin/user/_recent_forum_replies.html.eex:8
+#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:8
 msgid "Topic"
 msgstr ""
 
-#: web/templates/admin/user/_recent_blog_posts.html.eex:10
+#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:10
 msgid "Views/Comments"
 msgstr ""
 
-#: web/templates/admin/calendar_event/index.html.eex:11
-#: web/templates/admin/user/_blocks.html.eex:10
-#: web/templates/admin/user/_recent_comments.html.eex:9
-#: web/templates/admin/user/_recent_forum_replies.html.eex:9
-#: web/templates/admin/user/_recent_forum_topics.html.eex:9
+#: lib/helheim_web/templates/admin/calendar_event/index.html.eex:11
+#: lib/helheim_web/templates/admin/user/_blocks.html.eex:10
+#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:9
+#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:9
+#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:9
 msgid "When"
 msgstr ""
 
-#: web/templates/forum_reply/forum_reply.html.eex:17
+#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:17
 msgid "Admin notice"
 msgstr ""
 
-#: web/templates/forum_topic/show.html.eex:34
+#: lib/helheim_web/templates/forum_topic/show.html.eex:34
 msgid "This topic is locked"
 msgstr ""
 
-#: web/templates/calendar_event/index.html.eex:5
-#: web/templates/calendar_event/new.html.eex:1
-#: web/templates/page/front_page.html.eex:69
+#: lib/helheim_web/templates/calendar_event/index.html.eex:5
+#: lib/helheim_web/templates/calendar_event/new.html.eex:1
+#: lib/helheim_web/templates/page/front_page.html.eex:69
 msgid "Create event"
 msgstr ""
 
-#: web/templates/admin/calendar_event/index.html.eex:3
-#: web/templates/admin/calendar_event/show.html.eex:3
-#: web/templates/calendar_event/index.html.eex:1
-#: web/templates/calendar_event/show.html.eex:2
-#: web/templates/layout/sidebar.html.eex:29
-#: web/templates/layout/sidebar_admin.html.eex:18
+#: lib/helheim_web/templates/admin/calendar_event/index.html.eex:3
+#: lib/helheim_web/templates/admin/calendar_event/show.html.eex:3
+#: lib/helheim_web/templates/calendar_event/index.html.eex:1
+#: lib/helheim_web/templates/calendar_event/show.html.eex:2
+#: lib/helheim_web/templates/layout/sidebar.html.eex:29
+#: lib/helheim_web/templates/layout/sidebar_admin.html.eex:18
 msgid "Event calendar"
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:12
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:12
 msgid "Give a good description of the event"
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:56
-#: web/templates/calendar_event/_form.html.eex:59
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:56
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:59
 msgid "Image"
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:73
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:73
 msgid "Save"
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:48
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:48
 msgid "Specify a website where there is more information about the event, if available"
 msgstr ""
 
-#: web/controllers/calendar_event_controller.ex:42
+#: lib/helheim_web/controllers/calendar_event_controller.ex:42
 msgid "The event has now been created and will be shown on the site when it has been approved by an administrator."
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:41
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:41
 msgid "Venue, address, city etc."
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:24
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:24
 msgid "When does the event begin?"
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:32
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:32
 msgid "When does the event end?"
 msgstr ""
 
-#: web/templates/calendar_event/_form.html.eex:40
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:40
 msgid "Where does the event take place?"
 msgstr ""
 
-#: web/views/notification_view.ex:37
+#: lib/helheim_web/views/notification_view.ex:37
 msgid "%{who} wrote a comment on the calendar event: %{what}"
 msgstr ""
 
-#: web/templates/admin/calendar_event/show.html.eex:23
+#: lib/helheim_web/templates/admin/calendar_event/show.html.eex:23
 msgid "Approve"
 msgstr ""
 
-#: web/templates/calendar_event/edit.html.eex:1
+#: lib/helheim_web/templates/calendar_event/edit.html.eex:1
 msgid "Edit event"
 msgstr ""
 
-#: web/views/comment_view.ex:49
+#: lib/helheim_web/views/comment_view.ex:49
 msgid "Event"
 msgstr ""
 
-#: web/controllers/calendar_event_controller.ex:72
+#: lib/helheim_web/controllers/calendar_event_controller.ex:72
 msgid "Event deleted successfully."
 msgstr ""
 
-#: web/templates/admin/calendar_event/show.html.eex:16
+#: lib/helheim_web/templates/admin/calendar_event/show.html.eex:16
 msgid "Pending approval"
 msgstr ""
 
-#: web/controllers/admin/calendar_event_controller.ex:36
+#: lib/helheim_web/controllers/admin/calendar_event_controller.ex:36
 msgid "The event could not be approved!"
 msgstr ""
 
-#: web/controllers/admin/calendar_event_controller.ex:50
+#: lib/helheim_web/controllers/admin/calendar_event_controller.ex:50
 msgid "The event could not be rejected!"
 msgstr ""
 
-#: web/controllers/admin/calendar_event_controller.ex:32
+#: lib/helheim_web/controllers/admin/calendar_event_controller.ex:32
 msgid "The event is now approved."
 msgstr ""
 
-#: web/controllers/admin/calendar_event_controller.ex:46
+#: lib/helheim_web/controllers/admin/calendar_event_controller.ex:46
 msgid "The event is now rejected."
 msgstr ""
 
-#: web/controllers/calendar_event_controller.ex:61
+#: lib/helheim_web/controllers/calendar_event_controller.ex:61
 msgid "The event was updated successfully."
 msgstr ""
 
-#: web/templates/admin/calendar_event/show.html.eex:19
+#: lib/helheim_web/templates/admin/calendar_event/show.html.eex:19
 msgid "This event needs to be approved before it will be shown to regular users"
 msgstr ""
 
-#: web/templates/admin/calendar_event/index.html.eex:12
+#: lib/helheim_web/templates/admin/calendar_event/index.html.eex:12
 msgid "User"
 msgstr ""
 
-#: web/templates/blog_post/form.html.eex:20
-#: web/templates/calendar_event/_form.html.eex:19
-#: web/templates/comment/comments.html.eex:39
-#: web/templates/comment/form.html.eex:13
-#: web/templates/forum_reply/form.html.eex:11
-#: web/templates/forum_topic/form.html.eex:19
-#: web/templates/profile/edit.html.eex:91
+#: lib/helheim_web/templates/blog_post/form.html.eex:20
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:19
+#: lib/helheim_web/templates/comment/comments.html.eex:39
+#: lib/helheim_web/templates/comment/form.html.eex:13
+#: lib/helheim_web/templates/forum_reply/form.html.eex:11
+#: lib/helheim_web/templates/forum_topic/form.html.eex:19
+#: lib/helheim_web/templates/profile/edit.html.eex:91
 msgid "You can embed pictures from your photo albums or from Imgur, gifs from Giphy, Videos from Youtube and Vimeo and Spotify playlists by simply including a url for the desired media in your post"
 msgstr ""
 
-#: web/templates/online_user/index.html.eex:2
+#: lib/helheim_web/templates/online_user/index.html.eex:2
 msgid "There is currently %{count} online user"
 msgid_plural "There are currently %{count} online users"
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/layout/sidebar.html.eex:22
+#: lib/helheim_web/templates/layout/sidebar.html.eex:22
 msgid "Online users"
 msgstr ""
 
-#: web/templates/online_user/index.html.eex:6
+#: lib/helheim_web/templates/online_user/index.html.eex:6
 msgid "This list shows whoever is currently online, meaning that they have the site open in a browser-tab"
 msgstr ""
 
-#: web/templates/preference/edit.html.eex:26
+#: lib/helheim_web/templates/preference/edit.html.eex:26
 msgid "Mute notifications?"
 msgstr ""
 
-#: web/templates/preference/edit.html.eex:10
+#: lib/helheim_web/templates/preference/edit.html.eex:10
 msgid "Notification sound"
 msgstr ""
 
-#: web/templates/preference/edit.html.eex:6
+#: lib/helheim_web/templates/preference/edit.html.eex:6
 msgid "Notifications"
 msgstr ""
 
-#: web/templates/navbar/show.html.eex:27
-#: web/templates/preference/edit.html.eex:1
+#: lib/helheim_web/templates/navbar/show.html.eex:27
+#: lib/helheim_web/templates/preference/edit.html.eex:1
 msgid "Preferences"
 msgstr ""
 
-#: web/controllers/preference_controller.ex:17
+#: lib/helheim_web/controllers/preference_controller.ex:17
 msgid "Preferences updated!"
 msgstr ""
 
-#: web/templates/preference/edit.html.eex:31
+#: lib/helheim_web/templates/preference/edit.html.eex:31
 msgid "Save preferences"
 msgstr ""
 
-#: web/views/notification_view.ex:43
+#: lib/helheim_web/views/notification_view.ex:43
 msgid "%{count} people"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:63
+#: lib/helheim_web/templates/page/front_page.html.eex:63
 msgid "It looks like there are no upcoming events..."
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:64
+#: lib/helheim_web/templates/page/front_page.html.eex:64
 msgid "Tell us about an event so we can add it:"
 msgstr ""
 
-#: web/templates/page/front_page.html.eex:54
+#: lib/helheim_web/templates/page/front_page.html.eex:54
 msgid "Events"
 msgstr ""
 
-#, fuzzy
-#: web/views/pagination_helpers.ex:39
+#: lib/helheim_web/views/pagination_helpers.ex:39
 msgid "%{page} of %{total}"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/auth/error_handler.ex:8
+msgid "You need to be signed in to access the requested page!"
 msgstr ""
