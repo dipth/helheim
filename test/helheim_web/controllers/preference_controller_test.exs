@@ -17,7 +17,7 @@ defmodule HelheimWeb.PreferenceControllerTest do
   describe "edit/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/preferences/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -51,7 +51,7 @@ defmodule HelheimWeb.PreferenceControllerTest do
   describe "update/2 when not signed in" do
     test "it redirects back to the sign in page", %{conn: conn} do
       conn = put conn, "/preferences", user: %{notification_sound: "chime_1"}
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

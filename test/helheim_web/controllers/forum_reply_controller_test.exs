@@ -73,7 +73,7 @@ defmodule HelheimWeb.ForumReplyControllerTest do
     test "it redirects to the login page", %{conn: conn} do
       topic = insert(:forum_topic)
       conn  = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -142,7 +142,7 @@ defmodule HelheimWeb.ForumReplyControllerTest do
       topic = reply.forum_topic
       forum = topic.forum
       conn  = get conn, "/forums/#{forum.id}/forum_topics/#{topic.id}/forum_replies/#{reply.id}/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -237,7 +237,7 @@ defmodule HelheimWeb.ForumReplyControllerTest do
       forum = topic.forum
       conn  = put conn, "/forums/#{forum.id}/forum_topics/#{topic.id}/forum_replies/#{reply.id}", forum_reply: @valid_attrs
       reply = Repo.one(ForumReply)
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       assert reply.body          == "Before"
     end
   end

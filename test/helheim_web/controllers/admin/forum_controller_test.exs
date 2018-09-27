@@ -39,7 +39,7 @@ defmodule HelheimWeb.Admin.ForumControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       forum_category = insert(:forum_category)
       conn           = get conn, "/admin/forum_categories/#{forum_category.id}/forums/new"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -88,7 +88,7 @@ defmodule HelheimWeb.Admin.ForumControllerTest do
     test "it does not create a forum but redirects to the sign in page", %{conn: conn} do
       forum_category = insert(:forum_category)
       conn           = post conn, "/admin/forum_categories/#{forum_category.id}/forums", forum_category: @valid_attrs
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       refute Repo.one(Forum)
     end
   end
@@ -137,7 +137,7 @@ defmodule HelheimWeb.Admin.ForumControllerTest do
       forum_category = insert(:forum_category)
       forum          = insert(:forum, forum_category: forum_category)
       conn           = get conn, "/admin/forum_categories/#{forum_category.id}/forums/#{forum.id}/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -212,7 +212,7 @@ defmodule HelheimWeb.Admin.ForumControllerTest do
       forum          = insert(:forum, forum_category: forum_category, title: "Before", description: "Edit")
       conn           = put conn, "/admin/forum_categories/#{forum_category.id}/forums/#{forum.id}", forum: @valid_attrs
       forum          = Repo.one(Forum)
-      assert redirected_to(conn)        == session_path(conn, :new)
+      assert redirected_to(conn)        =~ session_path(conn, :new)
       assert forum.forum_category_id    == forum_category.id
       assert forum.title                == "Before"
       assert forum.description          == "Edit"
@@ -267,7 +267,7 @@ defmodule HelheimWeb.Admin.ForumControllerTest do
       forum_category = insert(:forum_category)
       forum          = insert(:forum, forum_category: forum_category)
       conn           = delete conn, "/admin/forum_categories/#{forum_category.id}/forums/#{forum.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       assert Repo.one(Forum)
     end
   end

@@ -19,7 +19,7 @@ defmodule HelheimWeb.AccountControllerTest do
   describe "edit/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/account/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -105,7 +105,7 @@ defmodule HelheimWeb.AccountControllerTest do
   describe "update/2 when not signed in" do
     test "it redirects back to the sign in page", %{conn: conn} do
       conn = put conn, "/account", user: %{name: "New Name", email: "new@email.com", password: "newpassword", password_confirmation: "newpassword", existing_password: "wrong"}
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -127,7 +127,7 @@ defmodule HelheimWeb.AccountControllerTest do
   describe "delete/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = delete conn, "/account"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

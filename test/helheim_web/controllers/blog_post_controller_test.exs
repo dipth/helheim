@@ -116,7 +116,7 @@ defmodule HelheimWeb.BlogPostControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       user = insert(:user)
       conn = get conn, "/profiles/#{user.id}/blog_posts"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -205,7 +205,7 @@ defmodule HelheimWeb.BlogPostControllerTest do
   describe "index/2 for all users when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/blog_posts"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -223,7 +223,7 @@ defmodule HelheimWeb.BlogPostControllerTest do
   describe "new/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/blog_posts/new"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -265,7 +265,7 @@ defmodule HelheimWeb.BlogPostControllerTest do
     test "it does not create a new blog post and instead redirects to the login page", %{conn: conn} do
       conn = post conn, "/blog_posts", blog_post: @valid_attrs
       refute Repo.one(BlogPost)
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -415,7 +415,7 @@ defmodule HelheimWeb.BlogPostControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       blog_post = insert(:blog_post)
       conn = get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -448,7 +448,7 @@ defmodule HelheimWeb.BlogPostControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       blog_post = insert(:blog_post)
       conn = get conn, "/blog_posts/#{blog_post.id}/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -512,7 +512,7 @@ defmodule HelheimWeb.BlogPostControllerTest do
     test "it does not update the blog post and instead redirects to the sign in page", %{conn: conn} do
       blog_post = insert(:blog_post, title: "Foo", body: "Bar")
       conn = put conn, "/blog_posts/#{blog_post.id}", blog_post: @valid_attrs
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       blog_post = Repo.get(BlogPost, blog_post.id)
       assert blog_post.title == "Foo"
       assert blog_post.body == "Bar"
@@ -550,7 +550,7 @@ defmodule HelheimWeb.BlogPostControllerTest do
     test "it does not delete the blog post and instead redirects to the sign in page", %{conn: conn} do
       blog_post = insert(:blog_post)
       conn = delete conn, "/blog_posts/#{blog_post.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       assert Repo.get(BlogPost, blog_post.id)
     end
   end

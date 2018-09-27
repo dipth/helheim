@@ -24,7 +24,7 @@ defmodule HelheimWeb.FriendshipRequestControllerTest do
 
       recipient = insert(:user)
       conn      = post conn, "/profiles/#{recipient.id}/contact_request"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -49,7 +49,7 @@ defmodule HelheimWeb.FriendshipRequestControllerTest do
 
       sender = insert(:user)
       conn   = delete conn, "/profiles/#{sender.id}/contact_request"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

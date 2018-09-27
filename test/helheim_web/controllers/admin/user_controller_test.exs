@@ -25,7 +25,7 @@ defmodule HelheimWeb.Admin.UserControllerTest do
   describe "index/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/admin/users"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -54,7 +54,7 @@ defmodule HelheimWeb.Admin.UserControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       user = insert(:user)
       conn = get conn, "/admin/users/#{user.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

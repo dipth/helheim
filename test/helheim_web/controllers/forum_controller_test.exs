@@ -23,7 +23,7 @@ defmodule HelheimWeb.ForumControllerTest do
   describe "index/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/forums"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -80,7 +80,7 @@ defmodule HelheimWeb.ForumControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       forum = insert(:forum)
       conn = get conn, "/forums/#{forum.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

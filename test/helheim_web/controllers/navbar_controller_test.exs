@@ -15,7 +15,7 @@ defmodule HelheimWeb.NavbarControllerTest do
   describe "show/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/navbar"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

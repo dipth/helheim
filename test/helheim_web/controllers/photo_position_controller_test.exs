@@ -41,7 +41,7 @@ defmodule HelheimWeb.PhotoPositionControllerTest do
 
       photo_album = insert(:photo_album)
       conn = put conn, "/photo_albums/#{photo_album.id}/photo_positions", photo_ids: ["1", "2", "3"]
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

@@ -33,7 +33,7 @@ defmodule HelheimWeb.ProfileControllerTest do
   describe "index/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/profiles"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -92,13 +92,13 @@ defmodule HelheimWeb.ProfileControllerTest do
   describe "show/2 when not signed in" do
     test "it redirects to the login page when specifying an id", %{conn: conn} do
       conn = get conn, "/profile"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
 
     test "it redirects to the login page when specifying an existing id", %{conn: conn} do
       user = insert(:user)
       conn = get conn, "/profiles/#{user.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -117,7 +117,7 @@ defmodule HelheimWeb.ProfileControllerTest do
   describe "edit/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/profile/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -154,7 +154,7 @@ defmodule HelheimWeb.ProfileControllerTest do
   describe "update/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = put conn, "/profile", user: %{profile_text: "Lorem Ipsum"}
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

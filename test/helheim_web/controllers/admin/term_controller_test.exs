@@ -30,7 +30,7 @@ defmodule HelheimWeb.Admin.TermControllerTest do
   describe "index/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/admin/terms"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -58,7 +58,7 @@ defmodule HelheimWeb.Admin.TermControllerTest do
   describe "new/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/admin/terms/new"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -95,7 +95,7 @@ defmodule HelheimWeb.Admin.TermControllerTest do
   describe "create/2 when not signed in" do
     test "it does not create a term but redirects to the sign in page", %{conn: conn} do
       conn = post conn, "/admin/terms", term: @valid_attrs
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       refute Repo.one(Term)
     end
   end
@@ -133,7 +133,7 @@ defmodule HelheimWeb.Admin.TermControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       term = insert(:term)
       conn = get conn, "/admin/terms/#{term.id}/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -183,7 +183,7 @@ defmodule HelheimWeb.Admin.TermControllerTest do
       term = insert(:term, body: "Before Edit")
       conn = put conn, "/admin/terms/#{term.id}", term: @valid_attrs
       term = Repo.one(Term)
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       assert term.body           == "Before Edit"
     end
   end
@@ -223,7 +223,7 @@ defmodule HelheimWeb.Admin.TermControllerTest do
     test "it does not delete the term but redirects to the sign in page", %{conn: conn} do
       term = insert(:term)
       conn = delete conn, "/admin/terms/#{term.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       assert Repo.one(Term)
     end
   end

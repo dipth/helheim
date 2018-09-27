@@ -46,7 +46,7 @@ defmodule HelheimWeb.Admin.User.VerificationControllerTest do
 
       user = insert(:user)
       conn = post conn, "/admin/users/#{user.id}/verification"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -93,7 +93,7 @@ defmodule HelheimWeb.Admin.User.VerificationControllerTest do
 
       user = insert(:user)
       conn = delete conn, "/admin/users/#{user.id}/verification"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

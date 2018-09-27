@@ -38,7 +38,7 @@ defmodule HelheimWeb.PrivateConversationControllerTest do
   describe "index/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/private_conversations"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -95,7 +95,7 @@ defmodule HelheimWeb.PrivateConversationControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       other_user = insert(:user)
       conn = get conn, "/private_conversations/#{other_user.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -120,7 +120,7 @@ defmodule HelheimWeb.PrivateConversationControllerTest do
 
       other_user = insert(:user)
       conn = delete conn, "/private_conversations/#{other_user.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 

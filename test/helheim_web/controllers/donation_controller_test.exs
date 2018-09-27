@@ -21,7 +21,7 @@ defmodule HelheimWeb.DonationControllerTest do
   describe "new/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn  = get conn, "/donations/new"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -57,7 +57,7 @@ defmodule HelheimWeb.DonationControllerTest do
 
     test "it redirects to the login page", %{conn: conn} do
       conn = post conn, "/donations", forum_reply: @valid_attrs
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -75,7 +75,7 @@ defmodule HelheimWeb.DonationControllerTest do
   describe "show/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn  = get conn, "/donations/thank_you"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

@@ -30,7 +30,7 @@ defmodule HelheimWeb.Admin.ForumCategoryControllerTest do
   describe "index/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/admin/forum_categories"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -58,7 +58,7 @@ defmodule HelheimWeb.Admin.ForumCategoryControllerTest do
   describe "new/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/admin/forum_categories/new"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -96,7 +96,7 @@ defmodule HelheimWeb.Admin.ForumCategoryControllerTest do
   describe "create/2 when not signed in" do
     test "it does not create a forum category but redirects to the sign in page", %{conn: conn} do
       conn = post conn, "/admin/forum_categories", forum_category: @valid_attrs
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       refute Repo.one(ForumCategory)
     end
   end
@@ -134,7 +134,7 @@ defmodule HelheimWeb.Admin.ForumCategoryControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       forum_category = insert(:forum_category)
       conn           = get conn, "/admin/forum_categories/#{forum_category.id}/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -187,7 +187,7 @@ defmodule HelheimWeb.Admin.ForumCategoryControllerTest do
       forum_category = insert(:forum_category, title: "Before", description: "Edit")
       conn           = put conn, "/admin/forum_categories/#{forum_category.id}", forum_category: @valid_attrs
       forum_category = Repo.one(ForumCategory)
-      assert redirected_to(conn)        == session_path(conn, :new)
+      assert redirected_to(conn)        =~ session_path(conn, :new)
       assert forum_category.title       == "Before"
       assert forum_category.description == "Edit"
     end
@@ -228,7 +228,7 @@ defmodule HelheimWeb.Admin.ForumCategoryControllerTest do
     test "it does not delete the forum category but redirects to the sign in page", %{conn: conn} do
       forum_category = insert(:forum_category)
       conn           = delete conn, "/admin/forum_categories/#{forum_category.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       assert Repo.one(ForumCategory)
     end
   end

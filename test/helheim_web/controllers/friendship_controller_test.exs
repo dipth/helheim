@@ -36,7 +36,7 @@ defmodule HelheimWeb.FriendshipControllerTest do
   describe "index/2 for your own list when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/contacts"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -74,7 +74,7 @@ defmodule HelheimWeb.FriendshipControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       profile = insert(:user)
       conn    = get conn, "/profiles/#{profile.id}/contacts"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -99,7 +99,7 @@ defmodule HelheimWeb.FriendshipControllerTest do
 
       sender = insert(:user)
       conn   = post conn, "/profiles/#{sender.id}/contact"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -124,7 +124,7 @@ defmodule HelheimWeb.FriendshipControllerTest do
 
       user_b = insert(:user)
       conn   = delete conn, "/profiles/#{user_b.id}/contact"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

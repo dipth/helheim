@@ -25,7 +25,7 @@ defmodule HelheimWeb.CalendarEventControllerTest do
   describe "index/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/calendar_events"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -43,7 +43,7 @@ defmodule HelheimWeb.CalendarEventControllerTest do
   describe "new/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/calendar_events/new"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -83,7 +83,7 @@ defmodule HelheimWeb.CalendarEventControllerTest do
     test "it does not create a new event and instead redirects to the login page", %{conn: conn} do
       conn = post conn, "/calendar_events", calendar_event: @valid_attrs
       refute Repo.one(CalendarEvent)
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -130,7 +130,7 @@ defmodule HelheimWeb.CalendarEventControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       calendar_event = insert(:calendar_event)
       conn = get conn, "/calendar_events/#{calendar_event.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -166,7 +166,7 @@ defmodule HelheimWeb.CalendarEventControllerTest do
 
     test "it redirects to the sign in page", %{conn: conn, calendar_event: calendar_event} do
       conn = get conn, "/calendar_events/#{calendar_event.id}/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -208,7 +208,7 @@ defmodule HelheimWeb.CalendarEventControllerTest do
 
     test "it does not update the event and instead redirects to the sign in page", %{conn: conn, calendar_event: calendar_event} do
       conn = put conn, "/calendar_events/#{calendar_event.id}", calendar_event: @valid_attrs
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       updated_calendar_event = Repo.get(CalendarEvent, calendar_event.id)
       refute updated_calendar_event.title == @valid_attrs.title
     end
@@ -248,7 +248,7 @@ defmodule HelheimWeb.CalendarEventControllerTest do
 
     test "it does not delete the blog post and instead redirects to the sign in page", %{conn: conn, calendar_event: calendar_event} do
       conn = delete conn, "/calendar_events/#{calendar_event.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       assert Repo.get(CalendarEvent, calendar_event.id)
     end
   end

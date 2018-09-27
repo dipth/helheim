@@ -33,7 +33,7 @@ defmodule HelheimWeb.BlockControllerTest do
   describe "index/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/blocks"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -65,7 +65,7 @@ defmodule HelheimWeb.BlockControllerTest do
   describe "show/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/profiles/1/block"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -90,7 +90,7 @@ defmodule HelheimWeb.BlockControllerTest do
 
       blockee = insert(:user)
       conn    = post conn, "/profiles/#{blockee.id}/block"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -115,7 +115,7 @@ defmodule HelheimWeb.BlockControllerTest do
 
       blockee = insert(:user)
       conn    = delete conn, "/profiles/#{blockee.id}/block"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

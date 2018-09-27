@@ -68,7 +68,7 @@ defmodule HelheimWeb.PrivateMessageControllerTest do
 
     test "it redirects to the login page", %{conn: conn, partner: partner} do
       conn = post conn, "/private_conversations/#{partner.id}/messages", private_message: @post_attrs
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 

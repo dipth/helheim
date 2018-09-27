@@ -96,7 +96,7 @@ defmodule HelheimWeb.NotificationControllerTest do
       ]) do
         notification = insert(:notification)
         conn = get conn, "/notifications/#{notification.id}"
-        assert redirected_to(conn) == session_path(conn, :new)
+        assert redirected_to(conn) =~ session_path(conn, :new)
       end
     end
   end

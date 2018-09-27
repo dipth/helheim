@@ -63,7 +63,7 @@ defmodule HelheimWeb.CommentControllerTest do
     test "it redirects to the login page", %{conn: conn} do
       profile = insert(:user)
       conn = get conn, "/profiles/#{profile.id}/comments"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -120,7 +120,7 @@ defmodule HelheimWeb.CommentControllerTest do
     test "it redirects to the login page", %{conn: conn} do
       profile = insert(:user)
       conn    = post conn, "/profiles/#{profile.id}/comments", comment: @comment_attrs
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -178,7 +178,7 @@ defmodule HelheimWeb.CommentControllerTest do
     test "it redirects to the login page", %{conn: conn} do
       blog_post = insert(:blog_post)
       conn      = post conn, "/blog_posts/#{blog_post.id}/comments", comment: @comment_attrs
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -237,7 +237,7 @@ defmodule HelheimWeb.CommentControllerTest do
     test "it redirects to the login page", %{conn: conn} do
       photo = insert(:photo)
       conn  = post conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/comments", comment: @comment_attrs
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -286,7 +286,7 @@ defmodule HelheimWeb.CommentControllerTest do
     test "it redirects to the login page", %{conn: conn} do
       calendar_event = insert(:calendar_event)
       conn           = post conn, "/calendar_events/#{calendar_event.id}/comments", comment: @comment_attrs
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -339,7 +339,7 @@ defmodule HelheimWeb.CommentControllerTest do
       comment = insert(:profile_comment)
       profile = comment.profile
       conn  = get conn, "/profiles/#{profile.id}/comments/#{comment.id}/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -392,7 +392,7 @@ defmodule HelheimWeb.CommentControllerTest do
       comment = insert(:blog_post_comment)
       blog_post = comment.blog_post
       conn  = get conn, "/blog_posts/#{blog_post.id}/comments/#{comment.id}/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -450,7 +450,7 @@ defmodule HelheimWeb.CommentControllerTest do
       photo = comment.photo
       album = photo.photo_album
       conn  = get conn, "/photo_albums/#{album.id}/photos/#{photo.id}/comments/#{comment.id}/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -503,7 +503,7 @@ defmodule HelheimWeb.CommentControllerTest do
       comment        = insert(:calendar_event_comment)
       calendar_event = comment.calendar_event
       conn           = get conn, "/calendar_events/#{calendar_event.id}/comments/#{comment.id}/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -579,7 +579,7 @@ defmodule HelheimWeb.CommentControllerTest do
       profile = comment.profile
       conn    = put conn, "/profiles/#{profile.id}/comments/#{comment.id}", comment: @comment_attrs
       comment = Repo.one(Comment)
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       assert comment.body        == "Before"
     end
   end
@@ -656,7 +656,7 @@ defmodule HelheimWeb.CommentControllerTest do
       blog_post = comment.blog_post
       conn    = put conn, "/blog_posts/#{blog_post.id}/comments/#{comment.id}", comment: @comment_attrs
       comment = Repo.one(Comment)
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       assert comment.body        == "Before"
     end
   end
@@ -739,7 +739,7 @@ defmodule HelheimWeb.CommentControllerTest do
       album   = photo.photo_album
       conn    = put conn, "/photo_albums/#{album.id}/photos/#{photo.id}/comments/#{comment.id}", comment: @comment_attrs
       comment = Repo.one(Comment)
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       assert comment.body        == "Before"
     end
   end
@@ -816,7 +816,7 @@ defmodule HelheimWeb.CommentControllerTest do
       calendar_event = comment.calendar_event
       conn    = put conn, "/calendar_events/#{calendar_event.id}/comments/#{comment.id}", comment: @comment_attrs
       comment = Repo.one(Comment)
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       assert comment.body        == "Before"
     end
   end
@@ -857,7 +857,7 @@ defmodule HelheimWeb.CommentControllerTest do
 
       comment = insert(:blog_post_comment)
       conn = delete conn, "/comments/#{comment.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

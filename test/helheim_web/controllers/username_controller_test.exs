@@ -16,7 +16,7 @@ defmodule HelheimWeb.UsernameControllerTest do
   describe "index/2 when not signed in" do
     test "it redirects to the login page", %{conn: conn} do
       conn = get conn, "/usernames"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -42,12 +42,12 @@ defmodule HelheimWeb.UsernameControllerTest do
     test "it redirects to the login page when specifying an existing username", %{conn: conn} do
       user = insert(:user)
       conn = get conn, "/usernames/#{user.username}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
 
     test "it redirects to the login page when specifying a non-existing username", %{conn: conn} do
       conn = get conn, "/usernames/foo"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

@@ -55,7 +55,7 @@ defmodule HelheimWeb.VisitorLogEntryControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       user = insert(:user)
       conn = get conn, "/profiles/#{user.id}/visitor_log_entries"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -128,7 +128,7 @@ defmodule HelheimWeb.VisitorLogEntryControllerTest do
       user      = insert(:user)
       blog_post = insert(:blog_post, user: user)
       conn      = get conn, "/profiles/#{user.id}/blog_posts/#{blog_post.id}/visitor_log_entries"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -201,7 +201,7 @@ defmodule HelheimWeb.VisitorLogEntryControllerTest do
       user        = insert(:user)
       photo_album = insert(:photo_album, user: user)
       conn        = get conn, "/profiles/#{user.id}/photo_albums/#{photo_album.id}/visitor_log_entries"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -299,7 +299,7 @@ defmodule HelheimWeb.VisitorLogEntryControllerTest do
       photo_album = insert(:photo_album, user: user)
       photo       = insert(:photo, photo_album: photo_album)
       conn        = get conn, "/profiles/#{user.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}/visitor_log_entries"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 end

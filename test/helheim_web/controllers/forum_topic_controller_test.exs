@@ -37,7 +37,7 @@ defmodule HelheimWeb.ForumTopicControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       forum = insert(:forum)
       conn  = get conn, "/forums/#{forum.id}/forum_topics/new"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -85,7 +85,7 @@ defmodule HelheimWeb.ForumTopicControllerTest do
     test "it does not create a forum topic but redirects to the sign in page", %{conn: conn} do
       forum = insert(:forum)
       conn  = post conn, "/forums/#{forum.id}/forum_topics", forum_topic: @valid_attrs
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       refute Repo.one(ForumTopic)
     end
   end
@@ -175,7 +175,7 @@ defmodule HelheimWeb.ForumTopicControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       topic = insert(:forum_topic)
       conn  = get conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -228,7 +228,7 @@ defmodule HelheimWeb.ForumTopicControllerTest do
       topic = insert(:forum_topic)
       forum = topic.forum
       conn  = get conn, "/forums/#{forum.id}/forum_topics/#{topic.id}/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -309,7 +309,7 @@ defmodule HelheimWeb.ForumTopicControllerTest do
       forum = topic.forum
       conn  = put conn, "/forums/#{forum.id}/forum_topics/#{topic.id}", forum_topic: @valid_attrs
       topic = Repo.one(ForumTopic)
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       assert topic.title         == "Before"
       assert topic.body          == "Edit"
     end

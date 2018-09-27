@@ -111,7 +111,7 @@ defmodule HelheimWeb.PhotoControllerTest do
   describe "index/2 when not signed in" do
     test "it redirects to the sign in page", %{conn: conn} do
       conn = get conn, "/photos"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -385,7 +385,7 @@ defmodule HelheimWeb.PhotoControllerTest do
       photo_album = insert(:photo_album)
       photo       = create_photo(photo_album)
       conn        = get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -430,7 +430,7 @@ defmodule HelheimWeb.PhotoControllerTest do
       photo_album = insert(:photo_album)
       photo       = create_photo(photo_album)
       conn        = get conn, "/photo_albums/#{photo_album.id}/photos/#{photo.id}/edit"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end
 
@@ -501,7 +501,7 @@ defmodule HelheimWeb.PhotoControllerTest do
       photo       = create_photo(photo_album, %{title: "Foo", description: "Bar"})
       conn        = put conn, "/photo_albums/#{photo_album.id}/photos/#{photo.id}", photo: @valid_attrs
       photo       = Repo.get(Photo, photo.id)
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       assert photo.title         == "Foo"
       assert photo.description   == "Bar"
     end
@@ -561,7 +561,7 @@ defmodule HelheimWeb.PhotoControllerTest do
       photo       = create_photo(photo_album)
       conn        = delete conn, "/photo_albums/#{photo_album.id}/photos/#{photo.id}"
 
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       refute called Photo.delete!(photo)
     end
   end

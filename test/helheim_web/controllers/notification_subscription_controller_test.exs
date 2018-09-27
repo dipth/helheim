@@ -87,7 +87,7 @@ defmodule HelheimWeb.NotificationSubscriptionControllerTest do
 
     test "does not create any subscription and instead redirects to the login page", %{conn: conn, profile: profile} do
       conn = put conn, "/profiles/#{profile.id}/notification_subscription", type: @type_attr, enabled: "1"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       refute Repo.one(NotificationSubscription)
     end
   end
@@ -175,7 +175,7 @@ defmodule HelheimWeb.NotificationSubscriptionControllerTest do
 
     test "does not create any subscription and instead redirects to the login page", %{conn: conn, blog_post: blog_post} do
       conn = put conn, "/blog_posts/#{blog_post.id}/notification_subscription", type: @type_attr, enabled: "1"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       refute Repo.one(NotificationSubscription)
     end
   end
@@ -263,7 +263,7 @@ defmodule HelheimWeb.NotificationSubscriptionControllerTest do
 
     test "does not create any subscription and instead redirects to the login page", %{conn: conn, forum_topic: forum_topic} do
       conn = put conn, "/forum_topics/#{forum_topic.id}/notification_subscription", type: "forum_reply", enabled: "1"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       refute Repo.one(NotificationSubscription)
     end
   end
@@ -351,7 +351,7 @@ defmodule HelheimWeb.NotificationSubscriptionControllerTest do
 
     test "does not create any subscription and instead redirects to the login page", %{conn: conn, photo: photo} do
       conn = put conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/notification_subscription", type: @type_attr, enabled: "1"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       refute Repo.one(NotificationSubscription)
     end
   end
@@ -439,7 +439,7 @@ defmodule HelheimWeb.NotificationSubscriptionControllerTest do
 
     test "does not create any subscription and instead redirects to the login page", %{conn: conn, calendar_event: calendar_event} do
       conn = put conn, "/calendar_events/#{calendar_event.id}/notification_subscription", type: @type_attr, enabled: "1"
-      assert redirected_to(conn) == session_path(conn, :new)
+      assert redirected_to(conn) =~ session_path(conn, :new)
       refute Repo.one(NotificationSubscription)
     end
   end
