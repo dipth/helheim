@@ -34,6 +34,12 @@ defmodule HelheimWeb.Router do
   end
 
   scope "/", HelheimWeb do
+    pipe_through [:browser] # Use the default browser stack
+
+    resources "/sessions", SessionController, only: [:new, :create]
+  end
+
+  scope "/", HelheimWeb do
     pipe_through [:browser, :auth] # Use the default browser stack
 
     get "/", PageController, :index
@@ -42,7 +48,6 @@ defmodule HelheimWeb.Router do
     get "/debug", PageController, :debug
     resources "/registrations", RegistrationController, only: [:new, :create]
     resources "/confirmations", ConfirmationController, only: [:new, :create, :show]
-    resources "/sessions", SessionController, only: [:new, :create]
     resources "/password_resets", PasswordResetController, only: [:new, :create, :show, :update]
   end
 
