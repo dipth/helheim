@@ -2,7 +2,7 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :helheim, Helheim.Endpoint,
+config :helheim, HelheimWeb.Endpoint,
   http: [port: 4001],
   server: true
 
@@ -23,7 +23,7 @@ config :helheim, Helheim.Repo,
   pool_timeout: 60_000
 
 # Guardian configuration
-config :guardian, Guardian,
+config :helheim, Helheim.Auth.Guardian,
   secret_key: "MHtXjXB4jXOtVQAJE39RxEaHOPj8jJiAI5HLW+p8xC1IeUcnc+T81t9KiC/9a4wh"
 
 # Make password hashing faster during tests

@@ -1,0 +1,35 @@
+<ul class="nav navbar-nav ml-auto" id="navbar">
+  <%= render HelheimWeb.PrivateConversationView, "menu_item.html", conn: @conn %>
+  <%= render HelheimWeb.NotificationView, "menu_item.html", conn: @conn %>
+  <%= render HelheimWeb.FriendshipView, "menu_item.html", conn: @conn %>
+  <li class="nav-item dropdown nav-item-user-menu">
+    <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      <img src="<%= HelheimWeb.Avatar.url({Guardian.Plug.current_resource(@conn).avatar, Guardian.Plug.current_resource(@conn)}, :tiny) %>" class="img-avatar" alt="<%= Guardian.Plug.current_resource(@conn).username %>">
+      <%= count_badge(@conn, %{notifications: true, unread_messages: true, pending_friendships: true, class: "hidden-lg-up"}) %>
+      <span class="hidden-md-down"><%= Guardian.Plug.current_resource(@conn).username %></span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+      <div class="hidden-lg-up dropdown-menu-unread-messages">
+        <%= render HelheimWeb.PrivateConversationView, "dropdown_items.html", conn: @conn %>
+      </div>
+      <div class="hidden-lg-up dropdown-menu-notifications">
+        <%= render HelheimWeb.NotificationView, "dropdown_items.html", conn: @conn %>
+      </div>
+      <div class="hidden-lg-up dropdown-menu-friendship-requests">
+        <%= render HelheimWeb.FriendshipView, "dropdown_items.html", conn: @conn %>
+      </div>
+      <div class="dropdown-header text-center">
+        <strong><%= gettext("Settings") %></strong>
+      </div>
+
+      <a class="dropdown-item" href="<%= profile_path(@conn, :edit) %>"><i class="fa fa-id-card"></i> <%= gettext("Profile") %></a>
+      <a class="dropdown-item" href="<%= account_path(@conn, :edit) %>"><i class="fa fa-user"></i> <%= gettext("Account") %></a>
+      <a class="dropdown-item" href="<%= preference_path(@conn, :edit) %>"><i class="fa fa-sliders"></i> <%= gettext("Preferences") %></a>
+      <a class="dropdown-item" href="<%= block_path(@conn, :index) %>"><i class="fa fa-lock"></i> <%= gettext("Blocks") %></a>
+      <a class="dropdown-item" href="/sessions/sign_out"><i class="fa fa-lock"></i> <%= gettext "Sign Out" %></a>
+    </div>
+  </li>
+  <li class="nav-item hidden-md-down">
+    &nbsp;
+  </li>
+</ul>

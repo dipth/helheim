@@ -1,2 +1,0 @@
-$('#photos').append('<%= escape_javascript render("thumb.html", conn: @conn, user: @user, photo_album: @photo_album, photo: @photo) %>');
-$('#photo-space-used').replaceWith('<%= escape_javascript render(Helheim.PhotoAlbumView, "space_used.html", conn: @conn, user: @user) %>');

@@ -1,4 +1,4 @@
-defmodule Helheim.Plug.LoadUnreadPrivateConversations do
+defmodule HelheimWeb.Plug.LoadUnreadPrivateConversations do
   import Plug.Conn
   alias Helheim.PrivateMessage
 

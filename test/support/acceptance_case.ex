@@ -1,4 +1,4 @@
-defmodule Helheim.AcceptanceCase do
+defmodule HelheimWeb.AcceptanceCase do
   use ExUnit.CaseTemplate
 
   using do
@@ -10,8 +10,8 @@ defmodule Helheim.AcceptanceCase do
       import Ecto.Changeset
       import Ecto.Query
 
-      import Helheim.Router.Helpers
-      import Helheim.Gettext
+      import HelheimWeb.Router.Helpers
+      import HelheimWeb.Gettext
       import Helheim.Factory
 
       defp sign_in(session, user) do
@@ -31,7 +31,7 @@ defmodule Helheim.AcceptanceCase do
   end
 
   setup tags do
-    Gettext.put_locale(Helheim.Gettext, "da")
+    Gettext.put_locale(HelheimWeb.Gettext, "da")
 
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Helheim.Repo, ownership_timeout: 60000)
 

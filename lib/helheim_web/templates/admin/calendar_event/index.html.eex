@@ -1,0 +1,29 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><i class="fa fa-lock"></i> <%= gettext("Administration") %></li>
+  <li class="breadcrumb-item active"><%= gettext("Event calendar") %></li>
+</ol>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th><%= gettext "Title" %></th>
+      <th><%= gettext "When" %></th>
+      <th><%= gettext "User" %></th>
+      <th><%= gettext "Inserted at" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for calendar_event <- @calendar_events do %>
+      <tr>
+        <th scope="row"><%= calendar_event.id %></th>
+        <td><%= link calendar_event.title, to: admin_calendar_event_path(@conn, :show, calendar_event) %></td>
+        <td><%= HelheimWeb.CalendarEventView.calendar_event_timespan calendar_event %></td>
+        <td><%= username calendar_event.user, true %></td>
+        <td><%= time_ago_in_words calendar_event.inserted_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= pagination_links @conn, @calendar_events %>

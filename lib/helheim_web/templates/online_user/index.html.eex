@@ -1,0 +1,25 @@
+<h1 class="mt-1">
+  <%= ngettext "There is currently %{count} online user", "There are currently %{count} online users", @count %>
+</h1>
+
+<p>
+  <%= gettext "This list shows whoever is currently online, meaning that they have the site open in a browser-tab" %>.<br>
+</p>
+
+<hr>
+
+<div class="card-group card-group-photos">
+  <%= for user <- @users do %>
+    <div class="card">
+      <%= link to: public_profile_path(@conn, :show, user) do %>
+        <%= img_tag(HelheimWeb.Avatar.url({user.avatar, user}, :thumb), class: "card-img-top img-fluid img-photo") %>
+      <% end %>
+      <div class="card-block">
+        <p class="card-text mb-0">
+          <strong><%= user.username %></strong><br>
+          <small class="font-italic"><%= user.location || "..." %></small>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>

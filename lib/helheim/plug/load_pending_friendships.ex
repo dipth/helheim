@@ -1,4 +1,4 @@
-defmodule Helheim.Plug.LoadPendingFriendships do
+defmodule HelheimWeb.Plug.LoadPendingFriendships do
   import Plug.Conn
   alias Helheim.Friendship
 

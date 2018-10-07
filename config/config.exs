@@ -10,28 +10,27 @@ config :helheim,
   ecto_repos: [Helheim.Repo]
 
 # Configures the endpoint
-config :helheim, Helheim.Endpoint,
+config :helheim, HelheimWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "JXAQU/sDIXwY//LkAGR99f22MNDD4pO0vJUFeJFnX1JBTRsnG+UD/EbZpjVGoZb6",
-  render_errors: [view: Helheim.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: HelheimWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Helheim.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+  metadata: [:user_id]
 
 # Configure guardian
-config :guardian, Guardian,
+config :helheim, Helheim.Auth.Guardian,
   issuer: "Helheim",
   ttl: { 1, :day },
   token_ttl: %{
     "refresh" => {30, :days},
     "access" =>  {1, :days}
   },
-  verify_issuer: true,
-  serializer: Helheim.GuardianSerializer
+  verify_issuer: true
 
 # Configure Sentry
 config :sentry,

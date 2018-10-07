@@ -1,4 +1,4 @@
-defmodule Helheim.Plug.EnforceBan do
+defmodule HelheimWeb.Plug.EnforceBan do
   import Plug.Conn
   alias Helheim.User
 

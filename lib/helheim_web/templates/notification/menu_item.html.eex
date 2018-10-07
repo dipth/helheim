@@ -1,0 +1,9 @@
+<li class="nav-item dropdown hidden-md-down" id="nav-item-notifications">
+  <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="nav-link-notifications">
+    <i class="fa fa-bell"></i>
+    <%= HelheimWeb.NavbarView.count_badge(@conn, %{notifications: true}) %>
+  </a>
+  <div class="dropdown-menu dropdown-menu-right dropdown-menu-notifications">
+    <%= render "dropdown_items.html", conn: @conn %>
+  </div>
+</li>

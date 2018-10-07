@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <meta name="keyword" content="">
+
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+      <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+      <link rel="manifest" href="/manifest.json">
+      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+      <meta name="theme-color" content="#ffffff">
+
+      <title><%= gettext("Helheim") %></title>
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+      <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+  <body class="app app-signed-out flex-row align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+
+        <div class="col-md-8">
+          <div class="text-center mb-2">
+            <a href="/">
+              <img src="<%= static_path(@conn, "/images/logo2.png") %>" alt="<%= gettext("Helheim") %>" class="mb-1"><br>
+              <img src="<%= static_path(@conn, "/images/logo.png") %>" alt="<%= gettext("Helheim") %>" class="logo-text">
+            </a>
+          </div>
+
+          <%= render "alerts.html", conn: @conn %>
+          <%= render @view_module, @view_template, assigns %>
+        </div>
+
+      </div>
+    </div>
+
+    <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script>require("js/app").AppSpecial.run()</script>
+  </body>
+</html>

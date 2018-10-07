@@ -27,7 +27,6 @@ defmodule Helheim.Scrubber do
   def scrub({"img", attributes, _}) do
     attributes = scrub_attributes("img", attributes)
     attributes = attributes ++ [{"class", "img-fluid rounded mx-auto d-block"}]
-    IO.inspect attributes
     {"img", attributes, []}
   end
 
