@@ -151,6 +151,11 @@ form.link {
       padding: 0.5rem;
     }
 
+    .username {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .card-text {
       font-size: 0.8em;
       margin-top: 0.5rem;
