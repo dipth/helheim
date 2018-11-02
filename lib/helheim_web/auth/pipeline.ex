@@ -4,7 +4,7 @@ defmodule HelheimWeb.Auth.Pipeline do
     error_handler: HelheimWeb.Auth.ErrorHandler,
     module: Helheim.Auth.Guardian
 
-  # If there is a remember-me cokkie, validate it
+  # If there is a remember-me cookie, validate it
   plug Guardian.Plug.VerifyCookie, claims: %{"typ" => "refresh"}
 
   # If there is a session token, validate it
