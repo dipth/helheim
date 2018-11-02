@@ -18,6 +18,7 @@ defmodule HelheimWeb.Router do
 
   pipeline :ensure_auth do
     plug Guardian.Plug.EnsureAuthenticated
+    plug HelheimWeb.Plug.TrackLogin
     plug HelheimWeb.Plug.LoadNotifications
     plug HelheimWeb.Plug.LoadUnreadPrivateConversations
     plug HelheimWeb.Plug.LoadPendingFriendships

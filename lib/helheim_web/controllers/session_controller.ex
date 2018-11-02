@@ -20,6 +20,7 @@ defmodule HelheimWeb.SessionController do
     conn
     |> Guardian.Plug.sign_out()
     |> delete_resp_cookie("guardian_default_token")
+    |> put_session(:id, nil)
     |> put_flash(:success, gettext("See you later!"))
     |> redirect(to: page_path(conn, :index))
   end

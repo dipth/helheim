@@ -324,38 +324,6 @@ defmodule Helheim.UserTest do
     end
   end
 
-  describe "track_login!/2" do
-    test "it sets last_login_at to the current utc time" do
-      user = insert(:user)
-      {:ok, user} = User.track_login!(user, "127.0.0.1")
-      {:ok, time_diff, _, _} = Calendar.DateTime.diff(user.last_login_at, DateTime.utc_now)
-      assert time_diff < 10
-    end
-
-    test "it sets last_login_ip to the specified ip address" do
-      user = insert(:user)
-      {:ok, user} = User.track_login!(user, "127.0.0.1")
-      assert user.last_login_ip == "127.0.0.1"
-    end
-
-    test "it copies the existing last_login_at to previous_login_at" do
-      existing_last_login_at = Timex.shift(Timex.now, days: -10)
-      user = insert(:user, last_login_at: existing_last_login_at)
-      {:ok, user} = User.track_login!(user, "127.0.0.1")
-      assert user.previous_login_at == existing_last_login_at
-    end
-
-    test "it copies the existing last_login_ip to previous_login_ip" do
-      user = insert(:user, last_login_ip: "192.168.0.1")
-      {:ok, user} = User.track_login!(user, "127.0.0.1")
-      assert user.previous_login_ip == "192.168.0.1"
-    end
-
-    test "correctly handles an edge case where the specified user is nil" do
-      {:ok, nil} = User.track_login!(nil, "127.0.0.1")
-    end
-  end
-
   describe "recently_logged_in/1" do
     test "it orders users who have recently logged in before older ones" do
       user1 = insert(:user, last_login_at: Timex.shift(Timex.now, minutes: -1))
