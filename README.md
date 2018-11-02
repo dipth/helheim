@@ -16,8 +16,8 @@ To start your Phoenix app:
 
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Alternatively load a database dump with `mix data.import PATH_TO_DUMP_FILE`
-  * Install Node.js dependencies with `cd assets && npm install`
+  * Optionally load a database dump with `mix data.import PATH_TO_DUMP_FILE`
+  * Install frontend dependencies with `cd assets && yarn`
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
