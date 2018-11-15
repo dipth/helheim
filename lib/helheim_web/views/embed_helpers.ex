@@ -22,6 +22,9 @@ defmodule HelheimWeb.EmbedHelpers do
   @instagram_hosts ["instagram.com"]
   @instagram_id_regex ~r/\/p\/(.+)\//
 
+  @gfycat_hosts ["gfycat.com"]
+  @gfycat_id_regex ~r/gfycat.com\/(.+)/i
+
   @helheim_cloudfront_hosts ["d3ki6vg87hrfvz.cloudfront.net"]
 
   def replace_urls(content) do
@@ -63,6 +66,8 @@ defmodule HelheimWeb.EmbedHelpers do
         replace_spotify(match)
       String.contains?(host, @instagram_hosts) ->
         replace_instagram(match)
+      String.contains?(host, @gfycat_hosts) ->
+        replace_gfycat(match)
       true ->
         autolink(match)
     end
@@ -151,6 +156,20 @@ defmodule HelheimWeb.EmbedHelpers do
       <a href="#{match}" target="_blank">
         <img src="https://instagram.com/p/#{id}/media/?size=t" class="img-fluid" alt="">
       </a>
+      """
+    rescue
+      _ -> autolink(match)
+    end
+  end
+
+  def replace_gfycat(nil), do: ""
+  def replace_gfycat(match) do
+    try do
+      [_,id] = Regex.run(@gfycat_id_regex, match)
+      """
+      <div style='position:relative; padding-bottom:42.50%'>
+        <iframe src='https://gfycat.com/ifr/#{id}' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe>
+      </div>
       """
     rescue
       _ -> autolink(match)
