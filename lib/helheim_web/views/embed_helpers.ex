@@ -2,7 +2,7 @@ defmodule HelheimWeb.EmbedHelpers do
   import Phoenix.HTML
   import Phoenix.HTML.Format
 
-  @url_regex ~r/(?<!["])(?:https?:\/\/)(?:[a-z0-9]+\.)?[a-z0-9]+\.(?:dk|com|net|de|org|be|io)(?::\d+)?\/?(?:[a-z0-9-_\/?%&=\.]+)?(?!["])/i
+  @url_regex ~r/(?<!["])(?:https?:\/\/)(?:[a-z0-9]+\.)?[a-z0-9]+\.(?:dk|com|net|de|org|be|io)(?::\d+)?\/?(?:[a-z0-9-_\/?%&=;\.]+)?(?!["])/i
 
   @youtube_hosts ["youtube.com", "youtu.be"]
   @youtube_id_regex ~r/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/i
