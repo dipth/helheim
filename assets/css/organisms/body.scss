@@ -1,0 +1,46 @@
+html {
+  height: 100%;
+  background-color: $black-bis;
+}
+
+body {
+  height: 100%;
+  background-color: $black-bis;
+  color: $grey-lighter;
+
+  // Allow the current breakpoint to be read from javascript
+  @include mobile() {
+    &:before {
+      content: "mobile";
+      display: none;
+    }
+  }
+
+  @include tablet() {
+    &:before {
+      content: "tablet";
+      display: none;
+    }
+  }
+
+  @include desktop() {
+    &:before {
+      content: "desktop";
+      display: none;
+    }
+  }
+
+  @include widescreen() {
+    &:before {
+      content: "widescreen";
+      display: none;
+    }
+  }
+
+  @include fullhd() {
+    &:before {
+      content: "fullhd";
+      display: none;
+    }
+  }
+}
