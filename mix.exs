@@ -85,16 +85,10 @@ defmodule Helheim.Mixfile do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: [
-        "assets.compile --quiet",
         "ecto.create --quiet",
         "ecto.migrate",
         "test"
-      ],
-      "assets.compile": &compile_assets/1
+      ]
     ]
-  end
-
-  defp compile_assets(_) do
-    Mix.shell.cmd("cd assets && webpack")
   end
 end
