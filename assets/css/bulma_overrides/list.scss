@@ -1,0 +1,19 @@
+$list-background-color: transparent;
+$list-shadow: none;
+$list-item-border: none;
+
+.list .list-item {
+  margin-bottom: 1rem;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.list .list-item small {
+  color: $grey-dark;
+}
+
+.list .list-item .subtitle {
+  margin-bottom: 0.25rem;
+}

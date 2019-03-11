@@ -1,0 +1,15 @@
+$card-background-color: transparent;
+$card-color: $grey-light;
+$card-shadow: none;
+
+.card {
+  margin-bottom: 2rem;
+}
+
+.card .card-content {
+  padding: 0;
+}
+
+.card .card-content small {
+  color: $grey-dark;
+}
