@@ -95,6 +95,6 @@ defmodule Helheim.Mixfile do
   end
 
   defp compile_assets(_) do
-    Mix.shell.cmd("cd assets && brunch build")
+    Mix.shell.cmd("cd assets && webpack")
   end
 end

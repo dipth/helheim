@@ -8,7 +8,6 @@ Prerequisites:
   * Install Hex package manager with `mix local.hex`
   * Install Phoenix with `mix archive.install https://github.com/phoenixframework/archives/raw/master/phx_new.ez`
   * Update to the latest version of NPM with `npm install npm@latest -g`
-  * Install brunch with `npm install -g brunch`
   * Install Phantom.js with `npm install -g phantomjs`
   * Create a postgres user with `createuser -d -P -s postgres` - when prompted for the password, choose `postgres`
 

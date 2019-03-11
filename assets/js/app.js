@@ -1,73 +1,19 @@
-// Brunch automatically concatenates all files in your
-// watched paths. Those paths can be configured at
-// config.paths.watched in "brunch-config.js".
-//
-// However, those files will only be executed if
-// explicitly imported. The only exception are files
-// in vendor, which are never wrapped in imports and
-// therefore are always executed.
+// We need to import the CSS so that webpack will load it.
+// The MiniCssExtractPlugin is used to separate it out into
+// its own CSS file.
+import css from "../css/app.scss"
 
+// webpack automatically bundles all modules in your
+// entry points. Those entry points can be configured
+// in "webpack.config.js".
+//
 // Import dependencies
 //
-// If you no longer want to use a dependency, remember
-// to also remove its path from "config.paths.watched".
-// import "phoenix_html"
+import "phoenix_html"
 
 // Import local files
 //
-// Local files can be imported directly using relative
-// paths "./socket" or full ones "web/static/js/socket".
+// Local files can be imported directly using relative paths, for example:
+// import socket from "./socket"
 
-import 'intl/locale-data/jsonp/da.js';
-
-import moment from 'moment';
-import tz from 'moment-timezone';
-import 'moment/locale/da';
-
-import { Leaf } from "./leaf";
-import { BootstrapStuff } from "./bootstrap_stuff";
-import { ProfileSettings } from "./profile_settings";
-import { BlogPostForm } from "./blog_post_form";
-import { Notifications } from "./notifications";
-import { Status } from "./status";
-import { SelectWithCustom } from "./select_with_custom";
-import { PhotoUpload } from "./photo_upload";
-import { AdminTermsForm } from "./admin_terms_form";
-import { Embeds } from "./embeds/embeds";
-import { NotificationsSwitch } from "./notifications_switch";
-import { PhotoSorter } from "./photo_sorter";
-import { MentionableInput } from "./mentionable";
-import { Mentionable } from "./mentionable";
-import { PopoverConfirmable } from "./popover_confirmable";
-import { DonationForm } from "./donation_form";
-import { CalendarEventForm } from "./calendar_event_form";
-import { PreferencesForm } from "./preferences_form";
-
-export var App = {
-  run: function(){
-    Embeds.run();
-    Leaf.run();
-    BootstrapStuff.run();
-    ProfileSettings.run();
-    BlogPostForm.run();
-    Notifications.run();
-    Status.run();
-    SelectWithCustom.run();
-    PhotoUpload.run();
-    AdminTermsForm.run();
-    NotificationsSwitch.run();
-    PhotoSorter.run();
-    MentionableInput.run();
-    Mentionable.run();
-    PopoverConfirmable.run();
-    DonationForm.run();
-    CalendarEventForm.run();
-    PreferencesForm.run();
-  }
-}
-
-export var AppSpecial = {
-  run: function(){
-    Leaf.run();
-  }
-}
+console.log('READY!');
