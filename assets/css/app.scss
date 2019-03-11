@@ -1,1 +1,11 @@
-body { background-color: aquamarine };
+// Bulma
+@import "~bulma/sass/utilities/_all.sass";
+@import "./bulma_overrides/_all.scss";
+@import "~bulma/bulma.sass";
+@import '~bulma-extensions/bulma-badge/src/sass/index.sass';
+
+// Variables
+@import "./_variables.scss";
+
+// Atoms, Molecules and Organisms
+@import "./molecules/_all.scss";

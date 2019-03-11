@@ -938,11 +938,6 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
 
-atoa@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/atoa/-/atoa-1.0.0.tgz#0cc0e91a480e738f923ebc103676471779b34a49"
-  integrity sha1-DMDpGkgOc4+SPrwQNnZHF3mzSkk=
-
 atob@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
@@ -1196,6 +1191,16 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
+
+bulma-extensions@^6.2.2:
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/bulma-extensions/-/bulma-extensions-6.2.2.tgz#27d52be9ef3a5b15d04144ff994cb2f94c8f038b"
+  integrity sha512-HQBQbPCjpDusOEk1WPqMnIXb462X62rWS3SZ3KZqh3E7rdLbgCr/50wfZ7V8J8XImhSGWL541bngFGQ6gJJadg==
+
+bulma@^0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.4.tgz#7e74512e9118d9799021339e67e365ee0ac4f3f9"
+  integrity sha512-krG2rP6eAX1WE0sf6O0SC/FUVSOBX4m1PBC2+GKLpb2pX0qanaDqcv9U2nu75egFrsHkI0zdWYuk/oGwoszVWg==
 
 cacache@^10.0.4:
   version "10.0.4"
@@ -1553,14 +1558,6 @@ constants-browserify@^1.0.0:
   resolved "https://registry.yarnpkg.com/constants-browserify/-/constants-browserify-1.0.0.tgz#c20b96d8c617748aaf1c16021760cd27fcb8cb75"
   integrity sha1-wguW2MYXdIqvHBYCF2DNJ/y4y3U=
 
-contra@1.9.4:
-  version "1.9.4"
-  resolved "https://registry.yarnpkg.com/contra/-/contra-1.9.4.tgz#f53bde42d7e5b5985cae4d99a8d610526de8f28d"
-  integrity sha1-9TveQtfltZhcrk2ZqNYQUm3o8o0=
-  dependencies:
-    atoa "1.0.0"
-    ticky "1.0.1"
-
 convert-source-map@^1.1.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.6.0.tgz#51b537a8c43e0f04dec1993bffcdd504e758ac20"
@@ -1653,13 +1650,6 @@ cross-spawn@^6.0.0, cross-spawn@^6.0.5:
     semver "^5.5.0"
     shebang-command "^1.2.0"
     which "^1.2.9"
-
-crossvent@1.5.4:
-  version "1.5.4"
-  resolved "https://registry.yarnpkg.com/crossvent/-/crossvent-1.5.4.tgz#da2c4f8f40c94782517bf2beec1044148194ab92"
-  integrity sha1-2ixPj0DJR4JRe/K+7BBEFIGUq5I=
-  dependencies:
-    custom-event "1.0.0"
 
 crypto-browserify@^3.11.0:
   version "3.12.0"
@@ -1757,11 +1747,6 @@ currently-unhandled@^0.4.1:
   integrity sha1-mI3zP+qxke95mmE2nddsF635V+o=
   dependencies:
     array-find-index "^1.0.1"
-
-custom-event@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/custom-event/-/custom-event-1.0.0.tgz#2e4628be19dc4b214b5c02630c5971e811618062"
-  integrity sha1-LkYovhncSyFLXAJjDFlx6BFhgGI=
 
 cyclist@~0.2.2:
   version "0.2.2"
@@ -1891,14 +1876,6 @@ domain-browser@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
   integrity sha512-jnjyiM6eRyZl2H+W8Q/zLMA481hzi0eszAaBUzIVnmYVDBbnLxVNnfu1HgEBvCbL+71FrxMl3E6lpKH7Ge3OXA==
-
-dragula@^3.7.2:
-  version "3.7.2"
-  resolved "https://registry.yarnpkg.com/dragula/-/dragula-3.7.2.tgz#4a35c9d3981ffac1a949c29ca7285058e87393ce"
-  integrity sha1-SjXJ05gf+sGpScKcpyhQWOhzk84=
-  dependencies:
-    contra "1.9.4"
-    crossvent "1.5.4"
 
 duplexify@^3.4.2, duplexify@^3.6.0:
   version "3.7.1"
@@ -2137,11 +2114,6 @@ fast-json-stable-stringify@^2.0.0:
   resolved "https://registry.yarnpkg.com/fast-json-stable-stringify/-/fast-json-stable-stringify-2.0.0.tgz#d5142c0caee6b1189f87d3a76111064f86c8bbf2"
   integrity sha1-1RQsDK7msRifh9OnYREGT4bIu/I=
 
-favico.js@^0.3.10:
-  version "0.3.10"
-  resolved "https://registry.yarnpkg.com/favico.js/-/favico.js-0.3.10.tgz#80586e27a117f24a8d51c18a99bdc714d4339301"
-  integrity sha1-gFhuJ6EX8kqNUcGKmb3HFNQzkwE=
-
 figgy-pudding@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/figgy-pudding/-/figgy-pudding-3.5.1.tgz#862470112901c727a0e495a80744bd5baa1d6790"
@@ -2206,11 +2178,6 @@ findup-sync@^2.0.0:
     is-glob "^3.1.0"
     micromatch "^3.0.4"
     resolve-dir "^1.0.1"
-
-flatpickr@^4.5.2:
-  version "4.5.2"
-  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.5.2.tgz#47c8ad472a096e5fb7e74b809b0703535383f20d"
-  integrity sha512-jDy4QYGpmiy7+Qk8QvKJ4spjDdxcx9cxMydmq1x427HkKWBw0qizLYeYM2F6tMcvvqGjU5VpJS55j4LnsaBblA==
 
 flatten@^1.0.2:
   version "1.0.2"
@@ -2679,11 +2646,6 @@ interpret@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.2.0.tgz#d5061a6224be58e8083985f5014d844359576296"
   integrity sha512-mT34yGKMNceBQUoVn7iCDKDntA7SC6gycMAWzGx1z/CMCTV7b2AAtXlo3nRyHZ1FelRkQbQjprHSYGwzLtkVbw==
-
-intl@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/intl/-/intl-1.2.5.tgz#82244a2190c4e419f8371f5aa34daa3420e2abde"
-  integrity sha1-giRKIZDE5Bn4Nx9ao02qNCDiq94=
 
 invariant@^2.2.2:
   version "2.2.4"
@@ -3407,18 +3369,6 @@ mixin-object@^2.0.1:
   integrity sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
   dependencies:
     minimist "0.0.8"
-
-moment-timezone@^0.5.21:
-  version "0.5.21"
-  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.21.tgz#3cba247d84492174dbf71de2a9848fa13207b845"
-  integrity sha512-j96bAh4otsgj3lKydm3K7kdtA3iKf2m6MY2iSYCzCm5a1zmHo1g+aK3068dDEeocLZQIS9kU8bsdQHLqEvgW0A==
-  dependencies:
-    moment ">= 2.9.0"
-
-"moment@>= 2.9.0", moment@^2.22.2:
-  version "2.22.2"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
-  integrity sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -5203,11 +5153,6 @@ through2@^2.0.0:
   dependencies:
     readable-stream "~2.3.6"
     xtend "~4.0.1"
-
-ticky@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/ticky/-/ticky-1.0.1.tgz#b7cfa71e768f1c9000c497b9151b30947c50e46d"
-  integrity sha1-t8+nHnaPHJAAxJe5FRswlHxQ5G0=
 
 timers-browserify@^2.0.4:
   version "2.0.10"
