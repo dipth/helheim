@@ -5,9 +5,11 @@ defmodule HelheimWeb.ProfileController do
   alias Helheim.Comment
   alias Helheim.Photo
   alias Helheim.ForumTopic
+  alias Helheim.UnicornService
 
   plug :scrub_get_params when action in [:index]
   plug :find_user when action in [:show]
+  plug :make_unicorn when action in [:show]
   plug HelheimWeb.Plug.EnforceBlock when action in [:show]
 
   def index(conn, params) do
@@ -58,13 +60,16 @@ defmodule HelheimWeb.ProfileController do
 
     Helheim.VisitorLogEntry.track! current_resource(conn), user
 
-    render conn, "show.html",
+    render conn, show_template(user),
       user: user,
       newest_blog_posts: newest_blog_posts,
       newest_comments: newest_comments,
       newest_photos: newest_photos,
       newest_forum_topics: newest_forum_topics
   end
+
+  defp show_template(%User{username: "rainbow_unicorn"}), do: "show_unicorn.html"
+  defp show_template(_), do: "show.html"
 
   def edit(conn, _params) do
     user = Guardian.Plug.current_resource(conn)
@@ -94,5 +99,16 @@ defmodule HelheimWeb.ProfileController do
     end
 
     assign conn, :user, user
+  end
+
+  defp make_unicorn(conn, _) do
+    case conn.assigns[:user] do
+      %{username: "rainbow_unicorn"} ->
+        user = Guardian.Plug.current_resource(conn)
+        {:ok, user} = UnicornService.call(user)
+        Guardian.Plug.put_current_resource(conn, user)
+      _ ->
+        conn
+    end
   end
 end

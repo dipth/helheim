@@ -189,6 +189,18 @@ defmodule Helheim.UserTest do
     end
   end
 
+  describe "unicorn?/1" do
+    test "it returns true if the unicorn_at field on the user contains a timestamp" do
+      user = insert(:user, unicorn_at: DateTime.utc_now)
+      assert User.unicorn?(user)
+    end
+
+    test "it returns false if the unicorn_at field on the user contains `nil`" do
+      user = insert(:user, unicorn_at: nil)
+      refute User.unicorn?(user)
+    end
+  end
+
   describe "delete/1" do
     test_with_mock "it calls PhotoAlbum.delete! for each photo album belonging to the user",
       PhotoAlbum, [:passthrough], [delete!: fn(_photo_album) -> {:ok} end] do

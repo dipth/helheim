@@ -24,7 +24,10 @@ exports.config = {
       }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: {
+        "css/app.css": /^(css\/non_unicorn)/,
+        "css/app_unicorn.css": /^(css\/unicorn)/
+      }
     },
     templates: {
       joinTo: "js/app.js"

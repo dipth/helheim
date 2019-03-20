@@ -1,0 +1,83 @@
+// Bootstrap overrides
+
+// Colors
+//
+// Grayscale and brand colors for use across Bootstrap.
+
+$gray-dark:                 #655396;
+$gray:                      #866ec7;
+$gray-light:                #bf9fee;
+$gray-lighter:              #f2c0ff;
+$gray-lightest:             #ffd7e8;
+
+$brand-primary:             #f54291;
+$brand-success:             #539666;
+$brand-info:                #538d96;
+$brand-warning:             #969253;
+$brand-danger:              #f54291;
+
+// Body
+//
+// Settings for the `<body>` element.
+$body-bg:  #ffebf4;
+$body-color: $gray-dark;
+
+// Links
+//
+// Style anchor elements.
+
+// $link-color:            $brand-primary;
+// $link-decoration:       none;
+// $link-hover-color:      darken($link-color, 15%);
+// $link-hover-decoration: underline;
+
+// Cards
+
+$card-bg:                  $gray-lightest;
+$card-border-color:        $gray;
+$card-cap-bg:              $gray-lightest;
+
+// List-groups
+
+$list-group-bg:                  $gray-lighter;
+$list-group-color:               $body-color;
+$list-group-link-color:          $body-color;
+$list-group-link-hover-color:    $gray-lightest;
+
+$list-group-hover-bg:            $gray-lightest;
+
+$list-group-link-color:          $gray;
+$list-group-link-heading-color:  $gray-dark;
+$list-group-link-hover-color:    $list-group-link-color;
+
+$list-group-link-active-color:   $list-group-color;
+$list-group-link-active-bg:      $gray-lighter;
+
+// Forms
+
+$input-bg: $gray-lighter;
+
+// Pagination
+
+$pagination-bg: $gray-dark;
+$pagination-color: $gray-lighter;
+$pagination-border-color: $gray-dark;
+
+$pagination-active-color: $gray-dark;
+$pagination-active-bg: $gray-lighter;
+$pagination-active-border: $gray-dark;
+
+$pagination-hover-bg: $gray-lightest;
+$pagination-hover-color: $gray-dark;
+$pagination-hover-border: $gray-dark;
+
+// Breadcrumbs
+
+$breadcrumb-active-color: $body-color;
+
+// Buttons
+
+$btn-secondary-color:            $gray-dark;
+$btn-secondary-bg:               $gray-lightest;
+$btn-secondary-border:           $gray-dark;
+

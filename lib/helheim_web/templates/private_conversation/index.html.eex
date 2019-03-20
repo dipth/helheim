@@ -7,7 +7,7 @@
       <div class="d-flex w-100">
         <div class="">
           <%= unless is_number(partner) do %>
-            <%= img_tag(HelheimWeb.Avatar.url({partner.avatar, partner}, :tiny), class: "sender-avatar img-avatar mr-1") %><br>
+            <%= img_tag(HelheimWeb.Avatar.url_with_unicorn({partner.avatar, partner}, :tiny, Guardian.Plug.current_resource(@conn)), class: "sender-avatar img-avatar mr-1") %><br>
           <% end %>
         </div>
         <div class="w-100">

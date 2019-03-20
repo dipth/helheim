@@ -36,7 +36,18 @@
       </tr>
     <% end %>
 
-    <%= if @user.partnership_status do %>
+    <%= if not is_nil(@user.unicorn_at) do %>
+      <tr>
+        <th><%= gettext "Partner status" %>:</th>
+        <td class="mentionable">
+          Har sværget evigt troskab til
+          <img src="<%= HelheimWeb.Router.Helpers.static_url(HelheimWeb.Endpoint, "/images/unicorn_avatar.gif") %>" class="img-avatar" height="32" alt="rainbow_unicorn">
+          @rainbow_unicorn
+          <img src="<%= HelheimWeb.Router.Helpers.static_url(HelheimWeb.Endpoint, "/images/unicorn_avatar.gif") %>" class="img-avatar" height="32" alt="rainbow_unicorn">
+        </td>
+      </tr>
+    <% end %>
+    <%= if is_nil(@user.unicorn_at) and @user.partnership_status do %>
       <tr>
         <th><%= gettext "Partner status" %>:</th>
         <td class="mentionable"><%= @user.partnership_status %></td>

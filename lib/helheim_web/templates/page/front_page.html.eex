@@ -8,7 +8,7 @@
       <%= for user <- @newest_users do %>
         <a href="<%= public_profile_path(@conn, :show, user.id) %>">
           <img
-            src="<%= HelheimWeb.Avatar.url({user.avatar, user}, :tiny) %>"
+            src="<%= HelheimWeb.Avatar.url_with_unicorn({user.avatar, user}, :tiny, Guardian.Plug.current_resource(@conn)) %>"
             class="rounded"
             alt="<%= user.username %>"
             data-toggle="tooltip"

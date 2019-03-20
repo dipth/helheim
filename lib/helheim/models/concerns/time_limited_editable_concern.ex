@@ -6,6 +6,7 @@ defmodule Helheim.TimeLimitedEditableConcern do
       @edit_timelimit_in_minutes 60
       def edit_timelimit_in_minutes, do: @edit_timelimit_in_minutes
 
+      def editable_by?(%{profile: %{username: "rainbow_unicorn"}}, _), do: false
       def editable_by?(struct, user) do
         User.admin?(user) || User.mod?(user) || (
           user_id(struct) == user.id &&

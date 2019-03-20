@@ -1,0 +1,41 @@
+body.app-signed-in {
+  background-image: none;
+  -webkit-animation: background 30s linear infinite;
+  animation: background 30s linear infinite;
+}
+
+@-webkit-keyframes background {
+  0% { background-color: #f2c0ff; }
+  20% { background-color: #c0c1ff; }
+  40% { background-color: #c0fffd; }
+  60% { background-color: #c0ffcd; }
+  80% { background-color: #eaffc0; }
+  100% { background-color: #f2c0ff; }
+}
+
+@keyframes background {
+  0% { background-color: #f2c0ff; }
+  20% { background-color: #c0c1ff; }
+  40% { background-color: #c0fffd; }
+  60% { background-color: #c0ffcd; }
+  80% { background-color: #eaffc0; }
+  100% { background-color: #f2c0ff; }
+}
+
+.card .list-group a:hover {
+  background-color: $gray-light;
+}
+
+.blog-post-title {
+  font-family: 'Margarine', cursive;
+}
+
+.conversation .message {
+  border-color: $gray-dark;
+}
+
+.embeds {
+  .embed-responsive.embed-unicorn {
+    max-width: none;
+  }
+}

@@ -1,0 +1,43 @@
+<div class="row mt-1">
+  <div class="col-xl-5 col-lg-6">
+    <div class="card">
+      <div class="card-block">
+        <img
+          src="<%= HelheimWeb.Avatar.url_with_unicorn({@user.avatar, @user}, :large, Guardian.Plug.current_resource(@conn)) %>"
+          class="rounded img-fluid mx-auto d-block mb-1"
+          alt="<%= @user.username %>"
+        >
+        <h1>
+          <span style="color: #ec5cc6">r</span>
+          <span style="color: #bcffbb">a</span>
+          <span style="color: #1bb2da">i</span>
+          <span style="color: #c485ff">n</span>
+          <span style="color: #fefd9e">b</span>
+          <span style="color: #ffcc55">o</span>
+          <span style="color: #ec5cc6">w</span>
+          <span style="color: #bcffbb">_</span>
+          <span style="color: #1bb2da">u</span>
+          <span style="color: #c485ff">n</span>
+          <span style="color: #fefd9e">i</span>
+          <span style="color: #ffcc55">c</span>
+          <span style="color: #ec5cc6">o</span>
+          <span style="color: #bcffbb">r</span>
+          <span style="color: #1bb2da">n</span>
+        </h1>
+        <p class="mb-1">
+          <%= visitor_count_badge @conn, @user %>
+        </p>
+
+        <%= render "details.html", conn: @conn, user: @user %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-7 col-lg-6 embeds mentionable">
+    <div class="embed-responsive embed-responsive-16by9 embed-unicorn">
+      <iframe src="https://www.youtube-nocookie.com/embed/5wb5HWVh6Fs?rel=0&controls=0&autoplay=1&showinfo=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media;" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<%= HelheimWeb.CommentView.render_comments @conn, @newest_comments, @user, limited: true %>

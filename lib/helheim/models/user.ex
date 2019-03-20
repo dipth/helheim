@@ -44,6 +44,7 @@ defmodule Helheim.User do
     field :notification_sound,              :string
     field :mute_notifications,              :boolean
     field :session_id,                      :string
+    field :unicorn_at,                      Calecto.DateTimeUTC
 
     timestamps()
 
@@ -73,12 +74,12 @@ defmodule Helheim.User do
 
   def recently_logged_in(query) do
     from u in query,
-    where: not is_nil(u.last_login_at),
-    order_by: [desc: u.last_login_at]
+    where: not is_nil(u.last_login_at) or u.username == "rainbow_unicorn",
+    order_by: [fragment("? = ? DESC", u.username, "rainbow_unicorn"), desc: u.last_login_at]
   end
 
   def with_avatar(query) do
-    from u in query, where: not is_nil(u.avatar)
+    from u in query, where: not is_nil(u.avatar) or u.username == "rainbow_unicorn"
   end
 
   def confirmed(query) do
@@ -291,6 +292,9 @@ defmodule Helheim.User do
 
   def mod?(%User{role: "mod"}), do: true
   def mod?(_), do: false
+
+  def unicorn?(%User{unicorn_at: timestamp}) when not is_nil(timestamp), do: true
+  def unicorn?(_), do: false
 
   def delete!(user) do
     photo_albums = assoc(user, :photo_albums) |> Repo.all

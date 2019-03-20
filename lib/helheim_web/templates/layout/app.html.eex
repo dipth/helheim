@@ -22,7 +22,12 @@
     <meta name="base-url" content="<%= HelheimWeb.Endpoint.url %>">
 
     <title><%= gettext("Helheim") %></title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <%= if User.unicorn?(Guardian.Plug.current_resource(@conn)) do %>
+      <link rel="stylesheet" href="<%= static_path(@conn, "/css/app_unicorn.css") %>">
+      <link href="https://fonts.googleapis.com/css?family=Margarine" rel="stylesheet">
+    <% else %>
+      <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <% end %>
     <link href="https://fonts.googleapis.com/css?family=Pirata+One|Roboto" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
@@ -50,5 +55,9 @@
     <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <script>require("js/app").App.run()</script>
+
+    <%= if User.unicorn?(Guardian.Plug.current_resource(@conn)) do %>
+      <%= render "sparkles.html" %>
+    <% end %>
   </body>
 </html>

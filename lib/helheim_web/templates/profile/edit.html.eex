@@ -11,7 +11,7 @@
               <h5 class="mb-1"><%= gettext "Profile Photo" %></h5>
               <hr>
               <div class="img-thumbnail img-thumbnail-with-form-control">
-                <img src="<%= HelheimWeb.Avatar.url({@changeset.data.avatar, @changeset.data}, :large) %>" class="img-fluid mx-auto d-block" alt="<%= gettext "Profile Photo" %>">
+                <img src="<%= HelheimWeb.Avatar.url_with_unicorn({@changeset.data.avatar, @changeset.data}, :large, Guardian.Plug.current_resource(@conn)) %>" class="img-fluid mx-auto d-block" alt="<%= gettext "Profile Photo" %>">
                 <%= file_input f, :avatar, class: "form-control" %>
               </div>
 

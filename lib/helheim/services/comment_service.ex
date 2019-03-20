@@ -10,6 +10,21 @@ defmodule Helheim.CommentService do
   alias Helheim.CalendarEvent
   alias Helheim.NotificationService
 
+  @unicorn_bodies [
+    "All hail @rainbow_unicorn!!!",
+    "Jeg sværger mit evige troskab til @rainbow_unicorn!",
+    "@rainbow_unicorn er min eneste gud!",
+    "Jeg elsker dig, @rainbow_unicorn! 💜",
+    "@rainbow_unicorn er den smukkeste i hele universet!",
+    "@rainbow_unicorn du er min inspiration!",
+    "Du er den bedste, @rainbow_unicorn!",
+    "@rainbow_unicorn gør mig så glad!"
+  ]
+
+  def create!(%User{username: "rainbow_unicorn"} = commentable, author, body) when body not in @unicorn_bodies do
+    body = Enum.random(@unicorn_bodies)
+    create!(commentable, author, body)
+  end
   def create!(commentable, author, body) do
     Multi.new
     |> insert_comment(commentable, author, body)

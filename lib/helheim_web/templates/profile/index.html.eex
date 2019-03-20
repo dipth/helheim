@@ -39,7 +39,7 @@
   <%= for user <- @users.entries do %>
     <div class="card">
       <%= link to: public_profile_path(@conn, :show, user) do %>
-        <%= img_tag(HelheimWeb.Avatar.url({user.avatar, user}, :thumb), class: "card-img-top img-fluid img-photo") %>
+        <%= img_tag(HelheimWeb.Avatar.url_with_unicorn({user.avatar, user}, :thumb, Guardian.Plug.current_resource(@conn)), class: "card-img-top img-fluid img-photo") %>
       <% end %>
       <div class="card-block">
         <p class="card-text mb-1">

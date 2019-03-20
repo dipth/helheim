@@ -4,7 +4,7 @@
   <%= render HelheimWeb.FriendshipView, "menu_item.html", conn: @conn %>
   <li class="nav-item dropdown nav-item-user-menu">
     <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-      <img src="<%= HelheimWeb.Avatar.url({Guardian.Plug.current_resource(@conn).avatar, Guardian.Plug.current_resource(@conn)}, :tiny) %>" class="img-avatar" alt="<%= Guardian.Plug.current_resource(@conn).username %>">
+      <img src="<%= HelheimWeb.Avatar.url_with_unicorn({Guardian.Plug.current_resource(@conn).avatar, Guardian.Plug.current_resource(@conn)}, :tiny, Guardian.Plug.current_resource(@conn)) %>" class="img-avatar" alt="<%= Guardian.Plug.current_resource(@conn).username %>">
       <%= count_badge(@conn, %{notifications: true, unread_messages: true, pending_friendships: true, class: "hidden-lg-up"}) %>
       <span class="hidden-md-down"><%= Guardian.Plug.current_resource(@conn).username %></span>
     </a>

@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-block">
         <img
-          src="<%= HelheimWeb.Avatar.url({@user.avatar, @user}, :large) %>"
+          src="<%= HelheimWeb.Avatar.url_with_unicorn({@user.avatar, @user}, :large, Guardian.Plug.current_resource(@conn)) %>"
           class="rounded img-fluid mx-auto d-block mb-1"
           alt="<%= @user.username %>"
         >
