@@ -50,7 +50,8 @@ defmodule HelheimWeb.Endpoint do
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
-    json_decoder: Poison
+    json_decoder: Poison,
+    length: 20_971_520 # 20 MB
 
   plug Plug.MethodOverride
   plug Plug.Head
