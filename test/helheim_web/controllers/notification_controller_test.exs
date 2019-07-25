@@ -50,7 +50,7 @@ defmodule HelheimWeb.NotificationControllerTest do
       notification = insert(:notification, recipient: user)
       with_mock Notification, [:passthrough], [subject: fn(_notification) -> subject end] do
         conn = get conn, "/notifications/#{notification.id}"
-        assert redirected_to(conn) == forum_forum_topic_path(conn, :show, subject.forum, subject)
+        assert redirected_to(conn) == forum_forum_topic_path(conn, :show, subject.forum, subject, page: "last") <> "#last_reply"
       end
     end
 

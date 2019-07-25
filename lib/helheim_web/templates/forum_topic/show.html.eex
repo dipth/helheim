@@ -21,7 +21,10 @@
 
 <%= pagination_links @conn, @forum_replies %>
 
-<%= for forum_reply <- @forum_replies.entries do %>
+<%= for {forum_reply, i} <- Enum.with_index(@forum_replies.entries) do %>
+  <%= if i + 1 == length(@forum_replies.entries) do %>
+    <a id="last_reply"></a>
+  <% end %>
   <%= render HelheimWeb.ForumReplyView, "forum_reply.html", conn: @conn, forum: @forum, forum_topic: @forum_topic, forum_reply: forum_reply %>
 <% end %>
 

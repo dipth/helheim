@@ -26,7 +26,7 @@ defmodule HelheimWeb.NotificationController do
     public_profile_photo_album_photo_path(conn, :show, photo_album.user_id, photo_album, photo)
   end
   defp redirect_path(conn, %Helheim.ForumTopic{} = forum_topic),
-    do: forum_forum_topic_path(conn, :show, forum_topic.forum_id, forum_topic)
+    do: forum_forum_topic_path(conn, :show, forum_topic.forum_id, forum_topic, page: "last") <> "#last_reply"
   defp redirect_path(conn, %Helheim.CalendarEvent{} = calendar_event),
     do: calendar_event_path(conn, :show, calendar_event)
 end
