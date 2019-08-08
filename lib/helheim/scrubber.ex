@@ -2,6 +2,8 @@ defmodule Helheim.Scrubber do
   require HtmlSanitizeEx.Scrubber.Meta
   alias HtmlSanitizeEx.Scrubber.Meta
 
+  @allowed_styles ["text-align: center", "text-align: right", "text-align: justify"]
+
   Meta.remove_cdata_sections_before_scrub
   Meta.strip_comments
 
@@ -14,7 +16,6 @@ defmodule Helheim.Scrubber do
   Meta.allow_tag_with_these_attributes "h4", []
 
   Meta.allow_tag_with_these_attributes "blockquote", []
-  Meta.allow_tag_with_these_attributes "p", []
 
   Meta.allow_tag_with_these_attributes "strong", []
   Meta.allow_tag_with_these_attributes "em", []
@@ -23,6 +24,27 @@ defmodule Helheim.Scrubber do
   Meta.allow_tag_with_these_attributes "sub", []
 
   Meta.allow_tag_with_these_attributes "br", []
+
+  def scrub({"p", attributes, body}) do
+    attributes = scrub_attributes("p", attributes)
+    {"p", attributes, body}
+  end
+
+  defp scrub_attributes("p", attributes) do
+    Enum.map(attributes, fn(attr) -> scrub_attribute("p", attr) end)
+    |> Enum.reject(&(is_nil(&1)))
+  end
+
+  def scrub_attribute("p", {"style", value}) do
+    value = String.split(value, ";")
+            |> Enum.filter(&(Enum.member?(@allowed_styles, &1)))
+            |> Enum.join(";")
+    if String.length(value) > 0 do
+      {"style", value <> ";"}
+    else
+      nil
+    end
+  end
 
   def scrub({"img", attributes, _}) do
     attributes = scrub_attributes("img", attributes)
