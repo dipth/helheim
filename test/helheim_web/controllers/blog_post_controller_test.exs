@@ -2,6 +2,7 @@ defmodule HelheimWeb.BlogPostControllerTest do
   use HelheimWeb.ConnCase
   import Mock
   alias Helheim.BlogPost
+  alias Helheim.NotificationSubscription
 
   @valid_attrs %{body: "Body Text", title: "Title String", visibility: "public"}
   @invalid_attrs %{body: "   ", title: "   ", visibility: ""}
@@ -239,6 +240,16 @@ defmodule HelheimWeb.BlogPostControllerTest do
       assert blog_post.body == @valid_attrs.body
       assert blog_post.user_id == user.id
       assert redirected_to(conn) == public_profile_blog_post_path(conn, :show, user, blog_post)
+    end
+
+    test "it creates a notification subscription for the newly created blog post when posting valid params", %{conn: conn, user: user} do
+      conn = post conn, "/blog_posts", blog_post: @valid_attrs
+      blog_post = Repo.one(BlogPost)
+      sub = Repo.one(NotificationSubscription)
+      assert sub.user_id == blog_post.user_id
+      assert sub.type == "comment"
+      assert sub.blog_post_id == blog_post.id
+      assert sub.enabled == true
     end
 
     test "it does not create a new blog post and re-renders the new template when posting invalid params", %{conn: conn} do

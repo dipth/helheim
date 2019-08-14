@@ -3,6 +3,7 @@ defmodule HelheimWeb.BlogPostController do
   alias Helheim.BlogPost
   alias Helheim.User
   alias Helheim.Comment
+  alias Helheim.BlogPostService
 
   plug :find_user when action in [:index, :show]
   plug HelheimWeb.Plug.EnforceBlock when action in [:index, :show]
@@ -42,12 +43,8 @@ defmodule HelheimWeb.BlogPostController do
 
   def create(conn, %{"blog_post" => blog_post_params}) do
     user = current_resource(conn)
-    changeset =
-      user
-        |> Ecto.build_assoc(:blog_posts)
-        |> BlogPost.changeset(blog_post_params)
 
-    case Repo.insert(changeset) do
+    case BlogPostService.create!(user, blog_post_params) do
       {:ok, blog_post} ->
         conn
         |> put_flash(:success, gettext("Blog post created successfully."))
