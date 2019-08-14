@@ -3,6 +3,7 @@ defmodule HelheimWeb.ForumTopicControllerTest do
   import Mock
   alias Helheim.ForumTopic
   alias Helheim.Forum
+  alias Helheim.NotificationSubscription
 
   @valid_attrs %{body: "Body Text", title: "Title String"}
   @invalid_attrs %{body: "   ", title: "   "}
@@ -55,6 +56,17 @@ defmodule HelheimWeb.ForumTopicControllerTest do
       assert topic.user_id  == user.id
       assert topic.title    == @valid_attrs.title
       assert topic.body     == @valid_attrs.body
+    end
+
+    test "it creates a notification subscription for the newly created topic when posting valid params", %{conn: conn, user: user} do
+      forum = insert(:forum)
+      _conn = post conn, "/forums/#{forum.id}/forum_topics", forum_topic: @valid_attrs
+      topic = Repo.one(ForumTopic)
+      sub   = Repo.one(NotificationSubscription)
+      assert sub.user_id == user.id
+      assert sub.type == "forum_reply"
+      assert sub.forum_topic_id == topic.id
+      assert sub.enabled == true
     end
 
     test "it does not create a forum topic but redirects to an error page when supplying an non-existing forum_id", %{conn: conn} do

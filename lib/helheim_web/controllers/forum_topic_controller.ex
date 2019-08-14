@@ -3,6 +3,7 @@ defmodule HelheimWeb.ForumTopicController do
   alias Helheim.Forum
   alias Helheim.ForumTopic
   alias Helheim.ForumReply
+  alias Helheim.ForumTopicService
 
   plug :find_forum
   plug :find_user
@@ -17,7 +18,7 @@ defmodule HelheimWeb.ForumTopicController do
   end
 
   def create(conn, %{"forum_id" => _, "forum_topic" => _}) do
-    case Repo.insert(conn.assigns[:changeset]) do
+    case ForumTopicService.create!(conn.assigns[:user], conn.assigns[:changeset]) do
       {:ok, forum_topic} ->
         conn
         |> put_flash(:success, gettext("Forum topic created successfully."))
