@@ -1,6 +1,7 @@
 defmodule HelheimWeb.RegistrationController do
   use HelheimWeb, :controller
   alias Helheim.User
+  alias Helheim.RegistrationService
 
   plug :put_layout, "app_special.html"
 
@@ -11,8 +12,8 @@ defmodule HelheimWeb.RegistrationController do
 
   def create(conn, %{"user" => user_params, "g-recaptcha-response" => captcha_response}) do
     user_params = Map.merge(user_params, %{"captcha" => captcha_response})
-    changeset = User.registration_changeset(%User{}, user_params)
-    case Repo.insert(changeset) do
+
+    case RegistrationService.create!(user_params) do
       {:ok, _user} ->
         conn
         |> put_flash(:success, gettext("User created!"))

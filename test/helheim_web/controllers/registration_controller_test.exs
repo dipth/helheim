@@ -3,6 +3,7 @@ defmodule HelheimWeb.RegistrationControllerTest do
   use Bamboo.Test
   alias Helheim.Repo
   alias Helheim.User
+  alias Helheim.NotificationSubscription
 
   describe "new/2" do
     test "it returns a successful response", %{conn: conn} do
@@ -21,6 +22,16 @@ defmodule HelheimWeb.RegistrationControllerTest do
       user = Repo.get_by(User, email: @valid_params[:email])
       assert user
       assert_delivered_email HelheimWeb.Email.registration_email(user.email, user.confirmation_token)
+    end
+
+    test "it creates a notification subscription for the newly created profile when posting valid params", %{conn: conn} do
+      _conn = post conn, "/registrations", user: @valid_params, "g-recaptcha-response": "valid_response"
+      user = Repo.one(User)
+      sub = Repo.one(NotificationSubscription)
+      assert sub.user_id == user.id
+      assert sub.type == "comment"
+      assert sub.profile_id == user.id
+      assert sub.enabled == true
     end
 
     test "it does not create a user but re-renders the new template when posting invalid params", %{conn: conn} do
