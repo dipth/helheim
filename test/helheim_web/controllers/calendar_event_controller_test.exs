@@ -1,6 +1,7 @@
 defmodule HelheimWeb.CalendarEventControllerTest do
   use HelheimWeb.ConnCase
   alias Helheim.CalendarEvent
+  alias Helheim.NotificationSubscription
 
   @valid_attrs %{title: "My awesome event", description: "Just for testing", starts_at: "2018-08-01 12:00:00.000000", ends_at: "2018-08-01 15:00:00.000000", location: "My place!"}
   @invalid_attrs %{title: ""}
@@ -62,6 +63,16 @@ defmodule HelheimWeb.CalendarEventControllerTest do
       assert calendar_event.ends_at == ~N[2018-08-01 15:00:00.000000]
       assert CalendarEvent.pending?(calendar_event)
       assert redirected_to(conn) == calendar_event_path(conn, :index)
+    end
+
+    test "it creates a notification subscription for the newly created event when posting valid params", %{conn: conn, user: user} do
+      _conn = post conn, "/calendar_events", calendar_event: @valid_attrs
+      calendar_event = Repo.one(CalendarEvent)
+      sub = Repo.one(NotificationSubscription)
+      assert sub.user_id == user.id
+      assert sub.type == "comment"
+      assert sub.calendar_event_id == calendar_event.id
+      assert sub.enabled == true
     end
 
     test "it does not create a new event and re-renders the new template when posting invalid params", %{conn: conn} do

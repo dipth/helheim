@@ -2,6 +2,7 @@ defmodule HelheimWeb.CalendarEventController do
   use HelheimWeb, :controller
   alias Helheim.CalendarEvent
   alias Helheim.Comment
+  alias Helheim.CalendarEventService
 
   plug HelheimWeb.Plug.VerifyAdmin when action in [:edit, :update, :delete]
 
@@ -31,12 +32,8 @@ defmodule HelheimWeb.CalendarEventController do
 
   def create(conn, %{"calendar_event" => calendar_event_params}) do
     user = current_resource(conn)
-    changeset =
-      user
-      |> Ecto.build_assoc(:calendar_events)
-      |> CalendarEvent.changeset(calendar_event_params)
 
-    case Repo.insert(changeset) do
+    case CalendarEventService.create!(user, calendar_event_params) do
       {:ok, _calendar_event} ->
         conn
         |> put_flash(:success, gettext("The event has now been created and will be shown on the site when it has been approved by an administrator."))
