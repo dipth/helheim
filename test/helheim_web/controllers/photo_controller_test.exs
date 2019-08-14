@@ -2,6 +2,7 @@ defmodule HelheimWeb.PhotoControllerTest do
   use HelheimWeb.ConnCase
   import Mock
   alias Helheim.Photo
+  alias Helheim.NotificationSubscription
 
   @valid_file %Plug.Upload{path: "test/files/1.0MB.jpg", filename: "1.0MB.jpg"}
   @invalid_file %{}
@@ -128,6 +129,17 @@ defmodule HelheimWeb.PhotoControllerTest do
       assert photo.file_size      == 999631
       assert photo.photo_album_id == photo_album.id
       assert photo.file
+    end
+
+    test "it creates a notification subscription for the newly created photo when posting valid params", %{conn: conn, user: user} do
+      photo_album = insert(:photo_album, user: user)
+      post conn, "/photo_albums/#{photo_album.id}/photos", file: @valid_file, photo: %{nsfw: false}
+      photo = Repo.one(Photo)
+      sub = Repo.one(NotificationSubscription)
+      assert sub.user_id == user.id
+      assert sub.type == "comment"
+      assert sub.photo_id == photo.id
+      assert sub.enabled == true
     end
 
     test "it does not create a new photo when posting a non existing photo_id", %{conn: conn} do
