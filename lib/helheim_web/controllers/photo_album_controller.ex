@@ -9,10 +9,11 @@ defmodule HelheimWeb.PhotoAlbumController do
 
   def index(conn, params = %{"profile_id" => _}) do
     user = conn.assigns[:user]
+    photos_query = from p in Photo, order_by: p.position, distinct: p.photo_album_id
     photo_albums =
       assoc(user, :photo_albums)
       |> PhotoAlbum.visible_by(current_resource(conn))
-      |> preload(:photos)
+      |> preload([photos: ^photos_query])
       |> Repo.paginate(page: sanitized_page(params["page"]))
     render(conn, "index.html", user: user, photo_albums: photo_albums)
   end
