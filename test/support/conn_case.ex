@@ -68,6 +68,13 @@ defmodule HelheimWeb.ConnCase do
         conn = conn |> sign_in(admin)
         [conn: conn, admin: admin]
       end
+
+      defp create_and_sign_in_mod(context) do
+        mod = insert(:user, role: "mod")
+        conn = context[:conn]
+        conn = conn |> sign_in(mod)
+        [conn: conn, mod: mod]
+      end
     end
   end
 

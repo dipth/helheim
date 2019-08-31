@@ -162,6 +162,21 @@ defmodule HelheimWeb.CalendarEventControllerTest do
     end
   end
 
+  describe "edit/2 when signed in as a moderator" do
+    setup [:create_and_sign_in_mod, :create_calendar_event]
+
+    test "it returns a successful response", %{conn: conn, calendar_event: calendar_event} do
+      conn = get conn, "/calendar_events/#{calendar_event.id}/edit"
+      assert html_response(conn, 200) =~ gettext("Edit event")
+    end
+
+    test "it redirects to an error page with the id of a non-existent event", %{conn: conn, calendar_event: calendar_event} do
+      assert_error_sent :not_found, fn ->
+        get conn, "/calendar_events/#{calendar_event.id + 1}/edit"
+      end
+    end
+  end
+
   describe "edit/2 when signed in as a user" do
     setup [:create_and_sign_in_user, :create_calendar_event]
 
@@ -185,6 +200,24 @@ defmodule HelheimWeb.CalendarEventControllerTest do
   # update/2
   describe "update/2 when signed in as an admin" do
     setup [:create_and_sign_in_admin, :create_calendar_event]
+
+    test "it updates the event when posting valid params", %{conn: conn, calendar_event: calendar_event} do
+      conn = put conn, "/calendar_events/#{calendar_event.id}", calendar_event: @valid_attrs
+      updated_calendar_event = Repo.get(CalendarEvent, calendar_event.id)
+      assert updated_calendar_event.title == @valid_attrs.title
+      assert updated_calendar_event.description == @valid_attrs.description
+      assert updated_calendar_event.user_id == calendar_event.user_id
+      assert redirected_to(conn) == calendar_event_path(conn, :show, calendar_event)
+    end
+
+    test "it does not update the event and re-renders the edit template when posting invalid params", %{conn: conn, calendar_event: calendar_event} do
+      conn = put conn, "/calendar_events/#{calendar_event.id}", calendar_event: @invalid_attrs
+      assert html_response(conn, 200) =~ gettext("Edit event")
+    end
+  end
+
+  describe "update/2 when signed in as a moderator" do
+    setup [:create_and_sign_in_mod, :create_calendar_event]
 
     test "it updates the event when posting valid params", %{conn: conn, calendar_event: calendar_event} do
       conn = put conn, "/calendar_events/#{calendar_event.id}", calendar_event: @valid_attrs
@@ -229,6 +262,22 @@ defmodule HelheimWeb.CalendarEventControllerTest do
   # delete/2
   describe "delete/2 when signed in as an admin" do
     setup [:create_and_sign_in_admin, :create_calendar_event]
+
+    test "it deletes the event and redirects to the list of events", %{conn: conn, calendar_event: calendar_event} do
+      conn = delete conn, "/calendar_events/#{calendar_event.id}"
+      assert redirected_to(conn) == calendar_event_path(conn, :index)
+      refute Repo.get(CalendarEvent, calendar_event.id)
+    end
+
+    test "it shows a 404 error when providing an invalid id", %{conn: conn, calendar_event: calendar_event} do
+      assert_error_sent :not_found, fn ->
+        delete conn, "/calendar_events/#{calendar_event.id + 1}"
+      end
+    end
+  end
+
+  describe "delete/2 when signed in as a moderator" do
+    setup [:create_and_sign_in_mod, :create_calendar_event]
 
     test "it deletes the event and redirects to the list of events", %{conn: conn, calendar_event: calendar_event} do
       conn = delete conn, "/calendar_events/#{calendar_event.id}"

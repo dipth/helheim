@@ -14,5 +14,9 @@ defmodule HelheimWeb.Plug.LoadPendingCalendarEvents do
     count = CalendarEvent.pending_count()
     assign(conn, :pending_calendar_events_count, count)
   end
+  defp assign_count(conn, %{role: "mod"}) do
+    count = CalendarEvent.pending_count()
+    assign(conn, :pending_calendar_events_count, count)
+  end
   defp assign_count(conn, _), do: conn
 end

@@ -4,7 +4,7 @@ defmodule HelheimWeb.CalendarEventController do
   alias Helheim.Comment
   alias Helheim.CalendarEventService
 
-  plug HelheimWeb.Plug.VerifyAdmin when action in [:edit, :update, :delete]
+  plug HelheimWeb.Plug.VerifyMod when action in [:edit, :update, :delete]
 
   def index(conn, params) do
     calendar_events = calendar_events(params["page"])

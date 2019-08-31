@@ -30,6 +30,10 @@ defmodule HelheimWeb.Router do
     plug HelheimWeb.Plug.VerifyAdmin
   end
 
+  pipeline :ensure_mod do
+    plug HelheimWeb.Plug.VerifyMod
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -119,6 +123,12 @@ defmodule HelheimWeb.Router do
     resources "/online_users", OnlineUserController, only: [:index]
   end
 
+  scope "/mod", HelheimWeb.Mod, as: :mod do
+    pipe_through [:browser, :auth, :ensure_auth, :ensure_mod]
+
+    resources "/calendar_events", CalendarEventController, only: [:index, :show, :update, :delete]
+  end
+
   scope "/admin", HelheimWeb.Admin, as: :admin do
     pipe_through [:browser, :auth, :ensure_auth, :ensure_admin]
 
@@ -129,7 +139,6 @@ defmodule HelheimWeb.Router do
     resources "/users", UserController, only: [:index, :show, :edit, :update] do
       resources "/verification", User.VerificationController, singleton: true, only: [:create, :delete]
     end
-    resources "/calendar_events", CalendarEventController, only: [:index, :show, :update, :delete]
   end
 
   # Other scopes may use custom stacks.

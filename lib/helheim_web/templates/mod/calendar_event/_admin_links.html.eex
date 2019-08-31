@@ -1,5 +1,5 @@
-<%= if Helheim.User.admin?(current_resource(@conn)) do %>
-  <p class="mb-1"><strong>ADMIN:</strong></p>
+<%= if Helheim.User.mod_or_admin?(current_resource(@conn)) do %>
+  <p class="mb-1"><strong>MOD:</strong></p>
 
   <%= link to: calendar_event_path(@conn, :edit, @calendar_event), class: "btn btn-sm btn-primary" do %>
     <i class="fa fa-pencil"></i>

@@ -292,6 +292,8 @@ defmodule Helheim.User do
   def mod?(%User{role: "mod"}), do: true
   def mod?(_), do: false
 
+  def mod_or_admin?(user), do: admin?(user) || mod?(user)
+
   def delete!(user) do
     photo_albums = assoc(user, :photo_albums) |> Repo.all
     Parallel.pmap(photo_albums, fn(pa) -> Helheim.PhotoAlbum.delete!(pa) end)

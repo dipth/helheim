@@ -1,4 +1,4 @@
-defmodule HelheimWeb.Admin.CalendarEventController do
+defmodule HelheimWeb.Mod.CalendarEventController do
   use HelheimWeb, :controller
   alias Helheim.CalendarEvent
   alias Helheim.Comment
@@ -30,11 +30,11 @@ defmodule HelheimWeb.Admin.CalendarEventController do
       {:ok, _calendar_event} ->
         conn
         |> put_flash(:success, gettext("The event is now approved."))
-        |> redirect(to: admin_calendar_event_path(conn, :index))
+        |> redirect(to: mod_calendar_event_path(conn, :index))
       {:error, _changeset} ->
         conn
         |> put_flash(:error, gettext("The event could not be approved!"))
-        |> redirect(to: admin_calendar_event_path(conn, :show, calendar_event))
+        |> redirect(to: mod_calendar_event_path(conn, :show, calendar_event))
     end
   end
 
@@ -44,11 +44,11 @@ defmodule HelheimWeb.Admin.CalendarEventController do
       {:ok, _calendar_event} ->
         conn
         |> put_flash(:success, gettext("The event is now rejected."))
-        |> redirect(to: admin_calendar_event_path(conn, :index))
+        |> redirect(to: mod_calendar_event_path(conn, :index))
       {:error, _changeset} ->
         conn
         |> put_flash(:error, gettext("The event could not be rejected!"))
-        |> redirect(to: admin_calendar_event_path(conn, :show, calendar_event))
+        |> redirect(to: mod_calendar_event_path(conn, :show, calendar_event))
     end
   end
 end

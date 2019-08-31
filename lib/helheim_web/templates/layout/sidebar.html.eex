@@ -92,6 +92,8 @@
         <% end %>
       </li>
 
+      <%= if User.mod_or_admin?(current_resource(@conn)) do render("sidebar_mod.html", conn: @conn) end %>
+
       <%= if User.admin?(current_resource(@conn)) do render("sidebar_admin.html", conn: @conn) end %>
     </ul>
   </nav>

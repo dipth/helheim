@@ -189,6 +189,23 @@ defmodule Helheim.UserTest do
     end
   end
 
+  describe "mod_or_admin?/1" do
+    test "it returns true if the role of the user is 'mod'" do
+      user = insert(:user, role: "mod")
+      assert User.mod_or_admin?(user)
+    end
+
+    test "it returns true if the role of the user is 'admin'" do
+      user = insert(:user, role: "admin")
+      assert User.mod_or_admin?(user)
+    end
+
+    test "it returns false if the role of the user is not 'mod' or 'admin'" do
+      user = insert(:user, role: "nope")
+      refute User.mod_or_admin?(user)
+    end
+  end
+
   describe "delete/1" do
     test_with_mock "it calls PhotoAlbum.delete! for each photo album belonging to the user",
       PhotoAlbum, [:passthrough], [delete!: fn(_photo_album) -> {:ok} end] do

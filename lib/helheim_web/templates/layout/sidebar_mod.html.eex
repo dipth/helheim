@@ -1,0 +1,11 @@
+<li class="nav-title"><%= gettext "Mod" %></li>
+
+<li class="nav-item">
+  <%= link to: mod_calendar_event_path(@conn, :index), class: "nav-link" do %>
+    <i class="fa fa-calendar"></i>
+    <%= gettext("Event calendar") %>
+    <%= if @conn.assigns[:pending_calendar_events_count] > 0 do %>
+      <span class="badge badge-pill badge-danger"><%= @conn.assigns[:pending_calendar_events_count] %></span>
+    <% end %>
+  <% end %>
+</li>

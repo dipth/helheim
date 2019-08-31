@@ -31,6 +31,6 @@
 
     <p class="card-text"><%= HelheimWeb.EmbedHelpers.replace_urls(@calendar_event.description) %></p>
 
-    <%= render HelheimWeb.Admin.CalendarEventView, "_admin_links.html", assigns %>
+    <%= render HelheimWeb.Mod.CalendarEventView, "_admin_links.html", assigns %>
   </div>
 </div>
