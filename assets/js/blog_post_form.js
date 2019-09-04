@@ -14,7 +14,7 @@ export var BlogPostForm = {
         'searchreplace visualblocks code fullscreen',
         'insertdatetime table contextmenu paste code'
       ],
-      toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image',
+      toolbar: 'undo redo | insert | styleselect | bold italic strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist | link image',
       init_instance_callback: function(editor) {
         $(editor.contentDocument.activeElement).atwho(MentionableConfig);
       }
