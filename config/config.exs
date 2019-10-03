@@ -37,7 +37,8 @@ config :sentry,
   environment_name: Mix.env,
   included_environments: [:prod],
   enable_source_code_context: true,
-  root_source_code_path: File.cwd!
+  root_source_code_path: File.cwd!,
+  json_library: Poison
 
 # Configure Scout APM
 config :scout_apm,
