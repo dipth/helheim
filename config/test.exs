@@ -17,7 +17,7 @@ config :helheim, Helheim.Repo,
   username: System.get_env("DATABASE_POSTGRESQL_USERNAME") || "postgres",
   password: System.get_env("DATABASE_POSTGRESQL_PASSWORD") || "postgres",
   database: "helheim_test",
-  hostname: "localhost",
+  hostname: System.get_env("DATABASE_POSTGRESQL_HOSTNAME") || "localhost",
   pool: Ecto.Adapters.SQL.Sandbox,
   timeout: 60_000,
   pool_timeout: 60_000
