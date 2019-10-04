@@ -117,7 +117,7 @@ defmodule Helheim.NotificationTest do
       assert entry2.id == notification1.id
     end
 
-    test "it groups similar notifications togetherr" do
+    test "it groups similar notifications together" do
       recipient = insert(:user)
       subject = insert(:user)
       _notification1 = insert(:notification, profile: subject, type: "comment", recipient: recipient)
