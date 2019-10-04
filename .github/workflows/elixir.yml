@@ -40,6 +40,7 @@ jobs:
           mix local.hex --force
           mix deps.get
           cd assets
+          npm install -g yarn
           yarn
           cd ..
 
