@@ -120,11 +120,12 @@ defmodule Helheim.NotificationTest do
     test "it groups similar notifications together" do
       recipient = insert(:user)
       subject = insert(:user)
-      _notification1 = insert(:notification, profile: subject, type: "comment", recipient: recipient)
+      notification1 = insert(:notification, profile: subject, type: "comment", recipient: recipient)
       notification2 = insert(:notification, profile: subject, type: "comment", recipient: recipient)
 
       [entry1] = Notification.list_not_clicked(recipient)
-      assert entry1.id == notification2.id
+
+      assert entry1.profile_id == subject.id
       assert entry1.duplicate_count == 2
     end
   end
