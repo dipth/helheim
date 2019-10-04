@@ -46,7 +46,7 @@ config :stripity_stripe,
 
 # Configure ReCaptcha
 config :recaptcha,
-  public_key: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe",
+  public_key: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
   secret: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
 
 # Configure wallaby
