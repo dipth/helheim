@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: elixir:1.9.1
+      image: dippel/elixir-ci:latest
       env:
         MIX_ENV: test
 
@@ -28,15 +28,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 10
-
-      - name: Install system packages
-        run: |
-          curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb
-          dpkg -i /chrome.deb || apt-get install -yf
-          rm /chrome.deb
-          curl https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip -o /usr/local/bin/chromedriver
-          chmod +x /usr/local/bin/chromedriver
-          chromedriver --version
 
       - name: Install Dependencies
         run: |
