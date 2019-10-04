@@ -48,3 +48,7 @@ config :stripity_stripe,
 config :recaptcha,
   public_key: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe",
   secret: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
+
+# Configure wallaby
+config :wallaby,
+  driver: Wallaby.Experimental.Chrome
