@@ -66,7 +66,7 @@ defmodule Helheim.Mixfile do
       {:html_sanitize_ex, "~> 1.1"},
       {:crutches, git: "https://github.com/mykewould/crutches.git"},
       {:scrivener_ecto, "~> 1.1"}, # Pagination
-      {:mock, "~> 0.3.1", only: :test},
+      {:mock, "~> 0.3.3", only: :test},
       {:scout_apm, "~> 0.0"},
       {:stripity_stripe, "~> 1.6.0"},
       {:recaptcha, "~> 2.2"},
