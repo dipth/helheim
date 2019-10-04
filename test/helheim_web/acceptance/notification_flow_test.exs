@@ -17,6 +17,9 @@ defmodule HelheimWeb.NotificationFlowTest do
     session
     |> click(subscription_switch())
 
+    # Wait for the request to go through
+    Process.sleep(100)
+
     subscription = Repo.one!(NotificationSubscription)
     assert subscription.user_id    == user.id
     assert subscription.profile_id == profile.id
@@ -25,6 +28,9 @@ defmodule HelheimWeb.NotificationFlowTest do
 
     session
     |> click(subscription_switch())
+
+    # Wait for the request to go through
+    Process.sleep(100)
 
     subscription = Repo.get(NotificationSubscription, subscription.id)
     assert subscription.enabled == false
@@ -40,6 +46,9 @@ defmodule HelheimWeb.NotificationFlowTest do
     session
     |> click(subscription_switch())
 
+    # Wait for the request to go through
+    Process.sleep(100)
+
     subscription = Repo.one!(NotificationSubscription)
     assert subscription.user_id    == user.id
     assert subscription.profile_id == profile.id
@@ -48,6 +57,9 @@ defmodule HelheimWeb.NotificationFlowTest do
 
     session
     |> click(subscription_switch())
+
+    # Wait for the request to go through
+    Process.sleep(100)
 
     subscription = Repo.get(NotificationSubscription, subscription.id)
     assert subscription.enabled == false
@@ -63,6 +75,9 @@ defmodule HelheimWeb.NotificationFlowTest do
     session
     |> click(subscription_switch())
 
+    # Wait for the request to go through
+    Process.sleep(100)
+
     subscription = Repo.one!(NotificationSubscription)
     assert subscription.user_id      == user.id
     assert subscription.blog_post_id == blog_post.id
@@ -71,6 +86,9 @@ defmodule HelheimWeb.NotificationFlowTest do
 
     session
     |> click(subscription_switch())
+
+    # Wait for the request to go through
+    Process.sleep(100)
 
     subscription = Repo.get(NotificationSubscription, subscription.id)
     assert subscription.enabled == false
@@ -85,6 +103,9 @@ defmodule HelheimWeb.NotificationFlowTest do
     session
     |> click(subscription_switch())
 
+    # Wait for the request to go through
+    Process.sleep(100)
+
     subscription = Repo.one!(NotificationSubscription)
     assert subscription.user_id        == user.id
     assert subscription.forum_topic_id == forum_topic.id
@@ -93,6 +114,9 @@ defmodule HelheimWeb.NotificationFlowTest do
 
     session
     |> click(subscription_switch())
+
+    # Wait for the request to go through
+    Process.sleep(100)
 
     subscription = Repo.get(NotificationSubscription, subscription.id)
     assert subscription.enabled == false
