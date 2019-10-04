@@ -35,7 +35,7 @@ jobs:
           mix local.hex --force
           mix deps.get
           cd assets
-          npm install -g yarn
+          npm install -g yarn brunch
           yarn
           cd ..
 
