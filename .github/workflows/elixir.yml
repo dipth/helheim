@@ -45,8 +45,6 @@ jobs:
           cd ..
 
       - name: Run Tests
-        run: |
-          chromedriver
-          mix test
+        run: chromedriver & mix test
         env:
           DATABASE_POSTGRESQL_HOSTNAME: postgres
