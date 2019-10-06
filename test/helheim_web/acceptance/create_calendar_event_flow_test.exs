@@ -10,9 +10,11 @@ defmodule HelheimWeb.CreateCalendarEventFlowTest do
   defp starts_at_flatpickr,   do: Query.css("div.form-group.starts-at .flatpickr-calendar")
   defp starts_at_day,         do: Query.css("div.form-group.starts-at .flatpickr-day", text: "15")
   defp starts_at_hour,        do: Query.css("div.form-group.starts-at input.flatpickr-hour")
+  defp starts_at_minute,      do: Query.css("div.form-group.starts-at input.flatpickr-minute")
   defp ends_at_flatpickr,     do: Query.css("div.form-group.ends-at .flatpickr-calendar")
   defp ends_at_day,           do: Query.css("div.form-group.ends-at .flatpickr-day", text: "16")
   defp ends_at_hour,          do: Query.css("div.form-group.ends-at input.flatpickr-hour")
+  defp ends_at_minute,        do: Query.css("div.form-group.ends-at input.flatpickr-minute")
   defp location_field,        do: Query.text_field(gettext("Where does the event take place?"))
   defp url_field,             do: Query.text_field(gettext("Specify a website where there is more information about the event, if available"))
   defp submit_button,         do: Query.button(gettext("Save"))
@@ -31,10 +33,14 @@ defmodule HelheimWeb.CreateCalendarEventFlowTest do
       |> click(starts_at_day())
       |> assert_has(starts_at_hour())
       |> fill_in(starts_at_hour(), with: "16")
+      |> assert_has(starts_at_minute())
+      |> fill_in(starts_at_minute(), with: "25")
       |> assert_has(ends_at_flatpickr())
       |> click(ends_at_day())
       |> assert_has(ends_at_hour())
-      |> fill_in(ends_at_hour(), with: "20")
+      |> fill_in(ends_at_hour(), with: "18")
+      |> assert_has(ends_at_minute())
+      |> fill_in(ends_at_minute(), with: "45")
       |> fill_in(location_field(), with: "A super secret location")
       |> fill_in(url_field(), with: "https://super.duper/event")
       |> click(submit_button())
@@ -47,8 +53,8 @@ defmodule HelheimWeb.CreateCalendarEventFlowTest do
     calendar_event = Repo.one!(CalendarEvent)
     assert calendar_event.title == "Super duper event!"
     assert calendar_event.description == "This is a super duper test event."
-    assert calendar_event.starts_at == NaiveDateTime.new(now.year, now.month, 15, 16, 0, 0, 0) |> elem(1)
-    assert calendar_event.ends_at == NaiveDateTime.new(now.year, now.month, 16, 20, 0, 0, 0) |> elem(1)
+    assert calendar_event.starts_at == NaiveDateTime.new(now.year, now.month, 15, 16, 25, 0, 0) |> elem(1)
+    assert calendar_event.ends_at == NaiveDateTime.new(now.year, now.month, 16, 18, 45, 0, 0) |> elem(1)
     assert calendar_event.location == "A super secret location"
     assert calendar_event.url == "https://super.duper/event"
     assert CalendarEvent.pending?(calendar_event)
