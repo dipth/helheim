@@ -44,14 +44,14 @@ defmodule Helheim.Mixfile do
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 0.12.0"},
       {:pbkdf2_elixir, "~> 0.12"},
-      {:guardian, "~> 1.1"},
+      {:guardian, "~> 1.2.1"},
       {:secure_random, "~> 0.5.0"},
       {:bamboo, "~> 0.7"},
       {:bamboo_postmark, "~> 0.4.1"},
       {:calendar, "~> 0.17"},
       {:calendar_translations, "~> 0.0.4"},
       {:calecto, "~> 0.16.0"},
-      {:timex, "~> 3.0"},
+      {:timex, "~> 3.6"},
       {:timex_ecto, "~> 3.0"},
       {:wallaby, "~> 0.23.0", [runtime: false, only: :test]},
       {:ex_machina, "~> 2.0", only: :test},
@@ -67,10 +67,10 @@ defmodule Helheim.Mixfile do
       {:crutches, git: "https://github.com/mykewould/crutches.git"},
       {:scrivener_ecto, "~> 1.1"}, # Pagination
       {:mock, "~> 0.3.3", only: :test},
-      {:scout_apm, "~> 0.0"},
+      {:scout_apm, "~> 1.0"},
       {:stripity_stripe, "~> 1.6.0"},
       {:recaptcha, "~> 2.2"},
-      {:remote_ip, "0.1.3"},
+      {:remote_ip, "~> 0.1.5"},
       {:plug_cowboy, "~> 1.0"}
     ]
   end
