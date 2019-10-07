@@ -8,7 +8,7 @@
   "dependencies": {
     "dragula": "^3.7.2",
     "favico.js": "^0.3.10",
-    "flatpickr": "^4.5.2",
+    "flatpickr": "^4.6.3",
     "intl": "^1.2.5",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.21",
