@@ -8,10 +8,10 @@ defmodule Helheim.ForumTopic do
     field      :body,                :string
     field      :pinned,              :boolean
     field      :forum_replies_count, :integer
-    field      :deleted_at,          Calecto.DateTimeUTC
-    field      :locked_at,           Calecto.DateTimeUTC
+    field      :deleted_at,          :utc_datetime
+    field      :locked_at,           :utc_datetime
 
-    timestamps()
+    timestamps(type: :utc_datetime)
 
     belongs_to :forum,         Helheim.Forum
     belongs_to :user,          Helheim.User
@@ -33,10 +33,10 @@ defmodule Helheim.ForumTopic do
   def latest_over_forum(per \\ 1) do
     from outer in __MODULE__,
       join: inner in fragment("""
-        SELECT *, row_number() OVER (
+        (SELECT *, row_number() OVER (
           PARTITION BY forum_id
           ORDER BY inserted_at DESC
-        ) FROM forum_topics
+        ) FROM forum_topics)
       """),
       where: inner.row_number <= ^per and inner.id == outer.id
   end

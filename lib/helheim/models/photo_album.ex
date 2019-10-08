@@ -11,7 +11,7 @@ defmodule Helheim.PhotoAlbum do
     field :visitor_count, :integer
     field :comment_count, :integer
 
-    timestamps()
+    timestamps(type: :utc_datetime)
 
     belongs_to :user,                Helheim.User
     has_many   :photos,              Helheim.Photo

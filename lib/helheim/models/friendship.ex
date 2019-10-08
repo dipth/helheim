@@ -11,8 +11,8 @@ defmodule Helheim.Friendship do
   schema "friendships" do
     belongs_to :sender,    User
     belongs_to :recipient, User
-    timestamps()
-    field :accepted_at,    Calecto.DateTimeUTC
+    timestamps(type: :utc_datetime)
+    field :accepted_at,    :utc_datetime
   end
 
   ## Changesets

@@ -8,11 +8,11 @@ defmodule Helheim.PrivateMessage do
   schema "private_messages" do
     field      :conversation_id,        :string
     field      :body,                   :string
-    field      :read_at,                Calecto.DateTimeUTC
-    field      :hidden_by_sender_at,    Calecto.DateTimeUTC
-    field      :hidden_by_recipient_at, Calecto.DateTimeUTC
+    field      :read_at,                :utc_datetime
+    field      :hidden_by_sender_at,    :utc_datetime
+    field      :hidden_by_recipient_at, :utc_datetime
 
-    timestamps()
+    timestamps(type: :utc_datetime)
 
     belongs_to :sender,          Helheim.User
     belongs_to :recipient,       Helheim.User

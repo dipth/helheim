@@ -9,7 +9,7 @@ defmodule Helheim.Block do
     belongs_to :blocker, User
     belongs_to :blockee, User
     field      :enabled, :boolean
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   def changeset(struct, params \\ %{}) do

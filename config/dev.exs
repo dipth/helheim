@@ -51,7 +51,6 @@ config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
 config :helheim, Helheim.Repo,
-  adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
   database: "helheim_dev",

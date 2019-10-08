@@ -10,7 +10,7 @@ defmodule Helheim.VisitorLogEntry do
   alias Helheim.Photo
 
   schema "visitor_log_entries" do
-    timestamps()
+    timestamps(type: :utc_datetime)
 
     belongs_to :user,        User
     belongs_to :blog_post,   BlogPost

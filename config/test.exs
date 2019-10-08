@@ -13,7 +13,6 @@ config :logger, level: :warn
 
 # Configure your database
 config :helheim, Helheim.Repo,
-  adapter: Ecto.Adapters.Postgres,
   username: System.get_env("DATABASE_POSTGRESQL_USERNAME") || "postgres",
   password: System.get_env("DATABASE_POSTGRESQL_PASSWORD") || "postgres",
   database: "helheim_test",

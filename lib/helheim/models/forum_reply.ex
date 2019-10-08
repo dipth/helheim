@@ -5,10 +5,10 @@ defmodule Helheim.ForumReply do
 
   schema "forum_replies" do
     field      :body,                :string
-    field      :deleted_at,          Calecto.DateTimeUTC
+    field      :deleted_at,          :utc_datetime
     field      :notice,              :boolean
 
-    timestamps()
+    timestamps(type: :utc_datetime)
 
     belongs_to :forum_topic, Helheim.ForumTopic
     belongs_to :user,        Helheim.User
@@ -29,10 +29,10 @@ defmodule Helheim.ForumReply do
   def latest_over_forum_topic(per \\ 1) do
     from outer in __MODULE__,
       join: inner in fragment("""
-        SELECT *, row_number() OVER (
+        (SELECT *, row_number() OVER (
           PARTITION BY forum_topic_id
           ORDER BY inserted_at DESC
-        ) FROM forum_replies
+        ) FROM forum_replies)
       """),
       where: inner.row_number <= ^per and inner.id == outer.id
   end
