@@ -50,7 +50,7 @@ defmodule Helheim.Mixfile do
       {:bamboo_postmark, "~> 0.4.1"},
       {:calendar, "~> 0.17"},
       {:calendar_translations, "~> 0.0.4"},
-      {:calecto, "~> 0.16.0"},
+      {:calecto, "~> 0.17.0"},
       {:timex, "~> 3.6"},
       {:timex_ecto, "~> 3.0"},
       {:wallaby, "~> 0.23.0", [runtime: false, only: :test]},
