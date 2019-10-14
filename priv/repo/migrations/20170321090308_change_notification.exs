@@ -10,8 +10,8 @@ defmodule Helheim.Repo.Migrations.ChangeNotification do
       add :trigger_person_id, references(:users, on_delete: :nilify_all)
       add :type,              :string, null: false
       timestamps()
-      add :seen_at,           :utc_datetime
-      add :clicked_at,        :utc_datetime
+      add :seen_at,           :utc_datetime_usec
+      add :clicked_at,        :utc_datetime_usec
       add :profile_id,        references(:users,        on_delete: :delete_all)
       add :blog_post_id,      references(:blog_posts,   on_delete: :delete_all)
       add :photo_album_id,    references(:photo_albums, on_delete: :delete_all)
@@ -30,7 +30,7 @@ defmodule Helheim.Repo.Migrations.ChangeNotification do
       add :title, :string, null: false
       add :icon, :string
       add :path, :string
-      add :read_at, :utc_datetime
+      add :read_at, :utc_datetime_usec
       timestamps()
     end
 

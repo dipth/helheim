@@ -4,7 +4,7 @@ defmodule Helheim.Repo.Migrations.AddPasswordResetTokenToUser do
   def change do
     alter table(:users) do
       add :password_reset_token, :string
-      add :password_reset_token_updated_at, :utc_datetime
+      add :password_reset_token_updated_at, :utc_datetime_usec
     end
     create unique_index(:users, [:password_reset_token])
   end

@@ -6,7 +6,7 @@ defmodule Helheim.Repo.Migrations.CreateFriendship do
       add :sender_id, references(:users, on_delete: :delete_all), null: false
       add :recipient_id, references(:users, on_delete: :delete_all), null: false
       timestamps()
-      add :accepted_at, :utc_datetime
+      add :accepted_at, :utc_datetime_usec
     end
 
     create index(:friendships, [:sender_id])

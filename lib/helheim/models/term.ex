@@ -4,7 +4,7 @@ defmodule Helheim.Term do
   schema "terms" do
     field :body,      :string
     field :published, :boolean
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
   end
 
   def changeset(struct, params \\ %{}) do

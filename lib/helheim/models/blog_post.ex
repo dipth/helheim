@@ -7,11 +7,11 @@ defmodule Helheim.BlogPost do
     field :visitor_count, :integer
     field :comment_count, :integer
     field :published,     :boolean
-    field :published_at,  :utc_datetime
+    field :published_at,  :utc_datetime_usec
     field :visibility,    :string
     field :hide_comments, :boolean
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
 
     belongs_to :user,                Helheim.User
     has_many   :comments,            Helheim.Comment

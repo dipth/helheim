@@ -3,7 +3,7 @@ defmodule Helheim.Repo.Migrations.AddDonationRelatedColumns do
 
   def change do
     alter table(:users) do
-      add :last_donation_at, :utc_datetime
+      add :last_donation_at, :utc_datetime_usec
       add :total_donated,    :integer, null: false, default: 0
     end
 

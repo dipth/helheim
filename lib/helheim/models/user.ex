@@ -16,9 +16,9 @@ defmodule Helheim.User do
     field :existing_password,               :string, virtual: true
     field :password_hash,                   :string
     field :password_reset_token,            :string
-    field :password_reset_token_updated_at, :utc_datetime
+    field :password_reset_token_updated_at, :utc_datetime_usec
     field :confirmation_token,              :string
-    field :confirmed_at,                    :utc_datetime
+    field :confirmed_at,                    :utc_datetime_usec
     field :avatar,                          HelheimWeb.Avatar.Type
     field :profile_text,                    :string
     field :role,                            :string
@@ -28,24 +28,24 @@ defmodule Helheim.User do
     field :partnership_status,              :string
     field :partnership_status_custom,       :string, virtual: true
     field :birthday,                        :date
-    field :banned_until,                    :utc_datetime
+    field :banned_until,                    :utc_datetime_usec
     field :ban_reason,                      :string
     field :visitor_count,                   :integer
     field :comment_count,                   :integer
-    field :last_login_at,                   :utc_datetime
+    field :last_login_at,                   :utc_datetime_usec
     field :last_login_ip,                   :string
-    field :previous_login_at,               :utc_datetime
+    field :previous_login_at,               :utc_datetime_usec
     field :previous_login_ip,               :string
     field :max_total_file_size,             :integer
-    field :last_donation_at,                :utc_datetime
+    field :last_donation_at,                :utc_datetime_usec
     field :total_donated,                   :integer
     field :captcha,                         :string, virtual: true
-    field :verified_at,                     :utc_datetime
+    field :verified_at,                     :utc_datetime_usec
     field :notification_sound,              :string
     field :mute_notifications,              :boolean
     field :session_id,                      :string
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
 
     has_many :blog_posts,                Helheim.BlogPost
     has_many :comments,                  Helheim.Comment,        foreign_key: :profile_id

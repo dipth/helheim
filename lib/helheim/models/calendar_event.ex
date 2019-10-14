@@ -14,11 +14,11 @@ defmodule Helheim.CalendarEvent do
     field :location,      :string
     field :url,           :string
     field :image,         HelheimWeb.CalendarEventImage.Type
-    field :approved_at,   :utc_datetime
-    field :rejected_at,   :utc_datetime
+    field :approved_at,   :utc_datetime_usec
+    field :rejected_at,   :utc_datetime_usec
     field :comment_count, :integer
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
 
     belongs_to :user, Helheim.User
     has_many :comments, Helheim.Comment

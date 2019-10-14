@@ -5,10 +5,10 @@ defmodule Helheim.ForumReply do
 
   schema "forum_replies" do
     field      :body,                :string
-    field      :deleted_at,          :utc_datetime
+    field      :deleted_at,          :utc_datetime_usec
     field      :notice,              :boolean
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
 
     belongs_to :forum_topic, Helheim.ForumTopic
     belongs_to :user,        Helheim.User

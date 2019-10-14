@@ -6,7 +6,7 @@ defmodule Helheim.ForumCategory do
     field :description, :string
     field :rank,        :integer
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
 
     has_many :forums, Helheim.Forum
   end

@@ -8,10 +8,10 @@ defmodule Helheim.ForumTopic do
     field      :body,                :string
     field      :pinned,              :boolean
     field      :forum_replies_count, :integer
-    field      :deleted_at,          :utc_datetime
-    field      :locked_at,           :utc_datetime
+    field      :deleted_at,          :utc_datetime_usec
+    field      :locked_at,           :utc_datetime_usec
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
 
     belongs_to :forum,         Helheim.Forum
     belongs_to :user,          Helheim.User

@@ -16,7 +16,7 @@ defmodule Helheim.NotificationSubscription do
   schema "notification_subscriptions" do
     field :type,    :string
     field :enabled, :boolean
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
 
     belongs_to :user,           Helheim.User
     belongs_to :blog_post,      Helheim.BlogPost
