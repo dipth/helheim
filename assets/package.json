@@ -17,7 +17,7 @@
     "set-value": "^3.0.1"
   },
   "devDependencies": {
-    "autoprefixer": "^9.6.4",
+    "autoprefixer": "^9.6.5",
     "babel-brunch": "6.1.1",
     "brunch": "2.10.17",
     "clean-css-brunch": "2.10.0",
