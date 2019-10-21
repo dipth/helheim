@@ -70,6 +70,9 @@ defmodule HelheimWeb.ProfileControllerTest do
       Helheim.VisitorLogEntry, [:passthrough], [track!: fn(_user, _subject) -> {:ok} end] do
 
       profile = Repo.get(User, insert(:user).id)
+
+      IO.inspect {"DEBUG DEBUG DEBUG", user, profile}
+
       get conn, "/profiles/#{profile.id}"
       assert_called Helheim.VisitorLogEntry.track!(user, profile)
     end
