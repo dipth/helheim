@@ -71,7 +71,7 @@ defmodule HelheimWeb.ProfileControllerTest do
 
       profile = Repo.get(User, insert(:user).id)
       get conn, "/profiles/#{profile.id}"
-      assert called Helheim.VisitorLogEntry.track!(user, profile)
+      assert_called Helheim.VisitorLogEntry.track!(user, profile)
     end
 
     test "redirects to the block page if the specified profile blocks the current user", %{conn: conn, user: user} do

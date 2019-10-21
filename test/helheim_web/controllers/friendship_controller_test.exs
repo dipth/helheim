@@ -88,7 +88,7 @@ defmodule HelheimWeb.FriendshipControllerTest do
 
       sender = Repo.get!(Helheim.User, insert(:user).id)
       conn   = post conn, "/profiles/#{sender.id}/contact"
-      assert called Friendship.accept_friendship!(recipient, sender)
+      assert_called Friendship.accept_friendship!(recipient, sender)
       assert redirected_to(conn) == friendship_path(conn, :index)
     end
   end
@@ -113,7 +113,7 @@ defmodule HelheimWeb.FriendshipControllerTest do
 
       user_b = Repo.get!(Helheim.User, insert(:user).id)
       conn   = delete conn, "/profiles/#{user_b.id}/contact"
-      assert called Friendship.cancel_friendship!(user_a, user_b)
+      assert_called Friendship.cancel_friendship!(user_a, user_b)
       assert redirected_to(conn) == friendship_path(conn, :index)
     end
   end

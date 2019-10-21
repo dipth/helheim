@@ -71,7 +71,7 @@ defmodule HelheimWeb.NotificationControllerTest do
         notification = insert(:notification, recipient: user)
         get conn, "/notifications/#{notification.id}"
         notification = Notification |> Notification.with_preloads() |> Repo.get!(notification.id)
-        assert called NotificationService.mark_as_clicked!(notification)
+        assert_called NotificationService.mark_as_clicked!(notification)
       end
     end
 

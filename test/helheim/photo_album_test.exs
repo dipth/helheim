@@ -156,8 +156,8 @@ defmodule Helheim.PhotoAlbumTest do
 
       PhotoAlbum.delete! photo_album
 
-      assert called Photo.delete!(photo1)
-      assert called Photo.delete!(photo2)
+      assert_called Photo.delete!(photo1)
+      assert_called Photo.delete!(photo2)
       refute called Photo.delete!(photo3)
     end
 

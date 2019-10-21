@@ -17,7 +17,7 @@ defmodule HelheimWeb.PrivateMessageControllerTest do
 
       conn    = post conn, "/private_conversations/#{partner.id}/messages", private_message: @post_attrs
       partner = Repo.get(User, partner.id)
-      assert called PrivateMessageService.insert(user, partner, "bar")
+      assert_called PrivateMessageService.insert(user, partner, "bar")
       assert redirected_to(conn) == private_conversation_path(conn, :show, partner.id)
       assert get_flash(conn, :success) == gettext("Message successfully sent")
     end
@@ -27,7 +27,7 @@ defmodule HelheimWeb.PrivateMessageControllerTest do
 
       conn    = post conn, "/private_conversations/#{partner.id}/messages", private_message: @post_attrs
       partner = Repo.get(User, partner.id)
-      assert called PrivateMessageService.insert(user, partner, "bar")
+      assert_called PrivateMessageService.insert(user, partner, "bar")
       assert redirected_to(conn) == private_conversation_path(conn, :show, partner.id)
       assert get_flash(conn, :error) == gettext("Unable to send message")
     end

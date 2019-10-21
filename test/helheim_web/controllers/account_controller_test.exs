@@ -118,7 +118,7 @@ defmodule HelheimWeb.AccountControllerTest do
       User, [:passthrough], [delete!: fn(_user) -> {:ok} end] do
 
       conn = delete conn, "/account"
-      assert called User.delete!(user)
+      assert_called User.delete!(user)
       assert redirected_to(conn) == page_path(conn, :index)
       refute Guardian.Plug.current_resource(conn)
     end

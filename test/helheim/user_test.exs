@@ -217,8 +217,8 @@ defmodule Helheim.UserTest do
 
       User.delete! user
 
-      assert called PhotoAlbum.delete!(photo_album1)
-      assert called PhotoAlbum.delete!(photo_album2)
+      assert_called PhotoAlbum.delete!(photo_album1)
+      assert_called PhotoAlbum.delete!(photo_album2)
       refute called PhotoAlbum.delete!(photo_album3)
     end
 

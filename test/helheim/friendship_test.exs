@@ -83,7 +83,7 @@ defmodule Helheim.FriendshipTest do
       sender    = insert(:user)
       recipient = insert(:user)
       Friendship.request_friendship!(sender, recipient)
-      assert called NotificationChannel.broadcast_notification(recipient.id)
+      assert_called NotificationChannel.broadcast_notification(recipient.id)
     end
   end
 

@@ -15,7 +15,7 @@ defmodule HelheimWeb.Admin.User.VerificationControllerTest do
       conn = post conn, "/admin/users/#{user.id}/verification"
 
       assert redirected_to(conn) == admin_user_path(conn, :show, user)
-      assert called User.verify!(user, admin)
+      assert_called User.verify!(user, admin)
     end
 
     test_with_mock "it redirects back to the admin page for the user when the verification fails", %{conn: conn},
@@ -62,7 +62,7 @@ defmodule HelheimWeb.Admin.User.VerificationControllerTest do
       conn = delete conn, "/admin/users/#{user.id}/verification"
 
       assert redirected_to(conn) == admin_user_path(conn, :show, user)
-      assert called User.unverify!(user)
+      assert_called User.unverify!(user)
     end
 
     test_with_mock "it redirects back to the admin page for the user when the unverification fails", %{conn: conn},

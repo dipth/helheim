@@ -80,7 +80,7 @@ defmodule HelheimWeb.PrivateConversationControllerTest do
       user_b          = insert(:user)
       conversation_id = PrivateMessage.calculate_conversation_id(user_a, user_b)
       get conn, "/private_conversations/#{user_b.id}"
-      assert called PrivateMessage.mark_as_read!(conversation_id, user_a)
+      assert_called PrivateMessage.mark_as_read!(conversation_id, user_a)
     end
 
     test "it does not show the message form when the partner is blocking the current user", %{conn: conn, user: user} do
@@ -110,7 +110,7 @@ defmodule HelheimWeb.PrivateConversationControllerTest do
       user_b          = insert(:user)
       conversation_id = PrivateMessage.calculate_conversation_id(user_a, user_b)
       delete conn, "/private_conversations/#{user_b.id}"
-      assert called PrivateMessage.hide!(conversation_id, %{user: user_a})
+      assert_called PrivateMessage.hide!(conversation_id, %{user: user_a})
     end
   end
 

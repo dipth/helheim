@@ -34,7 +34,7 @@ defmodule HelheimWeb.DonationControllerTest do
       DonationService, [], [create!: fn(_changeset) -> {:ok, %{donation: %{}}} end] do
 
       conn = post conn, "/donations", donation: @valid_attrs
-      assert called DonationService.create!(%{changes: %{amount: @valid_attrs[:amount], token: @valid_attrs[:token]}})
+      assert_called DonationService.create!(%{changes: %{amount: @valid_attrs[:amount], token: @valid_attrs[:token]}})
       assert redirected_to(conn)       =~ donation_path(conn, :thank_you)
     end
 
@@ -42,7 +42,7 @@ defmodule HelheimWeb.DonationControllerTest do
       DonationService, [], [create!: fn(_changeset) -> {:error, :donation, %{}, []} end] do
 
       conn = post conn, "/donations", donation: @invalid_attrs
-      assert called DonationService.create!(%{changes: %{amount: @invalid_attrs[:amount]}})
+      assert_called DonationService.create!(%{changes: %{amount: @invalid_attrs[:amount]}})
       assert html_response(conn, 200) =~ gettext("How much would you like to donate?")
       assert get_flash(conn, :error) == gettext("Something went wrong...")
     end

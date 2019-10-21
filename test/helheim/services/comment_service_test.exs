@@ -34,7 +34,7 @@ defmodule Helheim.CommentServiceTest do
       NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       CommentService.create!(profile, author, @valid_body)
-      assert called NotificationService.create_async!(:_, "comment", profile, author)
+      assert_called NotificationService.create_async!(:_, "comment", profile, author)
     end
   end
 
@@ -88,7 +88,7 @@ defmodule Helheim.CommentServiceTest do
       NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       CommentService.create!(blog_post, author, @valid_body)
-      assert called NotificationService.create_async!(:_, "comment", blog_post, author)
+      assert_called NotificationService.create_async!(:_, "comment", blog_post, author)
     end
   end
 
@@ -142,7 +142,7 @@ defmodule Helheim.CommentServiceTest do
       NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       CommentService.create!(photo, author, @valid_body)
-      assert called NotificationService.create_async!(:_, "comment", photo, author)
+      assert_called NotificationService.create_async!(:_, "comment", photo, author)
     end
   end
 
@@ -196,7 +196,7 @@ defmodule Helheim.CommentServiceTest do
       NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       CommentService.create!(calendar_event, author, @valid_body)
-      assert called NotificationService.create_async!(:_, "comment", calendar_event, author)
+      assert_called NotificationService.create_async!(:_, "comment", calendar_event, author)
     end
   end
 

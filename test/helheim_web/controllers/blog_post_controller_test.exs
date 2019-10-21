@@ -316,7 +316,7 @@ defmodule HelheimWeb.BlogPostControllerTest do
 
       blog_post = BlogPost |> preload(:user) |> Repo.get(insert(:blog_post).id)
       get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
-      assert called Helheim.VisitorLogEntry.track!(user, blog_post)
+      assert_called Helheim.VisitorLogEntry.track!(user, blog_post)
     end
 
     test "redirects to an error page when the blog post is not published or owned by the current user", %{conn: conn, user: user} do

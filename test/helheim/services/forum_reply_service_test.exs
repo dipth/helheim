@@ -31,7 +31,7 @@ defmodule Helheim.ForumReplyServiceTest do
       NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       ForumReplyService.create!(forum_topic, user, @valid_body)
-      assert called NotificationService.create_async!(:_, "forum_reply", forum_topic, user)
+      assert_called NotificationService.create_async!(:_, "forum_reply", forum_topic, user)
     end
   end
 

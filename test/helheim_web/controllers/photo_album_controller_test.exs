@@ -277,7 +277,7 @@ defmodule HelheimWeb.PhotoAlbumControllerTest do
 
       photo_album = insert(:photo_album)
       get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"
-      assert called Helheim.VisitorLogEntry.track!(user, Repo.get(PhotoAlbum, photo_album.id))
+      assert_called Helheim.VisitorLogEntry.track!(user, Repo.get(PhotoAlbum, photo_album.id))
     end
 
     test "it redirects to a block page when the specified profile is blocking the current user", %{conn: conn, user: user} do
@@ -438,7 +438,7 @@ defmodule HelheimWeb.PhotoAlbumControllerTest do
 
       photo_album = Repo.get_by(PhotoAlbum, id: insert(:photo_album, user: user).id)
       conn = delete conn, "/photo_albums/#{photo_album.id}"
-      assert called PhotoAlbum.delete!(photo_album)
+      assert_called PhotoAlbum.delete!(photo_album)
       assert redirected_to(conn) == public_profile_photo_album_path(conn, :index, user)
     end
 

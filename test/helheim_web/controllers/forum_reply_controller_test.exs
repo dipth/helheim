@@ -19,7 +19,7 @@ defmodule HelheimWeb.ForumReplyControllerTest do
       topic          = insert(:forum_topic)
       expected_topic = ForumTopic |> preload(:user) |> Repo.get!(topic.id)
       conn = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
-      assert called ForumReplyService.create!(expected_topic, user, @valid_attrs[:body])
+      assert_called ForumReplyService.create!(expected_topic, user, @valid_attrs[:body])
       assert redirected_to(conn)       =~ forum_forum_topic_path(conn, :show, topic.forum, topic, page: "last")
       assert get_flash(conn, :success) == gettext("Reply created successfully")
     end
@@ -30,7 +30,7 @@ defmodule HelheimWeb.ForumReplyControllerTest do
       topic          = insert(:forum_topic)
       expected_topic = ForumTopic |> preload(:user) |> Repo.get!(topic.id)
       conn = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @invalid_attrs
-      assert called ForumReplyService.create!(expected_topic, user, @invalid_attrs[:body])
+      assert_called ForumReplyService.create!(expected_topic, user, @invalid_attrs[:body])
       assert redirected_to(conn)     == forum_forum_topic_path(conn, :show, topic.forum, topic)
       assert get_flash(conn, :error) == gettext("Reply could not be created")
     end

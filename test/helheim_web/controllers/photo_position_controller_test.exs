@@ -14,7 +14,7 @@ defmodule HelheimWeb.PhotoPositionControllerTest do
       photo_album = Repo.get(PhotoAlbum, insert(:photo_album, user: user).id)
       conn = put conn, "/photo_albums/#{photo_album.id}/photo_positions", photo_ids: ["1", "2", "3"]
 
-      assert called PhotoAlbum.reposition_photos!(photo_album, [1,2,3])
+      assert_called PhotoAlbum.reposition_photos!(photo_album, [1,2,3])
       assert conn.state == :sent
       assert conn.status == 200
     end

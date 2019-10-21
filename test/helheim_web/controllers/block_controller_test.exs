@@ -79,7 +79,7 @@ defmodule HelheimWeb.BlockControllerTest do
 
       blockee = Repo.get!(Helheim.User, insert(:user).id)
       conn    = post conn, "/profiles/#{blockee.id}/block"
-      assert called Block.block!(blocker, blockee)
+      assert_called Block.block!(blocker, blockee)
       assert redirected_to(conn) == block_path(conn, :index)
     end
   end
@@ -104,7 +104,7 @@ defmodule HelheimWeb.BlockControllerTest do
 
       blockee = Repo.get!(Helheim.User, insert(:user).id)
       conn    = delete conn, "/profiles/#{blockee.id}/block"
-      assert called Block.unblock!(blocker, blockee)
+      assert_called Block.unblock!(blocker, blockee)
       assert redirected_to(conn) == block_path(conn, :index)
     end
   end

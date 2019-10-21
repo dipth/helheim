@@ -47,7 +47,7 @@ defmodule Helheim.DonationServiceTest do
 
     test "captures the money via Stripe", %{user: user, changeset: changeset} do
       DonationService.create!(changeset)
-      assert called Stripe.Charges.create(changeset.changes[:amount], [
+      assert_called Stripe.Charges.create(changeset.changes[:amount], [
         source: changeset.changes[:token],
         currency: "dkk",
         description: "Helheim donation from user: #{user.id}"
