@@ -1,5 +1,6 @@
 defmodule HelheimWeb.PrivateMessageControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.PrivateMessageService
   alias Helheim.Repo
@@ -17,7 +18,12 @@ defmodule HelheimWeb.PrivateMessageControllerTest do
 
       conn    = post conn, "/private_conversations/#{partner.id}/messages", private_message: @post_attrs
       partner = Repo.get(User, partner.id)
-      assert_called PrivateMessageService.insert(user, partner, "bar")
+
+      assert_called_with_pattern Helheim.PrivateMessageService, :insert, fn(args) ->
+        user_id    = user.id
+        partner_id = partner.id
+        [%User{id: ^user_id}, %User{id: ^partner_id}, "bar"] = args
+      end
       assert redirected_to(conn) == private_conversation_path(conn, :show, partner.id)
       assert get_flash(conn, :success) == gettext("Message successfully sent")
     end

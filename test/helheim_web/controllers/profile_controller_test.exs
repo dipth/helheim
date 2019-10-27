@@ -1,5 +1,6 @@
 defmodule HelheimWeb.ProfileControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   use Bamboo.Test
   alias Helheim.Repo
@@ -73,14 +74,11 @@ defmodule HelheimWeb.ProfileControllerTest do
 
       get conn, "/profiles/#{profile.id}"
 
-      user_id       = user.id
-      profile_id    = profile.id
-      expected_call = Enum.find(
-        :meck.history(Helheim.VisitorLogEntry),
-        fn({_, {_, method, _}, _}) -> method == :track! end
-      )
-
-      assert {_pid, {_entity, _method, [%User{id: ^user_id}, %User{id: ^profile_id}]}, _result} = expected_call
+      assert_called_with_pattern Helheim.VisitorLogEntry, :track!, fn(args) ->
+        user_id    = user.id
+        profile_id = profile.id
+        [%User{id: ^user_id}, %User{id: ^profile_id}] = args
+      end
     end
 
     test "redirects to the block page if the specified profile blocks the current user", %{conn: conn, user: user} do
