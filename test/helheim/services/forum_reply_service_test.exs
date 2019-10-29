@@ -1,10 +1,12 @@
 defmodule Helheim.ForumReplyServiceTest do
   use Helheim.DataCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.ForumReplyService
   alias Helheim.ForumReply
   alias Helheim.ForumTopic
   alias Helheim.NotificationService
+  alias Helheim.User
 
   @valid_body "My Reply"
   @invalid_body ""
@@ -31,7 +33,12 @@ defmodule Helheim.ForumReplyServiceTest do
       NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       ForumReplyService.create!(forum_topic, user, @valid_body)
-      assert_called NotificationService.create_async!(:_, "forum_reply", forum_topic, user)
+
+      assert_called_with_pattern NotificationService, :create_async!, fn(args) ->
+        forum_topic_id = forum_topic.id
+        user_id        = user.id
+        [anything, %ForumTopic{id: ^forum_topic_id}, %User{id: ^user_id}] = args
+      end
     end
   end
 

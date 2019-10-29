@@ -1,8 +1,10 @@
 defmodule HelheimWeb.PhotoControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.Photo
   alias Helheim.NotificationSubscription
+  alias Helheim.User
 
   @valid_file %Plug.Upload{path: "test/files/1.0MB.jpg", filename: "1.0MB.jpg"}
   @invalid_file %{}
@@ -320,8 +322,12 @@ defmodule HelheimWeb.PhotoControllerTest do
       photo_album = insert(:photo_album, user: profile)
       photo       = create_photo(photo_album)
       get conn, "/profiles/#{profile.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
-      photo = Photo |> preload(:photo_album) |> Repo.get(photo.id)
-      assert_called Helheim.VisitorLogEntry.track!(user, photo)
+
+      assert_called_with_pattern Helheim.VisitorLogEntry, :track!, fn(args) ->
+        user_id  = user.id
+        photo_id = photo.id
+        [%User{id: ^user_id}, %Photo{id: ^photo_id}] = args
+      end
     end
 
     test "it redirects to a block page when the specified profile is blocking the current user", %{conn: conn, user: user} do
@@ -530,7 +536,11 @@ defmodule HelheimWeb.PhotoControllerTest do
       photo_album = insert(:photo_album, user: user)
       photo       = create_photo(photo_album)
       conn        = delete conn, "/photo_albums/#{photo_album.id}/photos/#{photo.id}"
-      assert_called Photo.delete!(Repo.get(Photo, photo.id))
+
+      assert_called_with_pattern Photo, :delete!, fn(args) ->
+        photo_id = photo.id
+        [%Photo{id: ^photo_id}] = args
+      end
       assert redirected_to(conn) == public_profile_photo_album_path(conn, :show, user, photo_album)
     end
 

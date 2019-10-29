@@ -1,5 +1,6 @@
 defmodule HelheimWeb.Admin.User.VerificationControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.User
 
@@ -15,7 +16,11 @@ defmodule HelheimWeb.Admin.User.VerificationControllerTest do
       conn = post conn, "/admin/users/#{user.id}/verification"
 
       assert redirected_to(conn) == admin_user_path(conn, :show, user)
-      assert_called User.verify!(user, admin)
+      assert_called_with_pattern User, :verify!, fn(args) ->
+        user_id  = user.id
+        admin_id = admin.id
+        [%User{id: ^user_id}, %User{id: ^admin_id}] = args
+      end
     end
 
     test_with_mock "it redirects back to the admin page for the user when the verification fails", %{conn: conn},
@@ -62,7 +67,10 @@ defmodule HelheimWeb.Admin.User.VerificationControllerTest do
       conn = delete conn, "/admin/users/#{user.id}/verification"
 
       assert redirected_to(conn) == admin_user_path(conn, :show, user)
-      assert_called User.unverify!(user)
+      assert_called_with_pattern User, :unverify!, fn(args) ->
+        user_id = user.id
+        [%User{id: ^user_id}] = args
+      end
     end
 
     test_with_mock "it redirects back to the admin page for the user when the unverification fails", %{conn: conn},

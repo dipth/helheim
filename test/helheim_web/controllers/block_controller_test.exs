@@ -1,7 +1,9 @@
 defmodule HelheimWeb.BlockControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.Block
+  alias Helheim.User
 
   ##############################################################################
   # index/2
@@ -77,9 +79,13 @@ defmodule HelheimWeb.BlockControllerTest do
     test_with_mock "it blocks the specified user and redirects to the blocks list", %{conn: conn, user: blocker},
       Block, [], [block!: fn(_blocker, _blockee) -> {:ok, nil} end] do
 
-      blockee = Repo.get!(Helheim.User, insert(:user).id)
+      blockee = insert(:user)
       conn    = post conn, "/profiles/#{blockee.id}/block"
-      assert_called Block.block!(blocker, blockee)
+      assert_called_with_pattern Block, :block!, fn(args) ->
+        blocker_id = blocker.id
+        blockee_id = blockee.id
+        [%User{id: ^blocker_id}, %User{id: ^blockee_id}] = args
+      end
       assert redirected_to(conn) == block_path(conn, :index)
     end
   end
@@ -102,9 +108,13 @@ defmodule HelheimWeb.BlockControllerTest do
     test_with_mock "it unblocks the specified user and redirects to the blocks list", %{conn: conn, user: blocker},
       Block, [], [unblock!: fn(_blocker, _blockee) -> {:ok, nil} end] do
 
-      blockee = Repo.get!(Helheim.User, insert(:user).id)
+      blockee = insert(:user)
       conn    = delete conn, "/profiles/#{blockee.id}/block"
-      assert_called Block.unblock!(blocker, blockee)
+      assert_called_with_pattern Block, :unblock!, fn(args) ->
+        blocker_id = blocker.id
+        blockee_id = blockee.id
+        [%User{id: ^blocker_id}, %User{id: ^blockee_id}] = args
+      end
       assert redirected_to(conn) == block_path(conn, :index)
     end
   end

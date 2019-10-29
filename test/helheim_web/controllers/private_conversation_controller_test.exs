@@ -1,7 +1,9 @@
 defmodule HelheimWeb.PrivateConversationControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.PrivateMessage
+  alias Helheim.User
 
   ##############################################################################
   # index/2
@@ -80,7 +82,11 @@ defmodule HelheimWeb.PrivateConversationControllerTest do
       user_b          = insert(:user)
       conversation_id = PrivateMessage.calculate_conversation_id(user_a, user_b)
       get conn, "/private_conversations/#{user_b.id}"
-      assert_called PrivateMessage.mark_as_read!(conversation_id, user_a)
+
+      assert_called_with_pattern PrivateMessage, :mark_as_read!, fn(args) ->
+        user_a_id = user_a.id
+        [^conversation_id, %User{id: ^user_a_id}] = args
+      end
     end
 
     test "it does not show the message form when the partner is blocking the current user", %{conn: conn, user: user} do
@@ -110,7 +116,11 @@ defmodule HelheimWeb.PrivateConversationControllerTest do
       user_b          = insert(:user)
       conversation_id = PrivateMessage.calculate_conversation_id(user_a, user_b)
       delete conn, "/private_conversations/#{user_b.id}"
-      assert_called PrivateMessage.hide!(conversation_id, %{user: user_a})
+
+      assert_called_with_pattern PrivateMessage, :hide!, fn(args) ->
+        user_a_id = user_a.id
+        [^conversation_id, %{user: %User{id: ^user_a_id}}] = args
+      end
     end
   end
 

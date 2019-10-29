@@ -1,5 +1,6 @@
 defmodule Helheim.DonationServiceTest do
   use Helheim.DataCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.Donation
   alias Helheim.DonationService
@@ -47,11 +48,13 @@ defmodule Helheim.DonationServiceTest do
 
     test "captures the money via Stripe", %{user: user, changeset: changeset} do
       DonationService.create!(changeset)
-      assert_called Stripe.Charges.create(changeset.changes[:amount], [
-        source: changeset.changes[:token],
-        currency: "dkk",
-        description: "Helheim donation from user: #{user.id}"
-      ])
+
+      assert_called_with_pattern Stripe.Charges, :create, fn(args) ->
+        amount      = changeset.changes[:amount]
+        token       = changeset.changes[:token]
+        description = "Helheim donation from user: #{user.id}"
+        [^amount, [source: ^token, currency: "dkk", description: ^description]] = args
+      end
     end
   end
 

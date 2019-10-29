@@ -1,5 +1,6 @@
 defmodule Helheim.UserTest do
   use Helheim.DataCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.Repo
   alias Helheim.User
@@ -211,15 +212,24 @@ defmodule Helheim.UserTest do
       PhotoAlbum, [:passthrough], [delete!: fn(_photo_album) -> {:ok} end] do
 
       user         = insert(:user)
-      photo_album1 = Repo.get_by(PhotoAlbum, id: insert(:photo_album, user: user).id)
-      photo_album2 = Repo.get_by(PhotoAlbum, id: insert(:photo_album, user: user).id)
-      photo_album3 = Repo.get_by(PhotoAlbum, id: insert(:photo_album).id)
+      photo_album1 = insert(:photo_album, user: user)
+      photo_album2 = insert(:photo_album, user: user)
+      photo_album3 = insert(:photo_album)
 
       User.delete! user
 
-      assert_called PhotoAlbum.delete!(photo_album1)
-      assert_called PhotoAlbum.delete!(photo_album2)
-      refute called PhotoAlbum.delete!(photo_album3)
+      assert_called_with_pattern PhotoAlbum, :delete!, fn(args) ->
+        photo_album_id = photo_album1.id
+        [%PhotoAlbum{id: ^photo_album_id}] = args
+      end
+      assert_called_with_pattern PhotoAlbum, :delete!, fn(args) ->
+        photo_album_id = photo_album2.id
+        [%PhotoAlbum{id: ^photo_album_id}] = args
+      end
+      refute_called_with_pattern PhotoAlbum, :delete!, fn(args) ->
+        photo_album_id = photo_album3.id
+        [%PhotoAlbum{id: ^photo_album_id}] = args
+      end
     end
 
     test "it deletes the user" do

@@ -1,7 +1,9 @@
 defmodule HelheimWeb.PhotoAlbumControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.PhotoAlbum
+  alias Helheim.User
 
   @valid_upload %Plug.Upload{path: "test/files/1.0MB.jpg", filename: "1.0MB.jpg"}
   @valid_attrs %{description: "Description Text", title: "Title String", visibility: "public"}
@@ -277,7 +279,12 @@ defmodule HelheimWeb.PhotoAlbumControllerTest do
 
       photo_album = insert(:photo_album)
       get conn, "/profiles/#{photo_album.user.id}/photo_albums/#{photo_album.id}"
-      assert_called Helheim.VisitorLogEntry.track!(user, Repo.get(PhotoAlbum, photo_album.id))
+
+      assert_called_with_pattern Helheim.VisitorLogEntry, :track!, fn(args) ->
+        user_id        = user.id
+        photo_album_id = photo_album.id
+        [%User{id: ^user_id}, %PhotoAlbum{id: ^photo_album_id}] = args
+      end
     end
 
     test "it redirects to a block page when the specified profile is blocking the current user", %{conn: conn, user: user} do
@@ -436,9 +443,13 @@ defmodule HelheimWeb.PhotoAlbumControllerTest do
     test_with_mock "it deletes the photo album when posting existing photo album id belonging to the user", %{conn: conn, user: user},
       PhotoAlbum, [:passthrough], [delete!: fn(_photo_album) -> {:ok} end] do
 
-      photo_album = Repo.get_by(PhotoAlbum, id: insert(:photo_album, user: user).id)
+      photo_album = insert(:photo_album, user: user)
       conn = delete conn, "/photo_albums/#{photo_album.id}"
-      assert_called PhotoAlbum.delete!(photo_album)
+
+      assert_called_with_pattern PhotoAlbum, :delete!, fn(args) ->
+        photo_album_id = photo_album.id
+        [%PhotoAlbum{id: ^photo_album_id}] = args
+      end
       assert redirected_to(conn) == public_profile_photo_album_path(conn, :index, user)
     end
 

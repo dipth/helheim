@@ -1,5 +1,6 @@
 defmodule Helheim.CommentServiceTest do
   use Helheim.DataCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.CommentService
   alias Helheim.Comment
@@ -34,7 +35,12 @@ defmodule Helheim.CommentServiceTest do
       NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       CommentService.create!(profile, author, @valid_body)
-      assert_called NotificationService.create_async!(:_, "comment", profile, author)
+
+      assert_called_with_pattern NotificationService, :create_async!, fn(args) ->
+        profile_id = profile.id
+        author_id  = author.id
+        [anything, "comment", %User{id: ^profile_id}, %User{id: ^author_id}] = args
+      end
     end
   end
 
@@ -88,7 +94,12 @@ defmodule Helheim.CommentServiceTest do
       NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       CommentService.create!(blog_post, author, @valid_body)
-      assert_called NotificationService.create_async!(:_, "comment", blog_post, author)
+
+      assert_called_with_pattern NotificationService, :create_async!, fn(args) ->
+        blog_post_id = blog_post.id
+        author_id    = author.id
+        [anything, "comment", %BlogPost{id: ^blog_post_id}, %User{id: ^author_id}] = args
+      end
     end
   end
 
@@ -142,7 +153,12 @@ defmodule Helheim.CommentServiceTest do
       NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       CommentService.create!(photo, author, @valid_body)
-      assert_called NotificationService.create_async!(:_, "comment", photo, author)
+
+      assert_called_with_pattern NotificationService, :create_async!, fn(args) ->
+        photo_id  = photo.id
+        author_id = author.id
+        [anything, "comment", %Photo{id: ^photo_id}, %User{id: ^author_id}] = args
+      end
     end
   end
 
@@ -196,7 +212,12 @@ defmodule Helheim.CommentServiceTest do
       NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       CommentService.create!(calendar_event, author, @valid_body)
-      assert_called NotificationService.create_async!(:_, "comment", calendar_event, author)
+
+      assert_called_with_pattern NotificationService, :create_async!, fn(args) ->
+        calendar_event_id = calendar_event.id
+        author_id         = author.id
+        [anything, "comment", %CalendarEvent{id: ^calendar_event_id}, %User{id: ^author_id}] = args
+      end
     end
   end
 

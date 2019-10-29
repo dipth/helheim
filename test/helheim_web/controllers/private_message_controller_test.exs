@@ -3,7 +3,6 @@ defmodule HelheimWeb.PrivateMessageControllerTest do
   use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.PrivateMessageService
-  alias Helheim.Repo
   alias Helheim.User
 
   @post_attrs %{body: "bar"}
@@ -16,10 +15,9 @@ defmodule HelheimWeb.PrivateMessageControllerTest do
     test_with_mock "it redirects to the conversation with a success flash message when successfull", %{conn: conn, user: user, partner: partner},
       PrivateMessageService, [], [insert: fn(_sender,_recipient,_body) -> {:ok, %{private_message: %{}, notification: %{}}} end] do
 
-      conn    = post conn, "/private_conversations/#{partner.id}/messages", private_message: @post_attrs
-      partner = Repo.get(User, partner.id)
+      conn = post conn, "/private_conversations/#{partner.id}/messages", private_message: @post_attrs
 
-      assert_called_with_pattern Helheim.PrivateMessageService, :insert, fn(args) ->
+      assert_called_with_pattern PrivateMessageService, :insert, fn(args) ->
         user_id    = user.id
         partner_id = partner.id
         [%User{id: ^user_id}, %User{id: ^partner_id}, "bar"] = args
@@ -31,9 +29,13 @@ defmodule HelheimWeb.PrivateMessageControllerTest do
     test_with_mock "it redirects to the conversation with an error flash message when unsuccessfull", %{conn: conn, user: user, partner: partner},
       PrivateMessageService, [], [insert: fn(_sender,_recipient,_body) -> {:error, :private_message, %{}, []} end] do
 
-      conn    = post conn, "/private_conversations/#{partner.id}/messages", private_message: @post_attrs
-      partner = Repo.get(User, partner.id)
-      assert_called PrivateMessageService.insert(user, partner, "bar")
+      conn = post conn, "/private_conversations/#{partner.id}/messages", private_message: @post_attrs
+
+      assert_called_with_pattern PrivateMessageService, :insert, fn(args) ->
+        user_id    = user.id
+        partner_id = partner.id
+        [%User{id: ^user_id}, %User{id: ^partner_id}, "bar"] = args
+      end
       assert redirected_to(conn) == private_conversation_path(conn, :show, partner.id)
       assert get_flash(conn, :error) == gettext("Unable to send message")
     end

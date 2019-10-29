@@ -1,5 +1,6 @@
 defmodule HelheimWeb.PhotoPositionControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.PhotoAlbum
 
@@ -11,10 +12,13 @@ defmodule HelheimWeb.PhotoPositionControllerTest do
     test_with_mock "it updates the positions of the specified photos in the specified album and returns a successful response", %{conn: conn, user: user},
       PhotoAlbum, [:passthrough], [reposition_photos!: fn(_photo_album, _photo_ids) -> {3, nil} end] do
 
-      photo_album = Repo.get(PhotoAlbum, insert(:photo_album, user: user).id)
+      photo_album = insert(:photo_album, user: user)
       conn = put conn, "/photo_albums/#{photo_album.id}/photo_positions", photo_ids: ["1", "2", "3"]
 
-      assert_called PhotoAlbum.reposition_photos!(photo_album, [1,2,3])
+      assert_called_with_pattern PhotoAlbum, :reposition_photos!, fn(args) ->
+        photo_album_id = photo_album.id
+        [%PhotoAlbum{id: ^photo_album_id}, [1,2,3]] = args
+      end
       assert conn.state == :sent
       assert conn.status == 200
     end

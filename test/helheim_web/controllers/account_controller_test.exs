@@ -1,5 +1,6 @@
 defmodule HelheimWeb.AccountControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   use Bamboo.Test
   alias Helheim.Repo
@@ -118,7 +119,11 @@ defmodule HelheimWeb.AccountControllerTest do
       User, [:passthrough], [delete!: fn(_user) -> {:ok} end] do
 
       conn = delete conn, "/account"
-      assert_called User.delete!(user)
+
+      assert_called_with_pattern User, :delete!, fn(args) ->
+        user_id = user.id
+        [%User{id: ^user_id}] = args
+      end
       assert redirected_to(conn) == page_path(conn, :index)
       refute Guardian.Plug.current_resource(conn)
     end

@@ -1,5 +1,6 @@
 defmodule HelheimWeb.CommentControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.CommentService
   alias Helheim.Repo
@@ -75,9 +76,15 @@ defmodule HelheimWeb.CommentControllerTest do
     test_with_mock "it redirects to the profile comments page with a success flash message when successfull", %{conn: conn, user: user},
       CommentService, [], [create!: fn(_commentable, _author, _body) -> {:ok, %{comment: %{}}} end] do
 
-      profile = Repo.get(User, insert(:user).id)
+      profile = insert(:user)
       conn    = post conn, "/profiles/#{profile.id}/comments", comment: @comment_attrs
-      assert_called CommentService.create!(profile, user, @comment_attrs[:body])
+
+      assert_called_with_pattern CommentService, :create!, fn(args) ->
+        profile_id = profile.id
+        user_id    = user.id
+        body       = @comment_attrs[:body]
+        [%User{id: ^profile_id}, %User{id: ^user_id}, ^body] = args
+      end
       assert redirected_to(conn)       == public_profile_comment_path(conn, :index, profile.id)
       assert get_flash(conn, :success) == gettext("Comment created successfully")
     end
@@ -85,9 +92,15 @@ defmodule HelheimWeb.CommentControllerTest do
     test_with_mock "it redirects to the profile comments page with an error flash message when unsuccessfull", %{conn: conn, user: user},
       CommentService, [], [create!: fn(_commentable, _author, _body) -> {:error, :comment, %{}, []} end] do
 
-      profile = Repo.get(User, insert(:user).id)
+      profile = insert(:user)
       conn    = post conn, "/profiles/#{profile.id}/comments", comment: @comment_attrs
-      assert_called CommentService.create!(profile, user, @comment_attrs[:body])
+
+      assert_called_with_pattern CommentService, :create!, fn(args) ->
+        profile_id = profile.id
+        user_id    = user.id
+        body       = @comment_attrs[:body]
+        [%User{id: ^profile_id}, %User{id: ^user_id}, ^body] = args
+      end
       assert redirected_to(conn)     == public_profile_comment_path(conn, :index, profile.id)
       assert get_flash(conn, :error) == gettext("Unable to create comment")
     end
@@ -132,9 +145,15 @@ defmodule HelheimWeb.CommentControllerTest do
     test_with_mock "it redirects to the blog post page with a success flash message when successfull", %{conn: conn, user: user},
       CommentService, [], [create!: fn(_commentable, _author, _body) -> {:ok, %{comment: %{}}} end] do
 
-      blog_post = BlogPost |> preload(:user) |> Repo.get!(insert(:blog_post).id)
+      blog_post = insert(:blog_post)
       conn      = post conn, "/blog_posts/#{blog_post.id}/comments", comment: @comment_attrs
-      assert_called CommentService.create!(blog_post, user, @comment_attrs[:body])
+
+      assert_called_with_pattern CommentService, :create!, fn(args) ->
+        blog_post_id = blog_post.id
+        user_id      = user.id
+        body         = @comment_attrs[:body]
+        [%BlogPost{id: ^blog_post_id}, %User{id: ^user_id}, ^body] = args
+      end
       assert redirected_to(conn)       == public_profile_blog_post_path(conn, :show, blog_post.user, blog_post)
       assert get_flash(conn, :success) == gettext("Comment created successfully")
     end
@@ -142,9 +161,15 @@ defmodule HelheimWeb.CommentControllerTest do
     test_with_mock "it redirects to the blog post page with an error flash message when unsuccessfull", %{conn: conn, user: user},
       CommentService, [], [create!: fn(_commentable, _author, _body) -> {:error, :comment, %{}, []} end] do
 
-      blog_post = BlogPost |> preload(:user) |> Repo.get!(insert(:blog_post).id)
+      blog_post = insert(:blog_post)
       conn      = post conn, "/blog_posts/#{blog_post.id}/comments", comment: @comment_attrs
-      assert_called CommentService.create!(blog_post, user, @comment_attrs[:body])
+
+      assert_called_with_pattern CommentService, :create!, fn(args) ->
+        blog_post_id = blog_post.id
+        user_id      = user.id
+        body         = @comment_attrs[:body]
+        [%BlogPost{id: ^blog_post_id}, %User{id: ^user_id}, ^body] = args
+      end
       assert redirected_to(conn)     == public_profile_blog_post_path(conn, :show, blog_post.user, blog_post)
       assert get_flash(conn, :error) == gettext("Unable to create comment")
     end
@@ -190,9 +215,15 @@ defmodule HelheimWeb.CommentControllerTest do
     test_with_mock "it redirects to the photo page with a success flash message when successfull", %{conn: conn, user: user},
       CommentService, [], [create!: fn(_commentable, _author, _body) -> {:ok, %{comment: %{}}} end] do
 
-      photo = Photo |> preload(photo_album: :user) |> Repo.get!(insert(:photo).id)
+      photo = insert(:photo)
       conn  = post conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/comments", comment: @comment_attrs
-      assert_called CommentService.create!(photo, user, @comment_attrs[:body])
+
+      assert_called_with_pattern CommentService, :create!, fn(args) ->
+        photo_id = photo.id
+        user_id      = user.id
+        body         = @comment_attrs[:body]
+        [%Photo{id: ^photo_id}, %User{id: ^user_id}, ^body] = args
+      end
       assert redirected_to(conn)       == public_profile_photo_album_photo_path(conn, :show, photo.photo_album.user_id, photo.photo_album.id, photo)
       assert get_flash(conn, :success) == gettext("Comment created successfully")
     end
@@ -200,9 +231,15 @@ defmodule HelheimWeb.CommentControllerTest do
     test_with_mock "it redirects to the photo page with an error flash message when unsuccessfull", %{conn: conn, user: user},
       CommentService, [], [create!: fn(_commentable, _author, _body) -> {:error, :comment, %{}, []} end] do
 
-      photo = Photo |> preload(photo_album: :user) |> Repo.get!(insert(:photo).id)
+      photo = insert(:photo)
       conn  = post conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/comments", comment: @comment_attrs
-      assert_called CommentService.create!(photo, user, @comment_attrs[:body])
+
+      assert_called_with_pattern CommentService, :create!, fn(args) ->
+        photo_id = photo.id
+        user_id      = user.id
+        body         = @comment_attrs[:body]
+        [%Photo{id: ^photo_id}, %User{id: ^user_id}, ^body] = args
+      end
       assert redirected_to(conn)     == public_profile_photo_album_photo_path(conn, :show, photo.photo_album.user_id, photo.photo_album.id, photo)
       assert get_flash(conn, :error) == gettext("Unable to create comment")
     end
@@ -249,9 +286,15 @@ defmodule HelheimWeb.CommentControllerTest do
     test_with_mock "it redirects to the event page with a success flash message when successfull", %{conn: conn, user: user},
       CommentService, [], [create!: fn(_commentable, _author, _body) -> {:ok, %{comment: %{}}} end] do
 
-      calendar_event = Repo.get(CalendarEvent, insert(:calendar_event).id)
+      calendar_event = insert(:calendar_event)
       conn           = post conn, "/calendar_events/#{calendar_event.id}/comments", comment: @comment_attrs
-      assert_called CommentService.create!(calendar_event, user, @comment_attrs[:body])
+
+      assert_called_with_pattern CommentService, :create!, fn(args) ->
+        calendar_event_id = calendar_event.id
+        user_id           = user.id
+        body              = @comment_attrs[:body]
+        [%CalendarEvent{id: ^calendar_event_id}, %User{id: ^user_id}, ^body] = args
+      end
       assert redirected_to(conn)       == calendar_event_path(conn, :show, calendar_event.id)
       assert get_flash(conn, :success) == gettext("Comment created successfully")
     end
@@ -259,9 +302,15 @@ defmodule HelheimWeb.CommentControllerTest do
     test_with_mock "it redirects to the event page with an error flash message when unsuccessfull", %{conn: conn, user: user},
       CommentService, [], [create!: fn(_commentable, _author, _body) -> {:error, :comment, %{}, []} end] do
 
-      calendar_event = Repo.get(CalendarEvent, insert(:calendar_event).id)
+      calendar_event = insert(:calendar_event)
       conn           = post conn, "/calendar_events/#{calendar_event.id}/comments", comment: @comment_attrs
-      assert_called CommentService.create!(calendar_event, user, @comment_attrs[:body])
+
+      assert_called_with_pattern CommentService, :create!, fn(args) ->
+        calendar_event_id = calendar_event.id
+        user_id           = user.id
+        body              = @comment_attrs[:body]
+        [%CalendarEvent{id: ^calendar_event_id}, %User{id: ^user_id}, ^body] = args
+      end
       assert redirected_to(conn)     == calendar_event_path(conn, :show, calendar_event.id)
       assert get_flash(conn, :error) == gettext("Unable to create comment")
     end

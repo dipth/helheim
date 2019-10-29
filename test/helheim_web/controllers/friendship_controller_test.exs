@@ -1,7 +1,9 @@
 defmodule HelheimWeb.FriendshipControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.Friendship
+  alias Helheim.User
 
   ##############################################################################
   # index/2 for your own list
@@ -86,9 +88,14 @@ defmodule HelheimWeb.FriendshipControllerTest do
     test_with_mock "it accepts a friendship request from the the specified user to the current user and redirects to the friend list", %{conn: conn, user: recipient},
       Friendship, [:passthrough], [accept_friendship!: fn(_recipient, _sender) -> {:ok, nil} end] do
 
-      sender = Repo.get!(Helheim.User, insert(:user).id)
+      sender = insert(:user)
       conn   = post conn, "/profiles/#{sender.id}/contact"
-      assert_called Friendship.accept_friendship!(recipient, sender)
+
+      assert_called_with_pattern Friendship, :accept_friendship!, fn(args) ->
+        recipient_id = recipient.id
+        sender_id    = sender.id
+        [%User{id: ^recipient_id}, %User{id: ^sender_id}] = args
+      end
       assert redirected_to(conn) == friendship_path(conn, :index)
     end
   end
@@ -111,9 +118,14 @@ defmodule HelheimWeb.FriendshipControllerTest do
     test_with_mock "it cancels a friendship between the specified user and the current user and redirects to the friend list", %{conn: conn, user: user_a},
       Friendship, [:passthrough], [cancel_friendship!: fn(_user_a, _user_b) -> {:ok, nil} end] do
 
-      user_b = Repo.get!(Helheim.User, insert(:user).id)
+      user_b = insert(:user)
       conn   = delete conn, "/profiles/#{user_b.id}/contact"
-      assert_called Friendship.cancel_friendship!(user_a, user_b)
+
+      assert_called_with_pattern Friendship, :cancel_friendship!, fn(args) ->
+        user_a_id = user_a.id
+        user_b_id = user_b.id
+        [%User{id: ^user_a_id}, %User{id: ^user_b_id}] = args
+      end
       assert redirected_to(conn) == friendship_path(conn, :index)
     end
   end

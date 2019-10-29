@@ -1,9 +1,11 @@
 defmodule Helheim.FriendshipTest do
   use Helheim.DataCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.Repo
   alias Helheim.Friendship
   alias HelheimWeb.NotificationChannel
+  alias Helheim.User
 
   ## Changesets
 
@@ -83,7 +85,11 @@ defmodule Helheim.FriendshipTest do
       sender    = insert(:user)
       recipient = insert(:user)
       Friendship.request_friendship!(sender, recipient)
-      assert_called NotificationChannel.broadcast_notification(recipient.id)
+
+      assert_called_with_pattern NotificationChannel, :broadcast_notification, fn(args) ->
+        recipient_id = recipient.id
+        [%User{id: ^recipient_id}] = args
+      end
     end
   end
 
