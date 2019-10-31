@@ -150,7 +150,7 @@ defmodule Helheim.UserTest do
       {:ok, confirmed_at} = Calendar.DateTime.Parse.rfc3339_utc("2015-01-01T00:00:00Z")
       user = insert(:user, confirmed_at: confirmed_at)
       {:ok, user} = User.confirm!(user)
-      assert user.confirmed_at == confirmed_at
+      assert Timex.diff(user.confirmed_at, confirmed_at, :seconds) == 0
     end
   end
 
