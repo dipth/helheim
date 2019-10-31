@@ -5,7 +5,6 @@ defmodule Helheim.FriendshipTest do
   alias Helheim.Repo
   alias Helheim.Friendship
   alias HelheimWeb.NotificationChannel
-  alias Helheim.User
 
   ## Changesets
 
@@ -86,10 +85,7 @@ defmodule Helheim.FriendshipTest do
       recipient = insert(:user)
       Friendship.request_friendship!(sender, recipient)
 
-      assert_called_with_pattern NotificationChannel, :broadcast_notification, fn(args) ->
-        recipient_id = recipient.id
-        [%User{id: ^recipient_id}] = args
-      end
+      assert_called NotificationChannel.broadcast_notification(recipient.id)
     end
   end
 
