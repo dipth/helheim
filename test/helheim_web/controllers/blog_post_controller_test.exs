@@ -244,8 +244,8 @@ defmodule HelheimWeb.BlogPostControllerTest do
       assert redirected_to(conn) == public_profile_blog_post_path(conn, :show, user, blog_post)
     end
 
-    test "it creates a notification subscription for the newly created blog post when posting valid params", %{conn: conn, user: user} do
-      conn = post conn, "/blog_posts", blog_post: @valid_attrs
+    test "it creates a notification subscription for the newly created blog post when posting valid params", %{conn: conn} do
+      post conn, "/blog_posts", blog_post: @valid_attrs
       blog_post = Repo.one(BlogPost)
       sub = Repo.one(NotificationSubscription)
       assert sub.user_id == blog_post.user_id

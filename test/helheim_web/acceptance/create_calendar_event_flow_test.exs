@@ -1,26 +1,26 @@
 defmodule HelheimWeb.CreateCalendarEventFlowTest do
   use HelheimWeb.AcceptanceCase
-  alias Helheim.CalendarEvent
-  alias Helheim.Repo
+  # alias Helheim.CalendarEvent
+  # alias Helheim.Repo
 
-  defp calendar_events_link,  do: Query.link(gettext("Event calendar"))
-  defp create_link,           do: Query.link(gettext("Create event"))
-  defp title_field,           do: Query.text_field(gettext("Title"))
-  defp description_field,     do: Query.text_field(gettext("Give a good description of the event"))
-  defp starts_at_flatpickr,   do: Query.css("div.form-group.starts-at .flatpickr-calendar")
-  defp starts_at_day,         do: Query.css("div.form-group.starts-at .flatpickr-day", text: "15")
-  defp starts_at_hour,        do: Query.css("div.form-group.starts-at input.flatpickr-hour")
-  defp starts_at_minute,      do: Query.css("div.form-group.starts-at input.flatpickr-minute")
-  defp ends_at_flatpickr,     do: Query.css("div.form-group.ends-at .flatpickr-calendar")
-  defp ends_at_day,           do: Query.css("div.form-group.ends-at .flatpickr-day", text: "16")
-  defp ends_at_hour,          do: Query.css("div.form-group.ends-at input.flatpickr-hour")
-  defp ends_at_minute,        do: Query.css("div.form-group.ends-at input.flatpickr-minute")
-  defp location_field,        do: Query.text_field(gettext("Where does the event take place?"))
-  defp url_field,             do: Query.text_field(gettext("Specify a website where there is more information about the event, if available"))
-  defp submit_button,         do: Query.button(gettext("Save"))
-  defp success_alert,         do: Query.css(".alert.alert-success")
+  # defp calendar_events_link,  do: Query.link(gettext("Event calendar"))
+  # defp create_link,           do: Query.link(gettext("Create event"))
+  # defp title_field,           do: Query.text_field(gettext("Title"))
+  # defp description_field,     do: Query.text_field(gettext("Give a good description of the event"))
+  # defp starts_at_flatpickr,   do: Query.css("div.form-group.starts-at .flatpickr-calendar")
+  # defp starts_at_day,         do: Query.css("div.form-group.starts-at .flatpickr-day", text: "15")
+  # defp starts_at_hour,        do: Query.css("div.form-group.starts-at input.flatpickr-hour")
+  # defp starts_at_minute,      do: Query.css("div.form-group.starts-at input.flatpickr-minute")
+  # defp ends_at_flatpickr,     do: Query.css("div.form-group.ends-at .flatpickr-calendar")
+  # defp ends_at_day,           do: Query.css("div.form-group.ends-at .flatpickr-day", text: "16")
+  # defp ends_at_hour,          do: Query.css("div.form-group.ends-at input.flatpickr-hour")
+  # defp ends_at_minute,        do: Query.css("div.form-group.ends-at input.flatpickr-minute")
+  # defp location_field,        do: Query.text_field(gettext("Where does the event take place?"))
+  # defp url_field,             do: Query.text_field(gettext("Specify a website where there is more information about the event, if available"))
+  # defp submit_button,         do: Query.button(gettext("Save"))
+  # defp success_alert,         do: Query.css(".alert.alert-success")
 
-  setup [:create_and_sign_in_user]
+  # setup [:create_and_sign_in_user]
 
   # TODO: Figure out why these fail randomly on CI
   # test "users can submit new calendar events", %{session: session} do
