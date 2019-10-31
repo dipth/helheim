@@ -8,8 +8,8 @@ defmodule Helheim.DonationService do
   def create!(changeset) do
     Multi.new |> Multi.insert(:donation, changeset)
               |> update_user(changeset)
-              |> Multi.run(:charge, &charge/1)
-              |> Multi.run(:write_charge, &write_charge/1)
+              |> Multi.run(:charge, &charge/2)
+              |> Multi.run(:write_charge, &write_charge/2)
               |> Repo.transaction
   end
 
@@ -23,7 +23,7 @@ defmodule Helheim.DonationService do
                               inc: [max_total_file_size: Donation.calculate_extra_space(amount)])
   end
 
-  defp charge(%{donation: %{token: token, amount: amount, user_id: user_id}}) do
+  defp charge(_repo, %{donation: %{token: token, amount: amount, user_id: user_id}}) do
     Stripe.Charges.create(amount, [
       source: token,
       currency: "dkk",
@@ -31,7 +31,7 @@ defmodule Helheim.DonationService do
     ])
   end
 
-  defp write_charge(%{donation: donation, charge: charge}) do
+  defp write_charge(_repo, %{donation: donation, charge: charge}) do
     donation
     |> Ecto.Changeset.change(charge: charge)
     |> Repo.update

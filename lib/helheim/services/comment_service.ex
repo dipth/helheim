@@ -59,10 +59,14 @@ defmodule Helheim.CommentService do
   end
 
   defp trigger_notifications(multi, commentable, author) do
-    multi |> Multi.run(:notify, NotificationService, :create_async!, ["comment", commentable, author])
+    Multi.run(multi, :notify, NotificationService, :create_async!, ["comment", commentable, author])
   end
 
-  defp ensure_deletable(multi, comment, user), do: Multi.run(multi, :ensure_deletable, fn(_) -> ensure_deletable(comment, user) end)
+  defp ensure_deletable(multi, comment, user) do
+    Multi.run(multi, :ensure_deletable, fn(_, _) ->
+      ensure_deletable(comment, user)
+    end)
+  end
   defp ensure_deletable(comment, user) do
     case Comment.deletable_by?(comment, user) do
       true  -> {:ok, nil}

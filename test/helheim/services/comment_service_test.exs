@@ -32,14 +32,14 @@ defmodule Helheim.CommentServiceTest do
     end
 
     test_with_mock "triggers notifications", %{author: author, profile: profile},
-      NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
+      NotificationService, [], [create_async!: fn(_repo, _changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       CommentService.create!(profile, author, @valid_body)
 
       assert_called_with_pattern NotificationService, :create_async!, fn(args) ->
         profile_id = profile.id
         author_id  = author.id
-        [anything, "comment", %User{id: ^profile_id}, %User{id: ^author_id}] = args
+        [_repo, _changes, "comment", %User{id: ^profile_id}, %User{id: ^author_id}] = args
       end
     end
   end
@@ -66,7 +66,7 @@ defmodule Helheim.CommentServiceTest do
     end
 
     test_with_mock "does not trigger notifications", %{author: author, profile: profile},
-      NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> raise "NotificationService was called!" end] do
+      NotificationService, [], [create_async!: fn(_repo, _changes, _type, _subject, _trigger_person) -> raise "NotificationService was called!" end] do
 
       CommentService.create!(profile, author, @invalid_body)
     end
@@ -91,14 +91,14 @@ defmodule Helheim.CommentServiceTest do
     end
 
     test_with_mock "triggers notifications", %{author: author, blog_post: blog_post},
-      NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
+      NotificationService, [], [create_async!: fn(_repo, _changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       CommentService.create!(blog_post, author, @valid_body)
 
       assert_called_with_pattern NotificationService, :create_async!, fn(args) ->
         blog_post_id = blog_post.id
         author_id    = author.id
-        [anything, "comment", %BlogPost{id: ^blog_post_id}, %User{id: ^author_id}] = args
+        [_repo, _changes, "comment", %BlogPost{id: ^blog_post_id}, %User{id: ^author_id}] = args
       end
     end
   end
@@ -125,7 +125,7 @@ defmodule Helheim.CommentServiceTest do
     end
 
     test_with_mock "does not trigger notifications", %{author: author, blog_post: blog_post},
-      NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> raise "NotificationService was called!" end] do
+      NotificationService, [], [create_async!: fn(_repo, _changes, _type, _subject, _trigger_person) -> raise "NotificationService was called!" end] do
 
       CommentService.create!(blog_post, author, @invalid_body)
     end
@@ -150,14 +150,14 @@ defmodule Helheim.CommentServiceTest do
     end
 
     test_with_mock "triggers notifications", %{author: author, photo: photo},
-      NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
+      NotificationService, [], [create_async!: fn(_repo, _changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       CommentService.create!(photo, author, @valid_body)
 
       assert_called_with_pattern NotificationService, :create_async!, fn(args) ->
         photo_id  = photo.id
         author_id = author.id
-        [anything, "comment", %Photo{id: ^photo_id}, %User{id: ^author_id}] = args
+        [_repo, _changes, "comment", %Photo{id: ^photo_id}, %User{id: ^author_id}] = args
       end
     end
   end
@@ -184,7 +184,7 @@ defmodule Helheim.CommentServiceTest do
     end
 
     test_with_mock "does not trigger notifications", %{author: author, photo: photo},
-      NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> raise "NotificationService was called!" end] do
+      NotificationService, [], [create_async!: fn(_repo, _changes, _type, _subject, _trigger_person) -> raise "NotificationService was called!" end] do
 
       CommentService.create!(photo, author, @invalid_body)
     end
@@ -209,14 +209,14 @@ defmodule Helheim.CommentServiceTest do
     end
 
     test_with_mock "triggers notifications", %{author: author, calendar_event: calendar_event},
-      NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
+      NotificationService, [], [create_async!: fn(_repo, _changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       CommentService.create!(calendar_event, author, @valid_body)
 
       assert_called_with_pattern NotificationService, :create_async!, fn(args) ->
         calendar_event_id = calendar_event.id
         author_id         = author.id
-        [anything, "comment", %CalendarEvent{id: ^calendar_event_id}, %User{id: ^author_id}] = args
+        [_repo, _changes, "comment", %CalendarEvent{id: ^calendar_event_id}, %User{id: ^author_id}] = args
       end
     end
   end
@@ -243,7 +243,7 @@ defmodule Helheim.CommentServiceTest do
     end
 
     test_with_mock "does not trigger notifications", %{author: author, calendar_event: calendar_event},
-      NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> raise "NotificationService was called!" end] do
+      NotificationService, [], [create_async!: fn(_repo, _changes, _type, _subject, _trigger_person) -> raise "NotificationService was called!" end] do
 
       CommentService.create!(calendar_event, author, @invalid_body)
     end

@@ -41,7 +41,7 @@ defmodule Helheim.Friendship do
 
     Multi.new
     |> Multi.insert(:friendship, friendship)
-    |> Multi.run(:push_notification, &push_notification/1)
+    |> Multi.run(:push_notification, &push_notification/2)
     |> Repo.transaction
   end
 
@@ -172,7 +172,7 @@ defmodule Helheim.Friendship do
     end
   end
 
-  defp push_notification(%{friendship: friendship}) do
+  defp push_notification(_repo, %{friendship: friendship}) do
     NotificationChannel.broadcast_notification(friendship.recipient_id)
     {:ok, friendship}
   end
