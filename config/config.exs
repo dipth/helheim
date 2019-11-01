@@ -9,6 +9,10 @@ use Mix.Config
 config :helheim,
   ecto_repos: [Helheim.Repo]
 
+# Configure Repo
+config :helheim, Helheim.Repo,
+  migration_timestamps: [type: :utc_datetime_usec]
+
 # Configures the endpoint
 config :helheim, HelheimWeb.Endpoint,
   url: [host: "localhost"],
