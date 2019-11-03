@@ -4,8 +4,8 @@ defmodule Helheim.Repo.Migrations.CreateComment do
   def change do
     create table(:comments) do
       timestamps()
-      add :deleted_at, :utc_datetime
-      add :approved_at, :utc_datetime
+      add :deleted_at, :utc_datetime_usec
+      add :approved_at, :utc_datetime_usec
       add :author_id, references(:users, on_delete: :delete_all)
       add :body, :text, null: false
       add :profile_id, references(:users, on_delete: :delete_all)

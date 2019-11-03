@@ -7,7 +7,7 @@ defmodule Helheim.Repo.Migrations.CreateNotification do
       add :title, :string, null: false
       add :icon, :string
       add :path, :string
-      add :read_at, :utc_datetime
+      add :read_at, :utc_datetime_usec
       timestamps()
     end
 

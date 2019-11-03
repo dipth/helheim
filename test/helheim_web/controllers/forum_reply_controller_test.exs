@@ -1,9 +1,11 @@
 defmodule HelheimWeb.ForumReplyControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.ForumReply
   alias Helheim.ForumTopic
   alias Helheim.ForumReplyService
+  alias Helheim.User
 
   @valid_attrs %{body: "Body Text"}
   @invalid_attrs %{body: "   "}
@@ -16,10 +18,15 @@ defmodule HelheimWeb.ForumReplyControllerTest do
     test_with_mock "it redirects to the topic page with a success flash message when successfull", %{conn: conn, user: user},
       ForumReplyService, [], [create!: fn(_forum_topic, _user, _body) -> {:ok, %{forum_reply: %{}}} end] do
 
-      topic          = insert(:forum_topic)
-      expected_topic = ForumTopic |> preload(:user) |> Repo.get!(topic.id)
-      conn = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
-      assert called ForumReplyService.create!(expected_topic, user, @valid_attrs[:body])
+      topic = insert(:forum_topic)
+      conn  = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
+
+      assert_called_with_pattern ForumReplyService, :create!, fn(args) ->
+        topic_id = topic.id
+        user_id  = user.id
+        body     = @valid_attrs[:body]
+        [%ForumTopic{id: ^topic_id}, %User{id: ^user_id}, ^body] = args
+      end
       assert redirected_to(conn)       =~ forum_forum_topic_path(conn, :show, topic.forum, topic, page: "last")
       assert get_flash(conn, :success) == gettext("Reply created successfully")
     end
@@ -27,10 +34,15 @@ defmodule HelheimWeb.ForumReplyControllerTest do
     test_with_mock "it redirects to the topic page with an error flash message when unsuccessfull", %{conn: conn, user: user},
       ForumReplyService, [], [create!: fn(_forum_topic, _user, _body) -> {:error, :forum_reply, %{}, []} end] do
 
-      topic          = insert(:forum_topic)
-      expected_topic = ForumTopic |> preload(:user) |> Repo.get!(topic.id)
-      conn = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @invalid_attrs
-      assert called ForumReplyService.create!(expected_topic, user, @invalid_attrs[:body])
+      topic = insert(:forum_topic)
+      conn  = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @invalid_attrs
+
+      assert_called_with_pattern ForumReplyService, :create!, fn(args) ->
+        topic_id = topic.id
+        user_id  = user.id
+        body     = @invalid_attrs[:body]
+        [%ForumTopic{id: ^topic_id}, %User{id: ^user_id}, ^body] = args
+      end
       assert redirected_to(conn)     == forum_forum_topic_path(conn, :show, topic.forum, topic)
       assert get_flash(conn, :error) == gettext("Reply could not be created")
     end

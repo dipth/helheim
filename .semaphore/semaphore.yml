@@ -1,0 +1,45 @@
+version: v1.0
+name: Test
+
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Build
+    task:
+      env_vars:
+        - name: MIX_ENV
+          value: test
+      prologue:
+        commands:
+          - sem-version node 10.16.3
+          - sem-version elixir 1.9.1
+
+          - npm install -g brunch
+
+          - sem-service start postgres 11.5
+
+          - checkout
+
+          - mix local.rebar --force
+          - mix local.hex --force
+
+          - cache restore mix-deps-$SEMAPHORE_GIT_BRANCH-$(checksum mix.lock),mix-deps-$SEMAPHORE_GIT_BRANCH,mix-deps-master
+          - cache restore mix-build-$SEMAPHORE_GIT_BRANCH-$(checksum mix.lock),mix-build-$SEMAPHORE_GIT_BRANCH,mix-build-master
+
+          - mix deps.get
+
+          - cache store mix-deps-$SEMAPHORE_GIT_BRANCH-$(checksum mix.lock) deps
+          - cache store mix-build-$SEMAPHORE_GIT_BRANCH-$(checksum mix.lock) _build
+
+          - mix ecto.create ecto.migrate
+
+      jobs:
+        - name: Build
+          commands:
+            - cd assets
+            - yarn
+            - cd ..
+            - mix test

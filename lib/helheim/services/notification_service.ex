@@ -10,7 +10,7 @@ defmodule Helheim.NotificationService do
   alias Helheim.Photo
   alias Helheim.CalendarEvent
 
-  def create_async!(_multi_changes, type, subject, trigger_person), do: create_async!(type, subject, trigger_person)
+  def create_async!(_repo, _multi_changes, type, subject, trigger_person), do: create_async!(type, subject, trigger_person)
   def create_async!(type, subject, trigger_person) do
     {:ok, Task.async(fn -> create!(type, subject, trigger_person) end)}
   end

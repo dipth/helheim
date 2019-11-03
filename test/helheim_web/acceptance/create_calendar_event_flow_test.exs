@@ -22,42 +22,41 @@ defmodule HelheimWeb.CreateCalendarEventFlowTest do
 
   setup [:create_and_sign_in_user]
 
-  # TODO: Figure out why these fail randomly on CI
-  # test "users can submit new calendar events", %{session: session} do
-  #   result =
-  #     session
-  #     |> click(calendar_events_link())
-  #     |> click(create_link())
-  #     |> fill_in(title_field(), with: "Super duper event!")
-  #     |> fill_in(description_field(), with: "This is a super duper test event.")
-  #     |> assert_has(starts_at_flatpickr())
-  #     |> click(starts_at_day())
-  #     |> assert_has(starts_at_hour())
-  #     |> fill_in(starts_at_hour(), with: "16")
-  #     |> assert_has(starts_at_minute())
-  #     |> fill_in(starts_at_minute(), with: "25")
-  #     |> assert_has(ends_at_flatpickr())
-  #     |> click(ends_at_day())
-  #     |> assert_has(ends_at_hour())
-  #     |> fill_in(ends_at_hour(), with: "18")
-  #     |> assert_has(ends_at_minute())
-  #     |> fill_in(ends_at_minute(), with: "45")
-  #     |> fill_in(location_field(), with: "A super secret location")
-  #     |> fill_in(url_field(), with: "https://super.duper/event")
-  #     |> click(submit_button())
-  #     |> find(success_alert())
-  #     |> Element.text
+  test "users can submit new calendar events", %{session: session} do
+    result =
+      session
+      |> click(calendar_events_link())
+      |> click(create_link())
+      |> fill_in(title_field(), with: "Super duper event!")
+      |> fill_in(description_field(), with: "This is a super duper test event.")
+      |> assert_has(starts_at_flatpickr())
+      |> click(starts_at_day())
+      |> assert_has(starts_at_hour())
+      |> fill_in(starts_at_hour(), with: "16")
+      |> assert_has(starts_at_minute())
+      |> fill_in(starts_at_minute(), with: "25")
+      |> assert_has(ends_at_flatpickr())
+      |> click(ends_at_day())
+      |> assert_has(ends_at_hour())
+      |> fill_in(ends_at_hour(), with: "18")
+      |> assert_has(ends_at_minute())
+      |> fill_in(ends_at_minute(), with: "45")
+      |> fill_in(location_field(), with: "A super secret location")
+      |> fill_in(url_field(), with: "https://super.duper/event")
+      |> click(submit_button())
+      |> find(success_alert())
+      |> Element.text
 
-  #   assert result =~ gettext("The event has now been created and will be shown on the site when it has been approved by an administrator.")
+    assert result =~ gettext("The event has now been created and will be shown on the site when it has been approved by an administrator.")
 
-  #   now = Timex.now
-  #   calendar_event = Repo.one!(CalendarEvent)
-  #   assert calendar_event.title == "Super duper event!"
-  #   assert calendar_event.description == "This is a super duper test event."
-  #   assert calendar_event.starts_at == NaiveDateTime.new(now.year, now.month, 15, 16, 25, 0, 0) |> elem(1)
-  #   assert calendar_event.ends_at == NaiveDateTime.new(now.year, now.month, 16, 18, 45, 0, 0) |> elem(1)
-  #   assert calendar_event.location == "A super secret location"
-  #   assert calendar_event.url == "https://super.duper/event"
-  #   assert CalendarEvent.pending?(calendar_event)
-  # end
+    now = Timex.now
+    calendar_event = Repo.one!(CalendarEvent)
+    assert calendar_event.title == "Super duper event!"
+    assert calendar_event.description == "This is a super duper test event."
+    assert Timex.diff(calendar_event.starts_at, NaiveDateTime.new(now.year, now.month, 15, 16, 25, 0, 0) |> elem(1), :seconds) == 0
+    assert Timex.diff(calendar_event.ends_at, NaiveDateTime.new(now.year, now.month, 16, 18, 45, 0, 0) |> elem(1), :seconds) == 0
+    assert calendar_event.location == "A super secret location"
+    assert calendar_event.url == "https://super.duper/event"
+    assert CalendarEvent.pending?(calendar_event)
+  end
 end

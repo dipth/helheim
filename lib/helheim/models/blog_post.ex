@@ -7,11 +7,11 @@ defmodule Helheim.BlogPost do
     field :visitor_count, :integer
     field :comment_count, :integer
     field :published,     :boolean
-    field :published_at,  Calecto.DateTimeUTC
+    field :published_at,  :utc_datetime_usec
     field :visibility,    :string
     field :hide_comments, :boolean
 
-    timestamps()
+    timestamps(type: :utc_datetime_usec)
 
     belongs_to :user,                Helheim.User
     has_many   :comments,            Helheim.Comment
@@ -24,10 +24,10 @@ defmodule Helheim.BlogPost do
   end
 
   @newest_for_frontpage_partition_query """
-    SELECT blog_posts.id, row_number() OVER (
+    (SELECT blog_posts.id, row_number() OVER (
       PARTITION BY blog_posts.user_id
       ORDER BY blog_posts.published_at DESC
-    ) FROM blog_posts WHERE blog_posts.published = TRUE
+    ) FROM blog_posts WHERE blog_posts.published = TRUE)
   """
   def newest_for_frontpage(current_user, limit) do
     from bp in (Helheim.BlogPost |> published |> visible_by(current_user) |> not_private |> newest),

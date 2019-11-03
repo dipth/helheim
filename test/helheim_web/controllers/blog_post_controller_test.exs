@@ -1,8 +1,10 @@
 defmodule HelheimWeb.BlogPostControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.BlogPost
   alias Helheim.NotificationSubscription
+  alias Helheim.User
 
   @valid_attrs %{body: "Body Text", title: "Title String", visibility: "public"}
   @invalid_attrs %{body: "   ", title: "   ", visibility: ""}
@@ -242,8 +244,8 @@ defmodule HelheimWeb.BlogPostControllerTest do
       assert redirected_to(conn) == public_profile_blog_post_path(conn, :show, user, blog_post)
     end
 
-    test "it creates a notification subscription for the newly created blog post when posting valid params", %{conn: conn, user: user} do
-      conn = post conn, "/blog_posts", blog_post: @valid_attrs
+    test "it creates a notification subscription for the newly created blog post when posting valid params", %{conn: conn} do
+      post conn, "/blog_posts", blog_post: @valid_attrs
       blog_post = Repo.one(BlogPost)
       sub = Repo.one(NotificationSubscription)
       assert sub.user_id == blog_post.user_id
@@ -314,9 +316,13 @@ defmodule HelheimWeb.BlogPostControllerTest do
     test_with_mock "it tracks the view", %{conn: conn, user: user},
       Helheim.VisitorLogEntry, [:passthrough], [track!: fn(_user, _subject) -> {:ok} end] do
 
-      blog_post = BlogPost |> preload(:user) |> Repo.get(insert(:blog_post).id)
+      blog_post = insert(:blog_post)
       get conn, "/profiles/#{blog_post.user.id}/blog_posts/#{blog_post.id}"
-      assert called Helheim.VisitorLogEntry.track!(user, blog_post)
+      assert_called_with_pattern Helheim.VisitorLogEntry, :track!, fn(args) ->
+        user_id      = user.id
+        blog_post_id = blog_post.id
+        [%User{id: ^user_id}, %BlogPost{id: ^blog_post_id}] = args
+      end
     end
 
     test "redirects to an error page when the blog post is not published or owned by the current user", %{conn: conn, user: user} do

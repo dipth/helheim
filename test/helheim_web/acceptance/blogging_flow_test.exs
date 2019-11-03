@@ -1,11 +1,11 @@
 defmodule HelheimWeb.BloggingFlowTest do
   use HelheimWeb.AcceptanceCase#, async: true
 
-  defp your_blog_posts_link,  do: Query.link(gettext("Your Blog Posts"))
-  defp title_field,           do: Query.text_field(gettext("Title"))
-  defp save_blog_post_button, do: Query.button(gettext("Save Blog Post"))
+  # defp your_blog_posts_link,  do: Query.link(gettext("Your Blog Posts"))
+  # defp title_field,           do: Query.text_field(gettext("Title"))
+  # defp save_blog_post_button, do: Query.button(gettext("Save Blog Post"))
   defp success_alert,         do: Query.css(".alert.alert-success")
-  defp blog_post_link,        do: Query.link("Blog Title Test")
+  # defp blog_post_link,        do: Query.link("Blog Title Test")
 
   setup [:create_and_sign_in_user]
 

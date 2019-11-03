@@ -13,14 +13,12 @@ config :logger, level: :warn
 
 # Configure your database
 config :helheim, Helheim.Repo,
-  adapter: Ecto.Adapters.Postgres,
   username: System.get_env("DATABASE_POSTGRESQL_USERNAME") || "postgres",
   password: System.get_env("DATABASE_POSTGRESQL_PASSWORD") || "postgres",
   database: "helheim_test",
   hostname: System.get_env("DATABASE_POSTGRESQL_HOSTNAME") || "localhost",
   pool: Ecto.Adapters.SQL.Sandbox,
-  timeout: 60_000,
-  pool_timeout: 60_000
+  timeout: 60_000
 
 # Guardian configuration
 config :helheim, Helheim.Auth.Guardian,

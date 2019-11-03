@@ -8,7 +8,7 @@ defmodule Helheim.Forum do
     field      :forum_topics_count, :integer
     field      :locked,             :boolean
 
-    timestamps()
+    timestamps(type: :utc_datetime_usec)
 
     belongs_to :forum_category, Helheim.ForumCategory
     has_many   :forum_topics,   Helheim.ForumTopic

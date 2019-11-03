@@ -1,5 +1,6 @@
 defmodule HelheimWeb.ProfileControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   use Bamboo.Test
   alias Helheim.Repo
@@ -69,9 +70,15 @@ defmodule HelheimWeb.ProfileControllerTest do
     test_with_mock "it tracks the view", %{conn: conn, user: user},
       Helheim.VisitorLogEntry, [:passthrough], [track!: fn(_user, _subject) -> {:ok} end] do
 
-      profile = Repo.get(User, insert(:user).id)
+      profile = insert(:user)
+
       get conn, "/profiles/#{profile.id}"
-      assert called Helheim.VisitorLogEntry.track!(user, profile)
+
+      assert_called_with_pattern Helheim.VisitorLogEntry, :track!, fn(args) ->
+        user_id    = user.id
+        profile_id = profile.id
+        [%User{id: ^user_id}, %User{id: ^profile_id}] = args
+      end
     end
 
     test "redirects to the block page if the specified profile blocks the current user", %{conn: conn, user: user} do

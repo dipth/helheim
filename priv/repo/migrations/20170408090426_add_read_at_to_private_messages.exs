@@ -3,7 +3,7 @@ defmodule Helheim.Repo.Migrations.AddReadAtToPrivateMessages do
 
   def change do
     alter table(:private_messages) do
-      add :read_at, :utc_datetime
+      add :read_at, :utc_datetime_usec
     end
     create index(:private_messages, [:read_at])
   end

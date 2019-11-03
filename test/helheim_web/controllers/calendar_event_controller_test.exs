@@ -59,8 +59,8 @@ defmodule HelheimWeb.CalendarEventControllerTest do
       assert calendar_event.title == @valid_attrs.title
       assert calendar_event.description == @valid_attrs.description
       assert calendar_event.user_id == user.id
-      assert calendar_event.starts_at == ~N[2018-08-01 12:00:00.000000]
-      assert calendar_event.ends_at == ~N[2018-08-01 15:00:00.000000]
+      assert Timex.diff(calendar_event.starts_at, ~N[2018-08-01 12:00:00.000000], :seconds) == 0
+      assert Timex.diff(calendar_event.ends_at, ~N[2018-08-01 15:00:00.000000], :seconds) == 0
       assert CalendarEvent.pending?(calendar_event)
       assert redirected_to(conn) == calendar_event_path(conn, :index)
     end

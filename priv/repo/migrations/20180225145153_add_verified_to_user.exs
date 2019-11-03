@@ -3,7 +3,7 @@ defmodule Helheim.Repo.Migrations.AddVerifiedToUser do
 
   def change do
     alter table(:users) do
-      add :verified_at, :utc_datetime
+      add :verified_at, :utc_datetime_usec
       add :verifier_id, references(:users, on_delete: :nilify_all)
     end
 

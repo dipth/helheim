@@ -1,5 +1,6 @@
 defmodule Helheim.PhotoAlbumTest do
   use Helheim.DataCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.PhotoAlbum
   alias Helheim.Photo
@@ -150,15 +151,24 @@ defmodule Helheim.PhotoAlbumTest do
       Photo, [:passthrough], [delete!: fn(_photo) -> {:ok} end] do
 
       photo_album = insert(:photo_album)
-      photo1      = Repo.get_by(Photo, id: insert(:photo, photo_album: photo_album).id)
-      photo2      = Repo.get_by(Photo, id: insert(:photo, photo_album: photo_album).id)
-      photo3      = Repo.get_by(Photo, id: insert(:photo).id)
+      photo1      = insert(:photo, photo_album: photo_album)
+      photo2      = insert(:photo, photo_album: photo_album)
+      photo3      = insert(:photo)
 
       PhotoAlbum.delete! photo_album
 
-      assert called Photo.delete!(photo1)
-      assert called Photo.delete!(photo2)
-      refute called Photo.delete!(photo3)
+      assert_called_with_pattern Photo, :delete!, fn(args) ->
+        photo_id = photo1.id
+        [%Photo{id: ^photo_id}] = args
+      end
+      assert_called_with_pattern Photo, :delete!, fn(args) ->
+        photo_id = photo2.id
+        [%Photo{id: ^photo_id}] = args
+      end
+      refute_called_with_pattern Photo, :delete!, fn(args) ->
+        photo_id = photo3.id
+        [%Photo{id: ^photo_id}] = args
+      end
     end
 
     test "it deletes the photo album" do

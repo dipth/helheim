@@ -4,7 +4,7 @@ defmodule Helheim.Repo.Migrations.AddPublishedToBlogPost do
   def up do
     alter table(:blog_posts) do
       add :published,    :boolean, default: false, null: false
-      add :published_at, :utc_datetime
+      add :published_at, :utc_datetime_usec
     end
 
     create index(:blog_posts, [:published])

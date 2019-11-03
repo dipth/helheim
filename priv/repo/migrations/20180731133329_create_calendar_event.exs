@@ -7,13 +7,13 @@ defmodule Helheim.Repo.Migrations.CreateCalendarEvent do
       add :uuid,        :string,        null: false
       add :title,       :string,        null: false
       add :description, :text,          null: false
-      add :starts_at,   :utc_datetime,  null: false
-      add :ends_at,     :utc_datetime,  null: false
+      add :starts_at,   :utc_datetime_usec,  null: false
+      add :ends_at,     :utc_datetime_usec,  null: false
       add :location,    :string,        null: false
       add :url,         :string
       add :image,       :string
-      add :approved_at, :utc_datetime
-      add :rejected_at, :utc_datetime
+      add :approved_at, :utc_datetime_usec
+      add :rejected_at, :utc_datetime_usec
 
       timestamps()
     end

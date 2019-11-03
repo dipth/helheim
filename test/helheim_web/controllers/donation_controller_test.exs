@@ -1,5 +1,6 @@
 defmodule HelheimWeb.DonationControllerTest do
   use HelheimWeb.ConnCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.Donation
   alias Helheim.DonationService
@@ -34,15 +35,24 @@ defmodule HelheimWeb.DonationControllerTest do
       DonationService, [], [create!: fn(_changeset) -> {:ok, %{donation: %{}}} end] do
 
       conn = post conn, "/donations", donation: @valid_attrs
-      assert called DonationService.create!(%{changes: %{amount: @valid_attrs[:amount], token: @valid_attrs[:token]}})
-      assert redirected_to(conn)       =~ donation_path(conn, :thank_you)
+
+      assert_called_with_pattern DonationService, :create!, fn(args) ->
+        amount = @valid_attrs[:amount]
+        token  = @valid_attrs[:token]
+        [%{changes: %{amount: ^amount, token: ^token}}] = args
+      end
+      assert redirected_to(conn) =~ donation_path(conn, :thank_you)
     end
 
     test_with_mock "it re-renders the donation form with an error flash message when unsuccessfull", %{conn: conn},
       DonationService, [], [create!: fn(_changeset) -> {:error, :donation, %{}, []} end] do
 
       conn = post conn, "/donations", donation: @invalid_attrs
-      assert called DonationService.create!(%{changes: %{amount: @invalid_attrs[:amount]}})
+
+      assert_called_with_pattern DonationService, :create!, fn(args) ->
+        amount = @invalid_attrs[:amount]
+        [%{changes: %{amount: ^amount}}] = args
+      end
       assert html_response(conn, 200) =~ gettext("How much would you like to donate?")
       assert get_flash(conn, :error) == gettext("Something went wrong...")
     end

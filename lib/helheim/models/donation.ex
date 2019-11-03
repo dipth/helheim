@@ -29,7 +29,7 @@ defmodule Helheim.Donation do
     field      :fee,         :integer
     field      :balance_txn, :map
 
-    timestamps()
+    timestamps(type: :utc_datetime_usec)
   end
 
   @doc """

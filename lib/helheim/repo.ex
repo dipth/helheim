@@ -1,5 +1,5 @@
 defmodule Helheim.Repo do
-  use Ecto.Repo, otp_app: :helheim
+  use Ecto.Repo, otp_app: :helheim, adapter: Ecto.Adapters.Postgres
   use Scrivener, page_size: 25
 
   @doc """

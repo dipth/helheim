@@ -7,8 +7,8 @@ defmodule Helheim.Comment do
 
   schema "comments" do
     field      :body,            :string
-    field      :approved_at,     Calecto.DateTimeUTC
-    field      :deleted_at,      Calecto.DateTimeUTC
+    field      :approved_at,     :utc_datetime_usec
+    field      :deleted_at,      :utc_datetime_usec
     field      :deletion_reason, :string
     belongs_to :author,          Helheim.User
     belongs_to :profile,         Helheim.User
@@ -18,7 +18,7 @@ defmodule Helheim.Comment do
     belongs_to :deleter,         Helheim.User
     belongs_to :calendar_event,  Helheim.CalendarEvent
 
-    timestamps()
+    timestamps(type: :utc_datetime_usec)
   end
 
   def newest(query) do

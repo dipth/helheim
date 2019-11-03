@@ -8,11 +8,11 @@ defmodule Helheim.Notification do
 
   schema "notifications" do
     field :type,       :string
-    field :seen_at,    Calecto.DateTimeUTC
-    field :clicked_at, Calecto.DateTimeUTC
+    field :seen_at,    :utc_datetime_usec
+    field :clicked_at, :utc_datetime_usec
     field :duplicate_count, :integer, virtual: true
 
-    timestamps()
+    timestamps(type: :utc_datetime_usec)
 
     belongs_to :recipient,      Helheim.User
     belongs_to :trigger_person, Helheim.User

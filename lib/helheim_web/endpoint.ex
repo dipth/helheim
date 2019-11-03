@@ -22,7 +22,8 @@ defmodule HelheimWeb.Endpoint do
     198.41.128.0/17
   ]
 
-  socket "/socket", HelheimWeb.UserSocket
+  socket "/socket", HelheimWeb.UserSocket,
+    websocket: true
 
   # Serve at "/" the static files from "priv/static" directory.
   #

@@ -26,7 +26,7 @@ defmodule Helheim.Repo.Migrations.CreateForumTables do
       add :body,                :text,    null: false
       add :pinned,              :boolean, null: false, default: false
       add :forum_replies_count, :integer, null: false, default: 0
-      add :deleted_at,          :utc_datetime
+      add :deleted_at,          :utc_datetime_usec
       timestamps()
     end
     create index(:forum_topics, [:forum_id])
@@ -37,7 +37,7 @@ defmodule Helheim.Repo.Migrations.CreateForumTables do
       add :forum_topic_id, references(:forum_topics, on_delete: :delete_all)
       add :user_id,        references(:users,        on_delete: :nilify_all)
       add :body,           :text, null: false
-      add :deleted_at,     :utc_datetime
+      add :deleted_at,     :utc_datetime_usec
       timestamps()
     end
     create index(:forum_replies, [:forum_topic_id])

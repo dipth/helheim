@@ -1,10 +1,12 @@
 defmodule Helheim.ForumReplyServiceTest do
   use Helheim.DataCase
+  use Helheim.AssertCalledPatternMatching
   import Mock
   alias Helheim.ForumReplyService
   alias Helheim.ForumReply
   alias Helheim.ForumTopic
   alias Helheim.NotificationService
+  alias Helheim.User
 
   @valid_body "My Reply"
   @invalid_body ""
@@ -28,10 +30,15 @@ defmodule Helheim.ForumReplyServiceTest do
     end
 
     test_with_mock "triggers notifications", %{forum_topic: forum_topic, user: user},
-      NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
+      NotificationService, [], [create_async!: fn(_repo, _multi_changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
 
       ForumReplyService.create!(forum_topic, user, @valid_body)
-      assert called NotificationService.create_async!(:_, "forum_reply", forum_topic, user)
+
+      assert_called_with_pattern NotificationService, :create_async!, fn(args) ->
+        forum_topic_id = forum_topic.id
+        user_id        = user.id
+        [_repo, _changes, "forum_reply", %ForumTopic{id: ^forum_topic_id}, %User{id: ^user_id}] = args
+      end
     end
   end
 
@@ -57,7 +64,7 @@ defmodule Helheim.ForumReplyServiceTest do
     end
 
     test_with_mock "does not trigger notifications", %{forum_topic: forum_topic, user: user},
-      NotificationService, [], [create_async!: fn(_multi_changes, _type, _subject, _trigger_person) -> raise "NotificationService was called!" end] do
+      NotificationService, [], [create_async!: fn(_repo, _multi_changes, _type, _subject, _trigger_person) -> raise "NotificationService was called!" end] do
 
       ForumReplyService.create!(forum_topic, user, @invalid_body)
     end

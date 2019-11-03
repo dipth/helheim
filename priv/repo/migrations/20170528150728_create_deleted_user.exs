@@ -8,15 +8,15 @@ defmodule Helheim.Repo.Migrations.CreateDeletedUser do
       add :username,             :string,       null: false
       add :email,                :string,       null: false
       add :name,                 :string,       null: false
-      add :banned_until,         :utc_datetime
+      add :banned_until,         :utc_datetime_usec
       add :ban_reason,           :text
-      add :confirmed_at,         :utc_datetime
-      add :last_login_at,        :utc_datetime
-      add :previous_login_at,    :utc_datetime
+      add :confirmed_at,         :utc_datetime_usec
+      add :last_login_at,        :utc_datetime_usec
+      add :previous_login_at,    :utc_datetime_usec
       add :last_login_ip,        :string
       add :previous_login_ip,    :string
-      add :original_inserted_at, :utc_datetime, null: false
-      add :original_updated_at,  :utc_datetime
+      add :original_inserted_at, :utc_datetime_usec, null: false
+      add :original_updated_at,  :utc_datetime_usec
       timestamps()
     end
 

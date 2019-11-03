@@ -8,7 +8,7 @@ defmodule Helheim.Repo.Migrations.CreateUser do
       add :username,           :string, null: false
       add :password_hash,      :string, null: false
       add :confirmation_token, :string, null: false
-      add :confirmed_at,       :utc_datetime
+      add :confirmed_at,       :utc_datetime_usec
 
       timestamps()
     end

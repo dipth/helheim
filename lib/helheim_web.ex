@@ -51,6 +51,8 @@ defmodule HelheimWeb do
 
       import Guardian.Plug, only: [current_resource: 1]
 
+      # TODO: Remove
+      # https://gist.github.com/chrismccord/bb1f8b136f5a9e4abc0bfc07b832257e#add-a-routes-alias-and-update-your-router-calls
       import HelheimWeb.Router.Helpers
       import HelheimWeb.ErrorHelpers
       import HelheimWeb.Gettext
