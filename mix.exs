@@ -68,7 +68,7 @@ defmodule Helheim.Mixfile do
       {:scrivener_ecto, "~> 2.2"}, # Pagination
       {:mock, "~> 0.3.3", only: :test},
       {:scout_apm, "~> 1.0"},
-      {:stripity_stripe, "~> 1.6.0"},
+      {:stripity_stripe, "~> 2.7.0"},
       {:recaptcha, "~> 2.2"},
       {:remote_ip, "~> 0.1.5"}
     ]
