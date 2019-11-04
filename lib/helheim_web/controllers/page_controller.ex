@@ -61,6 +61,12 @@ defmodule HelheimWeb.PageController do
     render(conn, "terms.html", term: term, layout: {HelheimWeb.LayoutView, "app_special.html"})
   end
 
+  def staff(conn, _params) do
+    admins = User |> User.admins() |> User.sort("username") |> Repo.all
+    mods   = User |> User.mods() |> User.sort("username") |> Repo.all
+    render(conn, "staff.html", admins: admins, mods: mods)
+  end
+
   def banned(conn, _params) do
     render(conn, "banned.html", layout: {HelheimWeb.LayoutView, "app_special.html"})
   end

@@ -48,6 +48,12 @@
               <%= gettext "User verification" %>
             <% end %>
           </li>
+          <li class="nav-item">
+            <%= link to: page_path(@conn, :staff), class: "nav-link" do %>
+              <i class="fa fa-user-nurse"></i>
+              <%= gettext "Staff" %>
+            <% end %>
+          </li>
         </ul>
       </li>
 

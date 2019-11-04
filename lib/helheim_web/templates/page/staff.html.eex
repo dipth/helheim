@@ -1,0 +1,15 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= gettext "Help" %></li>
+  <li class="breadcrumb-item active"><%= gettext("Staff") %></li>
+</ol>
+
+<h1><%= gettext "Staff Users" %></h1>
+<hr>
+
+<h2><%= gettext "Moderators" %>:</h2>
+<p><%= gettext "Description of moderator role" %></p>
+<%= render HelheimWeb.ProfileView, "cards.html", conn: @conn, users: @mods %>
+
+<h2><%= gettext "Administrators" %>:</h2>
+<p><%= gettext "Description of administrator role" %></p>
+<%= render HelheimWeb.ProfileView, "cards.html", conn: @conn, users: @admins %>

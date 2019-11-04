@@ -63,6 +63,7 @@ defmodule HelheimWeb.Router do
     get "/help/verification", HelpController, :verification
     get "/signed_in", PageController, :signed_in
     get "/front_page", PageController, :front_page
+    get "/staff", PageController, :staff
     get "/sessions/sign_out", SessionController, :delete
     resources "/account", AccountController, singleton: true, only: [:edit, :update, :delete]
     resources "/preferences", PreferenceController, singleton: true, only: [:edit, :update]

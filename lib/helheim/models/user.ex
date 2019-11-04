@@ -89,6 +89,14 @@ defmodule Helheim.User do
     from u in query, where: is_nil(u.confirmed_at)
   end
 
+  def admins(query) do
+    from u in query, where: u.role == "admin"
+  end
+
+  def mods(query) do
+    from u in query, where: u.role == "mod"
+  end
+
   def search(query, search_params) do
     query
     |> search_by_username(search_params["username"])

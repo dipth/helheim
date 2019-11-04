@@ -37,4 +37,17 @@ defmodule HelheimWeb.PageControllerTest do
       assert html_response(conn, 200)
     end
   end
+
+  describe "staff/2" do
+    test "it returns a successful response when you are logged in", %{conn: conn} do
+      conn = conn |> sign_in(insert(:user))
+      conn = get conn, "/staff"
+      assert html_response(conn, 200) =~ gettext("Staff Users")
+    end
+
+    test "it redirects to the login page if you are not signed in", %{conn: conn} do
+      conn = get conn, "/staff"
+      assert redirected_to(conn) == "/sessions/new?type=unauthenticated&reason=unauthenticated"
+    end
+  end
 end
