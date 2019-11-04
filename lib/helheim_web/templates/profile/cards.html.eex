@@ -1,0 +1,23 @@
+<div class="card-group card-group-photos">
+  <%= for user <- @users do %>
+    <div class="card">
+      <%= link to: public_profile_path(@conn, :show, user) do %>
+        <%= img_tag(HelheimWeb.Avatar.url({user.avatar, user}, :thumb), class: "card-img-top img-fluid img-photo") %>
+      <% end %>
+      <div class="card-block">
+        <p class="card-text mb-1">
+          <strong><%= user.username %></strong><br>
+          <small class="font-italic"><%= user.location || "..." %></small>
+        </p>
+        <div class="d-flex justify-content-between">
+          <small><%= gettext "Created" %>:</small>
+          <small><%= time_ago_in_words user.inserted_at %></small>
+        </div>
+        <div class="d-flex justify-content-between">
+          <small><%= gettext "Login" %>:</small>
+          <small><%= time_ago_in_words(user.last_login_at || user.inserted_at) %></small>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
