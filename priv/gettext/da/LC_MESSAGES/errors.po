@@ -46,11 +46,9 @@ msgstr "er reserveret"
 msgid "does not match confirmation"
 msgstr "matcher ikke"
 
-#, fuzzy
 msgid "is still associated with this entry"
 msgstr "er stadig associeret med denne post"
 
-#, fuzzy
 msgid "are still associated with this entry"
 msgstr "er stadig associeret med denne post"
 

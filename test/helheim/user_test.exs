@@ -369,6 +369,26 @@ defmodule Helheim.UserTest do
     end
   end
 
+  describe "admins/1" do
+    test "returns users who are marked as admins" do
+      user = insert(:user)
+      admin = insert(:user, role: "admin")
+      user_ids = User |> User.admins |> Repo.all |> Enum.map(fn(p) -> p.id end)
+      assert Enum.member?(user_ids, admin.id)
+      refute Enum.member?(user_ids, user.id)
+    end
+  end
+
+  describe "mods/1" do
+    test "returns users who are marked as moderators" do
+      user = insert(:user)
+      mod = insert(:user, role: "mod")
+      user_ids = User |> User.mods |> Repo.all |> Enum.map(fn(p) -> p.id end)
+      assert Enum.member?(user_ids, mod.id)
+      refute Enum.member?(user_ids, user.id)
+    end
+  end
+
   describe "search_by_username/2" do
     test "it finds users where the username match the search term case insensitive" do
       user1 = insert(:user, username: "FoO")
