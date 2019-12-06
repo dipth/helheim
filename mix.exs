@@ -48,7 +48,7 @@ defmodule Helheim.Mixfile do
       {:pbkdf2_elixir, "~> 0.12"},
       {:guardian, "~> 1.2.1"},
       {:secure_random, "~> 0.5.0"},
-      {:bamboo, "~> 0.7"},
+      {:bamboo, "~> 1.3"},
       {:bamboo_postmark, "~> 0.4.1"},
       {:calendar, "~> 0.17"},
       {:calendar_translations, "~> 0.0.4"},
