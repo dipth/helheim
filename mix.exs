@@ -70,7 +70,7 @@ defmodule Helheim.Mixfile do
       {:scout_apm, "~> 1.0"},
       {:stripity_stripe, "~> 1.6.0"},
       {:recaptcha, "~> 2.2"},
-      {:remote_ip, "~> 0.1.5"}
+      {:remote_ip, "~> 0.2.0"}
     ]
   end
 
