@@ -49,7 +49,7 @@ defmodule Helheim.Mixfile do
       {:guardian, "~> 1.2.1"},
       {:secure_random, "~> 0.5.0"},
       {:bamboo, "~> 1.3"},
-      {:bamboo_postmark, "~> 0.4.1"},
+      {:bamboo_postmark, "~> 0.6.0"},
       {:calendar, "~> 0.17"},
       {:calendar_translations, "~> 0.0.4"},
       {:timex, "~> 3.6"},
