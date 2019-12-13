@@ -20,7 +20,7 @@ defmodule Helheim.Mixfile do
   def application do
     [
       mod: {Helheim.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :recaptcha]
     ]
   end
 
