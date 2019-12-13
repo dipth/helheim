@@ -20,7 +20,7 @@ defmodule Helheim.Mixfile do
   def application do
     [
       mod: {Helheim.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :recaptcha]
     ]
   end
 
@@ -69,7 +69,7 @@ defmodule Helheim.Mixfile do
       {:mock, "~> 0.3.3", only: :test},
       {:scout_apm, "~> 1.0"},
       {:stripity_stripe, "~> 1.6.0"},
-      {:recaptcha, "~> 2.2"},
+      {:recaptcha, "~> 3.0"},
       {:remote_ip, "~> 0.2.0"}
     ]
   end
