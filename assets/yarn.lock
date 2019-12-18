@@ -1290,19 +1290,19 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-clean-css-brunch@2.10.0:
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/clean-css-brunch/-/clean-css-brunch-2.10.0.tgz#6a151e6509589cd341dce04981a1c75062a22d18"
-  integrity sha1-ahUeZQlYnNNB3OBJgaHHUGKiLRg=
+clean-css-brunch@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/clean-css-brunch/-/clean-css-brunch-3.0.0.tgz#0b6c40543cad6fcef61bf32e9292ce9394dd5d0b"
+  integrity sha512-gbkVut0IXCyMjOMETb2pbe+klsMB4WAebWmeA39G9479D4CJN7+4ggF+MpdSordHm/DWKywzgC7IvJVkPW0kRA==
   dependencies:
-    clean-css "~4.0"
+    clean-css "~4.2"
 
-clean-css@~4.0:
-  version "4.0.13"
-  resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.0.13.tgz#feb2a176062d72a6c3e624d9213cac6a0c485e80"
-  integrity sha1-/rKhdgYtcqbD5iTZITysagxIXoA=
+clean-css@~4.2:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.2.1.tgz#2d411ef76b8569b6d0c84068dabe85b0aa5e5c17"
+  integrity sha512-4ZxI6dy4lrY6FHzfiy1aEOXgu4LIsW2MhwG0VBKdcoGoH/XLFgaHSdLTGr4O8Be6A8r3MOphEiI8Gc1n0ecf3g==
   dependencies:
-    source-map "0.5.x"
+    source-map "~0.6.0"
 
 cliui@^2.1.0:
   version "2.1.0"
@@ -4497,11 +4497,6 @@ source-map-url@^0.4.0:
   resolved "https://registry.yarnpkg.com/source-map-url/-/source-map-url-0.4.0.tgz#3e935d7ddd73631b97659956d55128e87b5084a3"
   integrity sha1-PpNdfd1zYxuXZZlW1VEo6HtQhKM=
 
-source-map@0.5.x, source-map@^0.5.0, source-map@^0.5.6, source-map@~0.5, source-map@~0.5.1:
-  version "0.5.7"
-  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
-  integrity sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
-
 source-map@^0.4.2:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.4.4.tgz#eba4f5da9c0dc999de68032d8b4f76173652036b"
@@ -4509,7 +4504,12 @@ source-map@^0.4.2:
   dependencies:
     amdefine ">=0.0.4"
 
-source-map@^0.6.1:
+source-map@^0.5.0, source-map@^0.5.6, source-map@~0.5, source-map@~0.5.1:
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
+  integrity sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
+
+source-map@^0.6.1, source-map@~0.6.0:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
