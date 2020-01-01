@@ -1,9 +1,7 @@
-let regEx = /@([\w\-\.\u00C0-\u017F]+)/giu
+let regEx = /@([-\w\.\u00C0-\u017F]+)/giu;
 
 let replacer = function(match, username) {
-  return `
-    <a href="/usernames/${username}">${username}</a>
-  `;
+  return `<a href="/usernames/${username}">${username}</a>`;
 }
 
 export var MentionableConfig = {

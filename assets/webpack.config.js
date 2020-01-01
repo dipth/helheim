@@ -1,4 +1,5 @@
 
+const webpack = require('webpack');
 const path = require('path');
 const glob = require('glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -23,6 +24,30 @@ module.exports = (env, options) => ({
   module: {
     rules: [
       {
+        test: require.resolve('jquery'),
+        use: [{
+            loader: 'expose-loader',
+            options: 'jQuery'
+        },{
+            loader: 'expose-loader',
+            options: '$'
+        }]
+      },
+      {
+        test: require.resolve('tether'),
+        use: [{
+            loader: 'expose-loader',
+            options: 'Tether'
+        }]
+      },
+      {
+        test: require.resolve('pace'),
+        use: [{
+            loader: 'expose-loader',
+            options: 'pace'
+        }]
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -30,13 +55,29 @@ module.exports = (env, options) => ({
         }
       },
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
       }
     ]
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: '../css/app.css' }),
-    new CopyWebpackPlugin([{ from: 'static/', to: '../' }])
-  ]
+    new CopyWebpackPlugin([{ from: 'static/', to: '../' }]),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.$': 'jquery',
+      'window.jQuery': 'jquery',
+      Tether: 'tether',
+      "window.Tether": 'tether',
+      pace: 'pace',
+      "window.pace": 'pace',
+      IntlPolyfill: 'intl',
+      Favico: 'favico.js',
+      dragula: 'dragula'
+    })
+  ],
+  externals: {
+    //"pace": "pace"
+  }
 });

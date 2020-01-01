@@ -43,6 +43,8 @@ import { DonationForm } from "./donation_form";
 import { CalendarEventForm } from "./calendar_event_form";
 import { PreferencesForm } from "./preferences_form";
 
+import css from "../css/app.css.scss"
+
 export var App = {
   run: function(){
     Embeds.run();
@@ -66,8 +68,12 @@ export var App = {
   }
 }
 
+window.App = App;
+
 export var AppSpecial = {
   run: function(){
     Leaf.run();
   }
 }
+
+window.AppSpecial = AppSpecial;
