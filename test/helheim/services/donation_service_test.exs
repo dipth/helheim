@@ -10,7 +10,7 @@ defmodule Helheim.DonationServiceTest do
     setup [:create_user, :build_valid_changeset]
 
     setup_with_mocks([
-      {Stripe.Charges, [], [create: fn(_amount, _options) -> {:ok, %{"balance_transaction" => "txn_test"}} end]},
+      {Stripe.Charge, [], [create: fn(_amount, _options) -> {:ok, %{"balance_transaction" => "txn_test"}} end]},
       {Donation, [:passthrough], [calculate_extra_space: fn(_amount) -> 123 end]}
       ], _context) do
         :ok
@@ -49,7 +49,7 @@ defmodule Helheim.DonationServiceTest do
     test "captures the money via Stripe", %{user: user, changeset: changeset} do
       DonationService.create!(changeset)
 
-      assert_called_with_pattern Stripe.Charges, :create, fn(args) ->
+      assert_called_with_pattern Stripe.Charge, :create, fn(args) ->
         amount      = changeset.changes[:amount]
         token       = changeset.changes[:token]
         description = "Helheim donation from user: #{user.id}"
@@ -62,7 +62,7 @@ defmodule Helheim.DonationServiceTest do
     setup [:create_user, :build_valid_changeset_with_default_amount]
 
     setup_with_mocks([
-      {Stripe.Charges, [], [create: fn(_amount, _options) -> {:ok, %{"balance_transaction" => "txn_test"}} end]},
+      {Stripe.Charge, [], [create: fn(_amount, _options) -> {:ok, %{"balance_transaction" => "txn_test"}} end]},
       {Donation, [:passthrough], [calculate_extra_space: fn(_amount) -> 123 end]}
       ], _context) do
         :ok
@@ -82,7 +82,7 @@ defmodule Helheim.DonationServiceTest do
     setup [:create_user, :build_valid_changeset]
 
     setup_with_mocks([
-      {Stripe.Charges, [], [create: fn(_amount, _options) -> {:error, %{}} end]},
+      {Stripe.Charge, [], [create: fn(_amount, _options) -> {:error, %{}} end]},
       {Donation, [:passthrough], [calculate_extra_space: fn(_amount) -> 123 end]}
       ], _context) do
         :ok
@@ -119,7 +119,7 @@ defmodule Helheim.DonationServiceTest do
     setup [:create_user, :build_invalid_changeset]
 
     setup_with_mocks([
-      {Stripe.Charges, [], [create: fn(_amount, _options) -> raise "Stripe called!" end]},
+      {Stripe.Charge, [], [create: fn(_amount, _options) -> raise "Stripe called!" end]},
       {Donation, [:passthrough], [calculate_extra_space: fn(_amount) -> 123 end]}
       ], _context) do
         :ok
