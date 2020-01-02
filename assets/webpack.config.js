@@ -48,6 +48,13 @@ module.exports = (env, options) => ({
         }]
       },
       {
+        test: require.resolve('dropzone'),
+        use: [{
+            loader: 'expose-loader',
+            options: 'Dropzone'
+        }]
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -74,7 +81,8 @@ module.exports = (env, options) => ({
       "window.pace": 'pace',
       IntlPolyfill: 'intl',
       Favico: 'favico.js',
-      dragula: 'dragula'
+      dragula: 'dragula',
+      Dropzone: 'dropzone'
     })
   ],
   externals: {

@@ -8,7 +8,7 @@ defmodule HelheimWeb.PhotoPositionController do
     photo_album   = assoc(user, :photo_albums) |> Repo.get!(photo_album_id)
 
     PhotoAlbum.reposition_photos!(photo_album, photo_ids)
-    send_resp(conn, 200, "OK")
+    text(conn, "OK")
   end
 
   defp parse_photo_ids(photo_ids) do

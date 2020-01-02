@@ -17,6 +17,7 @@ export var PhotoSorter = {
       $.ajax({
         url:  url,
         type: 'PUT',
+        dataType: 'text',
         data: {
           _csrf_token: $('body').data('csrf'),
           photo_ids: photoIds
