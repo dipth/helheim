@@ -40,6 +40,6 @@
 
     <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <script>require("js/app").AppSpecial.run()</script>
+    <script>AppSpecial.run()</script>
   </body>
 </html>
