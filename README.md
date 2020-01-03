@@ -12,14 +12,12 @@
   * `Chromedriver` 2.36
 
 The recommended way to install Elixir and Node.js is through the modular version manager asdf:
-https://github.com/asdf-vm/asdf
-https://github.com/asdf-vm/asdf-elixir
-https://github.com/asdf-vm/asdf-nodejs
 
-yarn can be installed through node.js
+- https://github.com/asdf-vm/asdf
+- https://github.com/asdf-vm/asdf-elixir
+- https://github.com/asdf-vm/asdf-nodejs
 
-The remaining can be installed with Homebrew:
-https://brew.sh/
+The remaining can be installed with [Homebrew](https://brew.sh/).
 
 ## Getting started:
 
