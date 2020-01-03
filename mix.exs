@@ -46,7 +46,7 @@ defmodule Helheim.Mixfile do
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.1.1"},
       {:pbkdf2_elixir, "~> 0.12"},
-      {:guardian, "~> 1.2.1"},
+      {:guardian, "~> 2.0.0"},
       {:secure_random, "~> 0.5.0"},
       {:bamboo, "~> 1.3"},
       {:bamboo_postmark, "~> 0.6.0"},
