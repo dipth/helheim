@@ -7,7 +7,6 @@ defmodule Helheim.Auth do
   alias Helheim.Repo
 
   alias Helheim.User
-  alias Comeonin.Bcrypt
 
   @doc """
   Searches the database for a user with the matching username, then
@@ -64,7 +63,7 @@ defmodule Helheim.Auth do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
-  def password_correct?(_, nil), do: Bcrypt.dummy_checkpw()
+  def password_correct?(_, nil), do: Bcrypt.no_user_verify()
   def password_correct?(password, %User{} = user), do: password_correct?(password, user.password_hash)
-  def password_correct?(password, encrypted_password), do: Bcrypt.checkpw(password, encrypted_password)
+  def password_correct?(password, encrypted_password), do: Bcrypt.verify_pass(password, encrypted_password)
 end
