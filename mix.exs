@@ -43,7 +43,7 @@ defmodule Helheim.Mixfile do
       {:gettext, "~> 0.11"},
       {:plug_cowboy, "~> 2.0"},
       {:plug, "~> 1.7"},
-      {:comeonin, "~> 4.0"},
+      {:comeonin, "~> 5.1"},
       {:bcrypt_elixir, "~> 1.1.1"},
       {:pbkdf2_elixir, "~> 0.12"},
       {:guardian, "~> 1.2.1"},
