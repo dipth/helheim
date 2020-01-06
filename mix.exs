@@ -44,7 +44,7 @@ defmodule Helheim.Mixfile do
       {:plug_cowboy, "~> 2.0"},
       {:plug, "~> 1.7"},
       {:bcrypt_elixir, "~> 2.0"},
-      {:pbkdf2_elixir, "~> 0.12"},
+      {:pbkdf2_elixir, "~> 1.0"},
       {:guardian, "~> 2.0"},
       {:guardian_phoenix, "~> 2.0"},
       {:secure_random, "~> 0.5.0"},
