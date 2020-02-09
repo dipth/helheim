@@ -18,12 +18,12 @@
   </div>
   <div>
     <small>
-      <%= username @forum_topic.user %>
-      - <%= time_ago_in_words(@forum_topic.inserted_at, simple: true) %>
       <%= if forum_reply do %>
-        <i class="fa fa-angle-right fa-fw"></i>
         <%= username forum_reply.user %>
         - <%= time_ago_in_words(forum_reply.inserted_at, simple: true) %>
+      <% else %>
+        <%= username @forum_topic.user %>
+        - <%= time_ago_in_words(@forum_topic.inserted_at, simple: true) %>
       <% end %>
     </small>
   </div>
