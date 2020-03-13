@@ -1,3 +1,4 @@
+@import "~csshake/scss/tools";
 // Here you can add other styles
 
 body:not(.top-nav) {
@@ -174,6 +175,10 @@ form.link {
         border-color: $brand-primary;
         transform: scale(1.1, 1.1);
       }
+    }
+
+    &.corona {
+      @include do-shake();
     }
 
     img.img-avatar {
