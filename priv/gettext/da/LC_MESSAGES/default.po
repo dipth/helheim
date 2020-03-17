@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -1621,7 +1621,7 @@ msgstr "Du har ingen kontakter..."
 msgid "Your Contacts"
 msgstr "Dine kontakter"
 
-#: lib/helheim_web/templates/blog_post/show.html.eex:50
+#: lib/helheim_web/templates/blog_post/show.html.eex:58
 msgid "Comments have been disabled for this blog post"
 msgstr "Kommentarer er deaktiveret på denne blog"
 
@@ -2089,3 +2089,11 @@ msgstr "Moderatorliste"
 #: lib/helheim_web/templates/page/staff.html.eex:6
 msgid "Staff Users"
 msgstr "Moderatorer og Admins"
+
+#: lib/helheim_web/templates/blog_post/show.html.eex:44
+msgid "The mod-team"
+msgstr "Moderatorholdet"
+
+#: lib/helheim_web/templates/blog_post/show.html.eex:43
+msgid "Kind regards"
+msgstr "Venlig hilsen"

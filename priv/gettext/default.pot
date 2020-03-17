@@ -15,24 +15,15 @@ msgid "%{site_name} is a community for alternative people."
 msgstr ""
 
 #: lib/helheim_web/email.ex:8 lib/helheim_web/email.ex:16
-#: lib/helheim_web/templates/donation/new.html.eex:7
-#: lib/helheim_web/templates/donation/new.html.eex:38
-#: lib/helheim_web/templates/email/password_reset_email.html.eex:5
-#: lib/helheim_web/templates/email/password_reset_email.html.eex:15
-#: lib/helheim_web/templates/email/password_reset_email.text.eex:1
-#: lib/helheim_web/templates/email/registration_email.html.eex:5
-#: lib/helheim_web/templates/email/registration_email.html.eex:15
-#: lib/helheim_web/templates/email/registration_email.text.eex:1
-#: lib/helheim_web/templates/error/404.html.eex:18
-#: lib/helheim_web/templates/error/404.html.eex:29
-#: lib/helheim_web/templates/error/500.html.eex:18
-#: lib/helheim_web/templates/error/500.html.eex:29
-#: lib/helheim_web/templates/layout/app.html.eex:24
-#: lib/helheim_web/templates/layout/app_special.html.eex:18
-#: lib/helheim_web/templates/layout/app_special.html.eex:29
-#: lib/helheim_web/templates/layout/app_special.html.eex:30
-#: lib/helheim_web/templates/layout/sidebar.html.eex:63
-#: lib/helheim_web/templates/page/index.html.eex:3
+#: lib/helheim_web/templates/donation/new.html.eex:7 lib/helheim_web/templates/donation/new.html.eex:38
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:5 lib/helheim_web/templates/email/password_reset_email.html.eex:15
+#: lib/helheim_web/templates/email/password_reset_email.text.eex:1 lib/helheim_web/templates/email/registration_email.html.eex:5
+#: lib/helheim_web/templates/email/registration_email.html.eex:15 lib/helheim_web/templates/email/registration_email.text.eex:1
+#: lib/helheim_web/templates/error/404.html.eex:18 lib/helheim_web/templates/error/404.html.eex:29
+#: lib/helheim_web/templates/error/500.html.eex:18 lib/helheim_web/templates/error/500.html.eex:29
+#: lib/helheim_web/templates/layout/app.html.eex:24 lib/helheim_web/templates/layout/app_special.html.eex:18
+#: lib/helheim_web/templates/layout/app_special.html.eex:29 lib/helheim_web/templates/layout/app_special.html.eex:30
+#: lib/helheim_web/templates/layout/sidebar.html.eex:63 lib/helheim_web/templates/page/index.html.eex:3
 msgid "Helheim"
 msgstr ""
 
@@ -45,12 +36,9 @@ msgid "Create Account"
 msgstr ""
 
 #: lib/helheim_web/templates/account/edit.html.eex:24
-#: lib/helheim_web/templates/admin/user/_account_details.html.eex:13
-#: lib/helheim_web/templates/admin/user/_users.html.eex:14
-#: lib/helheim_web/templates/admin/user/index.html.eex:26
-#: lib/helheim_web/templates/confirmation/new.html.eex:10
-#: lib/helheim_web/templates/password_reset/new.html.eex:10
-#: lib/helheim_web/templates/registration/new.html.eex:37
+#: lib/helheim_web/templates/admin/user/_account_details.html.eex:13 lib/helheim_web/templates/admin/user/_users.html.eex:14
+#: lib/helheim_web/templates/admin/user/index.html.eex:26 lib/helheim_web/templates/confirmation/new.html.eex:10
+#: lib/helheim_web/templates/password_reset/new.html.eex:10 lib/helheim_web/templates/registration/new.html.eex:37
 #: lib/helheim_web/templates/session/new.html.eex:9
 msgid "E-mail"
 msgstr ""
@@ -64,10 +52,8 @@ msgid "If for some reason you did not receive your confirmation e-mail, then ent
 msgstr ""
 
 #: lib/helheim_web/templates/account/edit.html.eex:14
-#: lib/helheim_web/templates/admin/user/_account_details.html.eex:10
-#: lib/helheim_web/templates/admin/user/_users.html.eex:11
-#: lib/helheim_web/templates/admin/user/index.html.eex:21
-#: lib/helheim_web/templates/registration/new.html.eex:23
+#: lib/helheim_web/templates/admin/user/_account_details.html.eex:10 lib/helheim_web/templates/admin/user/_users.html.eex:11
+#: lib/helheim_web/templates/admin/user/index.html.eex:21 lib/helheim_web/templates/registration/new.html.eex:23
 msgid "Name"
 msgstr ""
 
@@ -77,8 +63,7 @@ msgid "New Registration"
 msgstr ""
 
 #: lib/helheim_web/templates/account/edit.html.eex:41
-#: lib/helheim_web/templates/registration/new.html.eex:51
-#: lib/helheim_web/templates/session/new.html.eex:21
+#: lib/helheim_web/templates/registration/new.html.eex:51 lib/helheim_web/templates/session/new.html.eex:21
 msgid "Password"
 msgstr ""
 
@@ -87,22 +72,18 @@ msgid "Register Account"
 msgstr ""
 
 #: lib/helheim_web/templates/confirmation/new.html.eex:3
-#: lib/helheim_web/templates/confirmation/new.html.eex:18
-#: lib/helheim_web/views/confirmation_view.ex:4
+#: lib/helheim_web/templates/confirmation/new.html.eex:18 lib/helheim_web/views/confirmation_view.ex:4
 msgid "Resend confirmation e-mail"
 msgstr ""
 
 #: lib/helheim_web/templates/page/index.html.eex:12
-#: lib/helheim_web/templates/session/new.html.eex:3
-#: lib/helheim_web/templates/session/new.html.eex:36
+#: lib/helheim_web/templates/session/new.html.eex:3 lib/helheim_web/templates/session/new.html.eex:36
 msgid "Sign In"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/_account_details.html.eex:7
-#: lib/helheim_web/templates/admin/user/_users.html.eex:8
-#: lib/helheim_web/templates/admin/user/index.html.eex:16
-#: lib/helheim_web/templates/profile/index.html.eex:15
-#: lib/helheim_web/templates/registration/new.html.eex:9
+#: lib/helheim_web/templates/admin/user/_users.html.eex:8 lib/helheim_web/templates/admin/user/index.html.eex:16
+#: lib/helheim_web/templates/profile/index.html.eex:15 lib/helheim_web/templates/registration/new.html.eex:9
 msgid "Username"
 msgstr ""
 
@@ -133,8 +114,7 @@ msgid "See you later!"
 msgstr ""
 
 #: lib/helheim_web/controllers/confirmation_controller.ex:28
-#: lib/helheim_web/controllers/password_reset_controller.ex:36
-#: lib/helheim_web/controllers/password_reset_controller.ex:55
+#: lib/helheim_web/controllers/password_reset_controller.ex:36 lib/helheim_web/controllers/password_reset_controller.ex:55
 msgid "Token not found!"
 msgstr ""
 
@@ -239,8 +219,7 @@ msgid "Your profile has now been created on %{site_name}, but you need to confir
 msgstr ""
 
 #: lib/helheim_web/templates/account/edit.html.eex:37
-#: lib/helheim_web/templates/password_reset/show.html.eex:3
-#: lib/helheim_web/templates/password_reset/show.html.eex:36
+#: lib/helheim_web/templates/password_reset/show.html.eex:3 lib/helheim_web/templates/password_reset/show.html.eex:36
 msgid "Change Password"
 msgstr ""
 
@@ -270,8 +249,7 @@ msgid "Front Page"
 msgstr ""
 
 #: lib/helheim_web/templates/account/edit.html.eex:46
-#: lib/helheim_web/templates/password_reset/show.html.eex:17
-#: lib/helheim_web/templates/registration/new.html.eex:56
+#: lib/helheim_web/templates/password_reset/show.html.eex:17 lib/helheim_web/templates/registration/new.html.eex:56
 msgid "Must be at least 6 characters long"
 msgstr ""
 
@@ -285,14 +263,12 @@ msgid "You need to confirm your e-mail address before you can log in"
 msgstr ""
 
 #: lib/helheim_web/templates/account/edit.html.eex:51
-#: lib/helheim_web/templates/password_reset/show.html.eex:26
-#: lib/helheim_web/templates/registration/new.html.eex:65
+#: lib/helheim_web/templates/password_reset/show.html.eex:26 lib/helheim_web/templates/registration/new.html.eex:65
 msgid "Confirm Password"
 msgstr ""
 
 #: lib/helheim_web/templates/account/edit.html.eex:56
-#: lib/helheim_web/templates/password_reset/show.html.eex:31
-#: lib/helheim_web/templates/registration/new.html.eex:70
+#: lib/helheim_web/templates/password_reset/show.html.eex:31 lib/helheim_web/templates/registration/new.html.eex:70
 msgid "To ensure that you didn't make any typos"
 msgstr ""
 
@@ -358,8 +334,7 @@ msgid "Maximum file size: %{file_size}"
 msgstr ""
 
 #: lib/helheim_web/templates/navbar/show.html.eex:25
-#: lib/helheim_web/views/comment_view.ex:46
-#: lib/helheim_web/views/comment_view.ex:46
+#: lib/helheim_web/views/comment_view.ex:46 lib/helheim_web/views/comment_view.ex:46
 msgid "Profile"
 msgstr ""
 
@@ -412,8 +387,7 @@ msgid "Blog Posts"
 msgstr ""
 
 #: lib/helheim_web/templates/blog_post/index.html.eex:10
-#: lib/helheim_web/templates/blog_post/new.html.eex:3
-#: lib/helheim_web/templates/blog_post/new.html.eex:8
+#: lib/helheim_web/templates/blog_post/new.html.eex:3 lib/helheim_web/templates/blog_post/new.html.eex:8
 msgid "New Blog Post"
 msgstr ""
 
@@ -422,20 +396,15 @@ msgid "Save Blog Post"
 msgstr ""
 
 #: lib/helheim_web/templates/blog_post/edit.html.eex:2
-#: lib/helheim_web/templates/blog_post/new.html.eex:2
-#: lib/helheim_web/templates/layout/sidebar.html.eex:92
+#: lib/helheim_web/templates/blog_post/new.html.eex:2 lib/helheim_web/templates/layout/sidebar.html.eex:92
 msgid "Your Blog Posts"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/forum_category/index.html.eex:13
-#: lib/helheim_web/templates/admin/forum_category/index.html.eex:39
-#: lib/helheim_web/templates/admin/term/index.html.eex:35
-#: lib/helheim_web/templates/blog_post/show.html.eex:30
-#: lib/helheim_web/templates/friendship/_my_active_friendships.html.eex:23
-#: lib/helheim_web/templates/friendship/_my_pending_friendships.html.eex:28
-#: lib/helheim_web/templates/mod/calendar_event/_admin_links.html.eex:8
-#: lib/helheim_web/templates/photo/show.html.eex:42
-#: lib/helheim_web/templates/photo_album/show.html.eex:59
+#: lib/helheim_web/templates/admin/forum_category/index.html.eex:39 lib/helheim_web/templates/admin/term/index.html.eex:35
+#: lib/helheim_web/templates/blog_post/show.html.eex:30 lib/helheim_web/templates/friendship/_my_active_friendships.html.eex:23
+#: lib/helheim_web/templates/friendship/_my_pending_friendships.html.eex:28 lib/helheim_web/templates/mod/calendar_event/_admin_links.html.eex:8
+#: lib/helheim_web/templates/photo/show.html.eex:42 lib/helheim_web/templates/photo_album/show.html.eex:59
 #: lib/helheim_web/templates/private_conversation/show.html.eex:10
 msgid "Are you sure?"
 msgstr ""
@@ -453,19 +422,15 @@ msgid "Blog post updated successfully."
 msgstr ""
 
 #: lib/helheim_web/templates/blog_post/show.html.eex:32
-#: lib/helheim_web/templates/mod/calendar_event/_admin_links.html.eex:10
-#: lib/helheim_web/templates/photo/show.html.eex:44
-#: lib/helheim_web/templates/photo_album/show.html.eex:61
-#: lib/helheim_web/views/comment_view.ex:70
+#: lib/helheim_web/templates/mod/calendar_event/_admin_links.html.eex:10 lib/helheim_web/templates/photo/show.html.eex:44
+#: lib/helheim_web/templates/photo_album/show.html.eex:61 lib/helheim_web/views/comment_view.ex:70
 #: lib/helheim_web/views/comment_view.ex:72
 msgid "Delete"
 msgstr ""
 
 #: lib/helheim_web/templates/blog_post/show.html.eex:28
-#: lib/helheim_web/templates/comment/comment.html.eex:16
-#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:30
-#: lib/helheim_web/templates/forum_topic/forum_topic.html.eex:21
-#: lib/helheim_web/templates/mod/calendar_event/_admin_links.html.eex:6
+#: lib/helheim_web/templates/comment/comment.html.eex:16 lib/helheim_web/templates/forum_reply/forum_reply.html.eex:30
+#: lib/helheim_web/templates/forum_topic/forum_topic.html.eex:21 lib/helheim_web/templates/mod/calendar_event/_admin_links.html.eex:6
 msgid "Edit"
 msgstr ""
 
@@ -475,14 +440,10 @@ msgid "Edit Blog Post"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/forum/form.html.eex:4
-#: lib/helheim_web/templates/admin/forum_category/form.html.eex:4
-#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:8
-#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:8
-#: lib/helheim_web/templates/blog_post/form.html.eex:4
-#: lib/helheim_web/templates/calendar_event/_form.html.eex:4
-#: lib/helheim_web/templates/forum_topic/form.html.eex:4
-#: lib/helheim_web/templates/mod/calendar_event/index.html.eex:10
-#: lib/helheim_web/templates/photo/form.html.eex:10
+#: lib/helheim_web/templates/admin/forum_category/form.html.eex:4 lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:8
+#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:8 lib/helheim_web/templates/blog_post/form.html.eex:4
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:4 lib/helheim_web/templates/forum_topic/form.html.eex:4
+#: lib/helheim_web/templates/mod/calendar_event/index.html.eex:10 lib/helheim_web/templates/photo/form.html.eex:10
 #: lib/helheim_web/templates/photo_album/form.html.eex:4
 msgid "Title"
 msgstr ""
@@ -505,12 +466,9 @@ msgid "Post Comment"
 msgstr ""
 
 #: lib/helheim_web/templates/comment/comments.html.eex:9
-#: lib/helheim_web/templates/page/front_page.html.eex:5
-#: lib/helheim_web/templates/page/front_page.html.eex:29
-#: lib/helheim_web/templates/page/front_page.html.eex:41
-#: lib/helheim_web/templates/page/front_page.html.eex:55
-#: lib/helheim_web/templates/page/front_page.html.eex:82
-#: lib/helheim_web/templates/profile/show.html.eex:75
+#: lib/helheim_web/templates/page/front_page.html.eex:5 lib/helheim_web/templates/page/front_page.html.eex:29
+#: lib/helheim_web/templates/page/front_page.html.eex:41 lib/helheim_web/templates/page/front_page.html.eex:55
+#: lib/helheim_web/templates/page/front_page.html.eex:82 lib/helheim_web/templates/profile/show.html.eex:75
 #: lib/helheim_web/templates/profile/show.html.eex:99
 msgid "Show All"
 msgstr ""
@@ -586,8 +544,7 @@ msgid "Female"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/_personal_details.html.eex:4
-#: lib/helheim_web/templates/profile/details.html.eex:27
-#: lib/helheim_web/templates/profile/edit.html.eex:32
+#: lib/helheim_web/templates/profile/details.html.eex:27 lib/helheim_web/templates/profile/edit.html.eex:32
 msgid "Gender"
 msgstr ""
 
@@ -596,10 +553,8 @@ msgid "Joined"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/_personal_details.html.eex:16
-#: lib/helheim_web/templates/admin/user/index.html.eex:31
-#: lib/helheim_web/templates/profile/details.html.eex:48
-#: lib/helheim_web/templates/profile/edit.html.eex:46
-#: lib/helheim_web/templates/profile/index.html.eex:20
+#: lib/helheim_web/templates/admin/user/index.html.eex:31 lib/helheim_web/templates/profile/details.html.eex:48
+#: lib/helheim_web/templates/profile/edit.html.eex:46 lib/helheim_web/templates/profile/index.html.eex:20
 msgid "Location"
 msgstr ""
 
@@ -608,10 +563,8 @@ msgid "Male"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/_personal_details.html.eex:5
-#: lib/helheim_web/templates/admin/user/_personal_details.html.eex:14
-#: lib/helheim_web/templates/admin/user/_personal_details.html.eex:17
-#: lib/helheim_web/templates/profile/edit.html.eex:36
-#: lib/helheim_web/templates/profile/edit.html.eex:56
+#: lib/helheim_web/templates/admin/user/_personal_details.html.eex:14 lib/helheim_web/templates/admin/user/_personal_details.html.eex:17
+#: lib/helheim_web/templates/profile/edit.html.eex:36 lib/helheim_web/templates/profile/edit.html.eex:56
 msgid "Not specified"
 msgstr ""
 
@@ -620,10 +573,8 @@ msgid "Create New"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/forum/form.html.eex:12
-#: lib/helheim_web/templates/admin/forum_category/form.html.eex:12
-#: lib/helheim_web/templates/admin/term/form.html.eex:4
-#: lib/helheim_web/templates/photo/form.html.eex:18
-#: lib/helheim_web/templates/photo_album/form.html.eex:12
+#: lib/helheim_web/templates/admin/forum_category/form.html.eex:12 lib/helheim_web/templates/admin/term/form.html.eex:4
+#: lib/helheim_web/templates/photo/form.html.eex:18 lib/helheim_web/templates/photo_album/form.html.eex:12
 msgid "Description"
 msgstr ""
 
@@ -637,10 +588,8 @@ msgid "New Photo Album"
 msgstr ""
 
 #: lib/helheim_web/templates/photo/show.html.eex:3
-#: lib/helheim_web/templates/photo_album/index.html.eex:3
-#: lib/helheim_web/templates/photo_album/show.html.eex:3
-#: lib/helheim_web/views/visitor_log_entry_view.ex:46
-#: lib/helheim_web/views/visitor_log_entry_view.ex:65
+#: lib/helheim_web/templates/photo_album/index.html.eex:3 lib/helheim_web/templates/photo_album/show.html.eex:3
+#: lib/helheim_web/views/visitor_log_entry_view.ex:46 lib/helheim_web/views/visitor_log_entry_view.ex:65
 msgid "Photo Albums"
 msgstr ""
 
@@ -657,8 +606,7 @@ msgid "Save Photo Album"
 msgstr ""
 
 #: lib/helheim_web/templates/blog_post/form.html.eex:24
-#: lib/helheim_web/templates/photo/show.html.eex:10
-#: lib/helheim_web/templates/photo_album/form.html.eex:20
+#: lib/helheim_web/templates/photo/show.html.eex:10 lib/helheim_web/templates/photo_album/form.html.eex:20
 msgid "Visibility"
 msgstr ""
 
@@ -704,24 +652,17 @@ msgid "You have used %{used_space} out of a maximum of %{max_space} across all y
 msgstr ""
 
 #: lib/helheim_web/templates/admin/forum/edit.html.eex:2
-#: lib/helheim_web/templates/admin/forum/new.html.eex:2
-#: lib/helheim_web/templates/admin/forum_category/edit.html.eex:2
-#: lib/helheim_web/templates/admin/forum_category/index.html.eex:2
-#: lib/helheim_web/templates/admin/forum_category/new.html.eex:2
-#: lib/helheim_web/templates/admin/term/edit.html.eex:2
-#: lib/helheim_web/templates/admin/term/index.html.eex:2
-#: lib/helheim_web/templates/admin/term/new.html.eex:2
-#: lib/helheim_web/templates/admin/term/show.html.eex:2
-#: lib/helheim_web/templates/admin/user/index.html.eex:2
-#: lib/helheim_web/templates/admin/user/show.html.eex:2
+#: lib/helheim_web/templates/admin/forum/new.html.eex:2 lib/helheim_web/templates/admin/forum_category/edit.html.eex:2
+#: lib/helheim_web/templates/admin/forum_category/index.html.eex:2 lib/helheim_web/templates/admin/forum_category/new.html.eex:2
+#: lib/helheim_web/templates/admin/term/edit.html.eex:2 lib/helheim_web/templates/admin/term/index.html.eex:2
+#: lib/helheim_web/templates/admin/term/new.html.eex:2 lib/helheim_web/templates/admin/term/show.html.eex:2
+#: lib/helheim_web/templates/admin/user/index.html.eex:2 lib/helheim_web/templates/admin/user/show.html.eex:2
 msgid "Administration"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:8
-#: lib/helheim_web/templates/blog_post/form.html.eex:12
-#: lib/helheim_web/templates/forum_reply/form.html.eex:4
-#: lib/helheim_web/templates/forum_topic/form.html.eex:12
-#: lib/helheim_web/templates/profile/edit.html.eex:83
+#: lib/helheim_web/templates/blog_post/form.html.eex:12 lib/helheim_web/templates/forum_reply/form.html.eex:4
+#: lib/helheim_web/templates/forum_topic/form.html.eex:12 lib/helheim_web/templates/profile/edit.html.eex:83
 msgid "Content"
 msgstr ""
 
@@ -749,10 +690,8 @@ msgid "Edit Forum Category"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/forum/edit.html.eex:3
-#: lib/helheim_web/templates/admin/forum/new.html.eex:3
-#: lib/helheim_web/templates/admin/forum_category/edit.html.eex:3
-#: lib/helheim_web/templates/admin/forum_category/index.html.eex:3
-#: lib/helheim_web/templates/admin/forum_category/new.html.eex:3
+#: lib/helheim_web/templates/admin/forum/new.html.eex:3 lib/helheim_web/templates/admin/forum_category/edit.html.eex:3
+#: lib/helheim_web/templates/admin/forum_category/index.html.eex:3 lib/helheim_web/templates/admin/forum_category/new.html.eex:3
 msgid "Forum Categories"
 msgstr ""
 
@@ -785,12 +724,9 @@ msgid "Forum updated successfully."
 msgstr ""
 
 #: lib/helheim_web/templates/forum/index.html.eex:2
-#: lib/helheim_web/templates/forum/show.html.eex:2
-#: lib/helheim_web/templates/forum_reply/edit.html.eex:2
-#: lib/helheim_web/templates/forum_topic/edit.html.eex:2
-#: lib/helheim_web/templates/forum_topic/new.html.eex:2
-#: lib/helheim_web/templates/forum_topic/show.html.eex:2
-#: lib/helheim_web/templates/layout/sidebar.html.eex:10
+#: lib/helheim_web/templates/forum/show.html.eex:2 lib/helheim_web/templates/forum_reply/edit.html.eex:2
+#: lib/helheim_web/templates/forum_topic/edit.html.eex:2 lib/helheim_web/templates/forum_topic/new.html.eex:2
+#: lib/helheim_web/templates/forum_topic/show.html.eex:2 lib/helheim_web/templates/layout/sidebar.html.eex:10
 msgid "Forums"
 msgstr ""
 
@@ -803,14 +739,10 @@ msgid "Go to the last page to reply..."
 msgstr ""
 
 #: lib/helheim_web/templates/blog_post/form.html.eex:20
-#: lib/helheim_web/templates/calendar_event/_form.html.eex:19
-#: lib/helheim_web/templates/comment/comments.html.eex:39
-#: lib/helheim_web/templates/comment/form.html.eex:13
-#: lib/helheim_web/templates/forum_reply/form.html.eex:11
-#: lib/helheim_web/templates/forum_topic/form.html.eex:19
-#: lib/helheim_web/templates/forum_topic/show.html.eex:36
-#: lib/helheim_web/templates/forum_topic/show.html.eex:51
-#: lib/helheim_web/templates/profile/edit.html.eex:91
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:19 lib/helheim_web/templates/comment/comments.html.eex:39
+#: lib/helheim_web/templates/comment/form.html.eex:13 lib/helheim_web/templates/forum_reply/form.html.eex:11
+#: lib/helheim_web/templates/forum_topic/form.html.eex:19 lib/helheim_web/templates/forum_topic/show.html.eex:36
+#: lib/helheim_web/templates/forum_topic/show.html.eex:51 lib/helheim_web/templates/profile/edit.html.eex:91
 msgid "Hint"
 msgstr ""
 
@@ -882,10 +814,8 @@ msgid "Hope to see you again some time!"
 msgstr ""
 
 #: lib/helheim_web/templates/private_conversation/index.html.eex:22
-#: lib/helheim_web/templates/private_conversation/show.html.eex:5
-#: lib/helheim_web/templates/private_conversation/show.html.eex:5
-#: lib/helheim_web/views/notification_view.ex:44
-#: lib/helheim_web/views/profile_helpers.ex:12
+#: lib/helheim_web/templates/private_conversation/show.html.eex:5 lib/helheim_web/templates/private_conversation/show.html.eex:5
+#: lib/helheim_web/views/notification_view.ex:44 lib/helheim_web/views/profile_helpers.ex:12
 msgid "User deleted"
 msgstr ""
 
@@ -966,10 +896,8 @@ msgid "Show Terms"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/term/edit.html.eex:3
-#: lib/helheim_web/templates/admin/term/index.html.eex:3
-#: lib/helheim_web/templates/admin/term/new.html.eex:3
-#: lib/helheim_web/templates/admin/term/show.html.eex:3
-#: lib/helheim_web/templates/layout/sidebar_admin.html.eex:10
+#: lib/helheim_web/templates/admin/term/index.html.eex:3 lib/helheim_web/templates/admin/term/new.html.eex:3
+#: lib/helheim_web/templates/admin/term/show.html.eex:3 lib/helheim_web/templates/layout/sidebar_admin.html.eex:10
 msgid "Terms"
 msgstr ""
 
@@ -1019,14 +947,12 @@ msgid "Forum topic updated successfully."
 msgstr ""
 
 #: lib/helheim_web/templates/comment/edit.html.eex:4
-#: lib/helheim_web/templates/forum_reply/edit.html.eex:12
-#: lib/helheim_web/templates/forum_topic/edit.html.eex:19
+#: lib/helheim_web/templates/forum_reply/edit.html.eex:12 lib/helheim_web/templates/forum_topic/edit.html.eex:19
 msgid "Save Changes"
 msgstr ""
 
 #: lib/helheim_web/views/visitor_log_entry_view.ex:15
-#: lib/helheim_web/views/visitor_log_entry_view.ex:33
-#: lib/helheim_web/views/visitor_log_entry_view.ex:51
+#: lib/helheim_web/views/visitor_log_entry_view.ex:33 lib/helheim_web/views/visitor_log_entry_view.ex:51
 #: lib/helheim_web/views/visitor_log_entry_view.ex:73
 msgid "Visitors"
 msgstr ""
@@ -1036,8 +962,7 @@ msgid "You do not have access to that page!"
 msgstr ""
 
 #: lib/helheim_web/templates/blog_post/index.html.eex:3
-#: lib/helheim_web/templates/blog_post/index_all_public.html.eex:2
-#: lib/helheim_web/templates/blog_post/show.html.eex:3
+#: lib/helheim_web/templates/blog_post/index_all_public.html.eex:2 lib/helheim_web/templates/blog_post/show.html.eex:3
 msgid "Blog posts"
 msgstr ""
 
@@ -1046,8 +971,7 @@ msgid "Comments"
 msgstr ""
 
 #: lib/helheim_web/templates/help/verification.html.eex:2
-#: lib/helheim_web/templates/layout/sidebar.html.eex:36
-#: lib/helheim_web/templates/page/staff.html.eex:2
+#: lib/helheim_web/templates/layout/sidebar.html.eex:36 lib/helheim_web/templates/page/staff.html.eex:2
 msgid "Help"
 msgstr ""
 
@@ -1173,8 +1097,7 @@ msgid "Draft"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/index.html.eex:37
-#: lib/helheim_web/templates/blog_post/form.html.eex:35
-#: lib/helheim_web/templates/blog_post/form.html.eex:49
+#: lib/helheim_web/templates/blog_post/form.html.eex:35 lib/helheim_web/templates/blog_post/form.html.eex:49
 msgid "No"
 msgstr ""
 
@@ -1191,8 +1114,7 @@ msgid "This blog post is not published!"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/index.html.eex:37
-#: lib/helheim_web/templates/blog_post/form.html.eex:35
-#: lib/helheim_web/templates/blog_post/form.html.eex:49
+#: lib/helheim_web/templates/blog_post/form.html.eex:35 lib/helheim_web/templates/blog_post/form.html.eex:49
 msgid "Yes"
 msgstr ""
 
@@ -1245,8 +1167,7 @@ msgid "Submit your changes to upload the image"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/_personal_details.html.eex:13
-#: lib/helheim_web/templates/profile/details.html.eex:41
-#: lib/helheim_web/templates/profile/edit.html.eex:51
+#: lib/helheim_web/templates/profile/details.html.eex:41 lib/helheim_web/templates/profile/edit.html.eex:51
 msgid "Partner status"
 msgstr ""
 
@@ -1284,8 +1205,7 @@ msgid "Unable to unblock user!"
 msgstr ""
 
 #: lib/helheim_web/templates/block/index.html.eex:27
-#: lib/helheim_web/templates/block/index.html.eex:28
-#: lib/helheim_web/templates/profile/show.html.eex:45
+#: lib/helheim_web/templates/block/index.html.eex:28 lib/helheim_web/templates/profile/show.html.eex:45
 msgid "Unblock user"
 msgstr ""
 
@@ -1302,8 +1222,7 @@ msgid "Blocked since:"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/_blocks.html.eex:1
-#: lib/helheim_web/templates/block/index.html.eex:2
-#: lib/helheim_web/templates/navbar/show.html.eex:28
+#: lib/helheim_web/templates/block/index.html.eex:2 lib/helheim_web/templates/navbar/show.html.eex:28
 msgid "Blocks"
 msgstr ""
 
@@ -1391,8 +1310,7 @@ msgid "Previous"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/index.html.eex:9
-#: lib/helheim_web/templates/admin/user/index.html.eex:45
-#: lib/helheim_web/templates/profile/index.html.eex:8
+#: lib/helheim_web/templates/admin/user/index.html.eex:45 lib/helheim_web/templates/profile/index.html.eex:8
 #: lib/helheim_web/templates/profile/index.html.eex:32
 msgid "Search"
 msgstr ""
@@ -1418,19 +1336,15 @@ msgid "Sorting"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/_login_details.html.eex:4
-#: lib/helheim_web/templates/friendship/_active_friendships.html.eex:12
-#: lib/helheim_web/templates/friendship/_active_friendships.html.eex:19
-#: lib/helheim_web/templates/friendship/_my_active_friendships.html.eex:12
-#: lib/helheim_web/templates/friendship/_my_active_friendships.html.eex:19
-#: lib/helheim_web/templates/friendship/_my_pending_friendships.html.eex:12
-#: lib/helheim_web/templates/friendship/_my_pending_friendships.html.eex:19
+#: lib/helheim_web/templates/friendship/_active_friendships.html.eex:12 lib/helheim_web/templates/friendship/_active_friendships.html.eex:19
+#: lib/helheim_web/templates/friendship/_my_active_friendships.html.eex:12 lib/helheim_web/templates/friendship/_my_active_friendships.html.eex:19
+#: lib/helheim_web/templates/friendship/_my_pending_friendships.html.eex:12 lib/helheim_web/templates/friendship/_my_pending_friendships.html.eex:19
 #: lib/helheim_web/templates/profile/details.html.eex:21
 msgid "Last login"
 msgstr ""
 
 #: lib/helheim_web/templates/comment/comment.html.eex:17
-#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:31
-#: lib/helheim_web/templates/forum_topic/forum_topic.html.eex:22
+#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:31 lib/helheim_web/templates/forum_topic/forum_topic.html.eex:22
 msgid "Only possible for up to %{minutes} minutes after posting..."
 msgstr ""
 
@@ -1533,7 +1447,6 @@ msgstr ""
 msgid "%{username} has been removed from your contact list!"
 msgstr ""
 
-#:
 #: lib/helheim_web/templates/friendship/_friend_request_button_friends.html.eex:3
 msgid "%{username} is on your contact list"
 msgstr ""
@@ -1546,7 +1459,6 @@ msgstr ""
 msgid "Accept"
 msgstr ""
 
-#:
 #: lib/helheim_web/templates/friendship/_friend_request_button_not_friends.html.eex:3
 msgid "Add to Contacts"
 msgstr ""
@@ -1556,7 +1468,6 @@ msgstr ""
 msgid "Contact List"
 msgstr ""
 
-#:
 #: lib/helheim_web/templates/friendship/_friend_request_button_pending.html.eex:3
 msgid "Contact Request Pending"
 msgstr ""
@@ -1615,7 +1526,7 @@ msgstr ""
 msgid "Your Contacts"
 msgstr ""
 
-#: lib/helheim_web/templates/blog_post/show.html.eex:50
+#: lib/helheim_web/templates/blog_post/show.html.eex:58
 msgid "Comments have been disabled for this blog post"
 msgstr ""
 
@@ -1667,10 +1578,8 @@ msgid "Created at"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/_account_details.html.eex:4
-#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:7
-#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:7
-#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:7
-#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:7
+#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:7 lib/helheim_web/templates/admin/user/_recent_comments.html.eex:7
+#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:7 lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:7
 #: lib/helheim_web/templates/admin/user/_users.html.eex:5
 msgid "ID"
 msgstr ""
@@ -1684,12 +1593,9 @@ msgid "Login Details"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/_blocks.html.eex:32
-#: lib/helheim_web/templates/admin/user/_potential_alt_accounts.html.eex:7
-#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:38
-#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:29
-#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:32
-#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:32
-#: lib/helheim_web/templates/admin/user/_recent_photos.html.eex:22
+#: lib/helheim_web/templates/admin/user/_potential_alt_accounts.html.eex:7 lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:38
+#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:29 lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:32
+#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:32 lib/helheim_web/templates/admin/user/_recent_photos.html.eex:22
 msgid "None found"
 msgstr ""
 
@@ -1731,8 +1637,7 @@ msgid "Recent photos"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/index.html.eex:3
-#: lib/helheim_web/templates/admin/user/show.html.eex:3
-#: lib/helheim_web/templates/layout/sidebar_admin.html.eex:14
+#: lib/helheim_web/templates/admin/user/show.html.eex:3 lib/helheim_web/templates/layout/sidebar_admin.html.eex:14
 msgid "Users"
 msgstr ""
 
@@ -1863,10 +1768,8 @@ msgid "Views/Comments"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/_blocks.html.eex:10
-#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:9
-#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:9
-#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:9
-#: lib/helheim_web/templates/mod/calendar_event/index.html.eex:11
+#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:9 lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:9
+#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:9 lib/helheim_web/templates/mod/calendar_event/index.html.eex:11
 msgid "When"
 msgstr ""
 
@@ -1879,16 +1782,13 @@ msgid "This topic is locked"
 msgstr ""
 
 #: lib/helheim_web/templates/calendar_event/index.html.eex:5
-#: lib/helheim_web/templates/calendar_event/new.html.eex:1
-#: lib/helheim_web/templates/page/front_page.html.eex:69
+#: lib/helheim_web/templates/calendar_event/new.html.eex:1 lib/helheim_web/templates/page/front_page.html.eex:69
 msgid "Create event"
 msgstr ""
 
 #: lib/helheim_web/templates/calendar_event/index.html.eex:1
-#: lib/helheim_web/templates/calendar_event/show.html.eex:2
-#: lib/helheim_web/templates/layout/sidebar.html.eex:29
-#: lib/helheim_web/templates/layout/sidebar_mod.html.eex:6
-#: lib/helheim_web/templates/mod/calendar_event/index.html.eex:3
+#: lib/helheim_web/templates/calendar_event/show.html.eex:2 lib/helheim_web/templates/layout/sidebar.html.eex:29
+#: lib/helheim_web/templates/layout/sidebar_mod.html.eex:6 lib/helheim_web/templates/mod/calendar_event/index.html.eex:3
 #: lib/helheim_web/templates/mod/calendar_event/show.html.eex:3
 msgid "Event calendar"
 msgstr ""
@@ -1984,12 +1884,9 @@ msgid "User"
 msgstr ""
 
 #: lib/helheim_web/templates/blog_post/form.html.eex:20
-#: lib/helheim_web/templates/calendar_event/_form.html.eex:19
-#: lib/helheim_web/templates/comment/comments.html.eex:39
-#: lib/helheim_web/templates/comment/form.html.eex:13
-#: lib/helheim_web/templates/forum_reply/form.html.eex:11
-#: lib/helheim_web/templates/forum_topic/form.html.eex:19
-#: lib/helheim_web/templates/profile/edit.html.eex:91
+#: lib/helheim_web/templates/calendar_event/_form.html.eex:19 lib/helheim_web/templates/comment/comments.html.eex:39
+#: lib/helheim_web/templates/comment/form.html.eex:13 lib/helheim_web/templates/forum_reply/form.html.eex:11
+#: lib/helheim_web/templates/forum_topic/form.html.eex:19 lib/helheim_web/templates/profile/edit.html.eex:91
 msgid "You can embed pictures from your photo albums or from Imgur, gifs from Giphy, Videos from Youtube and Vimeo and Spotify playlists by simply including a url for the desired media in your post"
 msgstr ""
 
@@ -2074,8 +1971,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/helheim_web/templates/layout/sidebar_mod.html.eex:1
-#: lib/helheim_web/templates/mod/calendar_event/index.html.eex:2
-#: lib/helheim_web/templates/mod/calendar_event/show.html.eex:2
+#: lib/helheim_web/templates/mod/calendar_event/index.html.eex:2 lib/helheim_web/templates/mod/calendar_event/show.html.eex:2
 msgid "Mod"
 msgstr ""
 
@@ -2093,4 +1989,14 @@ msgstr ""
 #, elixir-format
 #: lib/helheim_web/templates/page/staff.html.eex:6
 msgid "Staff Users"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/blog_post/show.html.eex:44
+msgid "The mod-team"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/blog_post/show.html.eex:43
+msgid "Kind regards"
 msgstr ""

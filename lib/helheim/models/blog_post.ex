@@ -10,6 +10,7 @@ defmodule Helheim.BlogPost do
     field :published_at,  :utc_datetime_usec
     field :visibility,    :string
     field :hide_comments, :boolean
+    field :mod_message,   :string
 
     timestamps(type: :utc_datetime_usec)
 

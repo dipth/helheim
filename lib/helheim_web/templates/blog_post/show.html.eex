@@ -37,6 +37,14 @@
 
 <hr>
 
+<%= if @blog_post.mod_message do %>
+  <div class="alert alert-info">
+    <%= raw @blog_post.mod_message %>
+    <strong><%= gettext "Kind regards" %></strong>,<br>
+    <%= gettext "The mod-team" %>
+  </div>
+<% end %>
+
 <div class="embeds blog-post-body mentionable">
   <%= HelheimWeb.EmbedHelpers.raw_replace_urls(@blog_post.body) %>
 </div>
