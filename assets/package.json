@@ -12,7 +12,7 @@
     "flatpickr": "^4.6.3",
     "intl": "^1.2.5",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.27",
+    "moment-timezone": "^0.5.28",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
     "set-value": "^3.0.1",
