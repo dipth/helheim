@@ -19,7 +19,8 @@
     "tether": "^1.4.7",
     "pace": "^0.0.4",
     "dropzone": "5.7.0",
-    "csshake": "^1.5.3"
+    "csshake": "^1.5.3",
+    "kind-of": "^6.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
