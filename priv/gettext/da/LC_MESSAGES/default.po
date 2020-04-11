@@ -1781,35 +1781,35 @@ msgstr "Fjern verificering!"
 msgid "Verify!"
 msgstr "Verificer!"
 
-#: lib/helheim_web/templates/help/verification.html.eex:16
+#: lib/helheim_web/templates/help/verification.html.eex:17
 msgid "Being a verified user gives you a special badge on your profile and will allow you to access certain blog posts and photos that users have marked as only being available for verified users."
 msgstr "Som verificeret bruger får du et specielt badge på din profil og du får adgang til de blogs og billeder som andre brugere har markeret til kun at være tilgængelige for verificerede brugere."
 
-#: lib/helheim_web/templates/help/verification.html.eex:11
+#: lib/helheim_web/templates/help/verification.html.eex:12
 msgid "Did the user sign up with a genuine name and e-mail address?"
 msgstr "Har brugeren tilmeldt sig med sit ægte navn og e-mail adresse?"
 
-#: lib/helheim_web/templates/help/verification.html.eex:12
+#: lib/helheim_web/templates/help/verification.html.eex:13
 msgid "Does the user have a constructive and interesting profile text?"
 msgstr "Har brugeren skrevet en konstruktiv og interessant profiltekst?"
 
-#: lib/helheim_web/templates/help/verification.html.eex:10
+#: lib/helheim_web/templates/help/verification.html.eex:11
 msgid "Does the user have a profile photo?"
 msgstr "Har brugeren uploaded et profilbillede?"
 
-#: lib/helheim_web/templates/help/verification.html.eex:14
+#: lib/helheim_web/templates/help/verification.html.eex:15
 msgid "Has the user demonstrated an ability to understand and follow the rules of the site?"
 msgstr "Har brugeren demonstreret sin evne til at forstå og leve op til sitets regler?"
 
-#: lib/helheim_web/templates/help/verification.html.eex:13
+#: lib/helheim_web/templates/help/verification.html.eex:14
 msgid "Has the user engaged positively with the community?"
 msgstr "Har brugeren engageret sig positivt med de andre brugere?"
 
-#: lib/helheim_web/templates/help/verification.html.eex:24
+#: lib/helheim_web/templates/help/verification.html.eex:25
 msgid "If you feel that you do meet the criteria and should be verified, then feel free to contact any of the admins via a private message."
 msgstr "Hvis du føler at du lever op til kriterierne for at blive verificeret, så kontakt gerne en admin via en privat besked."
 
-#: lib/helheim_web/templates/help/verification.html.eex:20
+#: lib/helheim_web/templates/help/verification.html.eex:21
 msgid "It appears that you have already been verified. But please be aware that your verification can be revoked at any time should you no longer meet the criteria for verification."
 msgstr "Det lader til at du allerede er verificeret. Men husk på at du til enhver tid kan blive frataget din verifikation hvis det vurderes at du ikke længere lever op til kravene for verifikation."
 
@@ -1817,7 +1817,7 @@ msgstr "Det lader til at du allerede er verificeret. Men husk på at du til enhv
 msgid "Some of the criteria that is used for determining whether a user should be verified includes, but is not limited to:"
 msgstr "Nogle af de kriterier som bruges til at vurdere om en bruger kan verificeres inkluderer, men er ikke begrænset til:"
 
-#: lib/helheim_web/templates/help/verification.html.eex:23
+#: lib/helheim_web/templates/help/verification.html.eex:24
 msgid "This can either mean that an admin has not yet had the time to decide on your verification state, or it has been decided that you do not meet the criteria for verification."
 msgstr "Dette kan betyde at en admin endnu ikke har haft tid til at vurdere om du kan verificeres, eller det kan være at det blev vurderet at du ikke levede op til kriterierne for verifikation."
 
@@ -1834,11 +1834,11 @@ msgstr "Verificeret bruger"
 msgid "What is a verified user?"
 msgstr "Hvad er en verificeret bruger?"
 
-#: lib/helheim_web/templates/help/verification.html.eex:22
+#: lib/helheim_web/templates/help/verification.html.eex:23
 msgid "You are not verified"
 msgstr "Du er ikke verificeret"
 
-#: lib/helheim_web/templates/help/verification.html.eex:19
+#: lib/helheim_web/templates/help/verification.html.eex:20
 msgid "You are verified!"
 msgstr "Du er verificeret!"
 
@@ -2097,3 +2097,7 @@ msgstr "Moderatorholdet"
 #: lib/helheim_web/templates/blog_post/show.html.eex:43
 msgid "Kind regards"
 msgstr "Venlig hilsen"
+
+#: lib/helheim_web/templates/help/verification.html.eex:10
+msgid "Is it more than 24 hours since the user signed up?"
+msgstr "Er det mere end 24 timer siden brugeren oprettede sig?"
