@@ -1813,7 +1813,7 @@ msgstr "Hvis du føler at du lever op til kriterierne for at blive verificeret, 
 msgid "It appears that you have already been verified. But please be aware that your verification can be revoked at any time should you no longer meet the criteria for verification."
 msgstr "Det lader til at du allerede er verificeret. Men husk på at du til enhver tid kan blive frataget din verifikation hvis det vurderes at du ikke længere lever op til kravene for verifikation."
 
-#: lib/helheim_web/templates/help/verification.html.eex:8
+#: lib/helheim_web/templates/help/verification.html.eex:9
 msgid "Some of the criteria that is used for determining whether a user should be verified includes, but is not limited to:"
 msgstr "Nogle af de kriterier som bruges til at vurdere om en bruger kan verificeres inkluderer, men er ikke begrænset til:"
 
@@ -2098,6 +2098,6 @@ msgstr "Moderatorholdet"
 msgid "Kind regards"
 msgstr "Venlig hilsen"
 
-#: lib/helheim_web/templates/help/verification.html.eex:10
-msgid "Is it more than 24 hours since the user signed up?"
-msgstr "Er det mere end 24 timer siden brugeren oprettede sig?"
+#: lib/helheim_web/templates/help/verification.html.eex:8
+msgid "As a general rule, profiles will never be verified before at least 24 hours has passed since their sign up."
+msgstr "Profiler vil ikke kunne verificeres før der er gået minimum 24 timer siden deres oprettelse."

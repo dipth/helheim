@@ -5,9 +5,9 @@
 
 <h1><%= gettext "What is a verified user?" %></h1>
 <p><%= gettext "In short, a verified user is a user that an admin has deemed as not being a fake or empty profile." %></p>
+<p><%= gettext "As a general rule, profiles will never be verified before at least 24 hours has passed since their sign up." %></p>
 <p><%= gettext "Some of the criteria that is used for determining whether a user should be verified includes, but is not limited to:" %></p>
 <ul>
-  <li><%= gettext "Is it more than 24 hours since the user signed up?" %></li>
   <li><%= gettext "Does the user have a profile photo?" %></li>
   <li><%= gettext "Did the user sign up with a genuine name and e-mail address?" %></li>
   <li><%= gettext "Does the user have a constructive and interesting profile text?" %></li>
