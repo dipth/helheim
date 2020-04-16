@@ -17,6 +17,7 @@ config :helheim, Helheim.Repo,
 config :helheim, HelheimWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "JXAQU/sDIXwY//LkAGR99f22MNDD4pO0vJUFeJFnX1JBTRsnG+UD/EbZpjVGoZb6",
+  live_view: [signing_salt: "A78RceomQzKIr7b0HfbmO8oE2lT24bnX"],
   render_errors: [view: HelheimWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Helheim.PubSub,
            adapter: Phoenix.PubSub.PG2]

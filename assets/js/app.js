@@ -28,6 +28,7 @@ import { Leaf } from "./leaf";
 import { BootstrapStuff } from "./bootstrap_stuff";
 import { ProfileSettings } from "./profile_settings";
 import { BlogPostForm } from "./blog_post_form";
+import { Live } from "./live";
 import { Notifications } from "./notifications";
 import { Status } from "./status";
 import { SelectWithCustom } from "./select_with_custom";
@@ -47,6 +48,7 @@ import css from "../css/app.css.scss"
 
 export var App = {
   run: function(){
+    Live.run();
     Embeds.run();
     Leaf.run();
     BootstrapStuff.run();
