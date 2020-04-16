@@ -28,6 +28,12 @@ defmodule HelheimWeb.Endpoint do
     198.41.128.0/17
   ]
 
+  plug Phoenix.LiveDashboard.RequestLogger,
+    param_key: "request_logger",
+    cookie_key: "request_logger"
+
+  plug Plug.RequestId
+
   socket "/socket", HelheimWeb.UserSocket,
     websocket: true
 

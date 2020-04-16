@@ -25,7 +25,7 @@ config :helheim, HelheimWeb.Endpoint,
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:user_id]
+  metadata: [:user_id, :request_id]
 
 # Configure guardian
 config :helheim, Helheim.Auth.Guardian,
