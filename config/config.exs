@@ -45,16 +45,6 @@ config :sentry,
   root_source_code_path: File.cwd!,
   json_library: Poison
 
-# Configure Scout APM
-config :scout_apm,
-  name: "Helheim"
-config :phoenix, :template_engines,
-  eex: ScoutApm.Instruments.EExEngine,
-  exs: ScoutApm.Instruments.ExsEngine
-config :helheim, Helheim.Repo,
-  loggers: [{Ecto.LogEntry, :log, []},
-            {ScoutApm.Instruments.EctoLogger, :log, []}]
-
 # Configure mailer
 config :helheim, Helheim.Mailer,
   adapter: Bamboo.PostmarkAdapter,

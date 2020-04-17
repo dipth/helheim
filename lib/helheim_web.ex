@@ -20,7 +20,6 @@ defmodule HelheimWeb do
   def controller do
     quote do
       use Phoenix.Controller, namespace: HelheimWeb
-      use ScoutApm.Instrumentation
 
       import Plug.Conn
       import Ecto
