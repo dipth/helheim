@@ -20,7 +20,6 @@ defmodule HelheimWeb do
   def controller do
     quote do
       use Phoenix.Controller, namespace: HelheimWeb
-      use ScoutApm.Instrumentation
 
       import Plug.Conn
       import Ecto
@@ -28,6 +27,8 @@ defmodule HelheimWeb do
       import Ecto.Query
 
       import Guardian.Plug, only: [current_resource: 1]
+
+      import Phoenix.LiveView.Controller
 
       import HelheimWeb.Router.Helpers
       import HelheimWeb.Gettext
@@ -51,6 +52,8 @@ defmodule HelheimWeb do
 
       import Guardian.Plug, only: [current_resource: 1]
 
+      import Phoenix.LiveView.Helpers
+
       # TODO: Remove
       # https://gist.github.com/chrismccord/bb1f8b136f5a9e4abc0bfc07b832257e#add-a-routes-alias-and-update-your-router-calls
       import HelheimWeb.Router.Helpers
@@ -72,6 +75,7 @@ defmodule HelheimWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 

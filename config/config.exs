@@ -17,6 +17,7 @@ config :helheim, Helheim.Repo,
 config :helheim, HelheimWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "JXAQU/sDIXwY//LkAGR99f22MNDD4pO0vJUFeJFnX1JBTRsnG+UD/EbZpjVGoZb6",
+  live_view: [signing_salt: "A78RceomQzKIr7b0HfbmO8oE2lT24bnX"],
   render_errors: [view: HelheimWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Helheim.PubSub,
            adapter: Phoenix.PubSub.PG2]
@@ -24,7 +25,7 @@ config :helheim, HelheimWeb.Endpoint,
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:user_id]
+  metadata: [:user_id, :request_id]
 
 # Configure guardian
 config :helheim, Helheim.Auth.Guardian,
@@ -43,16 +44,6 @@ config :sentry,
   enable_source_code_context: true,
   root_source_code_path: File.cwd!,
   json_library: Poison
-
-# Configure Scout APM
-config :scout_apm,
-  name: "Helheim"
-config :phoenix, :template_engines,
-  eex: ScoutApm.Instruments.EExEngine,
-  exs: ScoutApm.Instruments.ExsEngine
-config :helheim, Helheim.Repo,
-  loggers: [{Ecto.LogEntry, :log, []},
-            {ScoutApm.Instruments.EctoLogger, :log, []}]
 
 # Configure mailer
 config :helheim, Helheim.Mailer,

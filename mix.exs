@@ -35,6 +35,11 @@ defmodule Helheim.Mixfile do
     [
       {:phoenix, "~> 1.4.0"},
       {:phoenix_pubsub, "~> 1.0"},
+      {:phoenix_live_view, "~> 0.12"},
+      {:floki, ">= 0.0.0", only: :test},
+      {:phoenix_live_dashboard, "~> 0.1"},
+      {:telemetry_poller, "~> 0.4"},
+      {:telemetry_metrics, "~> 0.4"},
       {:ecto_sql, "~> 3.0"},
       {:phoenix_ecto, "~> 4.0"},
       {:postgrex, ">= 0.0.0"},
@@ -67,7 +72,6 @@ defmodule Helheim.Mixfile do
       {:crutches, git: "https://github.com/mykewould/crutches.git"},
       {:scrivener_ecto, "~> 2.2"}, # Pagination
       {:mock, "~> 0.3.3", only: :test},
-      {:scout_apm, "~> 1.0"},
       {:stripity_stripe, "~> 2.8.0"},
       {:recaptcha, "~> 3.0"},
       {:remote_ip, "~> 0.2.0"}

@@ -10,6 +10,8 @@ defmodule Helheim.Application do
     children = [
       # Start the Ecto repository
       supervisor(Helheim.Repo, []),
+      # Start the Telemetry
+      supervisor(HelheimWeb.Telemetry, [nil]),
       # Start the endpoint when the application starts
       supervisor(HelheimWeb.Endpoint, []),
       # Start the presence

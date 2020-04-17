@@ -3,10 +3,12 @@ defmodule HelheimWeb.Router do
   use Plug.ErrorHandler
   use Sentry.Plug
 
+  import Phoenix.LiveDashboard.Router
+
   pipeline :browser do
     plug :accepts, ["html", "json"]
     plug :fetch_session
-    plug :fetch_flash
+    plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug HelheimWeb.Locale
@@ -132,6 +134,8 @@ defmodule HelheimWeb.Router do
 
   scope "/admin", HelheimWeb.Admin, as: :admin do
     pipe_through [:browser, :auth, :ensure_auth, :ensure_admin]
+
+    live_dashboard "/dashboard", metrics: HelheimWeb.Telemetry
 
     resources "/forum_categories", ForumCategoryController, only: [:index, :new, :create, :edit, :update, :delete] do
       resources "/forums", ForumController, only: [:new, :create, :edit, :update, :delete]
