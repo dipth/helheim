@@ -13,4 +13,8 @@
     <i class="fa fa-users"></i>
     <%= gettext("Users") %>
   <% end %>
+  <a href="/admin/dashboard" class="nav-link">
+    <i class="fa fa-chart-line"></i>
+    <%= gettext("Dashboard") %>
+  </a>
 </li>
