@@ -21,7 +21,7 @@ msgstr ""
 #: lib/helheim_web/templates/email/registration_email.html.eex:15 lib/helheim_web/templates/email/registration_email.text.eex:1
 #: lib/helheim_web/templates/error/404.html.eex:18 lib/helheim_web/templates/error/404.html.eex:29
 #: lib/helheim_web/templates/error/500.html.eex:18 lib/helheim_web/templates/error/500.html.eex:29
-#: lib/helheim_web/templates/layout/app.html.eex:24 lib/helheim_web/templates/layout/app_special.html.eex:18
+#: lib/helheim_web/templates/layout/app.html.eex:25 lib/helheim_web/templates/layout/app_special.html.eex:18
 #: lib/helheim_web/templates/layout/app_special.html.eex:29 lib/helheim_web/templates/layout/app_special.html.eex:30
 #: lib/helheim_web/templates/layout/sidebar.html.eex:63 lib/helheim_web/templates/page/index.html.eex:3
 msgid "Helheim"
@@ -165,7 +165,7 @@ msgstr ""
 msgid "If it was you who requested the password reset, then simply click the link below to choose a new password:"
 msgstr ""
 
-#: lib/helheim_web/templates/email/password_reset_email.html.eex:58
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:70
 #: lib/helheim_web/templates/email/password_reset_email.text.eex:9
 msgid "If you did not request the password change, then simply delete and ignore this e-mail."
 msgstr ""
@@ -199,7 +199,7 @@ msgstr ""
 msgid "Welcome to %{site_name}. Please confirm your e-mail address"
 msgstr ""
 
-#: lib/helheim_web/templates/email/password_reset_email.html.eex:59
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:71
 #: lib/helheim_web/templates/email/password_reset_email.text.eex:11
 msgid "Your account will remain safe as long as your e-mail account remains uncompromised."
 msgstr ""
@@ -2004,4 +2004,15 @@ msgstr ""
 #, elixir-format
 #: lib/helheim_web/templates/help/verification.html.eex:8
 msgid "As a general rule, profiles will never be verified before at least 24 hours has passed since their sign up."
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/layout/sidebar_admin.html.eex:18
+msgid "Dashboard"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:58
+#: lib/helheim_web/templates/email/registration_email.html.eex:58
+msgid "If you have any problems using the link above, try manually copying this url into your browsers url-bar:"
 msgstr ""

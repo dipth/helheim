@@ -38,7 +38,7 @@ msgstr "%{site_name} er et community for alternative folk."
 #: lib/helheim_web/templates/error/404.html.eex:29
 #: lib/helheim_web/templates/error/500.html.eex:18
 #: lib/helheim_web/templates/error/500.html.eex:29
-#: lib/helheim_web/templates/layout/app.html.eex:24
+#: lib/helheim_web/templates/layout/app.html.eex:25
 #: lib/helheim_web/templates/layout/app_special.html.eex:18
 #: lib/helheim_web/templates/layout/app_special.html.eex:29
 #: lib/helheim_web/templates/layout/app_special.html.eex:30
@@ -196,7 +196,7 @@ msgstr "Har du glemt dit kodeord?"
 msgid "If it was you who requested the password reset, then simply click the link below to choose a new password:"
 msgstr "Hvis det var dig selv som har forespurgt at få nulstillet dit kodeord, skal du blot klikke på linket herunder for at vælge et nyt kodeord:"
 
-#: lib/helheim_web/templates/email/password_reset_email.html.eex:58
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:70
 #: lib/helheim_web/templates/email/password_reset_email.text.eex:9
 msgid "If you did not request the password change, then simply delete and ignore this e-mail."
 msgstr "Hvis du ikke har bedt om at få nulstillet dit kodeord, skal du blot slette og ignorere denne e-mail."
@@ -230,7 +230,7 @@ msgstr "Nogen har forespurgt at få nulstillet dit kodeord på %{site_name}."
 msgid "Welcome to %{site_name}. Please confirm your e-mail address"
 msgstr "Velkommen til %{site_name}. Bekræft venligst din e-mail adresse"
 
-#: lib/helheim_web/templates/email/password_reset_email.html.eex:59
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:71
 #: lib/helheim_web/templates/email/password_reset_email.text.eex:11
 msgid "Your account will remain safe as long as your e-mail account remains uncompromised."
 msgstr "Din konto vil forblive sikker så længe din e-mail konto ikke er kompromitteret."
@@ -2101,3 +2101,12 @@ msgstr "Venlig hilsen"
 #: lib/helheim_web/templates/help/verification.html.eex:8
 msgid "As a general rule, profiles will never be verified before at least 24 hours has passed since their sign up."
 msgstr "Profiler vil ikke kunne verificeres før der er gået minimum 24 timer siden deres oprettelse."
+
+#: lib/helheim_web/templates/layout/sidebar_admin.html.eex:18
+msgid "Dashboard"
+msgstr ""
+
+#: lib/helheim_web/templates/email/password_reset_email.html.eex:58
+#: lib/helheim_web/templates/email/registration_email.html.eex:58
+msgid "If you have any problems using the link above, try manually copying this url into your browsers url-bar:"
+msgstr "Hvis linket ovenfor ikke virker så prøv manuelt at indsætte denne url i din browsers adresselinje:"
