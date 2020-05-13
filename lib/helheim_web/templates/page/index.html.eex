@@ -1,7 +1,16 @@
+<h1>A social media platform aimed towards the alternative community in Denmark.</h1>
 <div class="card mx-2">
   <div class="card-block p-2">
-    <p><%= gettext "%{site_name} is a community for alternative people.", site_name: gettext("Helheim") %></p>
-
+  
+    <h5><%= gettext "Welcome to %{site_name}!", site_name: gettext("Helheim") %></h5>
+    <p>This is a place for people who are either rocking the alternative style and for those who simply admires it.
+    The alternative commmunity is a subculture with great varity.<br>
+    Emos, goths, punks and metalheads just to name a few</p>
+    <p>In 2017 the previous online presense for our community <a href="https://www.blackmarket.dk" target="_blank">Black Market</a> shut down.<br>
+    In response to this Helheim was created to fill the void.<br>
+    This site offers a nonjudgmental sanctuary where you can share your thoughts, images and join in discussions with the other members on our forum.</p>
+    <p>Sign up for free below to join the rest of us!</p>
+    <p></p>
     <div class="row">
       <div class="col-lg-6">
         <%= link gettext("Register Account"), to: registration_path(@conn, :new), class: "btn btn-outline-secondary btn-block" %>
