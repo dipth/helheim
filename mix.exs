@@ -58,7 +58,7 @@ defmodule Helheim.Mixfile do
       {:calendar, "~> 0.17"},
       {:calendar_translations, "~> 0.0.4"},
       {:timex, "~> 3.6"},
-      {:wallaby, "~> 0.23.0", [runtime: false, only: :test]},
+      {:wallaby, "~> 0.24.1", [runtime: false, only: :test]},
       {:ex_machina, "~> 2.3", only: :test},
       {:sentry, "~> 7.1"},
       {:arc, "~> 0.11.0"},
