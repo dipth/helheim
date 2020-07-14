@@ -60,7 +60,7 @@ defmodule Helheim.Mixfile do
       {:timex, "~> 3.6"},
       {:wallaby, "~> 0.23.0", [runtime: false, only: :test]},
       {:ex_machina, "~> 2.3", only: :test},
-      {:sentry, "~> 7.1"},
+      {:sentry, "~> 8.0"},
       {:arc, "~> 0.11.0"},
       {:arc_ecto, "~> 0.11.2"},
       {:hackney, "~> 1.9", override: true},# Used by arc
