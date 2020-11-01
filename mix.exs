@@ -46,7 +46,7 @@ defmodule Helheim.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:plug_cowboy, "~> 2.0"},
+      {:plug_cowboy, "~> 2.4"},
       {:plug, "~> 1.7"},
       {:bcrypt_elixir, "~> 2.0"},
       {:pbkdf2_elixir, "~> 1.0"},
