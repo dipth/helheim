@@ -44,6 +44,7 @@ defmodule Helheim.User do
     field :notification_sound,              :string
     field :mute_notifications,              :boolean
     field :session_id,                      :string
+    field :incognito,                       :boolean
 
     timestamps(type: :utc_datetime_usec)
 
