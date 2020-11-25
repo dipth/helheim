@@ -49,6 +49,14 @@ defmodule Helheim.VisitorLogEntryTest do
       assert Repo.get(Helheim.BlogPost, blog_post.id).visitor_count == 0
     end
 
+    test "it never tracks a view or increments visitor_count on a blog_post when the user is incognito" do
+      user = insert(:user, incognito: true)
+      blog_post   = insert(:blog_post)
+      {:error, _} = VisitorLogEntry.track!(user, blog_post)
+      refute Repo.one(VisitorLogEntry)
+      assert Repo.get(Helheim.BlogPost, blog_post.id).visitor_count == 0
+    end
+
     test "it successfully tracks a view on a photo album and increments the visitor_count", %{user: user} do
       photo_album            = insert(:photo_album)
       {:ok, %{entry: entry}} = VisitorLogEntry.track!(user, photo_album)
@@ -77,6 +85,14 @@ defmodule Helheim.VisitorLogEntryTest do
 
     test "it never tracks a view or increments visitor_count on a photo_album belonging to the user", %{user: user} do
       photo_album = insert(:photo_album, user: user)
+      {:error, _} = VisitorLogEntry.track!(user, photo_album)
+      refute Repo.one(VisitorLogEntry)
+      assert Repo.get(Helheim.PhotoAlbum, photo_album.id).visitor_count == 0
+    end
+
+    test "it never tracks a view or increments visitor_count on a photo_album when the user is incognito" do
+      user = insert(:user, incognito: true)
+      photo_album = insert(:photo_album)
       {:error, _} = VisitorLogEntry.track!(user, photo_album)
       refute Repo.one(VisitorLogEntry)
       assert Repo.get(Helheim.PhotoAlbum, photo_album.id).visitor_count == 0
@@ -116,6 +132,15 @@ defmodule Helheim.VisitorLogEntryTest do
       assert Repo.get(Helheim.Photo, photo.id).visitor_count == 0
     end
 
+    test "it never tracks a view or increments visitor_count on a photo when the user is incognito" do
+      user        = insert(:user, incognito: true)
+      photo_album = insert(:photo_album)
+      photo       = insert(:photo, photo_album: photo_album)
+      {:error, _} = VisitorLogEntry.track!(user, photo)
+      refute Repo.one(VisitorLogEntry)
+      assert Repo.get(Helheim.Photo, photo.id).visitor_count == 0
+    end
+
     test "it successfully tracks a view on a profile and increments the visitor_count", %{user: user} do
       profile                = insert(:user)
       {:ok, %{entry: entry}} = VisitorLogEntry.track!(user, profile)
@@ -146,6 +171,14 @@ defmodule Helheim.VisitorLogEntryTest do
       {:error, _} = VisitorLogEntry.track!(user, user)
       refute Repo.one(VisitorLogEntry)
       assert Repo.get(Helheim.User, user.id).visitor_count == 0
+    end
+
+    test "it never tracks a view or increments visitor_count on a profile when the user is incognito" do
+      user        = insert(:user, incognito: true)
+      profile     = insert(:user)
+      {:error, _} = VisitorLogEntry.track!(user, profile)
+      refute Repo.one(VisitorLogEntry)
+      assert Repo.get(Helheim.User, profile.id).visitor_count == 0
     end
 
     test "it allows the user to have multiple different entries for different subjects", %{user: user} do

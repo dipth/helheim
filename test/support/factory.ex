@@ -16,7 +16,8 @@ defmodule Helheim.Factory do
       total_donated: 1000,
       comment_count: 0,
       verified_at: nil,
-      verifier_id: nil
+      verifier_id: nil,
+      incognito: false
     }
   end
 

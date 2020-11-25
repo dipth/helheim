@@ -28,6 +28,7 @@ defmodule HelheimWeb.Plug.TrackLogin do
 
   defp load_user(conn), do: {:ok, Guardian.Plug.current_resource(conn)}
 
+  defp maybe_track_login(_conn, %{incognito: true} = user, _id), do: {:ok, user}
   defp maybe_track_login(_conn, %{session_id: stored_id} = user, id) when stored_id == id, do: {:ok, user}
   defp maybe_track_login(conn, user, id) do
     changeset = Ecto.Changeset.change user,

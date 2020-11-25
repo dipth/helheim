@@ -29,6 +29,7 @@ defmodule Helheim.VisitorLogEntry do
       order_by: [desc: e.updated_at]
   end
 
+  def track!(%{incognito: true}, _), do: {:error, "User must not be incognito"}
   def track!(user, %BlogPost{} = subject), do: track!(user, subject.user_id, subject, :blog_post)
   def track!(user, %PhotoAlbum{} = subject), do: track!(user, subject.user_id, subject, :photo_album)
   def track!(user, %Photo{} = subject), do: track!(user, subject.photo_album.user_id, subject, :photo)
