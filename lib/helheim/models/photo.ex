@@ -54,7 +54,7 @@ defmodule Helheim.Photo do
     sq = from(
       p in      (Photo |> Photo.visible_by(user) |> Photo.not_private()),
       join:     pa in Helheim.PhotoAlbum, on: pa.id == p.photo_album_id,
-      group_by: pa.id,
+      group_by: pa.user_id,
       select:   %{last_public_photo_id: max(p.id)},
       order_by: [desc: max(p.id)],
       limit:    ^limit
