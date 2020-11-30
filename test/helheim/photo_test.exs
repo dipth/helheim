@@ -184,14 +184,19 @@ defmodule Helheim.PhotoTest do
       refute Enum.find(photos, fn(p) -> p.id == photo.id end)
     end
 
-    test "returns only the latest photo from each album" do
+    test "returns only the latest photo from each user" do
       viewer  = insert(:user)
-      album   = insert(:photo_album, visibility: "public")
-      photo_1 = insert(:photo, photo_album: album)
-      photo_2 = insert(:photo, photo_album: album)
+      album_1   = insert(:photo_album, visibility: "public")
+      album_2   = insert(:photo_album, visibility: "public", user: album_1.user)
+      photo_1 = insert(:photo, photo_album: album_1)
+      photo_2 = insert(:photo, photo_album: album_2)
+      photo_3 = insert(:photo, photo_album: album_2)
+      photo_4 = insert(:photo)
       photos  = Photo.newest_for_frontpage(viewer, 10)
       refute Enum.find(photos, fn(p) -> p.id == photo_1.id end)
-      assert Enum.find(photos, fn(p) -> p.id == photo_2.id end)
+      refute Enum.find(photos, fn(p) -> p.id == photo_2.id end)
+      assert Enum.find(photos, fn(p) -> p.id == photo_3.id end)
+      assert Enum.find(photos, fn(p) -> p.id == photo_4.id end)
     end
 
     test "only returns the specified number of photos" do
