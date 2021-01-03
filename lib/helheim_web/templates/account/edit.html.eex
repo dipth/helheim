@@ -39,7 +39,7 @@
 
               <div class="form-group <%= if f.errors[:password] do 'has-danger' end %>">
                 <%= label f, :password, gettext("Password")%>
-                <%= text_input f, :password, class: "form-control" %>
+                <%= password_input f, :password, class: "form-control" %>
                 <%= if message = f.errors[:password] do %>
                   <div class="form-control-feedback"><%= translate_error(message) %></div>
                 <% else %>
@@ -49,7 +49,7 @@
 
               <div class="form-group <%= if f.errors[:password_confirmation] do 'has-danger' end %>">
                 <%= label f, :password_confirmation, gettext("Confirm Password")%>
-                <%= text_input f, :password_confirmation, class: "form-control" %>
+                <%= password_input f, :password_confirmation, class: "form-control" %>
                 <%= if message = f.errors[:password_confirmation] do %>
                   <div class="form-control-feedback"><%= translate_error(message) %></div>
                 <% else %>
@@ -66,7 +66,7 @@
 
               <div class="form-group <%= if f.errors[:existing_password] do 'has-danger' end %>">
                 <%= label f, :existing_password, gettext("Existing Password")%>
-                <%= text_input f, :existing_password, class: "form-control" %>
+                <%= password_input f, :existing_password, class: "form-control" %>
                 <%= if message = f.errors[:existing_password] do %>
                   <div class="form-control-feedback"><%= translate_error(message) %></div>
                 <% end %>
