@@ -32,7 +32,7 @@ defmodule Helheim.PhotoAlbum do
 
     from pa in query,
     where: pa.visibility == "public" or pa.user_id == ^user.id or (pa.visibility == "verified_only" and ^verified) or (
-      pa.visibility == "friends_only" and fragment(
+      (pa.visibility == "friends_only" or pa.visibility == "verified_only") and fragment(
         "EXISTS(?)",
         fragment(
           "

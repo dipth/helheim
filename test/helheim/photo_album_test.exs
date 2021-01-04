@@ -93,7 +93,7 @@ defmodule Helheim.PhotoAlbumTest do
       assert photo_albums == []
     end
 
-    test "never returns verified_only photo albums if the user is not verified" do
+    test "never returns verified_only photo albums if the user is not verified or friends with the user of the album" do
       user = insert(:user, verified_at: nil)
       _photo_album = insert(:photo_album, visibility: "verified_only")
       photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
@@ -127,6 +127,26 @@ defmodule Helheim.PhotoAlbumTest do
       assert [photo_album.id] == ids
     end
 
+    test "always returns verified_only photo albums if the user is befriended by the user of the photo album" do
+      author       = insert(:user)
+      user         = insert(:user)
+      photo_album  = insert(:photo_album, user: author, visibility: "verified_only")
+      _friendship  = insert(:friendship, sender: author, recipient: user)
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      ids          = Enum.map photo_albums, fn(c) -> c.id end
+      assert [photo_album.id] == ids
+    end
+
+    test "always returns verified_only photo albums if the user of the photo album is befriended by the user" do
+      author       = insert(:user)
+      user         = insert(:user)
+      photo_album  = insert(:photo_album, user: author, visibility: "verified_only")
+      _friendship  = insert(:friendship, sender: user, recipient: author)
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      ids          = Enum.map photo_albums, fn(c) -> c.id end
+      assert [photo_album.id] == ids
+    end
+
     test "never returns friends_only photo albums if the user is pending friendship from the user of the photo album" do
       author       = insert(:user)
       user         = insert(:user)
@@ -140,6 +160,24 @@ defmodule Helheim.PhotoAlbumTest do
       author       = insert(:user)
       user         = insert(:user)
       _photo_album = insert(:photo_album, user: author, visibility: "friends_only")
+      _friendship  = insert(:friendship_request, sender: user, recipient: author)
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      assert photo_albums == []
+    end
+
+    test "never returns verified_only photo albums if the user is pending friendship from the user of the photo album" do
+      author       = insert(:user)
+      user         = insert(:user)
+      _photo_album = insert(:photo_album, user: author, visibility: "verified_only")
+      _friendship  = insert(:friendship_request, sender: author, recipient: user)
+      photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
+      assert photo_albums == []
+    end
+
+    test "never returns verified_only photo albums if the user of the photo album is pending friendship from the user" do
+      author       = insert(:user)
+      user         = insert(:user)
+      _photo_album = insert(:photo_album, user: author, visibility: "verified_only")
       _friendship  = insert(:friendship_request, sender: user, recipient: author)
       photo_albums = PhotoAlbum |> PhotoAlbum.visible_by(user) |> Repo.all
       assert photo_albums == []
