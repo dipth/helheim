@@ -23,10 +23,10 @@ msgid "private"
 msgstr "Private"
 
 msgid "friends_only"
-msgstr "Friends only"
+msgstr "Friends"
 
 msgid "verified_only"
-msgstr "Verified users and friends only"
+msgstr "Friends & Verified"
 
 msgid "public"
 msgstr "All users"
