@@ -54,7 +54,7 @@ defmodule Helheim.BlogPost do
 
     from p in query,
     where: p.visibility == "public" or p.user_id == ^user.id or (p.visibility == "verified_only" and ^verified) or (
-      p.visibility == "friends_only" and fragment(
+      (p.visibility == "friends_only" or p.visibility == "verified_only") and fragment(
         "EXISTS(?)",
         fragment(
           "

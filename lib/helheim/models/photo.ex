@@ -83,7 +83,7 @@ defmodule Helheim.Photo do
     from p in query,
     join:  pa in PhotoAlbum, on: pa.id == p.photo_album_id,
     where: pa.visibility == "public" or pa.user_id == ^user.id or (pa.visibility == "verified_only" and ^verified) or (
-      pa.visibility == "friends_only" and fragment(
+      (pa.visibility == "friends_only" or pa.visibility == "verified_only") and fragment(
         "EXISTS(?)",
         fragment(
           "

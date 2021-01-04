@@ -221,7 +221,7 @@ defmodule Helheim.BlogPostTest do
       assert blog_posts == []
     end
 
-    test "never returns verified_only blog posts if the user is not verified" do
+    test "never returns verified_only blog posts if the user is not verified or friends with the user of the blog post" do
       user = insert(:user, verified_at: nil)
       _blog_post  = insert(:blog_post, visibility: "verified_only")
       blog_posts = BlogPost |> BlogPost.visible_by(user) |> Repo.all
@@ -255,6 +255,26 @@ defmodule Helheim.BlogPostTest do
       assert [blog_post.id] == ids
     end
 
+    test "always returns verified_only blog posts if the user is befriended by the user of the blog post" do
+      author      = insert(:user)
+      user        = insert(:user)
+      blog_post   = insert(:blog_post, user: author, visibility: "verified_only")
+      _friendship = insert(:friendship, sender: author, recipient: user)
+      blog_posts = BlogPost |> BlogPost.visible_by(user) |> Repo.all
+      ids        = Enum.map blog_posts, fn(c) -> c.id end
+      assert [blog_post.id] == ids
+    end
+
+    test "always returns verified_only blog posts if the user of the blog post is befriended by the user" do
+      author      = insert(:user)
+      user        = insert(:user)
+      blog_post   = insert(:blog_post, user: author, visibility: "verified_only")
+      _friendship = insert(:friendship, sender: user, recipient: author)
+      blog_posts = BlogPost |> BlogPost.visible_by(user) |> Repo.all
+      ids        = Enum.map blog_posts, fn(c) -> c.id end
+      assert [blog_post.id] == ids
+    end
+
     test "never returns friends_only blog posts if the user is pending friendship from the user of the blog post" do
       author      = insert(:user)
       user        = insert(:user)
@@ -268,6 +288,24 @@ defmodule Helheim.BlogPostTest do
       author      = insert(:user)
       user        = insert(:user)
       _blog_post  = insert(:blog_post, user: author, visibility: "friends_only")
+      _friendship = insert(:friendship_request, sender: user, recipient: author)
+      blog_posts = BlogPost |> BlogPost.visible_by(user) |> Repo.all
+      assert blog_posts == []
+    end
+
+    test "never returns verified_only blog posts if the user is pending friendship from the user of the blog post" do
+      author      = insert(:user)
+      user        = insert(:user)
+      _blog_post  = insert(:blog_post, user: author, visibility: "verified_only")
+      _friendship = insert(:friendship_request, sender: author, recipient: user)
+      blog_posts = BlogPost |> BlogPost.visible_by(user) |> Repo.all
+      assert blog_posts == []
+    end
+
+    test "never returns verified_only blog posts if the user of the blog post is pending friendship from the user" do
+      author      = insert(:user)
+      user        = insert(:user)
+      _blog_post  = insert(:blog_post, user: author, visibility: "verified_only")
       _friendship = insert(:friendship_request, sender: user, recipient: author)
       blog_posts = BlogPost |> BlogPost.visible_by(user) |> Repo.all
       assert blog_posts == []
