@@ -63,7 +63,7 @@ defmodule Helheim.Mixfile do
       {:ex_machina, "~> 2.3", only: :test},
       {:sentry, "~> 7.1"},
       {:arc, "~> 0.11.0"},
-      {:arc_ecto, "~> 0.11.2"},
+      {:arc_ecto, "~> 0.11.3"},
       {:hackney, "~> 1.9", override: true},# Used by arc
       {:ex_aws, "~> 2.0"},                 # Used by arc
       {:ex_aws_s3, "~> 2.0"},              # Used by arc
