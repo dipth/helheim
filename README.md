@@ -4,7 +4,7 @@
 
 ## Requirements:
 
-  * `Elixir` 1.11.1 OTP 23
+  * `Elixir` 1.9.1 OTP 21
   * `Node.js` 13.5.0
   * `yarn` 1.21.1
   * `Imagemagick` 7.0.9-12

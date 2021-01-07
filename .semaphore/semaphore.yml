@@ -15,7 +15,7 @@ blocks:
       prologue:
         commands:
           - sem-version node 13.5.0
-          - sem-version elixir 1.11.1
+          - sem-version elixir 1.9.1
 
           - npm install -g brunch
 
