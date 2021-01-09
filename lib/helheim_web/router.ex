@@ -124,6 +124,9 @@ defmodule HelheimWeb.Router do
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
     end
     resources "/online_users", OnlineUserController, only: [:index]
+
+    get "/spotify/authorize", SpotifyController, :authorize
+    get "/spotify/callback", SpotifyController, :callback
   end
 
   scope "/mod", HelheimWeb.Mod, as: :mod do

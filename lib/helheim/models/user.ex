@@ -45,6 +45,8 @@ defmodule Helheim.User do
     field :mute_notifications,              :boolean
     field :session_id,                      :string
     field :incognito,                       :boolean
+    field :spotify_access_token,            :string
+    field :spotify_refresh_token,           :string
 
     timestamps(type: :utc_datetime_usec)
 
