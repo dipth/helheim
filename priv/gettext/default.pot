@@ -23,7 +23,7 @@ msgstr ""
 #: lib/helheim_web/templates/error/500.html.eex:18 lib/helheim_web/templates/error/500.html.eex:29
 #: lib/helheim_web/templates/layout/app.html.eex:25 lib/helheim_web/templates/layout/app_special.html.eex:18
 #: lib/helheim_web/templates/layout/app_special.html.eex:29 lib/helheim_web/templates/layout/app_special.html.eex:30
-#: lib/helheim_web/templates/layout/sidebar.html.eex:63 lib/helheim_web/templates/page/index.html.eex:3
+#: lib/helheim_web/templates/page/index.html.eex:3
 msgid "Helheim"
 msgstr ""
 
@@ -324,7 +324,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: lib/helheim/models/user.ex:352
+#: lib/helheim/models/user.ex:355
 msgid "does not match your current password"
 msgstr ""
 
@@ -334,7 +334,7 @@ msgid "Maximum file size: %{file_size}"
 msgstr ""
 
 #: lib/helheim_web/templates/navbar/show.html.eex:25
-#: lib/helheim_web/views/comment_view.ex:46 lib/helheim_web/views/comment_view.ex:46
+#: lib/helheim_web/views/comment_view.ex:46
 msgid "Profile"
 msgstr ""
 
@@ -378,7 +378,7 @@ msgstr ""
 msgid "Newest Photos"
 msgstr ""
 
-#: lib/helheim_web/templates/layout/sidebar.html.eex:71
+#: lib/helheim_web/templates/layout/sidebar.html.eex:63
 msgid "Your Profile"
 msgstr ""
 
@@ -396,7 +396,7 @@ msgid "Save Blog Post"
 msgstr ""
 
 #: lib/helheim_web/templates/blog_post/edit.html.eex:2
-#: lib/helheim_web/templates/blog_post/new.html.eex:2 lib/helheim_web/templates/layout/sidebar.html.eex:92
+#: lib/helheim_web/templates/blog_post/new.html.eex:2 lib/helheim_web/templates/layout/sidebar.html.eex:84
 msgid "Your Blog Posts"
 msgstr ""
 
@@ -452,7 +452,7 @@ msgstr ""
 msgid "Comment created successfully"
 msgstr ""
 
-#: lib/helheim_web/templates/layout/sidebar.html.eex:76
+#: lib/helheim_web/templates/layout/sidebar.html.eex:68
 #: lib/helheim_web/views/comment_view.ex:15
 msgid "Guest Book"
 msgstr ""
@@ -516,7 +516,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] ""
 msgstr[1] ""
 
-#: lib/helheim_web/templates/layout/sidebar.html.eex:88
+#: lib/helheim_web/templates/layout/sidebar.html.eex:80
 #: lib/helheim_web/templates/private_conversation/index.html.eex:1
 msgid "Private Messages"
 msgstr ""
@@ -643,7 +643,7 @@ msgstr ""
 msgid "Uploaded"
 msgstr ""
 
-#: lib/helheim_web/templates/layout/sidebar.html.eex:97
+#: lib/helheim_web/templates/layout/sidebar.html.eex:89
 msgid "Your Photo Albums"
 msgstr ""
 
@@ -784,7 +784,7 @@ msgstr ""
 msgid "Submit new reply"
 msgstr ""
 
-#: lib/helheim_web/templates/layout/sidebar.html.eex:68
+#: lib/helheim_web/templates/layout/sidebar.html.eex:60
 msgid "You"
 msgstr ""
 
@@ -814,8 +814,8 @@ msgid "Hope to see you again some time!"
 msgstr ""
 
 #: lib/helheim_web/templates/private_conversation/index.html.eex:22
-#: lib/helheim_web/templates/private_conversation/show.html.eex:5 lib/helheim_web/templates/private_conversation/show.html.eex:5
-#: lib/helheim_web/views/notification_view.ex:44 lib/helheim_web/views/profile_helpers.ex:12
+#: lib/helheim_web/templates/private_conversation/show.html.eex:5 lib/helheim_web/views/notification_view.ex:44
+#: lib/helheim_web/views/profile_helpers.ex:12
 msgid "User deleted"
 msgstr ""
 
@@ -1373,7 +1373,6 @@ msgid "How much would you like to donate?"
 msgstr ""
 
 #: lib/helheim_web/templates/donation/new.html.eex:7
-#: lib/helheim_web/templates/layout/sidebar.html.eex:63
 msgid "Support %{site}"
 msgstr ""
 
@@ -1425,7 +1424,7 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-#: lib/helheim/models/user.ex:385
+#: lib/helheim/models/user.ex:388
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr ""
 
@@ -1464,7 +1463,7 @@ msgid "Add to Contacts"
 msgstr ""
 
 #: lib/helheim_web/templates/friendship/index.html.eex:3
-#: lib/helheim_web/templates/layout/sidebar.html.eex:82
+#: lib/helheim_web/templates/layout/sidebar.html.eex:74
 msgid "Contact List"
 msgstr ""
 
@@ -1559,7 +1558,6 @@ msgid "Any"
 msgstr ""
 
 #: lib/helheim_web/views/comment_view.ex:47
-#: lib/helheim_web/views/comment_view.ex:47
 msgid "Blog Post"
 msgstr ""
 
@@ -1603,7 +1601,6 @@ msgstr ""
 msgid "Not Verified!"
 msgstr ""
 
-#: lib/helheim_web/views/comment_view.ex:48
 #: lib/helheim_web/views/comment_view.ex:48
 msgid "Photo"
 msgstr ""
@@ -1843,7 +1840,6 @@ msgid "Edit event"
 msgstr ""
 
 #: lib/helheim_web/views/comment_view.ex:49
-#: lib/helheim_web/views/comment_view.ex:49
 msgid "Event"
 msgstr ""
 
@@ -2015,4 +2011,14 @@ msgstr ""
 #: lib/helheim_web/templates/email/password_reset_email.html.eex:58
 #: lib/helheim_web/templates/email/registration_email.html.eex:58
 msgid "If you have any problems using the link above, try manually copying this url into your browsers url-bar:"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/controllers/spotify_controller.ex:18
+msgid "We were unable to connect your Spotify account."
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/controllers/spotify_controller.ex:13
+msgid "You have successfully connected your Spotify account."
 msgstr ""

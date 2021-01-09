@@ -64,4 +64,8 @@ config :helheim, Helheim.Auth.Guardian,
 config :helheim, Helheim.Mailer,
   adapter: Bamboo.LocalAdapter
 
+# Configure Spotify
+config :spotify_ex,
+  callback_url: "http://dev.helheim.dk:4000/spotify/callback"
+
 import_config "dev.secret.exs"

@@ -70,6 +70,11 @@ config :recaptcha,
   public_key: System.get_env("RECAPTCHA_PUBLIC_KEY"),
   secret: System.get_env("RECAPTCHA_SECRET_KEY")
 
+# Configure Spotify
+config :spotify_ex, client_id: System.get_env("SPOTIFY_CLIENT_ID")
+                    secret_key: System.get_env("SPOTIFY_SECRET_KEY"),
+                    callback_url: "https://helheim.dk/spotify/callback"
+
 # Filter sensitive data from logs
 config :phoenix, :filter_parameters, ["password", "guardian_token"]
 

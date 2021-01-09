@@ -57,6 +57,16 @@ config :calendar, :translation_module, CalendarTranslations.Translations
 config :recaptcha,
   json_library: Poison
 
+# Configure Spotify
+config :spotify_ex,
+  scopes: [
+    "user-read-recently-played",
+    "user-read-playback-state",
+    "user-top-read",
+    "user-read-currently-playing",
+    "user-read-playback-position"
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
