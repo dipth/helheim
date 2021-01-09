@@ -4,16 +4,18 @@
 
 ## Requirements:
 
-  * `Elixir` 1.9.1 OTP 21
+  * `Erlang` 21.3.8.18
+  * `Elixir` 1.11.3 OTP 21
   * `Node.js` 13.5.0
   * `yarn` 1.21.1
   * `Imagemagick` 7.0.9-12
   * `PostgreSQL` 12.1
   * `Chromedriver` 2.36
 
-The recommended way to install Elixir and Node.js is through the modular version manager asdf:
+The recommended way to install Erlang, Elixir and Node.js is through the modular version manager asdf:
 
 - https://github.com/asdf-vm/asdf
+- https://github.com/asdf-vm/asdf-erlang
 - https://github.com/asdf-vm/asdf-elixir
 - https://github.com/asdf-vm/asdf-nodejs
 
