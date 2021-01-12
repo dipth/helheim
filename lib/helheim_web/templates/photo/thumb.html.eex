@@ -6,7 +6,7 @@
 <div class="card photo<%= if @photo.id == 5650, do: ' corona' %>" data-id="<%= @photo.id %>">
   <%= link to: public_profile_photo_album_photo_path(@conn, :show, user, photo_album, @photo) do %>
     <%= if @photo.nsfw do %>
-      <%= img_tag(static_path(@conn, "/images/photo_thumb_nsfw.jpg"), class: "card-img-top img-fluid img-photo") %>
+      <%= img_tag(HelheimWeb.PhotoFile.url({@photo.file, @photo}, :nsfw_thumb), class: "card-img-top img-fluid img-photo") %>
     <% else %>
       <%= img_tag(HelheimWeb.PhotoFile.url({@photo.file, @photo}, :thumb), class: "card-img-top img-fluid img-photo") %>
     <% end %>
