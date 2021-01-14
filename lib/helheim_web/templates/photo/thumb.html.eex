@@ -21,10 +21,8 @@
         </small>
       </div>
       <div class="text-nowrap">
-        <small>
-          <%= visitor_count_badge @conn, @photo %>
-          <%= comment_count_badge @photo %>
-        </small>
+        <%= visitor_count_badge @conn, @photo %>
+        <%= comment_count_badge @photo %>
       </div>
     </div>
     <%= unless hide_title do %>
