@@ -30,7 +30,7 @@
     <%= unless hide_title do %>
       <p class="card-text">
         <strong class="text-break-up" title="<%= @photo.title %>"><%= if truncate_title, do: Crutches.String.truncate(@photo.title, 25), else: @photo.title %></strong><br>
-        <% if show_album_title do %>
+        <%= if show_album_title do %>
           <small class="text-break-up" title="<%= @photo.photo_album.title %>"><%= if truncate_title, do: Crutches.String.truncate(@photo.photo_album.title, 35), else: @photo.photo_album.title %></small><br>
         <% end %>
         <small><%= time_ago_in_words @photo.inserted_at %></small>
