@@ -36,8 +36,8 @@ defmodule HelheimWeb.ProfileHelpers do
     end
   end
 
-  defp role_badge("admin"), do: [{:safe, " "}, content_tag(:span, "admin", class: "badge badge-default")]
-  defp role_badge("mod"), do: [{:safe, " "}, content_tag(:span, "mod", class: "badge badge-default")]
+  defp role_badge("admin"), do: [{:safe, " "}, content_tag(:span, "[A]", class: "badge badge-default", title: "Admin")]
+  defp role_badge("mod"), do: [{:safe, " "}, content_tag(:span, "[M]", class: "badge badge-default", title: "Moderator")]
   defp role_badge(_), do: {:safe, ""}
 
   defp avatar(nil), do: img_tag(static_path(Endpoint, "/images/deleted_user_avatar_tiny.png"), class: "img-avatar")
