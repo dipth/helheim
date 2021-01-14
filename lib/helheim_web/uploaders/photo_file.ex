@@ -2,11 +2,12 @@ defmodule HelheimWeb.PhotoFile do
   use Arc.Definition
   use Arc.Ecto.Definition
 
-  @versions [:original, :large, :thumb]
+  @versions [:original, :large, :thumb, :nsfw_thumb]
   @extension_whitelist ~w(.jpg .jpeg .gif .png)
 
   def acl(:large, _), do: :public_read
   def acl(:thumb, _), do: :public_read
+  def acl(:nsfw_thumb, _), do: :public_read
 
   def validate({file, photo}) do
     photo = Helheim.Repo.preload(photo, photo_album: :user)
@@ -23,6 +24,14 @@ defmodule HelheimWeb.PhotoFile do
     {:convert, "-define jpeg:size=500x500 -auto-orient -strip -thumbnail 250x250^ -gravity center -extent 250x250"}
   end
 
+  def transform(:nsfw_thumb, _) do
+    {:convert, fn(input, output) ->
+      overlay = "#{File.cwd!}/assets/static/images/nsfw_overlay.png"
+      command = "#{input} -auto-orient -strip -thumbnail 250x250^ -gravity center -extent 250x250 -blur 0x20 #{overlay} -composite jpg:#{output}"
+      command
+    end, :jpg}
+  end
+
   def filename(version, _) do
     version
   end
@@ -36,6 +45,10 @@ defmodule HelheimWeb.PhotoFile do
   end
 
   def default_url(:thumb) do
+    "https://placehold.it/250x250"
+  end
+
+  def default_url(:nsfw_thumb) do
     "https://placehold.it/250x250"
   end
 

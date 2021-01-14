@@ -75,7 +75,8 @@ defmodule Helheim.Mixfile do
       {:mock, "~> 0.3.3", only: :test},
       {:stripity_stripe, "~> 2.8.0"},
       {:recaptcha, "~> 3.0"},
-      {:remote_ip, "~> 0.2.0"}
+      {:remote_ip, "~> 0.2.0"},
+      {:zarex, "~> 1.0"}
     ]
   end
 

@@ -80,4 +80,5 @@
   "uri_query": {:hex, :uri_query, "0.1.2", "ae35b83b472f3568c2c159eee3f3ccf585375d8a94fb5382db1ea3589e75c3b4", [:mix], [], "hexpm", "e3bc81816c98502c36498b9b2f239b89c71ce5eadfff7ceb2d6c0a2e6ae2ea0c"},
   "uuid": {:hex, :uuid, "1.1.8", "e22fc04499de0de3ed1116b770c7737779f226ceefa0badb3592e64d5cfb4eb9", [:mix], [], "hexpm"},
   "wallaby": {:hex, :wallaby, "0.23.0", "4100a43ad0d2bc60491871ae7556ac17d454ff53815ab87a8b9fea3b00e98cec", [:mix], [{:httpoison, "~> 0.12 or ~> 1.0", [hex: :httpoison, repo: "hexpm", optional: false]}, {:jason, "~> 1.1", [hex: :jason, repo: "hexpm", optional: false]}, {:poolboy, "~> 1.5", [hex: :poolboy, repo: "hexpm", optional: false]}], "hexpm", "4ee4f3b1860b24982a691c2c97c518e635b4b8bd5aea580c11183442ab05f70c"},
+  "zarex": {:hex, :zarex, "1.0.1", "86ae94e44f3b30f02417cdb6c0d88895da38491d509abc1a4b2b180ddbdb0e02", [:mix], [], "hexpm", "f529bd16e0826a24ac87bdad8ef2246b0b00926b885d12109eec48300bc1c71e"},
 }

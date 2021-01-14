@@ -2,6 +2,8 @@
   photo_album = assigns[:photo_album] || @photo.photo_album
   user        = assigns[:user] || photo_album.user
   hide_title  = assigns[:hide_title] || false
+  truncate_title = assigns[:truncate_title] || false
+  show_album_title = assigns[:show_album_title] || false
 %>
 <div class="card photo<%= if @photo.id == 5650, do: ' corona' %>" data-id="<%= @photo.id %>">
   <%= link to: public_profile_photo_album_photo_path(@conn, :show, user, photo_album, @photo) do %>
@@ -19,16 +21,20 @@
         </small>
       </div>
       <div class="text-nowrap">
-        <%= visitor_count_badge @conn, @photo %>
-        <%= comment_count_badge @photo %>
+        <small>
+          <%= visitor_count_badge @conn, @photo %>
+          <%= comment_count_badge @photo %>
+        </small>
       </div>
     </div>
     <%= unless hide_title do %>
       <p class="card-text">
-        <strong class="text-break-up"><%= @photo.title %></strong><br>
+        <strong class="text-break-up" title="<%= @photo.title %>"><%= if truncate_title, do: Crutches.String.truncate(@photo.title, 25), else: @photo.title %></strong><br>
+        <% if show_album_title do %>
+          <small class="text-break-up" title="<%= @photo.photo_album.title %>"><%= if truncate_title, do: Crutches.String.truncate(@photo.photo_album.title, 35), else: @photo.photo_album.title %></small><br>
+        <% end %>
         <small><%= time_ago_in_words @photo.inserted_at %></small>
       </p>
     <% end %>
-    <%= visibility_badge photo_album %>
   </div>
 </div>

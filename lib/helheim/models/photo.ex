@@ -39,6 +39,11 @@ defmodule Helheim.Photo do
     |> unique_constraint(:uuid)
   end
 
+  def update_file(photo, params) do
+    photo
+    |> cast_attachments(params, ~w(), ~w(file))
+  end
+
   def newest(query) do
     from p in query,
     order_by: [desc: p.inserted_at]
