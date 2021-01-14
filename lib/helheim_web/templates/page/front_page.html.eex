@@ -83,7 +83,7 @@
       </h5>
       <div class="card-group card-group-photos">
         <%= for photo <- @newest_photos do %>
-          <%= render HelheimWeb.PhotoView, "thumb.html", conn: @conn, photo: photo, truncate_title: true %>
+          <%= render HelheimWeb.PhotoView, "thumb.html", conn: @conn, photo: photo, truncate_title: true, show_album_title: true %>
         <% end %>
       </div>
     </div>
