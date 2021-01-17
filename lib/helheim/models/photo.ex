@@ -39,6 +39,18 @@ defmodule Helheim.Photo do
     |> unique_constraint(:uuid)
   end
 
+  def update_changeset(struct, user_photo_albums, params \\ %{}) do
+    struct
+    |> cast(params, [:title, :description, :nsfw, :photo_album_id])
+    |> trim_fields([:title, :description])
+    |> put_uuid()
+    |> resolve_position()
+    |> cast_attachments(params, [:file])
+    |> validate_required([:title, :file])
+    |> unique_constraint(:uuid)
+    |> validate_inclusion(:photo_album_id, Enum.map(user_photo_albums, &(&1.id)))
+  end
+
   def update_file(photo, params) do
     photo
     |> cast_attachments(params, ~w(), ~w(file))

@@ -27,6 +27,11 @@ defmodule Helheim.PhotoAlbum do
     |> validate_inclusion(:visibility, Helheim.Visibility.visibilities)
   end
 
+  def alphabetical(query) do
+    from pa in query,
+    order_by: [desc: pa.title]
+  end
+
   def visible_by(query, user) do
     verified = Helheim.User.verified?(user)
 

@@ -3,5 +3,6 @@
     <%= gettext "Edit Photo Details" %>
   </div>
   <%= render "form.html", changeset: @changeset,
+                          photo_albums: @photo_albums,
                           action: photo_album_photo_path(@conn, :update, @photo_album, @photo) %>
 </div>
