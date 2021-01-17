@@ -166,6 +166,17 @@ defmodule HelheimWeb.PhotoControllerTest do
       end
       refute Repo.one(Photo)
     end
+
+    test "it is not possible to create a photo in an album belonging to another user", %{conn: conn, user: user} do
+      photo_album_1 = insert(:photo_album, user: user)
+      photo_album_2 = insert(:photo_album)
+      post conn, "/photo_albums/#{photo_album_1.id}/photos", file: @valid_file, photo: %{nsfw: false, photo_album_id: photo_album_2.id}
+      photo = Repo.one(Photo)
+      assert photo.title          == "1.0MB.jpg"
+      assert photo.file_size      == 999631
+      assert photo.photo_album_id == photo_album_1.id
+      assert photo.file
+    end
   end
 
   describe "create/2 when not signed in" do
@@ -464,6 +475,7 @@ defmodule HelheimWeb.PhotoControllerTest do
       photo       = Repo.get(Photo, photo.id)
       assert photo.title         == @valid_attrs.title
       assert photo.description   == @valid_attrs.description
+      assert photo.photo_album_id == photo_album.id
       assert redirected_to(conn) == public_profile_photo_album_photo_path(conn, :show, user, photo_album, photo)
     end
 
@@ -474,6 +486,7 @@ defmodule HelheimWeb.PhotoControllerTest do
       photo       = Repo.get(Photo, photo.id)
       assert photo.title              == "Foo"
       assert photo.description        == "Bar"
+      assert photo.photo_album_id     == photo_album.id
       assert html_response(conn, 200) =~ gettext("Edit Photo Details")
     end
 
@@ -510,6 +523,32 @@ defmodule HelheimWeb.PhotoControllerTest do
       photo = Repo.get(Photo, photo.id)
       assert photo.title       == "Foo"
       assert photo.description == "Bar"
+    end
+
+    test "it allows moving a photo to a different album", %{conn: conn, user: user} do
+      photo_album_1 = insert(:photo_album, user: user)
+      photo_album_2 = insert(:photo_album, user: user)
+      photo         = create_photo(photo_album_1, %{title: "Foo", description: "Bar"})
+      conn          = put conn, "/photo_albums/#{photo_album_1.id}/photos/#{photo.id}", photo: Map.merge(@valid_attrs, %{photo_album_id: photo_album_2.id})
+      photo         = Repo.get(Photo, photo.id)
+
+      assert photo.title         == @valid_attrs.title
+      assert photo.description   == @valid_attrs.description
+      assert photo.photo_album_id == photo_album_2.id
+      assert redirected_to(conn) == public_profile_photo_album_photo_path(conn, :show, user, photo_album_2, photo)
+    end
+
+    test "it does not allow moving a photo to an album belonging to another user", %{conn: conn, user: user} do
+      photo_album_1 = insert(:photo_album, user: user)
+      photo_album_2 = insert(:photo_album)
+      photo         = create_photo(photo_album_1, %{title: "Foo", description: "Bar"})
+      conn          = put conn, "/photo_albums/#{photo_album_1.id}/photos/#{photo.id}", photo: Map.merge(@valid_attrs, %{photo_album_id: photo_album_2.id})
+      photo         = Repo.get(Photo, photo.id)
+
+      assert photo.title              == "Foo"
+      assert photo.description        == "Bar"
+      assert photo.photo_album_id     == photo_album_1.id
+      assert html_response(conn, 200) =~ gettext("Edit Photo Details")
     end
   end
 

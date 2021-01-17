@@ -54,24 +54,26 @@ defmodule HelheimWeb.PhotoController do
     user        = current_resource(conn)
     photo_album = assoc(user, :photo_albums) |> Repo.get!(photo_album_id)
     photo       = assoc(photo_album, :photos) |> Repo.get!(id)
+    photo_albums = assoc(user, :photo_albums) |> PhotoAlbum.alphabetical() |> Repo.all()
     changeset   = Photo.changeset(photo)
 
-    render(conn, "edit.html", user: user, photo_album: photo_album, photo: photo, changeset: changeset)
+    render(conn, "edit.html", user: user, photo_album: photo_album, photo: photo, photo_albums: photo_albums, changeset: changeset)
   end
 
   def update(conn, %{"photo_album_id" => photo_album_id, "id" => id, "photo" => photo_params}) do
     user        = current_resource(conn)
     photo_album = assoc(user, :photo_albums) |> Repo.get!(photo_album_id)
     photo       = assoc(photo_album, :photos) |> Repo.get!(id)
-    changeset   = Photo.changeset(photo, photo_params)
+    photo_albums = assoc(user, :photo_albums) |> PhotoAlbum.alphabetical() |> Repo.all()
+    changeset   = Photo.update_changeset(photo, photo_albums, photo_params)
 
     case Repo.update(changeset) do
       {:ok, photo} ->
         conn
         |> put_flash(:success, gettext("Photo details updated successfully."))
-        |> redirect(to: public_profile_photo_album_photo_path(conn, :show, user, photo_album, photo))
+        |> redirect(to: public_profile_photo_album_photo_path(conn, :show, user, photo.photo_album_id, photo))
       {:error, changeset} ->
-        render(conn, "edit.html", user: user, photo_album: photo_album, photo: photo, changeset: changeset)
+        render(conn, "edit.html", user: user, photo_album: photo_album, photo: photo, photo_albums: photo_albums, changeset: changeset)
     end
   end
 
