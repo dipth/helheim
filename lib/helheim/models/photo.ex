@@ -7,7 +7,7 @@ defmodule Helheim.Photo do
   alias Helheim.Photo
   alias Helheim.PhotoAlbum
 
-  @max_file_size 20 * 1000 * 1000 # MB
+  @max_file_size 5 * 1000 * 1000 # MB
   def max_file_size, do: @max_file_size
 
   schema "photos" do

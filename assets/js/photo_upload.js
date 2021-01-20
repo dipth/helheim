@@ -6,9 +6,10 @@ export var PhotoUpload = {
     if (dropzone.length == 0) { return }
 
     Dropzone.options.photoDropzone = {
-      maxFilesize: 20, // MB
-      maxThumbnailFilesize: 20, // MB
+      maxFilesize: 5, // MB
+      maxThumbnailFilesize: 5, // MB
       acceptedFiles: 'image/*',
+      parallelUploads: 1,
       success: (file, response) => {
         $.globalEval(response)
       }
