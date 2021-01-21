@@ -10,8 +10,8 @@ defmodule HelheimWeb.ProfileHelpers do
 
   def username(user), do: username(user, false)
   def username(nil, _), do: gettext("User deleted")
-  def username(%User{} = user, false), do: [donor_badge(user), {:safe, user.username}, role_badge(user.role)]
-  def username(%User{} = user, true), do: [donor_badge(user), link(user.username, to: public_profile_path(Endpoint, :show, user)), role_badge(user.role)]
+  def username(%User{} = user, false), do: [donor_badge(user), {:safe, user.username}, role_badge(user.role), banned_badge(user)]
+  def username(%User{} = user, true), do: [donor_badge(user), link(user.username, to: public_profile_path(Endpoint, :show, user)), role_badge(user.role), banned_badge(user)]
 
   def username_with_avatar(user), do: username_with_avatar(user, false)
   def username_with_avatar(user, link), do: [username(user, link), {:safe, " "}, avatar(user)]
@@ -39,6 +39,10 @@ defmodule HelheimWeb.ProfileHelpers do
   defp role_badge("admin"), do: [{:safe, " "}, content_tag(:span, "[A]", class: "badge badge-default", title: "Admin")]
   defp role_badge("mod"), do: [{:safe, " "}, content_tag(:span, "[M]", class: "badge badge-default", title: "Moderator")]
   defp role_badge(_), do: {:safe, ""}
+
+  defp banned_badge(user), do: banned_badge(user, User.banned?(user))
+  defp banned_badge(_, true), do: [{:safe, " "}, content_tag(:span, class: "badge badge-default", title: "Banned") do content_tag(:i, "", class: "fa fa-ban") end]
+  defp banned_badge(_, false), do: {:safe, ""}
 
   defp avatar(nil), do: img_tag(static_path(Endpoint, "/images/deleted_user_avatar_tiny.png"), class: "img-avatar")
   defp avatar(%User{} = user), do: img_tag(Avatar.url({user.avatar, user}, :tiny), class: "img-avatar")
