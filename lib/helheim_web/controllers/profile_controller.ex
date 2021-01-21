@@ -21,9 +21,14 @@ defmodule HelheimWeb.ProfileController do
     render(conn, "index.html", users: users)
   end
 
-  def show(conn, _) do
+  def show(conn, params) do
     user = conn.assigns[:user]
+    banned = if User.mod_or_admin?(Guardian.Plug.current_resource(conn)) && params["force"], do: false, else: User.banned?(user)
+    render_profile(conn, user, banned)
+  end
 
+  defp render_profile(conn, user, true), do: render(conn, "show_banned.html", user: user)
+  defp render_profile(conn, user, false) do
     newest_blog_posts =
       assoc(user, :blog_posts)
       |> BlogPost.published

@@ -43,15 +43,15 @@ defmodule HelheimWeb.ProfileControllerTest do
   describe "show/2 when signed in" do
     setup [:create_and_sign_in_user]
 
-    test "it returns a successful response when not specifying an id", %{conn: conn} do
+    test "it returns a successful response when not specifying an id", %{conn: conn, user: user} do
       conn = get conn, "/profile"
-      assert html_response(conn, 200)
+      assert html_response(conn, 200) =~ user.username
     end
 
     test "it returns a successful response when specifying an existing id", %{conn: conn} do
       profile = insert(:user)
       conn = get conn, "/profiles/#{profile.id}"
-      assert html_response(conn, 200)
+      assert html_response(conn, 200) =~ profile.username
     end
 
     test "it redirects to an error page when specifying a non-existing id", %{conn: conn} do
@@ -93,6 +93,59 @@ defmodule HelheimWeb.ProfileControllerTest do
       profile = comment.profile
       conn    = get conn, "/profiles/#{profile.id}"
       refute html_response(conn, 200) =~ "This is a deleted comment"
+    end
+
+    test "shows a message instead of the profile if the user of the profile is banned", %{conn: conn} do
+      profile = insert(:user, banned_until: Timex.shift(Timex.now, days: 1))
+      conn = get conn, "/profiles/#{profile.id}"
+      assert html_response(conn, 200) =~ "<h1>#{gettext("This user is banned")}</h1>"
+      refute html_response(conn, 200) =~ profile.username
+      refute html_response(conn, 200) =~ gettext("Mod: Show profile")
+    end
+
+    test "does not allow skipping the ban message when viewing the profile of a user that is banned", %{conn: conn} do
+      profile = insert(:user, banned_until: Timex.shift(Timex.now, days: 1))
+      conn = get conn, "/profiles/#{profile.id}", force: "true"
+      assert html_response(conn, 200) =~ "<h1>#{gettext("This user is banned")}</h1>"
+      refute html_response(conn, 200) =~ profile.username
+    end
+  end
+
+  describe "show/2 when signed in as a moderator" do
+    setup [:create_and_sign_in_mod]
+
+    test "shows a message instead of the profile if the user of the profile is banned", %{conn: conn} do
+      profile = insert(:user, banned_until: Timex.shift(Timex.now, days: 1))
+      conn = get conn, "/profiles/#{profile.id}"
+      assert html_response(conn, 200) =~ "<h1>#{gettext("This user is banned")}</h1>"
+      refute html_response(conn, 200) =~ profile.username
+      assert html_response(conn, 200) =~ gettext("Mod: Show profile")
+    end
+
+    test "allows skipping the ban message when viewing the profile of a user that is banned", %{conn: conn} do
+      profile = insert(:user, banned_until: Timex.shift(Timex.now, days: 1))
+      conn = get conn, "/profiles/#{profile.id}", force: "true"
+      refute html_response(conn, 200) =~ "<h1>#{gettext("This user is banned")}</h1>"
+      assert html_response(conn, 200) =~ profile.username
+    end
+  end
+
+  describe "show/2 when signed in as an admin" do
+    setup [:create_and_sign_in_admin]
+
+    test "shows a message instead of the profile if the user of the profile is banned", %{conn: conn} do
+      profile = insert(:user, banned_until: Timex.shift(Timex.now, days: 1))
+      conn = get conn, "/profiles/#{profile.id}"
+      assert html_response(conn, 200) =~ "<h1>#{gettext("This user is banned")}</h1>"
+      refute html_response(conn, 200) =~ profile.username
+      assert html_response(conn, 200) =~ gettext("Mod: Show profile")
+    end
+
+    test "allows skipping the ban message when viewing the profile of a user that is banned", %{conn: conn} do
+      profile = insert(:user, banned_until: Timex.shift(Timex.now, days: 1))
+      conn = get conn, "/profiles/#{profile.id}", force: "true"
+      refute html_response(conn, 200) =~ "<h1>#{gettext("This user is banned")}</h1>"
+      assert html_response(conn, 200) =~ profile.username
     end
   end
 

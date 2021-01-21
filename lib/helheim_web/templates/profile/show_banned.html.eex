@@ -1,0 +1,8 @@
+<div class="text-center mb-2 mt-2">
+  <%= img_tag(static_path(@conn, "/images/block_owl.png"), class: "img-fluid") %>
+  <hr>
+  <h1><%= gettext("This user is banned") %></h1>
+  <%= if User.mod_or_admin?(current_resource(@conn)) do %>
+    <%= link gettext("Mod: Show profile"), to: public_profile_path(@conn, :show, @user, force: "true") %>
+  <% end %>
+</div>
