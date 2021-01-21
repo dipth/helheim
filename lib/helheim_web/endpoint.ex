@@ -35,10 +35,10 @@ defmodule HelheimWeb.Endpoint do
   plug Plug.RequestId
 
   socket "/socket", HelheimWeb.UserSocket,
-    websocket: true
+    websocket: [timeout: 45_000]
 
   socket "/live", Phoenix.LiveView.Socket,
-    websocket: [connect_info: [session: @session_options]]
+    websocket: [timeout: 45_000, connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
