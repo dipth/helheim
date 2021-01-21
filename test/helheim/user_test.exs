@@ -351,6 +351,26 @@ defmodule Helheim.UserTest do
     end
   end
 
+  describe "not_banned/1" do
+    test "returns users where banned_until is blank" do
+      id = insert(:user, banned_until: nil).id
+      user = User |> User.not_banned |> Repo.one
+      assert user.id == id
+    end
+
+    test "returns users where banned_until is in the past" do
+      id = insert(:user, banned_until: Timex.shift(Timex.now, minutes: -1)).id
+      user = User |> User.not_banned |> Repo.one
+      assert user.id == id
+    end
+
+    test "does not return users where banned_until is in the future" do
+      insert(:user, banned_until: Timex.shift(Timex.now, minutes: 1)).id
+      users = User |> User.not_banned |> Repo.all
+      assert length(users) == 0
+    end
+  end
+
   describe "recently_logged_in/1" do
     test "it orders users who have recently logged in before older ones" do
       user1 = insert(:user, last_login_at: Timex.shift(Timex.now, minutes: -1))

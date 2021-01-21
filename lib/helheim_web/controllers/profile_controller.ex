@@ -15,6 +15,7 @@ defmodule HelheimWeb.ProfileController do
     sorting = search["sorting"] || "creation"
     users = User
             |> User.confirmed
+            |> User.not_banned
             |> User.search(search)
             |> User.sort(sorting)
             |> Repo.paginate(page: sanitized_page(params["page"]))

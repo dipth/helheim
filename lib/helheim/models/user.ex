@@ -90,6 +90,11 @@ defmodule Helheim.User do
     from u in query, where: is_nil(u.confirmed_at)
   end
 
+  def not_banned(query) do
+    now = DateTime.utc_now
+    from u in query, where: is_nil(u.banned_until) or u.banned_until < ^now
+  end
+
   def admins(query) do
     from u in query, where: u.role == "admin"
   end

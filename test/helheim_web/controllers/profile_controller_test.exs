@@ -29,6 +29,12 @@ defmodule HelheimWeb.ProfileControllerTest do
       conn = get conn, "/profiles"
       refute conn.resp_body =~ user.username
     end
+
+    test "does not show users who are banned", %{conn: conn} do
+      user = insert(:user, banned_until: Timex.shift(Timex.now, months: 1))
+      conn = get conn, "/profiles"
+      refute conn.resp_body =~ user.username
+    end
   end
 
   describe "index/2 when not signed in" do
