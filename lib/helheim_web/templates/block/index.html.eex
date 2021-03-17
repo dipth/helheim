@@ -23,8 +23,8 @@
               </small>
             </td>
             <td class="text-right">
-              <%= link to: public_profile_block_path(@conn, :create, block.blockee), method: "DELETE" do %>
-                <i class="fa fa-unlock" title="<%= gettext "Unblock user" %>"></i>
+              <%= link to: block_path(@conn, :delete, block.blockee_id), method: "DELETE" do %>
+                <i class="fa fa-trash" title="<%= gettext "Unblock user" %>"></i>
                 <span class="hidden-xs-down"><%= gettext "Unblock user" %></span>
               <% end %>
             </td>
@@ -32,6 +32,11 @@
         <% end %>
       </tbody>
     </table>
+
+    <%= link to: block_path(@conn, :new), class: "btn btn-primary btn-sm" do %>
+      <i class="fa fa-plus"></i>
+      <%= gettext("Create block") %>
+    <% end %>
   </div>
 </div>
 

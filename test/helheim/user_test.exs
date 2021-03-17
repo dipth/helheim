@@ -409,6 +409,44 @@ defmodule Helheim.UserTest do
     end
   end
 
+  describe "blockable_by/2" do
+    test "returns a list of users" do
+      blocker  = insert(:user)
+      blockee1 = insert(:user)
+      blockee2 = insert(:user)
+      users = User |> User.blockable_by(blocker) |> Repo.all
+      assert Enum.member?(users, blockee1)
+      assert Enum.member?(users, blockee2)
+    end
+
+    test "does not include the blocker" do
+      blocker = insert(:user)
+      users = User |> User.blockable_by(blocker) |> Repo.all
+      refute Enum.member?(users, blocker)
+    end
+
+    test "does not include unconfirmed users" do
+      blocker = insert(:user)
+      blockee = insert(:user, confirmed_at: nil)
+      users = User |> User.blockable_by(blocker) |> Repo.all
+      refute Enum.member?(users, blockee)
+    end
+
+    test "does not include admins" do
+      blocker = insert(:user)
+      blockee = insert(:user, role: "admin")
+      users = User |> User.blockable_by(blocker) |> Repo.all
+      refute Enum.member?(users, blockee)
+    end
+
+    test "does not include mods" do
+      blocker = insert(:user)
+      blockee = insert(:user, role: "mod")
+      users = User |> User.blockable_by(blocker) |> Repo.all
+      refute Enum.member?(users, blockee)
+    end
+  end
+
   describe "search_by_username/2" do
     test "it finds users where the username match the search term case insensitive" do
       user1 = insert(:user, username: "FoO")

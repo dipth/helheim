@@ -48,7 +48,7 @@ defmodule HelheimWeb.BlogPostControllerTest do
     test "it redirects to a block page when the specified profile is blocking the current user", %{conn: conn, user: user} do
       block = insert(:block, blockee: user)
       conn  = get conn, "/profiles/#{block.blocker.id}/blog_posts"
-      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
+      assert redirected_to(conn) == block_path(conn, :show, block.blocker)
     end
 
     test "does not show blog posts that are set to private and the current user is not the author of the blog post", %{conn: conn} do
@@ -342,7 +342,7 @@ defmodule HelheimWeb.BlogPostControllerTest do
       block = insert(:block, blockee: user)
       blog_post = insert(:blog_post, user: block.blocker)
       conn  = get conn, "/profiles/#{block.blocker.id}/blog_posts/#{blog_post.id}"
-      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
+      assert redirected_to(conn) == block_path(conn, :show, block.blocker)
     end
 
     test "does not show deleted comments", %{conn: conn} do

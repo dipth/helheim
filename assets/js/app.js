@@ -43,6 +43,7 @@ import { PopoverConfirmable } from "./popover_confirmable";
 import { DonationForm } from "./donation_form";
 import { CalendarEventForm } from "./calendar_event_form";
 import { PreferencesForm } from "./preferences_form";
+import { BlockForm } from "./block_form";
 
 import css from "../css/app.css.scss"
 
@@ -67,6 +68,7 @@ export var App = {
     DonationForm.run();
     CalendarEventForm.run();
     PreferencesForm.run();
+    BlockForm.run();
   }
 }
 

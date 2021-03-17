@@ -1,0 +1,12 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link gettext("Blocks"), to: block_path(@conn, :index) %></li>
+  <li class="breadcrumb-item active"><%= gettext "Create block" %></li>
+</ol>
+
+<div class="card">
+  <div class="card-header">
+    <%= gettext "Create block" %>
+  </div>
+  <%= render "form.html", conn: @conn, users: @users,
+                          action: block_path(@conn, :create) %>
+</div>

@@ -73,7 +73,7 @@ defmodule HelheimWeb.PhotoAlbumControllerTest do
     test "it redirects to a block page when the specified profile is blocking the current user", %{conn: conn, user: user} do
       block = insert(:block, blockee: user)
       conn  = get conn, "/profiles/#{block.blocker.id}/photo_albums"
-      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
+      assert redirected_to(conn) == block_path(conn, :show, block.blocker)
     end
 
     test "does not show photo albums that are set to private and the current user is not the author of the photo album", %{conn: conn} do
@@ -291,7 +291,7 @@ defmodule HelheimWeb.PhotoAlbumControllerTest do
       block = insert(:block, blockee: user)
       photo_album = insert(:photo_album, user: block.blocker)
       conn  = get conn, "/profiles/#{block.blocker.id}/photo_albums/#{photo_album.id}"
-      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
+      assert redirected_to(conn) == block_path(conn, :show, block.blocker)
     end
 
     test "redirects to an error page when the photo album is set to private and the current user is not the author of the photo album", %{conn: conn} do

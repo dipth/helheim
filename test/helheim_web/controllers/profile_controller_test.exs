@@ -91,7 +91,7 @@ defmodule HelheimWeb.ProfileControllerTest do
       profile = insert(:user)
       insert(:block, blocker: profile, blockee: user)
       conn = get conn, "/profiles/#{profile.id}"
-      assert redirected_to(conn) == public_profile_block_path(conn, :show, profile)
+      assert redirected_to(conn) == block_path(conn, :show, profile)
     end
 
     test "does not show deleted comments", %{conn: conn} do

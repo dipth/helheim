@@ -324,7 +324,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: lib/helheim/models/user.ex:353
+#: lib/helheim/models/user.ex:362
 msgid "does not match your current password"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgstr ""
 msgid "Profile Text"
 msgstr ""
 
-#: lib/helheim_web/controllers/profile_controller.ex:86
+#: lib/helheim_web/controllers/profile_controller.ex:87
 msgid "Profile updated!"
 msgstr ""
 
@@ -1183,12 +1183,13 @@ msgstr ""
 msgid "Your ban will expire"
 msgstr ""
 
+#: lib/helheim_web/templates/block/form.html.eex:16
 #: lib/helheim_web/templates/profile/show.html.eex:53
 msgid "Block user"
 msgstr ""
 
-#: lib/helheim_web/templates/block/index.html.eex:10
-#: lib/helheim_web/templates/profile/show.html.eex:41
+#: lib/helheim_web/templates/block/form.html.eex:5
+#: lib/helheim_web/templates/block/index.html.eex:10 lib/helheim_web/templates/profile/show.html.eex:41
 msgid "The user will be unable to see your profile, blog posts, photos or send you messages while blocked"
 msgstr ""
 
@@ -1196,11 +1197,11 @@ msgstr ""
 msgid "This user is blocked"
 msgstr ""
 
-#: lib/helheim_web/controllers/block_controller.ex:36
+#: lib/helheim_web/controllers/block_controller.ex:48
 msgid "Unable to block user!"
 msgstr ""
 
-#: lib/helheim_web/controllers/block_controller.ex:50
+#: lib/helheim_web/controllers/block_controller.ex:64
 msgid "Unable to unblock user!"
 msgstr ""
 
@@ -1213,7 +1214,7 @@ msgstr ""
 msgid "User blocked!"
 msgstr ""
 
-#: lib/helheim_web/controllers/block_controller.ex:46
+#: lib/helheim_web/controllers/block_controller.ex:60
 msgid "User unblocked!"
 msgstr ""
 
@@ -1222,7 +1223,8 @@ msgid "Blocked since:"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/_blocks.html.eex:1
-#: lib/helheim_web/templates/block/index.html.eex:2 lib/helheim_web/templates/navbar/show.html.eex:28
+#: lib/helheim_web/templates/block/index.html.eex:2 lib/helheim_web/templates/block/new.html.eex:2
+#: lib/helheim_web/templates/navbar/show.html.eex:28
 msgid "Blocks"
 msgstr ""
 
@@ -1424,7 +1426,7 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-#: lib/helheim/models/user.ex:386
+#: lib/helheim/models/user.ex:395
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr ""
 
@@ -2018,13 +2020,29 @@ msgstr ""
 msgid "Mod: Show profile"
 msgstr ""
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/helheim_web/templates/photo/form.html.eex:10
 msgid "Photo Album"
 msgstr ""
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/helheim_web/templates/profile/show.html.eex:65
 #: lib/helheim_web/templates/profile/show_banned.html.eex:4
 msgid "This user is banned"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/block/index.html.eex:38
+#: lib/helheim_web/templates/block/new.html.eex:3 lib/helheim_web/templates/block/new.html.eex:8
+msgid "Create block"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/controllers/block_controller.ex:43
+msgid "User successfully blocked!"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/block/form.html.eex:8
+msgid "Who?"
 msgstr ""

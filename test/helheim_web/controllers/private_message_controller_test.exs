@@ -61,7 +61,7 @@ defmodule HelheimWeb.PrivateMessageControllerTest do
 
       block = insert(:block, blockee: user)
       conn  = post conn, "/private_conversations/#{block.blocker.id}/messages", private_message: @post_attrs
-      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
+      assert redirected_to(conn) == block_path(conn, :show, block.blocker)
     end
   end
 

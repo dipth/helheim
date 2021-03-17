@@ -346,7 +346,7 @@ defmodule HelheimWeb.PhotoControllerTest do
       photo_album = insert(:photo_album, user: block.blocker)
       photo       = create_photo(photo_album)
       conn        = get conn, "/profiles/#{block.blocker.id}/photo_albums/#{photo_album.id}/photos/#{photo.id}"
-      assert redirected_to(conn) == public_profile_block_path(conn, :show, block.blocker)
+      assert redirected_to(conn) == block_path(conn, :show, block.blocker)
     end
 
     test "does not show deleted comments", %{conn: conn} do

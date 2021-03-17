@@ -103,6 +103,10 @@ defmodule Helheim.User do
     from u in query, where: u.role == "mod"
   end
 
+  def blockable_by(query, blocker) do
+    from u in query, where: not is_nil(u.confirmed_at) and is_nil(u.role) and u.id != ^blocker.id
+  end
+
   def search(query, search_params) do
     query
     |> search_by_username(search_params["username"])
