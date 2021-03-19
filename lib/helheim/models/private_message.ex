@@ -45,8 +45,8 @@ defmodule Helheim.PrivateMessage do
       (m.recipient_id == ^user.id and is_nil(m.hidden_by_recipient_at))
   end
 
-  def unique_conversations_for(user) do
-    from m in PrivateMessage,
+  def unique_conversations_for(query, user) do
+    from m in query,
       where: m.id in(^last_conversation_msg_ids_for(user))
   end
 

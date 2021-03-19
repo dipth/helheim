@@ -148,6 +148,14 @@ defmodule Helheim.PrivateMessageTest do
       message = Repo.get(PrivateMessage, message.id)
       refute message.hidden_by_sender_at
     end
+
+    test "it does not set the hidden_by_recipient_at value of messages" do
+      sender  = insert(:user)
+      message = insert(:private_message, sender: sender, conversation_id: "1:2")
+      PrivateMessage.hide!("1:2", %{sender: sender})
+      message = Repo.get(PrivateMessage, message.id)
+      refute message.hidden_by_recipient_at
+    end
   end
 
   describe "hide!/2 when passing a recipient" do
@@ -179,6 +187,14 @@ defmodule Helheim.PrivateMessageTest do
       message = Repo.get(PrivateMessage, message.id)
       refute message.hidden_by_recipient_at
     end
+
+    test "it does not set the hidden_by_sender_at value of messages" do
+      recipient  = insert(:user)
+      message = insert(:private_message, recipient: recipient, conversation_id: "1:2")
+      PrivateMessage.hide!("1:2", %{recipient: recipient})
+      message = Repo.get(PrivateMessage, message.id)
+      refute message.hidden_by_sender_at
+    end
   end
 
   describe "hide!/2 when passing a user" do
@@ -193,6 +209,32 @@ defmodule Helheim.PrivateMessageTest do
       refute message_1.hidden_by_sender_at
       refute message_2.hidden_by_recipient_at
       assert message_2.hidden_by_sender_at
+    end
+
+    test "it does not set the hidden_by_recipient_at or hidden_by_recipient_at value of messages with a different conversation_id" do
+      user = insert(:user)
+      message_1 = insert(:private_message, recipient: user, conversation_id: "1:3")
+      message_2 = insert(:private_message, sender: user, conversation_id: "1:3")
+      PrivateMessage.hide!("1:2", %{user: user})
+      message_1 = Repo.get(PrivateMessage, message_1.id)
+      message_2 = Repo.get(PrivateMessage, message_2.id)
+      refute message_1.hidden_by_recipient_at
+      refute message_1.hidden_by_sender_at
+      refute message_2.hidden_by_recipient_at
+      refute message_2.hidden_by_sender_at
+    end
+
+    test "it does not set the hidden_by_recipient_at or hidden_by_recipient_at value of messages with a recipient and sender" do
+      user = insert(:user)
+      message_1 = insert(:private_message, conversation_id: "1:2")
+      message_2 = insert(:private_message, conversation_id: "1:2")
+      PrivateMessage.hide!("1:2", %{user: user})
+      message_1 = Repo.get(PrivateMessage, message_1.id)
+      message_2 = Repo.get(PrivateMessage, message_2.id)
+      refute message_1.hidden_by_recipient_at
+      refute message_1.hidden_by_sender_at
+      refute message_2.hidden_by_recipient_at
+      refute message_2.hidden_by_sender_at
     end
   end
 end

@@ -35,6 +35,38 @@ defmodule HelheimWeb.PrivateConversationControllerTest do
       assert html_response(conn, 200)
       assert conn.resp_body =~ "Message With Deleted User"
     end
+
+    test "it does not show conversations sent by the current user and hidden by the sender", %{conn: conn, user: user} do
+      partner = insert(:user)
+      insert_message(user, partner, "Test conversation", DateTime.utc_now, nil)
+      conn = get conn, "/private_conversations"
+      assert html_response(conn, 200)
+      refute conn.resp_body =~ "Test conversation"
+    end
+
+    test "it does not show conversations recieved by the current user and hidden by the recipient", %{conn: conn, user: user} do
+      partner = insert(:user)
+      insert_message(partner, user, "Test conversation", nil, DateTime.utc_now)
+      conn = get conn, "/private_conversations"
+      assert html_response(conn, 200)
+      refute conn.resp_body =~ "Test conversation"
+    end
+
+    test "it shows conversations sent by the current user and hidden by the recipient", %{conn: conn, user: user} do
+      partner = insert(:user)
+      insert_message(user, partner, "Test conversation", nil, DateTime.utc_now)
+      conn = get conn, "/private_conversations"
+      assert html_response(conn, 200)
+      assert conn.resp_body =~ "Test conversation"
+    end
+
+    test "it shows conversations recieved by the current user and hidden by the sender", %{conn: conn, user: user} do
+      partner = insert(:user)
+      insert_message(partner, user, "Test conversation", DateTime.utc_now, nil)
+      conn = get conn, "/private_conversations"
+      assert html_response(conn, 200)
+      assert conn.resp_body =~ "Test conversation"
+    end
   end
 
   describe "index/2 when not signed in" do
@@ -136,8 +168,18 @@ defmodule HelheimWeb.PrivateConversationControllerTest do
 
   ##############################################################################
   # helpers
-  defp insert_message(sender, recipient, body) do
+  defp insert_message(sender, recipient, body), do: insert_message(sender, recipient, body, nil, nil)
+  defp insert_message(sender, recipient, body, hidden_by_sender_at, hidden_by_recipient_at) do
     conversation_id = PrivateMessage.calculate_conversation_id(sender, recipient)
-    insert(:private_message, conversation_id: conversation_id, sender: sender, recipient: recipient, body: body)
+    insert(
+      :private_message,
+      conversation_id: conversation_id,
+      sender: sender,
+      recipient: recipient,
+      body: body,
+      hidden_by_sender_at: hidden_by_sender_at,
+      hidden_by_recipient_at: hidden_by_recipient_at,
+      read_at: DateTime.utc_now
+    )
   end
 end
