@@ -8,7 +8,9 @@ defmodule HelheimWeb.PrivateConversationController do
   def index(conn, params) do
     me = current_resource(conn)
     messages =
-      PrivateMessage.unique_conversations_for(me)
+      PrivateMessage
+      |> PrivateMessage.by_or_for(me)
+      |> PrivateMessage.unique_conversations_for(me)
       |> PrivateMessage.newest
       |> preload([:sender, :recipient])
       |> Repo.paginate(page: sanitized_page(params["page"]))
