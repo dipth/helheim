@@ -16,7 +16,7 @@ defmodule Helheim.NotificationService do
   end
 
   def create!(type, subject, trigger_person) do
-    subscriptions = subscriptions(type, subject)
+    subscriptions = subscriptions(type, subject, trigger_person)
     notifications = Parallel.pmap(subscriptions, fn(s) -> notify!(s, trigger_person) end)
     {:ok, notifications}
   end
@@ -26,13 +26,22 @@ defmodule Helheim.NotificationService do
     |> Repo.update_all(set: [clicked_at: DateTime.utc_now])
   end
 
-  defp subscriptions(type, subject) do
+  defp subscriptions(type, subject, trigger_person) do
     NotificationSubscription
     |> NotificationSubscription.for_type(type)
     |> NotificationSubscription.for_subject(subject)
     |> NotificationSubscription.enabled()
     |> NotificationSubscription.with_preloads()
     |> Repo.all
+    |> filter_out_ignored(trigger_person)
+  end
+
+  defp filter_out_ignored(subscriptions, trigger_person) do
+    ignore_map = Helheim.Ignore.get_ignore_map()
+    subscriptions
+    |> Enum.reject(fn(s) ->
+      (ignore_map[s.user_id] || []) |> Enum.member?(trigger_person.id)
+    end)
   end
 
   defp notify!(%NotificationSubscription{user_id: subscriber_id}, %User{id: trigger_person_id}) when subscriber_id == trigger_person_id,

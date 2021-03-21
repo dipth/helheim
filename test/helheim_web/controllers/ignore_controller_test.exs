@@ -51,7 +51,7 @@ defmodule HelheimWeb.IgnoreControllerTest do
     setup [:create_and_sign_in_user]
 
     test_with_mock "it ignores the specified user and redirects to the blocks and ignores list", %{conn: conn, user: ignorer},
-      Ignore, [], [ignore!: fn(_ignorer, _ignoree) -> {:ok, nil} end] do
+      Ignore, [:passthrough], [ignore!: fn(_ignorer, _ignoree) -> {:ok, nil} end] do
 
       ignoree = insert(:user)
       conn    = post conn, "/ignores", ignoree_id: ignoree.id
@@ -64,14 +64,14 @@ defmodule HelheimWeb.IgnoreControllerTest do
     end
 
     test_with_mock "it redirects to the block and ignore list and does not ignore the specified user if the user is the current user", %{conn: conn, user: ignorer},
-      Ignore, [], [ignore!: fn(_ignorer, _ignoree) -> raise("ignore!/2 was called!") end] do
+      Ignore, [:passthrough], [ignore!: fn(_ignorer, _ignoree) -> raise("ignore!/2 was called!") end] do
 
       conn = post conn, "/ignores", ignoree_id: ignorer.id
       assert redirected_to(conn) =~ block_and_ignore_path(conn, :index)
     end
 
     test_with_mock "it redirects to the block and ignore list and does not ignore the specified user if the user is an unconfirmed user", %{conn: conn, user: _ignorer},
-      Ignore, [], [ignore!: fn(_ignorer, _ignoree) -> raise("ignore!/2 was called!") end] do
+      Ignore, [:passthrough], [ignore!: fn(_ignorer, _ignoree) -> raise("ignore!/2 was called!") end] do
 
       ignoree = insert(:user, confirmed_at: nil)
       conn = post conn, "/ignores", ignoree_id: ignoree.id
@@ -79,7 +79,7 @@ defmodule HelheimWeb.IgnoreControllerTest do
     end
 
     test_with_mock "it redirects to the block and ignore list and does not ignore the specified user if the user is an admin", %{conn: conn, user: _ignorer},
-      Ignore, [], [ignore!: fn(_ignorer, _ignoree) -> raise("ignore!/2 was called!") end] do
+      Ignore, [:passthrough], [ignore!: fn(_ignorer, _ignoree) -> raise("ignore!/2 was called!") end] do
 
       ignoree = insert(:user, role: "admin")
       conn = post conn, "/ignores", ignoree_id: ignoree.id
@@ -87,7 +87,7 @@ defmodule HelheimWeb.IgnoreControllerTest do
     end
 
     test_with_mock "it redirects to the block and ignore list and does not ignore the specified user if the user is a mod", %{conn: conn, user: _ignorer},
-      Ignore, [], [ignore!: fn(_ignorer, _ignoree) -> raise("ignore!/2 was called!") end] do
+      Ignore, [:passthrough], [ignore!: fn(_ignorer, _ignoree) -> raise("ignore!/2 was called!") end] do
 
       ignoree = insert(:user, role: "mod")
       conn = post conn, "/ignores", ignoree_id: ignoree.id
@@ -97,7 +97,7 @@ defmodule HelheimWeb.IgnoreControllerTest do
 
   describe "create/2 when not signed in" do
     test_with_mock "it does not ignore the specified user but redirects to the login page", %{conn: conn},
-      Ignore, [], [ignore!: fn(_ignorer, _ignoree) -> raise("ignore!/2 was called!") end] do
+      Ignore, [:passthrough], [ignore!: fn(_ignorer, _ignoree) -> raise("ignore!/2 was called!") end] do
 
       ignoree = insert(:user)
       conn    = post conn, "/ignores", ignoree_id: ignoree.id
@@ -111,7 +111,7 @@ defmodule HelheimWeb.IgnoreControllerTest do
     setup [:create_and_sign_in_user]
 
     test_with_mock "it unignores the specified user and redirects to the blocks and ignores list", %{conn: conn, user: ignorer},
-      Ignore, [], [unignore!: fn(_ignorer, _ignoree) -> {:ok, nil} end] do
+      Ignore, [:passthrough], [unignore!: fn(_ignorer, _ignoree) -> {:ok, nil} end] do
 
       ignoree = insert(:user)
       conn    = delete conn, "/ignores/#{ignoree.id}"
@@ -126,7 +126,7 @@ defmodule HelheimWeb.IgnoreControllerTest do
 
   describe "delete/2 when not signed in" do
     test_with_mock "it does not unignore the specified user but redirects to the login page", %{conn: conn},
-      Ignore, [], [unignore!: fn(_ignorer, _ignoree) -> raise("unignore!/2 was called!") end] do
+      Ignore, [:passthrough], [unignore!: fn(_ignorer, _ignoree) -> raise("unignore!/2 was called!") end] do
 
       ignoree = insert(:user)
       conn    = delete conn, "/ignores/#{ignoree.id}"

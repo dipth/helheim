@@ -172,4 +172,24 @@ defmodule Helheim.IgnoreTest do
       {:error, _} = Ignore.unignore!(user, user)
     end
   end
+
+  ##############################################################################
+  # get_ignore_map/0
+  describe "get_ignore_map/0" do
+    test "it returns a map with lists of user ids that are ignored by the user with the id of the given key" do
+      user_1 = insert(:user, id: 1)
+      user_2 = insert(:user, id: 2)
+      user_3 = insert(:user, id: 3)
+      insert(:ignore, ignorer: user_1, ignoree: user_2)
+      insert(:ignore, ignorer: user_1, ignoree: user_3)
+      insert(:ignore, ignorer: user_2, ignoree: user_3)
+
+      assert Ignore.get_ignore_map == %{1 => [2,3], 2 => [3]}
+    end
+
+    test "it does not include disabled ignores" do
+      insert(:ignore, enabled: false)
+      assert Ignore.get_ignore_map == %{}
+    end
+  end
 end

@@ -67,10 +67,11 @@ defmodule Helheim.Photo do
     where: pa.visibility == "public"
   end
 
-  def newest_for_frontpage(user, limit) do
+  def newest_for_frontpage(user, limit, ignoree_ids \\ []) do
     sq = from(
       p in      (Photo |> Photo.visible_by(user) |> Photo.not_private()),
       join:     pa in Helheim.PhotoAlbum, on: pa.id == p.photo_album_id,
+      where:    pa.user_id not in ^ignoree_ids,
       group_by: pa.user_id,
       select:   %{last_public_photo_id: max(p.id)},
       order_by: [desc: max(p.id)],

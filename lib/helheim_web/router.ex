@@ -26,6 +26,7 @@ defmodule HelheimWeb.Router do
     plug HelheimWeb.Plug.LoadPendingFriendships
     plug HelheimWeb.Plug.EnforceBan
     plug HelheimWeb.Plug.LoadPendingCalendarEvents
+    plug HelheimWeb.Plug.LoadIgnorees
   end
 
   pipeline :ensure_admin do

@@ -76,6 +76,15 @@ defmodule Helheim.Ignore do
     |> Repo.insert_or_update
   end
 
+  def get_ignore_map do
+    query = Ignore |> Ignore.enabled()
+    query = from i in query,
+      group_by: i.ignorer_id,
+      select: {i.ignorer_id, fragment("array_agg(?)", i.ignoree_id)}
+    Repo.all(query)
+    |> Enum.into(%{})
+  end
+
   defp existing_ignore(ignorer, ignoree) do
     Ignore
     |> Ignore.for_ignorer(ignorer)

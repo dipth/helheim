@@ -67,6 +67,10 @@ defmodule Helheim.User do
     from u in query, where: u.id in ^ids
   end
 
+  def without_ids(query, ids) do
+    from u in query, where: u.id not in ^ids
+  end
+
   def newest(query) do
     from u in query,
     order_by: [desc: u.inserted_at]

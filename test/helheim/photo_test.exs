@@ -184,6 +184,14 @@ defmodule Helheim.PhotoTest do
       refute Enum.find(photos, fn(p) -> p.id == photo.id end)
     end
 
+    test "never returns photos from albums belonging to a user with an id matching any of the given ignoree_ids" do
+      viewer      = insert(:user)
+      photo_album = insert(:photo_album, visibility: "public")
+      photo       = insert(:photo, photo_album: photo_album)
+      photos      = Photo.newest_for_frontpage(viewer, 10, [photo_album.user_id])
+      refute Enum.find(photos, fn(p) -> p.id == photo.id end)
+    end
+
     test "returns only the latest photo from each user" do
       viewer  = insert(:user)
       album_1   = insert(:photo_album, visibility: "public")

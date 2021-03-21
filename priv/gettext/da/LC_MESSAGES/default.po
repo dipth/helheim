@@ -358,7 +358,7 @@ msgstr "Personlige detaljer"
 msgid "Update Account"
 msgstr "Opdatér Konto"
 
-#: lib/helheim/models/user.ex:363
+#: lib/helheim/models/user.ex:367
 msgid "does not match your current password"
 msgstr "matcher ikke dit nuværende kodeord"
 
@@ -471,8 +471,8 @@ msgid "Delete"
 msgstr "Slet"
 
 #: lib/helheim_web/templates/blog_post/show.html.eex:28
-#: lib/helheim_web/templates/comment/comment.html.eex:16
-#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:30
+#: lib/helheim_web/templates/comment/comment.html.eex:26
+#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:40
 #: lib/helheim_web/templates/forum_topic/forum_topic.html.eex:21
 #: lib/helheim_web/templates/mod/calendar_event/_admin_links.html.eex:6
 msgid "Edit"
@@ -1312,7 +1312,6 @@ msgid "Blocked since:"
 msgstr "Blokeret siden:"
 
 #: lib/helheim_web/templates/admin/user/_blocks.html.eex:1
-#: lib/helheim_web/templates/block_and_ignore/index.html.eex:2
 msgid "Blocks"
 msgstr "Blokeringer"
 
@@ -1437,8 +1436,8 @@ msgstr "Sortering"
 msgid "Last login"
 msgstr "Seneste login"
 
-#: lib/helheim_web/templates/comment/comment.html.eex:17
-#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:31
+#: lib/helheim_web/templates/comment/comment.html.eex:27
+#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:41
 #: lib/helheim_web/templates/forum_topic/forum_topic.html.eex:22
 msgid "Only possible for up to %{minutes} minutes after posting..."
 msgstr "Det er kun muligt at redigere i op til %{minutes} minutter…"
@@ -1519,7 +1518,7 @@ msgstr "Vi har modtaget din donation og takker ydmygt for din hjælp med at gør
 msgid "Edited"
 msgstr "Redigeret"
 
-#: lib/helheim/models/user.ex:396
+#: lib/helheim/models/user.ex:400
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr "I too enjoy registering on websites, fellow human… Bleep Bloop!"
 
@@ -1873,7 +1872,7 @@ msgstr "Visninger/Kommentarer"
 msgid "When"
 msgstr "Hvornår"
 
-#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:17
+#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:21
 msgid "Admin notice"
 msgstr "Administratorbesked"
 
@@ -2140,6 +2139,7 @@ msgid "Who?"
 msgstr "Hvem?"
 
 #: lib/helheim_web/templates/block/new.html.eex:2
+#: lib/helheim_web/templates/block_and_ignore/index.html.eex:2
 #: lib/helheim_web/templates/ignore/new.html.eex:2
 #: lib/helheim_web/templates/navbar/show.html.eex:28
 msgid "Blocks & Ignores"
@@ -2187,3 +2187,13 @@ msgstr "Brugeren er nu ignoreret!"
 #: lib/helheim_web/templates/block_and_ignore/blocks.html.eex:6
 msgid "These users will be unable to see your profile, blog posts, photos or send you messages while blocked"
 msgstr "Disse brugere vil ikke være i stand til at se din profil, blogs, billeder eller kontakte dig så længe blokeringen er aktiv"
+
+#: lib/helheim_web/templates/comment/comment.html.eex:19
+#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:30
+msgid "This content is hidden because of one of your ignores"
+msgstr "Dette indhold er skjult pga. en af dine ignoreringer"
+
+#: lib/helheim_web/templates/comment/comment.html.eex:5
+#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:4
+msgid "ignored user"
+msgstr "Ignoreret bruger"
