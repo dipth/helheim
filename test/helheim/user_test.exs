@@ -447,6 +447,44 @@ defmodule Helheim.UserTest do
     end
   end
 
+  describe "ignorable_by/2" do
+    test "returns a list of users" do
+      ignorer  = insert(:user)
+      ignoree1 = insert(:user)
+      ignoree2 = insert(:user)
+      users = User |> User.ignorable_by(ignorer) |> Repo.all
+      assert Enum.member?(users, ignoree1)
+      assert Enum.member?(users, ignoree2)
+    end
+
+    test "does not include the ignorer" do
+      ignorer = insert(:user)
+      users = User |> User.ignorable_by(ignorer) |> Repo.all
+      refute Enum.member?(users, ignorer)
+    end
+
+    test "does not include unconfirmed users" do
+      ignorer = insert(:user)
+      ignoree = insert(:user, confirmed_at: nil)
+      users = User |> User.ignorable_by(ignorer) |> Repo.all
+      refute Enum.member?(users, ignoree)
+    end
+
+    test "does not include admins" do
+      ignorer = insert(:user)
+      ignoree = insert(:user, role: "admin")
+      users = User |> User.ignorable_by(ignorer) |> Repo.all
+      refute Enum.member?(users, ignoree)
+    end
+
+    test "does not include mods" do
+      ignorer = insert(:user)
+      ignoree = insert(:user, role: "mod")
+      users = User |> User.ignorable_by(ignorer) |> Repo.all
+      refute Enum.member?(users, ignoree)
+    end
+  end
+
   describe "search_by_username/2" do
     test "it finds users where the username match the search term case insensitive" do
       user1 = insert(:user, username: "FoO")

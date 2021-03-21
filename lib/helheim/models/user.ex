@@ -106,6 +106,7 @@ defmodule Helheim.User do
   def blockable_by(query, blocker) do
     from u in query, where: not is_nil(u.confirmed_at) and is_nil(u.role) and u.id != ^blocker.id
   end
+  def ignorable_by(query, ignorer), do: blockable_by(query, ignorer)
 
   def search(query, search_params) do
     query

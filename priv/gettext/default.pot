@@ -324,7 +324,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: lib/helheim/models/user.ex:362
+#: lib/helheim/models/user.ex:363
 msgid "does not match your current password"
 msgstr ""
 
@@ -1189,7 +1189,7 @@ msgid "Block user"
 msgstr ""
 
 #: lib/helheim_web/templates/block/form.html.eex:5
-#: lib/helheim_web/templates/block/index.html.eex:10 lib/helheim_web/templates/profile/show.html.eex:41
+#: lib/helheim_web/templates/profile/show.html.eex:41
 msgid "The user will be unable to see your profile, blog posts, photos or send you messages while blocked"
 msgstr ""
 
@@ -1198,6 +1198,7 @@ msgid "This user is blocked"
 msgstr ""
 
 #: lib/helheim_web/controllers/block_controller.ex:48
+#: lib/helheim_web/controllers/ignore_controller.ex:26
 msgid "Unable to block user!"
 msgstr ""
 
@@ -1205,8 +1206,8 @@ msgstr ""
 msgid "Unable to unblock user!"
 msgstr ""
 
-#: lib/helheim_web/templates/block/index.html.eex:27
-#: lib/helheim_web/templates/block/index.html.eex:28 lib/helheim_web/templates/profile/show.html.eex:45
+#: lib/helheim_web/templates/block_and_ignore/blocks.html.eex:23
+#: lib/helheim_web/templates/block_and_ignore/blocks.html.eex:24 lib/helheim_web/templates/profile/show.html.eex:45
 msgid "Unblock user"
 msgstr ""
 
@@ -1218,17 +1219,16 @@ msgstr ""
 msgid "User unblocked!"
 msgstr ""
 
-#: lib/helheim_web/templates/block/index.html.eex:21
+#: lib/helheim_web/templates/block_and_ignore/blocks.html.eex:17
 msgid "Blocked since:"
 msgstr ""
 
 #: lib/helheim_web/templates/admin/user/_blocks.html.eex:1
-#: lib/helheim_web/templates/block/index.html.eex:2 lib/helheim_web/templates/block/new.html.eex:2
-#: lib/helheim_web/templates/navbar/show.html.eex:28
+#: lib/helheim_web/templates/block_and_ignore/index.html.eex:2
 msgid "Blocks"
 msgstr ""
 
-#: lib/helheim_web/templates/block/index.html.eex:7
+#: lib/helheim_web/templates/block_and_ignore/blocks.html.eex:3
 msgid "These are the users that you have blocked"
 msgstr ""
 
@@ -1299,7 +1299,7 @@ msgstr ""
 msgid "Hide Conversation"
 msgstr ""
 
-#: lib/helheim_web/controllers/private_conversation_controller.ex:43
+#: lib/helheim_web/controllers/private_conversation_controller.ex:45
 msgid "The conversation was hidden"
 msgstr ""
 
@@ -1426,7 +1426,7 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-#: lib/helheim/models/user.ex:395
+#: lib/helheim/models/user.ex:396
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr ""
 
@@ -2032,17 +2032,77 @@ msgid "This user is banned"
 msgstr ""
 
 #, elixir-format
-#: lib/helheim_web/templates/block/index.html.eex:38
-#: lib/helheim_web/templates/block/new.html.eex:3 lib/helheim_web/templates/block/new.html.eex:8
+#: lib/helheim_web/templates/block/new.html.eex:3
+#: lib/helheim_web/templates/block/new.html.eex:8 lib/helheim_web/templates/block_and_ignore/blocks.html.eex:34
 msgid "Create block"
 msgstr ""
 
 #, elixir-format
 #: lib/helheim_web/controllers/block_controller.ex:43
+#: lib/helheim_web/controllers/ignore_controller.ex:21
 msgid "User successfully blocked!"
 msgstr ""
 
 #, elixir-format
 #: lib/helheim_web/templates/block/form.html.eex:8
+#: lib/helheim_web/templates/ignore/form.html.eex:8
 msgid "Who?"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/block/new.html.eex:2
+#: lib/helheim_web/templates/ignore/new.html.eex:2 lib/helheim_web/templates/navbar/show.html.eex:28
+msgid "Blocks & Ignores"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/ignore/form.html.eex:5
+msgid "Content from the user will be hidden from you throughout the site"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/block_and_ignore/ignores.html.eex:6
+msgid "Content from these users will be hidden from you throughout the site"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/block_and_ignore/ignores.html.eex:34
+#: lib/helheim_web/templates/ignore/new.html.eex:3 lib/helheim_web/templates/ignore/new.html.eex:8
+msgid "Create ignore"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/ignore/form.html.eex:16
+msgid "Ignore user"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/block_and_ignore/ignores.html.eex:17
+msgid "Ignored since:"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/block_and_ignore/ignores.html.eex:3
+msgid "These are the users that you have ignored"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/controllers/ignore_controller.ex:42
+msgid "Unable to unignore user!"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/block_and_ignore/ignores.html.eex:23
+#: lib/helheim_web/templates/block_and_ignore/ignores.html.eex:24
+msgid "Unignore user"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/controllers/ignore_controller.ex:38
+msgid "User unignored!"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/block_and_ignore/blocks.html.eex:6
+msgid "These users will be unable to see your profile, blog posts, photos or send you messages while blocked"
 msgstr ""

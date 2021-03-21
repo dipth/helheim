@@ -41,12 +41,12 @@ defmodule HelheimWeb.BlockController do
     do
       conn
       |> put_flash(:success, gettext("User successfully blocked!"))
-      |> redirect(to: block_path(conn, :index))
+      |> redirect(to: block_and_ignore_path(conn, :index))
     else
       _ ->
         conn
         |> put_flash(:error, gettext("Unable to block user!"))
-        |> redirect(to: block_path(conn, :index))
+        |> redirect(to: block_and_ignore_path(conn, :index))
     end
   end
 
@@ -58,11 +58,11 @@ defmodule HelheimWeb.BlockController do
       {:ok, _block} ->
         conn
         |> put_flash(:success, gettext("User unblocked!"))
-        |> redirect(to: block_path(conn, :index))
+        |> redirect(to: block_and_ignore_path(conn, :index))
       {:error, _} ->
         conn
         |> put_flash(:error, gettext("Unable to unblock user!"))
-        |> redirect(to: block_path(conn, :index))
+        |> redirect(to: block_and_ignore_path(conn, :index))
     end
   end
 

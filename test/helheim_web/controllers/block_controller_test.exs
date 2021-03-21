@@ -6,40 +6,6 @@ defmodule HelheimWeb.BlockControllerTest do
   alias Helheim.User
 
   ##############################################################################
-  # index/2
-  describe "index/2 when signed in" do
-    setup [:create_and_sign_in_user]
-
-    test "it returns a successful response", %{conn: conn} do
-      conn = get conn, "/blocks"
-      assert html_response(conn, 200)
-    end
-
-    test "it only shows users that the current user has blocked", %{conn: conn, user: blocker} do
-      user_1 = insert(:user)
-      user_2 = insert(:user)
-      insert(:block, blocker: blocker, blockee: user_1)
-      insert(:block, blockee: user_2)
-      conn = get conn, "/blocks"
-      assert conn.resp_body =~ user_1.username
-      refute conn.resp_body =~ user_2.username
-    end
-
-    test "it does not show disabled blocks", %{conn: conn, user: blocker} do
-      block = insert(:block, blocker: blocker, enabled: false)
-      conn = get conn, "/blocks"
-      refute conn.resp_body =~ block.blockee.username
-    end
-  end
-
-  describe "index/2 when not signed in" do
-    test "it redirects to the sign in page", %{conn: conn} do
-      conn = get conn, "/blocks"
-      assert redirected_to(conn) =~ session_path(conn, :new)
-    end
-  end
-
-  ##############################################################################
   # show/2
   describe "show/2 when signed in" do
     setup [:create_and_sign_in_user]
@@ -116,7 +82,7 @@ defmodule HelheimWeb.BlockControllerTest do
   describe "create/2 when signed in" do
     setup [:create_and_sign_in_user]
 
-    test_with_mock "it blocks the specified user and redirects to the blocks list", %{conn: conn, user: blocker},
+    test_with_mock "it blocks the specified user and redirects to the blocks and ignores list", %{conn: conn, user: blocker},
       Block, [], [block!: fn(_blocker, _blockee) -> {:ok, nil} end] do
 
       blockee = insert(:user)
@@ -126,14 +92,14 @@ defmodule HelheimWeb.BlockControllerTest do
         blockee_id = blockee.id
         [%User{id: ^blocker_id}, %User{id: ^blockee_id}] = args
       end
-      assert redirected_to(conn) == block_path(conn, :index)
+      assert redirected_to(conn) == block_and_ignore_path(conn, :index)
     end
 
     test_with_mock "it redirects to the block list and does not block the specified user if the user is the current user", %{conn: conn, user: blocker},
       Block, [], [block!: fn(_blocker, _blockee) -> raise("block!/2 was called!") end] do
 
       conn = post conn, "/blocks", blockee_id: blocker.id
-      assert redirected_to(conn) =~ block_path(conn, :index)
+      assert redirected_to(conn) =~ block_and_ignore_path(conn, :index)
     end
 
     test_with_mock "it redirects to the block list and does not block the specified user if the user is an unconfirmed user", %{conn: conn, user: _blocker},
@@ -141,7 +107,7 @@ defmodule HelheimWeb.BlockControllerTest do
 
       blockee = insert(:user, confirmed_at: nil)
       conn = post conn, "/blocks", blockee_id: blockee.id
-      assert redirected_to(conn) =~ block_path(conn, :index)
+      assert redirected_to(conn) =~ block_and_ignore_path(conn, :index)
     end
 
     test_with_mock "it redirects to the block list and does not block the specified user if the user is an admin", %{conn: conn, user: _blocker},
@@ -149,7 +115,7 @@ defmodule HelheimWeb.BlockControllerTest do
 
       blockee = insert(:user, role: "admin")
       conn = post conn, "/blocks", blockee_id: blockee.id
-      assert redirected_to(conn) =~ block_path(conn, :index)
+      assert redirected_to(conn) =~ block_and_ignore_path(conn, :index)
     end
 
     test_with_mock "it redirects to the block list and does not block the specified user if the user is a mod", %{conn: conn, user: _blocker},
@@ -157,7 +123,7 @@ defmodule HelheimWeb.BlockControllerTest do
 
       blockee = insert(:user, role: "mod")
       conn = post conn, "/blocks", blockee_id: blockee.id
-      assert redirected_to(conn) =~ block_path(conn, :index)
+      assert redirected_to(conn) =~ block_and_ignore_path(conn, :index)
     end
   end
 
@@ -176,7 +142,7 @@ defmodule HelheimWeb.BlockControllerTest do
   describe "delete/2 when signed in" do
     setup [:create_and_sign_in_user]
 
-    test_with_mock "it unblocks the specified user and redirects to the blocks list", %{conn: conn, user: blocker},
+    test_with_mock "it unblocks the specified user and redirects to the blocks and ignores list", %{conn: conn, user: blocker},
       Block, [], [unblock!: fn(_blocker, _blockee) -> {:ok, nil} end] do
 
       blockee = insert(:user)
@@ -186,7 +152,7 @@ defmodule HelheimWeb.BlockControllerTest do
         blockee_id = blockee.id
         [%User{id: ^blocker_id}, %User{id: ^blockee_id}] = args
       end
-      assert redirected_to(conn) == block_path(conn, :index)
+      assert redirected_to(conn) == block_and_ignore_path(conn, :index)
     end
   end
 

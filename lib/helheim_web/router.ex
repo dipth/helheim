@@ -113,7 +113,9 @@ defmodule HelheimWeb.Router do
     resources "/notifications", NotificationController, only: [:show]
     resources "/navbar", NavbarController, singleton: true, only: [:show]
     resources "/usernames", UsernameController, only: [:index, :show]
-    resources "/blocks", BlockController
+    resources "/blocks_and_ignores", BlockAndIgnoreController, only: [:index]
+    resources "/blocks", BlockController, except: [:index]
+    resources "/ignores", IgnoreController, except: [:index, :show]
     resources "/comments", CommentController, only: [:delete]
     resources "/donations", DonationController, only: [:new, :create]
     get "/donations/thank_you", DonationController, :thank_you

@@ -1,12 +1,12 @@
 <ol class="breadcrumb">
   <li class="breadcrumb-item"><%= link gettext("Blocks & Ignores"), to: block_and_ignore_path(@conn, :index) %></li>
-  <li class="breadcrumb-item active"><%= gettext "Create block" %></li>
+  <li class="breadcrumb-item active"><%= gettext "Create ignore" %></li>
 </ol>
 
 <div class="card">
   <div class="card-header">
-    <%= gettext "Create block" %>
+    <%= gettext "Create ignore" %>
   </div>
   <%= render "form.html", conn: @conn, users: @users,
-                          action: block_path(@conn, :create) %>
+                          action: ignore_path(@conn, :create) %>
 </div>
