@@ -68,6 +68,10 @@ defmodule Helheim.PrivateMessageTest do
       assert PrivateMessage.calculate_conversation_id(first_user.id, second_user) == "#{first_user.id}:#{second_user.id}"
       assert PrivateMessage.calculate_conversation_id(first_user, second_user.id) == "#{first_user.id}:#{second_user.id}"
     end
+
+    test "it works when one if the ids is passed as a string" do
+      assert PrivateMessage.calculate_conversation_id(296, "161") == "161:296"
+    end
   end
 
   describe "unread?/2" do
@@ -235,6 +239,34 @@ defmodule Helheim.PrivateMessageTest do
       refute message_1.hidden_by_sender_at
       refute message_2.hidden_by_recipient_at
       refute message_2.hidden_by_sender_at
+    end
+
+    test "it correctly hides conversations where only the user is the sender" do
+      user      = insert(:user, id: 296)
+      recipient = insert(:user, id: 494)
+      message_1 = insert(:private_message, sender: user, recipient: recipient, conversation_id: "296:494")
+      message_2 = insert(:private_message, sender: user, recipient: recipient, conversation_id: "296:494")
+      PrivateMessage.hide!("296:494", %{user: user})
+      message_1 = Repo.get(PrivateMessage, message_1.id)
+      message_2 = Repo.get(PrivateMessage, message_2.id)
+      assert message_1.hidden_by_sender_at
+      refute message_1.hidden_by_recipient_at
+      assert message_2.hidden_by_sender_at
+      refute message_2.hidden_by_recipient_at
+    end
+
+    test "it correctly hides conversations where only the user is the recipient" do
+      user   = insert(:user, id: 494)
+      sender = insert(:user, id: 296)
+      message_1 = insert(:private_message, sender: sender, recipient: user, conversation_id: "296:494")
+      message_2 = insert(:private_message, sender: sender, recipient: user, conversation_id: "296:494")
+      PrivateMessage.hide!("296:494", %{user: user})
+      message_1 = Repo.get(PrivateMessage, message_1.id)
+      message_2 = Repo.get(PrivateMessage, message_2.id)
+      refute message_1.hidden_by_sender_at
+      assert message_1.hidden_by_recipient_at
+      refute message_2.hidden_by_sender_at
+      assert message_2.hidden_by_recipient_at
     end
   end
 end
