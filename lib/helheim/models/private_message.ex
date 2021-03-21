@@ -72,6 +72,7 @@ defmodule Helheim.PrivateMessage do
   def calculate_conversation_id(user_1_id, user_2 = %User{}), do: calculate_conversation_id(user_1_id, user_2.id)
   def calculate_conversation_id(user_1_id, user_2_id) do
     [user_1_id, user_2_id]
+    |> Enum.map(fn(id) -> sanitize_id(id) end)
     |> Enum.sort()
     |> Enum.join(":")
   end
@@ -131,4 +132,7 @@ defmodule Helheim.PrivateMessage do
     |> select([m], max(m.id))
     |> Repo.all
   end
+
+  defp sanitize_id(id) when is_integer(id), do: id
+  defp sanitize_id(id), do: String.to_integer(id)
 end

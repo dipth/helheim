@@ -49,4 +49,5 @@ config :recaptcha,
 
 # Configure wallaby
 config :wallaby,
-  driver: Wallaby.Experimental.Chrome
+  otp_app: :helheim,
+  driver: Wallaby.Chrome
