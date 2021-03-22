@@ -54,7 +54,7 @@ defmodule Helheim.Mixfile do
       {:guardian, "~> 2.0"},
       {:guardian_phoenix, "~> 2.0"},
       {:secure_random, "~> 0.5.0"},
-      {:bamboo, "~> 1.3"},
+      {:bamboo, "~> 2.0"},
       {:bamboo_postmark, "~> 0.6.0"},
       {:calendar, "~> 0.17"},
       {:calendar_translations, "~> 0.0.4"},
