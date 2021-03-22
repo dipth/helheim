@@ -73,7 +73,7 @@ defmodule Helheim.Mixfile do
       {:crutches, git: "https://github.com/mykewould/crutches.git"},
       {:scrivener_ecto, "~> 2.2"}, # Pagination
       {:mock, "~> 0.3.3", only: :test},
-      {:stripity_stripe, "~> 2.8.0"},
+      {:stripity_stripe, "~> 2.9.0"},
       {:recaptcha, "~> 3.0"},
       {:remote_ip, "~> 0.2.0"},
       {:zarex, "~> 1.0"}
