@@ -26,6 +26,7 @@ defmodule HelheimWeb.Router do
     plug HelheimWeb.Plug.LoadPendingFriendships
     plug HelheimWeb.Plug.EnforceBan
     plug HelheimWeb.Plug.LoadPendingCalendarEvents
+    plug HelheimWeb.Plug.LoadIgnorees
   end
 
   pipeline :ensure_admin do
@@ -83,7 +84,6 @@ defmodule HelheimWeb.Router do
       end
       resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
-      resources "/block", BlockController, singleton: true, only: [:create, :delete, :show]
       resources "/contact_request", FriendshipRequestController, singleton: true, only: [:create, :delete]
       resources "/contact", FriendshipController, singleton: true, only: [:create, :delete]
       resources "/contacts", FriendshipController, only: [:index]
@@ -114,7 +114,9 @@ defmodule HelheimWeb.Router do
     resources "/notifications", NotificationController, only: [:show]
     resources "/navbar", NavbarController, singleton: true, only: [:show]
     resources "/usernames", UsernameController, only: [:index, :show]
-    resources "/blocks", BlockController, only: [:index]
+    resources "/blocks_and_ignores", BlockAndIgnoreController, only: [:index]
+    resources "/blocks", BlockController, except: [:index]
+    resources "/ignores", IgnoreController, except: [:index, :show]
     resources "/comments", CommentController, only: [:delete]
     resources "/donations", DonationController, only: [:new, :create]
     get "/donations/thank_you", DonationController, :thank_you

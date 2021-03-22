@@ -15,7 +15,7 @@ defmodule HelheimWeb.Plug.EnforceBlock do
     cond do
       blocker != nil && Block.blocked?(blocker, blockee) ->
         conn
-        |> Phoenix.Controller.redirect(to: public_profile_block_path(conn, :show, blocker))
+        |> Phoenix.Controller.redirect(to: block_path(conn, :show, blocker))
         |> halt
       true -> conn
     end

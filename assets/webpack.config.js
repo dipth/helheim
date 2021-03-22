@@ -55,6 +55,13 @@ module.exports = (env, options) => ({
         }]
       },
       {
+        test: require.resolve('tom-select'),
+        use: [{
+            loader: 'expose-loader',
+            options: 'TomSelect'
+        }]
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -82,7 +89,8 @@ module.exports = (env, options) => ({
       IntlPolyfill: 'intl',
       Favico: 'favico.js',
       dragula: 'dragula',
-      Dropzone: 'dropzone'
+      Dropzone: 'dropzone',
+      TomSelect: 'tom-select'
     })
   ],
   externals: {

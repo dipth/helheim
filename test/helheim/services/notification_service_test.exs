@@ -52,6 +52,24 @@ defmodule Helheim.NotificationServiceTest do
       NotificationService.create!("comment", profile, trigger_person)
       refute Repo.one(Notification)
     end
+
+    test "does not create a notification if the trigger person is ignored by the subscriber",
+      %{trigger_person: trigger_person, profile: profile} do
+
+      sub = insert(:notification_subscription, type: "comment", profile: profile, enabled: true)
+      insert(:ignore, ignorer: sub.user, ignoree: trigger_person)
+      NotificationService.create!("comment", profile, trigger_person)
+      refute Repo.one(Notification)
+    end
+
+    test "creates a notification if the trigger person is ignored by the subscriber but the ignore is disabled",
+      %{trigger_person: trigger_person, profile: profile} do
+
+      sub = insert(:notification_subscription, type: "comment", profile: profile, enabled: true)
+      insert(:ignore, ignorer: sub.user, ignoree: trigger_person, enabled: false)
+      NotificationService.create!("comment", profile, trigger_person)
+      assert Repo.one(Notification)
+    end
   end
 
   ##############################################################################
@@ -101,6 +119,24 @@ defmodule Helheim.NotificationServiceTest do
       insert(:notification_subscription, user: trigger_person, type: "comment", blog_post: blog_post, enabled: true)
       NotificationService.create!("comment", blog_post, trigger_person)
       refute Repo.one(Notification)
+    end
+
+    test "does not create a notification if the trigger person is ignored by the subscriber",
+      %{trigger_person: trigger_person, blog_post: blog_post} do
+
+      sub = insert(:notification_subscription, type: "comment", blog_post: blog_post, enabled: true)
+      insert(:ignore, ignorer: sub.user, ignoree: trigger_person)
+      NotificationService.create!("comment", blog_post, trigger_person)
+      refute Repo.one(Notification)
+    end
+
+    test "creates a notification if the trigger person is ignored by the subscriber but the ignore is disabled",
+      %{trigger_person: trigger_person, blog_post: blog_post} do
+
+      sub = insert(:notification_subscription, type: "comment", blog_post: blog_post, enabled: true)
+      insert(:ignore, ignorer: sub.user, ignoree: trigger_person, enabled: false)
+      NotificationService.create!("comment", blog_post, trigger_person)
+      assert Repo.one(Notification)
     end
   end
 
@@ -152,6 +188,24 @@ defmodule Helheim.NotificationServiceTest do
       NotificationService.create!("comment", photo, trigger_person)
       refute Repo.one(Notification)
     end
+
+    test "does not create a notification if the trigger person is ignored by the subscriber",
+      %{trigger_person: trigger_person, photo: photo} do
+
+      sub = insert(:notification_subscription, type: "comment", photo: photo, enabled: true)
+      insert(:ignore, ignorer: sub.user, ignoree: trigger_person)
+      NotificationService.create!("comment", photo, trigger_person)
+      refute Repo.one(Notification)
+    end
+
+    test "creates a notification if the trigger person is ignored by the subscriber but the ignore is disabled",
+      %{trigger_person: trigger_person, photo: photo} do
+
+      sub = insert(:notification_subscription, type: "comment", photo: photo, enabled: true)
+      insert(:ignore, ignorer: sub.user, ignoree: trigger_person, enabled: false)
+      NotificationService.create!("comment", photo, trigger_person)
+      assert Repo.one(Notification)
+    end
   end
 
   ##############################################################################
@@ -202,6 +256,24 @@ defmodule Helheim.NotificationServiceTest do
       NotificationService.create!("comment", forum_topic, trigger_person)
       refute Repo.one(Notification)
     end
+
+    test "does not create a notification if the trigger person is ignored by the subscriber",
+      %{trigger_person: trigger_person, forum_topic: forum_topic} do
+
+      sub = insert(:notification_subscription, type: "comment", forum_topic: forum_topic, enabled: true)
+      insert(:ignore, ignorer: sub.user, ignoree: trigger_person)
+      NotificationService.create!("comment", forum_topic, trigger_person)
+      refute Repo.one(Notification)
+    end
+
+    test "creates a notification if the trigger person is ignored by the subscriber but the ignore is disabled",
+      %{trigger_person: trigger_person, forum_topic: forum_topic} do
+
+      sub = insert(:notification_subscription, type: "comment", forum_topic: forum_topic, enabled: true)
+      insert(:ignore, ignorer: sub.user, ignoree: trigger_person, enabled: false)
+      NotificationService.create!("comment", forum_topic, trigger_person)
+      assert Repo.one(Notification)
+    end
   end
 
   ##############################################################################
@@ -251,6 +323,24 @@ defmodule Helheim.NotificationServiceTest do
       insert(:notification_subscription, user: trigger_person, type: "comment", calendar_event: calendar_event, enabled: true)
       NotificationService.create!("comment", calendar_event, trigger_person)
       refute Repo.one(Notification)
+    end
+
+    test "does not create a notification if the trigger person is ignored by the subscriber",
+      %{trigger_person: trigger_person, calendar_event: calendar_event} do
+
+      sub = insert(:notification_subscription, type: "comment", calendar_event: calendar_event, enabled: true)
+      insert(:ignore, ignorer: sub.user, ignoree: trigger_person)
+      NotificationService.create!("comment", calendar_event, trigger_person)
+      refute Repo.one(Notification)
+    end
+
+    test "creates a notification if the trigger person is ignored by the subscriber but the ignore is disabled",
+      %{trigger_person: trigger_person, calendar_event: calendar_event} do
+
+      sub = insert(:notification_subscription, type: "comment", calendar_event: calendar_event, enabled: true)
+      insert(:ignore, ignorer: sub.user, ignoree: trigger_person, enabled: false)
+      NotificationService.create!("comment", calendar_event, trigger_person)
+      assert Repo.one(Notification)
     end
   end
 

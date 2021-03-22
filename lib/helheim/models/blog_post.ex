@@ -30,8 +30,8 @@ defmodule Helheim.BlogPost do
       ORDER BY blog_posts.published_at DESC
     ) FROM blog_posts WHERE blog_posts.published = TRUE)
   """
-  def newest_for_frontpage(current_user, limit) do
-    from bp in (Helheim.BlogPost |> published |> visible_by(current_user) |> not_private |> newest),
+  def newest_for_frontpage(current_user, limit, ignoree_ids \\ []) do
+    from bp in (Helheim.BlogPost |> published |> visible_by(current_user) |> not_from_ignoree(ignoree_ids) |> not_private |> newest),
     join: partition in fragment(@newest_for_frontpage_partition_query),
     where: partition.row_number <= ^1 and partition.id == bp.id,
     limit: ^limit
@@ -47,6 +47,11 @@ defmodule Helheim.BlogPost do
       owner.id == current_user.id -> query
       true -> query |> published
     end
+  end
+
+  defp not_from_ignoree(query, ignoree_ids) do
+    from p in query,
+    where: p.user_id not in ^ignoree_ids
   end
 
   def visible_by(query, user) do

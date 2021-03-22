@@ -1,6 +1,10 @@
 <div class="d-flex w-100 justify-content-between mb-1">
   <div>
-    <%= avatar_with_username @forum_reply.user, true %>
+    <%= if Enum.member?(@conn.assigns[:ignoree_ids], @forum_reply.user_id) do %>
+      <span class="badge badge-default"><%= gettext("ignored user") %></span>
+    <% else %>
+      <%= avatar_with_username @forum_reply.user, true %>
+    <% end %>
   </div>
   <div>
     <small>
@@ -21,7 +25,13 @@
 <% else %>
 
   <div class="embeds mentionable">
-    <%= HelheimWeb.EmbedHelpers.replace_urls(@forum_reply.body) %>
+    <%= if Enum.member?(@conn.assigns[:ignoree_ids], @forum_reply.user_id) do %>
+      <p>
+        <small><%= gettext("This content is hidden because of one of your ignores") %></small>
+      </p>
+    <% else %>
+      <%= HelheimWeb.EmbedHelpers.replace_urls(@forum_reply.body) %>
+    <% end %>
   </div>
 
 <% end %>

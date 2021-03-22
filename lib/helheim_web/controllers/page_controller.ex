@@ -24,11 +24,12 @@ defmodule HelheimWeb.PageController do
       User
       |> User.recently_logged_in
       |> User.with_avatar
+      |> User.without_ids(conn.assigns[:ignoree_ids])
       |> limit(140)
       |> Repo.all
 
     newest_blog_posts =
-      BlogPost.newest_for_frontpage(current_resource(conn), 8)
+      BlogPost.newest_for_frontpage(current_resource(conn), 8, conn.assigns[:ignoree_ids])
       |> preload(:user)
       |> Repo.all
 
@@ -46,7 +47,7 @@ defmodule HelheimWeb.PageController do
       |> Repo.all
 
     newest_photos =
-      Helheim.Photo.newest_for_frontpage(current_resource(conn), 24)
+      Helheim.Photo.newest_for_frontpage(current_resource(conn), 24, conn.assigns[:ignoree_ids])
 
     render conn, "front_page.html",
       newest_users: newest_users,

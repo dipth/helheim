@@ -1,0 +1,18 @@
+<%= form_for @conn, @action, fn f -> %>
+  <div class="card-block">
+    <p class="mb-2">
+      <i class="fa fa-info-circle"></i>
+      <%= gettext "The user will be unable to see your profile, blog posts, photos or send you messages while blocked" %>
+    </p>
+    <div class="form-group <%= if f.errors[:blockee_id] do 'has-danger' end %>">
+      <%= label f, :blockee_id, gettext("Who?"), class: "control-label" %>
+      <%= select f, :blockee_id, Enum.map(@users, &{&1.username, &1.id}), prompt: '', class: "form-control" %>
+      <%= if message = f.errors[:blockee_id] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Block user" %></button>
+  </div>
+<% end %>

@@ -1,0 +1,18 @@
+<%= form_for @conn, @action, fn f -> %>
+  <div class="card-block">
+    <p class="mb-2">
+      <i class="fa fa-info-circle"></i>
+      <%= gettext "Content from the user will be hidden from you throughout the site" %>
+    </p>
+    <div class="form-group <%= if f.errors[:ignoree_id] do 'has-danger' end %>">
+      <%= label f, :ignoree_id, gettext("Who?"), class: "control-label" %>
+      <%= select f, :ignoree_id, Enum.map(@users, &{&1.username, &1.id}), prompt: '', class: "form-control" %>
+      <%= if message = f.errors[:ignoree_id] do %>
+        <div class="form-control-feedback"><%= translate_error(message) %></div>
+      <% end %>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> <%= gettext "Ignore user" %></button>
+  </div>
+<% end %>

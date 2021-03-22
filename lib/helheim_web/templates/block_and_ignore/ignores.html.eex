@@ -1,0 +1,37 @@
+<div class="card card-dark">
+  <div class="card-block">
+    <h4 class="card-title"><%= gettext "These are the users that you have ignored" %>:</h4>
+    <p class="mb-2">
+      <i class="fa fa-info-circle"></i>
+      <%= gettext "Content from these users will be hidden from you throughout the site" %>
+    </p>
+    <table class="table">
+      <tbody>
+        <%= for ignore <- @ignores do %>
+          <tr>
+            <td>
+              <strong>
+                <%= link ignore.ignoree.username, to: public_profile_path(@conn, :show, ignore.ignoree) %><br>
+              </strong>
+              <small>
+                <%= gettext "Ignored since:" %>
+                <%= lt(ignore.updated_at, "%d. %b %Y kl. %H:%M") %>
+              </small>
+            </td>
+            <td class="text-right">
+              <%= link to: ignore_path(@conn, :delete, ignore.ignoree_id), method: "DELETE" do %>
+                <i class="fa fa-trash" title="<%= gettext "Unignore user" %>"></i>
+                <span class="hidden-xs-down"><%= gettext "Unignore user" %></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= link to: ignore_path(@conn, :new), class: "btn btn-primary btn-sm" do %>
+      <i class="fa fa-plus"></i>
+      <%= gettext("Create ignore") %>
+    <% end %>
+  </div>
+</div>

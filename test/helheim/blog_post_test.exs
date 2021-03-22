@@ -132,6 +132,13 @@ defmodule Helheim.BlogPostTest do
       refute Enum.find(blog_posts, fn(p) -> p.id == blog_post.id end)
     end
 
+    test "never returns blog posts from users with any of the given ignoree ids" do
+      viewer     = insert(:user)
+      blog_post  = insert(:blog_post, visibility: "public")
+      blog_posts = BlogPost.newest_for_frontpage(viewer, 10, [blog_post.user_id]) |> Repo.all
+      assert blog_posts == []
+    end
+
     test "orders a post with a more recent published_at date before one with an older published_at date" do
       user       = insert(:user)
       blog_post1 = insert(:blog_post, published_at: Timex.shift(Timex.now, minutes: -1))

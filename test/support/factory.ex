@@ -154,6 +154,14 @@ defmodule Helheim.Factory do
     }
   end
 
+  def ignore_factory do
+    %Helheim.Ignore{
+      ignorer: build(:user),
+      ignoree: build(:user),
+      enabled: true
+    }
+  end
+
   def friendship_request_factory do
     %Helheim.Friendship{
       sender:      build(:user),

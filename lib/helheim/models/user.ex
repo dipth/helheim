@@ -67,6 +67,10 @@ defmodule Helheim.User do
     from u in query, where: u.id in ^ids
   end
 
+  def without_ids(query, ids) do
+    from u in query, where: u.id not in ^ids
+  end
+
   def newest(query) do
     from u in query,
     order_by: [desc: u.inserted_at]
@@ -102,6 +106,11 @@ defmodule Helheim.User do
   def mods(query) do
     from u in query, where: u.role == "mod"
   end
+
+  def blockable_by(query, blocker) do
+    from u in query, where: not is_nil(u.confirmed_at) and is_nil(u.role) and u.id != ^blocker.id
+  end
+  def ignorable_by(query, ignorer), do: blockable_by(query, ignorer)
 
   def search(query, search_params) do
     query

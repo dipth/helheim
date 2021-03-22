@@ -40,7 +40,7 @@
               <strong><%= gettext "This user is blocked" %>!</strong>
               <%= gettext "The user will be unable to see your profile, blog posts, photos or send you messages while blocked" %>.
               <p class="mb-0 mt-1">
-                <%= link to: public_profile_block_path(@conn, :delete, @user.id), class: "btn btn-default btn-block", method: "DELETE" do %>
+                <%= link to: block_path(@conn, :delete, @user.id), class: "btn btn-default btn-block", method: "DELETE" do %>
                   <i class="fa fa-unlock"></i>
                   <%= gettext "Unblock user" %>
                 <% end %>
@@ -48,7 +48,7 @@
             </div>
           <% else %>
             <p class="mb-0 mt-1">
-              <%= link to: public_profile_block_path(@conn, :create, @user.id), class: "btn btn-default btn-block", method: "POST" do %>
+              <%= link to: block_path(@conn, :create, blockee_id: @user.id), class: "btn btn-default btn-block", method: "POST" do %>
                 <i class="fa fa-lock"></i>
                 <%= gettext "Block user" %>
               <% end %>

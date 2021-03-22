@@ -1,0 +1,6 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item active"><%= gettext("Blocks & Ignores") %></li>
+</ol>
+
+<%= render "blocks.html", conn: @conn, blocks: @blocks %>
+<%= render "ignores.html", conn: @conn, ignores: @ignores %>

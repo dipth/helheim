@@ -1,17 +1,13 @@
-<ol class="breadcrumb">
-  <li class="breadcrumb-item active"><%= gettext("Blocks") %></li>
-</ol>
-
 <div class="card card-dark">
   <div class="card-block">
     <h4 class="card-title"><%= gettext "These are the users that you have blocked" %>:</h4>
     <p class="mb-2">
       <i class="fa fa-info-circle"></i>
-      <%= gettext "The user will be unable to see your profile, blog posts, photos or send you messages while blocked" %>
+      <%= gettext "These users will be unable to see your profile, blog posts, photos or send you messages while blocked" %>
     </p>
     <table class="table">
       <tbody>
-        <%= for block <- @blocks.entries do %>
+        <%= for block <- @blocks do %>
           <tr>
             <td>
               <strong>
@@ -23,8 +19,8 @@
               </small>
             </td>
             <td class="text-right">
-              <%= link to: public_profile_block_path(@conn, :create, block.blockee), method: "DELETE" do %>
-                <i class="fa fa-unlock" title="<%= gettext "Unblock user" %>"></i>
+              <%= link to: block_path(@conn, :delete, block.blockee_id), method: "DELETE" do %>
+                <i class="fa fa-trash" title="<%= gettext "Unblock user" %>"></i>
                 <span class="hidden-xs-down"><%= gettext "Unblock user" %></span>
               <% end %>
             </td>
@@ -32,7 +28,10 @@
         <% end %>
       </tbody>
     </table>
+
+    <%= link to: block_path(@conn, :new), class: "btn btn-primary btn-sm" do %>
+      <i class="fa fa-plus"></i>
+      <%= gettext("Create block") %>
+    <% end %>
   </div>
 </div>
-
-<%= pagination_links @conn, @blocks %>
