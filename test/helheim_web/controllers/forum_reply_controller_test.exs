@@ -16,7 +16,7 @@ defmodule HelheimWeb.ForumReplyControllerTest do
     setup [:create_and_sign_in_user]
 
     test_with_mock "it redirects to the topic page with a success flash message when successfull", %{conn: conn, user: user},
-      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body) -> {:ok, %{forum_reply: %{}}} end] do
+      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body, _notice) -> {:ok, %{forum_reply: %{}}} end] do
 
       topic = insert(:forum_topic)
       conn  = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
@@ -25,14 +25,14 @@ defmodule HelheimWeb.ForumReplyControllerTest do
         topic_id = topic.id
         user_id  = user.id
         body     = @valid_attrs[:body]
-        [%ForumTopic{id: ^topic_id}, %User{id: ^user_id}, ^body] = args
+        [%ForumTopic{id: ^topic_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)       =~ forum_forum_topic_path(conn, :show, topic.forum, topic, page: "last")
       assert get_flash(conn, :success) == gettext("Reply created successfully")
     end
 
     test_with_mock "it redirects to the topic page with an error flash message when unsuccessfull", %{conn: conn, user: user},
-      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body) -> {:error, :forum_reply, %{}, []} end] do
+      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body, _notice) -> {:error, :forum_reply, %{}, []} end] do
 
       topic = insert(:forum_topic)
       conn  = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @invalid_attrs
@@ -41,14 +41,14 @@ defmodule HelheimWeb.ForumReplyControllerTest do
         topic_id = topic.id
         user_id  = user.id
         body     = @invalid_attrs[:body]
-        [%ForumTopic{id: ^topic_id}, %User{id: ^user_id}, ^body] = args
+        [%ForumTopic{id: ^topic_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)     == forum_forum_topic_path(conn, :show, topic.forum, topic)
       assert get_flash(conn, :error) == gettext("Reply could not be created")
     end
 
     test_with_mock "it does not invoke the ForumReplyService if the topic does not exist but instead shows a 404 error", %{conn: conn},
-      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body) -> raise("ForumReplyService was called!") end] do
+      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body, _notice) -> raise("ForumReplyService was called!") end] do
 
       topic = insert(:forum_topic)
       assert_error_sent :not_found, fn ->
@@ -57,7 +57,7 @@ defmodule HelheimWeb.ForumReplyControllerTest do
     end
 
     test_with_mock "it does not invoke the ForumReplyService if the forum does not exist but instead shows a 404 error", %{conn: conn},
-      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body) -> raise("ForumReplyService was called!") end] do
+      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body, _notice) -> raise("ForumReplyService was called!") end] do
 
       topic = insert(:forum_topic)
       assert_error_sent :not_found, fn ->
@@ -66,7 +66,7 @@ defmodule HelheimWeb.ForumReplyControllerTest do
     end
 
     test_with_mock "it does not invoke the ForumReplyService if the topic is locked but instead shows a 404 error", %{conn: conn},
-      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body) -> raise("ForumReplyService was called!") end] do
+      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body, _notice) -> raise("ForumReplyService was called!") end] do
 
       topic = insert(:forum_topic, locked_at: DateTime.utc_now)
       conn = post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs
@@ -76,7 +76,7 @@ defmodule HelheimWeb.ForumReplyControllerTest do
 
   describe "create/2 when not signed in" do
     test_with_mock "it does not invoke the ForumReplyService", %{conn: conn},
-      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body) -> raise("ForumReplyService was called!") end] do
+      ForumReplyService, [], [create!: fn(_forum_topic, _user, _body, _notice) -> raise("ForumReplyService was called!") end] do
 
       topic = insert(:forum_topic)
       post conn, "/forums/#{topic.forum.id}/forum_topics/#{topic.id}/forum_replies", forum_reply: @valid_attrs

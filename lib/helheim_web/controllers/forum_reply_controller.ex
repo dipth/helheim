@@ -3,6 +3,7 @@ defmodule HelheimWeb.ForumReplyController do
   alias Helheim.Forum
   alias Helheim.ForumReply
   alias Helheim.ForumTopic
+  alias Helheim.User
 
   plug :find_forum
   plug :find_user
@@ -15,7 +16,8 @@ defmodule HelheimWeb.ForumReplyController do
   def create(conn, %{"forum_id" => _, "forum_topic_id" => _, "forum_reply" => forum_reply_params}) do
     user   = current_resource(conn)
     body   = forum_reply_params["body"]
-    result = Helheim.ForumReplyService.create!(conn.assigns[:forum_topic], user, body)
+    notice = forum_reply_params["notice"] == "true"
+    result = Helheim.ForumReplyService.create!(conn.assigns[:forum_topic], user, body, notice)
 
     case result do
       {:ok, %{forum_reply: _forum_reply}} ->
@@ -91,9 +93,10 @@ defmodule HelheimWeb.ForumReplyController do
   end
 
   defp build_edit_changeset(conn, _) do
+    author = current_resource(conn)
     forum_reply_params = conn.params["forum_reply"] || %{}
     changeset = conn.assigns[:forum_reply]
-                |> ForumReply.changeset(forum_reply_params)
+                |> ForumReply.changeset(forum_reply_params, User.mod_or_admin?(author))
     assign conn, :changeset, changeset
   end
 end

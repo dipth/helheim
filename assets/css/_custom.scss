@@ -301,4 +301,13 @@ code {
   hyphens: auto;
 }
 
+.mod_message {
+  border-left: 3px solid $brand-warning;
+  padding-left: $spacer;
+
+  h5 {
+    color: $brand-warning;
+  }
+}
+
 @import "calendar_events";

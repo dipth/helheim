@@ -471,8 +471,8 @@ msgid "Delete"
 msgstr "Slet"
 
 #: lib/helheim_web/templates/blog_post/show.html.eex:28
-#: lib/helheim_web/templates/comment/comment.html.eex:26
-#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:40
+#: lib/helheim_web/templates/comment/comment.html.eex:29
+#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:32
 #: lib/helheim_web/templates/forum_topic/forum_topic.html.eex:21
 #: lib/helheim_web/templates/mod/calendar_event/_admin_links.html.eex:6
 msgid "Edit"
@@ -496,7 +496,7 @@ msgstr "Redigér Blog"
 msgid "Title"
 msgstr "Titel"
 
-#: lib/helheim_web/controllers/comment_controller.ex:31
+#: lib/helheim_web/controllers/comment_controller.ex:32
 msgid "Comment created successfully"
 msgstr "Din kommentar er tilføjet!"
 
@@ -509,7 +509,7 @@ msgstr "Gæstebog"
 msgid "Newest Guest Book Entries"
 msgstr "Nyeste gæstebogsindlæg"
 
-#: lib/helheim_web/templates/comment/comments.html.eex:43
+#: lib/helheim_web/templates/comment/comments.html.eex:49
 msgid "Post Comment"
 msgstr "Tilføj Kommentar"
 
@@ -524,7 +524,7 @@ msgstr "Tilføj Kommentar"
 msgid "Show All"
 msgstr "Vis alle"
 
-#: lib/helheim_web/controllers/comment_controller.ex:35
+#: lib/helheim_web/controllers/comment_controller.ex:36
 msgid "Unable to create comment"
 msgstr "Din kommentar kunne ikke tilføjes!"
 
@@ -728,7 +728,7 @@ msgstr "Administration"
 
 #: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:8
 #: lib/helheim_web/templates/blog_post/form.html.eex:12
-#: lib/helheim_web/templates/forum_reply/form.html.eex:4
+#: lib/helheim_web/templates/forum_reply/form.html.eex:12
 #: lib/helheim_web/templates/forum_topic/form.html.eex:12
 #: lib/helheim_web/templates/profile/edit.html.eex:83
 msgid "Content"
@@ -813,9 +813,9 @@ msgstr "Hop til den sidste side for at sende et svar"
 
 #: lib/helheim_web/templates/blog_post/form.html.eex:20
 #: lib/helheim_web/templates/calendar_event/_form.html.eex:19
-#: lib/helheim_web/templates/comment/comments.html.eex:39
-#: lib/helheim_web/templates/comment/form.html.eex:13
-#: lib/helheim_web/templates/forum_reply/form.html.eex:11
+#: lib/helheim_web/templates/comment/comments.html.eex:45
+#: lib/helheim_web/templates/comment/form.html.eex:19
+#: lib/helheim_web/templates/forum_reply/form.html.eex:19
 #: lib/helheim_web/templates/forum_topic/form.html.eex:19
 #: lib/helheim_web/templates/forum_topic/show.html.eex:36
 #: lib/helheim_web/templates/forum_topic/show.html.eex:51
@@ -833,7 +833,7 @@ msgstr "Nyt forum"
 msgid "New Forum Category"
 msgstr "Ny forum kategori"
 
-#: lib/helheim_web/templates/forum_reply/new.html.eex:9
+#: lib/helheim_web/templates/forum_reply/new.html.eex:10
 msgid "Post Reply"
 msgstr "Send svar"
 
@@ -841,11 +841,11 @@ msgstr "Send svar"
 msgid "Post Topic"
 msgstr "Opret indlæg"
 
-#: lib/helheim_web/controllers/forum_reply_controller.ex:27
+#: lib/helheim_web/controllers/forum_reply_controller.ex:29
 msgid "Reply could not be created"
 msgstr "Dit svar kunne ikke oprettes"
 
-#: lib/helheim_web/controllers/forum_reply_controller.ex:23
+#: lib/helheim_web/controllers/forum_reply_controller.ex:25
 msgid "Reply created successfully"
 msgstr "Dit svar blev sendt"
 
@@ -1018,7 +1018,7 @@ msgstr "Redigér svar"
 msgid "Edit topic"
 msgstr "Redigér indlæg"
 
-#: lib/helheim_web/controllers/forum_reply_controller.ex:40
+#: lib/helheim_web/controllers/forum_reply_controller.ex:42
 msgid "Forum reply updated successfully."
 msgstr "Dit svar blev gemt!"
 
@@ -1026,8 +1026,8 @@ msgstr "Dit svar blev gemt!"
 msgid "Forum topic updated successfully."
 msgstr "Dit indlæg blev gemt!"
 
-#: lib/helheim_web/templates/comment/edit.html.eex:4
-#: lib/helheim_web/templates/forum_reply/edit.html.eex:12
+#: lib/helheim_web/templates/comment/edit.html.eex:5
+#: lib/helheim_web/templates/forum_reply/edit.html.eex:13
 #: lib/helheim_web/templates/forum_topic/edit.html.eex:19
 msgid "Save Changes"
 msgstr "Gem ændringer"
@@ -1436,13 +1436,13 @@ msgstr "Sortering"
 msgid "Last login"
 msgstr "Seneste login"
 
-#: lib/helheim_web/templates/comment/comment.html.eex:27
-#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:41
+#: lib/helheim_web/templates/comment/comment.html.eex:30
+#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:33
 #: lib/helheim_web/templates/forum_topic/forum_topic.html.eex:22
 msgid "Only possible for up to %{minutes} minutes after posting..."
 msgstr "Det er kun muligt at redigere i op til %{minutes} minutter…"
 
-#: lib/helheim_web/controllers/forum_reply_controller.ex:85
+#: lib/helheim_web/controllers/forum_reply_controller.ex:87
 msgid "You can only edit a forum reply in the first %{minutes} minutes!"
 msgstr "Du kan kun redigere dit svar i de første %{minutes} minutter!"
 
@@ -1631,7 +1631,7 @@ msgstr "Skjul kommentarer?"
 msgid "Terms and Rules"
 msgstr "Betingelser og Regler"
 
-#: lib/helheim_web/controllers/comment_controller.ex:48
+#: lib/helheim_web/controllers/comment_controller.ex:49
 msgid "Comment updated successfully."
 msgstr "Kommentaren blev opdateret."
 
@@ -1639,7 +1639,7 @@ msgstr "Kommentaren blev opdateret."
 msgid "Edit comment"
 msgstr "Redigér kommentar"
 
-#: lib/helheim_web/controllers/comment_controller.ex:110
+#: lib/helheim_web/controllers/comment_controller.ex:111
 msgid "You can only edit a comment in the first %{minutes} minutes!"
 msgstr "Du kan kun redigere din kommentar i den første %{minutes} minutter!"
 
@@ -1986,9 +1986,9 @@ msgstr "Bruger"
 
 #: lib/helheim_web/templates/blog_post/form.html.eex:20
 #: lib/helheim_web/templates/calendar_event/_form.html.eex:19
-#: lib/helheim_web/templates/comment/comments.html.eex:39
-#: lib/helheim_web/templates/comment/form.html.eex:13
-#: lib/helheim_web/templates/forum_reply/form.html.eex:11
+#: lib/helheim_web/templates/comment/comments.html.eex:45
+#: lib/helheim_web/templates/comment/form.html.eex:19
+#: lib/helheim_web/templates/forum_reply/form.html.eex:19
 #: lib/helheim_web/templates/forum_topic/form.html.eex:19
 #: lib/helheim_web/templates/profile/edit.html.eex:91
 msgid "You can embed pictures from your photo albums or from Imgur, gifs from Giphy, Videos from Youtube and Vimeo and Spotify playlists by simply including a url for the desired media in your post"
@@ -2189,7 +2189,7 @@ msgid "These users will be unable to see your profile, blog posts, photos or sen
 msgstr "Disse brugere vil ikke være i stand til at se din profil, blogs, billeder eller kontakte dig så længe blokeringen er aktiv"
 
 #: lib/helheim_web/templates/comment/comment.html.eex:19
-#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:30
+#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:21
 msgid "This content is hidden because of one of your ignores"
 msgstr "Dette indhold er skjult pga. en af dine ignoreringer"
 
@@ -2197,3 +2197,14 @@ msgstr "Dette indhold er skjult pga. en af dine ignoreringer"
 #: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:4
 msgid "ignored user"
 msgstr "Ignoreret bruger"
+
+#: lib/helheim_web/templates/comment/comments.html.eex:39
+#: lib/helheim_web/templates/comment/form.html.eex:10
+#: lib/helheim_web/templates/forum_reply/form.html.eex:7
+msgid "Mod message?"
+msgstr "Moderatorbesked?"
+
+#: lib/helheim_web/templates/comment/comment.html.eex:23
+#: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:25
+msgid "Moderator notice"
+msgstr "Moderatorbesked"

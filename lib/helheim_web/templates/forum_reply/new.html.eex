@@ -6,6 +6,7 @@
     </strong>
   </div>
   <%= render "form.html", changeset: @changeset,
+                          conn: @conn,
                           button_label: gettext("Post Reply"),
                           action: forum_forum_topic_forum_reply_path(@conn, :create, @forum, @forum_topic) %>
 </div>

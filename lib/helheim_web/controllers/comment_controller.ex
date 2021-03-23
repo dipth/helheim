@@ -23,7 +23,8 @@ defmodule HelheimWeb.CommentController do
   def create(conn, %{"comment" => comment_params}) do
     author = current_resource(conn)
     body   = comment_params["body"]
-    result = Helheim.CommentService.create!(conn.assigns[:commentable], author, body)
+    notice = comment_params["notice"] == "true"
+    result = Helheim.CommentService.create!(conn.assigns[:commentable], author, body, notice)
 
     case result do
       {:ok, %{comment: _comment}} ->
@@ -116,9 +117,10 @@ defmodule HelheimWeb.CommentController do
   end
 
   defp build_edit_changeset(conn, _) do
+    author = current_resource(conn)
     comment_params = conn.params["comment"] || %{}
     changeset = conn.assigns[:comment]
-                |> Comment.changeset(comment_params)
+                |> Comment.changeset(comment_params, User.mod_or_admin?(author))
     assign conn, :changeset, changeset
   end
 end

@@ -4,6 +4,12 @@
       <%= label f, :body, gettext("Write new comment:"), class: "control-label mb-0" %>
     </div>
     <div class="card-block">
+      <%= if Helheim.User.mod_or_admin?(current_resource(@conn)) do %>
+        <%= label f, :notice do %>
+          <%= checkbox f, :notice %>
+          <%= gettext "Mod message?" %>
+        <% end %>
+      <% end %>
       <%= textarea f, :body, class: "form-control mentionable-input", rows: 5 %>
       <%= if message = f.errors[:body] do %>
         <div class="form-control-feedback"><%= translate_error(message) %></div>
