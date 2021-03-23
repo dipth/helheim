@@ -6,22 +6,23 @@ defmodule Helheim.ForumReplyService do
   alias Helheim.ForumReply
   alias Helheim.ForumTopic
   alias Helheim.NotificationService
+  alias Helheim.User
 
-  def create!(forum_topic, user, body) do
+  def create!(forum_topic, user, body, notice \\ false) do
     Multi.new
-    |> insert_reply(forum_topic, user, body)
+    |> insert_reply(forum_topic, user, body, notice)
     |> inc_forum_replies_count(forum_topic)
     |> trigger_notifications(forum_topic, user)
     |> Repo.transaction
   end
 
-  defp insert_reply(multi, forum_topic, user, body) do
+  defp insert_reply(multi, forum_topic, user, body, notice \\ false) do
     multi
-    |> Multi.insert(:forum_reply, build_reply(forum_topic, user, body))
+    |> Multi.insert(:forum_reply, build_reply(forum_topic, user, body, notice))
   end
 
-  defp build_reply(forum_topic, user, body) do
-    ForumReply.changeset(%ForumReply{}, %{body: body})
+  defp build_reply(forum_topic, user, body, notice \\ false) do
+    ForumReply.changeset(%ForumReply{}, %{body: body, notice: notice}, User.mod_or_admin?(user))
     |> Changeset.put_assoc(:forum_topic, forum_topic)
     |> Changeset.put_assoc(:user, user)
   end

@@ -10,6 +10,7 @@ defmodule Helheim.Comment do
     field      :approved_at,     :utc_datetime_usec
     field      :deleted_at,      :utc_datetime_usec
     field      :deletion_reason, :string
+    field      :notice,          :boolean
     belongs_to :author,          Helheim.User
     belongs_to :profile,         Helheim.User
     belongs_to :blog_post,       Helheim.BlogPost
@@ -38,9 +39,10 @@ defmodule Helheim.Comment do
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
-  def changeset(struct, params \\ %{}) do
+  def changeset(struct, params \\ %{}, mod \\ false) do
+    allowed_fields = if mod, do: [:body, :notice], else: [:body]
     struct
-    |> cast(params, [:body])
+    |> cast(params, allowed_fields)
     |> trim_fields(:body)
     |> validate_required([:body])
   end

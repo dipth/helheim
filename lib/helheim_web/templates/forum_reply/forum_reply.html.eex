@@ -15,26 +15,18 @@
   </div>
 </div>
 
-<%= if @forum_reply.notice do %>
-
-  <div class="alert alert-warning embeds mentionable" role="alert">
-    <h4 class="alert-heading"><%= gettext "Admin notice" %></h4>
-    <%= text_to_html @forum_reply.body %>
-  </div>
-
-<% else %>
-
-  <div class="embeds mentionable">
-    <%= if Enum.member?(@conn.assigns[:ignoree_ids], @forum_reply.user_id) do %>
-      <p>
-        <small><%= gettext("This content is hidden because of one of your ignores") %></small>
-      </p>
-    <% else %>
-      <%= HelheimWeb.EmbedHelpers.replace_urls(@forum_reply.body) %>
+<div class="embeds mentionable<%= if @forum_reply.notice do %> mod_message<% end %>">
+  <%= if Enum.member?(@conn.assigns[:ignoree_ids], @forum_reply.user_id) do %>
+    <p>
+      <small><%= gettext("This content is hidden because of one of your ignores") %></small>
+    </p>
+  <% else %>
+    <%= if @forum_reply.notice do %>
+      <h5 class="alert-heading"><%= gettext "Moderator notice" %></h5>
     <% end %>
-  </div>
-
-<% end %>
+    <%= HelheimWeb.EmbedHelpers.replace_urls(@forum_reply.body) %>
+  <% end %>
+</div>
 
 <%= if ForumReply.editable_by?(@forum_reply, current_resource(@conn)) do %>
   <%= link gettext("Edit"), to: forum_forum_topic_forum_reply_path(@conn, :edit, @forum, @forum_topic, @forum_reply), class: "btn btn-outline-secondary btn-sm" %>

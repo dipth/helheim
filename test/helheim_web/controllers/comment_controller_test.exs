@@ -74,7 +74,7 @@ defmodule HelheimWeb.CommentControllerTest do
     setup [:create_and_sign_in_user]
 
     test_with_mock "it redirects to the profile comments page with a success flash message when successfull", %{conn: conn, user: user},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> {:ok, %{comment: %{}}} end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> {:ok, %{comment: %{}}} end] do
 
       profile = insert(:user)
       conn    = post conn, "/profiles/#{profile.id}/comments", comment: @comment_attrs
@@ -83,14 +83,14 @@ defmodule HelheimWeb.CommentControllerTest do
         profile_id = profile.id
         user_id    = user.id
         body       = @comment_attrs[:body]
-        [%User{id: ^profile_id}, %User{id: ^user_id}, ^body] = args
+        [%User{id: ^profile_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)       == public_profile_comment_path(conn, :index, profile.id)
       assert get_flash(conn, :success) == gettext("Comment created successfully")
     end
 
     test_with_mock "it redirects to the profile comments page with an error flash message when unsuccessfull", %{conn: conn, user: user},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> {:error, :comment, %{}, []} end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> {:error, :comment, %{}, []} end] do
 
       profile = insert(:user)
       conn    = post conn, "/profiles/#{profile.id}/comments", comment: @comment_attrs
@@ -99,14 +99,14 @@ defmodule HelheimWeb.CommentControllerTest do
         profile_id = profile.id
         user_id    = user.id
         body       = @comment_attrs[:body]
-        [%User{id: ^profile_id}, %User{id: ^user_id}, ^body] = args
+        [%User{id: ^profile_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)     == public_profile_comment_path(conn, :index, profile.id)
       assert get_flash(conn, :error) == gettext("Unable to create comment")
     end
 
     test_with_mock "it does not invoke the CommentService if the profile does not exist but instead shows a 404 error", %{conn: conn},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
 
       assert_error_sent :not_found, fn ->
         post conn, "/profiles/1/comments", comment: @comment_attrs
@@ -114,7 +114,7 @@ defmodule HelheimWeb.CommentControllerTest do
     end
 
     test_with_mock "it does not invoke the CommentService if the profile is blocking the current user but instead redirects to a block page", %{conn: conn, user: user},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
 
       block = insert(:block, blockee: user)
       conn  = post conn, "/profiles/#{block.blocker.id}/comments", comment: @comment_attrs
@@ -124,7 +124,7 @@ defmodule HelheimWeb.CommentControllerTest do
 
   describe "create/2 for a profile when not signed in" do
     test_with_mock "it does not invoke the CommentService", %{conn: conn},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
 
       profile = insert(:user)
       post conn, "/profiles/#{profile.id}/comments", comment: @comment_attrs
@@ -143,7 +143,7 @@ defmodule HelheimWeb.CommentControllerTest do
     setup [:create_and_sign_in_user]
 
     test_with_mock "it redirects to the blog post page with a success flash message when successfull", %{conn: conn, user: user},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> {:ok, %{comment: %{}}} end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> {:ok, %{comment: %{}}} end] do
 
       blog_post = insert(:blog_post)
       conn      = post conn, "/blog_posts/#{blog_post.id}/comments", comment: @comment_attrs
@@ -152,14 +152,14 @@ defmodule HelheimWeb.CommentControllerTest do
         blog_post_id = blog_post.id
         user_id      = user.id
         body         = @comment_attrs[:body]
-        [%BlogPost{id: ^blog_post_id}, %User{id: ^user_id}, ^body] = args
+        [%BlogPost{id: ^blog_post_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)       == public_profile_blog_post_path(conn, :show, blog_post.user, blog_post)
       assert get_flash(conn, :success) == gettext("Comment created successfully")
     end
 
     test_with_mock "it redirects to the blog post page with an error flash message when unsuccessfull", %{conn: conn, user: user},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> {:error, :comment, %{}, []} end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> {:error, :comment, %{}, []} end] do
 
       blog_post = insert(:blog_post)
       conn      = post conn, "/blog_posts/#{blog_post.id}/comments", comment: @comment_attrs
@@ -168,14 +168,14 @@ defmodule HelheimWeb.CommentControllerTest do
         blog_post_id = blog_post.id
         user_id      = user.id
         body         = @comment_attrs[:body]
-        [%BlogPost{id: ^blog_post_id}, %User{id: ^user_id}, ^body] = args
+        [%BlogPost{id: ^blog_post_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)     == public_profile_blog_post_path(conn, :show, blog_post.user, blog_post)
       assert get_flash(conn, :error) == gettext("Unable to create comment")
     end
 
     test_with_mock "it does not invoke the CommentService if the blog post does not exist but instead shows a 404 error", %{conn: conn},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
 
       assert_error_sent :not_found, fn ->
         post conn, "/blog_posts/1/comments", comment: @comment_attrs
@@ -183,7 +183,7 @@ defmodule HelheimWeb.CommentControllerTest do
     end
 
     test_with_mock "it does not invoke the CommentService if the author of the blog is blocking the current user but instead redirects to a block page", %{conn: conn, user: user},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
 
       block     = insert(:block, blockee: user)
       blog_post = insert(:blog_post, user: block.blocker)
@@ -194,7 +194,7 @@ defmodule HelheimWeb.CommentControllerTest do
 
   describe "create/2 for a blog post when not signed in" do
     test_with_mock "it does not invoke the CommentService", %{conn: conn},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
 
       blog_post = insert(:blog_post)
       post conn, "/blog_posts/#{blog_post.id}/comments", comment: @comment_attrs
@@ -213,7 +213,7 @@ defmodule HelheimWeb.CommentControllerTest do
     setup [:create_and_sign_in_user]
 
     test_with_mock "it redirects to the photo page with a success flash message when successfull", %{conn: conn, user: user},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> {:ok, %{comment: %{}}} end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> {:ok, %{comment: %{}}} end] do
 
       photo = insert(:photo)
       conn  = post conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/comments", comment: @comment_attrs
@@ -222,14 +222,14 @@ defmodule HelheimWeb.CommentControllerTest do
         photo_id = photo.id
         user_id      = user.id
         body         = @comment_attrs[:body]
-        [%Photo{id: ^photo_id}, %User{id: ^user_id}, ^body] = args
+        [%Photo{id: ^photo_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)       == public_profile_photo_album_photo_path(conn, :show, photo.photo_album.user_id, photo.photo_album.id, photo)
       assert get_flash(conn, :success) == gettext("Comment created successfully")
     end
 
     test_with_mock "it redirects to the photo page with an error flash message when unsuccessfull", %{conn: conn, user: user},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> {:error, :comment, %{}, []} end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> {:error, :comment, %{}, []} end] do
 
       photo = insert(:photo)
       conn  = post conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/comments", comment: @comment_attrs
@@ -238,14 +238,14 @@ defmodule HelheimWeb.CommentControllerTest do
         photo_id = photo.id
         user_id      = user.id
         body         = @comment_attrs[:body]
-        [%Photo{id: ^photo_id}, %User{id: ^user_id}, ^body] = args
+        [%Photo{id: ^photo_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)     == public_profile_photo_album_photo_path(conn, :show, photo.photo_album.user_id, photo.photo_album.id, photo)
       assert get_flash(conn, :error) == gettext("Unable to create comment")
     end
 
     test_with_mock "it does not invoke the CommentService if the photo does not exist but instead shows a 404 error", %{conn: conn},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
 
       assert_error_sent :not_found, fn ->
         post conn, "/photo_albums/1/photos/1/comments", comment: @comment_attrs
@@ -253,7 +253,7 @@ defmodule HelheimWeb.CommentControllerTest do
     end
 
     test_with_mock "it does not invoke the CommentService if the author of the photo is blocking the current user but instead redirects to a block page", %{conn: conn, user: user},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
 
       block       = insert(:block, blockee: user)
       photo_album = insert(:photo_album, user: block.blocker)
@@ -265,7 +265,7 @@ defmodule HelheimWeb.CommentControllerTest do
 
   describe "create/2 for a photo when not signed in" do
     test_with_mock "it does not invoke the CommentService", %{conn: conn},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
 
       photo = insert(:photo)
       post conn, "/photo_albums/#{photo.photo_album_id}/photos/#{photo.id}/comments", comment: @comment_attrs
@@ -284,7 +284,7 @@ defmodule HelheimWeb.CommentControllerTest do
     setup [:create_and_sign_in_user]
 
     test_with_mock "it redirects to the event page with a success flash message when successfull", %{conn: conn, user: user},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> {:ok, %{comment: %{}}} end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> {:ok, %{comment: %{}}} end] do
 
       calendar_event = insert(:calendar_event)
       conn           = post conn, "/calendar_events/#{calendar_event.id}/comments", comment: @comment_attrs
@@ -293,14 +293,14 @@ defmodule HelheimWeb.CommentControllerTest do
         calendar_event_id = calendar_event.id
         user_id           = user.id
         body              = @comment_attrs[:body]
-        [%CalendarEvent{id: ^calendar_event_id}, %User{id: ^user_id}, ^body] = args
+        [%CalendarEvent{id: ^calendar_event_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)       == calendar_event_path(conn, :show, calendar_event.id)
       assert get_flash(conn, :success) == gettext("Comment created successfully")
     end
 
     test_with_mock "it redirects to the event page with an error flash message when unsuccessfull", %{conn: conn, user: user},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> {:error, :comment, %{}, []} end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> {:error, :comment, %{}, []} end] do
 
       calendar_event = insert(:calendar_event)
       conn           = post conn, "/calendar_events/#{calendar_event.id}/comments", comment: @comment_attrs
@@ -309,14 +309,14 @@ defmodule HelheimWeb.CommentControllerTest do
         calendar_event_id = calendar_event.id
         user_id           = user.id
         body              = @comment_attrs[:body]
-        [%CalendarEvent{id: ^calendar_event_id}, %User{id: ^user_id}, ^body] = args
+        [%CalendarEvent{id: ^calendar_event_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)     == calendar_event_path(conn, :show, calendar_event.id)
       assert get_flash(conn, :error) == gettext("Unable to create comment")
     end
 
     test_with_mock "it does not invoke the CommentService if the event does not exist but instead shows a 404 error", %{conn: conn},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
 
       assert_error_sent :not_found, fn ->
         post conn, "/calendar_event/1/comments", comment: @comment_attrs
@@ -326,7 +326,7 @@ defmodule HelheimWeb.CommentControllerTest do
 
   describe "create/2 for a calendar_event when not signed in" do
     test_with_mock "it does not invoke the CommentService", %{conn: conn},
-      CommentService, [], [create!: fn(_commentable, _author, _body) -> raise("CommentService was called!") end] do
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
 
       calendar_event = insert(:calendar_event)
       post conn, "/calendar_events/#{calendar_event.id}/comments", comment: @comment_attrs

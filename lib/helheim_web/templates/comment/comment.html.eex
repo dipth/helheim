@@ -13,12 +13,15 @@
       </small>
     </div>
   </div>
-  <div class="embeds mentionable">
+  <div class="embeds mentionable<%= if @comment.notice do %> mod_message<% end %>">
     <%= if Enum.member?(@conn.assigns[:ignoree_ids], @comment.author_id) do %>
       <p>
         <small><%= gettext("This content is hidden because of one of your ignores") %></small>
       </p>
     <% else %>
+      <%= if @comment.notice do %>
+        <h5 class="alert-heading"><%= gettext "Moderator notice" %></h5>
+      <% end %>
       <%= HelheimWeb.EmbedHelpers.replace_urls(@comment.body) %>
     <% end %>
   </div>

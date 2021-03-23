@@ -10,9 +10,9 @@ defmodule Helheim.CommentService do
   alias Helheim.CalendarEvent
   alias Helheim.NotificationService
 
-  def create!(commentable, author, body) do
+  def create!(commentable, author, body, notice \\ false) do
     Multi.new
-    |> insert_comment(commentable, author, body)
+    |> insert_comment(commentable, author, body, notice)
     |> inc_comment_count(commentable)
     |> trigger_notifications(commentable, author)
     |> Repo.transaction
@@ -26,13 +26,13 @@ defmodule Helheim.CommentService do
     |> Repo.transaction
   end
 
-  defp insert_comment(multi, commentable, author, body) do
+  defp insert_comment(multi, commentable, author, body, notice \\ false) do
     multi
-    |> Multi.insert(:comment, build_comment(commentable, author, body))
+    |> Multi.insert(:comment, build_comment(commentable, author, body, notice))
   end
 
-  defp build_comment(commentable, author, body) do
-    Comment.changeset(%Comment{}, %{body: body})
+  defp build_comment(commentable, author, body, notice \\ false) do
+    Comment.changeset(%Comment{}, %{body: body, notice: notice}, User.mod_or_admin?(author))
     |> Changeset.put_assoc(:author, author)
     |> put_commentable(commentable)
   end

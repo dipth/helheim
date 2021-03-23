@@ -9,6 +9,7 @@
 
 <div class="card">
   <%= render "form.html", changeset: @changeset,
+                          conn: @conn,
                           button_label: gettext("Save Changes"),
                           action: forum_forum_topic_forum_reply_path(@conn, :update, @forum, @forum_topic, @forum_reply) %>
 </div>

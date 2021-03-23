@@ -14,9 +14,10 @@ defmodule Helheim.ForumReply do
     belongs_to :user,        Helheim.User
   end
 
-  def changeset(struct, params \\ %{}) do
+  def changeset(struct, params \\ %{}, mod \\ false) do
+    allowed_fields = if mod, do: [:body, :notice], else: [:body]
     struct
-    |> cast(params, [:body])
+    |> cast(params, allowed_fields)
     |> trim_fields([:body])
     |> validate_required([:body])
     |> prepare_changes(fn changeset ->
