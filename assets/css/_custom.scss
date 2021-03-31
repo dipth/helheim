@@ -12,7 +12,7 @@ body:not(.top-nav) {
 }
 
 body.app-signed-in {
-  background-image: url('/images/body_bg_02.png');
+
 }
 
 body.app-signed-out {
@@ -69,17 +69,11 @@ form.link {
 }
 
 .blog-post-title {
-  font-family: 'Pirata One', cursive;
 
-  @include media-breakpoint-down(sm) {
-    font-size: 2rem;
-  }
 }
 
 .blog-post-body {
   color: darken($body-color, 10);
-  font-family: 'Roboto', sans-serif;
-  font-size: 1rem;
   max-width: 60rem;
   text-align: justify;
 }
@@ -140,7 +134,8 @@ form.link {
 
 .card-group-photos {
   .card {
-    background-color: $gray-light;
+    background-color: $gray-lightest;
+    border-width: 1px;
     border-radius: 0px;
     max-width: 200px;
     min-width: 200px;
@@ -160,7 +155,7 @@ form.link {
     }
 
     .card-text {
-      font-size: 0.8em;
+      font-size: 0.8rem;
       margin-top: 0.5rem;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -221,7 +216,7 @@ form.link {
 }
 
 .card .list-group a:hover {
-  background-color: $gray-dark;
+  background-color: $gray-lighter;
 }
 
 .card-header .img-avatar {
@@ -302,11 +297,11 @@ code {
 }
 
 .mod_message {
-  border-left: 3px solid $brand-warning;
+  border-left: 3px solid $brand-danger;
   padding-left: $spacer;
 
   h5 {
-    color: $brand-warning;
+    color: $brand-danger;
   }
 }
 
