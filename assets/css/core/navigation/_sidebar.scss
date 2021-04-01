@@ -1,7 +1,7 @@
 .sidebar {
   padding: $sidebar-padding;
   color: $sidebar-color;
-  background-image: url('/images/vert_leather1.jpg');
+  background: $sidebar-bg;
   @include borders($sidebar-borders);
 
   .sidebar-close {
