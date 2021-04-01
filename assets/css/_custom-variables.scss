@@ -47,9 +47,9 @@ $navbar-border: (
     )
 );
 $navbar-brand-width:                240px;
-$navbar-brand-bg:                   $gray-dark;
-$navbar-brand-logo:                 url('/images/logo_nostalgia.png');
-$navbar-brand-logo-size:            70px auto;
+$navbar-brand-bg:                   $gray-lighter;
+$navbar-brand-logo:                 url('/images/logo.png');
+$navbar-brand-logo-size:            130px auto;
 $navbar-brand-border: (
     bottom: (
         size:                       1px,
@@ -78,20 +78,20 @@ $sidebar-borders:                   none;
 
 // Sidebar Navigation
 
-$sidebar-nav-color:                 $sidebar-color;
+$sidebar-nav-color:                 $gray-lightest;
 $sidebar-nav-title-padding-y:       .95rem;
 $sidebar-nav-title-padding-x:       1rem;
-$sidebar-nav-title-color:           $sidebar-color;
+$sidebar-nav-title-color:           $gray-lightest;
 $sidebar-nav-link-padding-y:        .75rem;
 $sidebar-nav-link-padding-x:        1rem;
-$sidebar-nav-link-color:            $sidebar-color;
+$sidebar-nav-link-color:            $gray-lightest;
 $sidebar-nav-link-bg:               transparent;
-$sidebar-nav-link-icon-color:       $sidebar-color;
+$sidebar-nav-link-icon-color:       $gray-lightest;
 
 $sidebar-nav-link-borders:          0;
-$sidebar-nav-link-hover-color:      #000;
-$sidebar-nav-link-hover-bg:         $gray-lightest;
-$sidebar-nav-link-hover-icon-color: #000 !important;
+$sidebar-nav-link-hover-color:      #fff;
+$sidebar-nav-link-hover-bg:         $brand-primary;
+$sidebar-nav-link-hover-icon-color: #fff !important;
 
 $sidebar-nav-link-hover-borders:    0;
 $sidebar-nav-link-active-color:     #fff;

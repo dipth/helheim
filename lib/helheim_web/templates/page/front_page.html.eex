@@ -2,7 +2,7 @@
   <div class="card-block">
     <h5 class="mb-1 d-flex justify-content-between">
       <%= gettext "Recently logged in users" %>
-      <%= link gettext("Show All"), to: public_profile_path(@conn, :index), class: "mb-0" %>
+      <%= link gettext("Show All"), to: public_profile_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
     </h5>
     <div class="avatar-list">
       <%= for user <- @newest_users do %>
@@ -26,7 +26,7 @@
     <div class="card-block">
       <h5 class="mb-1 d-flex justify-content-between">
         <%= gettext "Newest Blogs" %>
-        <%= link gettext("Show All"), to: blog_post_path(@conn, :index), class: "mb-0" %>
+        <%= link gettext("Show All"), to: blog_post_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
       </h5>
       <%= for blog_post <- @newest_blog_posts do %>
         <%= render HelheimWeb.BlogPostView, "list_entry.html", conn: @conn, blog_post: blog_post %>
@@ -38,7 +38,7 @@
     <div class="card-block">
       <h5 class="mb-1 d-flex justify-content-between">
         <%= gettext "Newest Forum Posts" %>
-        <%= link gettext("Show All"), to: forum_path(@conn, :index), class: "mb-0" %>
+        <%= link gettext("Show All"), to: forum_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
       </h5>
       <div class="list-group mb-1">
         <%= for forum_topic <- @newest_forum_topics do %>
@@ -52,7 +52,7 @@
     <div class="card-block">
       <h5 class="mb-1 d-flex justify-content-between">
         <%= gettext "Events" %>
-        <%= link gettext("Show All"), to: calendar_event_path(@conn, :index), class: "mb-0" %>
+        <%= link gettext("Show All"), to: calendar_event_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
       </h5>
       <%= for calendar_event <- @upcoming_events do %>
         <%= render HelheimWeb.CalendarEventView, "_list_entry_card.html", conn: @conn,
@@ -79,7 +79,7 @@
     <div class="card-block">
       <h5 class="mb-0 d-flex justify-content-between">
         <%= gettext "Newest Photos" %>
-        <%= link gettext("Show All"), to: photo_path(@conn, :index), class: "mb-0" %>
+        <%= link gettext("Show All"), to: photo_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
       </h5>
       <div class="card-group card-group-photos">
         <%= for photo <- @newest_photos do %>
