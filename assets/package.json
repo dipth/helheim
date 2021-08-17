@@ -6,7 +6,7 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "jquery": "~3.4.1",
+    "jquery": "~3.5.0",
     "dragula": "^3.7.2",
     "favico.js": "^0.3.10",
     "flatpickr": "^4.6.3",
