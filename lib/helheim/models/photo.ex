@@ -122,6 +122,12 @@ defmodule Helheim.Photo do
     where: pa.visibility != "private"
   end
 
+  def not_from_ignoree(query, ignoree_ids) do
+    from p in query,
+    join: pa in Helheim.PhotoAlbum, on: pa.id == p.photo_album_id,
+    where: pa.user_id not in ^ignoree_ids
+  end
+
   def by(query, user) do
     from p in query,
     join: pa in Helheim.PhotoAlbum, on: pa.id == p.photo_album_id,

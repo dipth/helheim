@@ -109,6 +109,24 @@ defmodule HelheimWeb.PhotoControllerTest do
       conn        = get conn, "/photos"
       refute conn.resp_body =~ photo.title
     end
+
+    test "does not show photos from users that are ignored by the current user", %{conn: conn, user: user} do
+      other_user = insert(:user)
+      photo_album = insert(:photo_album, user: other_user)
+      photo = insert(:photo, photo_album: photo_album, title: "Ignored user photo")
+      insert(:ignore, ignorer: user, ignoree: other_user)
+      conn        = get conn, "/photos"
+      refute conn.resp_body =~ photo.title
+    end
+
+    test "shows photos of from users that the current user is ignored by", %{conn: conn, user: user} do
+      other_user = insert(:user)
+      photo_album = insert(:photo_album, user: other_user)
+      photo = insert(:photo, photo_album: photo_album, title: "Ignored user photo")
+      insert(:ignore, ignorer: other_user, ignoree: user)
+      conn        = get conn, "/photos"
+      assert conn.resp_body =~ photo.title
+    end
   end
 
   describe "index/2 when not signed in" do

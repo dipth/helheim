@@ -26,6 +26,7 @@ defmodule HelheimWeb.BlogPostController do
       |> BlogPost.published
       |> BlogPost.newest
       |> BlogPost.visible_by(current_resource(conn))
+      |> BlogPost.not_from_ignoree(conn.assigns[:ignoree_ids])
       |> BlogPost.not_private
       |> preload(:user)
       |> Repo.paginate(page: sanitized_page(params["page"]))

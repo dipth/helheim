@@ -49,7 +49,7 @@ defmodule Helheim.BlogPost do
     end
   end
 
-  defp not_from_ignoree(query, ignoree_ids) do
+  def not_from_ignoree(query, ignoree_ids) do
     from p in query,
     where: p.user_id not in ^ignoree_ids
   end
