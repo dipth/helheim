@@ -203,6 +203,22 @@ defmodule HelheimWeb.BlogPostControllerTest do
       conn = get conn, "/blog_posts"
       refute conn.resp_body =~ blog_post.title
     end
+
+    test "does not show blog posts from users that are ignored by the current user", %{conn: conn, user: user} do
+      other_user = insert(:user)
+      blog_post = insert(:blog_post, user: other_user)
+      insert(:ignore, ignorer: user, ignoree: other_user)
+      conn = get conn, "/blog_posts"
+      refute conn.resp_body =~ blog_post.title
+    end
+
+    test "shows blog posts from users that are ignoring the current user", %{conn: conn, user: user} do
+      other_user = insert(:user)
+      blog_post = insert(:blog_post, user: other_user)
+      insert(:ignore, ignorer: other_user, ignoree: user)
+      conn = get conn, "/blog_posts"
+      assert conn.resp_body =~ blog_post.title
+    end
   end
 
   describe "index/2 for all users when not signed in" do

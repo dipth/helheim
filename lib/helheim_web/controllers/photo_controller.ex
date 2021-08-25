@@ -15,6 +15,7 @@ defmodule HelheimWeb.PhotoController do
              |> Photo.visible_by(current_resource(conn))
              |> Photo.newest
              |> Photo.not_private
+             |> Photo.not_from_ignoree(conn.assigns[:ignoree_ids])
              |> preload(photo_album: :user)
              |> Repo.paginate(page: sanitized_page(params["page"]))
     render(conn, "index.html", photos: photos)
