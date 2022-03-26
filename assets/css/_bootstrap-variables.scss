@@ -4,13 +4,13 @@
 //
 // Grayscale and brand colors for use across Bootstrap.
 
-$gray-dark:                 #111111;
-$gray:                      #1A1A1A;
-$gray-light:                #282828;
-$gray-lighter:              #383838;
-$gray-lightest:             #505050;
+$gray-dark:                 #2A6B84; // sidebar
+$gray:                      #1A1A1A; // panel border
+$gray-light:                #296984; // navbar bg, label bg, thumbnail bg
+$gray-lighter:              #1D495A; // logo bg, list-item left border, forum list bg
+$gray-lightest:             #FFFFFF; // panel bg
 
-$brand-primary:             #fd643e;
+$brand-primary:             #E16745;
 $brand-success:             #25ef8e;
 $brand-info:                #25cbef;
 $brand-warning:             #efe325;
@@ -20,7 +20,7 @@ $brand-danger:              #ef2525;
 //
 // Quickly modify global styling by enabling or disabling optional features.
 
-$enable-rounded:            true;
+$enable-rounded:            false;
 $enable-transitions:        true;
 
 // Spacing
@@ -62,8 +62,8 @@ $spacers: (
 //
 // Settings for the `<body>` element.
 
-$body-bg:                    #080808;
-$body-color:                 #d3d3d3;
+$body-bg:                    #E16745;
+$body-color:                 #000;
 
 // Typography
 //
@@ -73,8 +73,10 @@ $font-size-base:             0.875rem;
 
 // Breadcrumbs
 
-$breadcrumb-padding-x:          2rem;
-$breadcrumb-bg:                 transparent;
+$breadcrumb-padding-x:          10px;
+$breadcrumb-padding-y:          0px;
+$breadcrumb-bg:                 $gray-light;
+$breadcrumb-divider-color:      $gray-lightest;
 
 // Cards
 
@@ -90,7 +92,8 @@ $dropdown-divider-bg:            $gray-lightest;
 
 // Inputs
 
-$input-bg: $body-color;
+$input-bg: $gray-lightest;
+$input-border-color: $body-color;
 
 // Text
 
@@ -102,22 +105,23 @@ $thumbnail-border-width: 2px;
 
 // Pagination
 
-$pagination-bg: $body-color;
+$pagination-bg: $gray-lightest;
 $pagination-color: $gray-dark;
 $pagination-border-color: $body-color;
 
 $pagination-active-color: $brand-primary;
-$pagination-active-bg: $gray-light;
+$pagination-active-bg: $gray-lightest;
 $pagination-active-border: $gray-light;
 
 $pagination-hover-bg: $brand-primary;
 $pagination-hover-color: $body-color;
-$pagination-hover-border: $brand-primary;
+$pagination-hover-border: $body-color;
 
 // List-groups
 
-$list-group-bg: $gray-lighter;
+$list-group-bg: $gray-lightest;
 $list-group-link-color: $body-color;
+$list-group-border-color: $body-color;
 
 // Breadcrumbs
 

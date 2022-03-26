@@ -29,7 +29,7 @@
 
   <%= form_for Helheim.Comment.changeset(%Helheim.Comment{}), @post_path, fn f -> %>
     <div class="card">
-      <div class="card-header">
+      <div class="card-title">
         <%= label f, :body, gettext("Write new comment:"), class: "control-label mb-0" %>
       </div>
       <div class="card-block">

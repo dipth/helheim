@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-header">
+  <div class="card-title">
     <strong><%= @forum_category.title %></strong>
     <br><small><%= @forum_category.description %></small>
   </div>

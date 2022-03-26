@@ -4,7 +4,7 @@
 </ol>
 
 <div class="card" id="search-outer">
-  <div class="card-header">
+  <div class="card-title">
     <a data-toggle="collapse" data-parent="#search-outer" href="#search-body">
       <%= gettext "Search" %>
     </a>

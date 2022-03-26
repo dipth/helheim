@@ -4,49 +4,53 @@
   <li class="breadcrumb-item active"><%= @blog_post.title %></li>
 </ol>
 
-<h1 class="display-4 blog-post-title"><%= @blog_post.title %></h1>
-<%= unless @blog_post.published do %>
-  <div class="alert alert-info">
-    <strong><%= gettext "This blog post is not published!" %></strong>
-    <%= gettext "Only you can currently view this blog post. Edit it to publish it." %>
-  </div>
-<% end %>
-<div class="d-flex w-100 justify-content-between">
-  <div class="align-self-center">
-    <%= visibility_badge @blog_post %>
-    <%= visitor_count_badge @conn, @blog_post %>
-    <%= edited_label(@blog_post) %>
-    <small>
-      <i class="fa fa-clock-o"></i>
-      <%= time_ago_in_words @blog_post.updated_at %>
-    </small>
-  </div>
-  <div>
-    <%= if me?(@conn, @user) do %>
-      <%= link to: blog_post_path(@conn, :edit, @blog_post), class: "btn btn-sm btn-primary mr-1" do %>
-        <i class="fa fa-pencil"></i>
-        <span class="hidden-sm-down"><%= gettext "Edit" %></span>
-      <% end %>
-      <%= link to: blog_post_path(@conn, :delete, @blog_post), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-sm float-right" do %>
-        <i class="fa fa-trash"></i>
-        <span class="hidden-sm-down"><%= gettext "Delete" %></span>
-      <% end %>
+<div class="card">
+  <div class="card-block">
+    <h1 class="display-4 blog-post-title"><%= @blog_post.title %></h1>
+    <%= unless @blog_post.published do %>
+      <div class="alert alert-info">
+        <strong><%= gettext "This blog post is not published!" %></strong>
+        <%= gettext "Only you can currently view this blog post. Edit it to publish it." %>
+      </div>
     <% end %>
+    <div class="d-flex w-100 justify-content-between">
+      <div class="align-self-center">
+        <%= visibility_badge @blog_post %>
+        <%= visitor_count_badge @conn, @blog_post %>
+        <%= edited_label(@blog_post) %>
+        <small>
+          <i class="fa fa-clock-o"></i>
+          <%= time_ago_in_words @blog_post.updated_at %>
+        </small>
+      </div>
+      <div>
+        <%= if me?(@conn, @user) do %>
+          <%= link to: blog_post_path(@conn, :edit, @blog_post), class: "btn btn-sm btn-primary mr-1" do %>
+            <i class="fa fa-pencil"></i>
+            <span class="hidden-sm-down"><%= gettext "Edit" %></span>
+          <% end %>
+          <%= link to: blog_post_path(@conn, :delete, @blog_post), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-sm float-right" do %>
+            <i class="fa fa-trash"></i>
+            <span class="hidden-sm-down"><%= gettext "Delete" %></span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <hr>
+
+    <%= if @blog_post.mod_message do %>
+      <div class="alert alert-info">
+        <%= raw @blog_post.mod_message %>
+        <strong><%= gettext "Kind regards" %></strong>,<br>
+        <%= gettext "The mod-team" %>
+      </div>
+    <% end %>
+
+    <div class="embeds blog-post-body mentionable">
+      <%= HelheimWeb.EmbedHelpers.raw_replace_urls(@blog_post.body) %>
+    </div>
   </div>
-</div>
-
-<hr>
-
-<%= if @blog_post.mod_message do %>
-  <div class="alert alert-info">
-    <%= raw @blog_post.mod_message %>
-    <strong><%= gettext "Kind regards" %></strong>,<br>
-    <%= gettext "The mod-team" %>
-  </div>
-<% end %>
-
-<div class="embeds blog-post-body mentionable">
-  <%= HelheimWeb.EmbedHelpers.raw_replace_urls(@blog_post.body) %>
 </div>
 
 <%= unless @blog_post.hide_comments do %>

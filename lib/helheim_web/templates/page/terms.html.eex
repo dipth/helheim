@@ -1,11 +1,14 @@
-<div class="text-center mb-2">
-  <hr>
-  <h1 class="mb-2"><%= gettext "Terms and rules" %></h1>
+<div class="card">
+  <div class="card-block">
+    <div class="text-center mb-2">
+      <h1 class="mb-2"><%= gettext "Terms and rules" %></h1>
 
-  <%= if @term do %>
-    <%= raw @term.body %>
-  <% else %>
-    <p><%= gettext "There doesn't seem to be any terms or rules written yet..."%></p>
-    <p><%= gettext "However, that doesn't meant that you should be an dick, so behave!"%></p>
-  <% end %>
+      <%= if @term do %>
+        <%= raw @term.body %>
+      <% else %>
+        <p><%= gettext "There doesn't seem to be any terms or rules written yet..."%></p>
+        <p><%= gettext "However, that doesn't meant that you should be an dick, so behave!"%></p>
+      <% end %>
+    </div>
+  </div>
 </div>
