@@ -1,24 +1,31 @@
-<div class="d-flex w-100 justify-content-between">
-  <div>
-    <%= avatar_with_username @forum_topic.user, true %>
-    <h4 class="mb-1 mt-1">
+<div class="card">
+  <div class="card-title">
+    <div class="d-flex w-100 justify-content-between">
+      <div>
+        <%= avatar_with_username @forum_topic.user, true %>
+
+      </div>
+      <div>
+        <span class="badge badge-default">
+          <%= time_ago_in_words @forum_topic.inserted_at %>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="card-block">
+    <h4 class="mb-1">
       <%= if @forum_topic.pinned do %>
         <i class="fa fa-fw fa-thumb-tack"></i>
       <% end %>
       <%= @forum_topic.title %>
     </h4>
-  </div>
-  <div>
-    <span class="badge badge-default">
-      <%= time_ago_in_words @forum_topic.inserted_at %>
-    </span>
+
+    <div class="embeds mentionable">
+      <%= HelheimWeb.EmbedHelpers.replace_urls(@forum_topic.body) %>
+    </div>
+    <%= if ForumTopic.editable_by?(@forum_topic, current_resource(@conn)) do %>
+      <%= link gettext("Edit"), to: forum_forum_topic_path(@conn, :edit, @forum, @forum_topic), class: "btn btn-outline-secondary btn-sm mt-1" %>
+      <small><%= gettext "Only possible for up to %{minutes} minutes after posting...", minutes: ForumTopic.edit_timelimit_in_minutes %></small>
+    <% end %>
   </div>
 </div>
-<div class="embeds mentionable">
-  <%= HelheimWeb.EmbedHelpers.replace_urls(@forum_topic.body) %>
-</div>
-<%= if ForumTopic.editable_by?(@forum_topic, current_resource(@conn)) do %>
-  <%= link gettext("Edit"), to: forum_forum_topic_path(@conn, :edit, @forum, @forum_topic), class: "btn btn-outline-secondary btn-sm" %>
-  <small><%= gettext "Only possible for up to %{minutes} minutes after posting...", minutes: ForumTopic.edit_timelimit_in_minutes %></small>
-<% end %>
-<hr>

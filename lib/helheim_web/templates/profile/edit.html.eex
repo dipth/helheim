@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <%= form_for @changeset, profile_path(@conn, :update), [multipart: true], fn f -> %>
       <div class="card">
-        <div class="card-header">
+        <div class="card-title">
           <strong><%= gettext "Profile Settings" %></strong>
         </div>
         <div class="card-block p-2">

@@ -1,13 +1,13 @@
 <div class="card">
-  <div class="card-block">
+  <div class="card-title">
     <div class="d-flex w-100 justify-content-between">
-      <h4 class="card-title">
-        <%= link @blog_post.title, to: public_profile_blog_post_path(@conn, :show, @user, @blog_post) %>
-      </h4>
+      <%= link @blog_post.title, to: public_profile_blog_post_path(@conn, :show, @user, @blog_post) %>
       <div class="hidden-sm-down">
         <%= username_with_avatar @user %>
       </div>
     </div>
+  </div>
+  <div class="card-block">
     <%= unless @blog_post.published do %>
       <span class="badge badge-primary"><%= gettext "Draft" %></span>
     <% end %>

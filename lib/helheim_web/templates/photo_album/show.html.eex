@@ -29,7 +29,7 @@
 
 <%= if me?(@conn, @user) do %>
   <div class="card">
-    <div class="card-header">
+    <div class="card-title">
       <%= gettext "Upload Photos" %>
     </div>
     <div class="card-block">

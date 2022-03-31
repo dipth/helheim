@@ -3,24 +3,28 @@
   <li class="breadcrumb-item active"><%= gettext "User verification" %></li>
 </ol>
 
-<h1><%= gettext "What is a verified user?" %></h1>
-<p><%= gettext "In short, a verified user is a user that an admin has deemed as not being a fake or empty profile." %></p>
-<p><%= gettext "As a general rule, profiles will never be verified before at least 24 hours has passed since their sign up." %></p>
-<p><%= gettext "Some of the criteria that is used for determining whether a user should be verified includes, but is not limited to:" %></p>
-<ul>
-  <li><%= gettext "Does the user have a profile photo?" %></li>
-  <li><%= gettext "Did the user sign up with a genuine name and e-mail address?" %></li>
-  <li><%= gettext "Does the user have a constructive and interesting profile text?" %></li>
-  <li><%= gettext "Has the user engaged positively with the community?" %></li>
-  <li><%= gettext "Has the user demonstrated an ability to understand and follow the rules of the site?" %></li>
-</ul>
-<p><%= gettext "Being a verified user gives you a special badge on your profile and will allow you to access certain blog posts and photos that users have marked as only being available for verified users." %></p>
+<div class="card">
+  <div class="card-block">
+    <h1><%= gettext "What is a verified user?" %></h1>
+    <p><%= gettext "In short, a verified user is a user that an admin has deemed as not being a fake or empty profile." %></p>
+    <p><%= gettext "As a general rule, profiles will never be verified before at least 24 hours has passed since their sign up." %></p>
+    <p><%= gettext "Some of the criteria that is used for determining whether a user should be verified includes, but is not limited to:" %></p>
+    <ul>
+      <li><%= gettext "Does the user have a profile photo?" %></li>
+      <li><%= gettext "Did the user sign up with a genuine name and e-mail address?" %></li>
+      <li><%= gettext "Does the user have a constructive and interesting profile text?" %></li>
+      <li><%= gettext "Has the user engaged positively with the community?" %></li>
+      <li><%= gettext "Has the user demonstrated an ability to understand and follow the rules of the site?" %></li>
+    </ul>
+    <p><%= gettext "Being a verified user gives you a special badge on your profile and will allow you to access certain blog posts and photos that users have marked as only being available for verified users." %></p>
 
-<%= if @verified do %>
-  <h3><%= gettext "You are verified!" %></h3>
-  <p><%= gettext "It appears that you have already been verified. But please be aware that your verification can be revoked at any time should you no longer meet the criteria for verification." %></p>
-<% else %>
-  <h3><%= gettext "You are not verified" %></h3>
-  <p><%= gettext "This can either mean that an admin has not yet had the time to decide on your verification state, or it has been decided that you do not meet the criteria for verification." %></p>
-  <p><%= gettext "If you feel that you do meet the criteria and should be verified, then feel free to contact any of the admins via a private message." %></p>
-<% end %>
+    <%= if @verified do %>
+      <h3><%= gettext "You are verified!" %></h3>
+      <p><%= gettext "It appears that you have already been verified. But please be aware that your verification can be revoked at any time should you no longer meet the criteria for verification." %></p>
+    <% else %>
+      <h3><%= gettext "You are not verified" %></h3>
+      <p><%= gettext "This can either mean that an admin has not yet had the time to decide on your verification state, or it has been decided that you do not meet the criteria for verification." %></p>
+      <p><%= gettext "If you feel that you do meet the criteria and should be verified, then feel free to contact any of the admins via a private message." %></p>
+    <% end %>
+  </div>
+</div>

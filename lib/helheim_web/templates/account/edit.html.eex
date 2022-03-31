@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <%= form_for @changeset, account_path(@conn, :update), fn f -> %>
       <div class="card">
-        <div class="card-header">
+        <div class="card-title">
           <strong><%= gettext "Account Settings" %></strong>
         </div>
         <div class="card-block p-2">
@@ -81,7 +81,7 @@
     <% end %>
 
     <div class="card">
-      <div class="card-header">
+      <div class="card-title">
         <strong><%= gettext "Delete Account" %></strong>
       </div>
       <div class="card-block p-2">
