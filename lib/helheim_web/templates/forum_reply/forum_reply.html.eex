@@ -1,39 +1,35 @@
-<div class="card">
-  <div class="card-title">
-    <div class="d-flex w-100 justify-content-between">
-      <div>
-        <%= if Enum.member?(@conn.assigns[:ignoree_ids], @forum_reply.user_id) do %>
-          <span class="badge badge-default"><%= gettext("ignored user") %></span>
-        <% else %>
-          <%= avatar_with_username @forum_reply.user, true %>
-        <% end %>
-      </div>
-      <div>
-        <small>
-          <span class="badge badge-default">
-            <%= time_ago_in_words @forum_reply.inserted_at %>
-          </span>
-        </small>
-      </div>
-    </div>
-  </div>
-  <div class="card-block">
-    <div class="embeds mentionable<%= if @forum_reply.notice do %> mod_message<% end %>">
-      <%= if Enum.member?(@conn.assigns[:ignoree_ids], @forum_reply.user_id) do %>
-        <p>
-          <small><%= gettext("This content is hidden because of one of your ignores") %></small>
-        </p>
-      <% else %>
-        <%= if @forum_reply.notice do %>
-          <h5 class="alert-heading"><%= gettext "Moderator notice" %></h5>
-        <% end %>
-        <%= HelheimWeb.EmbedHelpers.replace_urls(@forum_reply.body) %>
-      <% end %>
-    </div>
-
-    <%= if ForumReply.editable_by?(@forum_reply, current_resource(@conn)) do %>
-      <%= link gettext("Edit"), to: forum_forum_topic_forum_reply_path(@conn, :edit, @forum, @forum_topic, @forum_reply), class: "btn btn-outline-secondary btn-sm mt-1" %>
-      <small><%= gettext "Only possible for up to %{minutes} minutes after posting...", minutes: ForumReply.edit_timelimit_in_minutes %></small>
+<div class="d-flex w-100 justify-content-between mb-1">
+  <div>
+    <%= if Enum.member?(@conn.assigns[:ignoree_ids], @forum_reply.user_id) do %>
+      <span class="badge badge-default"><%= gettext("ignored user") %></span>
+    <% else %>
+      <%= avatar_with_username @forum_reply.user, true %>
     <% end %>
   </div>
+  <div>
+    <small>
+      <span class="badge badge-default">
+        <%= time_ago_in_words @forum_reply.inserted_at %>
+      </span>
+    </small>
+  </div>
 </div>
+
+<div class="embeds mentionable<%= if @forum_reply.notice do %> mod_message<% end %>">
+  <%= if Enum.member?(@conn.assigns[:ignoree_ids], @forum_reply.user_id) do %>
+    <p>
+      <small><%= gettext("This content is hidden because of one of your ignores") %></small>
+    </p>
+  <% else %>
+    <%= if @forum_reply.notice do %>
+      <h5 class="alert-heading"><%= gettext "Moderator notice" %></h5>
+    <% end %>
+    <%= HelheimWeb.EmbedHelpers.replace_urls(@forum_reply.body) %>
+  <% end %>
+</div>
+
+<%= if ForumReply.editable_by?(@forum_reply, current_resource(@conn)) do %>
+  <%= link gettext("Edit"), to: forum_forum_topic_forum_reply_path(@conn, :edit, @forum, @forum_topic, @forum_reply), class: "btn btn-outline-secondary btn-sm" %>
+  <small><%= gettext "Only possible for up to %{minutes} minutes after posting...", minutes: ForumReply.edit_timelimit_in_minutes %></small>
+<% end %>
+<hr>

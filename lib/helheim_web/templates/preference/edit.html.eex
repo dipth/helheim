@@ -2,7 +2,7 @@
 
 <%= form_for @changeset, preference_path(@conn, :update), [id: "preferences-form"], fn f -> %>
   <div class="card">
-    <div class="card-title">
+    <div class="card-header">
       <%= gettext "Notifications" %>
     </div>
     <div class="card-block">

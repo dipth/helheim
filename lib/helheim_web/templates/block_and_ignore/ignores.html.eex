@@ -1,8 +1,6 @@
-<div class="card">
-  <div class="card-title">
-    <%= gettext "These are the users that you have ignored" %>:
-  </div>
+<div class="card card-dark">
   <div class="card-block">
+    <h4 class="card-title"><%= gettext "These are the users that you have ignored" %>:</h4>
     <p class="mb-2">
       <i class="fa fa-info-circle"></i>
       <%= gettext "Content from these users will be hidden from you throughout the site" %>

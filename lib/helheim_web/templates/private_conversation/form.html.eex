@@ -1,7 +1,7 @@
 <%= unless Helheim.Block.blocked?(@partner, @me) do %>
   <%= form_for Helheim.PrivateMessage.create_changeset(%Helheim.PrivateMessage{}, @me, @partner), private_conversation_message_path(@conn, :create, @partner), fn f -> %>
     <div class="card">
-      <div class="card-title">
+      <div class="card-header">
         <%= label f, :body, gettext("Write new message:"), class: "control-label mb-0" %>
       </div>
       <div class="card-block">

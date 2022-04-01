@@ -7,8 +7,8 @@
 </ol>
 
 <div class="card">
-  <div class="card-title">
-    <div class="d-flex w-100 justify-content-between">
+  <div class="card-header">
+    <div class="d-flex w-100 justify-content-between mb-1">
       <div>
         <%= @forum.forum_category.title %><br>
         <strong>
@@ -18,6 +18,12 @@
         <br><small><%= @forum.description %></small>
       </div>
       <div>
+        <%= unless Helheim.Forum.locked_for?(@forum, current_resource(@conn)) do %>
+          <%= link to: forum_forum_topic_path(@conn, :new, @forum), class: "btn btn-outline-success btn-sm mt-1" do %>
+            <i class="fa fa-plus"></i>
+            <span class="hidden-xs-down"><%= gettext "Create new topic" %></span>
+          <% end %>
+        <% end %>
         <%= if @forum.locked do %>
           <br>
           <span class="badge badge-primary">
@@ -29,13 +35,6 @@
     </div>
   </div>
   <div class="card-block">
-    <%= unless Helheim.Forum.locked_for?(@forum, current_resource(@conn)) do %>
-      <%= link to: forum_forum_topic_path(@conn, :new, @forum), class: "btn btn-outline-success btn-sm mb-1" do %>
-        <i class="fa fa-plus"></i>
-        <span class="hidden-xs-down"><%= gettext "Create new topic" %></span>
-      <% end %>
-    <% end %>
-
     <div class="list-group">
       <%= for forum_topic <- @forum_topics.entries do %>
         <%= render "forum_topic.html", conn: @conn, forum: @forum, forum_topic: forum_topic %>

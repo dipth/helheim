@@ -5,7 +5,7 @@
 
 <%= for forum_category <- @forum_categories do %>
   <div class="card">
-    <div class="card-title">
+    <div class="card-header">
       <div class="float-right">
         <%= link to: admin_forum_category_path(@conn, :edit, forum_category), class: "btn btn-sm btn-link" do %>
           <i class="fa fa-pencil"></i>

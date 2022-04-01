@@ -60,7 +60,7 @@
       <li class="nav-title"><%= gettext "You" %></li>
 
       <li class="nav-item">
-        <a class="nav-link" href="<%= profile_path(@conn, :show)%>"><i class="fa fa-id-card"></i> Min hule</a>
+        <a class="nav-link" href="<%= profile_path(@conn, :show)%>"><i class="fa fa-id-card"></i> <%= gettext("Your Profile") %></a>
       </li>
       <li class="nav-item">
         <%= link to: public_profile_comment_path(@conn, :index, current_resource(@conn)), class: "nav-link" do %>

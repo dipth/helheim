@@ -1,7 +1,6 @@
 <header class="app-header navbar">
   <button class="navbar-toggler mobile-sidebar-toggler hidden-lg-up" type="button">&#9776;</button>
   <a class="navbar-brand" href="<%= page_path(@conn, :front_page)%>"></a>
-  <%= img_tag static_path(@conn, "/images/bjarne#{:rand.uniform(5) - 1}.gif"), class: "bjarne", width: "56", height: "32" %>
   <ul class="nav navbar-nav hidden-md-down">
     <li class="nav-item">
       <a class="nav-link navbar-toggler sidebar-toggler" href="#">&#9776;</a>

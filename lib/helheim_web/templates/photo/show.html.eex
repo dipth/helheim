@@ -13,7 +13,7 @@
 <% end %>
 
 <div class="card">
-  <h5 class="card-title">
+  <h5 class="card-header">
     <span class="text-break-up"><%= @photo.title %></span>
   </h5>
   <div class="card-block text-center">

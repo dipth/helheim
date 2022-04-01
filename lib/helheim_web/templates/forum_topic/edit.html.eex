@@ -7,7 +7,7 @@
 </ol>
 
 <div class="card">
-  <div class="card-title">
+  <div class="card-header">
     <%= @forum.forum_category.title %><br>
     <strong>
       <i class="fa fa-angle-right"></i>

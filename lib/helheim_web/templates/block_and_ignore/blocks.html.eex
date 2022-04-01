@@ -1,8 +1,6 @@
-<div class="card">
-  <div class="card-title">
-    <%= gettext "These are the users that you have blocked" %>:
-  </div>
+<div class="card card-dark">
   <div class="card-block">
+    <h4 class="card-title"><%= gettext "These are the users that you have blocked" %>:</h4>
     <p class="mb-2">
       <i class="fa fa-info-circle"></i>
       <%= gettext "These users will be unable to see your profile, blog posts, photos or send you messages while blocked" %>
