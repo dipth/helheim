@@ -1,39 +1,34 @@
 <div class="comment" data-id="<%= @comment.id %>">
-  <div class="card">
-    <div class="card-title">
-      <div class="d-flex flex-row justify-content-between">
-        <div>
-          <%= if Enum.member?(@conn.assigns[:ignoree_ids], @comment.author_id) do %>
-            <span class="badge badge-default"><%= gettext("ignored user") %></span>
-          <% else %>
-            <%= avatar_with_username @comment.author, true %>
-          <% end %>
-        </div>
-        <div class="hidden-xs-down">
-          <small>
-            <%= time_ago_in_words @comment.inserted_at %>
-          </small>
-        </div>
-      </div>
-    </div>
-    <div class="card-block">
-      <div class="embeds mentionable<%= if @comment.notice do %> mod_message<% end %>">
-        <%= if Enum.member?(@conn.assigns[:ignoree_ids], @comment.author_id) do %>
-          <p>
-            <small><%= gettext("This content is hidden because of one of your ignores") %></small>
-          </p>
-        <% else %>
-          <%= if @comment.notice do %>
-            <h5 class="alert-heading"><%= gettext "Moderator notice" %></h5>
-          <% end %>
-          <%= HelheimWeb.EmbedHelpers.replace_urls(@comment.body) %>
-        <% end %>
-      </div>
-      <%= if Comment.editable_by?(@comment, current_resource(@conn)) do %>
-        <%= link gettext("Edit"), to: HelheimWeb.CommentView.edit_path(@conn, @comment, Comment.commentable(@comment)), class: "btn btn-outline-secondary btn-sm mt-1" %>
-        <small><%= gettext "Only possible for up to %{minutes} minutes after posting...", minutes: Comment.edit_timelimit_in_minutes %></small><br>
+  <div class="d-flex flex-row justify-content-between mb-1">
+    <div>
+      <%= if Enum.member?(@conn.assigns[:ignoree_ids], @comment.author_id) do %>
+        <span class="badge badge-default"><%= gettext("ignored user") %></span>
+      <% else %>
+        <%= avatar_with_username @comment.author, true %>
       <% end %>
-      <%= HelheimWeb.CommentView.delete_comment_button(@conn, @comment) %>
+    </div>
+    <div class="hidden-xs-down">
+      <small>
+        <%= time_ago_in_words @comment.inserted_at %>
+      </small>
     </div>
   </div>
+  <div class="embeds mentionable<%= if @comment.notice do %> mod_message<% end %>">
+    <%= if Enum.member?(@conn.assigns[:ignoree_ids], @comment.author_id) do %>
+      <p>
+        <small><%= gettext("This content is hidden because of one of your ignores") %></small>
+      </p>
+    <% else %>
+      <%= if @comment.notice do %>
+        <h5 class="alert-heading"><%= gettext "Moderator notice" %></h5>
+      <% end %>
+      <%= HelheimWeb.EmbedHelpers.replace_urls(@comment.body) %>
+    <% end %>
+  </div>
+  <%= if Comment.editable_by?(@comment, current_resource(@conn)) do %>
+    <%= link gettext("Edit"), to: HelheimWeb.CommentView.edit_path(@conn, @comment, Comment.commentable(@comment)), class: "btn btn-outline-secondary btn-sm" %>
+    <small><%= gettext "Only possible for up to %{minutes} minutes after posting...", minutes: Comment.edit_timelimit_in_minutes %></small><br>
+  <% end %>
+  <%= HelheimWeb.CommentView.delete_comment_button(@conn, @comment) %>
+  <hr>
 </div>

@@ -1,13 +1,8 @@
 .breadcrumb {
   padding: $breadcrumb-padding-y $breadcrumb-padding-x;
-  margin-top: $spacer-y;
   margin-bottom: $spacer-y;
   list-style: none;
   background-color: $breadcrumb-bg;
-  border: 1px solid #000;
-  text-transform: uppercase;
-  font-size: 10px;
-  font-weight: bold;
   @include border-radius($border-radius);
   @include clearfix;
 }
@@ -38,6 +33,6 @@
   }
 
   &.active {
-    color: $gray-lightest;
+    color: $breadcrumb-active-color;
   }
 }

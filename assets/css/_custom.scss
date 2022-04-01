@@ -12,7 +12,7 @@ body:not(.top-nav) {
 }
 
 body.app-signed-in {
-  // background-image: url('/images/body_bg_02.png');
+  background-image: url('/images/body_bg_02.png');
 }
 
 body.app-signed-out {
@@ -114,19 +114,10 @@ form.link {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
-    background-color: $gray-light;
-    border-top: 2px solid #4A8BA4;
-    border-bottom: 2px solid #073c50;
   }
 
   .message-content {
     width: 100%;
-    background-color: $gray-lightest;
-    border: 1px solid $body-color;
-  }
-
-  .message-body {
-    padding: 10px;
   }
 
   .message-timestamp {
@@ -317,19 +308,6 @@ code {
   h5 {
     color: $brand-warning;
   }
-}
-
-img.bjarne {
-  margin-left: -56px;
-  margin-top: 22px;
-}
-
-.list-group a:hover {
-  background-color: $brand-primary !important;
-}
-
-table {
-  background-color: $gray-lightest;
 }
 
 @import "calendar_events";

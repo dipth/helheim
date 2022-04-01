@@ -19,24 +19,7 @@
 }
 
 .card-title {
-  margin-bottom: 0px;
-  background-color: $gray-light;
-  text-transform: uppercase;
-  font-size: 10px;
-  font-weight: bold;
-  padding-left: 10px;
-  border-top: 2px solid #4A8BA4;
-  border-bottom: 2px solid #073c50;
-  color: $gray-lightest;
-
-  a {
-    color: $gray-lightest;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: none;
-  }
+  margin-bottom: $card-spacer-y;
 }
 
 .card-subtitle {
