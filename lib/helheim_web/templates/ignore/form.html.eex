@@ -6,7 +6,7 @@
     </p>
     <div class="form-group <%= if f.errors[:ignoree_id] do 'has-danger' end %>">
       <%= label f, :ignoree_id, gettext("Who?"), class: "control-label" %>
-      <%= select f, :ignoree_id, Enum.map(@users, &{&1.username, &1.id}), prompt: '', class: "form-control" %>
+      <%= select f, :ignoree_id, Enum.map(@users, &[key: &1.username, value: &1.id]), prompt: [key: '', value: nil], class: "form-control" %>
       <%= if message = f.errors[:ignoree_id] do %>
         <div class="form-control-feedback"><%= translate_error(message) %></div>
       <% end %>

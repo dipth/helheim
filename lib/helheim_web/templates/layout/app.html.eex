@@ -13,7 +13,7 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">
 
-    <meta name='env' content="<%= Mix.env %>">
+    <meta name='env' content="<%= Application.fetch_env!(:helheim, :env) %>">
     <meta name='user_id' content="<%= Guardian.Plug.current_resource(@conn).id %>">
     <meta name='guardian_token' content="<%= Guardian.Plug.current_token(@conn) %>">
     <meta name='notification_sound' content="<%= static_path(@conn, Helheim.NotificationSounds.file(current_resource(@conn).notification_sound)) %>">
@@ -40,7 +40,7 @@
       <main class="main">
         <div class="container-fluid">
           <%= render "alerts.html", conn: @conn %>
-          <%= render @view_module, @view_template, assigns %>
+          <%= @inner_content %>
         </div>
         <!-- /.conainer-fluid -->
       </main>

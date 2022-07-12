@@ -153,7 +153,7 @@ defmodule HelheimWeb.Router do
   #   pipe_through :api
   # end
 
-  if Mix.env == :dev do
+  if Application.fetch_env!(:helheim, :env) == :dev do
     forward "/sent_emails", Bamboo.SentEmailViewerPlug
   end
 end
