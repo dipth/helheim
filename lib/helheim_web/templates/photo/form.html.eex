@@ -8,7 +8,7 @@
       <div class="col">
         <div class="form-group <%= if f.errors[:photo_album_id] do 'has-danger' end %>">
           <%= label f, :photo_album_id, gettext("Photo Album"), class: "control-label" %>
-          <%= select f, :photo_album_id, Enum.map(@photo_albums, &{&1.title, &1.id}), class: "form-control" %>
+          <%= select f, :photo_album_id, Enum.map(@photo_albums, &[key: &1.title, value: &1.id]), class: "form-control" %>
           <%= if message = f.errors[:photo_album_id] do %>
             <div class="form-control-feedback"><%= translate_error(message) %></div>
           <% end %>

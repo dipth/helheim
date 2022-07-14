@@ -4,19 +4,21 @@
 
 ## Requirements:
 
-  * `Erlang` 21.3.8.18
-  * `Elixir` 1.11.3 OTP 21
-  * `Node.js` 13.5.0
+  * `Erlang` 25.0.2
+  * `Elixir` 1.13.4-otp-25
+  * `Python` 2.7.18
+  * `Node.js` 18.4.0
   * `yarn` 1.21.1
   * `Imagemagick` 7.0.9-12
   * `PostgreSQL` 12.1
   * `Chromedriver` 2.36
 
-The recommended way to install Erlang, Elixir and Node.js is through the modular version manager asdf:
+The recommended way to install Erlang, Elixir, Python and Node.js is through the modular version manager asdf:
 
 - https://github.com/asdf-vm/asdf
 - https://github.com/asdf-vm/asdf-erlang
 - https://github.com/asdf-vm/asdf-elixir
+- https://github.com/danhper/asdf-python
 - https://github.com/asdf-vm/asdf-nodejs
 
 The remaining can be installed with [Homebrew](https://brew.sh/).

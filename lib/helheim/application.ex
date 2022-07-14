@@ -4,18 +4,18 @@ defmodule Helheim.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
-    import Supervisor.Spec
-
     # Define workers and child supervisors to be supervised
     children = [
+      # Start the PubSub system
+      {Phoenix.PubSub, name: Helheim.PubSub},
       # Start the Ecto repository
-      supervisor(Helheim.Repo, []),
+      Helheim.Repo,
       # Start the Telemetry
-      supervisor(HelheimWeb.Telemetry, [nil]),
+      HelheimWeb.Telemetry,
       # Start the endpoint when the application starts
-      supervisor(HelheimWeb.Endpoint, []),
+      HelheimWeb.Endpoint,
       # Start the presence
-      supervisor(HelheimWeb.Presence, []),
+      HelheimWeb.Presence,
       # Start your own worker by calling: Helheim.Worker.start_link(arg1, arg2, arg3)
       # worker(Helheim.Worker, [arg1, arg2, arg3]),
     ]
