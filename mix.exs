@@ -67,9 +67,9 @@ defmodule Helheim.Mixfile do
       # Used by arc
       {:hackney, "~> 1.9", override: true},
       # Used by arc
-      {:ex_aws, "~> 2.0"},
+      {:ex_aws, "~> 2.3.3"},
       # Used by arc
-      {:ex_aws_s3, "~> 2.0"},
+      {:ex_aws_s3, "~> 2.3.3"},
       # Used by arc
       {:poison, "~> 3.1"},
       # Used by arc
