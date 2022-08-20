@@ -5,7 +5,7 @@
   truncate_title = assigns[:truncate_title] || false
   show_album_title = assigns[:show_album_title] || false
 %>
-<div class="card photo<%= if @photo.id == 5650, do: ' corona' %>" data-id="<%= @photo.id %>">
+<div class="card photo" data-id="<%= @photo.id %>">
   <%= link to: public_profile_photo_album_photo_path(@conn, :show, user, photo_album, @photo) do %>
     <%= if @photo.nsfw do %>
       <%= img_tag(HelheimWeb.PhotoFile.url({@photo.file, @photo}, :nsfw_thumb), class: "card-img-top img-fluid img-photo") %>

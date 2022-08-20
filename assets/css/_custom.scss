@@ -177,10 +177,6 @@ form.link {
       }
     }
 
-    &.corona {
-      @include do-shake();
-    }
-
     img.img-avatar {
       margin-right: 0.5rem;
       width: 20px;
