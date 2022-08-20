@@ -92,11 +92,10 @@
 
 // 3rd party depedencies
 @import "../vendor/css/dropzone";
-@import "node_modules/dragula/dist/dragula";
-@import "../vendor/css/jquery.atwho.min";
-@import "../vendor/css/rangeslider";
-@import "core/rangeslider";
-@import "node_modules/tom-select/dist/css/tom-select.bootstrap4";
+@import "../vendor/css/dragula";
+@import "../vendor/css/tribute";
+// @import "../vendor/css/jquery.atwho.min";
+// @import "node_modules/tom-select/dist/css/tom-select.bootstrap4";
 
 // Custom styles
 @import "custom";

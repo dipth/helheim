@@ -1,28 +1,15 @@
-// Brunch automatically concatenates all files in your
-// watched paths. Those paths can be configured at
-// config.paths.watched in "brunch-config.js".
-//
-// However, those files will only be executed if
-// explicitly imported. The only exception are files
-// in vendor, which are never wrapped in imports and
-// therefore are always executed.
+import favico from "../vendor/js/favico"
+window.Favico = favico
 
-// Import dependencies
-//
-// If you no longer want to use a dependency, remember
-// to also remove its path from "config.paths.watched".
-// import "phoenix_html"
-
-// Import local files
-//
-// Local files can be imported directly using relative
-// paths "./socket" or full ones "web/static/js/socket".
-
-import 'intl/locale-data/jsonp/da.js';
+import dragula from "../vendor/js/dragula"
+window.dragula = dragula
 
 import moment from 'moment';
 import tz from 'moment-timezone';
-import 'moment/locale/da';
+// import 'moment/locale/da';
+
+// Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
+import "phoenix_html"
 
 import { Leaf } from "./leaf";
 import { BootstrapStuff } from "./bootstrap_stuff";
@@ -45,8 +32,6 @@ import { CalendarEventForm } from "./calendar_event_form";
 import { PreferencesForm } from "./preferences_form";
 import { BlockForm } from "./block_form";
 import { IgnoreForm } from "./ignore_form";
-
-import css from "../css/app.css.scss"
 
 export var App = {
   run: function(){
