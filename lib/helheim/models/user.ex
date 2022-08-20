@@ -63,6 +63,11 @@ defmodule Helheim.User do
     belongs_to :verifier,                Helheim.User
   end
 
+  def all_usernames do
+    query = from u in User, order_by: u.username, select: u.username
+    Repo.all(query)
+  end
+
   def with_ids(query, ids) do
     from u in query, where: u.id in ^ids
   end

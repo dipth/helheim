@@ -18,6 +18,7 @@
     <meta name='guardian_token' content="<%= Guardian.Plug.current_token(@conn) %>">
     <meta name='notification_sound' content="<%= static_path(@conn, Helheim.NotificationSounds.file(current_resource(@conn).notification_sound)) %>">
     <meta name='mute_notifications' content="<%= current_resource(@conn).mute_notifications %>">
+    <meta name="usernames" content="<%= meta_usernames %>>">
     <%= csrf_meta_tag() %>
 
     <meta name="base-url" content="<%= HelheimWeb.Endpoint.url %>">
