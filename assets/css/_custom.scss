@@ -254,22 +254,23 @@ code {
   }
 }
 
-.atwho-view {
+.tribute-container ul {
   background-color: $gray-dark;
   color: $body-color;
   border-color: $gray-lighter;
   box-shadow: none;
 
-  ul li {
+  li {
     border-color: $gray-lighter;
-  }
-
-  .cur {
-    background-color: $brand-primary;
   }
 
   strong {
     color: $brand-primary;
+  }
+
+  li.highlight {
+    background-color: $brand-primary;
+    color: $gray-dark;
   }
 }
 
@@ -304,6 +305,11 @@ code {
   h5 {
     color: $brand-warning;
   }
+}
+
+.pell-content {
+  background-color: $white;
+  color: $black;
 }
 
 @import "calendar_events";
