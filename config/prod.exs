@@ -28,7 +28,7 @@ config :helheim, Helheim.Repo,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true,
   ssl_opts: [
-    server_name_indication: System.get_env("NEON_HOST"),
+    server_name_indication: to_charlist(System.get_env("NEON_HOST")),
     verify: :verify_none
   ]
 
