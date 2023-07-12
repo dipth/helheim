@@ -24,9 +24,13 @@ config :helheim, HelheimWeb.Endpoint,
 
 # Configure your database
 config :helheim, Helheim.Repo,
-  url: System.get_env("DATABASE_URL"),
+  url: System.get_env("NEON_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-  ssl: true
+  ssl: true,
+  ssl_opts: [
+    server_name_indication: System.get_env("NEON_HOST"),
+    verify: :verify_none
+  ]
 
 # Configure guardian
 config :helheim, Helheim.Auth.Guardian,
