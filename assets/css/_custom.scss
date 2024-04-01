@@ -173,7 +173,7 @@ form.link {
 
       &:hover {
         border-color: $brand-primary;
-        transform: scale(1.1, 1.1) rotate(180deg);
+        transform: scale(1.1, 1.1);
       }
     }
 
@@ -311,15 +311,3 @@ code {
 }
 
 @import "calendar_events";
-
-img {
-  transform: rotate(180deg);
-}
-
-.navbar-brand {
-  transform: rotate(180deg);
-}
-
-i.fa {
-  transform: rotate(180deg);
-}
