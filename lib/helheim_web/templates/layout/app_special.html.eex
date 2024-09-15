@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <meta name="description" content="">
+      <meta name="description" content="A social media platform for the alternative community in Denmark. Meet new people, write blogs and participate in discussions on our forum. Sign up for free!">
       <meta name="author" content="">
       <meta name="keyword" content="">
 
@@ -15,7 +15,7 @@
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
       <meta name="theme-color" content="#ffffff">
 
-      <title><%= gettext("Helheim") %></title>
+      <title><%= gettext("Helheim") %> - Social media platform for danish alternative people</title>
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
       <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
