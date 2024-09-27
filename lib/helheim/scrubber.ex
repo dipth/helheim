@@ -18,7 +18,10 @@ defmodule Helheim.Scrubber do
   Meta.allow_tag_with_these_attributes "blockquote", []
 
   Meta.allow_tag_with_these_attributes "strong", []
+  Meta.allow_tag_with_these_attributes "b", []
+  Meta.allow_tag_with_these_attributes "u", []
   Meta.allow_tag_with_these_attributes "em", []
+  Meta.allow_tag_with_these_attributes "i", []
   Meta.allow_tag_with_these_attributes "strike", []
   Meta.allow_tag_with_these_attributes "sup", []
   Meta.allow_tag_with_these_attributes "sub", []
@@ -52,6 +55,9 @@ defmodule Helheim.Scrubber do
     |> Enum.reject(&(is_nil(&1)))
   end
 
+  def scrub_attribute("p", {"align", value}) do
+    {"align", value}
+  end
   def scrub_attribute("p", {"style", value}) do
     value = String.split(value, ";")
             |> Enum.filter(&(Enum.member?(@allowed_styles, &1)))
