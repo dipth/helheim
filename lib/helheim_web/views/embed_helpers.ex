@@ -25,6 +25,9 @@ defmodule HelheimWeb.EmbedHelpers do
   @gfycat_hosts ["gfycat.com"]
   @gfycat_id_regex ~r/gfycat.com\/(.+)/i
 
+  @gafffa_hosts ["gafffa.dk"]
+  @gafffa_id_regex ~r/gafffa\.dk\/(.+)/i
+
   @helheim_cloudfront_hosts ["d3ki6vg87hrfvz.cloudfront.net"]
 
   def replace_urls(content) do
@@ -68,6 +71,8 @@ defmodule HelheimWeb.EmbedHelpers do
         replace_instagram(match)
       String.contains?(host, @gfycat_hosts) ->
         replace_gfycat(match)
+      String.contains?(host, @gafffa_hosts) ->
+        replace_gafffa(match)
       true ->
         autolink(match)
     end
@@ -170,6 +175,20 @@ defmodule HelheimWeb.EmbedHelpers do
       <div style='position:relative; padding-bottom:42.50%'>
         <iframe src='https://gfycat.com/ifr/#{id}' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe>
       </div>
+      """
+    rescue
+      _ -> autolink(match)
+    end
+  end
+
+  def replace_gafffa(nil), do: ""
+  def replace_gafffa(match) do
+    try do
+      [_,id] = Regex.run(@gafffa_id_regex, match)
+      """
+      <a href="#{match}" target="_blank">
+        #{String.replace(match, "gafffa.dk", "gaffa.dk")}
+      </a>
       """
     rescue
       _ -> autolink(match)
