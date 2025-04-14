@@ -19,7 +19,7 @@ config :helheim, HelheimWeb.Endpoint,
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
-  check_origin: ["//helheim.dk", "//www.helheim.dk", "//staging.helheim.dk"],
+  check_origin: ["//helheim.dk", "//www.helheim.dk", "//staging.helheim.dk", "//alpha.helheim.dk"],
   live_view: [signing_salt: System.get_env("LIVE_VIEW_SALT")]
 
 # Configure your database
