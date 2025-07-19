@@ -56,7 +56,7 @@
         <%= gettext("Edit Photo Album") %>
       <% end %>
 
-      <%= link to: photo_album_path(@conn, :delete, @photo_album), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-sm float-right" do %>
+      <%= link to: photo_album_path(@conn, :delete, @photo_album), method: :delete, data: [confirm: gettext("Are you sure you want to delete this photo album? All photos in the album will be deleted with no way to recover them.")], class: "btn btn-danger btn-sm float-right" do %>
         <i class="fa fa-trash"></i>
         <%= gettext "Delete" %>
       <% end %>

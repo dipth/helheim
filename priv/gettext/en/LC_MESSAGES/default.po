@@ -373,7 +373,7 @@ msgstr ""
 msgid "Newest Forum Posts"
 msgstr ""
 
-#: lib/helheim_web/templates/page/front_page.html.eex:81
+#: lib/helheim_web/templates/page/front_page.html.eex:83
 #: lib/helheim_web/templates/profile/show.html.eex:99
 msgid "Newest Photos"
 msgstr ""
@@ -404,20 +404,19 @@ msgstr ""
 #: lib/helheim_web/templates/admin/forum_category/index.html.eex:39 lib/helheim_web/templates/admin/term/index.html.eex:35
 #: lib/helheim_web/templates/blog_post/show.html.eex:30 lib/helheim_web/templates/friendship/_my_active_friendships.html.eex:23
 #: lib/helheim_web/templates/friendship/_my_pending_friendships.html.eex:28 lib/helheim_web/templates/mod/calendar_event/_admin_links.html.eex:8
-#: lib/helheim_web/templates/photo/show.html.eex:42 lib/helheim_web/templates/photo_album/show.html.eex:59
-#: lib/helheim_web/templates/private_conversation/show.html.eex:10
+#: lib/helheim_web/templates/photo/show.html.eex:42 lib/helheim_web/templates/private_conversation/show.html.eex:10
 msgid "Are you sure?"
 msgstr ""
 
-#: lib/helheim_web/controllers/blog_post_controller.ex:50
+#: lib/helheim_web/controllers/blog_post_controller.ex:51
 msgid "Blog post created successfully."
 msgstr ""
 
-#: lib/helheim_web/controllers/blog_post_controller.ex:103
+#: lib/helheim_web/controllers/blog_post_controller.ex:104
 msgid "Blog post deleted successfully."
 msgstr ""
 
-#: lib/helheim_web/controllers/blog_post_controller.ex:90
+#: lib/helheim_web/controllers/blog_post_controller.ex:91
 msgid "Blog post updated successfully."
 msgstr ""
 
@@ -467,8 +466,8 @@ msgstr ""
 
 #: lib/helheim_web/templates/comment/comments.html.eex:9
 #: lib/helheim_web/templates/page/front_page.html.eex:5 lib/helheim_web/templates/page/front_page.html.eex:29
-#: lib/helheim_web/templates/page/front_page.html.eex:41 lib/helheim_web/templates/page/front_page.html.eex:55
-#: lib/helheim_web/templates/page/front_page.html.eex:82 lib/helheim_web/templates/profile/show.html.eex:81
+#: lib/helheim_web/templates/page/front_page.html.eex:41 lib/helheim_web/templates/page/front_page.html.eex:56
+#: lib/helheim_web/templates/page/front_page.html.eex:84 lib/helheim_web/templates/profile/show.html.eex:81
 #: lib/helheim_web/templates/profile/show.html.eex:105
 msgid "Show All"
 msgstr ""
@@ -623,11 +622,11 @@ msgstr ""
 msgid "Photo Album deleted successfully."
 msgstr ""
 
-#: lib/helheim_web/controllers/photo_controller.ex:88
+#: lib/helheim_web/controllers/photo_controller.ex:89
 msgid "Photo deleted successfully."
 msgstr ""
 
-#: lib/helheim_web/controllers/photo_controller.ex:73
+#: lib/helheim_web/controllers/photo_controller.ex:74
 msgid "Photo details updated successfully."
 msgstr ""
 
@@ -1780,7 +1779,7 @@ msgid "This topic is locked"
 msgstr ""
 
 #: lib/helheim_web/templates/calendar_event/index.html.eex:5
-#: lib/helheim_web/templates/calendar_event/new.html.eex:1 lib/helheim_web/templates/page/front_page.html.eex:69
+#: lib/helheim_web/templates/calendar_event/new.html.eex:1 lib/helheim_web/templates/page/front_page.html.eex:70
 msgid "Create event"
 msgstr ""
 
@@ -1930,15 +1929,15 @@ msgstr ""
 msgid "%{count} people"
 msgstr ""
 
-#: lib/helheim_web/templates/page/front_page.html.eex:63
+#: lib/helheim_web/templates/page/front_page.html.eex:64
 msgid "It looks like there are no upcoming events..."
 msgstr ""
 
-#: lib/helheim_web/templates/page/front_page.html.eex:64
+#: lib/helheim_web/templates/page/front_page.html.eex:65
 msgid "Tell us about an event so we can add it:"
 msgstr ""
 
-#: lib/helheim_web/templates/page/front_page.html.eex:54
+#: lib/helheim_web/templates/page/front_page.html.eex:55
 msgid "Events"
 msgstr ""
 
@@ -2125,8 +2124,13 @@ msgstr ""
 msgid "Mod message?"
 msgstr ""
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/helheim_web/templates/comment/comment.html.eex:23
 #: lib/helheim_web/templates/forum_reply/forum_reply.html.eex:25
 msgid "Moderator notice"
+msgstr ""
+
+#, elixir-format
+#: lib/helheim_web/templates/photo_album/show.html.eex:59
+msgid "Are you sure you want to delete this photo album? All photos in the album will be deleted with no way to recover them."
 msgstr ""
