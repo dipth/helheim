@@ -13,13 +13,13 @@
   * `PostgreSQL` 12.1
   * `Chromedriver` 2.36
 
-The recommended way to install Erlang, Elixir, Python and Node.js is through the modular version manager asdf:
+The recommended way to install Erlang, Elixir, Python and Node.js is through the modular version manager mise:
 
-- https://github.com/asdf-vm/asdf
+- https://mise.jdx.dev/
 - https://github.com/asdf-vm/asdf-erlang
 - https://github.com/asdf-vm/asdf-elixir
-- https://github.com/danhper/asdf-python
 - https://github.com/asdf-vm/asdf-nodejs
+- https://github.com/danhper/asdf-python
 
 The remaining can be installed with [Homebrew](https://brew.sh/).
 
