@@ -4,7 +4,7 @@ defmodule HelheimWeb.ConfirmationController do
   alias HelheimWeb.Email
   alias Helheim.Mailer
 
-  plug :put_layout, "app_special.html"
+  plug :put_layout, {HelheimWeb.LayoutView, "app_special.html"}
 
   def new(conn, _params) do
     render conn, "new.html"

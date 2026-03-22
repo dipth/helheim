@@ -58,7 +58,7 @@ if config_env() == :prod do
   config :stripity_stripe,
     secret_key: System.get_env("STRIPE_PRIVATE_KEY")
 
-  config :recaptcha,
+  config :helheim, :recaptcha,
     public_key: System.get_env("RECAPTCHA_PUBLIC_KEY"),
     secret: System.get_env("RECAPTCHA_SECRET_KEY")
 end

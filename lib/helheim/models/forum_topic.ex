@@ -37,7 +37,7 @@ defmodule Helheim.ForumTopic do
           PARTITION BY forum_id
           ORDER BY inserted_at DESC
         ) FROM forum_topics)
-      """),
+      """), on: true,
       where: inner.row_number <= ^per and inner.id == outer.id
   end
 

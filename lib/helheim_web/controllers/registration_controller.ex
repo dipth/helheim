@@ -3,7 +3,7 @@ defmodule HelheimWeb.RegistrationController do
   alias Helheim.User
   alias Helheim.RegistrationService
 
-  plug :put_layout, "app_special.html"
+  plug :put_layout, {HelheimWeb.LayoutView, "app_special.html"}
 
   def new(conn, _params) do
     changeset = User.registration_changeset(%User{})

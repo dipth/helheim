@@ -50,7 +50,7 @@ defmodule Helheim.RecaptchaTest do
     end
 
     test "sends the configured secret and the response token in the request body" do
-      secret = Application.get_env(:recaptcha, :secret)
+      secret = Application.get_env(:helheim, :recaptcha)[:secret]
 
       with_mock Req, [post: fn(_url, opts) ->
         expected_body = URI.encode_query(%{secret: secret, response: "my-token"})
@@ -75,7 +75,7 @@ defmodule Helheim.RecaptchaTest do
     end
 
     test "includes the g-recaptcha div with the configured public key" do
-      public_key = Application.get_env(:recaptcha, :public_key)
+      public_key = Application.get_env(:helheim, :recaptcha)[:public_key]
       {:safe, html} = Recaptcha.render_widget()
       assert html =~ "g-recaptcha"
       assert html =~ "data-sitekey=\"#{public_key}\""

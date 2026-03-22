@@ -79,7 +79,7 @@
 
               <h5 class="mb-1"><%= gettext "Profile Text" %></h5>
               <hr>
-              <div class="form-group <%= if f.errors[:profile_text] do 'has-danger' end %>">
+              <div class="form-group <%= if f.errors[:profile_text] do "has-danger" end %>">
                 <%= label f, :profile_text, gettext("Content"), class: "control-label" %>
                 <%= textarea f, :profile_text, class: "form-control", rows: 10 %>
                 <%= if message = f.errors[:profile_text] do %>

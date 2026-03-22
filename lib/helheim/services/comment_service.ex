@@ -26,12 +26,12 @@ defmodule Helheim.CommentService do
     |> Repo.transaction
   end
 
-  defp insert_comment(multi, commentable, author, body, notice \\ false) do
+  defp insert_comment(multi, commentable, author, body, notice) do
     multi
     |> Multi.insert(:comment, build_comment(commentable, author, body, notice))
   end
 
-  defp build_comment(commentable, author, body, notice \\ false) do
+  defp build_comment(commentable, author, body, notice) do
     Comment.changeset(%Comment{}, %{body: body, notice: notice}, User.mod_or_admin?(author))
     |> Changeset.put_assoc(:author, author)
     |> put_commentable(commentable)

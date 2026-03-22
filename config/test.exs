@@ -43,7 +43,7 @@ config :stripity_stripe,
   secret_key: "sk_test_abababababababababababab"
 
 # Configure ReCaptcha
-config :recaptcha,
+config :helheim, :recaptcha,
   public_key: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
   secret: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
 

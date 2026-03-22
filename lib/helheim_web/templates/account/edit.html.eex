@@ -10,7 +10,7 @@
             <div class="col-md-6">
               <h5><%= gettext "Personal Details" %></h5>
               <div class="mb-3 hidden-sm-down"></div>
-              <div class="form-group <%= if f.errors[:name] do 'has-danger' end %>">
+              <div class="form-group <%= if f.errors[:name] do "has-danger" end %>">
                 <%= label f, :name, gettext("Name")%>
                 <%= text_input f, :name, class: "form-control" %>
                 <%= if message = f.errors[:name] do %>
@@ -20,7 +20,7 @@
                 <% end %>
               </div>
 
-              <div class="form-group <%= if f.errors[:email] do 'has-danger' end %>">
+              <div class="form-group <%= if f.errors[:email] do "has-danger" end %>">
                 <%= label f, :email, gettext("E-mail")%>
                 <%= text_input f, :email, class: "form-control" %>
                 <%= if message = f.errors[:email] do %>
@@ -37,7 +37,7 @@
               <h5><%= gettext "Change Password" %></h5>
               <p><%= gettext "Leave these fields blank to keep your current password" %></p>
 
-              <div class="form-group <%= if f.errors[:password] do 'has-danger' end %>">
+              <div class="form-group <%= if f.errors[:password] do "has-danger" end %>">
                 <%= label f, :password, gettext("Password")%>
                 <%= password_input f, :password, class: "form-control" %>
                 <%= if message = f.errors[:password] do %>
@@ -47,7 +47,7 @@
                 <% end %>
               </div>
 
-              <div class="form-group <%= if f.errors[:password_confirmation] do 'has-danger' end %>">
+              <div class="form-group <%= if f.errors[:password_confirmation] do "has-danger" end %>">
                 <%= label f, :password_confirmation, gettext("Confirm Password")%>
                 <%= password_input f, :password_confirmation, class: "form-control" %>
                 <%= if message = f.errors[:password_confirmation] do %>
@@ -64,7 +64,7 @@
               <h5><%= gettext "Existing Password" %></h5>
               <p><%= gettext "For security reasons you must type in your existing password when updating your account settings" %></p>
 
-              <div class="form-group <%= if f.errors[:existing_password] do 'has-danger' end %>">
+              <div class="form-group <%= if f.errors[:existing_password] do "has-danger" end %>">
                 <%= label f, :existing_password, gettext("Existing Password")%>
                 <%= password_input f, :existing_password, class: "form-control" %>
                 <%= if message = f.errors[:existing_password] do %>

@@ -184,7 +184,7 @@ defmodule HelheimWeb.EmbedHelpers do
   def replace_gafffa(nil), do: ""
   def replace_gafffa(match) do
     try do
-      [_,id] = Regex.run(@gafffa_id_regex, match)
+      [_, _id] = Regex.run(@gafffa_id_regex, match)
       """
       <a href="#{match}" target="_blank">
         #{String.replace(match, "gafffa.dk", "gaffa.dk")}

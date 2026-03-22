@@ -4,7 +4,7 @@ defmodule HelheimWeb.SessionController do
   alias Helheim.Auth
   alias Helheim.Auth.Guardian
 
-  plug :put_layout, "app_special.html"
+  plug :put_layout, {HelheimWeb.LayoutView, "app_special.html"}
 
   def new(conn, _) do
     render conn, "new.html"

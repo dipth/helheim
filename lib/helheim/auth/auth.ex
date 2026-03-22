@@ -13,7 +13,7 @@ defmodule Helheim.Auth do
   checks that encrypting the plain text password matches in the
   encrypted password that was stored during user creation.
   """
-  def authenticate_user(email, password, remote_ip) do
+  def authenticate_user(email, password, _remote_ip) do
     with {:ok, user} <- load_user(email),
          {:ok} <- check_password(user, password),
          {:ok} <- check_confirmation(user)

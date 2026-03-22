@@ -34,7 +34,7 @@ defmodule Helheim.ForumReply do
           PARTITION BY forum_topic_id
           ORDER BY inserted_at DESC
         ) FROM forum_replies)
-      """),
+      """), on: true,
       where: inner.row_number <= ^per and inner.id == outer.id
   end
 

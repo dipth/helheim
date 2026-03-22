@@ -23,7 +23,6 @@ defmodule HelheimWeb.ProfileHelpers do
 
   ### PRIVATE
 
-  defp donor_badge(nil), do: {:safe, ""}
   defp donor_badge(user) do
     cond do
       Donation.recently_donated?(user) ->

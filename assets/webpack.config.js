@@ -10,7 +10,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = (env, options) => ({
   optimization: {
     minimizer: [
-      new TerserPlugin({ cache: true, parallel: true, sourceMap: false }),
+      new TerserPlugin({ parallel: true, sourceMap: false }),
       new OptimizeCSSAssetsPlugin({})
     ]
   },
@@ -21,7 +21,13 @@ module.exports = (env, options) => ({
     filename: 'app.js',
     path: path.resolve(__dirname, '../priv/static/js')
   },
+  resolve: {
+    alias: {
+      phoenix_live_view: path.resolve(__dirname, '../deps/phoenix_live_view/priv/static/phoenix_live_view.cjs.js')
+    }
+  },
   module: {
+    noParse: /phoenix_live_view\.cjs\.js$/,
     rules: [
       {
         test: require.resolve('jquery'),

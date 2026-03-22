@@ -23,7 +23,7 @@ defmodule Helheim.Recaptcha do
   """
   @spec verify(String.t()) :: {:ok, map()} | {:error, list(String.t())}
   def verify(response) do
-    secret = Application.get_env(:recaptcha, :secret)
+    secret = Application.get_env(:helheim, :recaptcha)[:secret]
 
     body = URI.encode_query(%{secret: secret, response: response})
 
@@ -57,7 +57,7 @@ defmodule Helheim.Recaptcha do
   """
   @spec render_widget() :: {:safe, String.t()}
   def render_widget do
-    public_key = Application.get_env(:recaptcha, :public_key)
+    public_key = Application.get_env(:helheim, :recaptcha)[:public_key]
 
     html = """
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>

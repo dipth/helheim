@@ -2,7 +2,6 @@ defmodule HelheimWeb.BlockAndIgnoreController do
   use HelheimWeb, :controller
   alias Helheim.Block
   alias Helheim.Ignore
-  alias Helheim.User
 
   def index(conn, _params) do
     user    = current_resource(conn)

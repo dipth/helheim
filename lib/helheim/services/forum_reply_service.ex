@@ -16,12 +16,12 @@ defmodule Helheim.ForumReplyService do
     |> Repo.transaction
   end
 
-  defp insert_reply(multi, forum_topic, user, body, notice \\ false) do
+  defp insert_reply(multi, forum_topic, user, body, notice) do
     multi
     |> Multi.insert(:forum_reply, build_reply(forum_topic, user, body, notice))
   end
 
-  defp build_reply(forum_topic, user, body, notice \\ false) do
+  defp build_reply(forum_topic, user, body, notice) do
     ForumReply.changeset(%ForumReply{}, %{body: body, notice: notice}, User.mod_or_admin?(user))
     |> Changeset.put_assoc(:forum_topic, forum_topic)
     |> Changeset.put_assoc(:user, user)

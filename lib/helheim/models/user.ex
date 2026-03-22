@@ -170,8 +170,8 @@ defmodule Helheim.User do
   end
 
   def sort(query, nil),             do: query
-  def sort(query, "creation"),      do: from u in query, order_by: [desc: u.inserted_at]
-  def sort(query, "login"),         do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_at)]
+  def sort(query, "creation"),      do: from(u in query, order_by: [desc: u.inserted_at])
+  def sort(query, "login"),         do: from(u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_at)])
   def sort(query, "id"),            do: sort(query, "id", "asc")
   def sort(query, "username"),      do: sort(query, "username", "asc")
   def sort(query, "name"),          do: sort(query, "name", "asc")
@@ -183,24 +183,24 @@ defmodule Helheim.User do
 
   def sort(query, nil, _),                  do: query
   def sort(query, "", _),                   do: query
-  def sort(query, "id", "asc"),             do: from u in query, order_by: [asc: u.id]
-  def sort(query, "id", "desc"),            do: from u in query, order_by: [desc: u.id]
-  def sort(query, "username", "asc"),       do: from u in query, order_by: [asc: u.username]
-  def sort(query, "username", "desc"),      do: from u in query, order_by: [desc: u.username]
-  def sort(query, "name", "asc"),           do: from u in query, order_by: [asc: u.name]
-  def sort(query, "name", "desc"),          do: from u in query, order_by: [desc: u.name]
-  def sort(query, "email", "asc"),          do: from u in query, order_by: [asc: u.email]
-  def sort(query, "email", "desc"),         do: from u in query, order_by: [desc: u.email]
-  def sort(query, "inserted_at", "asc"),    do: from u in query, order_by: [asc: u.inserted_at]
-  def sort(query, "inserted_at", "desc"),   do: from u in query, order_by: [desc: u.inserted_at]
-  def sort(query, "confirmed_at", "asc"),   do: from u in query, order_by: [fragment("? ASC NULLS LAST", u.confirmed_at)]
-  def sort(query, "confirmed_at", "desc"),  do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.confirmed_at)]
-  def sort(query, "last_login_at", "asc"),  do: from u in query, order_by: [fragment("? ASC NULLS LAST", u.last_login_at)]
-  def sort(query, "last_login_at", "desc"), do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_at)]
-  def sort(query, "last_login_ip", "asc"),  do: from u in query, order_by: [fragment("? ASC NULLS LAST", u.last_login_ip)]
-  def sort(query, "last_login_ip", "desc"), do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_ip)]
-  def sort(query, "verified_at", "asc"),    do: from u in query, order_by: [fragment("? ASC NULLS LAST", u.verified_at)]
-  def sort(query, "verified_at", "desc"),   do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.verified_at)]
+  def sort(query, "id", "asc"),             do: from(u in query, order_by: [asc: u.id])
+  def sort(query, "id", "desc"),            do: from(u in query, order_by: [desc: u.id])
+  def sort(query, "username", "asc"),       do: from(u in query, order_by: [asc: u.username])
+  def sort(query, "username", "desc"),      do: from(u in query, order_by: [desc: u.username])
+  def sort(query, "name", "asc"),           do: from(u in query, order_by: [asc: u.name])
+  def sort(query, "name", "desc"),          do: from(u in query, order_by: [desc: u.name])
+  def sort(query, "email", "asc"),          do: from(u in query, order_by: [asc: u.email])
+  def sort(query, "email", "desc"),         do: from(u in query, order_by: [desc: u.email])
+  def sort(query, "inserted_at", "asc"),    do: from(u in query, order_by: [asc: u.inserted_at])
+  def sort(query, "inserted_at", "desc"),   do: from(u in query, order_by: [desc: u.inserted_at])
+  def sort(query, "confirmed_at", "asc"),   do: from(u in query, order_by: [fragment("? ASC NULLS LAST", u.confirmed_at)])
+  def sort(query, "confirmed_at", "desc"),  do: from(u in query, order_by: [fragment("? DESC NULLS LAST", u.confirmed_at)])
+  def sort(query, "last_login_at", "asc"),  do: from(u in query, order_by: [fragment("? ASC NULLS LAST", u.last_login_at)])
+  def sort(query, "last_login_at", "desc"), do: from(u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_at)])
+  def sort(query, "last_login_ip", "asc"),  do: from(u in query, order_by: [fragment("? ASC NULLS LAST", u.last_login_ip)])
+  def sort(query, "last_login_ip", "desc"), do: from(u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_ip)])
+  def sort(query, "verified_at", "asc"),    do: from(u in query, order_by: [fragment("? ASC NULLS LAST", u.verified_at)])
+  def sort(query, "verified_at", "desc"),   do: from(u in query, order_by: [fragment("? DESC NULLS LAST", u.verified_at)])
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
