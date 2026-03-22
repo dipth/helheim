@@ -7,8 +7,8 @@
     <% percent_used = round(space_used / max_space * 100) %>
     <%=
       gettext "You have used %{used_space} out of a maximum of %{max_space} across all your photo albums", [
-        used_space: Crutches.Format.Number.as_human_size(space_used),
-        max_space: Crutches.Format.Number.as_human_size(max_space)
+        used_space: Helheim.Helpers.FormatHelpers.human_size(space_used),
+        max_space: Helheim.Helpers.FormatHelpers.human_size(max_space)
       ]
     %>
     <div class="progress mb-1">

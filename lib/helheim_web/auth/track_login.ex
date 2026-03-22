@@ -20,7 +20,7 @@ defmodule HelheimWeb.Plug.TrackLogin do
   defp get_id_from_session(conn), do: {:ok, get_session(conn, :id)}
 
   defp maybe_generate_new_id(conn, nil) do
-    id = SecureRandom.uuid
+    id = Ecto.UUID.generate()
     conn = put_session(conn, :id, id)
     {:ok, conn, id}
   end

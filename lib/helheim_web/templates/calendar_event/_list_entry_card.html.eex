@@ -7,6 +7,6 @@
       <i class="fa fa-fw fa-calendar"></i>
       <%= calendar_event_timestamp(@calendar_event.starts_at) |> elem(1) %>
     </span>
-    <p><%= Crutches.String.truncate(@calendar_event.description, 250) %></p>
+    <p><%= Helheim.Helpers.FormatHelpers.truncate(@calendar_event.description, 250) %></p>
   </div>
 </div>

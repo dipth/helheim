@@ -1,5 +1,5 @@
 defmodule HelheimWeb.DonationView do
   use HelheimWeb, :view
-  alias Crutches.Format.Number
+  alias Helheim.Helpers.FormatHelpers
   alias Helheim.Donation
 end

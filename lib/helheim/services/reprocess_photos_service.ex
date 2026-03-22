@@ -33,7 +33,7 @@ defmodule Helheim.ReprocessPhotosService do
   defp extract_details(photo) do
     url = PhotoFile.url({photo.file, photo}, :original, signed: true)
     download_file_name = photo.file.file_name |> Zarex.sanitize() |> String.replace(" ", "_")
-    download_path = "#{File.cwd!}/tmp/reprocess/#{SecureRandom.uuid()}/#{download_file_name}"
+    download_path = "#{File.cwd!}/tmp/reprocess/#{Ecto.UUID.generate()}/#{download_file_name}"
 
     {:ok, url, download_path}
   end

@@ -74,7 +74,7 @@
 
       <div class="form-group mb-2 <%= if f.errors[:captcha] do 'has-danger' end %>">
         <div class="controls">
-          <%= raw Recaptcha.Template.display %>
+          <%= Helheim.Recaptcha.render_widget() %>
           <%= if message = f.errors[:captcha] do %>
             <div class="form-control-feedback"><%= translate_error(message) %></div>
           <% end %>

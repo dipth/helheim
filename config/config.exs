@@ -16,6 +16,7 @@ config :helheim, Helheim.Repo,
 
 # Configures the endpoint
 config :helheim, HelheimWeb.Endpoint,
+  adapter: Bandit.PhoenixAdapter,
   url: [host: "localhost"],
   secret_key_base: "JXAQU/sDIXwY//LkAGR99f22MNDD4pO0vJUFeJFnX1JBTRsnG+UD/EbZpjVGoZb6",
   live_view: [signing_salt: "A78RceomQzKIr7b0HfbmO8oE2lT24bnX"],
@@ -39,11 +40,7 @@ config :helheim, Helheim.Auth.Guardian,
 
 # Configure Sentry
 config :sentry,
-  environment_name: config_env(),
-  included_environments: [:prod],
-  enable_source_code_context: true,
-  root_source_code_path: File.cwd!,
-  json_library: Poison
+  environment_name: config_env()
 
 # Configure mailer
 config :helheim, Helheim.Mailer,
@@ -53,11 +50,9 @@ config :helheim, Helheim.Mailer,
 # Configure calendar
 config :calendar, :translation_module, CalendarTranslations.Translations
 
-# Configure JSON
-config :recaptcha,
-  json_library: Poison
+# Configure JSON library
 config :phoenix,
-  :json_library, Poison
+  :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

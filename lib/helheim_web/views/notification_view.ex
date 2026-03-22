@@ -1,7 +1,7 @@
 defmodule HelheimWeb.NotificationView do
   use HelheimWeb, :view
-  import Phoenix.HTML.Link
-  import Phoenix.HTML.Tag
+  import PhoenixHTMLHelpers.Link
+  import PhoenixHTMLHelpers.Tag
   import HelheimWeb.Gettext
   alias Helheim.{Notification, User, BlogPost, PhotoAlbum, Photo, ForumTopic, CalendarEvent}
 

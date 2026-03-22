@@ -47,7 +47,7 @@ defmodule HelheimWeb.ConfirmationController do
 
   defp send_confirmation(conn, user) do
     Email.registration_email(user.email, user.confirmation_token)
-    |> Mailer.deliver_later
+    |> Mailer.deliver_later!()
 
     conn
     |> put_flash(:success, gettext("Confirmation e-mail sent!"))

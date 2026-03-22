@@ -1,5 +1,5 @@
 defmodule HelheimWeb.NotificationHelpers do
-  import Phoenix.HTML.Tag
+  import PhoenixHTMLHelpers.Tag
   import HelheimWeb.Router.Helpers
   import HelheimWeb.Gettext
   alias Helheim.NotificationSubscription

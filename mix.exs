@@ -1,13 +1,12 @@
-defmodule Helheim.Mixfile do
+defmodule Helheim.MixProject do
   use Mix.Project
 
   def project do
     [
       app: :helheim,
       version: "0.0.2",
-      elixir: "~> 1.13.4",
+      elixir: "~> 1.19",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -20,7 +19,7 @@ defmodule Helheim.Mixfile do
   def application do
     [
       mod: {Helheim.Application, []},
-      extra_applications: [:logger, :runtime_tools, :recaptcha, :os_mon]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
@@ -33,55 +32,49 @@ defmodule Helheim.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.6.0"},
-      {:phoenix_pubsub, "~> 2.1.1"},
-      {:phoenix_live_view, "~> 0.17.10"},
+      {:phoenix, "~> 1.8.5"},
+      {:phoenix_pubsub, "~> 2.1"},
+      {:phoenix_view, "~> 2.0"},
+      {:phoenix_live_view, "~> 1.0"},
       {:floki, ">= 0.0.0", only: :test},
-      {:phoenix_live_dashboard, "~> 0.6.5"},
-      {:telemetry_poller, "~> 0.5.1"},
-      {:telemetry_metrics, "~> 0.6.1"},
-      {:ecto_sql, "~> 3.8.3"},
-      {:phoenix_ecto, "~> 4.4.0"},
+      {:phoenix_live_dashboard, "~> 0.8"},
+      {:telemetry_poller, "~> 1.1"},
+      {:telemetry_metrics, "~> 1.0"},
+      {:ecto_sql, "~> 3.12"},
+      {:phoenix_ecto, "~> 4.6"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 3.2.0"},
-      {:phoenix_live_reload, "~> 1.3.3", only: :dev},
-      {:gettext, "~> 0.11"},
-      {:plug_cowboy, "~> 2.4"},
-      {:cowlib, "~> 2.8.0"},
-      {:plug, "~> 1.7"},
-      {:bcrypt_elixir, "~> 2.0"},
-      {:pbkdf2_elixir, "~> 1.0"},
-      {:guardian, "~> 2.2.4"},
-      {:guardian_phoenix, "~> 2.0.1"},
-      {:secure_random, "~> 0.5.0"},
-      {:bamboo, "~> 1.3"},
-      {:bamboo_postmark, "~> 0.6.0"},
-      {:calendar, "~> 0.17"},
+      {:phoenix_html, "~> 4.1"},
+      {:phoenix_html_helpers, "~> 1.0"},
+      {:phoenix_live_reload, "~> 1.5", only: :dev},
+      {:gettext, "~> 0.26"},
+      {:bandit, "~> 1.6"},
+      {:plug, "~> 1.16"},
+      {:jason, "~> 1.4"},
+      {:bcrypt_elixir, "~> 3.0"},
+      {:pbkdf2_elixir, "~> 2.0"},
+      {:guardian, "~> 2.3"},
+      {:guardian_phoenix, "~> 2.0"},
+      {:bamboo, "~> 2.5"},
+      {:bamboo_phoenix, "~> 1.0"},
+      {:bamboo_postmark, "~> 1.0"},
+      {:calendar, "~> 0.18"},
       {:calendar_translations, "~> 0.0.4"},
-      {:timex, "~> 3.6"},
-      {:wallaby, "~> 0.28.0", [runtime: false, only: :test]},
-      {:ex_machina, "~> 2.3", only: :test},
-      {:sentry, "~> 7.1"},
-      {:arc, "~> 0.11.0"},
-      {:arc_ecto, "~> 0.11.3"},
-      # Used by arc
-      {:hackney, "~> 1.9", override: true},
-      # Used by arc
-      {:ex_aws, "~> 2.3.3"},
-      # Used by arc
-      {:ex_aws_s3, "~> 2.3.3"},
-      # Used by arc
-      {:poison, "~> 3.1"},
-      # Used by arc
+      {:timex, "~> 3.7"},
+      {:wallaby, "~> 0.30", [runtime: false, only: :test]},
+      {:ex_machina, "~> 2.8", only: :test},
+      {:sentry, "~> 10.0"},
+      {:waffle, "~> 1.1"},
+      {:waffle_ecto, "~> 0.0.12"},
+      {:hackney, "~> 1.18", override: true},
+      {:ex_aws, "~> 2.5"},
+      {:ex_aws_s3, "~> 2.5"},
       {:sweet_xml, "~> 0.6"},
-      {:html_sanitize_ex, "~> 1.1"},
-      {:crutches, git: "https://github.com/mykewould/crutches.git"},
-      # Pagination
-      {:scrivener_ecto, "~> 2.7.0"},
-      {:mock, "~> 0.3.3", only: :test},
-      {:stripity_stripe, "~> 2.8.0"},
-      {:recaptcha, "~> 3.0"},
-      {:remote_ip, "~> 0.2.0"},
+      {:html_sanitize_ex, "~> 1.4"},
+      {:scrivener_ecto, "~> 3.0"},
+      {:mock, "~> 0.3", only: :test},
+      {:stripity_stripe, "~> 3.2"},
+      {:req, "~> 0.5"},
+      {:remote_ip, "~> 1.2"},
       {:zarex, "~> 1.0"}
     ]
   end
@@ -107,6 +100,8 @@ defmodule Helheim.Mixfile do
   end
 
   defp compile_assets(_) do
-    Mix.shell().cmd("cd assets && node_modules/webpack/bin/webpack.js --mode production")
+    Mix.shell().cmd(
+      "cd assets && NODE_OPTIONS=--openssl-legacy-provider node_modules/webpack/bin/webpack.js --mode production"
+    )
   end
 end

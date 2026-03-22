@@ -1,5 +1,5 @@
 defmodule HelheimWeb.VisibilityHelpers do
-  import Phoenix.HTML.Tag
+  import PhoenixHTMLHelpers.Tag
   alias Helheim.Visibility
 
   def visibility_badge(%{visibility: "public"}), do: nil

@@ -77,7 +77,7 @@ defmodule HelheimWeb.PasswordResetController do
     {:ok, user} = User.update_password_reset_token! user
 
     Email.password_reset_email(user)
-    |> Mailer.deliver_later
+    |> Mailer.deliver_later!()
 
     conn
     |> put_flash(:success, gettext("Password reset instructions sent!"))

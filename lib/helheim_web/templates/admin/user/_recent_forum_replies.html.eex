@@ -17,7 +17,7 @@
           </td>
           <td>
             <strong><%= reply.forum_topic.title %></strong>
-            <p><small><%= Crutches.String.truncate(reply.body, 200) %></small></p>
+            <p><small><%= Helheim.Helpers.FormatHelpers.truncate(reply.body, 200) %></small></p>
           </td>
           <td>
             <samp><%= lt(reply.inserted_at, "%Y-%m-%d %H:%M:%S") %></samp>

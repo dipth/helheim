@@ -75,7 +75,7 @@ defmodule Helheim.Scrubber do
   def scrub_attribute("img", {"alt", alt}), do: {"alt", alt}
   def scrub_attribute("img", {"src", value}) do
     %{host: host, scheme: scheme} = URI.parse(value)
-    %{host: asset_host} = URI.parse(Application.get_env(:arc, :asset_host))
+    %{host: asset_host} = URI.parse(Application.get_env(:waffle, :asset_host))
 
     if String.downcase(host) == String.downcase(asset_host) && scheme == "https" do
       {"src", value}

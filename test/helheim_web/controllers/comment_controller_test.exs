@@ -319,7 +319,7 @@ defmodule HelheimWeb.CommentControllerTest do
       CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
 
       assert_error_sent :not_found, fn ->
-        post conn, "/calendar_event/1/comments", comment: @comment_attrs
+        post conn, "/calendar_events/1/comments", comment: @comment_attrs
       end
     end
   end

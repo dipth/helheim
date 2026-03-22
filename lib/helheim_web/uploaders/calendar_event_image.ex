@@ -1,6 +1,6 @@
 defmodule HelheimWeb.CalendarEventImage do
-  use Arc.Definition
-  use Arc.Ecto.Definition
+  use Waffle.Definition
+  use Waffle.Ecto.Definition
 
   @versions [:original, :large, :thumb, :tiny]
   @extension_whitelist ~w(.jpg .jpeg .gif .png)

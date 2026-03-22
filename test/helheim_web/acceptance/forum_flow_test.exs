@@ -31,6 +31,7 @@ defmodule HelheimWeb.ForumFlowTest do
     result = session
       |> visit("/forums/#{forum.id}")
       |> click(Query.link("Topic before edit"))
+      |> execute_script("window.scrollTo(0, 0)")
       |> click(edit_link())
       |> fill_in(title_field(), with: "Topic after edit!")
       |> click(save_changes_button())

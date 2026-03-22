@@ -14,7 +14,7 @@
         <tr>
           <td><samp><%= comment_link(@conn, comment) %></samp></td>
           <td>
-            <%= Crutches.String.truncate(comment.body, 200) %>
+            <%= Helheim.Helpers.FormatHelpers.truncate(comment.body, 200) %>
           </td>
           <td>
             <samp><%= lt(comment.inserted_at, "%Y-%m-%d %H:%M:%S") %></samp>

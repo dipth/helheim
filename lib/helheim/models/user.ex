@@ -1,7 +1,7 @@
 defmodule Helheim.User do
   use Helheim, :model
 
-  use Arc.Ecto.Schema
+  use Waffle.Ecto.Schema
   use Timex
   alias Helheim.Repo
   alias Helheim.User
@@ -300,7 +300,7 @@ defmodule Helheim.User do
 
   def update_password_reset_token!(user) do
     changeset = Ecto.Changeset.change user,
-      password_reset_token: SecureRandom.urlsafe_base64(16),
+      password_reset_token: :crypto.strong_rand_bytes(16) |> Base.url_encode64(padding: false),
       password_reset_token_updated_at: DateTime.utc_now
     Repo.update(changeset)
   end
@@ -374,10 +374,10 @@ defmodule Helheim.User do
   defp reset_confirmed_state_if_email_changed(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{email: email}} ->
-        changeset = put_change(changeset, :confirmation_token, SecureRandom.urlsafe_base64(16))
+        changeset = put_change(changeset, :confirmation_token, :crypto.strong_rand_bytes(16) |> Base.url_encode64(padding: false))
         changeset = put_change(changeset, :confirmed_at, nil)
         confirmation_token = get_field(changeset, :confirmation_token)
-        HelheimWeb.Email.registration_email(email, confirmation_token) |> Helheim.Mailer.deliver_later
+        HelheimWeb.Email.registration_email(email, confirmation_token) |> Helheim.Mailer.deliver_later!
         changeset
       _ ->
         changeset
@@ -395,7 +395,7 @@ defmodule Helheim.User do
 
   defp validate_captcha(changeset, field, options \\ []) do
     validate_change changeset, field, fn _, captcha ->
-      case Recaptcha.verify(captcha) do
+      case Helheim.Recaptcha.verify(captcha) do
         {:ok, _} -> []
         {:error, _} -> [{field, options[:message] || gettext("I too enjoy registering on websites, fellow human... Bleep Bloop!")}]
       end

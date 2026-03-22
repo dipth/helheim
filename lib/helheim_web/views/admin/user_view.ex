@@ -1,6 +1,6 @@
 defmodule HelheimWeb.Admin.UserView do
   use HelheimWeb, :view
-  import Phoenix.HTML.Link
+  import PhoenixHTMLHelpers.Link
   alias Helheim.Comment
   alias Helheim.User
 

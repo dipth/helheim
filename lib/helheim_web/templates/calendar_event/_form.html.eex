@@ -64,7 +64,7 @@
         <div class="form-control-feedback"><%= translate_error(message) %></div>
       <% else %>
         <small>
-          <%= gettext "Maximum file size: %{file_size}", file_size: HelheimWeb.CalendarEventImage.max_file_size |> Crutches.Format.Number.as_human_size %><br>
+          <%= gettext "Maximum file size: %{file_size}", file_size: HelheimWeb.CalendarEventImage.max_file_size |> Helheim.Helpers.FormatHelpers.human_size %><br>
         </small>
       <% end %>
     </div>

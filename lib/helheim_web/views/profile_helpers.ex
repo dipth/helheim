@@ -1,6 +1,6 @@
 defmodule HelheimWeb.ProfileHelpers do
-  import Phoenix.HTML.Link
-  import Phoenix.HTML.Tag
+  import PhoenixHTMLHelpers.Link
+  import PhoenixHTMLHelpers.Tag
   import HelheimWeb.Gettext
   import HelheimWeb.Router.Helpers
   alias HelheimWeb.Endpoint
