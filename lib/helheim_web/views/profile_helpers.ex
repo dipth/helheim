@@ -1,7 +1,7 @@
 defmodule HelheimWeb.ProfileHelpers do
   import PhoenixHTMLHelpers.Link
   import PhoenixHTMLHelpers.Tag
-  import HelheimWeb.Gettext
+  use Gettext, backend: HelheimWeb.Gettext
   import HelheimWeb.Router.Helpers
   alias HelheimWeb.Endpoint
   alias Helheim.User

@@ -1,5 +1,5 @@
 defmodule HelheimWeb.TimeHelpers do
-  import HelheimWeb.Gettext
+  use Gettext, backend: HelheimWeb.Gettext
 
   def lt(nil, _), do: nil
   def lt(timestamp, format) do

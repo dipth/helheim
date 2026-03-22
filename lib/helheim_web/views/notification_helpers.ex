@@ -1,7 +1,7 @@
 defmodule HelheimWeb.NotificationHelpers do
   import PhoenixHTMLHelpers.Tag
   import HelheimWeb.Router.Helpers
-  import HelheimWeb.Gettext
+  use Gettext, backend: HelheimWeb.Gettext
   alias Helheim.NotificationSubscription
 
   def notifications_switch(conn, user, type, %Helheim.User{} = profile) do

@@ -1,5 +1,5 @@
 defmodule HelheimWeb.PaginationHelpers do
-  import HelheimWeb.Gettext
+  use Gettext, backend: HelheimWeb.Gettext
   import PhoenixHTMLHelpers.Tag
   import PhoenixHTMLHelpers.Link
 

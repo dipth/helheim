@@ -5,7 +5,7 @@ defmodule Helheim.User do
   use Timex
   alias Helheim.Repo
   alias Helheim.User
-  import HelheimWeb.Gettext
+  use Gettext, backend: HelheimWeb.Gettext
 
   schema "users" do
     field :name,                            :string

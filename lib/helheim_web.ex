@@ -29,7 +29,7 @@ defmodule HelheimWeb do
       import Guardian.Plug, only: [current_resource: 1]
 
       import HelheimWeb.Router.Helpers
-      import HelheimWeb.Gettext
+      use Gettext, backend: HelheimWeb.Gettext
       import HelheimWeb.PaginationSanitization
       import HelheimWeb.ScrubGetParams, only: [scrub_get_params: 2]
 
@@ -56,7 +56,7 @@ defmodule HelheimWeb do
 
       import HelheimWeb.Router.Helpers
       import HelheimWeb.ErrorHelpers
-      import HelheimWeb.Gettext
+      use Gettext, backend: HelheimWeb.Gettext
       import HelheimWeb.TimeHelpers
       import HelheimWeb.PaginationHelpers
       import HelheimWeb.ProfileHelpers
@@ -80,7 +80,7 @@ defmodule HelheimWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import HelheimWeb.Gettext
+      use Gettext, backend: HelheimWeb.Gettext
     end
   end
 
