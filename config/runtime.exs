@@ -12,6 +12,7 @@ if config_env() == :prod do
   port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :helheim, HelheimWeb.Endpoint,
+    server: true,
     url: [scheme: "https", host: host, port: 443],
     http: [ip: {0, 0, 0, 0, 0, 0, 0, 0}, port: port],
     secret_key_base: secret_key_base,
@@ -20,8 +21,7 @@ if config_env() == :prod do
   config :helheim, Helheim.Repo,
     url: System.get_env("NEON_URL"),
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-    ssl: true,
-    ssl_opts: [
+    ssl: [
       server_name_indication: to_charlist(System.get_env("NEON_HOST")),
       verify: :verify_none
     ]

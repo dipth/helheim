@@ -16,7 +16,7 @@ import Config
 config :helheim, HelheimWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  check_origin: ["//helheim.dk", "//www.helheim.dk", "//staging.helheim.dk", "//alpha.helheim.dk"]
+  check_origin: ["//helheim.dk", "//www.helheim.dk", "//staging.helheim.dk", "//alpha.helheim.dk", "//beta.helheim.dk"]
 
 # Configure waffle storage for production
 config :waffle,
