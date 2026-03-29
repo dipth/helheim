@@ -7,7 +7,7 @@ primary_region = "arn"
   release_command = "/app/bin/helheim eval 'Helheim.Release.migrate()'"
 
 [env]
-  HOST = "beta.helheim.dk"
+  HOST = "www.helheim.dk"
   PORT = "4000"
 
 [http_service]
