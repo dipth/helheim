@@ -19,7 +19,7 @@ defmodule HelheimWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, formats: [html: "View", json: "View"]
+      use Phoenix.Controller, formats: [html: "View", json: "View", js: "View"]
 
       import Plug.Conn
       import Ecto

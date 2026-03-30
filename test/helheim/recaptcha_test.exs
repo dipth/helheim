@@ -69,16 +69,25 @@ defmodule Helheim.RecaptchaTest do
       assert is_binary(html)
     end
 
-    test "includes the Google reCAPTCHA script tag" do
+    test "in test_mode renders a hidden input with a dummy captcha value" do
       {:safe, html} = Recaptcha.render_widget()
-      assert html =~ "https://www.google.com/recaptcha/api.js"
+      assert html =~ ~s(name="g-recaptcha-response")
+      assert html =~ ~s(value="test_captcha_response")
     end
 
-    test "includes the g-recaptcha div with the configured public key" do
-      public_key = Application.get_env(:helheim, :recaptcha)[:public_key]
-      {:safe, html} = Recaptcha.render_widget()
-      assert html =~ "g-recaptcha"
-      assert html =~ "data-sitekey=\"#{public_key}\""
+    test "in production mode includes the Google reCAPTCHA script tag and sitekey" do
+      original = Application.get_env(:helheim, :recaptcha)
+      public_key = original[:public_key]
+      Application.put_env(:helheim, :recaptcha, Keyword.delete(original, :test_mode))
+
+      try do
+        {:safe, html} = Recaptcha.render_widget()
+        assert html =~ "https://www.google.com/recaptcha/api.js"
+        assert html =~ "g-recaptcha"
+        assert html =~ "data-sitekey=\"#{public_key}\""
+      after
+        Application.put_env(:helheim, :recaptcha, original)
+      end
     end
   end
 end
