@@ -54,7 +54,7 @@ defmodule HelheimWeb.DonationControllerTest do
         [%{changes: %{amount: ^amount}}] = args
       end
       assert html_response(conn, 200) =~ gettext("How much would you like to donate?")
-      assert get_flash(conn, :error) == gettext("Something went wrong...")
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) == gettext("Something went wrong...")
     end
   end
 

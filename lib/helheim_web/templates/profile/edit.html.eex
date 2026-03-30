@@ -69,7 +69,7 @@
                 <%= date_select f, :birthday, builder: fn b -> %>
                   <%= b.(:day, prompt: "", class: "custom-select") %> /
                   <%= b.(:month, options: gettext_month_options(),prompt: "", class: "custom-select") %> /
-                  <%= b.(:year, options: Timex.now.year..(Timex.now.year - 100), prompt: "", class: "custom-select") %>
+                  <%= b.(:year, options: Timex.now.year..(Timex.now.year - 100)//-1, prompt: "", class: "custom-select") %>
                 <% end %>
                 <small class="form-text">
                   <i class="fa fa-info fa-fw"></i>

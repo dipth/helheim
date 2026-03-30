@@ -57,12 +57,17 @@ defmodule Helheim.Recaptcha do
   """
   @spec render_widget() :: {:safe, String.t()}
   def render_widget do
-    public_key = Application.get_env(:helheim, :recaptcha)[:public_key]
+    config = Application.get_env(:helheim, :recaptcha)
 
-    html = """
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <div class="g-recaptcha" data-sitekey="#{public_key}"></div>
-    """
+    html =
+      if config[:test_mode] do
+        ~s(<input type="hidden" name="g-recaptcha-response" value="test_captcha_response">)
+      else
+        """
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <div class="g-recaptcha" data-sitekey="#{config[:public_key]}"></div>
+        """
+      end
 
     {:safe, html}
   end

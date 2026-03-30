@@ -45,7 +45,8 @@ config :stripity_stripe,
 # Configure ReCaptcha
 config :helheim, :recaptcha,
   public_key: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
-  secret: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
+  secret: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe",
+  test_mode: true
 
 # Configure wallaby
 config :wallaby,
