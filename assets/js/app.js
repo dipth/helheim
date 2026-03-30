@@ -45,6 +45,7 @@ import { CalendarEventForm } from "./calendar_event_form";
 import { PreferencesForm } from "./preferences_form";
 import { BlockForm } from "./block_form";
 import { IgnoreForm } from "./ignore_form";
+import { AprilFoolsFly } from "./april_fools_fly";
 
 import css from "../css/app.css.scss"
 
@@ -71,6 +72,7 @@ export var App = {
     PreferencesForm.run();
     BlockForm.run();
     IgnoreForm.run();
+    AprilFoolsFly.run();
   }
 }
 
