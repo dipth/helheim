@@ -14,12 +14,10 @@ blocks:
           value: test
       prologue:
         commands:
-          - sem-version node 16.16.0
-          - sem-version elixir 1.13.4
+          - sem-version node 24.14.0
+          - sem-version elixir 1.19.5
 
-          - npm install -g brunch
-
-          - sem-service start postgres 11.5
+          - sem-service start postgres 15
 
           - checkout
 

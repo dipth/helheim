@@ -1,6 +1,6 @@
 <%= form_for @changeset, @action, fn f -> %>
   <div class="card-block">
-    <div class="form-group <%= if f.errors[:body] do 'has-danger' end %>">
+    <div class="form-group <%= if f.errors[:body] do "has-danger" end %>">
       <%= label f, :body, gettext("Description"), class: "control-label" %>
       <%= textarea f, :body, class: "form-control", rows: 10 %>
       <%= if message = f.errors[:body] do %>

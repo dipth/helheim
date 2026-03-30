@@ -11,7 +11,7 @@ defmodule HelheimWeb.AcceptanceCase do
       import Ecto.Query
 
       import HelheimWeb.Router.Helpers
-      import HelheimWeb.Gettext
+      use Gettext, backend: HelheimWeb.Gettext
       import Helheim.Factory
 
       defp sign_in(session, user) do
@@ -31,7 +31,7 @@ defmodule HelheimWeb.AcceptanceCase do
   end
 
   setup tags do
-    Gettext.put_locale(HelheimWeb.Gettext, "da")
+    Gettext.put_locale("da")
 
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Helheim.Repo, ownership_timeout: 60000)
 

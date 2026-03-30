@@ -1,0 +1,22 @@
+app = "helheim-dk"
+primary_region = "arn"
+
+[build]
+
+[deploy]
+  release_command = "/app/bin/helheim eval 'Helheim.Release.migrate()'"
+
+[env]
+  HOST = "www.helheim.dk"
+  PORT = "4000"
+
+[http_service]
+  internal_port = 4000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"

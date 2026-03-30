@@ -1,8 +1,8 @@
 defmodule HelheimWeb.NotificationView do
   use HelheimWeb, :view
-  import Phoenix.HTML.Link
-  import Phoenix.HTML.Tag
-  import HelheimWeb.Gettext
+  import PhoenixHTMLHelpers.Link
+  import PhoenixHTMLHelpers.Tag
+  use Gettext, backend: HelheimWeb.Gettext
   alias Helheim.{Notification, User, BlogPost, PhotoAlbum, Photo, ForumTopic, CalendarEvent}
 
   def notification_item(conn, notification, opts \\ %{}) do

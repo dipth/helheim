@@ -23,7 +23,7 @@ defmodule HelheimWeb.PrivateMessageControllerTest do
         [%User{id: ^user_id}, %User{id: ^partner_id}, "bar"] = args
       end
       assert redirected_to(conn) == private_conversation_path(conn, :show, partner.id)
-      assert get_flash(conn, :success) == gettext("Message successfully sent")
+      assert Phoenix.Flash.get(conn.assigns.flash, :success) == gettext("Message successfully sent")
     end
 
     test_with_mock "it redirects to the conversation with an error flash message when unsuccessfull", %{conn: conn, user: user, partner: partner},
@@ -37,7 +37,7 @@ defmodule HelheimWeb.PrivateMessageControllerTest do
         [%User{id: ^user_id}, %User{id: ^partner_id}, "bar"] = args
       end
       assert redirected_to(conn) == private_conversation_path(conn, :show, partner.id)
-      assert get_flash(conn, :error) == gettext("Unable to send message")
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) == gettext("Unable to send message")
     end
 
     test_with_mock "it does not invoke the PrivateMessageService if the partner does not exist but instead shows a 404 error", %{conn: conn},

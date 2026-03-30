@@ -1,7 +1,6 @@
 defmodule HelheimWeb.Router do
   use HelheimWeb, :router
   use Plug.ErrorHandler
-  use Sentry.Plug
 
   import Phoenix.LiveDashboard.Router
 
@@ -11,6 +10,7 @@ defmodule HelheimWeb.Router do
     plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Sentry.PlugContext
     plug HelheimWeb.Locale
   end
 
@@ -153,7 +153,7 @@ defmodule HelheimWeb.Router do
   #   pipe_through :api
   # end
 
-  if Application.fetch_env!(:helheim, :env) == :dev do
+  if Application.compile_env!(:helheim, :env) == :dev do
     forward "/sent_emails", Bamboo.SentEmailViewerPlug
   end
 end

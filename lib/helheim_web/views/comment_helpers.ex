@@ -1,5 +1,5 @@
 defmodule HelheimWeb.CommentHelpers do
-  import Phoenix.HTML.Tag
+  import PhoenixHTMLHelpers.Tag
 
   def comment_count_badge(%{hide_comments: true}) do
     content_tag :span, class: "badge badge-default" do

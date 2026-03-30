@@ -28,7 +28,7 @@ defmodule HelheimWeb.ForumReplyControllerTest do
         [%ForumTopic{id: ^topic_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)       =~ forum_forum_topic_path(conn, :show, topic.forum, topic, page: "last")
-      assert get_flash(conn, :success) == gettext("Reply created successfully")
+      assert Phoenix.Flash.get(conn.assigns.flash, :success) == gettext("Reply created successfully")
     end
 
     test_with_mock "it redirects to the topic page with an error flash message when unsuccessfull", %{conn: conn, user: user},
@@ -44,7 +44,7 @@ defmodule HelheimWeb.ForumReplyControllerTest do
         [%ForumTopic{id: ^topic_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)     == forum_forum_topic_path(conn, :show, topic.forum, topic)
-      assert get_flash(conn, :error) == gettext("Reply could not be created")
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) == gettext("Reply could not be created")
     end
 
     test_with_mock "it does not invoke the ForumReplyService if the topic does not exist but instead shows a 404 error", %{conn: conn},

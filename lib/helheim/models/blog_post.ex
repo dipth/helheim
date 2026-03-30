@@ -32,7 +32,7 @@ defmodule Helheim.BlogPost do
   """
   def newest_for_frontpage(current_user, limit, ignoree_ids \\ []) do
     from bp in (Helheim.BlogPost |> published |> visible_by(current_user) |> not_from_ignoree(ignoree_ids) |> not_private |> newest),
-    join: partition in fragment(@newest_for_frontpage_partition_query),
+    join: partition in fragment(@newest_for_frontpage_partition_query), on: true,
     where: partition.row_number <= ^1 and partition.id == bp.id,
     limit: ^limit
   end

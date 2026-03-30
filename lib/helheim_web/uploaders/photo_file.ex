@@ -1,6 +1,6 @@
 defmodule HelheimWeb.PhotoFile do
-  use Arc.Definition
-  use Arc.Ecto.Definition
+  use Waffle.Definition
+  use Waffle.Ecto.Definition
 
   @versions [:original, :large, :thumb, :nsfw_thumb]
   @extension_whitelist ~w(.jpg .jpeg .gif .png)
@@ -26,7 +26,7 @@ defmodule HelheimWeb.PhotoFile do
 
   def transform(:nsfw_thumb, _) do
     {:convert, fn(input, output) ->
-      overlay = "#{File.cwd!}/assets/static/images/nsfw_overlay.png"
+      overlay = Application.app_dir(:helheim, "priv/static/images/nsfw_overlay.png")
       command = "#{input} -auto-orient -strip -thumbnail 250x250^ -gravity center -extent 250x250 -blur 0x20 #{overlay} -composite jpg:#{output}"
       command
     end, :jpg}

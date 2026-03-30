@@ -1,69 +1,42 @@
 defmodule Helheim.Downloader do
+  @moduledoc """
+  Downloads files from URLs to local paths using Req.
+  """
+
+  @timeout 300_000
+
+  @doc """
+  Downloads the file at `url` to the local filesystem at `path`.
+
+  Creates any necessary parent directories. Returns `{:ok, bytes_received}`
+  on success or `{:error, reason}` on failure.
+
+  ## Examples
+
+      iex> Helheim.Downloader.download("https://example.com/file.jpg", "/tmp/file.jpg")
+      {:ok, 12345}
+
+  """
+  @spec download(String.t(), String.t()) :: {:ok, non_neg_integer()} | {:error, String.t()}
   def download(url, path) do
-    timeout = 300_000 # 5 minutes
-    do_download = fn ->
-      :ok = Path.dirname(path) |> File.mkdir_p()
-      {:ok, file} = File.open(path, [:write])
+    :ok = Path.dirname(path) |> File.mkdir_p()
 
-      opts = [stream_to: self(), follow_redirect: true]
-      {:ok, %HTTPoison.AsyncResponse{id: id}} = HTTPoison.get(url, [], opts)
-      result =
-        receive_data(file, %{
-          received_bytes: 0,
-          total_bytes: 0,
-          id: id
-        })
+    case Req.get(url, receive_timeout: @timeout, redirect: true, into: File.stream!(path)) do
+      {:ok, %Req.Response{status: 200}} ->
+        %{size: size} = File.stat!(path)
+        {:ok, size}
 
-      :ok = File.close(file)
+      {:ok, %Req.Response{status: 404}} ->
+        File.rm(path)
+        {:error, "File not found"}
 
-      result
-    end
+      {:ok, %Req.Response{status: code}} ->
+        File.rm(path)
+        {:error, "Received unexpected status code #{code}"}
 
-    do_download
-    |> Task.async()
-    |> Task.await(timeout) # blocking a potentially very long process!
-  end
-
-  defp receive_data(file, %{id: id} = state) do
-    receive do
-      %HTTPoison.AsyncStatus{code: code, id: id} ->
-        case code do
-          200 ->
-            receive_data(file, %{state | id: id})
-
-          404 ->
-            {:error, "File not found"}
-
-          _ ->
-            {:error, "Received unexpected status code #{code}"}
-        end
-
-      %HTTPoison.AsyncHeaders{headers: headers} ->
-        total_bytes =
-          headers
-          |> Enum.find(fn {name, _} -> name == "Content-Length" end)
-          |> elem(1)
-          |> String.to_integer()
-
-        receive_data(file, %{state | total_bytes: total_bytes})
-
-      %HTTPoison.AsyncChunk{chunk: chunk, id: ^id} ->
-        IO.binwrite(file, chunk)
-        new_state = %{state |
-          received_bytes: state.received_bytes + byte_size(chunk)
-        }
-
-        receive_data(file, new_state)
-
-      %HTTPoison.AsyncEnd{id: ^id} ->
-        if state.total_bytes === state.received_bytes do
-          {:ok, state.received_bytes}
-        else
-          {:error, "Expected to receive #{state.total_bytes} bytes but got #{state.received_bytes}"}
-        end
-
-      %HTTPoison.Error{id: ^id, reason: {:closed, :timeout}} ->
-        {:error, "Receiving a response chunk timed out"}
+      {:error, reason} ->
+        File.rm(path)
+        {:error, inspect(reason)}
     end
   end
 end

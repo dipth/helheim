@@ -18,7 +18,7 @@
           </td>
           <td>
             <strong><%= blog_post.title %></strong>
-            <p><small><%= Crutches.String.truncate(blog_post.body, 200) %></small></p>
+            <p><small><%= Helheim.Helpers.FormatHelpers.truncate(blog_post.body, 200) %></small></p>
           </td>
           <td>
             <samp><%= lt(blog_post.published_at, "%Y-%m-%d %H:%M:%S") %></samp>

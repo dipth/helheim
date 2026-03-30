@@ -6,7 +6,7 @@ defmodule Helheim.Friendship do
   alias Helheim.Friendship
   alias Helheim.User
   alias HelheimWeb.NotificationChannel
-  import HelheimWeb.Gettext
+  use Gettext, backend: HelheimWeb.Gettext
 
   schema "friendships" do
     belongs_to :sender,    User

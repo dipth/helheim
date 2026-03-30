@@ -2,7 +2,7 @@
   <div class="card-block p-2">
     <h1 class="mb-2"><%= gettext "New Registration" %></h1>
     <%= form_for @changeset, registration_path(@conn, :create), fn f -> %>
-      <div class="form-group <%= if f.errors[:username] do 'has-danger' end %>">
+      <div class="form-group <%= if f.errors[:username] do "has-danger" end %>">
         <div class="controls">
           <div class="input-prepend input-group">
             <span class="input-group-addon"><i class="fa fa-tag"></i></span>
@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <div class="form-group <%= if f.errors[:name] do 'has-danger' end %>">
+      <div class="form-group <%= if f.errors[:name] do "has-danger" end %>">
         <div class="controls">
           <div class="input-prepend input-group">
             <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <div class="form-group <%= if f.errors[:email] do 'has-danger' end %>">
+      <div class="form-group <%= if f.errors[:email] do "has-danger" end %>">
         <div class="controls">
           <div class="input-prepend input-group">
             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div class="form-group mb-2 <%= if f.errors[:password] do 'has-danger' end %>">
+      <div class="form-group mb-2 <%= if f.errors[:password] do "has-danger" end %>">
         <div class="controls">
           <div class="input-prepend input-group">
             <span class="input-group-addon"><i class="fa fa-key"></i></span>
@@ -58,7 +58,7 @@
         </div>
       </div>
 
-      <div class="form-group mb-2 <%= if f.errors[:password_confirmation] do 'has-danger' end %>">
+      <div class="form-group mb-2 <%= if f.errors[:password_confirmation] do "has-danger" end %>">
         <div class="controls">
           <div class="input-prepend input-group">
             <span class="input-group-addon"><i class="fa fa-key"></i></span>
@@ -72,9 +72,9 @@
         </div>
       </div>
 
-      <div class="form-group mb-2 <%= if f.errors[:captcha] do 'has-danger' end %>">
+      <div class="form-group mb-2 <%= if f.errors[:captcha] do "has-danger" end %>">
         <div class="controls">
-          <%= raw Recaptcha.Template.display %>
+          <%= Helheim.Recaptcha.render_widget() %>
           <%= if message = f.errors[:captcha] do %>
             <div class="form-control-feedback"><%= translate_error(message) %></div>
           <% end %>

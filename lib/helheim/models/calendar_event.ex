@@ -1,6 +1,6 @@
 defmodule Helheim.CalendarEvent do
   use Helheim, :model
-  use Arc.Ecto.Schema
+  use Waffle.Ecto.Schema
 
   alias Helheim.CalendarEvent
   alias Helheim.Repo
@@ -89,7 +89,7 @@ defmodule Helheim.CalendarEvent do
 
   defp put_uuid(changeset) do
     case get_field(changeset, :uuid) do
-      nil -> put_change(changeset, :uuid, SecureRandom.uuid())
+      nil -> put_change(changeset, :uuid, Ecto.UUID.generate())
       _ ->   changeset
     end
   end

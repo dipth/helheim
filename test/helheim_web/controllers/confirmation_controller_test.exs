@@ -30,14 +30,14 @@ defmodule HelheimWeb.ConfirmationControllerTest do
     test "it confirms a user and redirects when using a valid confirmation token", %{conn: conn} do
       user = insert(:user, confirmed_at: nil)
       assert user.confirmed_at == nil
-      conn = get conn, "confirmations/#{user.confirmation_token}"
+      conn = get conn, "/confirmations/#{user.confirmation_token}"
       user = Repo.get(User, user.id)
       refute user.confirmed_at == nil
       assert html_response(conn, 302)
     end
 
     test "it redirects when using an invalid confirmation token", %{conn: conn} do
-      conn = get conn, "confirmations/someInvalidToken"
+      conn = get conn, "/confirmations/someInvalidToken"
       assert html_response(conn, 302)
     end
   end

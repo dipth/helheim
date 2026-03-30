@@ -19,7 +19,7 @@
     </div>
     <div class="card-block">
       <ul class="list-group mb-1">
-        <%#= for forum <- Ecto.assoc(forum_category, :forums) |> Helheim.Forum.in_positional_order |> Helheim.Repo.all do %>
+        <%!-- for forum <- Ecto.assoc(forum_category, :forums) |> Helheim.Forum.in_positional_order |> Helheim.Repo.all do --%>
         <%= for forum <- forum_category.forums do %>
           <li class="list-group-item justify-content-between">
             <span>

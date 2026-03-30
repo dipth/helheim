@@ -9,7 +9,7 @@ config :helheim, HelheimWeb.Endpoint,
 config :helheim, :sql_sandbox, true
 
 # Print only warnings and errors during test
-config :logger, level: :warn
+config :logger, level: :warning
 
 # Configure your database
 config :helheim, Helheim.Repo,
@@ -32,9 +32,9 @@ config :pbkdf2_elixir, :rounds, 1
 config :helheim, Helheim.Mailer,
   adapter: Bamboo.TestAdapter
 
-# Configure arc
-config :arc,
-  storage: Arc.Storage.Local
+# Configure waffle
+config :waffle,
+  storage: Waffle.Storage.Local
 
 # Configure Stripe
 config :helheim, :stripe,
@@ -43,9 +43,10 @@ config :stripity_stripe,
   secret_key: "sk_test_abababababababababababab"
 
 # Configure ReCaptcha
-config :recaptcha,
+config :helheim, :recaptcha,
   public_key: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
-  secret: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
+  secret: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe",
+  test_mode: true
 
 # Configure wallaby
 config :wallaby,

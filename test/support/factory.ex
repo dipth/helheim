@@ -181,7 +181,7 @@ defmodule Helheim.Factory do
   def calendar_event_factory do
     %Helheim.CalendarEvent{
       user:           build(:user),
-      uuid:           SecureRandom.uuid(),
+      uuid:           Ecto.UUID.generate(),
       title:          "Test Event",
       description:    "This is an awesome event for testing",
       starts_at:      Timex.shift(Timex.now, days: 14),

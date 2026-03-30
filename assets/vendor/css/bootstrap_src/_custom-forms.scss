@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // scss-lint:disable PropertyCount
 
 // Embedded icons from Open Iconic.
@@ -59,7 +61,7 @@
 
 .custom-control-indicator {
   position: absolute;
-  top: (($line-height-base - $custom-control-indicator-size) / 2);
+  top: math.div($line-height-base - $custom-control-indicator-size, 2);
   left: 0;
   display: block;
   width: $custom-control-indicator-size;

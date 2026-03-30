@@ -1,7 +1,7 @@
 defmodule HelheimWeb.Auth.ErrorHandler do
   import Phoenix.Controller
   import HelheimWeb.Router.Helpers
-  import HelheimWeb.Gettext
+  use Gettext, backend: HelheimWeb.Gettext
 
   def auth_error(conn, {type, reason}, _opts) do
     conn

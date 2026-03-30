@@ -4,7 +4,7 @@ defmodule HelheimWeb.ConfirmationController do
   alias HelheimWeb.Email
   alias Helheim.Mailer
 
-  plug :put_layout, "app_special.html"
+  plug :put_layout, {HelheimWeb.LayoutView, "app_special.html"}
 
   def new(conn, _params) do
     render conn, "new.html"
@@ -47,7 +47,7 @@ defmodule HelheimWeb.ConfirmationController do
 
   defp send_confirmation(conn, user) do
     Email.registration_email(user.email, user.confirmation_token)
-    |> Mailer.deliver_later
+    |> Mailer.deliver_later!()
 
     conn
     |> put_flash(:success, gettext("Confirmation e-mail sent!"))

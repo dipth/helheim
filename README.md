@@ -4,24 +4,17 @@
 
 ## Requirements:
 
-  * `Erlang` 25.0.2
-  * `Elixir` 1.13.4-otp-25
-  * `Python` 2.7.18
-  * `Node.js` 18.4.0
+  * `Erlang/OTP` 28.4.1
+  * `Elixir` 1.19.5-otp-28
+  * `Node.js` 24.14.0
   * `yarn` 1.21.1
   * `Imagemagick` 7.0.9-12
-  * `PostgreSQL` 12.1
-  * `Chromedriver` 2.36
+  * `PostgreSQL` 15
+  * `Chromedriver` (latest, for acceptance tests)
 
-The recommended way to install Erlang, Elixir, Python and Node.js is through the modular version manager asdf:
+The recommended way to install Erlang, Elixir and Node.js is through the modular version manager mise:
 
-- https://github.com/asdf-vm/asdf
-- https://github.com/asdf-vm/asdf-erlang
-- https://github.com/asdf-vm/asdf-elixir
-- https://github.com/danhper/asdf-python
-- https://github.com/asdf-vm/asdf-nodejs
-
-The remaining can be installed with [Homebrew](https://brew.sh/).
+- https://mise.jdx.dev/
 
 ## Getting started:
 

@@ -1,6 +1,6 @@
 defmodule HelheimWeb.Email do
   use Bamboo.Phoenix, view: HelheimWeb.EmailView
-  import HelheimWeb.Gettext
+  use Gettext, backend: HelheimWeb.Gettext
 
   def registration_email(email, confirmation_token) do
     base_email()

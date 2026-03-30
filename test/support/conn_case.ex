@@ -26,7 +26,7 @@ defmodule HelheimWeb.ConnCase do
       import Ecto.Query
 
       import HelheimWeb.Router.Helpers
-      import HelheimWeb.Gettext
+      use Gettext, backend: HelheimWeb.Gettext
       import Helheim.Factory
 
       alias Helheim.Repo
@@ -80,7 +80,7 @@ defmodule HelheimWeb.ConnCase do
   end
 
   setup tags do
-    Gettext.put_locale(HelheimWeb.Gettext, "da")
+    Gettext.put_locale("da")
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Helheim.Repo, ownership_timeout: 60000)
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(Helheim.Repo, {:shared, self()})

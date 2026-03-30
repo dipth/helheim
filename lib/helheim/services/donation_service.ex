@@ -24,11 +24,12 @@ defmodule Helheim.DonationService do
   end
 
   defp charge(_repo, %{donation: %{token: token, amount: amount, user_id: user_id}}) do
-    Stripe.Charge.create(amount, [
+    Stripe.Charge.create(%{
+      amount: amount,
       source: token,
       currency: "dkk",
       description: "Helheim donation from user: #{user_id}"
-    ])
+    })
   end
 
   defp write_charge(_repo, %{donation: donation, charge: charge}) do

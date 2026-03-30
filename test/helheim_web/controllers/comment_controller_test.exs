@@ -86,7 +86,7 @@ defmodule HelheimWeb.CommentControllerTest do
         [%User{id: ^profile_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)       == public_profile_comment_path(conn, :index, profile.id)
-      assert get_flash(conn, :success) == gettext("Comment created successfully")
+      assert Phoenix.Flash.get(conn.assigns.flash, :success) == gettext("Comment created successfully")
     end
 
     test_with_mock "it redirects to the profile comments page with an error flash message when unsuccessfull", %{conn: conn, user: user},
@@ -102,7 +102,7 @@ defmodule HelheimWeb.CommentControllerTest do
         [%User{id: ^profile_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)     == public_profile_comment_path(conn, :index, profile.id)
-      assert get_flash(conn, :error) == gettext("Unable to create comment")
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) == gettext("Unable to create comment")
     end
 
     test_with_mock "it does not invoke the CommentService if the profile does not exist but instead shows a 404 error", %{conn: conn},
@@ -155,7 +155,7 @@ defmodule HelheimWeb.CommentControllerTest do
         [%BlogPost{id: ^blog_post_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)       == public_profile_blog_post_path(conn, :show, blog_post.user, blog_post)
-      assert get_flash(conn, :success) == gettext("Comment created successfully")
+      assert Phoenix.Flash.get(conn.assigns.flash, :success) == gettext("Comment created successfully")
     end
 
     test_with_mock "it redirects to the blog post page with an error flash message when unsuccessfull", %{conn: conn, user: user},
@@ -171,7 +171,7 @@ defmodule HelheimWeb.CommentControllerTest do
         [%BlogPost{id: ^blog_post_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)     == public_profile_blog_post_path(conn, :show, blog_post.user, blog_post)
-      assert get_flash(conn, :error) == gettext("Unable to create comment")
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) == gettext("Unable to create comment")
     end
 
     test_with_mock "it does not invoke the CommentService if the blog post does not exist but instead shows a 404 error", %{conn: conn},
@@ -225,7 +225,7 @@ defmodule HelheimWeb.CommentControllerTest do
         [%Photo{id: ^photo_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)       == public_profile_photo_album_photo_path(conn, :show, photo.photo_album.user_id, photo.photo_album.id, photo)
-      assert get_flash(conn, :success) == gettext("Comment created successfully")
+      assert Phoenix.Flash.get(conn.assigns.flash, :success) == gettext("Comment created successfully")
     end
 
     test_with_mock "it redirects to the photo page with an error flash message when unsuccessfull", %{conn: conn, user: user},
@@ -241,7 +241,7 @@ defmodule HelheimWeb.CommentControllerTest do
         [%Photo{id: ^photo_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)     == public_profile_photo_album_photo_path(conn, :show, photo.photo_album.user_id, photo.photo_album.id, photo)
-      assert get_flash(conn, :error) == gettext("Unable to create comment")
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) == gettext("Unable to create comment")
     end
 
     test_with_mock "it does not invoke the CommentService if the photo does not exist but instead shows a 404 error", %{conn: conn},
@@ -296,7 +296,7 @@ defmodule HelheimWeb.CommentControllerTest do
         [%CalendarEvent{id: ^calendar_event_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)       == calendar_event_path(conn, :show, calendar_event.id)
-      assert get_flash(conn, :success) == gettext("Comment created successfully")
+      assert Phoenix.Flash.get(conn.assigns.flash, :success) == gettext("Comment created successfully")
     end
 
     test_with_mock "it redirects to the event page with an error flash message when unsuccessfull", %{conn: conn, user: user},
@@ -312,14 +312,14 @@ defmodule HelheimWeb.CommentControllerTest do
         [%CalendarEvent{id: ^calendar_event_id}, %User{id: ^user_id}, ^body, false] = args
       end
       assert redirected_to(conn)     == calendar_event_path(conn, :show, calendar_event.id)
-      assert get_flash(conn, :error) == gettext("Unable to create comment")
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) == gettext("Unable to create comment")
     end
 
     test_with_mock "it does not invoke the CommentService if the event does not exist but instead shows a 404 error", %{conn: conn},
       CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
 
       assert_error_sent :not_found, fn ->
-        post conn, "/calendar_event/1/comments", comment: @comment_attrs
+        post conn, "/calendar_events/1/comments", comment: @comment_attrs
       end
     end
   end

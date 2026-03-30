@@ -1,7 +1,7 @@
 defmodule HelheimWeb.ProfileHelpers do
-  import Phoenix.HTML.Link
-  import Phoenix.HTML.Tag
-  import HelheimWeb.Gettext
+  import PhoenixHTMLHelpers.Link
+  import PhoenixHTMLHelpers.Tag
+  use Gettext, backend: HelheimWeb.Gettext
   import HelheimWeb.Router.Helpers
   alias HelheimWeb.Endpoint
   alias Helheim.User
@@ -23,7 +23,6 @@ defmodule HelheimWeb.ProfileHelpers do
 
   ### PRIVATE
 
-  defp donor_badge(nil), do: {:safe, ""}
   defp donor_badge(user) do
     cond do
       Donation.recently_donated?(user) ->

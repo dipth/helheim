@@ -44,11 +44,11 @@ defmodule Helheim.NotificationSubscription do
     where: s.type == ^type
   end
 
-  def for_subject(query, %User{} = profile),                 do: from s in query, where: s.profile_id == ^profile.id
-  def for_subject(query, %BlogPost{} = blog_post),           do: from s in query, where: s.blog_post_id == ^blog_post.id
-  def for_subject(query, %ForumTopic{} = forum_topic),       do: from s in query, where: s.forum_topic_id == ^forum_topic.id
-  def for_subject(query, %Photo{} = photo),                  do: from s in query, where: s.photo_id == ^photo.id
-  def for_subject(query, %CalendarEvent{} = calendar_event), do: from s in query, where: s.calendar_event_id == ^calendar_event.id
+  def for_subject(query, %User{} = profile),                 do: from(s in query, where: s.profile_id == ^profile.id)
+  def for_subject(query, %BlogPost{} = blog_post),           do: from(s in query, where: s.blog_post_id == ^blog_post.id)
+  def for_subject(query, %ForumTopic{} = forum_topic),       do: from(s in query, where: s.forum_topic_id == ^forum_topic.id)
+  def for_subject(query, %Photo{} = photo),                  do: from(s in query, where: s.photo_id == ^photo.id)
+  def for_subject(query, %CalendarEvent{} = calendar_event), do: from(s in query, where: s.calendar_event_id == ^calendar_event.id)
 
   def enabled(query) do
     from s in query,

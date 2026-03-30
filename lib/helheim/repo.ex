@@ -3,10 +3,14 @@ defmodule Helheim.Repo do
   use Scrivener, page_size: 25
 
   @doc """
-  Dynamically loads the repository url from the
-  DATABASE_URL environment variable.
+  Dynamically loads the repository url from the DATABASE_URL environment
+  variable if present, otherwise falls back to whatever is configured
+  via config files (e.g. NEON_URL in runtime.exs).
   """
   def init(_, opts) do
-    {:ok, Keyword.put(opts, :url, System.get_env("DATABASE_URL"))}
+    case System.get_env("DATABASE_URL") do
+      nil -> {:ok, opts}
+      url -> {:ok, Keyword.put(opts, :url, url)}
+    end
   end
 end

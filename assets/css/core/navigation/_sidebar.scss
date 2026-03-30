@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .sidebar {
   padding: $sidebar-padding;
   color: $sidebar-color;
@@ -133,7 +135,7 @@
 
         i {
           width: 20px;
-          margin: 0 ($sidebar-nav-link-padding-x / 2) 0 0;
+          margin: 0 math.div($sidebar-nav-link-padding-x, 2) 0 0;
           font-size: 14px;
           color: $sidebar-nav-link-icon-color;
           text-align: center;
@@ -149,14 +151,14 @@
 
           &::before {
             position: absolute;
-            top: ($sidebar-nav-link-padding-y + ($font-size-base / 4));
+            top: ($sidebar-nav-link-padding-y + math.div($font-size-base, 4));
             right: $sidebar-nav-link-padding-x;
             display: block;
             width: ($font-size-base);
             height: ($font-size-base);
             padding: 0;
             font-size: $font-size-base;
-            line-height: ($font-size-base * 3 / 4);
+            line-height: math.div($font-size-base * 3, 4);
             text-align: center;
             content: "\2039";
             transition: .3s;
@@ -208,7 +210,7 @@
 
       a.nav-label {
         display: block;
-        padding: ($sidebar-nav-link-padding-y / 8) $sidebar-nav-link-padding-x;
+        padding: math.div($sidebar-nav-link-padding-y, 8) $sidebar-nav-link-padding-x;
         color: $sidebar-nav-title-color;
 
         &:hover {
@@ -218,7 +220,7 @@
 
         i {
           width: 20px;
-          margin: -3px ($sidebar-nav-link-padding-x / 2) 0 0;
+          margin: -3px math.div($sidebar-nav-link-padding-x, 2) 0 0;
           font-size: 10px;
           color: $sidebar-nav-link-icon-color;
           text-align: center;

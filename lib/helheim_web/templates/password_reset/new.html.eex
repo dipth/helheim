@@ -3,7 +3,7 @@
     <h1><%= gettext "Forgot your password?" %></h1>
     <p class="text-muted"><%= gettext "If you forgot your password then fill out your e-mail below and we will send you instructions about how to reset it." %></p>
     <%= form_for @conn, password_reset_path(@conn, :create), [as: "password_reset"], fn f -> %>
-      <div class="form-group <%= if f.errors[:email] do 'has-danger' end %>">
+      <div class="form-group <%= if f.errors[:email] do "has-danger" end %>">
         <div class="controls">
           <div class="input-prepend input-group">
             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>

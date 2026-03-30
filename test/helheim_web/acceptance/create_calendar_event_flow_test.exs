@@ -8,11 +8,9 @@ defmodule HelheimWeb.CreateCalendarEventFlowTest do
   defp title_field,           do: Query.text_field(gettext("Title"))
   defp description_field,     do: Query.text_field(gettext("Give a good description of the event"))
   defp starts_at_flatpickr,   do: Query.css("div.form-group.starts-at .flatpickr-calendar")
-  defp starts_at_day,         do: Query.css("div.form-group.starts-at .flatpickr-day", text: "15")
   defp starts_at_hour,        do: Query.css("div.form-group.starts-at input.flatpickr-hour")
   defp starts_at_minute,      do: Query.css("div.form-group.starts-at input.flatpickr-minute")
   defp ends_at_flatpickr,     do: Query.css("div.form-group.ends-at .flatpickr-calendar")
-  defp ends_at_day,           do: Query.css("div.form-group.ends-at .flatpickr-day", text: "16")
   defp ends_at_hour,          do: Query.css("div.form-group.ends-at input.flatpickr-hour")
   defp ends_at_minute,        do: Query.css("div.form-group.ends-at input.flatpickr-minute")
   defp location_field,        do: Query.text_field(gettext("Where does the event take place?"))
@@ -29,18 +27,27 @@ defmodule HelheimWeb.CreateCalendarEventFlowTest do
       |> click(create_link())
       |> fill_in(title_field(), with: "Super duper event!")
       |> fill_in(description_field(), with: "This is a super duper test event.")
-      |> assert_has(starts_at_flatpickr())
-      |> click(starts_at_day())
-      |> assert_has(starts_at_hour())
-      |> fill_in(starts_at_hour(), with: "16")
-      |> assert_has(starts_at_minute())
-      |> fill_in(starts_at_minute(), with: "25")
-      |> assert_has(ends_at_flatpickr())
-      |> click(ends_at_day())
-      |> assert_has(ends_at_hour())
-      |> fill_in(ends_at_hour(), with: "18")
-      |> assert_has(ends_at_minute())
-      |> fill_in(ends_at_minute(), with: "45")
+      |> find(starts_at_flatpickr(), fn calendar ->
+        calendar
+        |> click(Query.css(".flatpickr-day", text: "15"))
+      end)
+      |> find(starts_at_hour(), fn hour ->
+        hour |> Element.clear() |> Element.fill_in(with: "16")
+      end)
+      |> find(starts_at_minute(), fn minute ->
+        minute |> Element.clear() |> Element.fill_in(with: "25")
+      end)
+      |> click(title_field())
+      |> find(ends_at_flatpickr(), fn calendar ->
+        calendar
+        |> click(Query.css(".flatpickr-day", text: "16"))
+      end)
+      |> find(ends_at_hour(), fn hour ->
+        hour |> Element.clear() |> Element.fill_in(with: "18")
+      end)
+      |> find(ends_at_minute(), fn minute ->
+        minute |> Element.clear() |> Element.fill_in(with: "45")
+      end)
       |> fill_in(location_field(), with: "A super secret location")
       |> fill_in(url_field(), with: "https://super.duper/event")
       |> click(submit_button())

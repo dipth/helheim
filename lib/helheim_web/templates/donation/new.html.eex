@@ -17,8 +17,8 @@
       <%= gettext "Help us keep this community open and free of ads by giving a small donation." %><br>
       <%=
         gettext "As a small thank you, we will give you %{extra_file_size} extra photo space for every %{min_amount} you donate!",
-        extra_file_size: Number.as_human_size(Donation.extra_space_per_step),
-        min_amount: Number.as_currency(Donation.min_amount / 100, unit: "kr. ", separator: ",", delimiter: ".")
+        extra_file_size: FormatHelpers.human_size(Donation.extra_space_per_step),
+        min_amount: FormatHelpers.as_currency(Donation.min_amount / 100, unit: "kr. ", separator: ",", delimiter: ".")
       %>
     </p>
 

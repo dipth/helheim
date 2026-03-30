@@ -1,6 +1,6 @@
 defmodule HelheimWeb.EmbedHelpers do
   import Phoenix.HTML
-  import Phoenix.HTML.Format
+  import PhoenixHTMLHelpers.Format
 
   @url_regex ~r/(?<!["])(?:https?:\/\/)(?:[a-z0-9]+\.)?[a-z0-9]+\.(?:dk|com|net|de|org|be|io|tv)(?::\d+)?\/?(?:[a-z0-9-_\/?%&=;\.]+)?(?!["])/i
 
@@ -184,7 +184,7 @@ defmodule HelheimWeb.EmbedHelpers do
   def replace_gafffa(nil), do: ""
   def replace_gafffa(match) do
     try do
-      [_,id] = Regex.run(@gafffa_id_regex, match)
+      [_, _id] = Regex.run(@gafffa_id_regex, match)
       """
       <a href="#{match}" target="_blank">
         #{String.replace(match, "gafffa.dk", "gaffa.dk")}

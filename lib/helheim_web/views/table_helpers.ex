@@ -1,6 +1,6 @@
 defmodule HelheimWeb.TableHelpers do
-  import Phoenix.HTML.Link
-  import Phoenix.HTML.Tag
+  import PhoenixHTMLHelpers.Link
+  import PhoenixHTMLHelpers.Tag
 
   def sort_link(text, value, params, path_func) do
     direction = sort_direction(params, value)

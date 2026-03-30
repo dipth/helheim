@@ -19,7 +19,9 @@ defmodule HelheimWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: HelheimWeb
+      use Phoenix.Controller,
+        formats: [html: "View", json: "View", js: "View"],
+        layouts: [html: {HelheimWeb.LayoutView, :app}]
 
       import Plug.Conn
       import Ecto
@@ -28,10 +30,8 @@ defmodule HelheimWeb do
 
       import Guardian.Plug, only: [current_resource: 1]
 
-      import Phoenix.LiveView.Controller
-
       import HelheimWeb.Router.Helpers
-      import HelheimWeb.Gettext
+      use Gettext, backend: HelheimWeb.Gettext
       import HelheimWeb.PaginationSanitization
       import HelheimWeb.ScrubGetParams, only: [scrub_get_params: 2]
 
@@ -41,24 +41,24 @@ defmodule HelheimWeb do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/helheim_web/templates",
-                        namespace: HelheimWeb
+      use Phoenix.View,
+        root: "lib/helheim_web/templates",
+        namespace: HelheimWeb
 
-      # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
+      import Phoenix.Controller, only: [view_module: 1]
 
-      # Use all HTML functionality (forms, tags, etc)
-      use Phoenix.HTML
+      defp get_flash(conn, key), do: Phoenix.Flash.get(conn.assigns.flash, key)
+
+      import Phoenix.HTML
+      use PhoenixHTMLHelpers
 
       import Guardian.Plug, only: [current_resource: 1]
 
-      import Phoenix.LiveView.Helpers
+      import Phoenix.Component, except: [link: 1]
 
-      # TODO: Remove
-      # https://gist.github.com/chrismccord/bb1f8b136f5a9e4abc0bfc07b832257e#add-a-routes-alias-and-update-your-router-calls
       import HelheimWeb.Router.Helpers
       import HelheimWeb.ErrorHelpers
-      import HelheimWeb.Gettext
+      use Gettext, backend: HelheimWeb.Gettext
       import HelheimWeb.TimeHelpers
       import HelheimWeb.PaginationHelpers
       import HelheimWeb.ProfileHelpers
@@ -82,7 +82,7 @@ defmodule HelheimWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import HelheimWeb.Gettext
+      use Gettext, backend: HelheimWeb.Gettext
     end
   end
 

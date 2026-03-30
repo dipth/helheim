@@ -1,6 +1,6 @@
 defmodule HelheimWeb.VisitorLogEntryHelpers do
-  import Phoenix.HTML.Link
-  import Phoenix.HTML.Tag
+  import PhoenixHTMLHelpers.Link
+  import PhoenixHTMLHelpers.Tag
   import Guardian.Plug, only: [current_resource: 1]
   import HelheimWeb.Router.Helpers
   alias Helheim.User

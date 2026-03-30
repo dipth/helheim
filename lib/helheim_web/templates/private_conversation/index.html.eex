@@ -24,7 +24,7 @@
             </strong>
             <small class="text-muted"><%= time_ago_in_words message.inserted_at %></small>
           </div>
-          <p class="mb-0"><%= Crutches.String.truncate message.body, 50 %></p>
+          <p class="mb-0"><%= Helheim.Helpers.FormatHelpers.truncate(message.body, 50) %></p>
         </div>
       </div>
     <% end %>

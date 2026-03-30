@@ -1,5 +1,5 @@
 defmodule HelheimWeb.TimeHelpers do
-  import HelheimWeb.Gettext
+  use Gettext, backend: HelheimWeb.Gettext
 
   def lt(nil, _), do: nil
   def lt(timestamp, format) do
@@ -20,7 +20,7 @@ defmodule HelheimWeb.TimeHelpers do
       content
     else
       title = lt(timestamp, "%d. %b %Y kl. %H:%M")
-      Phoenix.HTML.Tag.content_tag :span, content, title: title
+      PhoenixHTMLHelpers.Tag.content_tag :span, content, title: title
     end
   end
 

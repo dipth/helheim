@@ -1,11 +1,11 @@
 defmodule Helheim.User do
   use Helheim, :model
 
-  use Arc.Ecto.Schema
+  use Waffle.Ecto.Schema
   use Timex
   alias Helheim.Repo
   alias Helheim.User
-  import HelheimWeb.Gettext
+  use Gettext, backend: HelheimWeb.Gettext
 
   schema "users" do
     field :name,                            :string
@@ -170,8 +170,8 @@ defmodule Helheim.User do
   end
 
   def sort(query, nil),             do: query
-  def sort(query, "creation"),      do: from u in query, order_by: [desc: u.inserted_at]
-  def sort(query, "login"),         do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_at)]
+  def sort(query, "creation"),      do: from(u in query, order_by: [desc: u.inserted_at])
+  def sort(query, "login"),         do: from(u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_at)])
   def sort(query, "id"),            do: sort(query, "id", "asc")
   def sort(query, "username"),      do: sort(query, "username", "asc")
   def sort(query, "name"),          do: sort(query, "name", "asc")
@@ -183,24 +183,24 @@ defmodule Helheim.User do
 
   def sort(query, nil, _),                  do: query
   def sort(query, "", _),                   do: query
-  def sort(query, "id", "asc"),             do: from u in query, order_by: [asc: u.id]
-  def sort(query, "id", "desc"),            do: from u in query, order_by: [desc: u.id]
-  def sort(query, "username", "asc"),       do: from u in query, order_by: [asc: u.username]
-  def sort(query, "username", "desc"),      do: from u in query, order_by: [desc: u.username]
-  def sort(query, "name", "asc"),           do: from u in query, order_by: [asc: u.name]
-  def sort(query, "name", "desc"),          do: from u in query, order_by: [desc: u.name]
-  def sort(query, "email", "asc"),          do: from u in query, order_by: [asc: u.email]
-  def sort(query, "email", "desc"),         do: from u in query, order_by: [desc: u.email]
-  def sort(query, "inserted_at", "asc"),    do: from u in query, order_by: [asc: u.inserted_at]
-  def sort(query, "inserted_at", "desc"),   do: from u in query, order_by: [desc: u.inserted_at]
-  def sort(query, "confirmed_at", "asc"),   do: from u in query, order_by: [fragment("? ASC NULLS LAST", u.confirmed_at)]
-  def sort(query, "confirmed_at", "desc"),  do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.confirmed_at)]
-  def sort(query, "last_login_at", "asc"),  do: from u in query, order_by: [fragment("? ASC NULLS LAST", u.last_login_at)]
-  def sort(query, "last_login_at", "desc"), do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_at)]
-  def sort(query, "last_login_ip", "asc"),  do: from u in query, order_by: [fragment("? ASC NULLS LAST", u.last_login_ip)]
-  def sort(query, "last_login_ip", "desc"), do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_ip)]
-  def sort(query, "verified_at", "asc"),    do: from u in query, order_by: [fragment("? ASC NULLS LAST", u.verified_at)]
-  def sort(query, "verified_at", "desc"),   do: from u in query, order_by: [fragment("? DESC NULLS LAST", u.verified_at)]
+  def sort(query, "id", "asc"),             do: from(u in query, order_by: [asc: u.id])
+  def sort(query, "id", "desc"),            do: from(u in query, order_by: [desc: u.id])
+  def sort(query, "username", "asc"),       do: from(u in query, order_by: [asc: u.username])
+  def sort(query, "username", "desc"),      do: from(u in query, order_by: [desc: u.username])
+  def sort(query, "name", "asc"),           do: from(u in query, order_by: [asc: u.name])
+  def sort(query, "name", "desc"),          do: from(u in query, order_by: [desc: u.name])
+  def sort(query, "email", "asc"),          do: from(u in query, order_by: [asc: u.email])
+  def sort(query, "email", "desc"),         do: from(u in query, order_by: [desc: u.email])
+  def sort(query, "inserted_at", "asc"),    do: from(u in query, order_by: [asc: u.inserted_at])
+  def sort(query, "inserted_at", "desc"),   do: from(u in query, order_by: [desc: u.inserted_at])
+  def sort(query, "confirmed_at", "asc"),   do: from(u in query, order_by: [fragment("? ASC NULLS LAST", u.confirmed_at)])
+  def sort(query, "confirmed_at", "desc"),  do: from(u in query, order_by: [fragment("? DESC NULLS LAST", u.confirmed_at)])
+  def sort(query, "last_login_at", "asc"),  do: from(u in query, order_by: [fragment("? ASC NULLS LAST", u.last_login_at)])
+  def sort(query, "last_login_at", "desc"), do: from(u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_at)])
+  def sort(query, "last_login_ip", "asc"),  do: from(u in query, order_by: [fragment("? ASC NULLS LAST", u.last_login_ip)])
+  def sort(query, "last_login_ip", "desc"), do: from(u in query, order_by: [fragment("? DESC NULLS LAST", u.last_login_ip)])
+  def sort(query, "verified_at", "asc"),    do: from(u in query, order_by: [fragment("? ASC NULLS LAST", u.verified_at)])
+  def sort(query, "verified_at", "desc"),   do: from(u in query, order_by: [fragment("? DESC NULLS LAST", u.verified_at)])
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
@@ -300,7 +300,7 @@ defmodule Helheim.User do
 
   def update_password_reset_token!(user) do
     changeset = Ecto.Changeset.change user,
-      password_reset_token: SecureRandom.urlsafe_base64(16),
+      password_reset_token: :crypto.strong_rand_bytes(16) |> Base.url_encode64(padding: false),
       password_reset_token_updated_at: DateTime.utc_now
     Repo.update(changeset)
   end
@@ -374,10 +374,10 @@ defmodule Helheim.User do
   defp reset_confirmed_state_if_email_changed(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{email: email}} ->
-        changeset = put_change(changeset, :confirmation_token, SecureRandom.urlsafe_base64(16))
+        changeset = put_change(changeset, :confirmation_token, :crypto.strong_rand_bytes(16) |> Base.url_encode64(padding: false))
         changeset = put_change(changeset, :confirmed_at, nil)
         confirmation_token = get_field(changeset, :confirmation_token)
-        HelheimWeb.Email.registration_email(email, confirmation_token) |> Helheim.Mailer.deliver_later
+        HelheimWeb.Email.registration_email(email, confirmation_token) |> Helheim.Mailer.deliver_later!
         changeset
       _ ->
         changeset
@@ -395,7 +395,7 @@ defmodule Helheim.User do
 
   defp validate_captcha(changeset, field, options \\ []) do
     validate_change changeset, field, fn _, captcha ->
-      case Recaptcha.verify(captcha) do
+      case Helheim.Recaptcha.verify(captcha) do
         {:ok, _} -> []
         {:error, _} -> [{field, options[:message] || gettext("I too enjoy registering on websites, fellow human... Bleep Bloop!")}]
       end

@@ -19,7 +19,7 @@
                 <div class="form-control-feedback"><%= translate_error(message) %></div>
               <% else %>
                 <small>
-                  <%= gettext "Maximum file size: %{file_size}", file_size: HelheimWeb.Avatar.max_file_size |> Crutches.Format.Number.as_human_size %><br>
+                  <%= gettext "Maximum file size: %{file_size}", file_size: HelheimWeb.Avatar.max_file_size |> Helheim.Helpers.FormatHelpers.human_size %><br>
                   <%= gettext "Submit your changes to upload the image" %>
                 </small>
               <% end %>
@@ -69,7 +69,7 @@
                 <%= date_select f, :birthday, builder: fn b -> %>
                   <%= b.(:day, prompt: "", class: "custom-select") %> /
                   <%= b.(:month, options: gettext_month_options(),prompt: "", class: "custom-select") %> /
-                  <%= b.(:year, options: Timex.now.year..(Timex.now.year - 100), prompt: "", class: "custom-select") %>
+                  <%= b.(:year, options: Timex.now.year..(Timex.now.year - 100)//-1, prompt: "", class: "custom-select") %>
                 <% end %>
                 <small class="form-text">
                   <i class="fa fa-info fa-fw"></i>
@@ -79,7 +79,7 @@
 
               <h5 class="mb-1"><%= gettext "Profile Text" %></h5>
               <hr>
-              <div class="form-group <%= if f.errors[:profile_text] do 'has-danger' end %>">
+              <div class="form-group <%= if f.errors[:profile_text] do "has-danger" end %>">
                 <%= label f, :profile_text, gettext("Content"), class: "control-label" %>
                 <%= textarea f, :profile_text, class: "form-control", rows: 10 %>
                 <%= if message = f.errors[:profile_text] do %>

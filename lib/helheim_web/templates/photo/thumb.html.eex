@@ -5,7 +5,7 @@
   truncate_title = assigns[:truncate_title] || false
   show_album_title = assigns[:show_album_title] || false
 %>
-<div class="card photo<%= if @photo.id == 5650, do: ' corona' %>" data-id="<%= @photo.id %>">
+<div class="card photo<%= if @photo.id == 5650, do: " corona" %>" data-id="<%= @photo.id %>">
   <%= link to: public_profile_photo_album_photo_path(@conn, :show, user, photo_album, @photo) do %>
     <%= if @photo.nsfw do %>
       <%= img_tag(HelheimWeb.PhotoFile.url({@photo.file, @photo}, :nsfw_thumb), class: "card-img-top img-fluid img-photo") %>
@@ -27,9 +27,9 @@
     </div>
     <%= unless hide_title do %>
       <p class="card-text">
-        <strong class="text-break-up" title="<%= @photo.title %>"><%= if truncate_title, do: Crutches.String.truncate(@photo.title, 25), else: @photo.title %></strong><br>
+        <strong class="text-break-up" title="<%= @photo.title %>"><%= if truncate_title, do: Helheim.Helpers.FormatHelpers.truncate(@photo.title, 25), else: @photo.title %></strong><br>
         <%= if show_album_title do %>
-          <small class="text-break-up" title="<%= @photo.photo_album.title %>"><%= if truncate_title, do: Crutches.String.truncate(@photo.photo_album.title, 35), else: @photo.photo_album.title %></small><br>
+          <small class="text-break-up" title="<%= @photo.photo_album.title %>"><%= if truncate_title, do: Helheim.Helpers.FormatHelpers.truncate(@photo.photo_album.title, 35), else: @photo.photo_album.title %></small><br>
         <% end %>
         <small><%= time_ago_in_words @photo.inserted_at %></small>
       </p>

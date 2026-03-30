@@ -1,6 +1,7 @@
 defmodule HelheimWeb.PaginationHelpers do
-  import HelheimWeb.Gettext
-  import Phoenix.HTML.{Tag, Link}
+  use Gettext, backend: HelheimWeb.Gettext
+  import PhoenixHTMLHelpers.Tag
+  import PhoenixHTMLHelpers.Link
 
   def pagination_links(conn, collection, params \\ %{}) do
     content_tag(:nav) do

@@ -8,7 +8,7 @@
         <% end %>
       </div>
     <% end %>
-    <div class="form-group <%= if f.errors[:body] do 'has-danger' end %>">
+    <div class="form-group <%= if f.errors[:body] do "has-danger" end %>">
       <%= label f, :body, gettext("Content"), class: "control-label" %>
       <%= textarea f, :body, class: "form-control mentionable-input", rows: 10 %>
       <%= if message = f.errors[:body] do %>
