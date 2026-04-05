@@ -6,6 +6,8 @@ defmodule Helheim.Application do
   def start(_type, _args) do
     # Define workers and child supervisors to be supervised
     children = [
+      # Start DNS-based clustering for distributed PubSub across Fly.io machines
+      {DNSCluster, query: Application.get_env(:helheim, :dns_cluster_query) || :ignore},
       # Start the PubSub system
       {Phoenix.PubSub, name: Helheim.PubSub},
       # Start the Ecto repository

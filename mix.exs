@@ -80,7 +80,8 @@ defmodule Helheim.MixProject do
       {:stripity_stripe, "~> 3.2"},
       {:req, "~> 0.5"},
       {:remote_ip, "~> 1.2"},
-      {:zarex, "~> 1.0"}
+      {:zarex, "~> 1.0"},
+      {:dns_cluster, "~> 0.2"}
     ]
   end
 
