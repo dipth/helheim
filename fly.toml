@@ -9,6 +9,7 @@ primary_region = "arn"
 [env]
   HOST = "www.helheim.dk"
   PORT = "4000"
+  DNS_CLUSTER_QUERY = "helheim-dk.internal"
 
 [http_service]
   internal_port = 4000

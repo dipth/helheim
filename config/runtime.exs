@@ -1,5 +1,7 @@
 import Config
 
+config :helheim, dns_cluster_query: System.get_env("DNS_CLUSTER_QUERY")
+
 if config_env() == :prod do
   secret_key_base =
     System.get_env("SECRET_KEY_BASE") ||
