@@ -207,6 +207,10 @@ app-root {
 
 @include media-breakpoint-down(md) {
 
+  html, body {
+    overflow-x: hidden;
+  }
+
   .app-header {
     position: fixed !important;
     z-index: $zindex-navbar;
