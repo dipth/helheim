@@ -207,6 +207,11 @@ app-root {
 
 @include media-breakpoint-down(md) {
 
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
   .app-header {
     position: fixed !important;
     z-index: $zindex-navbar;
@@ -243,6 +248,7 @@ app-root {
 
   .app-body {
     margin-top: $navbar-height;
+    max-width: 100%;
   }
 
   .sidebar {
@@ -255,6 +261,11 @@ app-root {
     .nav {
       width: $mobile-sidebar-width !important;
     }
+  }
+
+  .main {
+    width: 100% !important;
+    overflow-x: hidden;
   }
 
   .main, .app-footer {
