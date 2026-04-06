@@ -16,4 +16,8 @@
   padding: 0 30px;
   overflow-wrap: break-word;
   word-wrap: break-word;
+
+  .media-body {
+    min-width: 0;
+  }
 }

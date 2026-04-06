@@ -209,6 +209,7 @@ app-root {
 
   html, body {
     overflow-x: hidden;
+    width: 100%;
   }
 
   .app-header {
@@ -247,6 +248,7 @@ app-root {
 
   .app-body {
     margin-top: $navbar-height;
+    max-width: 100%;
   }
 
   .sidebar {
@@ -259,6 +261,11 @@ app-root {
     .nav {
       width: $mobile-sidebar-width !important;
     }
+  }
+
+  .main {
+    width: 100% !important;
+    overflow-x: hidden;
   }
 
   .main, .app-footer {
