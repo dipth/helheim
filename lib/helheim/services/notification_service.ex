@@ -10,22 +10,119 @@ defmodule Helheim.NotificationService do
   alias Helheim.Photo
   alias Helheim.CalendarEvent
 
+  require Logger
+
+  @notification_timeout 30_000
+
+  @doc """
+  Multi.run callback that spawns notification creation as a supervised background
+  task, decoupled from the request lifecycle. This ensures notifications are not
+  lost if the calling process exits (e.g. during deployments or connection close).
+
+  ## Parameters
+
+    * `_repo` - The Ecto repo (provided by Multi.run, unused)
+    * `_multi_changes` - Results of prior Multi steps (provided by Multi.run, unused)
+    * `type` - The notification type string (e.g. "comment", "forum_reply")
+    * `subject` - The subject the notification is about (e.g. a BlogPost, ForumTopic)
+    * `trigger_person` - The User who triggered the notification
+
+  ## Returns
+
+    * `{:ok, pid}` on successful task start
+
+  ## Examples
+
+      Multi.run(multi, :notify, NotificationService, :create_async!, ["comment", blog_post, user])
+  """
   def create_async!(_repo, _multi_changes, type, subject, trigger_person), do: create_async!(type, subject, trigger_person)
+
+  @doc """
+  Spawns notification creation as a supervised background task under
+  `Helheim.TaskSupervisor`. The task is not linked to the caller, so it
+  survives request process termination.
+
+  ## Parameters
+
+    * `type` - The notification type string (e.g. "comment", "forum_reply")
+    * `subject` - The subject the notification is about (e.g. a BlogPost, ForumTopic)
+    * `trigger_person` - The User who triggered the notification
+
+  ## Returns
+
+    * `{:ok, pid}` on successful task start
+
+  ## Examples
+
+      NotificationService.create_async!("comment", blog_post, current_user)
+  """
   def create_async!(type, subject, trigger_person) do
-    {:ok, Task.async(fn -> create!(type, subject, trigger_person) end)}
+    Task.Supervisor.start_child(Helheim.TaskSupervisor, fn ->
+      create!(type, subject, trigger_person)
+    end)
   end
 
+  @doc """
+  Synchronously creates notifications for all matching, enabled subscriptions.
+  Each notification is created in an isolated task so that a failure in one does
+  not prevent the others from being created.
+
+  ## Parameters
+
+    * `type` - The notification type string (e.g. "comment", "forum_reply")
+    * `subject` - The subject the notification is about (e.g. a BlogPost, ForumTopic)
+    * `trigger_person` - The User who triggered the notification
+
+  ## Returns
+
+    * `{:ok, results}` where results is a list of `{:ok, notification}` or
+      `{:error, reason}` tuples
+
+  ## Examples
+
+      NotificationService.create!("forum_reply", forum_topic, replying_user)
+  """
   def create!(type, subject, trigger_person) do
     subscriptions = subscriptions(type, subject, trigger_person)
-    notifications = Parallel.pmap(subscriptions, fn(s) -> notify!(s, trigger_person) end)
-    {:ok, notifications}
+
+    results =
+      Helheim.TaskSupervisor
+      |> Task.Supervisor.async_stream_nolink(
+        subscriptions,
+        fn s -> notify(s, trigger_person) end,
+        timeout: @notification_timeout
+      )
+      |> Enum.map(fn
+        {:ok, result} ->
+          result
+
+        {:exit, reason} ->
+          Logger.error("Notification task failed: #{inspect(reason)}")
+          {:error, reason}
+      end)
+
+    {:ok, results}
   end
 
+  @doc """
+  Marks a notification and all its duplicates (same subject, type, and recipient)
+  as clicked by setting `clicked_at` to the current UTC time.
+
+  ## Parameters
+
+    * `notification` - The Notification struct to mark as clicked
+
+  ## Examples
+
+      NotificationService.mark_as_clicked!(notification)
+  """
   def mark_as_clicked!(notification) do
     Notification.query_duplicate_notifications(notification)
     |> Repo.update_all(set: [clicked_at: DateTime.utc_now])
   end
 
+  # Fetches all enabled subscriptions for the given type and subject,
+  # excluding subscriptions from users who have ignored the trigger person.
   defp subscriptions(type, subject, trigger_person) do
     NotificationSubscription
     |> NotificationSubscription.for_type(type)
@@ -44,17 +141,32 @@ defmodule Helheim.NotificationService do
     end)
   end
 
-  defp notify!(%NotificationSubscription{user_id: subscriber_id}, %User{id: trigger_person_id}) when subscriber_id == trigger_person_id,
-    do: {:error, "subscriber and trigger person is the same"}
-  defp notify!(subscription, trigger_person) do
-    {:ok, notification} =
+  # Skips notification when the subscriber is the same person who triggered it.
+  defp notify(%NotificationSubscription{user_id: subscriber_id}, %User{id: trigger_person_id})
+       when subscriber_id == trigger_person_id do
+    {:error, "subscriber and trigger person is the same"}
+  end
+
+  # Creates a single notification record and pushes a real-time broadcast
+  # to the recipient's channel.
+  defp notify(subscription, trigger_person) do
+    result =
       Changeset.change(%Notification{})
       |> Changeset.put_change(:type, subscription.type)
       |> Changeset.put_assoc(:recipient, subscription.user)
       |> Changeset.put_assoc(:trigger_person, trigger_person)
       |> put_subject(NotificationSubscription.subject(subscription))
       |> Repo.insert()
-    push_notification(notification.recipient_id)
+
+    case result do
+      {:ok, notification} ->
+        push_notification(notification.recipient_id)
+        {:ok, notification}
+
+      {:error, changeset} ->
+        Logger.error("Failed to insert notification for user #{subscription.user_id}: #{inspect(changeset.errors)}")
+        {:error, changeset}
+    end
   end
 
   defp put_subject(changeset, %User{} = profile),                 do: changeset |> Changeset.put_assoc(:profile, profile)
