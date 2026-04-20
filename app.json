@@ -1,0 +1,95 @@
+{
+  "name": "helheim",
+  "scripts": {},
+  "env": {
+    "APPSIGNAL_KEY": {
+      "required": true
+    },
+    "AWS_ACCESS_KEY": {
+      "required": true
+    },
+    "AWS_REGION": {
+      "required": true
+    },
+    "AWS_S3_ASSET_HOST": {
+      "required": true
+    },
+    "AWS_S3_BUCKET": {
+      "required": true
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "required": true
+    },
+    "DATABASE_URL": {
+      "required": true
+    },
+    "GUARDIAN_SECRET_KEY": {
+      "required": true
+    },
+    "HOST": {
+      "required": true
+    },
+    "LIVE_VIEW_SALT": {
+      "required": true
+    },
+    "NEON_HOST": {
+      "required": true
+    },
+    "NEON_URL": {
+      "required": true
+    },
+    "PAPERTRAIL_API_TOKEN": {
+      "required": true
+    },
+    "POOL_SIZE": {
+      "required": true
+    },
+    "POSTMARK_API_KEY": {
+      "required": true
+    },
+    "RECAPTCHA_PUBLIC_KEY": {
+      "required": true
+    },
+    "RECAPTCHA_SECRET_KEY": {
+      "required": true
+    },
+    "SCOUT_APM_KEY": {
+      "required": true
+    },
+    "SECRET_KEY_BASE": {
+      "required": true
+    },
+    "SECRET_KEY_PASSPHRASE": {
+      "required": true
+    },
+    "SENTRY_DSN": {
+      "required": true
+    },
+    "STRIPE_PRIVATE_KEY": {
+      "required": true
+    },
+    "STRIPE_PUBLIC_KEY": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "papertrail"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/DuckyTeam/heroku-buildpack-imagemagick"
+    },
+    {
+      "url": "https://github.com/HashNuke/heroku-buildpack-elixir.git"
+    },
+    {
+      "url": "https://github.com/gjaldon/heroku-buildpack-phoenix-static.git"
+    }
+  ],
+  "stack": "heroku-24"
+}
