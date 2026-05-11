@@ -5,6 +5,7 @@ defmodule HelheimWeb.Avatar do
   @versions [:original, :large, :thumb, :tiny]
   @extension_whitelist ~w(.jpg .jpeg .gif .png)
   @max_file_size 20 * 1024 * 1024 # MB
+  @magick_limits "-limit memory 64MiB -limit map 128MiB"
 
   def acl(:large, _), do: :public_read
   def acl(:thumb, _), do: :public_read
@@ -17,15 +18,15 @@ defmodule HelheimWeb.Avatar do
   end
 
   def transform(:large, _) do
-    {:convert, "-strip -resize 800x800^ -gravity center -extent 800x800"}
+    {:convert, "#{@magick_limits} -strip -resize 800x800^ -gravity center -extent 800x800"}
   end
 
   def transform(:thumb, _) do
-    {:convert, "-strip -thumbnail 250x250^ -gravity center -extent 250x250"}
+    {:convert, "#{@magick_limits} -strip -thumbnail 250x250^ -gravity center -extent 250x250"}
   end
 
   def transform(:tiny, _) do
-    {:convert, "-strip -thumbnail 50x50^ -gravity center -extent 50x50"}
+    {:convert, "#{@magick_limits} -strip -thumbnail 50x50^ -gravity center -extent 50x50"}
   end
 
   def filename(version, _) do
