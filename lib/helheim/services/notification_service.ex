@@ -57,9 +57,15 @@ defmodule Helheim.NotificationService do
       NotificationService.create_async!("comment", blog_post, current_user)
   """
   def create_async!(type, subject, trigger_person) do
-    Task.Supervisor.start_child(Helheim.TaskSupervisor, fn ->
+    if Application.get_env(:helheim, :async_notifications, true) do
+      Task.Supervisor.start_child(Helheim.TaskSupervisor, fn ->
+        create!(type, subject, trigger_person)
+      end)
+    else
+      # Synchronous mode for tests: background tasks would outlive the test
+      # process and race with the SQL sandbox ownership.
       create!(type, subject, trigger_person)
-    end)
+    end
   end
 
   @doc """

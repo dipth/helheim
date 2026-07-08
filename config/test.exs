@@ -8,6 +8,10 @@ config :helheim, HelheimWeb.Endpoint,
 
 config :helheim, :sql_sandbox, true
 
+# Create notifications synchronously so background tasks don't outlive the
+# test process and race with the SQL sandbox
+config :helheim, :async_notifications, false
+
 # Print only warnings and errors during test
 config :logger, level: :warning
 
