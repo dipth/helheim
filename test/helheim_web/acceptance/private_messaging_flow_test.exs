@@ -30,6 +30,9 @@ defmodule HelheimWeb.PrivateMessagingFlowTest do
     session
     |> click(private_messages_link())
     |> click(Query.link(third_user.username))
+    # Wait for the conversation page to render so the request doesn't outlive
+    # the test and race the SQL sandbox
+    |> assert_has(Query.text("Awesome Message Text"))
   end
 
   test "users can hide private conversations", %{session: session, user: user} do

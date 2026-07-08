@@ -1,0 +1,85 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+env:
+  MIX_ENV: test
+  # Keep in sync with .tool-versions
+  OTP_VERSION: "28.4.1"
+  ELIXIR_VERSION: "1.19.5-otp-28"
+  NODE_VERSION: "24.14.0"
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-24.04
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Erlang and Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+          version-type: strict
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: yarn
+          cache-dependency-path: assets/yarn.lock
+
+      - name: Restore mix dependency and build cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            deps
+            _build
+          key: mix-${{ runner.os }}-${{ env.OTP_VERSION }}-${{ env.ELIXIR_VERSION }}-${{ hashFiles('mix.lock') }}
+          restore-keys: |
+            mix-${{ runner.os }}-${{ env.OTP_VERSION }}-${{ env.ELIXIR_VERSION }}-
+
+      - name: Install Hex and Rebar
+        run: |
+          mix local.hex --force
+          mix local.rebar --force
+
+      - name: Install Elixir dependencies
+        run: mix deps.get
+
+      - name: Compile
+        run: mix compile
+
+      - name: Install asset dependencies
+        run: yarn install --frozen-lockfile
+        working-directory: assets
+
+      # Waffle uploaders shell out to ImageMagick's convert during photo tests
+      - name: Ensure ImageMagick is available
+        run: convert -version || (sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick)
+
+      # The test alias also compiles assets with webpack and creates and
+      # migrates the test database. Wallaby acceptance tests use the Chrome
+      # and chromedriver preinstalled on the GitHub runner image.
+      - name: Run tests
+        run: mix test

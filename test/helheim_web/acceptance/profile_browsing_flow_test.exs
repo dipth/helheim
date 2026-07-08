@@ -19,6 +19,9 @@ defmodule HelheimWeb.ProfileBrowsingFlowTest do
     session
     |> visit("/profiles/#{profile.id}")
     |> click(show_all_comments_link())
+    # Wait for the guest book page to render so the request doesn't outlive
+    # the test and race the SQL sandbox
+    |> assert_has(comment_text_field())
   end
 
   test "users can comment on a profile directly from the profile", %{profile: profile, session: session} do

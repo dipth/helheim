@@ -20,6 +20,9 @@ defmodule HelheimWeb.AcceptanceCase do
         |> fill_in(Wallaby.Query.text_field(gettext("E-mail")), with: user.email)
         |> fill_in(Wallaby.Query.text_field(gettext("Password")), with: "password")
         |> click(Wallaby.Query.button(gettext("Sign In")))
+        # Wait for the post-login redirect to finish so subsequent navigation
+        # doesn't race the sign-in request
+        |> assert_has(Wallaby.Query.css(".alert.alert-success"))
       end
 
       defp create_and_sign_in_user(context) do
@@ -33,13 +36,22 @@ defmodule HelheimWeb.AcceptanceCase do
   setup tags do
     Gettext.put_locale("da")
 
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Helheim.Repo, ownership_timeout: 60000)
+    owner =
+      Ecto.Adapters.SQL.Sandbox.start_owner!(
+        Helheim.Repo,
+        shared: not tags[:async],
+        ownership_timeout: 60000
+      )
 
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Helheim.Repo, {:shared, self()})
-    end
+    on_exit(fn ->
+      # Let in-flight browser requests (e.g. XHRs fired on page load) finish
+      # before tearing down the sandbox owner. Otherwise they crash the shared
+      # connection and can poison the next test's database access.
+      Process.sleep(200)
+      Ecto.Adapters.SQL.Sandbox.stop_owner(owner)
+    end)
 
-    metadata = Phoenix.Ecto.SQL.Sandbox.metadata_for(Helheim.Repo, self())
+    metadata = Phoenix.Ecto.SQL.Sandbox.metadata_for(Helheim.Repo, owner)
     {:ok, session} = Wallaby.start_session(metadata: metadata)
     session = Wallaby.Browser.resize_window(session, 1366, 768)
     {:ok, session: session}
