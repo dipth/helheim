@@ -41,7 +41,7 @@
       <div class="media mb-1">
         <%= if listen.song.cover_image_url_small do %>
           <a href="<%= song_path(@conn, :show, listen.song) %>">
-            <img src="<%= listen.song.cover_image_url_small %>" class="d-flex mr-1 rounded" alt="" width="48" height="48">
+            <img src="<%= listen.song.cover_image_url_small %>" class="d-flex mr-1 rounded" alt="" width="64" height="64">
           </a>
         <% end %>
         <div class="media-body">
