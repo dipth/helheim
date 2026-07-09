@@ -211,31 +211,22 @@ defmodule Helheim.Factory do
     }
   end
 
-  def spotify_account_factory do
-    %Helheim.SpotifyAccount{
+  def lastfm_account_factory do
+    %Helheim.LastfmAccount{
       user: build(:user),
-      spotify_user_id: sequence(:spotify_user_id, &"spotify-user-#{&1}"),
-      access_token: "an_access_token",
-      refresh_token: "a_refresh_token",
-      token_expires_at: Timex.shift(Timex.now, hours: 1),
-      scopes: "user-read-recently-played"
+      username: sequence(:lastfm_username, &"lastfm-user-#{&1}"),
+      session_key: "a_session_key"
     }
   end
 
   def song_factory do
     %Helheim.Song{
-      spotify_track_id: sequence(:spotify_track_id, &"track-#{&1}"),
-      title: "Master of Puppets",
+      title: sequence(:song_title, &"Master of Puppets #{&1}"),
       artist_name: "Metallica",
-      artist_spotify_id: sequence(:artist_spotify_id, &"artist-#{&1}"),
       album_name: "Master of Puppets",
-      album_spotify_id: sequence(:album_spotify_id, &"album-#{&1}"),
-      cover_image_url: "https://i.scdn.co/image/cover.jpg",
-      cover_image_url_small: "https://i.scdn.co/image/cover_small.jpg",
-      spotify_track_url: "https://open.spotify.com/track/abc",
-      spotify_artist_url: "https://open.spotify.com/artist/abc",
-      spotify_album_url: "https://open.spotify.com/album/abc",
-      duration_ms: 515_000,
+      cover_image_url: "https://lastfm.freetls.fastly.net/i/u/300x300/cover.jpg",
+      cover_image_url_small: "https://lastfm.freetls.fastly.net/i/u/64s/cover.jpg",
+      lastfm_track_url: "https://www.last.fm/music/Metallica/_/Master+of+Puppets",
       comment_count: 0,
       listens_count: 0
     }

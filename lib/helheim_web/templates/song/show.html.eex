@@ -19,21 +19,18 @@
               <td><%= @song.album_name %></td>
             </tr>
           <% end %>
-          <%= if @song.duration_ms do %>
-            <tr>
-              <th><%= gettext "Duration" %></th>
-              <td><%= duration @song.duration_ms %></td>
-            </tr>
-          <% end %>
           <tr>
             <th><%= gettext "Listens" %></th>
             <td><%= @song.listens_count %></td>
           </tr>
         </table>
         <p class="mb-0">
-          <%= spotify_link @song.spotify_track_url, gettext("Song on Spotify") %><br>
-          <%= spotify_link @song.spotify_artist_url, gettext("Artist on Spotify") %><br>
-          <%= spotify_link @song.spotify_album_url, gettext("Album on Spotify") %>
+          <%= lastfm_link @song.lastfm_track_url, gettext("Song on Last.fm") %><br>
+          <%= lastfm_link lastfm_artist_url(@song.artist_name), gettext("Artist on Last.fm") %>
+          <%= if @song.album_name do %>
+            <br>
+            <%= lastfm_link lastfm_album_url(@song.artist_name, @song.album_name), gettext("Album on Last.fm") %>
+          <% end %>
         </p>
         <%= if @current_user_listen_count > 0 do %>
           <hr>

@@ -35,29 +35,33 @@
 
 <div class="card">
   <div class="card-header">
-    <i class="fa fa-spotify"></i> <%= gettext "Spotify" %>
+    <i class="fa fa-lastfm"></i> <%= gettext "Last.fm" %>
   </div>
   <div class="card-block">
-    <%= if @spotify_account do %>
-      <%= if @spotify_account.broken_at do %>
+    <%= if @lastfm_account do %>
+      <%= if @lastfm_account.broken_at do %>
         <div class="alert alert-warning">
-          <%= gettext "The connection to your Spotify account is broken and we can no longer track what you listen to. Please reconnect to continue sharing your listening history." %>
+          <%= gettext "The connection to your Last.fm account is broken and we can no longer track what you listen to. This happens if you revoked our access on Last.fm or enabled the \"Hide recent listening information\" privacy setting. Please reconnect to continue sharing your listening history." %>
         </div>
         <p>
-          <%= link to: spotify_account_path(@conn, :create), method: :post, class: "btn btn-sm btn-warning" do %>
+          <%= link to: lastfm_account_path(@conn, :create), method: :post, class: "btn btn-sm btn-warning" do %>
             <i class="fa fa-refresh"></i>
-            <%= gettext "Reconnect Spotify" %>
+            <%= gettext "Reconnect Last.fm" %>
           <% end %>
         </p>
         <hr>
       <% end %>
       <p>
-        <%= gettext "Your Spotify account is connected and your listening history is shared on the site." %>
+        <%= gettext "Your Last.fm account %{username} is connected and your listening history is shared on the site.", username: @lastfm_account.username %>
       </p>
       <p>
-        <%= link to: spotify_account_path(@conn, :delete), method: :delete, data: [confirm: gettext("Are you sure? We will stop tracking what you listen to. Your existing listening history will be kept.")], class: "btn btn-sm btn-secondary" do %>
+        <%= gettext "Make sure your music players scrobble to Last.fm, so we can pick up what you listen to:" %>
+        <%= link gettext("Set up scrobbling on Last.fm"), to: "https://www.last.fm/about/trackmymusic", target: "_blank", rel: "noopener" %>
+      </p>
+      <p>
+        <%= link to: lastfm_account_path(@conn, :delete), method: :delete, data: [confirm: gettext("Are you sure? We will stop tracking what you listen to. Your existing listening history will be kept.")], class: "btn btn-sm btn-secondary" do %>
           <i class="fa fa-chain-broken"></i>
-          <%= gettext "Disconnect Spotify" %>
+          <%= gettext "Disconnect Last.fm" %>
         <% end %>
       </p>
       <hr>
@@ -65,19 +69,23 @@
         <%= gettext "You can also delete your entire listening history from the site. This cannot be undone." %>
       </p>
       <p>
-        <%= link to: spotify_account_path(@conn, :delete_history), method: :delete, data: [confirm: gettext("Are you sure? Your entire listening history will be permanently deleted!")], class: "btn btn-sm btn-danger" do %>
+        <%= link to: lastfm_account_path(@conn, :delete_history), method: :delete, data: [confirm: gettext("Are you sure? Your entire listening history will be permanently deleted!")], class: "btn btn-sm btn-danger" do %>
           <i class="fa fa-trash"></i>
           <%= gettext "Delete listening history" %>
         <% end %>
       </p>
     <% else %>
       <p>
-        <%= gettext "Connect your Spotify account to share what you are listening to with the rest of the site. Your listening history will be shown on your profile and on the front page." %>
+        <%= gettext "Connect your Last.fm account to share what you are listening to with the rest of the site. Your listening history will be shown on your profile and on the front page." %>
       </p>
       <p>
-        <%= link to: spotify_account_path(@conn, :create), method: :post, class: "btn btn-sm btn-success" do %>
-          <i class="fa fa-spotify"></i>
-          <%= gettext "Connect Spotify" %>
+        <%= gettext "Last.fm works by \"scrobbling\" the music you play on Spotify, Apple Music, YouTube Music and most other players. If you don't have a Last.fm account yet, create one and connect it to your music player first:" %>
+        <%= link gettext("Set up scrobbling on Last.fm"), to: "https://www.last.fm/about/trackmymusic", target: "_blank", rel: "noopener" %>
+      </p>
+      <p>
+        <%= link to: lastfm_account_path(@conn, :create), method: :post, class: "btn btn-sm btn-success" do %>
+          <i class="fa fa-lastfm"></i>
+          <%= gettext "Connect Last.fm" %>
         <% end %>
       </p>
     <% end %>

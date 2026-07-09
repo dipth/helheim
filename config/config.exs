@@ -42,12 +42,12 @@ config :helheim, Helheim.Auth.Guardian,
 config :helheim, Oban,
   engine: Oban.Engines.Basic,
   repo: Helheim.Repo,
-  queues: [spotify: 5],
+  queues: [lastfm: 5],
   plugins: [
     {Oban.Plugins.Pruner, max_age: 60 * 60 * 24 * 7},
     {Oban.Plugins.Cron,
      crontab: [
-       {"*/5 * * * *", Helheim.Spotify.SchedulerWorker}
+       {"*/5 * * * *", Helheim.Lastfm.SchedulerWorker}
      ]}
   ]
 

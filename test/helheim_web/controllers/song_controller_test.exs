@@ -43,9 +43,9 @@ defmodule HelheimWeb.SongControllerTest do
       assert response =~ "Creeping Death"
       assert response =~ "Metallica"
       assert response =~ "Ride the Lightning"
-      assert response =~ song.spotify_track_url
-      assert response =~ song.spotify_artist_url
-      assert response =~ song.spotify_album_url
+      assert response =~ song.lastfm_track_url
+      assert response =~ "https://www.last.fm/music/Metallica"
+      assert response =~ "https://www.last.fm/music/Metallica/Ride%20the%20Lightning"
     end
 
     test "it shows the most recent listeners of the song", %{conn: conn} do

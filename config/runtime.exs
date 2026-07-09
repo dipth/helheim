@@ -64,8 +64,8 @@ if config_env() == :prod do
     public_key: System.get_env("RECAPTCHA_PUBLIC_KEY"),
     secret: System.get_env("RECAPTCHA_SECRET_KEY")
 
-  config :helheim, :spotify,
-    client_id: System.get_env("SPOTIFY_CLIENT_ID"),
-    client_secret: System.get_env("SPOTIFY_CLIENT_SECRET"),
-    redirect_uri: "https://#{host}/spotify_account/callback"
+  config :helheim, :lastfm,
+    api_key: System.get_env("LASTFM_API_KEY"),
+    shared_secret: System.get_env("LASTFM_SHARED_SECRET"),
+    callback_url: "https://#{host}/lastfm_account/callback"
 end

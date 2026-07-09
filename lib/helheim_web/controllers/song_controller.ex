@@ -42,7 +42,7 @@ defmodule HelheimWeb.SongController do
 
   def remove_my_listens(conn, %{"song_id" => song_id}) do
     song = Repo.get!(Song, song_id)
-    {:ok, _} = Helheim.SpotifyAccountService.delete_listens_for_song!(current_resource(conn), song)
+    {:ok, _} = Helheim.LastfmAccountService.delete_listens_for_song!(current_resource(conn), song)
 
     conn
     |> put_flash(:success, gettext("Your listens have been removed from this song."))

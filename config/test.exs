@@ -55,11 +55,11 @@ config :helheim, :recaptcha,
   secret: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe",
   test_mode: true
 
-# Configure Spotify
-config :helheim, :spotify,
-  client_id: "spotify_test_client_id",
-  client_secret: "spotify_test_client_secret",
-  redirect_uri: "http://localhost:4001/spotify_account/callback"
+# Configure Last.fm
+config :helheim, :lastfm,
+  api_key: "lastfm_test_api_key",
+  shared_secret: "lastfm_test_shared_secret",
+  callback_url: "http://localhost:4001/lastfm_account/callback"
 
 # Configure wallaby
 config :wallaby,

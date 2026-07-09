@@ -20,13 +20,9 @@
         <p class="text-muted mb-0"><%= gettext "No listens have been tracked yet..." %></p>
       <% end %>
       <ol class="pl-2 mb-0">
-        <%= for {artist_name, spotify_artist_url, count} <- @top_artists do %>
+        <%= for {artist_name, count} <- @top_artists do %>
           <li>
-            <%= if spotify_artist_url do %>
-              <%= link artist_name, to: spotify_artist_url, target: "_blank", rel: "noopener" %>
-            <% else %>
-              <%= artist_name %>
-            <% end %>
+            <%= link artist_name, to: HelheimWeb.SongView.lastfm_artist_url(artist_name), target: "_blank", rel: "noopener" %>
             <span class="badge badge-default"><i class="fa fa-fw fa-headphones"></i> <%= count %></span>
           </li>
         <% end %>
