@@ -86,6 +86,7 @@ defmodule HelheimWeb.Router do
         resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
       end
       resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
+      get "/music", SongListenController, :index, as: :music
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
       resources "/contact_request", FriendshipRequestController, singleton: true, only: [:create, :delete]
       resources "/contact", FriendshipController, singleton: true, only: [:create, :delete]
@@ -129,6 +130,7 @@ defmodule HelheimWeb.Router do
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
     end
     resources "/online_users", OnlineUserController, only: [:index]
+    resources "/songs", SongController, only: [:index, :show]
   end
 
   scope "/mod", HelheimWeb.Mod, as: :mod do

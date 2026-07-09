@@ -62,6 +62,13 @@ defmodule HelheimWeb.ProfileController do
       |> Repo.all
       |> Repo.preload(:photo_album)
 
+    newest_song_listens =
+      assoc(user, :song_listens)
+      |> Helheim.SongListen.newest
+      |> preload(:song)
+      |> limit(5)
+      |> Repo.all
+
     Helheim.VisitorLogEntry.track! current_resource(conn), user
 
     render conn, "show.html",
@@ -69,7 +76,8 @@ defmodule HelheimWeb.ProfileController do
       newest_blog_posts: newest_blog_posts,
       newest_comments: newest_comments,
       newest_photos: newest_photos,
-      newest_forum_topics: newest_forum_topics
+      newest_forum_topics: newest_forum_topics,
+      newest_song_listens: newest_song_listens
   end
 
   def edit(conn, _params) do

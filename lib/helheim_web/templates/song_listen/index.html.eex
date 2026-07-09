@@ -1,0 +1,65 @@
+<h1 class="mt-1"><%= gettext "Music from %{username}", username: @user.username %></h1>
+
+<div class="card-group mt-1">
+  <div class="card">
+    <div class="card-block">
+      <h5 class="mb-1"><%= gettext "Top songs" %></h5>
+      <%= if length(@top_songs) == 0 do %>
+        <p class="text-muted mb-0"><%= gettext "No listens have been tracked yet..." %></p>
+      <% end %>
+      <%= for {song, count} <- @top_songs do %>
+        <%= render HelheimWeb.SongView, "_song.html", conn: @conn, song: song, listen_count: count %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-block">
+      <h5 class="mb-1"><%= gettext "Top artists" %></h5>
+      <%= if length(@top_artists) == 0 do %>
+        <p class="text-muted mb-0"><%= gettext "No listens have been tracked yet..." %></p>
+      <% end %>
+      <ol class="pl-2 mb-0">
+        <%= for {artist_name, spotify_artist_url, count} <- @top_artists do %>
+          <li>
+            <%= if spotify_artist_url do %>
+              <%= link artist_name, to: spotify_artist_url, target: "_blank", rel: "noopener" %>
+            <% else %>
+              <%= artist_name %>
+            <% end %>
+            <span class="badge badge-default"><i class="fa fa-fw fa-headphones"></i> <%= count %></span>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-1">
+  <div class="card-block">
+    <h5 class="mb-1"><%= gettext "All listens" %></h5>
+    <%= if Enum.empty?(@listens) do %>
+      <p class="text-muted mb-0"><%= gettext "No listens have been tracked yet..." %></p>
+    <% end %>
+    <%= for listen <- @listens do %>
+      <div class="media mb-1">
+        <%= if listen.song.cover_image_url_small do %>
+          <a href="<%= song_path(@conn, :show, listen.song) %>">
+            <img src="<%= listen.song.cover_image_url_small %>" class="d-flex mr-1 rounded" alt="<%= listen.song.title %>" width="48" height="48">
+          </a>
+        <% end %>
+        <div class="media-body">
+          <%= link listen.song.title, to: song_path(@conn, :show, listen.song) %>
+          <%= comment_count_badge listen.song %>
+          <br>
+          <small class="text-muted">
+            <%= listen.song.artist_name %>
+            &mdash;
+            <%= time_ago_in_words listen.played_at %>
+          </small>
+        </div>
+      </div>
+    <% end %>
+    <%= pagination_links @conn, @listens %>
+  </div>
+</div>

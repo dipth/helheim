@@ -46,4 +46,22 @@ defmodule Helheim.Song do
       order_by: [desc: count(l.id), asc: s.id],
       select: {s, count(l.id)}
   end
+
+  def top_for_user(query, user) do
+    from s in query,
+      join: l in SongListen, on: l.song_id == s.id,
+      where: l.user_id == ^user.id,
+      group_by: s.id,
+      order_by: [desc: count(l.id), asc: s.id],
+      select: {s, count(l.id)}
+  end
+
+  def top_artists_for_user(query, user) do
+    from s in query,
+      join: l in SongListen, on: l.song_id == s.id,
+      where: l.user_id == ^user.id,
+      group_by: [s.artist_name, s.spotify_artist_url],
+      order_by: [desc: count(l.id), asc: s.artist_name],
+      select: {s.artist_name, s.spotify_artist_url, count(l.id)}
+  end
 end

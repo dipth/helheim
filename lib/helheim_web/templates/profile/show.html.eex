@@ -94,6 +94,18 @@
   </div>
 </div>
 
+<%= if length(@newest_song_listens) > 0 do %>
+  <div class="card">
+    <div class="card-block">
+      <h5 class="mb-1"><%= gettext "Latest listens" %></h5>
+      <%= for listen <- @newest_song_listens do %>
+        <%= render HelheimWeb.SongView, "_song.html", conn: @conn, song: listen.song %>
+      <% end %>
+      <%= link gettext("Show All"), to: public_profile_music_path(@conn, :index, @user), class: "btn btn-outline-secondary btn-block mb-0" %>
+    </div>
+  </div>
+<% end %>
+
 <div class="card">
   <div class="card-block">
     <h5 class="mb-1"><%= gettext "Newest Photos" %></h5>

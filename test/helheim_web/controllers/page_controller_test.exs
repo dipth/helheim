@@ -14,6 +14,47 @@ defmodule HelheimWeb.PageControllerTest do
     end
   end
 
+  describe "front_page/2" do
+    setup [:create_and_sign_in_user]
+
+    test "it returns a successful response without the music section when no listens are tracked", %{conn: conn} do
+      conn = get conn, "/front_page"
+      response = html_response(conn, 200)
+      refute response =~ gettext("Recent listens")
+    end
+
+    test "it shows the most recent listens along with the listener", %{conn: conn} do
+      listener = insert(:user, username: "melomaniac")
+      song = insert(:song, title: "Orion")
+      insert(:song_listen, user: listener, song: song)
+
+      conn = get conn, "/front_page"
+      response = html_response(conn, 200)
+      assert response =~ gettext("Recent listens")
+      assert response =~ "Orion"
+      assert response =~ "melomaniac"
+    end
+
+    test "it does not show listens from ignored users", %{conn: conn, user: user} do
+      ignoree = insert(:user)
+      insert(:ignore, ignorer: user, ignoree: ignoree, enabled: true)
+      insert(:song_listen, user: ignoree, song: insert(:song, title: "Orion"))
+
+      conn = get conn, "/front_page"
+      refute html_response(conn, 200) =~ gettext("Recent listens")
+    end
+
+    test "it shows the top songs of today and this week", %{conn: conn} do
+      song = insert(:song, title: "Orion")
+      insert_list(2, :song_listen, song: song)
+
+      conn = get conn, "/front_page"
+      response = html_response(conn, 200)
+      assert response =~ gettext("Top songs today")
+      assert response =~ gettext("Top songs this week")
+    end
+  end
+
   describe "confirmation_pending/2" do
     test "it returns a successful response", %{conn: conn} do
       conn = get conn, "/confirmation_pending"

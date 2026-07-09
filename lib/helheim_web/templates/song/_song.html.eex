@@ -1,0 +1,16 @@
+<div class="media mb-1">
+  <%= if @song.cover_image_url_small do %>
+    <a href="<%= song_path(@conn, :show, @song) %>">
+      <img src="<%= @song.cover_image_url_small %>" class="d-flex mr-1 rounded" alt="<%= @song.title %>" width="48" height="48">
+    </a>
+  <% end %>
+  <div class="media-body">
+    <%= link @song.title, to: song_path(@conn, :show, @song) %>
+    <%= comment_count_badge @song %>
+    <%= if assigns[:listen_count] do %>
+      <span class="badge badge-default"><i class="fa fa-fw fa-headphones"></i> <%= @listen_count %></span>
+    <% end %>
+    <br>
+    <small class="text-muted"><%= @song.artist_name %></small>
+  </div>
+</div>
