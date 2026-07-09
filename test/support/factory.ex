@@ -202,4 +202,42 @@ defmodule Helheim.Factory do
       body: "My Aweseome Comment"
     }
   end
+
+  def spotify_account_factory do
+    %Helheim.SpotifyAccount{
+      user: build(:user),
+      spotify_user_id: sequence(:spotify_user_id, &"spotify-user-#{&1}"),
+      access_token: "an_access_token",
+      refresh_token: "a_refresh_token",
+      token_expires_at: Timex.shift(Timex.now, hours: 1),
+      scopes: "user-read-recently-played"
+    }
+  end
+
+  def song_factory do
+    %Helheim.Song{
+      spotify_track_id: sequence(:spotify_track_id, &"track-#{&1}"),
+      title: "Master of Puppets",
+      artist_name: "Metallica",
+      artist_spotify_id: sequence(:artist_spotify_id, &"artist-#{&1}"),
+      album_name: "Master of Puppets",
+      album_spotify_id: sequence(:album_spotify_id, &"album-#{&1}"),
+      cover_image_url: "https://i.scdn.co/image/cover.jpg",
+      cover_image_url_small: "https://i.scdn.co/image/cover_small.jpg",
+      spotify_track_url: "https://open.spotify.com/track/abc",
+      spotify_artist_url: "https://open.spotify.com/artist/abc",
+      spotify_album_url: "https://open.spotify.com/album/abc",
+      duration_ms: 515_000,
+      comment_count: 0,
+      listens_count: 0
+    }
+  end
+
+  def song_listen_factory do
+    %Helheim.SongListen{
+      user: build(:user),
+      song: build(:song),
+      played_at: sequence(:played_at, &Timex.shift(Timex.now, seconds: -&1))
+    }
+  end
 end

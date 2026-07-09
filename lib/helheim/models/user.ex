@@ -60,6 +60,8 @@ defmodule Helheim.User do
     has_many :forum_topics,              Helheim.ForumTopic
     has_many :forum_replies,             Helheim.ForumReply
     has_many :calendar_events,           Helheim.CalendarEvent
+    has_many :song_listens,              Helheim.SongListen
+    has_one  :spotify_account,           Helheim.SpotifyAccount
     belongs_to :verifier,                Helheim.User
   end
 

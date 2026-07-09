@@ -32,3 +32,42 @@
     </div>
   </div>
 <% end %>
+
+<div class="card">
+  <div class="card-header">
+    <i class="fa fa-spotify"></i> <%= gettext "Spotify" %>
+  </div>
+  <div class="card-block">
+    <%= if @spotify_account do %>
+      <p>
+        <%= gettext "Your Spotify account is connected and your listening history is shared on the site." %>
+      </p>
+      <p>
+        <%= link to: spotify_account_path(@conn, :delete), method: :delete, data: [confirm: gettext("Are you sure? We will stop tracking what you listen to. Your existing listening history will be kept.")], class: "btn btn-sm btn-secondary" do %>
+          <i class="fa fa-chain-broken"></i>
+          <%= gettext "Disconnect Spotify" %>
+        <% end %>
+      </p>
+      <hr>
+      <p>
+        <%= gettext "You can also delete your entire listening history from the site. This cannot be undone." %>
+      </p>
+      <p>
+        <%= link to: spotify_account_path(@conn, :delete_history), method: :delete, data: [confirm: gettext("Are you sure? Your entire listening history will be permanently deleted!")], class: "btn btn-sm btn-danger" do %>
+          <i class="fa fa-trash"></i>
+          <%= gettext "Delete listening history" %>
+        <% end %>
+      </p>
+    <% else %>
+      <p>
+        <%= gettext "Connect your Spotify account to share what you are listening to with the rest of the site. Your listening history will be shown on your profile and on the front page." %>
+      </p>
+      <p>
+        <%= link to: spotify_account_path(@conn, :create), method: :post, class: "btn btn-sm btn-success" do %>
+          <i class="fa fa-spotify"></i>
+          <%= gettext "Connect Spotify" %>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+</div>

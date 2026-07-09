@@ -63,4 +63,9 @@ if config_env() == :prod do
   config :helheim, :recaptcha,
     public_key: System.get_env("RECAPTCHA_PUBLIC_KEY"),
     secret: System.get_env("RECAPTCHA_SECRET_KEY")
+
+  config :helheim, :spotify,
+    client_id: System.get_env("SPOTIFY_CLIENT_ID"),
+    client_secret: System.get_env("SPOTIFY_CLIENT_SECRET"),
+    redirect_uri: "https://#{host}/spotify_account/callback"
 end

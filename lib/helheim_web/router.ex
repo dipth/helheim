@@ -70,6 +70,9 @@ defmodule HelheimWeb.Router do
     get "/sessions/sign_out", SessionController, :delete
     resources "/account", AccountController, singleton: true, only: [:edit, :update, :delete]
     resources "/preferences", PreferenceController, singleton: true, only: [:edit, :update]
+    get "/spotify_account/callback", SpotifyAccountController, :callback
+    delete "/spotify_account/history", SpotifyAccountController, :delete_history
+    resources "/spotify_account", SpotifyAccountController, singleton: true, only: [:create, :delete]
     resources "/profile", ProfileController, singleton: true, only: [:show, :edit, :update]
     resources "/profiles", ProfileController, only: [:index, :show], as: :public_profile do
       resources "/blog_posts", BlogPostController, only: [:index, :show] do

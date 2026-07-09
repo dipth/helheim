@@ -55,6 +55,12 @@ config :helheim, :recaptcha,
   secret: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe",
   test_mode: true
 
+# Configure Spotify
+config :helheim, :spotify,
+  client_id: "spotify_test_client_id",
+  client_secret: "spotify_test_client_secret",
+  redirect_uri: "http://localhost:4001/spotify_account/callback"
+
 # Configure wallaby
 config :wallaby,
   otp_app: :helheim,
