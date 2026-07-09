@@ -18,13 +18,18 @@ defmodule Helheim.Lastfm.SyncService do
   alias Helheim.LastfmAccount
   alias Helheim.Lastfm.Client
 
+  # A full page of 200 scrobbles is several hundred queries in one
+  # transaction; against a remote database (Neon) that far exceeds the
+  # default 15s connection checkout timeout.
+  @sync_timeout :timer.minutes(2)
+
   def sync_listens!(account, tracks) do
     parsed_items = tracks |> Enum.map(&parse_item/1) |> Enum.reject(&is_nil/1)
 
     Multi.new()
     |> Multi.run(:listens, fn repo, _changes -> insert_listens(repo, account, parsed_items) end)
     |> Multi.run(:account, fn repo, _changes -> update_account(repo, account, parsed_items) end)
-    |> Repo.transaction()
+    |> Repo.transaction(timeout: @sync_timeout)
   end
 
   defp insert_listens(repo, account, parsed_items) do
