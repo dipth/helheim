@@ -10,7 +10,9 @@
     <small class="text-muted">
       <%= @listen.song.artist_name %>
       &mdash;
-      <%= username @listen.user, true %>,
+      <%= if assigns[:show_username] != false do %>
+        <%= username @listen.user, true %>,
+      <% end %>
       <%= time_ago_in_words @listen.played_at %>
     </small>
     <br>

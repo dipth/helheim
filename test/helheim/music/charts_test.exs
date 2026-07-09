@@ -23,6 +23,19 @@ defmodule Helheim.Music.ChartsTest do
       insert_list(3, :song_listen)
       assert length(Charts.top_songs_since(Timex.shift(Timex.now, days: -1), 2)) == 2
     end
+
+    test "excludes listens from the given user ids" do
+      since = Timex.shift(Timex.now, days: -1)
+      ignoree = insert(:user)
+      song = insert(:song)
+      insert(:song_listen, user: ignoree, song: song)
+      other_listen = insert(:song_listen)
+
+      results = Charts.top_songs_since(since, 10, [ignoree.id])
+
+      assert [{top_song, 1}] = results
+      assert top_song.id == other_listen.song_id
+    end
   end
 
   describe "start_of_day/0" do

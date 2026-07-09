@@ -66,8 +66,8 @@ defmodule HelheimWeb.PageController do
       newest_forum_topics: newest_forum_topics,
       upcoming_events: upcoming_events,
       recent_song_listens: recent_song_listens,
-      top_songs_today: Charts.top_songs_today(5),
-      top_songs_week: Charts.top_songs_this_week(5)
+      top_songs_today: Charts.top_songs_today(5, conn.assigns[:ignoree_ids]),
+      top_songs_week: Charts.top_songs_this_week(5, conn.assigns[:ignoree_ids])
   end
 
   def terms(conn, _params) do

@@ -32,7 +32,7 @@
             <%= lastfm_link lastfm_album_url(@song.artist_name, @song.album_name), gettext("Album on Last.fm") %>
           <% end %>
         </p>
-        <%= if @current_user_listen_count > 0 do %>
+        <%= if @current_user_has_listens do %>
           <hr>
           <p class="mb-0">
             <%= link to: song_my_listens_path(@conn, :remove_my_listens, @song), method: :delete, data: [confirm: gettext("Are you sure? Your listens of this song will be permanently removed!")], class: "btn btn-sm btn-outline-danger" do %>

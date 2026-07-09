@@ -11,7 +11,7 @@
     <br>
     <%= comment_count_badge @song %>
     <%= if assigns[:listen_count] do %>
-      <span class="badge badge-default"><i class="fa fa-fw fa-headphones"></i> <%= @listen_count %></span>
+      <%= listen_count_badge @listen_count %>
     <% end %>
   </div>
 </div>

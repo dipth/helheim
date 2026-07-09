@@ -12,10 +12,6 @@ defmodule Helheim.Lastfm.Client do
   @auth_url "https://www.last.fm/api/auth/"
   @api_url "https://ws.audioscrobbler.com/2.0/"
 
-  # The placeholder image Last.fm serves when it has no album art.
-  @placeholder_image_hash "2a96cbd8b46e442fc41c2b86b821562f"
-  def placeholder_image_hash, do: @placeholder_image_hash
-
   def auth_url do
     query = URI.encode_query(%{api_key: config()[:api_key], cb: config()[:callback_url]})
     "#{@auth_url}?#{query}"

@@ -5,8 +5,7 @@ defmodule HelheimWeb.PreferenceController do
   def edit(conn, _params) do
     user = Guardian.Plug.current_resource(conn)
     changeset = User.preferences_changeset(user)
-    lastfm_account = Repo.get_by(Helheim.LastfmAccount, user_id: user.id)
-    render conn, "edit.html", changeset: changeset, lastfm_account: lastfm_account
+    render conn, "edit.html", changeset: changeset, lastfm_account: Helheim.LastfmAccount.get_for_user(user)
   end
 
   def update(conn, %{"user" => user_params}) do
@@ -18,9 +17,8 @@ defmodule HelheimWeb.PreferenceController do
         |> put_flash(:success, gettext("Preferences updated!"))
         |> redirect(to: page_path(conn, :front_page))
       {:error, changeset} ->
-        lastfm_account = Repo.get_by(Helheim.LastfmAccount, user_id: user.id)
         conn
-        |> render("edit.html", changeset: changeset, lastfm_account: lastfm_account)
+        |> render("edit.html", changeset: changeset, lastfm_account: Helheim.LastfmAccount.get_for_user(user))
     end
   end
 end

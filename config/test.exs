@@ -15,6 +15,9 @@ config :helheim, :async_notifications, false
 # Run Oban in manual testing mode so jobs only execute through Oban.Testing
 config :helheim, Oban, testing: :manual
 
+# Never serve stale chart data across tests
+config :helheim, :chart_cache_ttl_ms, 0
+
 # Print only warnings and errors during test
 config :logger, level: :warning
 

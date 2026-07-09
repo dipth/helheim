@@ -16,7 +16,9 @@ defmodule Helheim.Lastfm.SyncService do
   alias Helheim.Song
   alias Helheim.SongListen
   alias Helheim.LastfmAccount
-  alias Helheim.Lastfm.Client
+
+  # The image Last.fm serves when it has no album art.
+  @placeholder_image_hash "2a96cbd8b46e442fc41c2b86b821562f"
 
   # A full page of 200 scrobbles is several hundred queries in one
   # transaction; against a remote database (Neon) that far exceeds the
@@ -68,13 +70,14 @@ defmodule Helheim.Lastfm.SyncService do
     )
   end
 
-  # Inserts a listen unless one already exists for the same user and
-  # played_at (scrobble timestamps are unique per user), keeping the song's
-  # listens_count in step with genuinely new rows only.
+  # Inserts a listen unless the same scrobble was already imported by an
+  # earlier poll, keeping the song's listens_count in step with genuinely
+  # new rows only. The song is part of the identity because bulk imports can
+  # stamp two different tracks with the same second.
   defp insert_listen!(repo, user_id, song, played_at) do
     listen =
       %SongListen{user_id: user_id, song_id: song.id, played_at: played_at}
-      |> repo.insert!(on_conflict: :nothing, conflict_target: [:user_id, :played_at])
+      |> repo.insert!(on_conflict: :nothing, conflict_target: [:user_id, :played_at, :song_id])
 
     if listen.id do
       repo.update_all((from s in Song, where: s.id == ^song.id), inc: [listens_count: 1])
@@ -102,6 +105,8 @@ defmodule Helheim.Lastfm.SyncService do
 
   # The currently playing track carries a nowplaying attribute and no date;
   # it is skipped and will be picked up once it has actually been scrobbled.
+  # All field access is defensive against shape drift in the API response,
+  # so one malformed item is skipped instead of crashing the whole batch.
   defp parse_item(%{"@attr" => %{"nowplaying" => "true"}}), do: nil
   defp parse_item(%{"date" => %{"uts" => uts}} = track) do
     with {uts, ""} <- Integer.parse("#{uts}"),
@@ -115,35 +120,38 @@ defmodule Helheim.Lastfm.SyncService do
   end
   defp parse_item(_), do: nil
 
-  defp artist_name(track) do
-    get_in(track, ["artist", "#text"]) || get_in(track, ["artist", "name"])
-  end
+  defp artist_name(%{"artist" => %{} = artist}), do: artist["#text"] || artist["name"]
+  defp artist_name(_), do: nil
+
+  defp album_name(%{"album" => %{"#text" => album}}), do: blank_to_nil(album)
+  defp album_name(_), do: nil
 
   defp song_attrs(track, title, artist) do
     %{
       title: title,
       artist_name: artist,
-      album_name: blank_to_nil(get_in(track, ["album", "#text"])),
+      album_name: album_name(track),
       cover_image_url: image_url(track["image"], "extralarge"),
       cover_image_url_small: image_url(track["image"], "medium"),
       lastfm_track_url: blank_to_nil(track["url"])
     }
   end
 
-  defp image_url(images, size) do
-    (images || [])
-    |> Enum.find(fn image -> image["size"] == size end)
+  defp image_url(images, size) when is_list(images) do
+    images
+    |> Enum.find(fn image -> is_map(image) && image["size"] == size end)
     |> case do
-      %{"#text" => url} -> blank_to_nil(url) |> reject_placeholder()
+      %{"#text" => url} when is_binary(url) -> blank_to_nil(url) |> reject_placeholder()
       _ -> nil
     end
   end
+  defp image_url(_, _), do: nil
 
   defp reject_placeholder(nil), do: nil
   defp reject_placeholder(url) do
-    if String.contains?(url, Client.placeholder_image_hash()), do: nil, else: url
+    if String.contains?(url, @placeholder_image_hash), do: nil, else: url
   end
 
-  defp blank_to_nil(""), do: nil
-  defp blank_to_nil(value), do: value
+  defp blank_to_nil(value) when is_binary(value) and value != "", do: value
+  defp blank_to_nil(_), do: nil
 end

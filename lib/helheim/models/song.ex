@@ -19,8 +19,6 @@ defmodule Helheim.Song do
 
   @metadata_fields [:album_name, :cover_image_url, :cover_image_url_small, :lastfm_track_url]
 
-  def metadata_fields, do: @metadata_fields
-
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:title, :artist_name | @metadata_fields])
@@ -28,13 +26,18 @@ defmodule Helheim.Song do
     |> unique_constraint(:title, name: :songs_artist_title_index)
   end
 
-  def top_by_listens_since(query, since) do
+  def top_by_listens_since(query, since, excluded_user_ids \\ nil)
+  def top_by_listens_since(query, since, excluded_user_ids) when excluded_user_ids in [nil, []] do
     from s in query,
       join: l in SongListen, on: l.song_id == s.id,
       where: l.played_at >= ^since,
       group_by: s.id,
       order_by: [desc: count(l.id), asc: s.id],
       select: {s, count(l.id)}
+  end
+  def top_by_listens_since(query, since, excluded_user_ids) do
+    from [s, l] in top_by_listens_since(query, since),
+      where: l.user_id not in ^excluded_user_ids
   end
 
   def top_for_user(query, user) do

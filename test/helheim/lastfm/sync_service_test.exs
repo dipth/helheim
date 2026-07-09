@@ -109,6 +109,28 @@ defmodule Helheim.Lastfm.SyncServiceTest do
       assert Repo.get_by!(Song, title: "Orion").listens_count == 2
     end
 
+    test "allows two different songs scrobbled at the same timestamp", %{account: account} do
+      items = [item("Orion", @uts_10_00), item("Battery", @uts_10_00)]
+      {:ok, _} = SyncService.sync_listens!(account, items)
+
+      assert Repo.aggregate(SongListen, :count) == 2
+      assert Repo.get_by!(Song, title: "Orion").listens_count == 1
+      assert Repo.get_by!(Song, title: "Battery").listens_count == 1
+    end
+
+    test "skips items with a malformed artist or image payload without crashing the batch", %{account: account} do
+      items = [
+        item("Orion", @uts_10_00, %{"artist" => "Metallica"}),
+        item("Battery", @uts_11_00, %{"image" => "not a list", "album" => "not a map"})
+      ]
+      {:ok, _} = SyncService.sync_listens!(account, items)
+
+      refute Repo.get_by(Song, title: "Orion")
+      song = Repo.get_by!(Song, title: "Battery")
+      assert song.cover_image_url == nil
+      assert song.album_name == nil
+    end
+
     test "skips the currently playing track", %{account: account} do
       nowplaying =
         item("Orion", @uts_10_00)

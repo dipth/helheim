@@ -17,9 +17,9 @@ defmodule Helheim.LastfmAccountServiceTest do
       assert_in_delta account.played_after_cursor, DateTime.to_unix(DateTime.utc_now()), 10
     end
 
-    test "updates the existing account, clears the broken state and keeps the cursor when reconnecting" do
+    test "updates the existing account, clears the broken state and keeps the cursor when reconnecting the same account" do
       user = insert(:user)
-      existing = insert(:lastfm_account, user: user, broken_at: DateTime.utc_now(), played_after_cursor: 123)
+      existing = insert(:lastfm_account, user: user, username: "MeloManiac", broken_at: DateTime.utc_now(), played_after_cursor: 123)
       {:ok, account} = LastfmAccountService.connect!(user, @session)
       assert account.id == existing.id
       assert account.username == "melomaniac"
@@ -27,6 +27,27 @@ defmodule Helheim.LastfmAccountServiceTest do
       assert account.broken_at == nil
       assert account.played_after_cursor == 123
       assert Repo.aggregate(LastfmAccount, :count) == 1
+    end
+
+    test "resets the cursor when connecting a different lastfm account" do
+      user = insert(:user)
+      insert(:lastfm_account, user: user, username: "somebody_else", played_after_cursor: 123)
+      {:ok, account} = LastfmAccountService.connect!(user, @session)
+      assert account.username == "melomaniac"
+      assert_in_delta account.played_after_cursor, DateTime.to_unix(DateTime.utc_now()), 10
+    end
+
+    test "returns an error changeset instead of raising when the user already has an account row" do
+      user = insert(:user)
+      insert(:lastfm_account, user: user)
+
+      {:error, changeset} =
+        %Helheim.LastfmAccount{}
+        |> Helheim.LastfmAccount.changeset(%{username: "melomaniac", session_key: "key"})
+        |> Ecto.Changeset.put_assoc(:user, user)
+        |> Repo.insert()
+
+      assert {"has already been taken", _} = changeset.errors[:user_id]
     end
   end
 

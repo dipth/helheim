@@ -8,18 +8,20 @@ defmodule Helheim.LastfmAccountService do
 
   @doc """
   Creates or updates the Last.fm connection for the given user from a
-  verified auth session. Reconnecting clears a broken state and keeps the
-  existing polling cursor so the gap is backfilled (up to one page); a first
-  connect starts tracking from now instead of importing old history.
+  verified auth session. Reconnecting the same Last.fm account clears a
+  broken state and keeps the existing polling cursor so the gap is
+  backfilled (up to one page); a first connect or a switch to a different
+  Last.fm account starts tracking from now instead of importing history
+  that belongs to another timeline.
   """
   def connect!(user, %{username: username, session_key: session_key}) do
-    existing = Repo.get_by(LastfmAccount, user_id: user.id)
+    existing = LastfmAccount.get_for_user(user)
 
     attrs = %{
       username: username,
       session_key: session_key,
       broken_at: nil,
-      played_after_cursor: (existing && existing.played_after_cursor) || DateTime.to_unix(DateTime.utc_now())
+      played_after_cursor: existing_cursor(existing, username) || DateTime.to_unix(DateTime.utc_now())
     }
 
     (existing || Ecto.build_assoc(user, :lastfm_account))
@@ -27,12 +29,21 @@ defmodule Helheim.LastfmAccountService do
     |> Repo.insert_or_update()
   end
 
+  defp existing_cursor(nil, _username), do: nil
+  defp existing_cursor(existing, username) do
+    if String.downcase(existing.username) == String.downcase(username) do
+      existing.played_after_cursor
+    else
+      nil
+    end
+  end
+
   @doc """
   Disconnects the user from the Last.fm feature. The session key is deleted
   and tracking stops, but already tracked listens are kept.
   """
   def disconnect!(user) do
-    case Repo.get_by(LastfmAccount, user_id: user.id) do
+    case LastfmAccount.get_for_user(user) do
       nil -> {:ok, nil}
       account -> Repo.delete(account)
     end
@@ -53,19 +64,23 @@ defmodule Helheim.LastfmAccountService do
     delete_listens!(from l in SongListen, where: l.user_id == ^user.id and l.song_id == ^song.id)
   end
 
+  # The counter decrement runs as a single UPDATE joined against the grouped
+  # listens (before they are deleted), so the whole operation is two
+  # statements regardless of how large the listening history is.
   defp delete_listens!(listens_query) do
+    counts_query =
+      from l in subquery(listens_query),
+        group_by: l.song_id,
+        select: %{song_id: l.song_id, listen_count: count(l.id)}
+
+    dec_query =
+      from s in Song,
+        join: c in subquery(counts_query), on: c.song_id == s.id,
+        update: [set: [listens_count: s.listens_count - c.listen_count]]
+
     Multi.new()
-    |> Multi.run(:counts_per_song, fn repo, _changes ->
-      counts = repo.all(from l in subquery(listens_query), group_by: l.song_id, select: {l.song_id, count(l.id)})
-      {:ok, counts}
-    end)
+    |> Multi.update_all(:dec_listens_counts, dec_query, [])
     |> Multi.delete_all(:delete_listens, listens_query)
-    |> Multi.run(:dec_listens_counts, fn repo, %{counts_per_song: counts} ->
-      Enum.each(counts, fn {song_id, count} ->
-        repo.update_all((from s in Song, where: s.id == ^song_id), inc: [listens_count: -count])
-      end)
-      {:ok, nil}
-    end)
     |> Repo.transaction()
   end
 end

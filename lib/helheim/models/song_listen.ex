@@ -23,10 +23,6 @@ defmodule Helheim.SongListen do
     from l in query, where: l.song_id == ^song.id
   end
 
-  def since(query, datetime) do
-    from l in query, where: l.played_at >= ^datetime
-  end
-
   def not_from_users(query, nil), do: query
   def not_from_users(query, user_ids) do
     from l in query, where: l.user_id not in ^user_ids

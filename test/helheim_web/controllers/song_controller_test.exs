@@ -56,6 +56,26 @@ defmodule HelheimWeb.SongControllerTest do
       assert html_response(conn, 200) =~ listen.user.username
     end
 
+    test "it does not show listeners who block the current user", %{conn: conn, user: user} do
+      song = insert(:song)
+      blocker = insert(:user, username: "blocky-mc-blockface")
+      insert(:block, blocker: blocker, blockee: user)
+      insert(:song_listen, song: song, user: blocker)
+
+      conn = get conn, "/songs/#{song.id}"
+      refute html_response(conn, 200) =~ "blocky-mc-blockface"
+    end
+
+    test "it does not show listeners that the current user ignores", %{conn: conn, user: user} do
+      song = insert(:song)
+      ignoree = insert(:user, username: "ignored-individual")
+      insert(:ignore, ignorer: user, ignoree: ignoree, enabled: true)
+      insert(:song_listen, song: song, user: ignoree)
+
+      conn = get conn, "/songs/#{song.id}"
+      refute html_response(conn, 200) =~ "ignored-individual"
+    end
+
     test "it shows the comments of the song", %{conn: conn} do
       comment = insert(:song_comment, body: "What a fantastic track")
 

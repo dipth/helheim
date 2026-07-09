@@ -1,35 +1,37 @@
 <h1 class="mt-1"><%= gettext "Music from %{username}", username: @user.username %></h1>
 
-<div class="card-group mt-1">
-  <div class="card">
-    <div class="card-block">
-      <h5 class="mb-1"><%= gettext "Top songs" %></h5>
-      <%= if length(@top_songs) == 0 do %>
-        <p class="text-muted mb-0"><%= gettext "No listens have been tracked yet..." %></p>
-      <% end %>
-      <%= for {song, count} <- @top_songs do %>
-        <%= render HelheimWeb.SongView, "_song.html", conn: @conn, song: song, listen_count: count %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-block">
-      <h5 class="mb-1"><%= gettext "Top artists" %></h5>
-      <%= if length(@top_artists) == 0 do %>
-        <p class="text-muted mb-0"><%= gettext "No listens have been tracked yet..." %></p>
-      <% end %>
-      <ol class="pl-2 mb-0">
-        <%= for {artist_name, count} <- @top_artists do %>
-          <li>
-            <%= link artist_name, to: HelheimWeb.SongView.lastfm_artist_url(artist_name), target: "_blank", rel: "noopener" %>
-            <span class="badge badge-default"><i class="fa fa-fw fa-headphones"></i> <%= count %></span>
-          </li>
+<%= if @top_songs do %>
+  <div class="card-group mt-1">
+    <div class="card">
+      <div class="card-block">
+        <h5 class="mb-1"><%= gettext "Top songs" %></h5>
+        <%= if length(@top_songs) == 0 do %>
+          <p class="text-muted mb-0"><%= gettext "No listens have been tracked yet..." %></p>
         <% end %>
-      </ol>
+        <%= for {song, count} <- @top_songs do %>
+          <%= render HelheimWeb.SongView, "_song.html", conn: @conn, song: song, listen_count: count %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-block">
+        <h5 class="mb-1"><%= gettext "Top artists" %></h5>
+        <%= if length(@top_artists) == 0 do %>
+          <p class="text-muted mb-0"><%= gettext "No listens have been tracked yet..." %></p>
+        <% end %>
+        <ol class="pl-2 mb-0">
+          <%= for {artist_name, count} <- @top_artists do %>
+            <li>
+              <%= link artist_name, to: HelheimWeb.SongView.lastfm_artist_url(artist_name), target: "_blank", rel: "noopener" %>
+              <%= HelheimWeb.SongView.listen_count_badge(count) %>
+            </li>
+          <% end %>
+        </ol>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
 
 <div class="card mt-1">
   <div class="card-block">
@@ -38,24 +40,7 @@
       <p class="text-muted mb-0"><%= gettext "No listens have been tracked yet..." %></p>
     <% end %>
     <%= for listen <- @listens do %>
-      <div class="media mb-1">
-        <%= if listen.song.cover_image_url_small do %>
-          <a href="<%= song_path(@conn, :show, listen.song) %>">
-            <img src="<%= listen.song.cover_image_url_small %>" class="d-flex mr-1 rounded" alt="" width="64" height="64">
-          </a>
-        <% end %>
-        <div class="media-body">
-          <%= link listen.song.title, to: song_path(@conn, :show, listen.song) %>
-          <br>
-          <small class="text-muted">
-            <%= listen.song.artist_name %>
-            &mdash;
-            <%= time_ago_in_words listen.played_at %>
-          </small>
-          <br>
-          <%= comment_count_badge listen.song %>
-        </div>
-      </div>
+      <%= render HelheimWeb.SongView, "_listen.html", conn: @conn, listen: listen, show_username: false %>
     <% end %>
     <%= pagination_links @conn, @listens %>
   </div>

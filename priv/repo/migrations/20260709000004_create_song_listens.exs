@@ -10,7 +10,7 @@ defmodule Helheim.Repo.Migrations.CreateSongListens do
       timestamps(type: :utc_datetime_usec)
     end
 
-    create unique_index(:song_listens, [:user_id, :played_at])
+    create unique_index(:song_listens, [:user_id, :played_at, :song_id])
     create index(:song_listens, [:song_id])
     create index(:song_listens, [:user_id, :song_id])
     create index(:song_listens, [:played_at])
