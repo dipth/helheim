@@ -1,4 +1,4 @@
-defmodule Helheim.Spotify.Charts do
+defmodule Helheim.Music.Charts do
   @moduledoc """
   Aggregated listening statistics for the front page. Day and week
   boundaries are calculated in local Danish time (weeks start on Monday) and

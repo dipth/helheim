@@ -3,7 +3,7 @@ defmodule HelheimWeb.SongController do
   alias Helheim.Comment
   alias Helheim.Song
   alias Helheim.SongListen
-  alias Helheim.Spotify.Charts
+  alias Helheim.Music.Charts
 
   def index(conn, params) do
     songs =

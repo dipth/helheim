@@ -7,7 +7,7 @@ defmodule HelheimWeb.PageController do
   alias Helheim.Term
   alias Helheim.CalendarEvent
   alias Helheim.SongListen
-  alias Helheim.Spotify.Charts
+  alias Helheim.Music.Charts
 
   def index(conn, _params) do
     if Guardian.Plug.current_resource(conn) do

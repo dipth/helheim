@@ -1,6 +1,6 @@
-defmodule Helheim.Spotify.ChartsTest do
+defmodule Helheim.Music.ChartsTest do
   use Helheim.DataCase
-  alias Helheim.Spotify.Charts
+  alias Helheim.Music.Charts
 
   describe "top_songs_since/2" do
     test "orders songs by number of listens since the given time and excludes older listens" do
