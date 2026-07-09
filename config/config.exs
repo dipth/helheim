@@ -45,7 +45,10 @@ config :helheim, Oban,
   queues: [spotify: 5],
   plugins: [
     {Oban.Plugins.Pruner, max_age: 60 * 60 * 24 * 7},
-    {Oban.Plugins.Cron, crontab: []}
+    {Oban.Plugins.Cron,
+     crontab: [
+       {"*/5 * * * *", Helheim.Spotify.SchedulerWorker}
+     ]}
   ]
 
 # Configure Sentry
