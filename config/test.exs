@@ -12,6 +12,9 @@ config :helheim, :sql_sandbox, true
 # test process and race with the SQL sandbox
 config :helheim, :async_notifications, false
 
+# Run Oban in manual testing mode so jobs only execute through Oban.Testing
+config :helheim, Oban, testing: :manual
+
 # Print only warnings and errors during test
 config :logger, level: :warning
 

@@ -14,6 +14,8 @@ defmodule Helheim.Application do
       {Phoenix.PubSub, name: Helheim.PubSub},
       # Start the Ecto repository
       Helheim.Repo,
+      # Start Oban for background and scheduled jobs
+      {Oban, Application.fetch_env!(:helheim, Oban)},
       # Start the Telemetry
       HelheimWeb.Telemetry,
       # Start the endpoint when the application starts
