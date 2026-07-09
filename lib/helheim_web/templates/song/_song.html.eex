@@ -6,11 +6,12 @@
   <% end %>
   <div class="media-body">
     <%= link @song.title, to: song_path(@conn, :show, @song) %>
+    <br>
+    <small class="text-muted"><%= @song.artist_name %></small>
+    <br>
     <%= comment_count_badge @song %>
     <%= if assigns[:listen_count] do %>
       <span class="badge badge-default"><i class="fa fa-fw fa-headphones"></i> <%= @listen_count %></span>
     <% end %>
-    <br>
-    <small class="text-muted"><%= @song.artist_name %></small>
   </div>
 </div>

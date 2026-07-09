@@ -6,7 +6,6 @@
   <% end %>
   <div class="media-body">
     <%= link @listen.song.title, to: song_path(@conn, :show, @listen.song) %>
-    <%= comment_count_badge @listen.song %>
     <br>
     <small class="text-muted">
       <%= @listen.song.artist_name %>
@@ -14,5 +13,7 @@
       <%= username @listen.user, true %>,
       <%= time_ago_in_words @listen.played_at %>
     </small>
+    <br>
+    <%= comment_count_badge @listen.song %>
   </div>
 </div>
