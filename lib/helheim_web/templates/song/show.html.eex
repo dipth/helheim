@@ -35,6 +35,15 @@
           <%= spotify_link @song.spotify_artist_url, gettext("Artist on Spotify") %><br>
           <%= spotify_link @song.spotify_album_url, gettext("Album on Spotify") %>
         </p>
+        <%= if @current_user_listen_count > 0 do %>
+          <hr>
+          <p class="mb-0">
+            <%= link to: song_my_listens_path(@conn, :remove_my_listens, @song), method: :delete, data: [confirm: gettext("Are you sure? Your listens of this song will be permanently removed!")], class: "btn btn-sm btn-outline-danger" do %>
+              <i class="fa fa-eraser"></i>
+              <%= gettext "Remove my name from this song" %>
+            <% end %>
+          </p>
+        <% end %>
       </div>
     </div>
   </div>

@@ -237,6 +237,19 @@ defmodule Helheim.UserTest do
       User.delete! user
       refute Repo.get(User, user.id)
     end
+
+    test "it deletes the spotify account and song listens of the user" do
+      user = insert(:user)
+      account = insert(:spotify_account, user: user)
+      listen = insert(:song_listen, user: user)
+      other_listen = insert(:song_listen)
+
+      User.delete! user
+
+      refute Repo.get(Helheim.SpotifyAccount, account.id)
+      refute Repo.get(Helheim.SongListen, listen.id)
+      assert Repo.get(Helheim.SongListen, other_listen.id)
+    end
   end
 
   describe "age/2" do

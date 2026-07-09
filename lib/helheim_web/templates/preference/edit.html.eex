@@ -39,6 +39,18 @@
   </div>
   <div class="card-block">
     <%= if @spotify_account do %>
+      <%= if @spotify_account.broken_at do %>
+        <div class="alert alert-warning">
+          <%= gettext "The connection to your Spotify account is broken and we can no longer track what you listen to. Please reconnect to continue sharing your listening history." %>
+        </div>
+        <p>
+          <%= link to: spotify_account_path(@conn, :create), method: :post, class: "btn btn-sm btn-warning" do %>
+            <i class="fa fa-refresh"></i>
+            <%= gettext "Reconnect Spotify" %>
+          <% end %>
+        </p>
+        <hr>
+      <% end %>
       <p>
         <%= gettext "Your Spotify account is connected and your listening history is shared on the site." %>
       </p>

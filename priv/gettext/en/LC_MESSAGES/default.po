@@ -2695,12 +2695,12 @@ msgstr ""
 msgid "All listens"
 msgstr ""
 
-#: lib/helheim_web/templates/preference/edit.html.eex:46
+#: lib/helheim_web/templates/preference/edit.html.eex:58
 #, elixir-autogen, elixir-format
 msgid "Are you sure? We will stop tracking what you listen to. Your existing listening history will be kept."
 msgstr ""
 
-#: lib/helheim_web/templates/preference/edit.html.eex:56
+#: lib/helheim_web/templates/preference/edit.html.eex:68
 #, elixir-autogen, elixir-format
 msgid "Are you sure? Your entire listening history will be permanently deleted!"
 msgstr ""
@@ -2715,22 +2715,22 @@ msgstr ""
 msgid "Artist on Spotify"
 msgstr ""
 
-#: lib/helheim_web/templates/preference/edit.html.eex:68
+#: lib/helheim_web/templates/preference/edit.html.eex:80
 #, elixir-autogen, elixir-format
 msgid "Connect Spotify"
 msgstr ""
 
-#: lib/helheim_web/templates/preference/edit.html.eex:63
+#: lib/helheim_web/templates/preference/edit.html.eex:75
 #, elixir-autogen, elixir-format
 msgid "Connect your Spotify account to share what you are listening to with the rest of the site. Your listening history will be shown on your profile and on the front page."
 msgstr ""
 
-#: lib/helheim_web/templates/preference/edit.html.eex:58
+#: lib/helheim_web/templates/preference/edit.html.eex:70
 #, elixir-autogen, elixir-format
 msgid "Delete listening history"
 msgstr ""
 
-#: lib/helheim_web/templates/preference/edit.html.eex:48
+#: lib/helheim_web/templates/preference/edit.html.eex:60
 #, elixir-autogen, elixir-format
 msgid "Disconnect Spotify"
 msgstr ""
@@ -2762,7 +2762,7 @@ msgstr ""
 msgid "No listens have been tracked yet..."
 msgstr ""
 
-#: lib/helheim_web/templates/song/show.html.eex:47
+#: lib/helheim_web/templates/song/show.html.eex:56
 #, elixir-autogen, elixir-format
 msgid "No one has listened to this song yet..."
 msgstr ""
@@ -2777,7 +2777,7 @@ msgstr ""
 msgid "No songs have been listened to today yet..."
 msgstr ""
 
-#: lib/helheim_web/templates/song/show.html.eex:45
+#: lib/helheim_web/templates/song/show.html.eex:54
 #, elixir-autogen, elixir-format
 msgid "Recent listeners"
 msgstr ""
@@ -2828,7 +2828,7 @@ msgstr ""
 msgid "Top songs today"
 msgstr ""
 
-#: lib/helheim_web/templates/preference/edit.html.eex:53
+#: lib/helheim_web/templates/preference/edit.html.eex:65
 #, elixir-autogen, elixir-format
 msgid "You can also delete your entire listening history from the site. This cannot be undone."
 msgstr ""
@@ -2844,7 +2844,7 @@ msgstr ""
 msgid "Your Spotify account has been disconnected."
 msgstr ""
 
-#: lib/helheim_web/templates/preference/edit.html.eex:43
+#: lib/helheim_web/templates/preference/edit.html.eex:55
 #, elixir-autogen, elixir-format
 msgid "Your Spotify account is connected and your listening history is shared on the site."
 msgstr ""
@@ -2857,4 +2857,29 @@ msgstr ""
 #: lib/helheim_web/controllers/spotify_account_controller.ex:57
 #, elixir-autogen, elixir-format
 msgid "Your listening history has been deleted."
+msgstr ""
+
+#: lib/helheim_web/templates/song/show.html.eex:41
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Are you sure? Your listens of this song will be permanently removed!"
+msgstr ""
+
+#: lib/helheim_web/templates/preference/edit.html.eex:49
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Reconnect Spotify"
+msgstr ""
+
+#: lib/helheim_web/templates/song/show.html.eex:43
+#, elixir-autogen, elixir-format
+msgid "Remove my name from this song"
+msgstr ""
+
+#: lib/helheim_web/templates/preference/edit.html.eex:44
+#, elixir-autogen, elixir-format
+msgid "The connection to your Spotify account is broken and we can no longer track what you listen to. Please reconnect to continue sharing your listening history."
+msgstr ""
+
+#: lib/helheim_web/controllers/song_controller.ex:48
+#, elixir-autogen, elixir-format
+msgid "Your listens have been removed from this song."
 msgstr ""
