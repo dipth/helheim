@@ -5,7 +5,7 @@
   <div class="col-md-4">
     <div class="card">
       <%= if @song.cover_image_url do %>
-        <img class="card-img-top img-fluid" src="<%= @song.cover_image_url %>" alt="<%= @song.title %>">
+        <img class="card-img-top img-fluid" src="<%= @song.cover_image_url %>" alt="">
       <% end %>
       <div class="card-block">
         <table class="table table-sm">
