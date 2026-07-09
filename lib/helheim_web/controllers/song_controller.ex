@@ -1,5 +1,6 @@
 defmodule HelheimWeb.SongController do
   use HelheimWeb, :controller
+  alias Helheim.Comment
   alias Helheim.Song
   alias Helheim.SongListen
   alias Helheim.Spotify.Charts
@@ -12,7 +13,7 @@ defmodule HelheimWeb.SongController do
     render(conn, "index.html", songs: songs)
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id} = params) do
     song = Repo.get!(Song, id)
     recent_listens =
       SongListen
@@ -21,6 +22,12 @@ defmodule HelheimWeb.SongController do
       |> preload(:user)
       |> limit(10)
       |> Repo.all
-    render(conn, "show.html", song: song, recent_listens: recent_listens)
+    comments =
+      assoc(song, :comments)
+      |> Comment.not_deleted
+      |> Comment.newest
+      |> Comment.with_preloads
+      |> Repo.paginate(page: sanitized_page(params["page"]))
+    render(conn, "show.html", song: song, recent_listens: recent_listens, comments: comments)
   end
 end

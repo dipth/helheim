@@ -56,6 +56,13 @@ defmodule HelheimWeb.SongControllerTest do
       assert html_response(conn, 200) =~ listen.user.username
     end
 
+    test "it shows the comments of the song", %{conn: conn} do
+      comment = insert(:song_comment, body: "What a fantastic track")
+
+      conn = get conn, "/songs/#{comment.song_id}"
+      assert html_response(conn, 200) =~ "What a fantastic track"
+    end
+
     test "it returns a 404 when the song does not exist", %{conn: conn} do
       assert_error_sent :not_found, fn ->
         get conn, "/songs/1234567"

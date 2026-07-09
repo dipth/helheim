@@ -203,6 +203,14 @@ defmodule Helheim.Factory do
     }
   end
 
+  def song_comment_factory do
+    %Helheim.Comment{
+      author: build(:user),
+      song: build(:song),
+      body: "My Aweseome Comment"
+    }
+  end
+
   def spotify_account_factory do
     %Helheim.SpotifyAccount{
       user: build(:user),

@@ -34,6 +34,12 @@ defmodule HelheimWeb.NotificationHelpers do
     notifications_switch(enabled, type, path)
   end
 
+  def notifications_switch(conn, user, type, %Helheim.Song{} = song) do
+    enabled = find_enabled_subscription(user, type, song) != nil
+    path    = song_notification_subscription_path(conn, :update, song)
+    notifications_switch(enabled, type, path)
+  end
+
   defp notifications_switch(enabled, type, path) do
     form_tag(path, method: :patch) do
       [

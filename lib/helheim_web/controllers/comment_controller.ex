@@ -98,6 +98,13 @@ defmodule HelheimWeb.CommentController do
     |> assign(:redirect_to, calendar_event_path(conn, :show, calendar_event))
   end
 
+  defp assign_commentable(conn, %{"song_id" => song_id}) do
+    song = Repo.get!(Helheim.Song, song_id)
+    conn
+    |> assign(:commentable, song)
+    |> assign(:redirect_to, song_path(conn, :show, song))
+  end
+
   defp find_comment(conn, _) do
     comment = assoc(conn.assigns[:commentable], :comments)
               |> preload(:author)

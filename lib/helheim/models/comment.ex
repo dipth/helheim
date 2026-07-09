@@ -18,6 +18,7 @@ defmodule Helheim.Comment do
     belongs_to :photo,           Helheim.Photo
     belongs_to :deleter,         Helheim.User
     belongs_to :calendar_event,  Helheim.CalendarEvent
+    belongs_to :song,            Helheim.Song
 
     timestamps(type: :utc_datetime_usec)
   end
@@ -33,7 +34,7 @@ defmodule Helheim.Comment do
 
   def with_preloads(query) do
     query
-    |> preload([:author, :profile, :blog_post, :photo_album, [photo: :photo_album], :deleter, :calendar_event])
+    |> preload([:author, :profile, :blog_post, :photo_album, [photo: :photo_album], :deleter, :calendar_event, :song])
   end
 
   @doc """
@@ -60,7 +61,8 @@ defmodule Helheim.Comment do
     comment.blog_post ||
     comment.photo_album ||
     comment.photo ||
-    comment.calendar_event
+    comment.calendar_event ||
+    comment.song
   end
 
   def deletable_by?(_, %User{role: "admin"}), do: true

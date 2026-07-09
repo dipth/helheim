@@ -54,5 +54,7 @@
         <% end %>
       </div>
     </div>
+
+    <%= HelheimWeb.CommentView.render_comments @conn, @comments, @song %>
   </div>
 </div>

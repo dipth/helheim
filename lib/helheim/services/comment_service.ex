@@ -8,6 +8,7 @@ defmodule Helheim.CommentService do
   alias Helheim.BlogPost
   alias Helheim.Photo
   alias Helheim.CalendarEvent
+  alias Helheim.Song
   alias Helheim.NotificationService
 
   def create!(commentable, author, body, notice \\ false) do
@@ -41,11 +42,13 @@ defmodule Helheim.CommentService do
   defp put_commentable(changeset, %BlogPost{} = blog_post),           do: Changeset.put_assoc(changeset, :blog_post, blog_post)
   defp put_commentable(changeset, %Photo{} = photo),                  do: Changeset.put_assoc(changeset, :photo, photo)
   defp put_commentable(changeset, %CalendarEvent{} = calendar_event), do: Changeset.put_assoc(changeset, :calendar_event, calendar_event)
+  defp put_commentable(changeset, %Song{} = song),                    do: Changeset.put_assoc(changeset, :song, song)
 
   defp inc_comment_count(multi, %User{} = profile),                 do: inc_comment_count(multi, User, profile.id)
   defp inc_comment_count(multi, %BlogPost{} = blog_post),           do: inc_comment_count(multi, BlogPost, blog_post.id)
   defp inc_comment_count(multi, %Photo{} = photo),                  do: inc_comment_count(multi, Photo, photo.id)
   defp inc_comment_count(multi, %CalendarEvent{} = calendar_event), do: inc_comment_count(multi, CalendarEvent, calendar_event.id)
+  defp inc_comment_count(multi, %Song{} = song),                    do: inc_comment_count(multi, Song, song.id)
   defp inc_comment_count(multi, model, id) do
     multi |> Multi.update_all(:comment_count, (model |> where(id: ^id)), inc: [comment_count: 1])
   end
@@ -54,6 +57,7 @@ defmodule Helheim.CommentService do
   defp dec_comment_count(multi, %BlogPost{} = blog_post),           do: dec_comment_count(multi, BlogPost, blog_post.id)
   defp dec_comment_count(multi, %Photo{} = photo),                  do: dec_comment_count(multi, Photo, photo.id)
   defp dec_comment_count(multi, %CalendarEvent{} = calendar_event), do: dec_comment_count(multi, CalendarEvent, calendar_event.id)
+  defp dec_comment_count(multi, %Song{} = song),                    do: dec_comment_count(multi, Song, song.id)
   defp dec_comment_count(multi, model, id) do
     multi |> Multi.update_all(:comment_count, (model |> where(id: ^id)), inc: [comment_count: -1])
   end

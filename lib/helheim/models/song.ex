@@ -20,6 +20,7 @@ defmodule Helheim.Song do
     field :comment_count,         :integer
     field :listens_count,         :integer
     has_many :listens, SongListen
+    has_many :comments, Helheim.Comment
     timestamps(type: :utc_datetime_usec)
   end
 

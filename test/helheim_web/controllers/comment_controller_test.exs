@@ -9,6 +9,7 @@ defmodule HelheimWeb.CommentControllerTest do
   alias Helheim.Photo
   alias Helheim.Comment
   alias Helheim.CalendarEvent
+  alias Helheim.Song
 
   @comment_attrs %{body: "My Comment"}
   @invalid_attrs %{body: ""}
@@ -335,6 +336,67 @@ defmodule HelheimWeb.CommentControllerTest do
     test "it redirects to the login page", %{conn: conn} do
       calendar_event = insert(:calendar_event)
       conn           = post conn, "/calendar_events/#{calendar_event.id}/comments", comment: @comment_attrs
+      assert redirected_to(conn) =~ session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # create/2 for a song
+  describe "create/2 for a song when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test_with_mock "it redirects to the song page with a success flash message when successfull", %{conn: conn, user: user},
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> {:ok, %{comment: %{}}} end] do
+
+      song = insert(:song)
+      conn = post conn, "/songs/#{song.id}/comments", comment: @comment_attrs
+
+      assert_called_with_pattern CommentService, :create!, fn(args) ->
+        song_id = song.id
+        user_id = user.id
+        body    = @comment_attrs[:body]
+        [%Song{id: ^song_id}, %User{id: ^user_id}, ^body, false] = args
+      end
+      assert redirected_to(conn) == song_path(conn, :show, song.id)
+      assert Phoenix.Flash.get(conn.assigns.flash, :success) == gettext("Comment created successfully")
+    end
+
+    test_with_mock "it redirects to the song page with an error flash message when unsuccessfull", %{conn: conn, user: user},
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> {:error, :comment, %{}, []} end] do
+
+      song = insert(:song)
+      conn = post conn, "/songs/#{song.id}/comments", comment: @comment_attrs
+
+      assert_called_with_pattern CommentService, :create!, fn(args) ->
+        song_id = song.id
+        user_id = user.id
+        body    = @comment_attrs[:body]
+        [%Song{id: ^song_id}, %User{id: ^user_id}, ^body, false] = args
+      end
+      assert redirected_to(conn) == song_path(conn, :show, song.id)
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) == gettext("Unable to create comment")
+    end
+
+    test_with_mock "it does not invoke the CommentService if the song does not exist but instead shows a 404 error", %{conn: conn},
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
+
+      assert_error_sent :not_found, fn ->
+        post conn, "/songs/1/comments", comment: @comment_attrs
+      end
+    end
+  end
+
+  describe "create/2 for a song when not signed in" do
+    test_with_mock "it does not invoke the CommentService", %{conn: conn},
+      CommentService, [], [create!: fn(_commentable, _author, _body, _notice) -> raise("CommentService was called!") end] do
+
+      song = insert(:song)
+      post conn, "/songs/#{song.id}/comments", comment: @comment_attrs
+    end
+
+    test "it redirects to the login page", %{conn: conn} do
+      song = insert(:song)
+      conn = post conn, "/songs/#{song.id}/comments", comment: @comment_attrs
       assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end

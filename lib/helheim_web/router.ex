@@ -130,7 +130,10 @@ defmodule HelheimWeb.Router do
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
     end
     resources "/online_users", OnlineUserController, only: [:index]
-    resources "/songs", SongController, only: [:index, :show]
+    resources "/songs", SongController, only: [:index, :show] do
+      resources "/comments", CommentController, only: [:create, :edit, :update]
+      resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
+    end
   end
 
   scope "/mod", HelheimWeb.Mod, as: :mod do
