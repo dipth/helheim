@@ -10,14 +10,24 @@ defmodule HelheimWeb.LastfmAccountControllerTest do
   describe "create/2 when signed in" do
     setup [:create_and_sign_in_user]
 
-    test "redirects to the last.fm authorization url", %{conn: conn} do
+    test "redirects to the last.fm authorization url with a callback on the request host", %{conn: conn} do
       conn = post conn, "/lastfm_account"
       location = redirected_to(conn)
       assert location =~ "https://www.last.fm/api/auth"
       %URI{query: query} = URI.parse(location)
       params = URI.decode_query(query)
       assert params["api_key"] == "lastfm_test_api_key"
-      assert params["cb"] == "http://localhost:4001/lastfm_account/callback"
+      %URI{host: cb_host, path: cb_path} = URI.parse(params["cb"])
+      assert cb_host == conn.host
+      assert cb_path == "/lastfm_account/callback"
+    end
+
+    test "keeps the callback on the host the user is browsing on", %{conn: conn} do
+      conn = %{conn | host: "apex-domain.example"}
+      conn = post conn, "/lastfm_account"
+      %URI{query: query} = URI.parse(redirected_to(conn))
+      %URI{host: cb_host} = URI.parse(URI.decode_query(query)["cb"])
+      assert cb_host == "apex-domain.example"
     end
   end
 

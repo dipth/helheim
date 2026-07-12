@@ -2,7 +2,7 @@ defmodule Helheim.Lastfm.Client do
   @moduledoc """
   Thin Req based client for the Last.fm web auth flow and API endpoints used
   by the listening history feature. Configured via `config :helheim, :lastfm`
-  with `api_key`, `shared_secret` and `callback_url`.
+  with `api_key` and `shared_secret`.
 
   Note that the Last.fm API usually reports errors as an HTTP 200 response
   with an `{"error": code, "message": ...}` body, so bodies are inspected
@@ -12,8 +12,13 @@ defmodule Helheim.Lastfm.Client do
   @auth_url "https://www.last.fm/api/auth/"
   @api_url "https://ws.audioscrobbler.com/2.0/"
 
-  def auth_url do
-    query = URI.encode_query(%{api_key: config()[:api_key], cb: config()[:callback_url]})
+  @doc """
+  The Last.fm authorization page url. The callback must be on the same host
+  the user's browser session lives on, so the caller derives it from the
+  current request rather than from static configuration.
+  """
+  def auth_url(callback_url) do
+    query = URI.encode_query(%{api_key: config()[:api_key], cb: callback_url})
     "#{@auth_url}?#{query}"
   end
 
