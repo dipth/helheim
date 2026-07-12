@@ -22,6 +22,7 @@ defmodule Helheim.Notification do
     belongs_to :photo,          Helheim.Photo
     belongs_to :forum_topic,    Helheim.ForumTopic
     belongs_to :calendar_event, Helheim.CalendarEvent
+    belongs_to :song,           Helheim.Song
   end
 
   def newest(query) do
@@ -36,7 +37,7 @@ defmodule Helheim.Notification do
 
   def with_preloads(query) do
     query
-    |> preload([:trigger_person, :profile, :blog_post, :photo_album, :photo, :forum_topic, :calendar_event])
+    |> preload([:trigger_person, :profile, :blog_post, :photo_album, :photo, :forum_topic, :calendar_event, :song])
   end
 
   def list_not_clicked(recipient) do
@@ -49,7 +50,7 @@ defmodule Helheim.Notification do
       trigger_person_id: List.first(n.trigger_person_ids),
       duplicate_count: length(n.trigger_person_ids)
     })) end)
-    |> Repo.preload([:trigger_person, :profile, :blog_post, :photo_album, :photo, :forum_topic, :calendar_event])
+    |> Repo.preload([:trigger_person, :profile, :blog_post, :photo_album, :photo, :forum_topic, :calendar_event, :song])
   end
 
   def query_duplicate_notifications(notification) do
@@ -64,7 +65,8 @@ defmodule Helheim.Notification do
     notification.photo_album ||
     notification.photo ||
     notification.forum_topic ||
-    notification.calendar_event
+    notification.calendar_event ||
+    notification.song
   end
 
   ### PRIVATE
@@ -73,7 +75,7 @@ defmodule Helheim.Notification do
     from n in query,
     group_by: [
       n.recipient_id, n.type, n.profile_id, n.blog_post_id, n.photo_album_id,
-      n.photo_id, n.forum_topic_id, n.calendar_event_id
+      n.photo_id, n.forum_topic_id, n.calendar_event_id, n.song_id
     ],
     select: %{
       ids:                fragment("array_agg(?::text)", n.id),
@@ -89,7 +91,8 @@ defmodule Helheim.Notification do
       photo_album_id:     n.photo_album_id,
       photo_id:           n.photo_id,
       forum_topic_id:     n.forum_topic_id,
-      calendar_event_id:  n.calendar_event_id
+      calendar_event_id:  n.calendar_event_id,
+      song_id:            n.song_id
     },
     order_by: [desc: max(n.inserted_at)]
   end
@@ -104,6 +107,7 @@ defmodule Helheim.Notification do
     |> where_subject_is_the_same(notification, :photo_id)
     |> where_subject_is_the_same(notification, :forum_topic_id)
     |> where_subject_is_the_same(notification, :calendar_event_id)
+    |> where_subject_is_the_same(notification, :song_id)
   end
 
   defp where_subject_is_the_same(query, notification, subject_field) do

@@ -237,6 +237,21 @@ defmodule Helheim.UserTest do
       User.delete! user
       refute Repo.get(User, user.id)
     end
+
+    test "it deletes the lastfm account and song listens of the user and keeps the listen counters in sync" do
+      user = insert(:user)
+      account = insert(:lastfm_account, user: user)
+      song = insert(:song, listens_count: 2)
+      listen = insert(:song_listen, user: user, song: song)
+      other_listen = insert(:song_listen, song: song)
+
+      User.delete! user
+
+      refute Repo.get(Helheim.LastfmAccount, account.id)
+      refute Repo.get(Helheim.SongListen, listen.id)
+      assert Repo.get(Helheim.SongListen, other_listen.id)
+      assert Repo.get(Helheim.Song, song.id).listens_count == 1
+    end
   end
 
   describe "age/2" do

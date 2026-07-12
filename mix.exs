@@ -76,6 +76,7 @@ defmodule Helheim.MixProject do
       {:sweet_xml, "~> 0.6"},
       {:html_sanitize_ex, "~> 1.4"},
       {:scrivener_ecto, "~> 3.0"},
+      {:oban, "~> 2.19"},
       {:mock, "~> 0.3", only: :test},
       {:stripity_stripe, "~> 3.2"},
       {:req, "~> 0.5"},

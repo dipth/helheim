@@ -70,6 +70,9 @@ defmodule HelheimWeb.Router do
     get "/sessions/sign_out", SessionController, :delete
     resources "/account", AccountController, singleton: true, only: [:edit, :update, :delete]
     resources "/preferences", PreferenceController, singleton: true, only: [:edit, :update]
+    get "/lastfm_account/callback", LastfmAccountController, :callback
+    delete "/lastfm_account/history", LastfmAccountController, :delete_history
+    resources "/lastfm_account", LastfmAccountController, singleton: true, only: [:create, :delete]
     resources "/profile", ProfileController, singleton: true, only: [:show, :edit, :update]
     resources "/profiles", ProfileController, only: [:index, :show], as: :public_profile do
       resources "/blog_posts", BlogPostController, only: [:index, :show] do
@@ -83,6 +86,7 @@ defmodule HelheimWeb.Router do
         resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
       end
       resources "/visitor_log_entries", VisitorLogEntryController, only: [:index]
+      get "/music", SongListenController, :index, as: :music
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
       resources "/contact_request", FriendshipRequestController, singleton: true, only: [:create, :delete]
       resources "/contact", FriendshipController, singleton: true, only: [:create, :delete]
@@ -126,6 +130,11 @@ defmodule HelheimWeb.Router do
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
     end
     resources "/online_users", OnlineUserController, only: [:index]
+    resources "/songs", SongController, only: [:index, :show] do
+      resources "/comments", CommentController, only: [:create, :edit, :update]
+      resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
+      delete "/my_listens", SongController, :remove_my_listens, as: :my_listens
+    end
   end
 
   scope "/mod", HelheimWeb.Mod, as: :mod do

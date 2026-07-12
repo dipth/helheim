@@ -445,6 +445,83 @@ defmodule HelheimWeb.NotificationSubscriptionControllerTest do
   end
 
   ##############################################################################
+  # update/2 for a song
+  describe "update/2 for a song when signed in" do
+    setup [:create_and_sign_in_user, :create_song]
+
+    test "creates an enabled subscription for the user for the given song when enabling", %{conn: conn, user: user, song: song} do
+      conn = put conn, "/songs/#{song.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.one(NotificationSubscription)
+      assert conn.status          == 200
+      assert subscription.user_id == user.id
+      assert subscription.song_id == song.id
+      assert subscription.type    == @type_attr
+      assert subscription.enabled == true
+    end
+
+    test "enables an existing disabled subscription for the user for the given song when enabling", %{conn: conn, user: user, song: song} do
+      subscription = insert(:notification_subscription, user: user, song: song, type: @type_attr, enabled: false)
+      conn = put conn, "/songs/#{song.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert conn.status          == 200
+      assert subscription.user_id == user.id
+      assert subscription.song_id == song.id
+      assert subscription.type    == @type_attr
+      assert subscription.enabled == true
+    end
+
+    test "disables an existing enabled subscription for the user for the given song when disabling", %{conn: conn, user: user, song: song} do
+      subscription = insert(:notification_subscription, user: user, song: song, type: @type_attr, enabled: true)
+      conn = put conn, "/songs/#{song.id}/notification_subscription", type: @type_attr
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert conn.status          == 200
+      assert subscription.user_id == user.id
+      assert subscription.song_id == song.id
+      assert subscription.type    == @type_attr
+      assert subscription.enabled == false
+    end
+
+    test "does not change subscriptions for other users", %{conn: conn, user: user, song: song} do
+      subscription = insert(:notification_subscription, song: song, type: @type_attr, enabled: false)
+      conn = put conn, "/songs/#{song.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert conn.status          == 200
+      refute subscription.user_id == user.id
+      assert subscription.song_id == song.id
+      assert subscription.type    == @type_attr
+      assert subscription.enabled == false
+    end
+
+    test "does not change subscriptions for other subjects", %{conn: conn, user: user, song: song} do
+      subscription = insert(:notification_subscription, user: user, profile: insert(:user), type: @type_attr, enabled: false)
+      conn = put conn, "/songs/#{song.id}/notification_subscription", type: @type_attr, enabled: "1"
+      subscription = Repo.get(NotificationSubscription, subscription.id)
+      assert conn.status          == 200
+      assert subscription.user_id == user.id
+      refute subscription.song_id == song.id
+      assert subscription.type    == @type_attr
+      assert subscription.enabled == false
+    end
+
+    test "it does not create a subscription but instead shows an error page if the song does not exist", %{conn: conn, song: song} do
+      assert_error_sent :not_found, fn ->
+        put conn, "/songs/#{song.id + 1}/notification_subscription", type: @type_attr, enabled: "1"
+      end
+      refute Repo.one(NotificationSubscription)
+    end
+  end
+
+  describe "update/2 for a song when not signed in" do
+    setup [:create_song]
+
+    test "does not create any subscription and instead redirects to the login page", %{conn: conn, song: song} do
+      conn = put conn, "/songs/#{song.id}/notification_subscription", type: @type_attr, enabled: "1"
+      assert redirected_to(conn) =~ session_path(conn, :new)
+      refute Repo.one(NotificationSubscription)
+    end
+  end
+
+  ##############################################################################
   # SETUP
   defp create_profile(_context) do
     [profile: insert(:user)]
@@ -464,5 +541,9 @@ defmodule HelheimWeb.NotificationSubscriptionControllerTest do
 
   defp create_calendar_event(_context) do
     [calendar_event: insert(:calendar_event)]
+  end
+
+  defp create_song(_context) do
+    [song: insert(:song)]
   end
 end

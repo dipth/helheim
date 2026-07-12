@@ -12,6 +12,12 @@ config :helheim, :sql_sandbox, true
 # test process and race with the SQL sandbox
 config :helheim, :async_notifications, false
 
+# Run Oban in manual testing mode so jobs only execute through Oban.Testing
+config :helheim, Oban, testing: :manual
+
+# Never serve stale chart data across tests
+config :helheim, :chart_cache_ttl_ms, 0
+
 # Print only warnings and errors during test
 config :logger, level: :warning
 
@@ -51,6 +57,12 @@ config :helheim, :recaptcha,
   public_key: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
   secret: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe",
   test_mode: true
+
+# Configure Last.fm
+config :helheim, :lastfm,
+  api_key: "lastfm_test_api_key",
+  shared_secret: "lastfm_test_shared_secret",
+  callback_url: "http://localhost:4001/lastfm_account/callback"
 
 # Configure wallaby
 config :wallaby,

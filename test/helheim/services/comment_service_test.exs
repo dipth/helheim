@@ -8,6 +8,7 @@ defmodule Helheim.CommentServiceTest do
   alias Helheim.BlogPost
   alias Helheim.Photo
   alias Helheim.CalendarEvent
+  alias Helheim.Song
   alias Helheim.NotificationService
 
   @valid_body "My Comment"
@@ -250,6 +251,52 @@ defmodule Helheim.CommentServiceTest do
   end
 
   ##############################################################################
+  # create!/3 for a song
+  describe "create/3 for a song with valid author and body" do
+    setup [:create_author, :create_song]
+
+    test "creates a comment on the song from the author with the specified body", %{author: author, song: song} do
+      {:ok, %{comment: comment}} = CommentService.create!(song, author, @valid_body)
+      assert comment.author_id == author.id
+      assert comment.song_id   == song.id
+      assert comment.body      == @valid_body
+    end
+
+    test "increments the comment_count of the song", %{author: author, song: song} do
+      CommentService.create!(song, author, @valid_body)
+      song = Repo.get(Song, song.id)
+      assert song.comment_count == 1
+    end
+
+    test_with_mock "triggers notifications", %{author: author, song: song},
+      NotificationService, [], [create_async!: fn(_repo, _changes, _type, _subject, _trigger_person) -> {:ok, nil} end] do
+
+      CommentService.create!(song, author, @valid_body)
+
+      assert_called_with_pattern NotificationService, :create_async!, fn(args) ->
+        song_id   = song.id
+        author_id = author.id
+        [_repo, _changes, "comment", %Song{id: ^song_id}, %User{id: ^author_id}] = args
+      end
+    end
+  end
+
+  describe "create/3 for a song with invalid body" do
+    setup [:create_author, :create_song]
+
+    test "does not create any comments", %{author: author, song: song} do
+      CommentService.create!(song, author, @invalid_body)
+      refute Repo.one(Comment)
+    end
+
+    test "does not increment the comment_count of the song", %{author: author, song: song} do
+      CommentService.create!(song, author, @invalid_body)
+      song = Repo.get(Song, song.id)
+      assert song.comment_count == 0
+    end
+  end
+
+  ##############################################################################
   # delete!/3
   describe "delete/3" do
     setup [:create_user, :create_comment]
@@ -386,6 +433,11 @@ defmodule Helheim.CommentServiceTest do
   defp create_calendar_event(_context) do
     calendar_event = insert(:calendar_event)
     [calendar_event: calendar_event]
+  end
+
+  defp create_song(_context) do
+    song = insert(:song)
+    [song: song]
   end
 
   defp create_comment(_context) do

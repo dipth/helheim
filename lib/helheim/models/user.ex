@@ -60,6 +60,8 @@ defmodule Helheim.User do
     has_many :forum_topics,              Helheim.ForumTopic
     has_many :forum_replies,             Helheim.ForumReply
     has_many :calendar_events,           Helheim.CalendarEvent
+    has_many :song_listens,              Helheim.SongListen
+    has_one  :lastfm_account,            Helheim.LastfmAccount
     belongs_to :verifier,                Helheim.User
   end
 
@@ -320,6 +322,9 @@ defmodule Helheim.User do
   def delete!(user) do
     photo_albums = assoc(user, :photo_albums) |> Repo.all
     Parallel.pmap(photo_albums, fn(pa) -> Helheim.PhotoAlbum.delete!(pa) end)
+    # The song_listens rows cascade with the user, so decrement the song
+    # listen counters first to keep them in sync
+    {:ok, _} = Helheim.LastfmAccountService.delete_history!(user)
     Repo.delete!(user)
   end
 

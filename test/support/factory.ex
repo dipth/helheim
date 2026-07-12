@@ -202,4 +202,41 @@ defmodule Helheim.Factory do
       body: "My Aweseome Comment"
     }
   end
+
+  def song_comment_factory do
+    %Helheim.Comment{
+      author: build(:user),
+      song: build(:song),
+      body: "My Aweseome Comment"
+    }
+  end
+
+  def lastfm_account_factory do
+    %Helheim.LastfmAccount{
+      user: build(:user),
+      username: sequence(:lastfm_username, &"lastfm-user-#{&1}"),
+      session_key: "a_session_key"
+    }
+  end
+
+  def song_factory do
+    %Helheim.Song{
+      title: sequence(:song_title, &"Master of Puppets #{&1}"),
+      artist_name: "Metallica",
+      album_name: "Master of Puppets",
+      cover_image_url: "https://lastfm.freetls.fastly.net/i/u/300x300/cover.jpg",
+      cover_image_url_small: "https://lastfm.freetls.fastly.net/i/u/64s/cover.jpg",
+      lastfm_track_url: "https://www.last.fm/music/Metallica/_/Master+of+Puppets",
+      comment_count: 0,
+      listens_count: 0
+    }
+  end
+
+  def song_listen_factory do
+    %Helheim.SongListen{
+      user: build(:user),
+      song: build(:song),
+      played_at: sequence(:played_at, &Timex.shift(Timex.now, seconds: -&1))
+    }
+  end
 end

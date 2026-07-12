@@ -6,6 +6,8 @@ defmodule HelheimWeb.PageController do
   alias Helheim.ForumTopic
   alias Helheim.Term
   alias Helheim.CalendarEvent
+  alias Helheim.SongListen
+  alias Helheim.Music.Charts
 
   def index(conn, _params) do
     if Guardian.Plug.current_resource(conn) do
@@ -49,12 +51,23 @@ defmodule HelheimWeb.PageController do
     newest_photos =
       Helheim.Photo.newest_for_frontpage(current_resource(conn), 24, conn.assigns[:ignoree_ids])
 
+    recent_song_listens =
+      SongListen
+      |> SongListen.not_from_users(conn.assigns[:ignoree_ids])
+      |> SongListen.newest
+      |> SongListen.with_preloads
+      |> limit(10)
+      |> Repo.all
+
     render conn, "front_page.html",
       newest_users: newest_users,
       newest_blog_posts: newest_blog_posts,
       newest_photos: newest_photos,
       newest_forum_topics: newest_forum_topics,
-      upcoming_events: upcoming_events
+      upcoming_events: upcoming_events,
+      recent_song_listens: recent_song_listens,
+      top_songs_today: Charts.top_songs_today(5, conn.assigns[:ignoree_ids]),
+      top_songs_week: Charts.top_songs_this_week(5, conn.assigns[:ignoree_ids])
   end
 
   def terms(conn, _params) do

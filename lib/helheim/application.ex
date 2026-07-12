@@ -10,10 +10,14 @@ defmodule Helheim.Application do
       {DNSCluster, query: Application.get_env(:helheim, :dns_cluster_query) || :ignore},
       # Start the task supervisor for background work (e.g. async notifications)
       {Task.Supervisor, name: Helheim.TaskSupervisor},
+      # Start the ETS cache for expensive, slightly-stale-tolerant values
+      Helheim.Cache,
       # Start the PubSub system
       {Phoenix.PubSub, name: Helheim.PubSub},
       # Start the Ecto repository
       Helheim.Repo,
+      # Start Oban for background and scheduled jobs
+      {Oban, Application.fetch_env!(:helheim, Oban)},
       # Start the Telemetry
       HelheimWeb.Telemetry,
       # Start the endpoint when the application starts

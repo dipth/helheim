@@ -63,4 +63,9 @@ if config_env() == :prod do
   config :helheim, :recaptcha,
     public_key: System.get_env("RECAPTCHA_PUBLIC_KEY"),
     secret: System.get_env("RECAPTCHA_SECRET_KEY")
+
+  config :helheim, :lastfm,
+    api_key: System.get_env("LASTFM_API_KEY"),
+    shared_secret: System.get_env("LASTFM_SHARED_SECRET"),
+    callback_url: "https://#{host}/lastfm_account/callback"
 end

@@ -9,6 +9,7 @@ defmodule Helheim.NotificationService do
   alias Helheim.ForumTopic
   alias Helheim.Photo
   alias Helheim.CalendarEvent
+  alias Helheim.Song
 
   require Logger
 
@@ -180,6 +181,7 @@ defmodule Helheim.NotificationService do
   defp put_subject(changeset, %ForumTopic{} = forum_topic),       do: changeset |> Changeset.put_assoc(:forum_topic, forum_topic)
   defp put_subject(changeset, %Photo{} = photo),                  do: changeset |> Changeset.put_assoc(:photo, photo)
   defp put_subject(changeset, %CalendarEvent{} = calendar_event), do: changeset |> Changeset.put_assoc(:calendar_event, calendar_event)
+  defp put_subject(changeset, %Song{} = song),                    do: changeset |> Changeset.put_assoc(:song, song)
 
   defp push_notification(recipient_id) do
     NotificationChannel.broadcast_notification(recipient_id)

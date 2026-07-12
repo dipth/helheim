@@ -3,7 +3,7 @@ defmodule HelheimWeb.NotificationView do
   import PhoenixHTMLHelpers.Link
   import PhoenixHTMLHelpers.Tag
   use Gettext, backend: HelheimWeb.Gettext
-  alias Helheim.{Notification, User, BlogPost, PhotoAlbum, Photo, ForumTopic, CalendarEvent}
+  alias Helheim.{Notification, User, BlogPost, PhotoAlbum, Photo, ForumTopic, CalendarEvent, Song}
 
   def notification_item(conn, notification, opts \\ %{}) do
     subject = Notification.subject(notification)
@@ -35,6 +35,9 @@ defmodule HelheimWeb.NotificationView do
   end
   defp notification_text(duplicate_count, trigger_person, "comment", %CalendarEvent{} = calendar_event) do
     gettext "%{who} wrote a comment on the calendar event: %{what}", who: trigger_person_name(duplicate_count, trigger_person), what: calendar_event.title
+  end
+  defp notification_text(duplicate_count, trigger_person, "comment", %Song{} = song) do
+    gettext "%{who} wrote a comment on the song: %{what}", who: trigger_person_name(duplicate_count, trigger_person), what: "#{song.artist_name} - #{song.title}"
   end
 
   defp notification_icon("comment"), do: "fa fa-fw fa-comment-o"

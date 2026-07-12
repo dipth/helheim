@@ -9,6 +9,7 @@ defmodule Helheim.NotificationSubscription do
   alias Helheim.ForumTopic
   alias Helheim.Photo
   alias Helheim.CalendarEvent
+  alias Helheim.Song
 
   @types ["comment", "blog_post", "photo", "forum_reply", "calendar_event"]
   def types, do: @types
@@ -25,6 +26,7 @@ defmodule Helheim.NotificationSubscription do
     belongs_to :photo,          Helheim.Photo
     belongs_to :profile,        Helheim.User
     belongs_to :calendar_event, Helheim.CalendarEvent
+    belongs_to :song,           Helheim.Song
   end
 
   def changeset(struct, params \\ %{}) do
@@ -49,6 +51,7 @@ defmodule Helheim.NotificationSubscription do
   def for_subject(query, %ForumTopic{} = forum_topic),       do: from(s in query, where: s.forum_topic_id == ^forum_topic.id)
   def for_subject(query, %Photo{} = photo),                  do: from(s in query, where: s.photo_id == ^photo.id)
   def for_subject(query, %CalendarEvent{} = calendar_event), do: from(s in query, where: s.calendar_event_id == ^calendar_event.id)
+  def for_subject(query, %Song{} = song),                    do: from(s in query, where: s.song_id == ^song.id)
 
   def enabled(query) do
     from s in query,
@@ -57,7 +60,7 @@ defmodule Helheim.NotificationSubscription do
 
   def with_preloads(query) do
     query
-    |> preload([:user, :profile, :blog_post, :forum_topic, :photo, :calendar_event])
+    |> preload([:user, :profile, :blog_post, :forum_topic, :photo, :calendar_event, :song])
   end
 
   def subject(subscription) do
@@ -65,7 +68,8 @@ defmodule Helheim.NotificationSubscription do
     subscription.blog_post ||
     subscription.forum_topic ||
     subscription.photo ||
-    subscription.calendar_event
+    subscription.calendar_event ||
+    subscription.song
   end
 
   def enable!(user, type, subject) do
@@ -93,6 +97,7 @@ defmodule Helheim.NotificationSubscription do
   defp new_subscription(user, type, %ForumTopic{} = forum_topic),       do: new_subscription(user, type) |> put_assoc(:forum_topic, forum_topic)
   defp new_subscription(user, type, %Photo{} = photo),                  do: new_subscription(user, type) |> put_assoc(:photo, photo)
   defp new_subscription(user, type, %CalendarEvent{} = calendar_event), do: new_subscription(user, type) |> put_assoc(:calendar_event, calendar_event)
+  defp new_subscription(user, type, %Song{} = song),                    do: new_subscription(user, type) |> put_assoc(:song, song)
   defp new_subscription(user, type) do
     NotificationSubscription.changeset(%NotificationSubscription{}, %{type: type})
     |> Ecto.Changeset.put_assoc(:user, user)
