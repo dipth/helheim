@@ -61,8 +61,7 @@ config :helheim, :recaptcha,
 # Configure Last.fm
 config :helheim, :lastfm,
   api_key: "lastfm_test_api_key",
-  shared_secret: "lastfm_test_shared_secret",
-  callback_url: "http://localhost:4001/lastfm_account/callback"
+  shared_secret: "lastfm_test_shared_secret"
 
 # Configure wallaby
 config :wallaby,

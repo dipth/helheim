@@ -6,7 +6,15 @@ defmodule HelheimWeb.LastfmAccountController do
   def create(conn, _params) do
     conn
     |> put_session(:lastfm_connect_pending, true)
-    |> redirect(external: Client.auth_url())
+    |> redirect(external: Client.auth_url(callback_url(conn)))
+  end
+
+  # The callback must return to the host the user is actually browsing on
+  # (www vs apex domain, dev hosts), since the session cookie holding the
+  # login and the pending flag is scoped to that host.
+  defp callback_url(conn) do
+    uri = %{HelheimWeb.Endpoint.struct_url() | host: conn.host}
+    lastfm_account_url(uri, :callback)
   end
 
   def callback(conn, %{"token" => token}) do
