@@ -4,8 +4,8 @@
 <div class="row">
   <div class="col-md-4">
     <div class="card">
-      <%= if @song.cover_image_url do %>
-        <img class="card-img-top img-fluid" src="<%= @song.cover_image_url %>" alt="">
+      <%= if detail_cover_url(@song) do %>
+        <img class="card-img-top img-fluid" src="<%= detail_cover_url(@song) %>" alt="">
       <% end %>
       <div class="card-block">
         <table class="table table-sm">
@@ -19,11 +19,30 @@
               <td><%= @song.album_name %></td>
             </tr>
           <% end %>
+          <%= if @song.release_year do %>
+            <tr>
+              <th><%= gettext "Year" %></th>
+              <td><%= @song.release_year %></td>
+            </tr>
+          <% end %>
+          <%= if genre_tag = List.first(@song.song_tags) do %>
+            <tr>
+              <th><%= gettext "Genre" %></th>
+              <td><%= genre_tag.tag.name %></td>
+            </tr>
+          <% end %>
           <tr>
             <th><%= gettext "Listens" %></th>
             <td><%= @song.listens_count %></td>
           </tr>
         </table>
+        <%= if length(@song.song_tags) > 0 do %>
+          <p>
+            <%= for song_tag <- @song.song_tags do %>
+              <span class="badge badge-default"><i class="fa fa-fw fa-tag"></i> <%= song_tag.tag.name %></span>
+            <% end %>
+          </p>
+        <% end %>
         <p class="mb-0">
           <%= lastfm_link @song.lastfm_track_url, gettext("Song on Last.fm") %><br>
           <%= lastfm_link lastfm_artist_url(@song.artist_name), gettext("Artist on Last.fm") %>

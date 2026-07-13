@@ -153,6 +153,21 @@ defmodule HelheimWeb.SongControllerTest do
       refute html_response(conn, 200) =~ "ignored-individual"
     end
 
+    test "it shows the enriched metadata when present", %{conn: conn} do
+      song = insert(:song,
+        release_year: 1986,
+        cover_image_url: "https://lastfm.freetls.fastly.net/i/u/300x300/abc.jpg",
+        cover_image_url_large: "https://lastfm.freetls.fastly.net/i/u/500x500/abc.jpg")
+      tag = insert(:tag, name: "thrash metal")
+      Repo.insert!(%Helheim.SongTag{song_id: song.id, tag_id: tag.id, position: 1})
+
+      conn = get conn, "/songs/#{song.id}"
+      response = html_response(conn, 200)
+      assert response =~ "1986"
+      assert response =~ "thrash metal"
+      assert response =~ "500x500"
+    end
+
     test "it shows the comments of the song", %{conn: conn} do
       comment = insert(:song_comment, body: "What a fantastic track")
 

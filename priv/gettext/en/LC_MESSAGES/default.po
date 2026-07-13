@@ -2687,7 +2687,7 @@ msgstr ""
 msgid "Album"
 msgstr ""
 
-#: lib/helheim_web/templates/song_listen/index.html.eex:38
+#: lib/helheim_web/templates/song_listen/index.html.eex:47
 #, elixir-autogen, elixir-format
 msgid "All listens"
 msgstr ""
@@ -2717,7 +2717,7 @@ msgstr ""
 msgid "Latest listens"
 msgstr ""
 
-#: lib/helheim_web/templates/song/show.html.eex:23
+#: lib/helheim_web/templates/song/show.html.eex:35
 #, elixir-autogen, elixir-format
 msgid "Listens"
 msgstr ""
@@ -2730,17 +2730,17 @@ msgstr ""
 #: lib/helheim_web/templates/song/recent.html.eex:6
 #: lib/helheim_web/templates/song_listen/index.html.eex:9
 #: lib/helheim_web/templates/song_listen/index.html.eex:21
-#: lib/helheim_web/templates/song_listen/index.html.eex:40
+#: lib/helheim_web/templates/song_listen/index.html.eex:49
 #, elixir-autogen, elixir-format
 msgid "No listens have been tracked yet..."
 msgstr ""
 
-#: lib/helheim_web/templates/song/show.html.eex:53
+#: lib/helheim_web/templates/song/show.html.eex:72
 #, elixir-autogen, elixir-format
 msgid "No one has listened to this song yet..."
 msgstr ""
 
-#: lib/helheim_web/templates/song/show.html.eex:51
+#: lib/helheim_web/templates/song/show.html.eex:70
 #, elixir-autogen, elixir-format
 msgid "Recent listeners"
 msgstr ""
@@ -2776,27 +2776,27 @@ msgstr ""
 msgid "Your listening history has been deleted."
 msgstr ""
 
-#: lib/helheim_web/templates/song/show.html.eex:38
+#: lib/helheim_web/templates/song/show.html.eex:57
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Are you sure? Your listens of this song will be permanently removed!"
 msgstr ""
 
-#: lib/helheim_web/templates/song/show.html.eex:40
+#: lib/helheim_web/templates/song/show.html.eex:59
 #, elixir-autogen, elixir-format
 msgid "Remove my name from this song"
 msgstr ""
 
-#: lib/helheim_web/controllers/song_controller.ex:73
+#: lib/helheim_web/controllers/song_controller.ex:76
 #, elixir-autogen, elixir-format
 msgid "Your listens have been removed from this song."
 msgstr ""
 
-#: lib/helheim_web/templates/song/show.html.eex:32
+#: lib/helheim_web/templates/song/show.html.eex:51
 #, elixir-autogen, elixir-format
 msgid "Album on Last.fm"
 msgstr ""
 
-#: lib/helheim_web/templates/song/show.html.eex:29
+#: lib/helheim_web/templates/song/show.html.eex:48
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Artist on Last.fm"
 msgstr ""
@@ -2842,7 +2842,7 @@ msgstr ""
 msgid "Set up scrobbling on Last.fm"
 msgstr ""
 
-#: lib/helheim_web/templates/song/show.html.eex:28
+#: lib/helheim_web/templates/song/show.html.eex:47
 #, elixir-autogen, elixir-format
 msgid "Song on Last.fm"
 msgstr ""
@@ -2890,4 +2890,14 @@ msgstr ""
 #: lib/helheim_web/templates/page/front_page.html.eex:111
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Top songs, past 7 days"
+msgstr ""
+
+#: lib/helheim_web/templates/song/show.html.eex:30
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Genre"
+msgstr ""
+
+#: lib/helheim_web/templates/song/show.html.eex:24
+#, elixir-autogen, elixir-format
+msgid "Year"
 msgstr ""

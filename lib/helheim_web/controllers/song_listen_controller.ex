@@ -24,13 +24,31 @@ defmodule HelheimWeb.SongListenController do
       if page == 1 do
         {
           Song |> Song.top_for_user(user) |> limit(10) |> Repo.all,
-          Song |> Song.top_artists_for_user(user) |> limit(10) |> Repo.all
+          Song |> Song.top_artists_for_user(user) |> limit(10) |> Repo.all |> with_artist_records()
         }
       else
         {nil, nil}
       end
 
     render(conn, "index.html", user: user, listens: listens, top_songs: top_songs, top_artists: top_artists)
+  end
+
+  # Joins the aggregated {artist_name, count} rows with their enriched
+  # artist records (images, nationality) in a single lookup. Songs whose
+  # artist has not been enriched yet still appear, just without extras.
+  defp with_artist_records([]), do: []
+  defp with_artist_records(top_artists) do
+    names = Enum.map(top_artists, fn {artist_name, _count} -> artist_name end)
+
+    artists_by_name =
+      Helheim.Artist
+      |> Helheim.Artist.by_names(names)
+      |> Repo.all()
+      |> Map.new(fn artist -> {String.downcase(artist.name), artist} end)
+
+    Enum.map(top_artists, fn {artist_name, count} ->
+      {artist_name, count, artists_by_name[String.downcase(artist_name)]}
+    end)
   end
 
   defp find_user(conn, _) do

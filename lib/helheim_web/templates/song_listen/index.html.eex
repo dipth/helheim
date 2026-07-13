@@ -20,14 +20,23 @@
         <%= if length(@top_artists) == 0 do %>
           <p class="text-muted mb-0"><%= gettext "No listens have been tracked yet..." %></p>
         <% end %>
-        <ol class="pl-2 mb-0">
-          <%= for {artist_name, count} <- @top_artists do %>
-            <li>
+        <%= for {artist_name, count, artist} <- @top_artists do %>
+          <div class="media mb-1">
+            <%= if artist && artist.image_url_medium do %>
+              <img src="<%= artist.image_url_medium %>" class="d-flex mr-1 rounded" alt="" width="64" height="64">
+            <% else %>
+              <div class="song-cover-placeholder rounded d-flex mr-1"><i class="fa fa-user"></i></div>
+            <% end %>
+            <div class="media-body">
               <%= link artist_name, to: HelheimWeb.SongView.lastfm_artist_url(artist_name), target: "_blank", rel: "noopener" %>
+              <%= if artist && artist.country_code do %>
+                <span title="<%= artist.country_name %>"><%= HelheimWeb.SongView.country_flag(artist.country_code) %></span>
+              <% end %>
+              <br>
               <%= HelheimWeb.SongView.listen_count_badge(count) %>
-            </li>
-          <% end %>
-        </ol>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

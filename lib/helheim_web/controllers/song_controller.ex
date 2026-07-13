@@ -37,7 +37,10 @@ defmodule HelheimWeb.SongController do
   end
 
   def show(conn, %{"id" => id} = params) do
-    song = Repo.get!(Song, id)
+    song =
+      Song
+      |> Repo.get!(id)
+      |> Repo.preload(song_tags: {Helheim.SongTag.ordered(Helheim.SongTag), [:tag]})
     current_user = current_resource(conn)
     recent_listens =
       SongListen
