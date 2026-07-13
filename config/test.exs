@@ -63,6 +63,10 @@ config :helheim, :lastfm,
   api_key: "lastfm_test_api_key",
   shared_secret: "lastfm_test_shared_secret"
 
+# Configure fanart.tv
+config :helheim, :fanart,
+  api_key: "fanart_test_api_key"
+
 # Configure wallaby
 config :wallaby,
   otp_app: :helheim,

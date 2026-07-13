@@ -69,6 +69,107 @@ defmodule Helheim.Lastfm.Client do
     end
   end
 
+  @doc """
+  Fetches extended metadata for a track: MusicBrainz ids, duration, album
+  details and the top tags. Unsigned call; autocorrect follows Last.fm's
+  canonical spelling of the artist/track.
+  """
+  def track_info(artist, title) do
+    params = %{
+      method: "track.getInfo",
+      api_key: config()[:api_key],
+      artist: artist,
+      track: title,
+      autocorrect: 1,
+      format: "json"
+    }
+
+    case api_get(params) do
+      {:ok, %{"track" => track}} -> {:ok, parse_track_info(track)}
+      {:ok, body} -> {:error, {:unexpected_response, body}}
+      {:error, :user_not_found} -> {:error, :not_found}
+      error -> error
+    end
+  end
+
+  @doc """
+  Fetches an artist's MusicBrainz id and Last.fm url. The image data the
+  endpoint returns is deliberately ignored - it has been a placeholder for
+  all artists since 2019.
+  """
+  def artist_info(name) do
+    params = %{
+      method: "artist.getInfo",
+      api_key: config()[:api_key],
+      artist: name,
+      autocorrect: 1,
+      format: "json"
+    }
+
+    case api_get(params) do
+      {:ok, %{"artist" => artist}} ->
+        {:ok, %{mbid: blank_to_nil(artist["mbid"]), url: blank_to_nil(artist["url"])}}
+      {:ok, body} ->
+        {:error, {:unexpected_response, body}}
+      {:error, :user_not_found} ->
+        {:error, :not_found}
+      error ->
+        error
+    end
+  end
+
+  defp parse_track_info(track) do
+    album = track["album"] || %{}
+
+    %{
+      mbid: blank_to_nil(track["mbid"]),
+      artist_mbid: blank_to_nil(get_in_map(track, "artist", "mbid")),
+      album_mbid: blank_to_nil(album["mbid"]),
+      album_name: blank_to_nil(album["title"]),
+      duration_seconds: parse_duration(track["duration"]),
+      image_extralarge: image_url(album["image"], "extralarge"),
+      tags: parse_tags(track),
+      url: blank_to_nil(track["url"])
+    }
+  end
+
+  defp parse_tags(track) do
+    case get_in(track, ["toptags", "tag"]) do
+      tags when is_list(tags) -> tags |> Enum.map(& &1["name"]) |> Enum.reject(&is_nil/1)
+      %{"name" => name} -> [name]
+      _ -> []
+    end
+  end
+
+  # track.getInfo reports the duration in milliseconds, as a string, and
+  # very often as "0" when unknown.
+  defp parse_duration(duration) do
+    case Integer.parse("#{duration}") do
+      {ms, ""} when ms > 0 -> div(ms, 1000)
+      _ -> nil
+    end
+  end
+
+  defp get_in_map(map, key1, key2) do
+    case map[key1] do
+      %{} = inner -> inner[key2]
+      _ -> nil
+    end
+  end
+
+  defp image_url(images, size) when is_list(images) do
+    images
+    |> Enum.find(fn image -> is_map(image) && image["size"] == size end)
+    |> case do
+      %{"#text" => url} when is_binary(url) and url != "" -> url
+      _ -> nil
+    end
+  end
+  defp image_url(_, _), do: nil
+
+  defp blank_to_nil(value) when is_binary(value) and value != "", do: value
+  defp blank_to_nil(_), do: nil
+
   # Signs the params with the api_sig required for authenticated calls:
   # md5 over the alphabetically sorted "<name><value>" pairs plus the shared
   # secret. The format param must not be part of the signature.

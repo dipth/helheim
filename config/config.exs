@@ -51,6 +51,10 @@ config :helheim, Oban,
      ]}
   ]
 
+# Configure MusicBrainz (identifying User-Agent required by their API terms)
+config :helheim, :musicbrainz,
+  user_agent: "Helheim/1.0 (https://www.helheim.dk; thomas@visioneers.dk)"
+
 # Configure Sentry
 config :sentry,
   environment_name: config_env()
