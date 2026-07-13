@@ -15,6 +15,20 @@ defmodule HelheimWeb.SongListenControllerTest do
       assert response =~ "Metallica"
     end
 
+    test "it shows artist images and nationality for enriched artists", %{conn: conn} do
+      profile = insert(:user)
+      insert(:artist, name: "Iotunn", country_code: "DK", country_name: "Denmark",
+        image_url_medium: "https://assets.fanart.tv/preview/music/abc/artistthumb/iotunn.jpg")
+      song = insert(:song, artist_name: "Iotunn")
+      insert(:song_listen, user: profile, song: song)
+
+      conn = get conn, "/profiles/#{profile.id}/music"
+      response = html_response(conn, 200)
+      assert response =~ "iotunn.jpg"
+      assert response =~ "Denmark"
+      assert response =~ "🇩🇰"
+    end
+
     test "it does not show listens from other users", %{conn: conn} do
       profile = insert(:user)
       song = insert(:song, title: "Creeping Death")

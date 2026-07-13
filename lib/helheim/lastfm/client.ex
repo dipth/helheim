@@ -9,6 +9,8 @@ defmodule Helheim.Lastfm.Client do
   before statuses.
   """
 
+  alias Helheim.Lastfm.Payload
+
   @auth_url "https://www.last.fm/api/auth/"
   @api_url "https://ws.audioscrobbler.com/2.0/"
 
@@ -66,6 +68,86 @@ defmodule Helheim.Lastfm.Client do
         {:error, {:unexpected_response, body}}
       error ->
         error
+    end
+  end
+
+  @doc """
+  Fetches extended metadata for a track: MusicBrainz ids, duration, album
+  details and the top tags. Unsigned call; autocorrect follows Last.fm's
+  canonical spelling of the artist/track.
+  """
+  def track_info(artist, title) do
+    params = %{
+      method: "track.getInfo",
+      api_key: config()[:api_key],
+      artist: artist,
+      track: title,
+      autocorrect: 1,
+      format: "json"
+    }
+
+    case api_get(params) do
+      {:ok, %{"track" => track}} -> {:ok, parse_track_info(track)}
+      {:ok, body} -> {:error, {:unexpected_response, body}}
+      {:error, :user_not_found} -> {:error, :not_found}
+      error -> error
+    end
+  end
+
+  @doc """
+  Fetches an artist's MusicBrainz id and Last.fm url. The image data the
+  endpoint returns is deliberately ignored - it has been a placeholder for
+  all artists since 2019.
+  """
+  def artist_info(name) do
+    params = %{
+      method: "artist.getInfo",
+      api_key: config()[:api_key],
+      artist: name,
+      autocorrect: 1,
+      format: "json"
+    }
+
+    case api_get(params) do
+      {:ok, %{"artist" => artist}} ->
+        {:ok, %{mbid: Payload.blank_to_nil(artist["mbid"]), url: Payload.blank_to_nil(artist["url"]), tags: Payload.tag_names(artist["tags"])}}
+      {:ok, body} ->
+        {:error, {:unexpected_response, body}}
+      {:error, :user_not_found} ->
+        {:error, :not_found}
+      error ->
+        error
+    end
+  end
+
+  defp parse_track_info(track) do
+    album = if is_map(track["album"]), do: track["album"], else: %{}
+
+    %{
+      mbid: Payload.blank_to_nil(track["mbid"]),
+      artist_mbid: Payload.blank_to_nil(get_in_map(track, "artist", "mbid")),
+      album_mbid: Payload.blank_to_nil(album["mbid"]),
+      album_name: Payload.blank_to_nil(album["title"]),
+      duration_seconds: parse_duration(track["duration"]),
+      image_extralarge: Payload.image_url(album["image"], "extralarge"),
+      tags: Payload.tag_names(track["toptags"]),
+      url: Payload.blank_to_nil(track["url"])
+    }
+  end
+
+  # track.getInfo reports the duration in milliseconds, as a string, and
+  # very often as "0" when unknown.
+  defp parse_duration(duration) do
+    case Integer.parse("#{duration}") do
+      {ms, ""} when ms > 0 -> div(ms, 1000)
+      _ -> nil
+    end
+  end
+
+  defp get_in_map(map, key1, key2) do
+    case map[key1] do
+      %{} = inner -> inner[key2]
+      _ -> nil
     end
   end
 

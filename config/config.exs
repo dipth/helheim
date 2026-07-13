@@ -42,14 +42,19 @@ config :helheim, Helheim.Auth.Guardian,
 config :helheim, Oban,
   engine: Oban.Engines.Basic,
   repo: Helheim.Repo,
-  queues: [lastfm: 5],
+  queues: [lastfm: 5, enrichment: 1],
   plugins: [
     {Oban.Plugins.Pruner, max_age: 60 * 60 * 24 * 7},
     {Oban.Plugins.Cron,
      crontab: [
-       {"*/5 * * * *", Helheim.Lastfm.SchedulerWorker}
+       {"*/5 * * * *", Helheim.Lastfm.SchedulerWorker},
+       {"30 * * * *", Helheim.Music.EnrichmentSweepWorker}
      ]}
   ]
+
+# Configure MusicBrainz (identifying User-Agent required by their API terms)
+config :helheim, :musicbrainz,
+  user_agent: "Helheim/1.0 (https://www.helheim.dk; thomas@visioneers.dk)"
 
 # Configure Sentry
 config :sentry,

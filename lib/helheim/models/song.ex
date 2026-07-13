@@ -9,21 +9,36 @@ defmodule Helheim.Song do
     field :album_name,            :string
     field :cover_image_url,       :string
     field :cover_image_url_small, :string
+    field :cover_image_url_large, :string
     field :lastfm_track_url,      :string
+    field :mbid,                  :string
+    field :artist_mbid,           :string
+    field :album_mbid,            :string
+    field :release_year,          :integer
+    field :duration_seconds,      :integer
+    field :enriched_at,           :utc_datetime_usec
     field :comment_count,         :integer
     field :listens_count,         :integer
+    belongs_to :artist, Helheim.Artist
     has_many :listens, SongListen
     has_many :comments, Helheim.Comment
+    has_many :song_tags, Helheim.SongTag
+    has_many :tags, through: [:song_tags, :tag]
     timestamps(type: :utc_datetime_usec)
   end
 
-  @metadata_fields [:album_name, :cover_image_url, :cover_image_url_small, :lastfm_track_url]
+  @metadata_fields [:album_name, :cover_image_url, :cover_image_url_small, :lastfm_track_url, :mbid, :artist_mbid, :album_mbid]
+  @enrichment_fields [:cover_image_url_large, :release_year, :duration_seconds, :enriched_at]
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :artist_name | @metadata_fields])
+    |> cast(params, [:title, :artist_name | @metadata_fields ++ @enrichment_fields])
     |> validate_required([:title, :artist_name])
     |> unique_constraint(:title, name: :songs_artist_title_index)
+  end
+
+  def unenriched(query) do
+    from s in query, where: is_nil(s.enriched_at)
   end
 
   def top_by_listens_since(query, since, excluded_user_ids \\ nil)

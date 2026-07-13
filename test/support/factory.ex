@@ -232,6 +232,26 @@ defmodule Helheim.Factory do
     }
   end
 
+  def artist_factory do
+    %Helheim.Artist{
+      name: sequence(:artist_name, &"Metallica #{&1}"),
+      mbid: sequence(:artist_mbid, &"65f4f0c5-ef9e-490c-aee3-909e7ae6b#{&1}"),
+      country_code: "US",
+      country_name: "United States",
+      image_url_small: "https://assets.fanart.tv/preview/music/abc/artistthumb/small.jpg",
+      image_url_medium: "https://assets.fanart.tv/preview/music/abc/artistthumb/medium.jpg",
+      image_url_large: "https://assets.fanart.tv/fanart/music/abc/artistthumb/large.jpg",
+      image_source: "fanart",
+      enriched_at: DateTime.utc_now()
+    }
+  end
+
+  def tag_factory do
+    %Helheim.Tag{
+      name: sequence(:tag_name, &"thrash metal #{&1}")
+    }
+  end
+
   def song_listen_factory do
     %Helheim.SongListen{
       user: build(:user),

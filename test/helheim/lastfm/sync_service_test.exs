@@ -1,10 +1,12 @@
 defmodule Helheim.Lastfm.SyncServiceTest do
   use Helheim.DataCase
+  use Oban.Testing, repo: Helheim.Repo
   alias Helheim.Repo
   alias Helheim.Song
   alias Helheim.SongListen
   alias Helheim.LastfmAccount
   alias Helheim.Lastfm.SyncService
+  alias Helheim.Music.SongEnrichmentWorker
 
   @uts_10_00 1_783_591_200
   @uts_11_00 1_783_594_800
@@ -165,6 +167,60 @@ defmodule Helheim.Lastfm.SyncServiceTest do
       account = Repo.get(LastfmAccount, account.id)
       assert account.played_after_cursor == @uts_11_00
       assert account.last_polled_at
+    end
+
+    test "captures musicbrainz ids from the scrobble without clobbering existing ones", %{account: account} do
+      overrides = %{
+        "mbid" => "track-mbid",
+        "artist" => %{"#text" => "Metallica", "mbid" => "artist-mbid"},
+        "album" => %{"#text" => "Ride the Lightning", "mbid" => "album-mbid"}
+      }
+      {:ok, _} = SyncService.sync_listens!(account, [item("Orion", @uts_10_00, overrides)])
+
+      song = Repo.get_by!(Song, title: "Orion")
+      assert song.mbid == "track-mbid"
+      assert song.artist_mbid == "artist-mbid"
+      assert song.album_mbid == "album-mbid"
+
+      no_mbids = item("Orion", @uts_11_00, %{"mbid" => ""})
+      {:ok, _} = SyncService.sync_listens!(account, [no_mbids])
+      assert Repo.get(Song, song.id).mbid == "track-mbid"
+    end
+
+    test "a re-scrobble never clobbers enrichment data", %{account: account} do
+      artist = insert(:artist)
+      song = insert(:song,
+        artist_name: "Metallica",
+        title: "Orion",
+        enriched_at: DateTime.utc_now(),
+        release_year: 1986,
+        duration_seconds: 500,
+        cover_image_url_large: "https://lastfm.freetls.fastly.net/i/u/500x500/abc.jpg",
+        artist: artist)
+
+      {:ok, _} = SyncService.sync_listens!(account, [item("Orion", @uts_10_00)])
+
+      updated = Repo.get(Song, song.id)
+      assert updated.enriched_at == song.enriched_at
+      assert updated.release_year == 1986
+      assert updated.duration_seconds == 500
+      assert updated.cover_image_url_large == song.cover_image_url_large
+      assert updated.artist_id == artist.id
+    end
+
+    test "enqueues enrichment for songs that have not been enriched yet", %{account: account} do
+      {:ok, _} = SyncService.sync_listens!(account, [item("Orion", @uts_10_00)])
+
+      song = Repo.get_by!(Song, title: "Orion")
+      assert_enqueued worker: SongEnrichmentWorker, args: %{song_id: song.id}
+    end
+
+    test "does not enqueue enrichment for songs that are already enriched", %{account: account} do
+      song = insert(:song, artist_name: "Metallica", title: "Orion", enriched_at: DateTime.utc_now())
+
+      {:ok, _} = SyncService.sync_listens!(account, [item("Orion", @uts_10_00)])
+
+      refute_enqueued worker: SongEnrichmentWorker, args: %{song_id: song.id}
     end
 
     test "keeps the existing cursor when there are no items", %{account: account} do

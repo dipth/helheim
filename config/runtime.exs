@@ -67,4 +67,7 @@ if config_env() == :prod do
   config :helheim, :lastfm,
     api_key: System.get_env("LASTFM_API_KEY"),
     shared_secret: System.get_env("LASTFM_SHARED_SECRET")
+
+  config :helheim, :fanart,
+    api_key: System.get_env("FANART_API_KEY")
 end

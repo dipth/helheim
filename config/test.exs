@@ -18,6 +18,9 @@ config :helheim, Oban, testing: :manual
 # Never serve stale chart data across tests
 config :helheim, :chart_cache_ttl_ms, 0
 
+# Never cache external API responses across tests
+config :helheim, :api_cache_ttl_ms, 0
+
 # Print only warnings and errors during test
 config :logger, level: :warning
 
@@ -62,6 +65,15 @@ config :helheim, :recaptcha,
 config :helheim, :lastfm,
   api_key: "lastfm_test_api_key",
   shared_secret: "lastfm_test_shared_secret"
+
+# Configure fanart.tv
+config :helheim, :fanart,
+  api_key: "fanart_test_api_key"
+
+# Don't pace MusicBrainz calls in tests (clients are mocked)
+config :helheim, :musicbrainz,
+  user_agent: "Helheim test",
+  pause_ms: 0
 
 # Configure wallaby
 config :wallaby,
