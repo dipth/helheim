@@ -67,6 +67,11 @@ config :helheim, :lastfm,
 config :helheim, :fanart,
   api_key: "fanart_test_api_key"
 
+# Don't pace MusicBrainz calls in tests (clients are mocked)
+config :helheim, :musicbrainz,
+  user_agent: "Helheim test",
+  pause_ms: 0
+
 # Configure wallaby
 config :wallaby,
   otp_app: :helheim,

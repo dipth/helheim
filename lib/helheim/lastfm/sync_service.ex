@@ -16,6 +16,7 @@ defmodule Helheim.Lastfm.SyncService do
   alias Helheim.Song
   alias Helheim.SongListen
   alias Helheim.LastfmAccount
+  alias Helheim.Music.SongEnrichmentWorker
 
   # The image Last.fm serves when it has no album art.
   @placeholder_image_hash "2a96cbd8b46e442fc41c2b86b821562f"
@@ -32,16 +33,39 @@ defmodule Helheim.Lastfm.SyncService do
     |> Multi.run(:listens, fn repo, _changes -> insert_listens(repo, account, parsed_items) end)
     |> Multi.run(:account, fn repo, _changes -> update_account(repo, account, parsed_items) end)
     |> Repo.transaction(timeout: @sync_timeout)
+    |> case do
+      {:ok, %{listens: %{song_ids: song_ids}}} = result ->
+        enqueue_enrichment(song_ids)
+        result
+      other ->
+        other
+    end
   end
 
   defp insert_listens(repo, account, parsed_items) do
-    listens =
-      Enum.map(parsed_items, fn {song_attrs, played_at} ->
+    {listens, song_ids} =
+      Enum.map_reduce(parsed_items, MapSet.new(), fn {song_attrs, played_at}, song_ids ->
         song = upsert_song!(repo, song_attrs)
-        insert_listen!(repo, account.user_id, song, played_at)
+        {insert_listen!(repo, account.user_id, song, played_at), MapSet.put(song_ids, song.id)}
       end)
 
-    {:ok, Enum.reject(listens, &is_nil/1)}
+    {:ok, %{listens: Enum.reject(listens, &is_nil/1), song_ids: MapSet.to_list(song_ids)}}
+  end
+
+  # Songs that have not been enriched yet (typically the ones this batch
+  # created) get an enrichment job; job uniqueness dedupes across polls.
+  defp enqueue_enrichment([]), do: :ok
+  defp enqueue_enrichment(song_ids) do
+    Song
+    |> Song.unenriched()
+    |> where([s], s.id in ^song_ids)
+    |> select([s], s.id)
+    |> Repo.all()
+    |> Enum.each(fn song_id ->
+      %{song_id: song_id}
+      |> SongEnrichmentWorker.new()
+      |> Oban.insert()
+    end)
   end
 
   # Songs are identified by lower(artist_name) + lower(title). On conflict
@@ -58,6 +82,9 @@ defmodule Helheim.Lastfm.SyncService do
           cover_image_url: fragment("COALESCE(EXCLUDED.cover_image_url, ?)", s.cover_image_url),
           cover_image_url_small: fragment("COALESCE(EXCLUDED.cover_image_url_small, ?)", s.cover_image_url_small),
           lastfm_track_url: fragment("COALESCE(EXCLUDED.lastfm_track_url, ?)", s.lastfm_track_url),
+          mbid: fragment("COALESCE(EXCLUDED.mbid, ?)", s.mbid),
+          artist_mbid: fragment("COALESCE(EXCLUDED.artist_mbid, ?)", s.artist_mbid),
+          album_mbid: fragment("COALESCE(EXCLUDED.album_mbid, ?)", s.album_mbid),
           updated_at: fragment("EXCLUDED.updated_at")
         ]]
 
@@ -133,9 +160,15 @@ defmodule Helheim.Lastfm.SyncService do
       album_name: album_name(track),
       cover_image_url: image_url(track["image"], "extralarge"),
       cover_image_url_small: image_url(track["image"], "medium"),
-      lastfm_track_url: blank_to_nil(track["url"])
+      lastfm_track_url: blank_to_nil(track["url"]),
+      mbid: blank_to_nil(track["mbid"]),
+      artist_mbid: mbid_of(track["artist"]),
+      album_mbid: mbid_of(track["album"])
     }
   end
+
+  defp mbid_of(%{"mbid" => mbid}), do: blank_to_nil(mbid)
+  defp mbid_of(_), do: nil
 
   defp image_url(images, size) when is_list(images) do
     images

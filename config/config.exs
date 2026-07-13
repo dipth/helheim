@@ -42,7 +42,7 @@ config :helheim, Helheim.Auth.Guardian,
 config :helheim, Oban,
   engine: Oban.Engines.Basic,
   repo: Helheim.Repo,
-  queues: [lastfm: 5],
+  queues: [lastfm: 5, enrichment: 1],
   plugins: [
     {Oban.Plugins.Pruner, max_age: 60 * 60 * 24 * 7},
     {Oban.Plugins.Cron,
