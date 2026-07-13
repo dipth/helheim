@@ -108,13 +108,21 @@ defmodule Helheim.Lastfm.Client do
 
     case api_get(params) do
       {:ok, %{"artist" => artist}} ->
-        {:ok, %{mbid: blank_to_nil(artist["mbid"]), url: blank_to_nil(artist["url"])}}
+        {:ok, %{mbid: blank_to_nil(artist["mbid"]), url: blank_to_nil(artist["url"]), tags: parse_artist_tags(artist)}}
       {:ok, body} ->
         {:error, {:unexpected_response, body}}
       {:error, :user_not_found} ->
         {:error, :not_found}
       error ->
         error
+    end
+  end
+
+  defp parse_artist_tags(artist) do
+    case get_in(artist, ["tags", "tag"]) do
+      tags when is_list(tags) -> tags |> Enum.map(& &1["name"]) |> Enum.reject(&is_nil/1)
+      %{"name" => name} -> [name]
+      _ -> []
     end
   end
 

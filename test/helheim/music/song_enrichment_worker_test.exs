@@ -111,13 +111,33 @@ defmodule Helheim.Music.SongEnrichmentWorkerTest do
     test "still enriches when last.fm does not know the track" do
       song = insert_unenriched_song(cover_image_url: nil)
 
-      with_mock Lastfm.Client, [:passthrough], [track_info: fn _a, _t -> {:error, :not_found} end] do
+      with_mock Lastfm.Client, [:passthrough], [
+        track_info: fn _a, _t -> {:error, :not_found} end,
+        artist_info: fn _name -> {:error, :not_found} end
+      ] do
         assert :ok = perform_job(SongEnrichmentWorker, %{song_id: song.id})
       end
 
       song = Repo.get(Song, song.id)
       assert song.enriched_at
       assert song.release_year == 1986
+    end
+
+    test "falls back to the artist's tags when the track has none" do
+      song = insert_unenriched_song()
+
+      with_mock Lastfm.Client, [:passthrough], [
+        track_info: fn _a, _t ->
+          {:ok, info} = @track_info
+          {:ok, %{info | tags: []}}
+        end,
+        artist_info: fn "Metallica" -> {:ok, %{mbid: nil, url: nil, tags: ["heavy metal", "thrash metal"]}} end
+      ] do
+        assert :ok = perform_job(SongEnrichmentWorker, %{song_id: song.id})
+      end
+
+      song = Repo.get(Song, song.id) |> Repo.preload(:tags)
+      assert Enum.map(song.tags, & &1.name) |> Enum.sort() == ["heavy metal", "thrash metal"]
     end
   end
 

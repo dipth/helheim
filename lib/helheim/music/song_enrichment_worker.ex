@@ -72,16 +72,27 @@ defmodule Helheim.Music.SongEnrichmentWorker do
         }
 
         {:ok, song} = song |> Song.changeset(attrs) |> Repo.update()
-        replace_tags(song, info.tags)
+        replace_tags(song, with_artist_tags_fallback(info.tags, song))
         {:ok, upgrade_cover(song)}
 
       {:error, :not_found} ->
+        replace_tags(song, with_artist_tags_fallback([], song))
         {:ok, song}
 
       error ->
         error
     end
   end
+
+  # Track-level tags are sparse on Last.fm outside the mainstream; the
+  # artist's tags are a much better genre signal than nothing.
+  defp with_artist_tags_fallback([], song) do
+    case Lastfm.Client.artist_info(song.artist_name) do
+      {:ok, %{tags: tags}} -> tags
+      _ -> []
+    end
+  end
+  defp with_artist_tags_fallback(tags, _song), do: tags
 
   # The Last.fm API caps artwork at 300px, but its CDN serves a 500px
   # rendition of the same image under a rewritten path - the same trick
