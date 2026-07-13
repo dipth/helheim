@@ -45,6 +45,11 @@ config :helheim, Oban,
   queues: [lastfm: 5, enrichment: 1],
   plugins: [
     {Oban.Plugins.Pruner, max_age: 60 * 60 * 24 * 7},
+    # Rescue jobs orphaned in the executing state when their node dies -
+    # Fly auto-stops idle machines mid-job (observed in production with an
+    # enrichment job stuck executing for 48 minutes). 15 minutes is far
+    # above any legitimate job runtime here.
+    {Oban.Plugins.Lifeline, rescue_after: :timer.minutes(15)},
     {Oban.Plugins.Cron,
      crontab: [
        {"*/5 * * * *", Helheim.Lastfm.SchedulerWorker},
