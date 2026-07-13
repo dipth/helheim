@@ -82,7 +82,7 @@
       <div class="card-block">
         <h5 class="mb-1 d-flex justify-content-between">
           <%= gettext "Recent listens" %>
-          <%= link gettext("Show All"), to: song_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
+          <%= link gettext("Show All"), to: song_path(@conn, :recent), class: "btn btn-outline-primary btn-sm mb-0" %>
         </h5>
         <%= for listen <- @recent_song_listens do %>
           <%= render HelheimWeb.SongView, "_listen.html", conn: @conn, listen: listen %>
@@ -92,11 +92,14 @@
 
     <div class="card">
       <div class="card-block">
-        <h5 class="mb-1"><%= gettext "Top songs today" %></h5>
-        <%= if length(@top_songs_today) == 0 do %>
-          <p class="text-muted"><%= gettext "No songs have been listened to today yet..." %></p>
+        <h5 class="mb-1 d-flex justify-content-between">
+          <%= gettext "Top songs, past 24 hours" %>
+          <%= link gettext("Show All"), to: song_path(@conn, :top_day), class: "btn btn-outline-primary btn-sm mb-0" %>
+        </h5>
+        <%= if length(@top_songs_day) == 0 do %>
+          <p class="text-muted"><%= gettext "No songs have been listened to in this period yet..." %></p>
         <% end %>
-        <%= for {song, count} <- @top_songs_today do %>
+        <%= for {song, count} <- @top_songs_day do %>
           <%= render HelheimWeb.SongView, "_song.html", conn: @conn, song: song, listen_count: count %>
         <% end %>
       </div>
@@ -104,9 +107,12 @@
 
     <div class="card">
       <div class="card-block">
-        <h5 class="mb-1"><%= gettext "Top songs this week" %></h5>
+        <h5 class="mb-1 d-flex justify-content-between">
+          <%= gettext "Top songs, past 7 days" %>
+          <%= link gettext("Show All"), to: song_path(@conn, :top_week), class: "btn btn-outline-primary btn-sm mb-0" %>
+        </h5>
         <%= if length(@top_songs_week) == 0 do %>
-          <p class="text-muted"><%= gettext "No songs have been listened to this week yet..." %></p>
+          <p class="text-muted"><%= gettext "No songs have been listened to in this period yet..." %></p>
         <% end %>
         <%= for {song, count} <- @top_songs_week do %>
           <%= render HelheimWeb.SongView, "_song.html", conn: @conn, song: song, listen_count: count %>

@@ -414,7 +414,7 @@ msgstr ""
 msgid "Update Account"
 msgstr ""
 
-#: lib/helheim/models/user.ex:369
+#: lib/helheim/models/user.ex:372
 #, elixir-autogen
 msgid "does not match your current password"
 msgstr ""
@@ -474,7 +474,7 @@ msgstr ""
 msgid "Newest Forum Posts"
 msgstr ""
 
-#: lib/helheim_web/templates/page/front_page.html.eex:120
+#: lib/helheim_web/templates/page/front_page.html.eex:129
 #: lib/helheim_web/templates/profile/show.html.eex:111
 #, elixir-autogen
 msgid "Newest Photos"
@@ -603,7 +603,9 @@ msgstr ""
 #: lib/helheim_web/templates/page/front_page.html.eex:41
 #: lib/helheim_web/templates/page/front_page.html.eex:56
 #: lib/helheim_web/templates/page/front_page.html.eex:85
-#: lib/helheim_web/templates/page/front_page.html.eex:121
+#: lib/helheim_web/templates/page/front_page.html.eex:97
+#: lib/helheim_web/templates/page/front_page.html.eex:112
+#: lib/helheim_web/templates/page/front_page.html.eex:130
 #: lib/helheim_web/templates/profile/show.html.eex:81
 #: lib/helheim_web/templates/profile/show.html.eex:104
 #: lib/helheim_web/templates/profile/show.html.eex:117
@@ -1823,7 +1825,7 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-#: lib/helheim/models/user.ex:402
+#: lib/helheim/models/user.ex:405
 #, elixir-autogen
 msgid "I too enjoy registering on websites, fellow human... Bleep Bloop!"
 msgstr ""
@@ -2445,7 +2447,7 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
-#: lib/helheim_web/controllers/preference_controller.ex:18
+#: lib/helheim_web/controllers/preference_controller.ex:17
 #, elixir-autogen
 msgid "Preferences updated!"
 msgstr ""
@@ -2685,7 +2687,7 @@ msgstr ""
 msgid "Album"
 msgstr ""
 
-#: lib/helheim_web/templates/song_listen/index.html.eex:36
+#: lib/helheim_web/templates/song_listen/index.html.eex:38
 #, elixir-autogen, elixir-format
 msgid "All listens"
 msgstr ""
@@ -2725,9 +2727,10 @@ msgstr ""
 msgid "Music from %{username}"
 msgstr ""
 
-#: lib/helheim_web/templates/song_listen/index.html.eex:8
-#: lib/helheim_web/templates/song_listen/index.html.eex:20
-#: lib/helheim_web/templates/song_listen/index.html.eex:38
+#: lib/helheim_web/templates/song/recent.html.eex:6
+#: lib/helheim_web/templates/song_listen/index.html.eex:9
+#: lib/helheim_web/templates/song_listen/index.html.eex:21
+#: lib/helheim_web/templates/song_listen/index.html.eex:40
 #, elixir-autogen, elixir-format
 msgid "No listens have been tracked yet..."
 msgstr ""
@@ -2737,22 +2740,13 @@ msgstr ""
 msgid "No one has listened to this song yet..."
 msgstr ""
 
-#: lib/helheim_web/templates/song/index.html.eex:6
-#, elixir-autogen, elixir-format
-msgid "No songs have been listened to this week yet..."
-msgstr ""
-
-#: lib/helheim_web/templates/page/front_page.html.eex:97
-#, elixir-autogen, elixir-format
-msgid "No songs have been listened to today yet..."
-msgstr ""
-
 #: lib/helheim_web/templates/song/show.html.eex:51
 #, elixir-autogen, elixir-format
 msgid "Recent listeners"
 msgstr ""
 
 #: lib/helheim_web/templates/page/front_page.html.eex:84
+#: lib/helheim_web/templates/song/recent.html.eex:1
 #, elixir-autogen, elixir-format
 msgid "Recent listens"
 msgstr ""
@@ -2762,25 +2756,14 @@ msgstr ""
 msgid "Song"
 msgstr ""
 
-#: lib/helheim_web/templates/song_listen/index.html.eex:18
+#: lib/helheim_web/templates/song_listen/index.html.eex:19
 #, elixir-autogen, elixir-format
 msgid "Top artists"
 msgstr ""
 
-#: lib/helheim_web/templates/song_listen/index.html.eex:6
+#: lib/helheim_web/templates/song_listen/index.html.eex:7
 #, elixir-autogen, elixir-format
 msgid "Top songs"
-msgstr ""
-
-#: lib/helheim_web/templates/page/front_page.html.eex:107
-#: lib/helheim_web/templates/song/index.html.eex:1
-#, elixir-autogen, elixir-format
-msgid "Top songs this week"
-msgstr ""
-
-#: lib/helheim_web/templates/page/front_page.html.eex:95
-#, elixir-autogen, elixir-format
-msgid "Top songs today"
 msgstr ""
 
 #: lib/helheim_web/templates/preference/edit.html.eex:69
@@ -2788,7 +2771,7 @@ msgstr ""
 msgid "You can also delete your entire listening history from the site. This cannot be undone."
 msgstr ""
 
-#: lib/helheim_web/controllers/lastfm_account_controller.ex:49
+#: lib/helheim_web/controllers/lastfm_account_controller.ex:57
 #, elixir-autogen, elixir-format
 msgid "Your listening history has been deleted."
 msgstr ""
@@ -2803,7 +2786,7 @@ msgstr ""
 msgid "Remove my name from this song"
 msgstr ""
 
-#: lib/helheim_web/controllers/song_controller.ex:48
+#: lib/helheim_web/controllers/song_controller.ex:73
 #, elixir-autogen, elixir-format
 msgid "Your listens have been removed from this song."
 msgstr ""
@@ -2874,18 +2857,37 @@ msgstr ""
 msgid "Your Last.fm account %{username} is connected and your listening history is shared on the site."
 msgstr ""
 
-#: lib/helheim_web/controllers/lastfm_account_controller.ex:26
-#: lib/helheim_web/controllers/lastfm_account_controller.ex:33
+#: lib/helheim_web/controllers/lastfm_account_controller.ex:34
+#: lib/helheim_web/controllers/lastfm_account_controller.ex:41
 #, elixir-autogen, elixir-format
 msgid "Your Last.fm account could not be connected. Please try again."
 msgstr ""
 
-#: lib/helheim_web/controllers/lastfm_account_controller.ex:41
+#: lib/helheim_web/controllers/lastfm_account_controller.ex:49
 #, elixir-autogen, elixir-format
 msgid "Your Last.fm account has been disconnected."
 msgstr ""
 
-#: lib/helheim_web/controllers/lastfm_account_controller.ex:21
+#: lib/helheim_web/controllers/lastfm_account_controller.ex:29
 #, elixir-autogen, elixir-format
 msgid "Your Last.fm account is now connected!"
+msgstr ""
+
+#: lib/helheim_web/templates/page/front_page.html.eex:100
+#: lib/helheim_web/templates/page/front_page.html.eex:115
+#: lib/helheim_web/templates/song/top.html.eex:6
+#, elixir-autogen, elixir-format
+msgid "No songs have been listened to in this period yet..."
+msgstr ""
+
+#: lib/helheim_web/controllers/song_controller.ex:24
+#: lib/helheim_web/templates/page/front_page.html.eex:96
+#, elixir-autogen, elixir-format
+msgid "Top songs, past 24 hours"
+msgstr ""
+
+#: lib/helheim_web/controllers/song_controller.ex:28
+#: lib/helheim_web/templates/page/front_page.html.eex:111
+#, elixir-autogen, elixir-format
+msgid "Top songs, past 7 days"
 msgstr ""

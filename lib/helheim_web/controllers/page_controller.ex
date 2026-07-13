@@ -54,9 +54,10 @@ defmodule HelheimWeb.PageController do
     recent_song_listens =
       SongListen
       |> SongListen.not_from_users(conn.assigns[:ignoree_ids])
+      |> SongListen.latest_per_song
       |> SongListen.newest
       |> SongListen.with_preloads
-      |> limit(10)
+      |> limit(5)
       |> Repo.all
 
     render conn, "front_page.html",
@@ -66,8 +67,8 @@ defmodule HelheimWeb.PageController do
       newest_forum_topics: newest_forum_topics,
       upcoming_events: upcoming_events,
       recent_song_listens: recent_song_listens,
-      top_songs_today: Charts.top_songs_today(5, conn.assigns[:ignoree_ids]),
-      top_songs_week: Charts.top_songs_this_week(5, conn.assigns[:ignoree_ids])
+      top_songs_day: Charts.top_songs_last_day(5, conn.assigns[:ignoree_ids]),
+      top_songs_week: Charts.top_songs_last_week(5, conn.assigns[:ignoree_ids])
   end
 
   def terms(conn, _params) do

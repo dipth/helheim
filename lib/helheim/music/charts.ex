@@ -1,8 +1,7 @@
 defmodule Helheim.Music.Charts do
   @moduledoc """
-  Aggregated listening statistics for the front page. Day and week
-  boundaries are calculated in local Danish time (weeks start on Monday) and
-  converted to UTC for querying.
+  Aggregated listening statistics for the front page, based on rolling
+  windows: the past 24 hours and the past 7 days.
 
   Listens from `excluded_user_ids` (the viewer's ignore list) are left out
   of the charts. The unfiltered charts are cached for a short interval since
@@ -15,14 +14,12 @@ defmodule Helheim.Music.Charts do
   alias Helheim.Repo
   alias Helheim.Song
 
-  @timezone "Europe/Copenhagen"
-
-  def top_songs_today(count, excluded_user_ids \\ nil) do
-    top_songs_since(start_of_day(), count, excluded_user_ids, cache_key: {:top_songs_today, count})
+  def top_songs_last_day(count, excluded_user_ids \\ nil) do
+    top_songs_since(hours_ago(24), count, excluded_user_ids, cache_key: {:top_songs_last_day, count})
   end
 
-  def top_songs_this_week(count, excluded_user_ids \\ nil) do
-    top_songs_since(start_of_week(), count, excluded_user_ids, cache_key: {:top_songs_this_week, count})
+  def top_songs_last_week(count, excluded_user_ids \\ nil) do
+    top_songs_since(hours_ago(24 * 7), count, excluded_user_ids, cache_key: {:top_songs_last_week, count})
   end
 
   def top_songs_since(since, count, excluded_user_ids \\ nil, opts \\ []) do
@@ -42,10 +39,9 @@ defmodule Helheim.Music.Charts do
     end
   end
 
-  def start_of_day, do: Timex.now(@timezone) |> Timex.beginning_of_day() |> to_utc()
-  def start_of_week, do: Timex.now(@timezone) |> Timex.beginning_of_week() |> to_utc()
-
-  defp to_utc(datetime), do: Timex.Timezone.convert(datetime, "Etc/UTC")
+  def hours_ago(hours) do
+    DateTime.add(DateTime.utc_now(), -hours * 3600, :second)
+  end
 
   defp cache_ttl, do: Application.get_env(:helheim, :chart_cache_ttl_ms, 60_000)
 end

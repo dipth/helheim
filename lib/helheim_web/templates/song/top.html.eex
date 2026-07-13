@@ -1,9 +1,9 @@
-<h1 class="mt-1"><%= gettext "Top songs this week" %></h1>
+<h1 class="mt-1"><%= @title %></h1>
 
 <div class="card">
   <div class="card-block">
     <%= if Enum.empty?(@songs) do %>
-      <p class="text-muted mb-0"><%= gettext "No songs have been listened to this week yet..." %></p>
+      <p class="text-muted mb-0"><%= gettext "No songs have been listened to in this period yet..." %></p>
     <% end %>
     <%= for {song, count} <- @songs do %>
       <%= render "_song.html", conn: @conn, song: song, listen_count: count %>
