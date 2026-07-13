@@ -36,13 +36,13 @@ defmodule Helheim.Music.SongEnrichmentWorker do
     cond do
       is_nil(song) -> :ok
       song.enriched_at && args["force"] != true -> :ok
-      true -> enrich(song)
+      true -> enrich(song, args["force"] == true)
     end
   end
 
-  defp enrich(song) do
+  defp enrich(song, force) do
     with {:ok, song} <- apply_track_info(song),
-         {:ok, song} <- apply_release_year(song),
+         {:ok, song} <- apply_release_year(song, force),
          {:ok, song} <- link_artist(song) do
       {:ok, _} =
         song
@@ -123,8 +123,9 @@ defmodule Helheim.Music.SongEnrichmentWorker do
   # release group via the album mbid (Last.fm album mbids are MusicBrainz
   # release ids), then a recording search by artist + title. Stale Last.fm
   # mbids 404 on MusicBrainz, so every step falls through on :not_found.
-  defp apply_release_year(%Song{release_year: year} = song) when is_integer(year), do: {:ok, song}
-  defp apply_release_year(song) do
+  # A force run re-derives the year so bad data can be corrected.
+  defp apply_release_year(%Song{release_year: year} = song, false) when is_integer(year), do: {:ok, song}
+  defp apply_release_year(song, _force) do
     case release_year_cascade(song) do
       {:ok, nil} ->
         {:ok, song}
@@ -167,14 +168,27 @@ defmodule Helheim.Music.SongEnrichmentWorker do
     end
   end
 
+  # Search results include remasters and compilation recordings whose
+  # first-release-date is years after the original, so take the earliest
+  # year across the hits rather than trusting the top-scored one.
   defp year_from_search(artist, title) do
     Musicbrainz.Client.search_recording(artist, title)
     |> musicbrainz_pause()
     |> case do
-      {:ok, [%{"first-release-date" => date} | _]} -> {:ok, parse_year(date)}
-      {:ok, _} -> {:ok, nil}
-      {:error, :not_found} -> {:ok, nil}
-      error -> error
+      {:ok, recordings} when is_list(recordings) ->
+        year =
+          recordings
+          |> Enum.map(fn recording -> parse_year(recording["first-release-date"]) end)
+          |> Enum.reject(&is_nil/1)
+          |> Enum.min(fn -> nil end)
+
+        {:ok, year}
+      {:ok, _} ->
+        {:ok, nil}
+      {:error, :not_found} ->
+        {:ok, nil}
+      error ->
+        error
     end
   end
 

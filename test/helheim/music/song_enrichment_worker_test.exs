@@ -141,13 +141,19 @@ defmodule Helheim.Music.SongEnrichmentWorkerTest do
       assert Repo.get(Song, song.id).release_year == 1999
     end
 
-    test "falls back to the recording search when both mbid lookups miss" do
+    test "falls back to the recording search when both mbid lookups miss, taking the earliest year" do
       song = insert_unenriched_song()
 
       with_mock Musicbrainz.Client, [:passthrough], [
         recording: fn _mbid -> {:error, :not_found} end,
         release: fn _mbid -> {:error, :not_found} end,
-        search_recording: fn "Metallica", "Battery" -> {:ok, [%{"first-release-date" => "1986-03-03"}]} end
+        search_recording: fn "Metallica", "Battery" ->
+          {:ok, [
+            %{"first-release-date" => "2001-10-01"},
+            %{"first-release-date" => "1986-03-03"},
+            %{"title" => "no date on this one"}
+          ]}
+        end
       ] do
         assert :ok = perform_job(SongEnrichmentWorker, %{song_id: song.id})
       end
