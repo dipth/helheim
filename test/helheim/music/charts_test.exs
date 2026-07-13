@@ -38,24 +38,31 @@ defmodule Helheim.Music.ChartsTest do
     end
   end
 
-  describe "start_of_day/0" do
-    test "is midnight in Copenhagen expressed in UTC" do
-      start_of_day = Charts.start_of_day()
-      local = Timex.Timezone.convert(start_of_day, "Europe/Copenhagen")
-      assert local.hour == 0
-      assert local.minute == 0
-      assert Timex.before?(start_of_day, Timex.now())
-      assert Timex.diff(Timex.now(), start_of_day, :hours) < 25
+  describe "top_songs_last_day/2" do
+    test "includes listens from the past 24 hours and excludes older ones" do
+      song = insert(:song)
+      insert(:song_listen, song: song, played_at: Timex.shift(Timex.now, hours: -23))
+      old_song = insert(:song)
+      insert(:song_listen, song: old_song, played_at: Timex.shift(Timex.now, hours: -25))
+
+      results = Charts.top_songs_last_day(10)
+
+      assert [{top_song, 1}] = results
+      assert top_song.id == song.id
     end
   end
 
-  describe "start_of_week/0" do
-    test "is monday midnight in Copenhagen expressed in UTC" do
-      start_of_week = Charts.start_of_week()
-      local = Timex.Timezone.convert(start_of_week, "Europe/Copenhagen")
-      assert Timex.weekday(local) == 1
-      assert local.hour == 0
-      assert Timex.before?(start_of_week, Timex.now())
+  describe "top_songs_last_week/2" do
+    test "includes listens from the past 7 days and excludes older ones" do
+      song = insert(:song)
+      insert(:song_listen, song: song, played_at: Timex.shift(Timex.now, days: -6))
+      old_song = insert(:song)
+      insert(:song_listen, song: old_song, played_at: Timex.shift(Timex.now, days: -8))
+
+      results = Charts.top_songs_last_week(10)
+
+      assert [{top_song, 1}] = results
+      assert top_song.id == song.id
     end
   end
 end

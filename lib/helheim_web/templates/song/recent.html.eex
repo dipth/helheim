@@ -1,0 +1,13 @@
+<h1 class="mt-1"><%= gettext "Recent listens" %></h1>
+
+<div class="card">
+  <div class="card-block">
+    <%= if Enum.empty?(@listens) do %>
+      <p class="text-muted mb-0"><%= gettext "No listens have been tracked yet..." %></p>
+    <% end %>
+    <%= for listen <- @listens do %>
+      <%= render "_listen.html", conn: @conn, listen: listen %>
+    <% end %>
+    <%= pagination_links @conn, @listens %>
+  </div>
+</div>

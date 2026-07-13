@@ -130,7 +130,10 @@ defmodule HelheimWeb.Router do
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
     end
     resources "/online_users", OnlineUserController, only: [:index]
-    resources "/songs", SongController, only: [:index, :show] do
+    get "/songs/recent", SongController, :recent
+    get "/songs/top/day", SongController, :top_day
+    get "/songs/top/week", SongController, :top_week
+    resources "/songs", SongController, only: [:show] do
       resources "/comments", CommentController, only: [:create, :edit, :update]
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
       delete "/my_listens", SongController, :remove_my_listens, as: :my_listens

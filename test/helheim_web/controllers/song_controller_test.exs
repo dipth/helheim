@@ -2,31 +2,108 @@ defmodule HelheimWeb.SongControllerTest do
   use HelheimWeb.ConnCase
 
   ##############################################################################
-  # index/2
-  describe "index/2 when signed in" do
+  # recent/2
+  describe "recent/2 when signed in" do
     setup [:create_and_sign_in_user]
 
-    test "it returns a successful response with the top songs of the week", %{conn: conn} do
+    test "it shows the most recent listens with the listener", %{conn: conn} do
+      listener = insert(:user, username: "melomaniac")
+      insert(:song_listen, user: listener, song: insert(:song, title: "Creeping Death"))
+
+      conn = get conn, "/songs/recent"
+      response = html_response(conn, 200)
+      assert response =~ "Creeping Death"
+      assert response =~ "melomaniac"
+    end
+
+    test "it only shows the most recent listen of a song played on repeat", %{conn: conn} do
+      user = insert(:user)
       song = insert(:song, title: "Creeping Death")
+      insert(:song_listen, user: user, song: song, played_at: Timex.shift(Timex.now, minutes: -10))
+      insert(:song_listen, user: user, song: song, played_at: Timex.shift(Timex.now, minutes: -5))
+
+      conn = get conn, "/songs/recent"
+      response = html_response(conn, 200)
+      assert length(String.split(response, "Creeping Death")) == 2
+    end
+
+    test "it does not show listens from ignored users", %{conn: conn, user: user} do
+      ignoree = insert(:user)
+      insert(:ignore, ignorer: user, ignoree: ignoree, enabled: true)
+      insert(:song_listen, user: ignoree, song: insert(:song, title: "Creeping Death"))
+
+      conn = get conn, "/songs/recent"
+      refute html_response(conn, 200) =~ "Creeping Death"
+    end
+
+    test "it clamps the page number to the pagination cap", %{conn: conn} do
+      insert(:song_listen)
+      conn = get conn, "/songs/recent", %{"page" => "999"}
+      assert html_response(conn, 200)
+    end
+
+    test "it renders a placeholder when a song has no cover art", %{conn: conn} do
+      song = insert(:song, cover_image_url_small: nil)
       insert(:song_listen, song: song)
 
-      conn = get conn, "/songs"
+      conn = get conn, "/songs/recent"
+      assert html_response(conn, 200) =~ "song-cover-placeholder"
+    end
+  end
+
+  describe "recent/2 when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      conn = get conn, "/songs/recent"
+      assert redirected_to(conn) =~ session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # top_day/2 + top_week/2
+  describe "top_day/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it shows songs listened to within the past 24 hours", %{conn: conn} do
+      song = insert(:song, title: "Creeping Death")
+      insert(:song_listen, song: song, played_at: Timex.shift(Timex.now, hours: -23))
+
+      conn = get conn, "/songs/top/day"
       assert html_response(conn, 200) =~ "Creeping Death"
     end
 
-    test "it does not include songs only listened to before this week", %{conn: conn} do
+    test "it does not include songs only listened to more than 24 hours ago", %{conn: conn} do
       song = insert(:song, title: "Creeping Death")
-      insert(:song_listen, song: song, played_at: Timex.shift(Timex.now, days: -8))
+      insert(:song_listen, song: song, played_at: Timex.shift(Timex.now, hours: -25))
 
-      conn = get conn, "/songs"
+      conn = get conn, "/songs/top/day"
       refute html_response(conn, 200) =~ "Creeping Death"
     end
   end
 
-  describe "index/2 when not signed in" do
-    test "it redirects to the sign in page", %{conn: conn} do
-      conn = get conn, "/songs"
-      assert redirected_to(conn) =~ session_path(conn, :new)
+  describe "top_week/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it shows songs listened to within the past 7 days", %{conn: conn} do
+      song = insert(:song, title: "Creeping Death")
+      insert(:song_listen, song: song, played_at: Timex.shift(Timex.now, days: -6))
+
+      conn = get conn, "/songs/top/week"
+      assert html_response(conn, 200) =~ "Creeping Death"
+    end
+
+    test "it does not include songs only listened to more than 7 days ago", %{conn: conn} do
+      song = insert(:song, title: "Creeping Death")
+      insert(:song_listen, song: song, played_at: Timex.shift(Timex.now, days: -8))
+
+      conn = get conn, "/songs/top/week"
+      refute html_response(conn, 200) =~ "Creeping Death"
+    end
+  end
+
+  describe "top_day/2 and top_week/2 when not signed in" do
+    test "they redirect to the sign in page", %{conn: conn} do
+      assert redirected_to(get(conn, "/songs/top/day")) =~ session_path(conn, :new)
+      assert redirected_to(get(build_conn(), "/songs/top/week")) =~ session_path(conn, :new)
     end
   end
 

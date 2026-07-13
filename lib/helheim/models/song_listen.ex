@@ -23,6 +23,19 @@ defmodule Helheim.SongListen do
     from l in query, where: l.song_id == ^song.id
   end
 
+  @doc """
+  Collapses the listens to one per song, keeping the newest listen of each,
+  so a song played on repeat only appears once in listing contexts.
+  """
+  def latest_per_song(query) do
+    deduplicated =
+      from l in query,
+        distinct: l.song_id,
+        order_by: [asc: l.song_id, desc: l.played_at]
+
+    from l in subquery(deduplicated)
+  end
+
   def not_from_users(query, nil), do: query
   def not_from_users(query, user_ids) do
     from l in query, where: l.user_id not in ^user_ids

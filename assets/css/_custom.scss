@@ -310,4 +310,20 @@ code {
   }
 }
 
+
+.song-cover-placeholder {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.25);
+
+  i {
+    font-size: 1.5rem;
+    opacity: 0.5;
+  }
+}
+
 @import "calendar_events";

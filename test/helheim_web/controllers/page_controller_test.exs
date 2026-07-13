@@ -44,14 +44,27 @@ defmodule HelheimWeb.PageControllerTest do
       refute html_response(conn, 200) =~ gettext("Recent listens")
     end
 
-    test "it shows the top songs of today and this week", %{conn: conn} do
+    test "it shows the top songs of the past 24 hours and past 7 days", %{conn: conn} do
       song = insert(:song, title: "Orion")
       insert_list(2, :song_listen, song: song)
 
       conn = get conn, "/front_page"
       response = html_response(conn, 200)
-      assert response =~ gettext("Top songs today")
-      assert response =~ gettext("Top songs this week")
+      assert response =~ gettext("Top songs, past 24 hours")
+      assert response =~ gettext("Top songs, past 7 days")
+    end
+
+    test "it does not show the same song twice in the recent listens", %{conn: conn} do
+      user = insert(:user)
+      song = insert(:song, title: "Orion")
+      insert(:song_listen, user: user, song: song, played_at: Timex.shift(Timex.now, minutes: -10))
+      insert(:song_listen, user: user, song: song, played_at: Timex.shift(Timex.now, minutes: -5))
+
+      conn = get conn, "/front_page"
+      response = html_response(conn, 200)
+      [_before, after_recent] = String.split(response, gettext("Recent listens"), parts: 2)
+      [recent_section, _rest] = String.split(after_recent, gettext("Top songs, past 24 hours"), parts: 2)
+      assert length(String.split(recent_section, "Orion")) == 2
     end
   end
 
