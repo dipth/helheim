@@ -5,19 +5,25 @@ defmodule Helheim.Music.SongEnrichmentWorker do
   higher resolution cover, the release year (via MusicBrainz) and a link
   to its artist record.
 
-  Runs on the concurrency-1 :enrichment queue and sleeps after each
-  MusicBrainz call, which keeps us within their 1 request/second policy on
-  a single-node deployment. Partial results are fine: enriched_at is
-  stamped even when some sources had nothing, and a re-run can be forced
-  with the "force" arg.
+  MusicBrainz calls are paced cluster-wide through Helheim.Musicbrainz.paced/1.
+  Partial results are fine: enriched_at is stamped even when some sources
+  had nothing, and when the final attempt still errors the song is settled
+  (stamped and logged) so it cannot clog the queue forever - the hourly
+  sweep or a "force" re-run are the recovery paths.
   """
 
   use Oban.Worker,
     queue: :enrichment,
     max_attempts: 5,
-    unique: [period: 3600, keys: [:song_id]]
+    unique: [
+      period: 3600,
+      keys: [:song_id],
+      states: [:available, :scheduled, :executing, :retryable, :suspended]
+    ]
 
   import Ecto.Query
+  require Logger
+  alias Helheim.Cache
   alias Helheim.Repo
   alias Helheim.Artist
   alias Helheim.Song
@@ -30,23 +36,34 @@ defmodule Helheim.Music.SongEnrichmentWorker do
   @max_tags 5
 
   @impl Oban.Worker
-  def perform(%Oban.Job{args: %{"song_id" => song_id} = args}) do
+  def perform(%Oban.Job{args: %{"song_id" => song_id} = args} = job) do
     song = Repo.get(Song, song_id)
 
     cond do
       is_nil(song) -> :ok
       song.enriched_at && args["force"] != true -> :ok
-      true -> enrich(song, args["force"] == true)
+      true -> song |> enrich(args["force"] == true) |> settle_final_attempt(job, song)
     end
   end
 
+  # A song that still errors on its last attempt is stamped as enriched so
+  # future polls/sweeps stop re-enqueueing it; force re-runs can revisit.
+  defp settle_final_attempt({:error, reason}, %Oban.Job{attempt: attempt, max_attempts: max}, song) when attempt >= max do
+    Logger.error("Song enrichment settled with error for song #{song.id}: #{inspect(reason)}")
+    {:ok, _} = song |> Song.changeset(%{enriched_at: DateTime.utc_now()}) |> Repo.update()
+    :ok
+  end
+  defp settle_final_attempt(result, _job, _song), do: result
+
   defp enrich(song, force) do
-    with {:ok, song} <- apply_track_info(song),
-         {:ok, song} <- apply_release_year(song, force),
-         {:ok, song} <- link_artist(song) do
+    with {:ok, song, tags} <- apply_track_info(song),
+         :ok <- apply_tags(song, tags),
+         {:ok, release_year} <- resolve_release_year(song, force),
+         {:ok, artist} <- ensure_artist(song) do
       {:ok, _} =
         song
-        |> Song.changeset(%{enriched_at: DateTime.utc_now()})
+        |> Song.changeset(%{release_year: release_year || song.release_year, enriched_at: DateTime.utc_now()})
+        |> Ecto.Changeset.put_change(:artist_id, song.artist_id || artist.id)
         |> Repo.update()
 
       :ok
@@ -56,59 +73,75 @@ defmodule Helheim.Music.SongEnrichmentWorker do
     end
   end
 
-  # Fetches track.getInfo and merges what we do not already know; existing
-  # values are never clobbered.
+  # Fetches track.getInfo and merges what we do not already know in a
+  # single write; existing values are never clobbered. The 500px cover is
+  # derived here too: the Last.fm API caps artwork at 300px, but its CDN
+  # serves a 500px rendition under a rewritten path - the same trick
+  # last.fm's own album pages use.
   defp apply_track_info(song) do
     case Lastfm.Client.track_info(song.artist_name, song.title) do
       {:ok, info} ->
+        cover = song.cover_image_url || info.image_extralarge
+
         attrs = %{
           mbid: song.mbid || info.mbid,
           artist_mbid: song.artist_mbid || info.artist_mbid,
           album_mbid: song.album_mbid || info.album_mbid,
           album_name: song.album_name || info.album_name,
           duration_seconds: song.duration_seconds || info.duration_seconds,
-          cover_image_url: song.cover_image_url || info.image_extralarge,
+          cover_image_url: cover,
+          cover_image_url_large: upgraded_cover_url(cover),
           lastfm_track_url: song.lastfm_track_url || info.url
         }
 
         {:ok, song} = song |> Song.changeset(attrs) |> Repo.update()
-        replace_tags(song, with_artist_tags_fallback(info.tags, song))
-        {:ok, upgrade_cover(song)}
+        {:ok, song, info.tags}
 
       {:error, :not_found} ->
-        replace_tags(song, with_artist_tags_fallback([], song))
-        {:ok, song}
+        {:ok, song, []}
 
       error ->
         error
     end
   end
 
+  defp upgraded_cover_url(nil), do: nil
+  defp upgraded_cover_url(url) do
+    case String.replace(url, "/300x300/", "/500x500/") do
+      ^url -> nil
+      upgraded -> upgraded
+    end
+  end
+
+  defp apply_tags(song, track_tags) do
+    case with_artist_tags_fallback(track_tags, song) do
+      {:error, :rate_limited} -> {:error, :rate_limited}
+      tags -> replace_tags(song, tags)
+    end
+  end
+
   # Track-level tags are sparse on Last.fm outside the mainstream; the
-  # artist's tags are a much better genre signal than nothing.
+  # artist's tags are a much better genre signal than nothing. The artist
+  # lookup is cached so a discography of tagless tracks costs one API call,
+  # and rate limits propagate so the job snoozes instead of losing tags.
   defp with_artist_tags_fallback([], song) do
-    case Lastfm.Client.artist_info(song.artist_name) do
+    Cache.fetch(
+      {:lastfm_artist_tags, String.downcase(song.artist_name)},
+      api_cache_ttl(),
+      fn -> Lastfm.Client.artist_info(song.artist_name) end,
+      cache_if: &match?({:ok, _}, &1)
+    )
+    |> case do
       {:ok, %{tags: tags}} -> tags
+      {:error, :rate_limited} -> {:error, :rate_limited}
       _ -> []
     end
   end
   defp with_artist_tags_fallback(tags, _song), do: tags
 
-  # The Last.fm API caps artwork at 300px, but its CDN serves a 500px
-  # rendition of the same image under a rewritten path - the same trick
-  # last.fm's own album pages use.
-  defp upgrade_cover(%Song{cover_image_url: nil} = song), do: song
-  defp upgrade_cover(%Song{} = song) do
-    large = String.replace(song.cover_image_url, "/300x300/", "/500x500/")
-
-    if large != song.cover_image_url do
-      {:ok, song} = song |> Song.changeset(%{cover_image_url_large: large}) |> Repo.update()
-      song
-    else
-      song
-    end
-  end
-
+  # An empty result never wipes tags a song already has: stale tags beat
+  # data loss from a transient upstream hiccup.
+  defp replace_tags(_song, []), do: :ok
   defp replace_tags(song, tag_names) do
     tags =
       tag_names
@@ -128,27 +161,18 @@ defmodule Helheim.Music.SongEnrichmentWorker do
       |> SongTag.changeset(%{position: position})
       |> Repo.insert!(on_conflict: :nothing, conflict_target: [:song_id, :tag_id])
     end)
+
+    :ok
   end
 
   # Release year lookup cascade: the recording by track mbid, then the
   # release group via the album mbid (Last.fm album mbids are MusicBrainz
   # release ids), then a recording search by artist + title. Stale Last.fm
   # mbids 404 on MusicBrainz, so every step falls through on :not_found.
-  # A force run re-derives the year so bad data can be corrected.
-  defp apply_release_year(%Song{release_year: year} = song, false) when is_integer(year), do: {:ok, song}
-  defp apply_release_year(song, _force) do
-    case release_year_cascade(song) do
-      {:ok, nil} ->
-        {:ok, song}
-      {:ok, year} ->
-        {:ok, _} = song |> Song.changeset(%{release_year: year}) |> Repo.update()
-        {:ok, %{song | release_year: year}}
-      error ->
-        error
-    end
-  end
-
-  defp release_year_cascade(song) do
+  # Returns the year without persisting; the caller folds it into the
+  # final write.
+  defp resolve_release_year(%Song{release_year: year}, false) when is_integer(year), do: {:ok, year}
+  defp resolve_release_year(song, _force) do
     with {:ok, nil} <- year_from_recording(song.mbid),
          {:ok, nil} <- year_from_release(song.album_mbid) do
       year_from_search(song.artist_name, song.title)
@@ -157,8 +181,7 @@ defmodule Helheim.Music.SongEnrichmentWorker do
 
   defp year_from_recording(nil), do: {:ok, nil}
   defp year_from_recording(mbid) do
-    Musicbrainz.Client.recording(mbid)
-    |> musicbrainz_pause()
+    Musicbrainz.paced(fn -> Musicbrainz.Client.recording(mbid) end)
     |> case do
       {:ok, %{"first-release-date" => date}} -> {:ok, parse_year(date)}
       {:ok, _} -> {:ok, nil}
@@ -169,8 +192,7 @@ defmodule Helheim.Music.SongEnrichmentWorker do
 
   defp year_from_release(nil), do: {:ok, nil}
   defp year_from_release(mbid) do
-    Musicbrainz.Client.release(mbid)
-    |> musicbrainz_pause()
+    Musicbrainz.paced(fn -> Musicbrainz.Client.release(mbid) end)
     |> case do
       {:ok, %{"release-group" => %{"first-release-date" => date}}} -> {:ok, parse_year(date)}
       {:ok, _} -> {:ok, nil}
@@ -183,8 +205,7 @@ defmodule Helheim.Music.SongEnrichmentWorker do
   # first-release-date is years after the original, so take the earliest
   # year across the hits rather than trusting the top-scored one.
   defp year_from_search(artist, title) do
-    Musicbrainz.Client.search_recording(artist, title)
-    |> musicbrainz_pause()
+    Musicbrainz.paced(fn -> Musicbrainz.Client.search_recording(artist, title) end)
     |> case do
       {:ok, recordings} when is_list(recordings) ->
         year =
@@ -211,20 +232,11 @@ defmodule Helheim.Music.SongEnrichmentWorker do
   end
   defp parse_year(_), do: nil
 
-  defp musicbrainz_pause(result) do
-    Process.sleep(Helheim.Musicbrainz.pause_ms())
-    result
-  end
-
-  defp link_artist(song) do
+  defp ensure_artist(song) do
     artist = Artist.get_or_create_by_name!(song.artist_name)
 
     if song.artist_mbid && is_nil(artist.mbid) do
       {:ok, _} = artist |> Artist.changeset(%{mbid: song.artist_mbid}) |> Repo.update()
-    end
-
-    if is_nil(song.artist_id) do
-      {:ok, _} = song |> Ecto.Changeset.change(artist_id: artist.id) |> Repo.update()
     end
 
     if is_nil(artist.enriched_at) do
@@ -233,6 +245,10 @@ defmodule Helheim.Music.SongEnrichmentWorker do
       |> Oban.insert()
     end
 
-    {:ok, Repo.get(Song, song.id)}
+    {:ok, artist}
+  end
+
+  defp api_cache_ttl do
+    Application.get_env(:helheim, :api_cache_ttl_ms, :timer.hours(24))
   end
 end

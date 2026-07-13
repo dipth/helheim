@@ -123,6 +123,56 @@ defmodule Helheim.Music.SongEnrichmentWorkerTest do
       assert song.release_year == 1986
     end
 
+    test "keeps existing tags when the fresh lookup has none" do
+      song = insert_unenriched_song()
+      tag = insert(:tag, name: "prog metal")
+      Repo.insert!(%SongTag{song_id: song.id, tag_id: tag.id, position: 1})
+
+      with_mock Lastfm.Client, [:passthrough], [
+        track_info: fn _a, _t ->
+          {:ok, info} = @track_info
+          {:ok, %{info | tags: []}}
+        end,
+        artist_info: fn _name -> {:error, :not_found} end
+      ] do
+        assert :ok = perform_job(SongEnrichmentWorker, %{song_id: song.id, force: true})
+      end
+
+      song = Repo.get(Song, song.id) |> Repo.preload(:tags)
+      assert Enum.map(song.tags, & &1.name) == ["prog metal"]
+    end
+
+    test "snoozes instead of losing tags when the artist tag fallback is rate limited" do
+      song = insert_unenriched_song()
+      tag = insert(:tag, name: "prog metal")
+      Repo.insert!(%SongTag{song_id: song.id, tag_id: tag.id, position: 1})
+
+      with_mock Lastfm.Client, [:passthrough], [
+        track_info: fn _a, _t ->
+          {:ok, info} = @track_info
+          {:ok, %{info | tags: []}}
+        end,
+        artist_info: fn _name -> {:error, :rate_limited} end
+      ] do
+        assert {:snooze, 60} = perform_job(SongEnrichmentWorker, %{song_id: song.id, force: true})
+      end
+
+      assert Repo.aggregate(from(st in SongTag, where: st.song_id == ^song.id), :count) == 1
+    end
+
+    test "settles a song whose final attempt still errors so it stops clogging the queue" do
+      song = insert_unenriched_song()
+
+      with_mock Lastfm.Client, [:passthrough], [
+        track_info: fn _a, _t -> {:error, {:api_error, 16, "temporary"}} end
+      ] do
+        assert {:error, _} = perform_job(SongEnrichmentWorker, %{song_id: song.id}, attempt: 1)
+        assert :ok = perform_job(SongEnrichmentWorker, %{song_id: song.id}, attempt: 5)
+      end
+
+      assert Repo.get(Song, song.id).enriched_at
+    end
+
     test "falls back to the artist's tags when the track has none" do
       song = insert_unenriched_song()
 

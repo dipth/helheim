@@ -21,8 +21,12 @@ defmodule Helheim.Fanart.Client do
   defp fetch_images(mbid, api_key) do
     case Req.get("#{@api_url}/#{mbid}", params: %{api_key: api_key}) do
       {:ok, %Req.Response{status: 200, body: %{"artistthumb" => [_ | _] = thumbs}}} ->
-        best = Enum.max_by(thumbs, &likes/1)
-        {:ok, %{thumb_url: best["url"], preview_url: preview_url(best["url"])}}
+        case Enum.max_by(thumbs, &likes/1) do
+          %{"url" => url} when is_binary(url) and url != "" ->
+            {:ok, %{thumb_url: url, preview_url: preview_url(url)}}
+          _ ->
+            {:error, :not_found}
+        end
       {:ok, %Req.Response{status: 200, body: _no_thumbs}} ->
         {:error, :not_found}
       {:ok, %Req.Response{status: 404}} ->

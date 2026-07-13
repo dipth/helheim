@@ -1,7 +1,7 @@
-<a href="<%= song_path(@conn, :show, @song) %>" class="d-flex mr-1">
-  <%= if @song.cover_image_url_small do %>
-    <img src="<%= @song.cover_image_url_small %>" class="rounded" alt="" width="64" height="64">
+<a href="<%= @href %>" class="d-flex mr-1"<%= if assigns[:external] do %> target="_blank" rel="noopener"<% end %>>
+  <%= if assigns[:image_url] do %>
+    <img src="<%= @image_url %>" class="rounded" alt="" width="64" height="64">
   <% else %>
-    <div class="song-cover-placeholder rounded"><i class="fa fa-music"></i></div>
+    <div class="song-cover-placeholder rounded"><i class="fa <%= assigns[:icon] || "fa-music" %>"></i></div>
   <% end %>
 </a>

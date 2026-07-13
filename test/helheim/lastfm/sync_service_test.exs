@@ -187,6 +187,27 @@ defmodule Helheim.Lastfm.SyncServiceTest do
       assert Repo.get(Song, song.id).mbid == "track-mbid"
     end
 
+    test "a re-scrobble never clobbers enrichment data", %{account: account} do
+      artist = insert(:artist)
+      song = insert(:song,
+        artist_name: "Metallica",
+        title: "Orion",
+        enriched_at: DateTime.utc_now(),
+        release_year: 1986,
+        duration_seconds: 500,
+        cover_image_url_large: "https://lastfm.freetls.fastly.net/i/u/500x500/abc.jpg",
+        artist: artist)
+
+      {:ok, _} = SyncService.sync_listens!(account, [item("Orion", @uts_10_00)])
+
+      updated = Repo.get(Song, song.id)
+      assert updated.enriched_at == song.enriched_at
+      assert updated.release_year == 1986
+      assert updated.duration_seconds == 500
+      assert updated.cover_image_url_large == song.cover_image_url_large
+      assert updated.artist_id == artist.id
+    end
+
     test "enqueues enrichment for songs that have not been enriched yet", %{account: account} do
       {:ok, _} = SyncService.sync_listens!(account, [item("Orion", @uts_10_00)])
 

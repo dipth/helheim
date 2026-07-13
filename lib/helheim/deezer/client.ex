@@ -34,10 +34,13 @@ defmodule Helheim.Deezer.Client do
         {:error, :not_found}
       artist ->
         {:ok, %{
-          image_url_small: artist["picture_small"],
-          image_url_medium: artist["picture_medium"],
-          image_url_large: artist["picture_xl"]
+          image_url_small: present_url(artist["picture_small"]),
+          image_url_medium: present_url(artist["picture_medium"]),
+          image_url_large: present_url(artist["picture_xl"])
         }}
     end
   end
+
+  defp present_url(url) when is_binary(url) and url != "", do: url
+  defp present_url(_), do: nil
 end

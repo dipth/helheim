@@ -2,7 +2,6 @@ defmodule Helheim.Artist do
   use Helheim, :model
 
   alias Helheim.Artist
-  alias Helheim.Repo
 
   schema "artists" do
     field :name,             :string
@@ -29,20 +28,9 @@ defmodule Helheim.Artist do
   Finds or creates the artist with the given name, matching
   case-insensitively - the same identity rule songs use for artist_name.
   """
-  def get_or_create_by_name!(name) do
-    get_by_name(name) ||
-      %Artist{}
-      |> changeset(%{name: name})
-      |> Repo.insert!(on_conflict: :nothing, conflict_target: {:unsafe_fragment, "(lower(name))"})
-      |> case do
-        %Artist{id: nil} -> get_by_name(name)
-        artist -> artist
-      end
-  end
+  def get_or_create_by_name!(name), do: Helheim.NamedLookup.get_or_create!(Artist, name)
 
-  def get_by_name(name) do
-    Repo.one(from a in Artist, where: fragment("lower(?)", a.name) == ^String.downcase(name))
-  end
+  def get_by_name(name), do: Helheim.NamedLookup.get(Artist, name)
 
   def by_names(query, names) do
     downcased = Enum.map(names, &String.downcase/1)

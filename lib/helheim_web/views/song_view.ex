@@ -7,14 +7,22 @@ defmodule HelheimWeb.SongView do
 
   @doc """
   Renders an ISO 3166-1 alpha-2 country code as its flag emoji via the
-  regional indicator codepoints - no image assets needed.
+  regional indicator codepoints - no image assets needed. MusicBrainz's
+  user-assigned region codes (XW worldwide, XE Europe, ...) have no flag
+  and render as letter boxes, so they are skipped - except XK (Kosovo),
+  which platforms do render.
   """
-  def country_flag(<<_, _>> = country_code) do
-    country_code
-    |> String.upcase()
-    |> String.to_charlist()
-    |> Enum.map(&(&1 + 127_397))
-    |> List.to_string()
+  def country_flag(country_code) when is_binary(country_code) do
+    case String.upcase(country_code) do
+      <<a, b>> = upcased when a in ?A..?Z and b in ?A..?Z ->
+        if a == ?X and upcased != "XK" do
+          nil
+        else
+          upcased |> String.to_charlist() |> Enum.map(&(&1 + 127_397)) |> List.to_string()
+        end
+      _ ->
+        nil
+    end
   end
   def country_flag(_), do: nil
 

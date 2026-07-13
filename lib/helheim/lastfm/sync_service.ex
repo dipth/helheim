@@ -16,10 +16,10 @@ defmodule Helheim.Lastfm.SyncService do
   alias Helheim.Song
   alias Helheim.SongListen
   alias Helheim.LastfmAccount
+  alias Helheim.Lastfm.Payload
   alias Helheim.Music.SongEnrichmentWorker
 
-  # The image Last.fm serves when it has no album art.
-  @placeholder_image_hash "2a96cbd8b46e442fc41c2b86b821562f"
+  require Logger
 
   # A full page of 200 scrobbles is several hundred queries in one
   # transaction; against a remote database (Neon) that far exceeds the
@@ -54,6 +54,9 @@ defmodule Helheim.Lastfm.SyncService do
 
   # Songs that have not been enriched yet (typically the ones this batch
   # created) get an enrichment job; job uniqueness dedupes across polls.
+  # Failures are logged rather than raised: the listens are already
+  # committed, so a broken enqueue must not fail the poll - the hourly
+  # enrichment sweep picks up anything missed here.
   defp enqueue_enrichment([]), do: :ok
   defp enqueue_enrichment(song_ids) do
     Song
@@ -66,6 +69,8 @@ defmodule Helheim.Lastfm.SyncService do
       |> SongEnrichmentWorker.new()
       |> Oban.insert()
     end)
+  rescue
+    error -> Logger.error("Failed to enqueue song enrichment: #{Exception.message(error)}")
   end
 
   # Songs are identified by lower(artist_name) + lower(title). On conflict
@@ -150,7 +155,7 @@ defmodule Helheim.Lastfm.SyncService do
   defp artist_name(%{"artist" => %{} = artist}), do: artist["#text"] || artist["name"]
   defp artist_name(_), do: nil
 
-  defp album_name(%{"album" => %{"#text" => album}}), do: blank_to_nil(album)
+  defp album_name(%{"album" => %{"#text" => album}}), do: Payload.blank_to_nil(album)
   defp album_name(_), do: nil
 
   defp song_attrs(track, title, artist) do
@@ -158,33 +163,15 @@ defmodule Helheim.Lastfm.SyncService do
       title: title,
       artist_name: artist,
       album_name: album_name(track),
-      cover_image_url: image_url(track["image"], "extralarge"),
-      cover_image_url_small: image_url(track["image"], "medium"),
-      lastfm_track_url: blank_to_nil(track["url"]),
-      mbid: blank_to_nil(track["mbid"]),
+      cover_image_url: Payload.image_url(track["image"], "extralarge"),
+      cover_image_url_small: Payload.image_url(track["image"], "medium"),
+      lastfm_track_url: Payload.blank_to_nil(track["url"]),
+      mbid: Payload.blank_to_nil(track["mbid"]),
       artist_mbid: mbid_of(track["artist"]),
       album_mbid: mbid_of(track["album"])
     }
   end
 
-  defp mbid_of(%{"mbid" => mbid}), do: blank_to_nil(mbid)
+  defp mbid_of(%{"mbid" => mbid}), do: Payload.blank_to_nil(mbid)
   defp mbid_of(_), do: nil
-
-  defp image_url(images, size) when is_list(images) do
-    images
-    |> Enum.find(fn image -> is_map(image) && image["size"] == size end)
-    |> case do
-      %{"#text" => url} when is_binary(url) -> blank_to_nil(url) |> reject_placeholder()
-      _ -> nil
-    end
-  end
-  defp image_url(_, _), do: nil
-
-  defp reject_placeholder(nil), do: nil
-  defp reject_placeholder(url) do
-    if String.contains?(url, @placeholder_image_hash), do: nil, else: url
-  end
-
-  defp blank_to_nil(value) when is_binary(value) and value != "", do: value
-  defp blank_to_nil(_), do: nil
 end

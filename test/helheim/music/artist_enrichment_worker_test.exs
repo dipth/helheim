@@ -110,6 +110,43 @@ defmodule Helheim.Music.ArtistEnrichmentWorkerTest do
       assert :ok = perform_job(ArtistEnrichmentWorker, %{artist_id: artist.id})
       assert not called Musicbrainz.Client.artist(:_)
     end
+
+    test "snoozes when last.fm rate limits during a force mbid re-resolution" do
+      artist = insert_unenriched_artist(enriched_at: DateTime.utc_now())
+
+      with_mock Lastfm.Client, [:passthrough], [artist_info: fn _name -> {:error, :rate_limited} end] do
+        assert {:snooze, 60} = perform_job(ArtistEnrichmentWorker, %{artist_id: artist.id, force: true})
+      end
+    end
+
+    test "a force run re-resolves a stale stored mbid" do
+      artist = insert_unenriched_artist(mbid: "stale-mbid", enriched_at: DateTime.utc_now())
+
+      with_mocks([
+        {Lastfm.Client, [:passthrough], [artist_info: fn "Iotunn" -> {:ok, %{mbid: "fresh-mbid", url: nil, tags: []}} end]},
+        {Musicbrainz.Client, [:passthrough], [artist: fn "fresh-mbid" -> @mb_artist end]},
+        {Fanart.Client, [:passthrough], [artist_images: fn "fresh-mbid" -> @fanart_images end]}
+      ]) do
+        assert :ok = perform_job(ArtistEnrichmentWorker, %{artist_id: artist.id, force: true})
+      end
+
+      artist = Repo.get(Artist, artist.id)
+      assert artist.mbid == "fresh-mbid"
+      assert artist.country_code == "DK"
+    end
+
+    test "settles an artist whose final attempt still errors" do
+      artist = insert_unenriched_artist(mbid: nil)
+
+      with_mocks([
+        {Lastfm.Client, [:passthrough], [artist_info: fn _name -> {:error, :not_found} end]},
+        {Musicbrainz.Client, [:passthrough], [search_artist: fn _name -> {:error, {:http_error, 500, "boom"}} end]}
+      ]) do
+        assert :ok = perform_job(ArtistEnrichmentWorker, %{artist_id: artist.id}, attempt: 5)
+      end
+
+      assert Repo.get(Artist, artist.id).enriched_at
+    end
   end
 
   describe "perform/1 without a stored mbid" do

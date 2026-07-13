@@ -22,11 +22,11 @@
         <% end %>
         <%= for {artist_name, count, artist} <- @top_artists do %>
           <div class="media mb-1">
-            <%= if artist && artist.image_url_medium do %>
-              <img src="<%= artist.image_url_medium %>" class="d-flex mr-1 rounded" alt="" width="64" height="64">
-            <% else %>
-              <div class="song-cover-placeholder rounded d-flex mr-1"><i class="fa fa-user"></i></div>
-            <% end %>
+            <%= render HelheimWeb.SongView, "_cover.html",
+                  href: HelheimWeb.SongView.lastfm_artist_url(artist_name),
+                  image_url: artist && artist.image_url_medium,
+                  icon: "fa-user",
+                  external: true %>
             <div class="media-body">
               <%= link artist_name, to: HelheimWeb.SongView.lastfm_artist_url(artist_name), target: "_blank", rel: "noopener" %>
               <%= if artist && artist.country_code do %>

@@ -9,6 +9,8 @@ defmodule Helheim.Lastfm.Client do
   before statuses.
   """
 
+  alias Helheim.Lastfm.Payload
+
   @auth_url "https://www.last.fm/api/auth/"
   @api_url "https://ws.audioscrobbler.com/2.0/"
 
@@ -108,7 +110,7 @@ defmodule Helheim.Lastfm.Client do
 
     case api_get(params) do
       {:ok, %{"artist" => artist}} ->
-        {:ok, %{mbid: blank_to_nil(artist["mbid"]), url: blank_to_nil(artist["url"]), tags: parse_artist_tags(artist)}}
+        {:ok, %{mbid: Payload.blank_to_nil(artist["mbid"]), url: Payload.blank_to_nil(artist["url"]), tags: Payload.tag_names(artist["tags"])}}
       {:ok, body} ->
         {:error, {:unexpected_response, body}}
       {:error, :user_not_found} ->
@@ -118,35 +120,19 @@ defmodule Helheim.Lastfm.Client do
     end
   end
 
-  defp parse_artist_tags(artist) do
-    case get_in(artist, ["tags", "tag"]) do
-      tags when is_list(tags) -> tags |> Enum.map(& &1["name"]) |> Enum.reject(&is_nil/1)
-      %{"name" => name} -> [name]
-      _ -> []
-    end
-  end
-
   defp parse_track_info(track) do
-    album = track["album"] || %{}
+    album = if is_map(track["album"]), do: track["album"], else: %{}
 
     %{
-      mbid: blank_to_nil(track["mbid"]),
-      artist_mbid: blank_to_nil(get_in_map(track, "artist", "mbid")),
-      album_mbid: blank_to_nil(album["mbid"]),
-      album_name: blank_to_nil(album["title"]),
+      mbid: Payload.blank_to_nil(track["mbid"]),
+      artist_mbid: Payload.blank_to_nil(get_in_map(track, "artist", "mbid")),
+      album_mbid: Payload.blank_to_nil(album["mbid"]),
+      album_name: Payload.blank_to_nil(album["title"]),
       duration_seconds: parse_duration(track["duration"]),
-      image_extralarge: image_url(album["image"], "extralarge"),
-      tags: parse_tags(track),
-      url: blank_to_nil(track["url"])
+      image_extralarge: Payload.image_url(album["image"], "extralarge"),
+      tags: Payload.tag_names(track["toptags"]),
+      url: Payload.blank_to_nil(track["url"])
     }
-  end
-
-  defp parse_tags(track) do
-    case get_in(track, ["toptags", "tag"]) do
-      tags when is_list(tags) -> tags |> Enum.map(& &1["name"]) |> Enum.reject(&is_nil/1)
-      %{"name" => name} -> [name]
-      _ -> []
-    end
   end
 
   # track.getInfo reports the duration in milliseconds, as a string, and
@@ -164,19 +150,6 @@ defmodule Helheim.Lastfm.Client do
       _ -> nil
     end
   end
-
-  defp image_url(images, size) when is_list(images) do
-    images
-    |> Enum.find(fn image -> is_map(image) && image["size"] == size end)
-    |> case do
-      %{"#text" => url} when is_binary(url) and url != "" -> url
-      _ -> nil
-    end
-  end
-  defp image_url(_, _), do: nil
-
-  defp blank_to_nil(value) when is_binary(value) and value != "", do: value
-  defp blank_to_nil(_), do: nil
 
   # Signs the params with the api_sig required for authenticated calls:
   # md5 over the alphabetically sorted "<name><value>" pairs plus the shared

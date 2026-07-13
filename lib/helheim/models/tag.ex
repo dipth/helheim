@@ -1,7 +1,6 @@
 defmodule Helheim.Tag do
   use Helheim, :model
 
-  alias Helheim.Repo
   alias Helheim.Tag
 
   schema "tags" do
@@ -22,18 +21,7 @@ defmodule Helheim.Tag do
   @doc """
   Finds or creates the tag with the given name, matching case-insensitively.
   """
-  def get_or_create_by_name!(name) do
-    get_by_name(name) ||
-      %Tag{}
-      |> changeset(%{name: name})
-      |> Repo.insert!(on_conflict: :nothing, conflict_target: {:unsafe_fragment, "(lower(name))"})
-      |> case do
-        %Tag{id: nil} -> get_by_name(name)
-        tag -> tag
-      end
-  end
+  def get_or_create_by_name!(name), do: Helheim.NamedLookup.get_or_create!(Tag, name)
 
-  def get_by_name(name) do
-    Repo.one(from t in Tag, where: fragment("lower(?)", t.name) == ^String.downcase(name))
-  end
+  def get_by_name(name), do: Helheim.NamedLookup.get(Tag, name)
 end

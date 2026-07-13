@@ -47,7 +47,8 @@ config :helheim, Oban,
     {Oban.Plugins.Pruner, max_age: 60 * 60 * 24 * 7},
     {Oban.Plugins.Cron,
      crontab: [
-       {"*/5 * * * *", Helheim.Lastfm.SchedulerWorker}
+       {"*/5 * * * *", Helheim.Lastfm.SchedulerWorker},
+       {"30 * * * *", Helheim.Music.EnrichmentSweepWorker}
      ]}
   ]
 
