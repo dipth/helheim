@@ -9,6 +9,7 @@ defmodule Helheim.Music.SongEnrichmentWorkerTest do
   alias Helheim.Tag
   alias Helheim.Lastfm
   alias Helheim.Musicbrainz
+  alias Helheim.Deezer
   alias Helheim.Music.ArtistEnrichmentWorker
   alias Helheim.Music.SongEnrichmentWorker
 
@@ -40,7 +41,8 @@ defmodule Helheim.Music.SongEnrichmentWorkerTest do
         recording: fn _mbid -> {:ok, %{"first-release-date" => "1986-03-03"}} end,
         release: fn _mbid -> {:ok, %{"release-group" => %{"first-release-date" => "1986"}}} end,
         search_recording: fn _artist, _title -> {:ok, [%{"first-release-date" => "1986-03-03"}]} end
-      ]}
+      ]},
+      {Deezer.Client, [:passthrough], [search_track: fn _artist, _title -> {:ok, %{deezer_id: 424_565_222}} end]}
     ]) do
       :ok
     end
@@ -57,6 +59,7 @@ defmodule Helheim.Music.SongEnrichmentWorkerTest do
       assert song.duration_seconds == 315
       assert song.release_year == 1986
       assert song.cover_image_url_large == "https://lastfm.freetls.fastly.net/i/u/500x500/abc.jpg"
+      assert song.deezer_id == 424_565_222
       assert song.enriched_at
       assert Enum.map(song.tags, & &1.name) |> Enum.sort() == ["80s", "metal", "thrash metal"]
 
@@ -67,7 +70,7 @@ defmodule Helheim.Music.SongEnrichmentWorkerTest do
     end
 
     test "does not clobber values the song already has" do
-      song = insert_unenriched_song(mbid: "existing-mbid", album_name: "Existing Album", duration_seconds: 100)
+      song = insert_unenriched_song(mbid: "existing-mbid", album_name: "Existing Album", duration_seconds: 100, deezer_id: 111)
 
       assert :ok = perform_job(SongEnrichmentWorker, %{song_id: song.id})
 
@@ -75,6 +78,44 @@ defmodule Helheim.Music.SongEnrichmentWorkerTest do
       assert song.mbid == "existing-mbid"
       assert song.album_name == "Existing Album"
       assert song.duration_seconds == 100
+      assert song.deezer_id == 111
+      assert not called Deezer.Client.search_track(:_, :_)
+    end
+
+    test "leaves the deezer id empty when deezer has no match but still marks the song enriched" do
+      song = insert_unenriched_song()
+
+      with_mock Deezer.Client, [:passthrough], [search_track: fn _a, _t -> {:error, :not_found} end] do
+        assert :ok = perform_job(SongEnrichmentWorker, %{song_id: song.id})
+      end
+
+      song = Repo.get(Song, song.id)
+      assert song.deezer_id == nil
+      assert song.enriched_at
+    end
+
+    test "continues without a deezer id when deezer errors, keeping the rest of the enrichment" do
+      song = insert_unenriched_song()
+
+      with_mock Deezer.Client, [:passthrough], [search_track: fn _a, _t -> {:error, {:http_error, 500, ""}} end] do
+        assert :ok = perform_job(SongEnrichmentWorker, %{song_id: song.id})
+      end
+
+      song = Repo.get(Song, song.id)
+      assert song.deezer_id == nil
+      assert song.enriched_at
+      assert song.release_year == 1986
+      assert song.artist_id
+    end
+
+    test "snoozes when deezer rate limits" do
+      song = insert_unenriched_song()
+
+      with_mock Deezer.Client, [:passthrough], [search_track: fn _a, _t -> {:error, :rate_limited} end] do
+        assert {:snooze, 60} = perform_job(SongEnrichmentWorker, %{song_id: song.id})
+      end
+
+      refute Repo.get(Song, song.id).enriched_at
     end
 
     test "skips songs that are already enriched" do
@@ -193,7 +234,8 @@ defmodule Helheim.Music.SongEnrichmentWorkerTest do
 
   describe "release year cascade" do
     setup_with_mocks([
-      {Lastfm.Client, [:passthrough], [track_info: fn _artist, _title -> @track_info end]}
+      {Lastfm.Client, [:passthrough], [track_info: fn _artist, _title -> @track_info end]},
+      {Deezer.Client, [:passthrough], [search_track: fn _artist, _title -> {:error, :not_found} end]}
     ]) do
       :ok
     end

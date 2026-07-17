@@ -2,8 +2,8 @@ defmodule Helheim.Music.SongEnrichmentWorker do
   @moduledoc """
   Enriches a song with metadata beyond what the scrobble feed provides:
   MusicBrainz ids, duration, tags (the first doubling as the genre), a
-  higher resolution cover, the release year (via MusicBrainz) and a link
-  to its artist record.
+  higher resolution cover, the release year (via MusicBrainz), a Deezer
+  track id (for 30 second previews) and a link to its artist record.
 
   MusicBrainz calls are paced cluster-wide through Helheim.Musicbrainz.paced/1.
   Partial results are fine: enriched_at is stamped even when some sources
@@ -31,6 +31,7 @@ defmodule Helheim.Music.SongEnrichmentWorker do
   alias Helheim.Tag
   alias Helheim.Lastfm
   alias Helheim.Musicbrainz
+  alias Helheim.Deezer
   alias Helheim.Music.ArtistEnrichmentWorker
 
   @max_tags 5
@@ -58,11 +59,16 @@ defmodule Helheim.Music.SongEnrichmentWorker do
   defp enrich(song, force) do
     with {:ok, song, tags} <- apply_track_info(song),
          :ok <- apply_tags(song, tags),
+         {:ok, deezer_id} <- resolve_deezer_id(song, force),
          {:ok, release_year} <- resolve_release_year(song, force),
          {:ok, artist} <- ensure_artist(song) do
       {:ok, _} =
         song
-        |> Song.changeset(%{release_year: release_year || song.release_year, enriched_at: DateTime.utc_now()})
+        |> Song.changeset(%{
+          release_year: release_year || song.release_year,
+          deezer_id: deezer_id || song.deezer_id,
+          enriched_at: DateTime.utc_now()
+        })
         |> Ecto.Changeset.put_change(:artist_id, song.artist_id || artist.id)
         |> Repo.update()
 
@@ -221,6 +227,25 @@ defmodule Helheim.Music.SongEnrichmentWorker do
         {:ok, nil}
       error ->
         error
+    end
+  end
+
+  # The Deezer id powers the on-demand preview endpoint (preview URLs
+  # themselves expire, so only the id is stored). This step runs before
+  # the release year cascade on purpose: a Deezer rate limit then snoozes
+  # the job before any paced MusicBrainz work is spent (the retry does
+  # still repeat the Last.fm lookup - apply_track_info runs every
+  # attempt). Other Deezer errors degrade to "no preview" instead of
+  # gating the year/artist steps behind an optional field: a song settled
+  # during a Deezer hiccup keeps its core metadata, and
+  # mix helheim.preview_backfill re-checks any song still missing its
+  # deezer_id, so previews are recoverable in bulk.
+  defp resolve_deezer_id(%Song{deezer_id: deezer_id}, false) when is_integer(deezer_id), do: {:ok, deezer_id}
+  defp resolve_deezer_id(song, _force) do
+    case Deezer.Client.search_track(song.artist_name, song.title) do
+      {:ok, %{deezer_id: deezer_id}} -> {:ok, deezer_id}
+      {:error, :rate_limited} -> {:error, :rate_limited}
+      _ -> {:ok, nil}
     end
   end
 

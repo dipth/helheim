@@ -1,5 +1,8 @@
 <div class="media mb-1">
-  <%= render "_cover.html", href: song_path(@conn, :show, @song), image_url: @song.cover_image_url_small %>
+  <div class="song-cover-frame">
+    <%= render "_cover.html", href: song_path(@conn, :show, @song), image_url: @song.cover_image_url_small %>
+    <%= preview_button @conn, @song %>
+  </div>
   <div class="media-body">
     <%= link @song.title, to: song_path(@conn, :show, @song) %>
     <br>

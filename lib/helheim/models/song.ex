@@ -16,6 +16,7 @@ defmodule Helheim.Song do
     field :album_mbid,            :string
     field :release_year,          :integer
     field :duration_seconds,      :integer
+    field :deezer_id,             :integer
     field :enriched_at,           :utc_datetime_usec
     field :comment_count,         :integer
     field :listens_count,         :integer
@@ -28,7 +29,7 @@ defmodule Helheim.Song do
   end
 
   @metadata_fields [:album_name, :cover_image_url, :cover_image_url_small, :lastfm_track_url, :mbid, :artist_mbid, :album_mbid]
-  @enrichment_fields [:cover_image_url_large, :release_year, :duration_seconds, :enriched_at]
+  @enrichment_fields [:cover_image_url_large, :release_year, :duration_seconds, :deezer_id, :enriched_at]
 
   def changeset(struct, params \\ %{}) do
     struct

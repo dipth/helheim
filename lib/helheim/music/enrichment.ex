@@ -12,6 +12,7 @@ defmodule Helheim.Music.Enrichment do
   alias Helheim.Repo
   alias Helheim.Song
   alias Helheim.Music.SongEnrichmentWorker
+  alias Helheim.Music.SongPreviewBackfillWorker
 
   def backfill do
     Song
@@ -20,6 +21,23 @@ defmodule Helheim.Music.Enrichment do
     |> Repo.all()
     |> Enum.map(fn song_id ->
       {:ok, _} = %{song_id: song_id} |> SongEnrichmentWorker.new() |> Oban.insert()
+    end)
+    |> length()
+  end
+
+  @doc """
+  Enqueues a preview-only Deezer lookup for every already-enriched song
+  still missing its deezer_id - the catalog that predates the preview
+  feature. Unenriched songs are skipped: their regular enrichment job
+  resolves the deezer_id itself.
+  """
+  def backfill_previews do
+    Song
+    |> where([s], not is_nil(s.enriched_at) and is_nil(s.deezer_id))
+    |> select([s], s.id)
+    |> Repo.all()
+    |> Enum.map(fn song_id ->
+      {:ok, _} = %{song_id: song_id} |> SongPreviewBackfillWorker.new() |> Oban.insert()
     end)
     |> length()
   end
