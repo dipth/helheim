@@ -2693,7 +2693,7 @@ msgstr "Er du sikker på at du vil slette dette fotoalbum? Alle billeder i album
 msgid "%{who} wrote a comment on the song: %{what}"
 msgstr "%{who} skrev en kommentar til sangen: %{what}"
 
-#: lib/helheim_web/templates/song/show.html.eex:18
+#: lib/helheim_web/templates/song/show.html.eex:19
 #, elixir-autogen, elixir-format
 msgid "Album"
 msgstr "Album"
@@ -2713,7 +2713,7 @@ msgstr "Er du sikker? Vi stopper med at registrere, hvad du lytter til. Din eksi
 msgid "Are you sure? Your entire listening history will be permanently deleted!"
 msgstr "Er du sikker? Hele din lyttehistorik bliver slettet permanent!"
 
-#: lib/helheim_web/templates/song/show.html.eex:13
+#: lib/helheim_web/templates/song/show.html.eex:14
 #, elixir-autogen, elixir-format
 msgid "Artist"
 msgstr "Kunstner"
@@ -2728,7 +2728,7 @@ msgstr "Slet lyttehistorik"
 msgid "Latest listens"
 msgstr "Seneste afspilninger"
 
-#: lib/helheim_web/templates/song/show.html.eex:35
+#: lib/helheim_web/templates/song/show.html.eex:36
 #, elixir-autogen, elixir-format
 msgid "Listens"
 msgstr "Afspilninger"
@@ -2746,12 +2746,12 @@ msgstr "Musik fra %{username}"
 msgid "No listens have been tracked yet..."
 msgstr "Der er ikke registreret nogen afspilninger endnu..."
 
-#: lib/helheim_web/templates/song/show.html.eex:72
+#: lib/helheim_web/templates/song/show.html.eex:73
 #, elixir-autogen, elixir-format
 msgid "No one has listened to this song yet..."
 msgstr "Ingen har lyttet til denne sang endnu..."
 
-#: lib/helheim_web/templates/song/show.html.eex:70
+#: lib/helheim_web/templates/song/show.html.eex:71
 #, elixir-autogen, elixir-format
 msgid "Recent listeners"
 msgstr "Seneste lyttere"
@@ -2787,27 +2787,27 @@ msgstr "Du kan også slette hele din lyttehistorik fra siden. Dette kan ikke for
 msgid "Your listening history has been deleted."
 msgstr "Din lyttehistorik er blevet slettet."
 
-#: lib/helheim_web/templates/song/show.html.eex:57
+#: lib/helheim_web/templates/song/show.html.eex:58
 #, elixir-autogen, elixir-format
 msgid "Are you sure? Your listens of this song will be permanently removed!"
 msgstr "Er du sikker? Dine afspilninger af denne sang bliver fjernet permanent!"
 
-#: lib/helheim_web/templates/song/show.html.eex:59
+#: lib/helheim_web/templates/song/show.html.eex:60
 #, elixir-autogen, elixir-format
 msgid "Remove my name from this song"
 msgstr "Fjern mit navn fra denne sang"
 
-#: lib/helheim_web/controllers/song_controller.ex:76
+#: lib/helheim_web/controllers/song_controller.ex:104
 #, elixir-autogen, elixir-format
 msgid "Your listens have been removed from this song."
 msgstr "Dine afspilninger er blevet fjernet fra denne sang."
 
-#: lib/helheim_web/templates/song/show.html.eex:51
+#: lib/helheim_web/templates/song/show.html.eex:52
 #, elixir-autogen, elixir-format
 msgid "Album on Last.fm"
 msgstr "Album på Last.fm"
 
-#: lib/helheim_web/templates/song/show.html.eex:48
+#: lib/helheim_web/templates/song/show.html.eex:49
 #, elixir-autogen, elixir-format
 msgid "Artist on Last.fm"
 msgstr "Kunstner på Last.fm"
@@ -2853,7 +2853,7 @@ msgstr "Forbind Last.fm igen"
 msgid "Set up scrobbling on Last.fm"
 msgstr "Opsæt scrobbling på Last.fm"
 
-#: lib/helheim_web/templates/song/show.html.eex:47
+#: lib/helheim_web/templates/song/show.html.eex:48
 #, elixir-autogen, elixir-format
 msgid "Song on Last.fm"
 msgstr "Sang på Last.fm"
@@ -2891,24 +2891,31 @@ msgstr "Din Last.fm-konto er nu forbundet!"
 msgid "No songs have been listened to in this period yet..."
 msgstr "Der er ikke lyttet til nogen sange i denne periode endnu..."
 
-#: lib/helheim_web/controllers/song_controller.ex:24
+#: lib/helheim_web/controllers/song_controller.ex:26
 #: lib/helheim_web/templates/page/front_page.html.eex:96
 #, elixir-autogen, elixir-format
 msgid "Top songs, past 24 hours"
 msgstr "Top sange, seneste 24 timer"
 
-#: lib/helheim_web/controllers/song_controller.ex:28
+#: lib/helheim_web/controllers/song_controller.ex:30
 #: lib/helheim_web/templates/page/front_page.html.eex:111
 #, elixir-autogen, elixir-format
 msgid "Top songs, past 7 days"
 msgstr "Top sange, seneste 7 dage"
 
-#: lib/helheim_web/templates/song/show.html.eex:30
+#: lib/helheim_web/templates/song/show.html.eex:31
 #, elixir-autogen, elixir-format
 msgid "Genre"
 msgstr "Genre"
 
-#: lib/helheim_web/templates/song/show.html.eex:24
+#: lib/helheim_web/templates/song/show.html.eex:25
 #, elixir-autogen, elixir-format
 msgid "Year"
 msgstr "Årstal"
+
+#: lib/helheim_web/templates/song/show.html.eex:11
+#: lib/helheim_web/views/song_view.ex:44
+#: lib/helheim_web/views/song_view.ex:45
+#, elixir-autogen, elixir-format
+msgid "Play preview"
+msgstr "Hør smagsprøve"

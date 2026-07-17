@@ -8,6 +8,7 @@
         <img class="card-img-top img-fluid" src="<%= detail_cover_url(@song) %>" alt="">
       <% end %>
       <div class="card-block">
+        <%= preview_button @conn, @song, class: "btn btn-sm btn-outline-primary btn-block mb-1", label: gettext("Play preview") %>
         <table class="table table-sm">
           <tr>
             <th><%= gettext "Artist" %></th>

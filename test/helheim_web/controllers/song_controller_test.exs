@@ -1,5 +1,7 @@
 defmodule HelheimWeb.SongControllerTest do
   use HelheimWeb.ConnCase
+  import Mock
+  alias Helheim.Deezer
 
   ##############################################################################
   # recent/2
@@ -168,6 +170,22 @@ defmodule HelheimWeb.SongControllerTest do
       assert response =~ "500x500"
     end
 
+    test "it shows a preview button when the song has a deezer id", %{conn: conn} do
+      song = insert(:song, deezer_id: 424_565_222)
+
+      conn = get conn, "/songs/#{song.id}"
+      response = html_response(conn, 200)
+      assert response =~ "song-preview-button"
+      assert response =~ "/songs/#{song.id}/preview"
+    end
+
+    test "it does not show a preview button when the song has no deezer id", %{conn: conn} do
+      song = insert(:song, deezer_id: nil)
+
+      conn = get conn, "/songs/#{song.id}"
+      refute html_response(conn, 200) =~ "song-preview-button"
+    end
+
     test "it shows the comments of the song", %{conn: conn} do
       comment = insert(:song_comment, body: "What a fantastic track")
 
@@ -186,6 +204,53 @@ defmodule HelheimWeb.SongControllerTest do
     test "it redirects to the sign in page", %{conn: conn} do
       song = insert(:song)
       conn = get conn, "/songs/#{song.id}"
+      assert redirected_to(conn) =~ session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # preview/2
+  describe "preview/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it redirects to a freshly resolved deezer preview url", %{conn: conn} do
+      song = insert(:song, deezer_id: 424_565_222)
+
+      with_mock Deezer.Client, [:passthrough], [
+        track_preview_url: fn 424_565_222 -> {:ok, "https://cdnt-preview.dzcdn.net/api/1/1/abc.mp3?hdnea=exp=123"} end
+      ] do
+        conn = get conn, "/songs/#{song.id}/preview"
+        assert redirected_to(conn) == "https://cdnt-preview.dzcdn.net/api/1/1/abc.mp3?hdnea=exp=123"
+      end
+    end
+
+    test "it returns a 404 when the song has no deezer id", %{conn: conn} do
+      song = insert(:song, deezer_id: nil)
+
+      conn = get conn, "/songs/#{song.id}/preview"
+      assert response(conn, 404)
+    end
+
+    test "it returns a 404 when deezer cannot resolve the preview", %{conn: conn} do
+      song = insert(:song, deezer_id: 424_565_222)
+
+      with_mock Deezer.Client, [:passthrough], [track_preview_url: fn _id -> {:error, :not_found} end] do
+        conn = get conn, "/songs/#{song.id}/preview"
+        assert response(conn, 404)
+      end
+    end
+
+    test "it returns a 404 when the song does not exist", %{conn: conn} do
+      assert_error_sent :not_found, fn ->
+        get conn, "/songs/1234567/preview"
+      end
+    end
+  end
+
+  describe "preview/2 when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      song = insert(:song, deezer_id: 424_565_222)
+      conn = get conn, "/songs/#{song.id}/preview"
       assert redirected_to(conn) =~ session_path(conn, :new)
     end
   end

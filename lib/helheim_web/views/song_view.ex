@@ -26,6 +26,27 @@ defmodule HelheimWeb.SongView do
   end
   def country_flag(_), do: nil
 
+  @doc """
+  A play/stop toggle for the song's 30 second preview, driven by
+  assets/js/song_preview.js. Renders nothing when the song has no Deezer
+  match. Defaults to the small overlay variant used on cover thumbnails;
+  pass `:class` and `:label` for a regular labelled button.
+  """
+  def preview_button(conn, song, opts \\ [])
+  def preview_button(_conn, %{deezer_id: nil}, _opts), do: nil
+  def preview_button(conn, song, opts) do
+    icon = content_tag(:i, "", class: "fa fa-fw fa-play")
+    content = if opts[:label], do: [icon, " ", opts[:label]], else: icon
+
+    content_tag(:button, content,
+      type: "button",
+      class: "song-preview-button #{Keyword.get(opts, :class, "song-preview-overlay")}",
+      title: gettext("Play preview"),
+      aria_label: gettext("Play preview"),
+      data: [preview_url: song_preview_path(conn, :preview, song)]
+    )
+  end
+
   def listen_count_badge(count) do
     content_tag :span, class: "badge badge-default" do
       [content_tag(:i, "", class: "fa fa-fw fa-headphones"), {:safe, [" #{count}"]}]

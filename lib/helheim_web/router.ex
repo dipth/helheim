@@ -137,6 +137,7 @@ defmodule HelheimWeb.Router do
       resources "/comments", CommentController, only: [:create, :edit, :update]
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
       delete "/my_listens", SongController, :remove_my_listens, as: :my_listens
+      get "/preview", SongController, :preview, as: :preview
     end
   end
 

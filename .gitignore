@@ -34,3 +34,6 @@ npm-debug.log
 
 # OS caches
 .DS_store
+
+# Claude Code local tooling config
+/.claude/

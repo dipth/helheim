@@ -1,7 +1,9 @@
 defmodule HelheimWeb.SongController do
   use HelheimWeb, :controller
   alias Helheim.Block
+  alias Helheim.Cache
   alias Helheim.Comment
+  alias Helheim.Deezer
   alias Helheim.Song
   alias Helheim.SongListen
   alias Helheim.Music.Charts
@@ -66,6 +68,39 @@ defmodule HelheimWeb.SongController do
       recent_listens: recent_listens,
       comments: comments,
       current_user_has_listens: current_user_has_listens)
+  end
+
+  # Redirects to a playable 30 second preview MP3. Deezer preview URLs
+  # carry an expiring token, so only the track id is stored and the URL is
+  # resolved (and briefly cached) on demand.
+  def preview(conn, %{"song_id" => song_id}) do
+    song = Repo.get!(Song, song_id)
+
+    case resolve_preview_url(song) do
+      {:ok, url} -> redirect(conn, external: url)
+      _ -> send_resp(conn, :not_found, "")
+    end
+  end
+
+  defp resolve_preview_url(%Song{deezer_id: nil}), do: :error
+  defp resolve_preview_url(song) do
+    Cache.fetch(
+      {:deezer_preview, song.deezer_id},
+      preview_url_cache_ttl(),
+      fn -> Deezer.Client.track_preview_url(song.deezer_id) end,
+      cache_if: &cacheable_preview_result?/1
+    )
+  end
+
+  # Misses are cached too: a stale deezer_id (track since removed from
+  # Deezer) would otherwise turn every click into a live Deezer call.
+  # Transient failures (rate limits, outages) are not pinned.
+  defp cacheable_preview_result?({:ok, _}), do: true
+  defp cacheable_preview_result?({:error, :not_found}), do: true
+  defp cacheable_preview_result?(_), do: false
+
+  defp preview_url_cache_ttl do
+    Application.get_env(:helheim, :preview_url_cache_ttl_ms, :timer.hours(1))
   end
 
   def remove_my_listens(conn, %{"song_id" => song_id}) do
