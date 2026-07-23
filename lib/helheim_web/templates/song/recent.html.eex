@@ -6,7 +6,7 @@
       <p class="text-muted mb-0"><%= gettext "No listens have been tracked yet..." %></p>
     <% end %>
     <%= for listen <- @listens do %>
-      <%= render "_listen.html", conn: @conn, listen: listen %>
+      <%= render "_listen.html", conn: @conn, listen: listen, upvoted_song_ids: @upvoted_song_ids %>
     <% end %>
     <%= pagination_links @conn, @listens %>
   </div>

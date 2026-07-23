@@ -99,7 +99,7 @@
     <div class="card-block">
       <h5 class="mb-1"><%= gettext "Latest listens" %></h5>
       <%= for listen <- @newest_song_listens do %>
-        <%= render HelheimWeb.SongView, "_song.html", conn: @conn, song: listen.song %>
+        <%= render HelheimWeb.SongView, "_song.html", conn: @conn, song: listen.song, upvoted_song_ids: @upvoted_song_ids %>
       <% end %>
       <%= link gettext("Show All"), to: public_profile_music_path(@conn, :index, @user), class: "btn btn-outline-secondary btn-block mb-0" %>
     </div>

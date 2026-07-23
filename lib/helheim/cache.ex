@@ -2,6 +2,12 @@ defmodule Helheim.Cache do
   @moduledoc """
   Minimal ETS backed read-through cache for values that are expensive to
   compute but may be slightly stale, such as the front page music charts.
+
+  Keys are tuples whose first element names the cache, e.g.
+  `{:top_songs_last_day, 5}` - `invalidate/1` drops every entry sharing
+  that first element. The cache is node-local: in a multi-node deployment
+  each node caches (and invalidates) independently, so cross-node
+  staleness is bounded only by the entry's ttl.
   """
 
   use GenServer
@@ -32,6 +38,18 @@ defmodule Helheim.Cache do
     end
   end
 
+  @doc """
+  Removes all cached entries whose key is a tuple starting with `prefix`,
+  e.g. `invalidate(:top_songs_last_day)` drops the entry for every count.
+  Also bumps the prefix's generation so a computation already in flight
+  when the invalidation happened cannot re-insert its (stale) result.
+  """
+  def invalidate(prefix) do
+    :ets.update_counter(@table, {:generation, prefix}, 1, {{:generation, prefix}, 0})
+    :ets.match_delete(@table, {{prefix, :_}, :_, :_})
+    :ok
+  end
+
   defp lookup(key, fun, ttl_ms, cache_if) do
     now = System.monotonic_time(:millisecond)
 
@@ -39,9 +57,24 @@ defmodule Helheim.Cache do
       [{^key, value, expires_at}] when expires_at > now ->
         value
       _ ->
+        generation = generation(key)
         value = fun.()
-        if cache_if.(value), do: :ets.insert(@table, {key, value, now + ttl_ms})
+
+        if cache_if.(value) and generation(key) == generation do
+          :ets.insert(@table, {key, value, now + ttl_ms})
+        end
+
         value
     end
   end
+
+  defp generation(key) do
+    case :ets.lookup(@table, {:generation, cache_prefix(key)}) do
+      [{_key, generation}] -> generation
+      [] -> 0
+    end
+  end
+
+  defp cache_prefix(key) when is_tuple(key), do: elem(key, 0)
+  defp cache_prefix(key), do: key
 end

@@ -30,7 +30,18 @@ defmodule HelheimWeb.SongListenController do
         {nil, nil}
       end
 
-    render(conn, "index.html", user: user, listens: listens, top_songs: top_songs, top_artists: top_artists)
+    upvoted_song_ids =
+      Helheim.SongUpvoteService.upvoted_song_ids(
+        current_resource(conn),
+        Enum.concat(top_songs || [], listens)
+      )
+
+    render(conn, "index.html",
+      user: user,
+      listens: listens,
+      top_songs: top_songs,
+      top_artists: top_artists,
+      upvoted_song_ids: upvoted_song_ids)
   end
 
   # Joins the aggregated {artist_name, count} rows with their enriched

@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-block">
+    <h5 class="mb-1 d-flex justify-content-between">
+      <%= @title %>
+      <%= link gettext("Show All"), to: @show_all_path, class: "btn btn-outline-primary btn-sm mb-0" %>
+    </h5>
+    <%= if length(@songs) == 0 do %>
+      <p class="text-muted"><%= @empty_message %></p>
+    <% end %>
+    <%= for {song, count} <- @songs do %>
+      <%= render "_song.html", [{@count_key, count}, conn: @conn, song: song, upvoted_song_ids: @upvoted_song_ids] %>
+    <% end %>
+  </div>
+</div>

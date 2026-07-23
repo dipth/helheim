@@ -7,6 +7,7 @@ defmodule HelheimWeb.PageController do
   alias Helheim.Term
   alias Helheim.CalendarEvent
   alias Helheim.SongListen
+  alias Helheim.SongUpvoteService
   alias Helheim.Music.Charts
 
   def index(conn, _params) do
@@ -60,6 +61,17 @@ defmodule HelheimWeb.PageController do
       |> limit(5)
       |> Repo.all
 
+    top_songs_day       = Charts.top_songs_last_day(5, conn.assigns[:ignoree_ids])
+    top_songs_week      = Charts.top_songs_last_week(5, conn.assigns[:ignoree_ids])
+    top_upvoted_day     = Charts.top_upvoted_songs_last_day(5, conn.assigns[:ignoree_ids])
+    top_upvoted_week    = Charts.top_upvoted_songs_last_week(5, conn.assigns[:ignoree_ids])
+
+    upvoted_song_ids =
+      SongUpvoteService.upvoted_song_ids(
+        current_resource(conn),
+        Enum.concat([recent_song_listens, top_songs_day, top_songs_week, top_upvoted_day, top_upvoted_week])
+      )
+
     render conn, "front_page.html",
       newest_users: newest_users,
       newest_blog_posts: newest_blog_posts,
@@ -67,8 +79,11 @@ defmodule HelheimWeb.PageController do
       newest_forum_topics: newest_forum_topics,
       upcoming_events: upcoming_events,
       recent_song_listens: recent_song_listens,
-      top_songs_day: Charts.top_songs_last_day(5, conn.assigns[:ignoree_ids]),
-      top_songs_week: Charts.top_songs_last_week(5, conn.assigns[:ignoree_ids])
+      top_songs_day: top_songs_day,
+      top_songs_week: top_songs_week,
+      top_upvoted_day: top_upvoted_day,
+      top_upvoted_week: top_upvoted_week,
+      upvoted_song_ids: upvoted_song_ids
   end
 
   def terms(conn, _params) do

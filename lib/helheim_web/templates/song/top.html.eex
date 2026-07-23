@@ -3,10 +3,10 @@
 <div class="card">
   <div class="card-block">
     <%= if Enum.empty?(@songs) do %>
-      <p class="text-muted mb-0"><%= gettext "No songs have been listened to in this period yet..." %></p>
+      <p class="text-muted mb-0"><%= @empty_message %></p>
     <% end %>
     <%= for {song, count} <- @songs do %>
-      <%= render "_song.html", conn: @conn, song: song, listen_count: count %>
+      <%= render "_song.html", [{@count_key, count}, conn: @conn, song: song, upvoted_song_ids: @upvoted_song_ids] %>
     <% end %>
     <%= pagination_links @conn, @songs %>
   </div>

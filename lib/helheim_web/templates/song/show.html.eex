@@ -36,6 +36,10 @@
             <th><%= gettext "Listens" %></th>
             <td><%= @song.listens_count %></td>
           </tr>
+          <tr>
+            <th><%= gettext "Upvotes" %></th>
+            <td><%= upvote_toggle @conn, @song, assigns %></td>
+          </tr>
         </table>
         <%= if length(@song.song_tags) > 0 do %>
           <p>

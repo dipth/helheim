@@ -299,4 +299,132 @@ defmodule HelheimWeb.SongControllerTest do
       assert Repo.get(Helheim.SongListen, listen.id)
     end
   end
+
+  ##############################################################################
+  # top_upvoted_day/2 and top_upvoted_week/2
+  describe "top_upvoted_day/2 and top_upvoted_week/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it shows the most upvoted songs of the past 24 hours", %{conn: conn} do
+      insert(:song_upvote, song: insert(:song, title: "Creeping Death"))
+
+      response = conn |> get("/songs/top/upvoted/day") |> html_response(200)
+      assert response =~ "Creeping Death"
+      assert response =~ gettext("Most upvoted songs, past 24 hours")
+    end
+
+    test "it shows the most upvoted songs of the past 7 days", %{conn: conn} do
+      insert(:song_upvote, song: insert(:song, title: "Creeping Death"))
+
+      response = conn |> get("/songs/top/upvoted/week") |> html_response(200)
+      assert response =~ "Creeping Death"
+      assert response =~ gettext("Most upvoted songs, past 7 days")
+    end
+
+    test "it does not count upvotes from ignored users", %{conn: conn, user: user} do
+      ignoree = insert(:user)
+      insert(:ignore, ignorer: user, ignoree: ignoree, enabled: true)
+      insert(:song_upvote, user: ignoree, song: insert(:song, title: "Creeping Death"))
+
+      response = conn |> get("/songs/top/upvoted/day") |> html_response(200)
+      refute response =~ "Creeping Death"
+    end
+  end
+
+  describe "top_upvoted_day/2 and top_upvoted_week/2 when not signed in" do
+    test "it redirects to the sign in page", %{conn: conn} do
+      assert conn |> get("/songs/top/upvoted/day") |> redirected_to() =~ session_path(conn, :new)
+      assert conn |> get("/songs/top/upvoted/week") |> redirected_to() =~ session_path(conn, :new)
+    end
+  end
+
+  ##############################################################################
+  # upvote/2
+  describe "upvote/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it upvotes the song and increments its counter", %{conn: conn, user: user} do
+      song = insert(:song, upvotes_count: 0)
+
+      conn = post conn, "/songs/#{song.id}/upvote"
+
+      assert redirected_to(conn) == song_path(conn, :show, song)
+      assert Repo.get(Helheim.Song, song.id).upvotes_count == 1
+      assert Repo.exists?(from u in Helheim.SongUpvote, where: u.user_id == ^user.id and u.song_id == ^song.id)
+    end
+
+    test "it returns a 404 when the song does not exist", %{conn: conn} do
+      assert_error_sent :not_found, fn -> post conn, "/songs/1234567/upvote" end
+    end
+
+    test "it returns the resulting state as JSON for async requests", %{conn: conn} do
+      song = insert(:song, upvotes_count: 0)
+
+      conn =
+        conn
+        |> put_req_header("accept", "application/json")
+        |> post("/songs/#{song.id}/upvote")
+
+      assert json_response(conn, 200) == %{"upvoted" => true, "upvotes_count" => 1}
+    end
+
+    test "it returns the current state as JSON when the song was already upvoted", %{conn: conn, user: user} do
+      song = insert(:song, upvotes_count: 1)
+      insert(:song_upvote, user: user, song: song)
+
+      conn =
+        conn
+        |> put_req_header("accept", "application/json")
+        |> post("/songs/#{song.id}/upvote")
+
+      assert json_response(conn, 200) == %{"upvoted" => true, "upvotes_count" => 1}
+    end
+  end
+
+  describe "upvote/2 when not signed in" do
+    test "it redirects to the sign in page and does not upvote", %{conn: conn} do
+      song = insert(:song, upvotes_count: 0)
+      conn = post conn, "/songs/#{song.id}/upvote"
+      assert redirected_to(conn) =~ session_path(conn, :new)
+      assert Repo.get(Helheim.Song, song.id).upvotes_count == 0
+    end
+  end
+
+  ##############################################################################
+  # remove_upvote/2
+  describe "remove_upvote/2 when signed in" do
+    setup [:create_and_sign_in_user]
+
+    test "it removes the current user's upvote and decrements the counter", %{conn: conn, user: user} do
+      song = insert(:song, upvotes_count: 1)
+      insert(:song_upvote, user: user, song: song)
+
+      conn = delete conn, "/songs/#{song.id}/upvote"
+
+      assert redirected_to(conn) == song_path(conn, :show, song)
+      refute Repo.exists?(from u in Helheim.SongUpvote, where: u.user_id == ^user.id and u.song_id == ^song.id)
+      assert Repo.get(Helheim.Song, song.id).upvotes_count == 0
+    end
+
+    test "it returns the resulting state as JSON for async requests", %{conn: conn, user: user} do
+      song = insert(:song, upvotes_count: 1)
+      insert(:song_upvote, user: user, song: song)
+
+      conn =
+        conn
+        |> put_req_header("accept", "application/json")
+        |> delete("/songs/#{song.id}/upvote")
+
+      assert json_response(conn, 200) == %{"upvoted" => false, "upvotes_count" => 0}
+    end
+  end
+
+  describe "remove_upvote/2 when not signed in" do
+    test "it redirects to the sign in page and does not remove any upvotes", %{conn: conn} do
+      upvote = insert(:song_upvote)
+      conn = delete conn, "/songs/#{upvote.song_id}/upvote"
+      assert redirected_to(conn) =~ session_path(conn, :new)
+      assert Repo.get(Helheim.SongUpvote, upvote.id)
+    end
+  end
 end

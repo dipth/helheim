@@ -322,10 +322,18 @@ defmodule Helheim.User do
   def delete!(user) do
     photo_albums = assoc(user, :photo_albums) |> Repo.all
     Parallel.pmap(photo_albums, fn(pa) -> Helheim.PhotoAlbum.delete!(pa) end)
-    # The song_listens rows cascade with the user, so decrement the song
-    # listen counters first to keep them in sync
-    {:ok, _} = Helheim.LastfmAccountService.delete_history!(user)
-    Repo.delete!(user)
+    # The song_listens and song_upvotes rows cascade with the user, so
+    # decrement the song counters first to keep them in sync. One
+    # transaction with the user delete itself, so a failed delete cannot
+    # leave the listens or upvotes half-removed.
+    {:ok, deleted_user} =
+      Repo.transaction(fn ->
+        {:ok, _} = Helheim.LastfmAccountService.delete_history!(user)
+        {:ok, _} = Helheim.SongUpvoteService.delete_upvotes_for_user!(user)
+        Repo.delete!(user)
+      end)
+
+    deleted_user
   end
 
   def age(%User{birthday: nil}, _), do: nil

@@ -20,9 +20,11 @@ defmodule Helheim.Song do
     field :enriched_at,           :utc_datetime_usec
     field :comment_count,         :integer
     field :listens_count,         :integer
+    field :upvotes_count,         :integer
     belongs_to :artist, Helheim.Artist
     has_many :listens, SongListen
     has_many :comments, Helheim.Comment
+    has_many :upvotes, Helheim.SongUpvote
     has_many :song_tags, Helheim.SongTag
     has_many :tags, through: [:song_tags, :tag]
     timestamps(type: :utc_datetime_usec)
@@ -54,6 +56,20 @@ defmodule Helheim.Song do
   def top_by_listens_since(query, since, excluded_user_ids) do
     from [s, l] in top_by_listens_since(query, since),
       where: l.user_id not in ^excluded_user_ids
+  end
+
+  def top_by_upvotes_since(query, since, excluded_user_ids \\ nil)
+  def top_by_upvotes_since(query, since, excluded_user_ids) when excluded_user_ids in [nil, []] do
+    from s in query,
+      join: u in Helheim.SongUpvote, on: u.song_id == s.id,
+      where: u.inserted_at >= ^since,
+      group_by: s.id,
+      order_by: [desc: count(u.id), asc: s.id],
+      select: {s, count(u.id)}
+  end
+  def top_by_upvotes_since(query, since, excluded_user_ids) do
+    from [s, u] in top_by_upvotes_since(query, since),
+      where: u.user_id not in ^excluded_user_ids
   end
 
   def top_for_user(query, user) do

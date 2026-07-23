@@ -12,5 +12,9 @@
     <%= if assigns[:listen_count] do %>
       <%= listen_count_badge @listen_count %>
     <% end %>
+    <%= if assigns[:upvote_count] do %>
+      <%= upvote_count_badge @upvote_count %>
+    <% end %>
+    <%= upvote_toggle @conn, @song, assigns %>
   </div>
 </div>
