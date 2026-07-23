@@ -1,0 +1,74 @@
+.rich-text-editor {
+  .rich-text-editor-toolbar {
+    padding: 0.25rem;
+    background-color: $gray-lighter;
+    border: 1px solid $gray;
+    border-bottom: 0;
+    border-radius: $border-radius $border-radius 0 0;
+
+    .btn-group {
+      margin: 0.125rem 0.25rem 0.125rem 0;
+    }
+
+    .rich-text-editor-block-select {
+      width: auto;
+      display: inline-block;
+    }
+  }
+
+  .rich-text-editor-content .ProseMirror {
+    min-height: 350px;
+    padding: 0.5rem 0.75rem;
+    background-color: $input-bg;
+    color: $gray;
+    border: 1px solid $gray;
+    border-radius: 0 0 $border-radius $border-radius;
+    outline: none;
+
+    &:focus {
+      border-color: $brand-primary;
+    }
+
+    p, h1, h2, h3, h4, blockquote, ul, ol {
+      margin-bottom: 0.5rem;
+    }
+
+    li > p:last-child {
+      margin-bottom: 0;
+    }
+
+    blockquote {
+      padding-left: 0.75rem;
+      border-left: 3px solid $gray-lightest;
+    }
+
+    hr {
+      border-top: 1px solid $gray-lightest;
+      margin: 0.75rem 0;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+
+      &.ProseMirror-selectednode {
+        outline: 2px solid $brand-primary;
+      }
+    }
+  }
+}
+
+// The vendored Bootstrap (4 alpha-6) hides .dropdown-menu by default; the
+// mention menu is added to and removed from the DOM as the suggestion opens
+// and closes, so it can simply always be display: block while present.
+.rich-text-editor-mentions {
+  display: block;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+// TipTap serializes list items as <li><p>…</p></li>; neutralize the paragraph
+// margin so re-saved lists render as tightly as the original <li>text</li>.
+.mentionable li > p:last-child {
+  margin-bottom: 0;
+}
