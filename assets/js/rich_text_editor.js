@@ -170,8 +170,9 @@ function normalizeUrl(url) {
   if (!url) return null;
   url = url.trim();
   if (url.length === 0) return null;
-  // Already has a scheme (https:, mailto:, ...): keep as typed.
-  if (/^[a-z][a-z0-9+.-]*:/i.test(url)) return url;
+  // Already has a scheme: keep as typed, but only for safe schemes —
+  // reject javascript: and other unsupported protocols.
+  if (/^[a-z][a-z0-9+.-]*:/i.test(url)) return /^(https?|mailto):/i.test(url) ? url : null;
   // Site-relative path or fragment: resolve against this site, like the old
   // TinyMCE relative_urls: false + document_base_url behaviour.
   if (url.startsWith('/') || url.startsWith('#')) return new URL(url, document.baseURI).href;
@@ -390,8 +391,11 @@ function initEditor(textarea) {
       }
     });
   } catch (e) {
+    // Leave the plain textarea usable and keep initializing any other
+    // editors on the page.
     wrapper.remove();
-    throw e;
+    console.error('Rich text editor failed to initialize', e);
+    return;
   }
   textarea.hidden = true;
 

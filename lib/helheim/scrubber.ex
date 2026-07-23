@@ -10,11 +10,6 @@ defmodule Helheim.Scrubber do
   Meta.allow_tag_with_uri_attributes   "a", ["href"], ["http", "https"]
   Meta.allow_tag_with_these_attributes "a", ["name", "title"]
 
-  Meta.allow_tag_with_these_attributes "h1", []
-  Meta.allow_tag_with_these_attributes "h2", []
-  Meta.allow_tag_with_these_attributes "h3", []
-  Meta.allow_tag_with_these_attributes "h4", []
-
   Meta.allow_tag_with_these_attributes "blockquote", []
 
   Meta.allow_tag_with_these_attributes "strong", []
@@ -32,6 +27,10 @@ defmodule Helheim.Scrubber do
   def scrub({"span", attributes, body}) do
     attributes = scrub_attributes("span", attributes)
     {"span", attributes, body}
+  end
+  def scrub({heading, attributes, body}) when heading in ["h1", "h2", "h3", "h4"] do
+    attributes = scrub_attributes(heading, attributes)
+    {heading, attributes, body}
   end
   def scrub({"img", attributes, _}) do
     attributes = scrub_attributes("img", attributes)
@@ -51,6 +50,10 @@ defmodule Helheim.Scrubber do
     Enum.map(attributes, fn(attr) -> scrub_attribute("img", attr) end)
     |> Enum.reject(&(is_nil(&1)))
   end
+  defp scrub_attributes(heading, attributes) when heading in ["h1", "h2", "h3", "h4"] do
+    Enum.map(attributes, fn(attr) -> scrub_attribute(heading, attr) end)
+    |> Enum.reject(&(is_nil(&1)))
+  end
 
   def scrub_attribute("p", {"style", value}) do
     value = String.split(value, ";")
@@ -63,6 +66,16 @@ defmodule Helheim.Scrubber do
     end
   end
   def scrub_attribute("span", {"style", value}) do
+    value = String.split(value, ";")
+            |> Enum.filter(&(Enum.member?(@allowed_styles, &1)))
+            |> Enum.join(";")
+    if String.length(value) > 0 do
+      {"style", value <> ";"}
+    else
+      nil
+    end
+  end
+  def scrub_attribute(heading, {"style", value}) when heading in ["h1", "h2", "h3", "h4"] do
     value = String.split(value, ";")
             |> Enum.filter(&(Enum.member?(@allowed_styles, &1)))
             |> Enum.join(";")
