@@ -311,6 +311,23 @@ code {
 }
 
 
+// Inline SVG icon (the hand-horns upvote glyph is not in Font Awesome's
+// free set), sized to line up with the fixed-width font icons in badges.
+.icon-horns {
+  width: 1.28571em;
+  height: 1em;
+  vertical-align: -0.125em;
+  fill: currentColor;
+}
+
+// The upvote toggle is a <button> styled as a badge; strip the native
+// button chrome so it renders exactly like the neighbouring count badges.
+.song-upvote-button {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
 .song-cover-frame {
   position: relative;
 

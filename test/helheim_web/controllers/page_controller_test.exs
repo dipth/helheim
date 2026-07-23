@@ -54,6 +54,16 @@ defmodule HelheimWeb.PageControllerTest do
       assert response =~ gettext("Top songs, past 7 days")
     end
 
+    test "it shows the most upvoted songs of the past 24 hours and past 7 days even without recent listens", %{conn: conn} do
+      insert(:song_upvote, song: insert(:song, title: "Orion"))
+
+      conn = get conn, "/front_page"
+      response = html_response(conn, 200)
+      assert response =~ gettext("Most upvoted songs, past 24 hours")
+      assert response =~ gettext("Most upvoted songs, past 7 days")
+      assert response =~ "Orion"
+    end
+
     test "it does not show the same song twice in the recent listens", %{conn: conn} do
       user = insert(:user)
       song = insert(:song, title: "Orion")

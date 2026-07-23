@@ -259,4 +259,11 @@ defmodule Helheim.Factory do
       played_at: sequence(:played_at, &Timex.shift(Timex.now, seconds: -&1))
     }
   end
+
+  def song_upvote_factory do
+    %Helheim.SongUpvote{
+      user: build(:user),
+      song: build(:song)
+    }
+  end
 end

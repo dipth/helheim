@@ -69,6 +69,9 @@ defmodule HelheimWeb.ProfileController do
       |> limit(5)
       |> Repo.all
 
+    upvoted_song_ids =
+      Helheim.SongUpvoteService.upvoted_song_ids(current_resource(conn), newest_song_listens)
+
     Helheim.VisitorLogEntry.track! current_resource(conn), user
 
     render conn, "show.html",
@@ -77,7 +80,8 @@ defmodule HelheimWeb.ProfileController do
       newest_comments: newest_comments,
       newest_photos: newest_photos,
       newest_forum_topics: newest_forum_topics,
-      newest_song_listens: newest_song_listens
+      newest_song_listens: newest_song_listens,
+      upvoted_song_ids: upvoted_song_ids
   end
 
   def edit(conn, _params) do

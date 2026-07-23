@@ -133,10 +133,14 @@ defmodule HelheimWeb.Router do
     get "/songs/recent", SongController, :recent
     get "/songs/top/day", SongController, :top_day
     get "/songs/top/week", SongController, :top_week
+    get "/songs/top/upvoted/day", SongController, :top_upvoted_day
+    get "/songs/top/upvoted/week", SongController, :top_upvoted_week
     resources "/songs", SongController, only: [:show] do
       resources "/comments", CommentController, only: [:create, :edit, :update]
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
       delete "/my_listens", SongController, :remove_my_listens, as: :my_listens
+      post "/upvote", SongController, :upvote, as: :upvote
+      delete "/upvote", SongController, :remove_upvote, as: :upvote
       get "/preview", SongController, :preview, as: :preview
     end
   end

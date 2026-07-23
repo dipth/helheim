@@ -46,6 +46,7 @@ import { PreferencesForm } from "./preferences_form";
 import { BlockForm } from "./block_form";
 import { IgnoreForm } from "./ignore_form";
 import { SongPreview } from "./song_preview";
+import { SongUpvote } from "./song_upvote";
 
 import css from "../css/app.css.scss"
 
@@ -73,6 +74,7 @@ export var App = {
     BlockForm.run();
     IgnoreForm.run();
     SongPreview.run();
+    SongUpvote.run();
   }
 }
 

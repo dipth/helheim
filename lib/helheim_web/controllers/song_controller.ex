@@ -6,6 +6,7 @@ defmodule HelheimWeb.SongController do
   alias Helheim.Deezer
   alias Helheim.Song
   alias Helheim.SongListen
+  alias Helheim.SongUpvoteService
   alias Helheim.Music.Charts
 
   # The full list pages are capped at 100 pages to preserve performance.
@@ -19,24 +20,41 @@ defmodule HelheimWeb.SongController do
       |> SongListen.newest
       |> SongListen.with_preloads
       |> capped_paginate(params)
-    render(conn, "recent.html", listens: listens)
+    upvoted_song_ids = SongUpvoteService.upvoted_song_ids(current_resource(conn), listens)
+    render(conn, "recent.html", listens: listens, upvoted_song_ids: upvoted_song_ids)
   end
 
   def top_day(conn, params) do
-    render_top(conn, params, Charts.hours_ago(24), gettext("Top songs, past 24 hours"))
+    render_top(conn, params, &Song.top_by_listens_since/3, :listen_count, Charts.hours_ago(24), gettext("Top songs, past 24 hours"))
   end
 
   def top_week(conn, params) do
-    render_top(conn, params, Charts.hours_ago(24 * 7), gettext("Top songs, past 7 days"))
+    render_top(conn, params, &Song.top_by_listens_since/3, :listen_count, Charts.hours_ago(24 * 7), gettext("Top songs, past 7 days"))
   end
 
-  defp render_top(conn, params, since, title) do
+  def top_upvoted_day(conn, params) do
+    render_top(conn, params, &Song.top_by_upvotes_since/3, :upvote_count, Charts.hours_ago(24), gettext("Most upvoted songs, past 24 hours"))
+  end
+
+  def top_upvoted_week(conn, params) do
+    render_top(conn, params, &Song.top_by_upvotes_since/3, :upvote_count, Charts.hours_ago(24 * 7), gettext("Most upvoted songs, past 7 days"))
+  end
+
+  defp render_top(conn, params, chart_fun, count_key, since, title) do
     songs =
       Song
-      |> Song.top_by_listens_since(since, conn.assigns[:ignoree_ids])
+      |> chart_fun.(since, conn.assigns[:ignoree_ids])
       |> capped_paginate(params)
-    render(conn, "top.html", songs: songs, title: title)
+    render(conn, "top.html",
+      songs: songs,
+      title: title,
+      count_key: count_key,
+      empty_message: empty_message(count_key),
+      upvoted_song_ids: SongUpvoteService.upvoted_song_ids(current_resource(conn), songs))
   end
+
+  defp empty_message(:listen_count), do: gettext("No songs have been listened to in this period yet...")
+  defp empty_message(:upvote_count), do: gettext("No songs have been upvoted in this period yet...")
 
   def show(conn, %{"id" => id} = params) do
     song =
@@ -67,7 +85,40 @@ defmodule HelheimWeb.SongController do
       song: song,
       recent_listens: recent_listens,
       comments: comments,
-      current_user_has_listens: current_user_has_listens)
+      current_user_has_listens: current_user_has_listens,
+      upvoted_song_ids: SongUpvoteService.upvoted_song_ids(current_user, [song]))
+  end
+
+  def upvote(conn, %{"song_id" => song_id}) do
+    song = Repo.get!(Song, song_id)
+    ensure_vote_toggled!(SongUpvoteService.upvote!(song, current_resource(conn)))
+    vote_response(conn, song)
+  end
+
+  def remove_upvote(conn, %{"song_id" => song_id}) do
+    song = Repo.get!(Song, song_id)
+    {:ok, _} = SongUpvoteService.remove_upvote!(song, current_resource(conn))
+    vote_response(conn, song)
+  end
+
+  # A duplicate vote from a stale page is an expected no-op (the unique
+  # index rejects it and the count stays put); any other failure is a bug
+  # and should crash rather than masquerade as success.
+  defp ensure_vote_toggled!({:ok, _}), do: :ok
+  defp ensure_vote_toggled!({:error, :song_upvote, %Ecto.Changeset{}, _}), do: :ok
+
+  # Async votes (assets/js/song_upvote.js) request JSON and receive the
+  # resulting state so the page can update in place - even an expected
+  # duplicate vote returns the current state, letting a stale page resync.
+  defp vote_response(conn, song) do
+    if get_format(conn) == "json" do
+      json(conn, %{
+        upvoted: SongUpvoteService.upvoted_song_ids(current_resource(conn), [song]) != [],
+        upvotes_count: Repo.get!(Song, song.id).upvotes_count
+      })
+    else
+      redirect(conn, to: song_path(conn, :show, song))
+    end
   end
 
   # Redirects to a playable 30 second preview MP3. Deezer preview URLs

@@ -16,5 +16,6 @@
     </small>
     <br>
     <%= comment_count_badge @listen.song %>
+    <%= upvote_toggle @conn, @listen.song, assigns %>
   </div>
 </div>
