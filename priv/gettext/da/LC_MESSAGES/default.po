@@ -2952,3 +2952,108 @@ msgstr "Likes"
 #, elixir-autogen, elixir-format
 msgid "Remove your upvote"
 msgstr "Fjern like"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Undo"
+msgstr "Fortryd"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Redo"
+msgstr "Annuller fortryd"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Bold"
+msgstr "Fed"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Italic"
+msgstr "Kursiv"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Strikethrough"
+msgstr "Gennemstreget"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Superscript"
+msgstr "Hævet skrift"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Subscript"
+msgstr "Sænket skrift"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Align left"
+msgstr "Venstrejusteret"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Align center"
+msgstr "Centreret"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Align right"
+msgstr "Højrejusteret"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Justify"
+msgstr "Lige margener"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Bullet list"
+msgstr "Punktliste"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Numbered list"
+msgstr "Nummereret liste"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Quote"
+msgstr "Citat"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Horizontal line"
+msgstr "Vandret linje"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Link"
+msgstr "Link"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Paragraph"
+msgstr "Afsnit"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Heading"
+msgstr "Overskrift"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Link URL:"
+msgstr "Link URL:"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "Image URL:"
+msgstr "Billede URL:"
+
+#: lib/helheim_web/views/rich_text_editor_helper.ex
+#, elixir-autogen, elixir-format
+msgid "This image is hosted outside %{host} and will be removed when the content is saved. Insert it anyway?"
+msgstr "Dette billede ligger ikke på %{host} og vil blive fjernet, når indholdet gemmes. Indsæt det alligevel?"
