@@ -1,5 +1,8 @@
 .rich-text-editor {
   .rich-text-editor-toolbar {
+    // The vendored Bootstrap's .btn-toolbar does not wrap, so the button
+    // groups would overflow the viewport on small screens.
+    flex-wrap: wrap;
     padding: 0.25rem;
     background-color: $gray-lighter;
     border: 1px solid $gray;
