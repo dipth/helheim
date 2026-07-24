@@ -1,6 +1,7 @@
 <h4><%= gettext "Recent comments" %>:</h4>
 
 <%= if Enum.any?(@recent_comments) do %>
+  <div class="table-responsive">
   <table class="table">
     <thead>
       <tr>
@@ -23,6 +24,7 @@
       <% end %>
     </tbody>
   </table>
+  </div>
 <% else %>
   <hr>
   <p class="text-center">
