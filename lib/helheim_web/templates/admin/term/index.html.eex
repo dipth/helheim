@@ -8,6 +8,7 @@
   <%= gettext("Create New Terms") %>
 <% end %>
 
+<div class="table-responsive">
 <table class="table">
   <thead>
     <tr>
@@ -40,3 +41,4 @@
     <% end %>
   </tbody>
 </table>
+</div>
