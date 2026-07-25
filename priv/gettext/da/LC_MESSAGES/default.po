@@ -61,7 +61,7 @@ msgstr "Opret Profil"
 
 #: lib/helheim_web/templates/account/edit.html.eex:24
 #: lib/helheim_web/templates/admin/user/_account_details.html.eex:13
-#: lib/helheim_web/templates/admin/user/_users.html.eex:14
+#: lib/helheim_web/templates/admin/user/_users.html.eex:15
 #: lib/helheim_web/templates/admin/user/index.html.eex:26
 #: lib/helheim_web/templates/confirmation/new.html.eex:10
 #: lib/helheim_web/templates/password_reset/new.html.eex:10
@@ -83,7 +83,7 @@ msgstr "Hvis du ikke har modtaget din aktiveringsmail, kan du indtaste din e-mai
 
 #: lib/helheim_web/templates/account/edit.html.eex:14
 #: lib/helheim_web/templates/admin/user/_account_details.html.eex:10
-#: lib/helheim_web/templates/admin/user/_users.html.eex:11
+#: lib/helheim_web/templates/admin/user/_users.html.eex:12
 #: lib/helheim_web/templates/admin/user/index.html.eex:21
 #: lib/helheim_web/templates/registration/new.html.eex:23
 #, elixir-autogen
@@ -123,7 +123,7 @@ msgid "Sign In"
 msgstr "Log ind"
 
 #: lib/helheim_web/templates/admin/user/_account_details.html.eex:7
-#: lib/helheim_web/templates/admin/user/_users.html.eex:8
+#: lib/helheim_web/templates/admin/user/_users.html.eex:9
 #: lib/helheim_web/templates/admin/user/index.html.eex:16
 #: lib/helheim_web/templates/profile/index.html.eex:15
 #: lib/helheim_web/templates/registration/new.html.eex:9
@@ -473,25 +473,25 @@ msgstr "Opdatér Profil"
 msgid "Remember me"
 msgstr "Husk mig i 30 dage"
 
-#: lib/helheim_web/templates/page/front_page.html.eex:28
+#: lib/helheim_web/templates/page/front_page.html.eex:16
 #: lib/helheim_web/templates/profile/show.html.eex:76
 #, elixir-autogen
 msgid "Newest Blogs"
 msgstr "Nyeste Blogs"
 
-#: lib/helheim_web/templates/page/front_page.html.eex:40
+#: lib/helheim_web/templates/page/front_page.html.eex:28
 #: lib/helheim_web/templates/profile/show.html.eex:87
 #, elixir-autogen
 msgid "Newest Forum Posts"
 msgstr "Nyeste Forumindlæg"
 
-#: lib/helheim_web/templates/page/front_page.html.eex:135
+#: lib/helheim_web/templates/page/front_page.html.eex:91
 #: lib/helheim_web/templates/profile/show.html.eex:111
 #, elixir-autogen
 msgid "Newest Photos"
 msgstr "Nyeste Fotos"
 
-#: lib/helheim_web/templates/layout/sidebar.html.eex:63
+#: lib/helheim_web/templates/layout/sidebar.html.eex:69
 #, elixir-autogen
 msgid "Your Profile"
 msgstr "Din Profil"
@@ -515,14 +515,14 @@ msgstr "Gem Blog"
 
 #: lib/helheim_web/templates/blog_post/edit.html.eex:2
 #: lib/helheim_web/templates/blog_post/new.html.eex:2
-#: lib/helheim_web/templates/layout/sidebar.html.eex:84
+#: lib/helheim_web/templates/layout/sidebar.html.eex:90
 #, elixir-autogen
 msgid "Your Blog Posts"
 msgstr "Dine Blogs"
 
 #: lib/helheim_web/templates/admin/forum_category/index.html.eex:13
 #: lib/helheim_web/templates/admin/forum_category/index.html.eex:39
-#: lib/helheim_web/templates/admin/term/index.html.eex:35
+#: lib/helheim_web/templates/admin/term/index.html.eex:36
 #: lib/helheim_web/templates/blog_post/show.html.eex:30
 #: lib/helheim_web/templates/friendship/_my_active_friendships.html.eex:23
 #: lib/helheim_web/templates/friendship/_my_pending_friendships.html.eex:28
@@ -575,8 +575,8 @@ msgstr "Redigér Blog"
 
 #: lib/helheim_web/templates/admin/forum/form.html.eex:4
 #: lib/helheim_web/templates/admin/forum_category/form.html.eex:4
-#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:8
-#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:8
+#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:9
+#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:9
 #: lib/helheim_web/templates/blog_post/form.html.eex:4
 #: lib/helheim_web/templates/calendar_event/_form.html.eex:4
 #: lib/helheim_web/templates/forum_topic/form.html.eex:4
@@ -592,7 +592,7 @@ msgstr "Titel"
 msgid "Comment created successfully"
 msgstr "Din kommentar er tilføjet!"
 
-#: lib/helheim_web/templates/layout/sidebar.html.eex:68
+#: lib/helheim_web/templates/layout/sidebar.html.eex:74
 #: lib/helheim_web/views/comment_view.ex:16
 #, elixir-autogen
 msgid "Guest Book"
@@ -610,11 +610,11 @@ msgstr "Tilføj Kommentar"
 
 #: lib/helheim_web/templates/comment/comments.html.eex:9
 #: lib/helheim_web/templates/page/front_page.html.eex:5
+#: lib/helheim_web/templates/page/front_page.html.eex:17
 #: lib/helheim_web/templates/page/front_page.html.eex:29
-#: lib/helheim_web/templates/page/front_page.html.eex:41
-#: lib/helheim_web/templates/page/front_page.html.eex:56
-#: lib/helheim_web/templates/page/front_page.html.eex:85
-#: lib/helheim_web/templates/page/front_page.html.eex:136
+#: lib/helheim_web/templates/page/front_page.html.eex:44
+#: lib/helheim_web/templates/page/front_page.html.eex:72
+#: lib/helheim_web/templates/page/front_page.html.eex:92
 #: lib/helheim_web/templates/profile/show.html.eex:81
 #: lib/helheim_web/templates/profile/show.html.eex:104
 #: lib/helheim_web/templates/profile/show.html.eex:117
@@ -676,7 +676,7 @@ msgid_plural "You have %{count} notifications"
 msgstr[0] "Du har %{count} notifikation"
 msgstr[1] "Du har %{count} notifikationer"
 
-#: lib/helheim_web/templates/layout/sidebar.html.eex:80
+#: lib/helheim_web/templates/layout/sidebar.html.eex:86
 #: lib/helheim_web/templates/private_conversation/index.html.eex:1
 #, elixir-autogen
 msgid "Private Messages"
@@ -841,7 +841,7 @@ msgstr "Upload billeder"
 msgid "Uploaded"
 msgstr "Uploadet"
 
-#: lib/helheim_web/templates/layout/sidebar.html.eex:89
+#: lib/helheim_web/templates/layout/sidebar.html.eex:95
 #, elixir-autogen
 msgid "Your Photo Albums"
 msgstr "Dine Fotoalbums"
@@ -866,7 +866,7 @@ msgstr "Du har brugt %{used_space} ud af maksimum %{max_space} fordelt over alle
 msgid "Administration"
 msgstr "Administration"
 
-#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:8
+#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:9
 #: lib/helheim_web/templates/blog_post/form.html.eex:12
 #: lib/helheim_web/templates/forum_reply/form.html.eex:12
 #: lib/helheim_web/templates/forum_topic/form.html.eex:12
@@ -953,7 +953,7 @@ msgstr "Forummet blev opdateret!"
 #: lib/helheim_web/templates/forum_topic/edit.html.eex:2
 #: lib/helheim_web/templates/forum_topic/new.html.eex:2
 #: lib/helheim_web/templates/forum_topic/show.html.eex:2
-#: lib/helheim_web/templates/layout/sidebar.html.eex:10
+#: lib/helheim_web/templates/layout/sidebar.html.eex:16
 #, elixir-autogen
 msgid "Forums"
 msgstr "Forum"
@@ -1028,7 +1028,7 @@ msgstr "Gem forum kategori"
 msgid "Submit new reply"
 msgstr "Send nyt svar"
 
-#: lib/helheim_web/templates/layout/sidebar.html.eex:60
+#: lib/helheim_web/templates/layout/sidebar.html.eex:66
 #, elixir-autogen
 msgid "You"
 msgstr "Dig"
@@ -1138,7 +1138,7 @@ msgstr "Redigér Betingelser"
 msgid "However, that doesn't meant that you should be an dick, so behave!"
 msgstr "Det betyder dog ikke at du har lov til at være et røvhul, så opfør dig pænt!"
 
-#: lib/helheim_web/templates/admin/term/index.html.eex:15
+#: lib/helheim_web/templates/admin/term/index.html.eex:16
 #: lib/helheim_web/templates/mod/calendar_event/index.html.eex:13
 #, elixir-autogen
 msgid "Inserted at"
@@ -1151,7 +1151,7 @@ msgid "New Terms"
 msgstr "Opret Betingelser"
 
 #: lib/helheim_web/templates/admin/term/form.html.eex:14
-#: lib/helheim_web/templates/admin/term/index.html.eex:17
+#: lib/helheim_web/templates/admin/term/index.html.eex:18
 #, elixir-autogen
 msgid "Published?"
 msgstr "Udgivet?"
@@ -1201,7 +1201,7 @@ msgstr "Betingelserne blev opdateret!"
 msgid "There doesn't seem to be any terms or rules written yet..."
 msgstr "Det lader ikke til at der nogle betingelser skrevet ned endnu…"
 
-#: lib/helheim_web/templates/admin/term/index.html.eex:16
+#: lib/helheim_web/templates/admin/term/index.html.eex:17
 #, elixir-autogen
 msgid "Updated at"
 msgstr "Opdateret"
@@ -1264,7 +1264,7 @@ msgid "Comments"
 msgstr "Kommentarer"
 
 #: lib/helheim_web/templates/help/verification.html.eex:2
-#: lib/helheim_web/templates/layout/sidebar.html.eex:36
+#: lib/helheim_web/templates/layout/sidebar.html.eex:42
 #: lib/helheim_web/templates/page/staff.html.eex:2
 #, elixir-autogen
 msgid "Help"
@@ -1357,7 +1357,7 @@ msgstr "Vi viser aldrig din fødselsdato til andre brugere, kun din alder. Det e
 msgid "Photos"
 msgstr "Billeder"
 
-#: lib/helheim_web/templates/layout/sidebar.html.eex:16
+#: lib/helheim_web/templates/layout/sidebar.html.eex:22
 #: lib/helheim_web/templates/profile/index.html.eex:2
 #, elixir-autogen
 msgid "Profiles"
@@ -1883,7 +1883,7 @@ msgid "Add to Contacts"
 msgstr "Føj til kontaktliste"
 
 #: lib/helheim_web/templates/friendship/index.html.eex:3
-#: lib/helheim_web/templates/layout/sidebar.html.eex:74
+#: lib/helheim_web/templates/layout/sidebar.html.eex:80
 #, elixir-autogen
 msgid "Contact List"
 msgstr "Kontaktliste"
@@ -1970,7 +1970,7 @@ msgstr "Kommentarer er deaktiveret på denne blog"
 msgid "Hide comments?"
 msgstr "Skjul kommentarer?"
 
-#: lib/helheim_web/templates/layout/sidebar.html.eex:42
+#: lib/helheim_web/templates/layout/sidebar.html.eex:48
 #, elixir-autogen
 msgid "Terms and Rules"
 msgstr "Betingelser og Regler"
@@ -2006,7 +2006,7 @@ msgid "Blog Post"
 msgstr "Blog"
 
 #: lib/helheim_web/templates/admin/user/_account_details.html.eex:19
-#: lib/helheim_web/templates/admin/user/_users.html.eex:20
+#: lib/helheim_web/templates/admin/user/_users.html.eex:21
 #, elixir-autogen
 msgid "Confirmed at"
 msgstr "Bekræftelsesdato"
@@ -2017,17 +2017,17 @@ msgid "Confirmed?"
 msgstr "Bekræftet?"
 
 #: lib/helheim_web/templates/admin/user/_account_details.html.eex:16
-#: lib/helheim_web/templates/admin/user/_users.html.eex:17
+#: lib/helheim_web/templates/admin/user/_users.html.eex:18
 #, elixir-autogen
 msgid "Created at"
 msgstr "Oprettelsesdato"
 
 #: lib/helheim_web/templates/admin/user/_account_details.html.eex:4
-#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:7
-#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:7
-#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:7
-#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:7
-#: lib/helheim_web/templates/admin/user/_users.html.eex:5
+#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:8
+#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:8
+#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:8
+#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:8
+#: lib/helheim_web/templates/admin/user/_users.html.eex:6
 #, elixir-autogen
 msgid "ID"
 msgstr "ID"
@@ -2042,12 +2042,12 @@ msgstr "IP Adresse"
 msgid "Login Details"
 msgstr "Logindetaljer"
 
-#: lib/helheim_web/templates/admin/user/_blocks.html.eex:32
+#: lib/helheim_web/templates/admin/user/_blocks.html.eex:34
 #: lib/helheim_web/templates/admin/user/_potential_alt_accounts.html.eex:7
-#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:38
-#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:29
-#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:32
-#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:32
+#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:40
+#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:31
+#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:34
+#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:34
 #: lib/helheim_web/templates/admin/user/_recent_photos.html.eex:22
 #, elixir-autogen
 msgid "None found"
@@ -2106,17 +2106,17 @@ msgid "Users"
 msgstr "Brugere"
 
 #: lib/helheim_web/templates/admin/user/_account_details.html.eex:22
-#: lib/helheim_web/templates/admin/user/_users.html.eex:29
+#: lib/helheim_web/templates/admin/user/_users.html.eex:30
 #, elixir-autogen
 msgid "Verified at"
 msgstr "Verifikationsdato"
 
-#: lib/helheim_web/templates/admin/user/_users.html.eex:26
+#: lib/helheim_web/templates/admin/user/_users.html.eex:27
 #, elixir-autogen
 msgid "IP"
 msgstr "IP"
 
-#: lib/helheim_web/templates/admin/user/_users.html.eex:23
+#: lib/helheim_web/templates/admin/user/_users.html.eex:24
 #, elixir-autogen
 msgid "Last Login at"
 msgstr "Seneste logindato"
@@ -2207,7 +2207,7 @@ msgid "This can either mean that an admin has not yet had the time to decide on 
 msgstr "Dette kan betyde at en admin endnu ikke har haft tid til at vurdere om du kan verificeres, eller det kan være at det blev vurderet at du ikke levede op til kriterierne for verifikation."
 
 #: lib/helheim_web/templates/help/verification.html.eex:3
-#: lib/helheim_web/templates/layout/sidebar.html.eex:48
+#: lib/helheim_web/templates/layout/sidebar.html.eex:54
 #, elixir-autogen
 msgid "User verification"
 msgstr "Brugerverifikation"
@@ -2237,35 +2237,35 @@ msgstr "Du er verificeret!"
 msgid "In short, a verified user is a user that an admin has deemed as not being a fake or empty profile."
 msgstr "Kort fortalt bliver man en verificeret bruger når en admin har vurderet at man ikke har en tom eller uærlig profil og samtidig lever op til sitets regler."
 
-#: lib/helheim_web/templates/admin/user/_blocks.html.eex:9
+#: lib/helheim_web/templates/admin/user/_blocks.html.eex:10
 #, elixir-autogen
 msgid "Blockee"
 msgstr "Hvem er blokeret"
 
-#: lib/helheim_web/templates/admin/user/_blocks.html.eex:7
+#: lib/helheim_web/templates/admin/user/_blocks.html.eex:8
 #, elixir-autogen
 msgid "Blocker"
 msgstr "Hvem har blokeret"
 
-#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:9
+#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:10
 #, elixir-autogen
 msgid "Published At"
 msgstr "Udgivelsesdato"
 
-#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:8
+#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:9
 #, elixir-autogen
 msgid "Topic"
 msgstr "Tråd"
 
-#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:10
+#: lib/helheim_web/templates/admin/user/_recent_blog_posts.html.eex:11
 #, elixir-autogen
 msgid "Views/Comments"
 msgstr "Visninger/Kommentarer"
 
-#: lib/helheim_web/templates/admin/user/_blocks.html.eex:10
-#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:9
-#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:9
-#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:9
+#: lib/helheim_web/templates/admin/user/_blocks.html.eex:11
+#: lib/helheim_web/templates/admin/user/_recent_comments.html.eex:10
+#: lib/helheim_web/templates/admin/user/_recent_forum_replies.html.eex:10
+#: lib/helheim_web/templates/admin/user/_recent_forum_topics.html.eex:10
 #: lib/helheim_web/templates/mod/calendar_event/index.html.eex:11
 #, elixir-autogen
 msgid "When"
@@ -2282,14 +2282,14 @@ msgstr "Dette emne er låst"
 
 #: lib/helheim_web/templates/calendar_event/index.html.eex:5
 #: lib/helheim_web/templates/calendar_event/new.html.eex:1
-#: lib/helheim_web/templates/page/front_page.html.eex:70
+#: lib/helheim_web/templates/page/front_page.html.eex:58
 #, elixir-autogen
 msgid "Create event"
 msgstr "Opret begivenhed"
 
 #: lib/helheim_web/templates/calendar_event/index.html.eex:1
 #: lib/helheim_web/templates/calendar_event/show.html.eex:2
-#: lib/helheim_web/templates/layout/sidebar.html.eex:29
+#: lib/helheim_web/templates/layout/sidebar.html.eex:35
 #: lib/helheim_web/templates/layout/sidebar_mod.html.eex:6
 #: lib/helheim_web/templates/mod/calendar_event/index.html.eex:3
 #: lib/helheim_web/templates/mod/calendar_event/show.html.eex:3
@@ -2426,7 +2426,7 @@ msgid_plural "There are currently %{count} online users"
 msgstr[0] "Der er i øjeblikket %{count} online bruger"
 msgstr[1] "Der er i øjeblikket %{count} online brugere"
 
-#: lib/helheim_web/templates/layout/sidebar.html.eex:22
+#: lib/helheim_web/templates/layout/sidebar.html.eex:28
 #, elixir-autogen
 msgid "Online users"
 msgstr "Online brugere"
@@ -2472,17 +2472,17 @@ msgstr "Gem præferencer"
 msgid "%{count} people"
 msgstr "%{count} personer"
 
-#: lib/helheim_web/templates/page/front_page.html.eex:64
+#: lib/helheim_web/templates/page/front_page.html.eex:52
 #, elixir-autogen
 msgid "It looks like there are no upcoming events..."
 msgstr "Det ser ud til at der ikke er nogle kommende begivenheder…"
 
-#: lib/helheim_web/templates/page/front_page.html.eex:65
+#: lib/helheim_web/templates/page/front_page.html.eex:53
 #, elixir-autogen
 msgid "Tell us about an event so we can add it:"
 msgstr "Fortæl os om en begivenhed så vi kan tilføje den:"
 
-#: lib/helheim_web/templates/page/front_page.html.eex:55
+#: lib/helheim_web/templates/page/front_page.html.eex:43
 #, elixir-autogen
 msgid "Events"
 msgstr "Begivenheder"
@@ -2524,7 +2524,7 @@ msgstr "Moderator"
 msgid "Moderators"
 msgstr "Moderatorer"
 
-#: lib/helheim_web/templates/layout/sidebar.html.eex:54
+#: lib/helheim_web/templates/layout/sidebar.html.eex:60
 #: lib/helheim_web/templates/page/staff.html.eex:3
 #, elixir-format, elixir-autogen
 msgid "Staff"
@@ -2727,6 +2727,7 @@ msgstr "Slet lyttehistorik"
 msgid "Latest listens"
 msgstr "Seneste afspilninger"
 
+#: lib/helheim_web/templates/music/index.html.eex:28
 #: lib/helheim_web/templates/song/show.html.eex:36
 #, elixir-autogen, elixir-format
 msgid "Listens"
@@ -2737,6 +2738,7 @@ msgstr "Afspilninger"
 msgid "Music from %{username}"
 msgstr "Musik fra %{username}"
 
+#: lib/helheim_web/templates/music/index.html.eex:94
 #: lib/helheim_web/templates/song/recent.html.eex:6
 #: lib/helheim_web/templates/song_listen/index.html.eex:9
 #: lib/helheim_web/templates/song_listen/index.html.eex:21
@@ -2755,7 +2757,8 @@ msgstr "Ingen har lyttet til denne sang endnu..."
 msgid "Recent listeners"
 msgstr "Seneste lyttere"
 
-#: lib/helheim_web/templates/page/front_page.html.eex:84
+#: lib/helheim_web/templates/music/index.html.eex:10
+#: lib/helheim_web/templates/page/front_page.html.eex:71
 #: lib/helheim_web/templates/song/recent.html.eex:1
 #, elixir-autogen, elixir-format
 msgid "Recent listens"
@@ -2766,6 +2769,7 @@ msgstr "Seneste afspilninger"
 msgid "Song"
 msgstr "Sang"
 
+#: lib/helheim_web/templates/music/index.html.eex:92
 #: lib/helheim_web/templates/song_listen/index.html.eex:19
 #, elixir-autogen, elixir-format
 msgid "Top artists"
@@ -2796,7 +2800,7 @@ msgstr "Er du sikker? Dine afspilninger af denne sang bliver fjernet permanent!"
 msgid "Remove my name from this song"
 msgstr "Fjern mit navn fra denne sang"
 
-#: lib/helheim_web/controllers/song_controller.ex:162
+#: lib/helheim_web/controllers/song_controller.ex:177
 #, elixir-autogen, elixir-format
 msgid "Your listens have been removed from this song."
 msgstr "Dine afspilninger er blevet fjernet fra denne sang."
@@ -2806,6 +2810,7 @@ msgstr "Dine afspilninger er blevet fjernet fra denne sang."
 msgid "Album on Last.fm"
 msgstr "Album på Last.fm"
 
+#: lib/helheim_web/templates/music/artist.html.eex:24
 #: lib/helheim_web/templates/song/show.html.eex:53
 #, elixir-autogen, elixir-format
 msgid "Artist on Last.fm"
@@ -2883,21 +2888,21 @@ msgstr "Din Last.fm-konto er blevet afbrudt."
 msgid "Your Last.fm account is now connected!"
 msgstr "Din Last.fm-konto er nu forbundet!"
 
-#: lib/helheim_web/controllers/song_controller.ex:56
-#: lib/helheim_web/templates/page/front_page.html.eex:98
-#: lib/helheim_web/templates/page/front_page.html.eex:106
+#: lib/helheim_web/controllers/song_controller.ex:59
+#: lib/helheim_web/templates/music/index.html.eex:135
+#: lib/helheim_web/templates/music/index.html.eex:143
 #, elixir-autogen, elixir-format
 msgid "No songs have been listened to in this period yet..."
 msgstr "Der er ikke lyttet til nogen sange i denne periode endnu..."
 
-#: lib/helheim_web/controllers/song_controller.ex:28
-#: lib/helheim_web/templates/page/front_page.html.eex:94
+#: lib/helheim_web/controllers/song_controller.ex:31
+#: lib/helheim_web/templates/music/index.html.eex:131
 #, elixir-autogen, elixir-format
 msgid "Top songs, past 24 hours"
 msgstr "Top sange, seneste 24 timer"
 
-#: lib/helheim_web/controllers/song_controller.ex:32
-#: lib/helheim_web/templates/page/front_page.html.eex:102
+#: lib/helheim_web/controllers/song_controller.ex:35
+#: lib/helheim_web/templates/music/index.html.eex:139
 #, elixir-autogen, elixir-format
 msgid "Top songs, past 7 days"
 msgstr "Top sange, seneste 7 dage"
@@ -2913,42 +2918,143 @@ msgid "Year"
 msgstr "Årstal"
 
 #: lib/helheim_web/templates/song/show.html.eex:11
-#: lib/helheim_web/views/song_view.ex:44
-#: lib/helheim_web/views/song_view.ex:45
+#: lib/helheim_web/views/song_view.ex:53
+#: lib/helheim_web/views/song_view.ex:54
 #, elixir-autogen, elixir-format
 msgid "Play preview"
 msgstr "Hør smagsprøve"
 
-#: lib/helheim_web/controllers/song_controller.ex:36
-#: lib/helheim_web/templates/page/front_page.html.eex:114
+#: lib/helheim_web/controllers/song_controller.ex:39
+#: lib/helheim_web/templates/music/index.html.eex:149
 #, elixir-autogen, elixir-format
 msgid "Most upvoted songs, past 24 hours"
 msgstr "Mest likede sange, seneste 24 timer"
 
-#: lib/helheim_web/controllers/song_controller.ex:40
-#: lib/helheim_web/templates/page/front_page.html.eex:122
+#: lib/helheim_web/controllers/song_controller.ex:43
+#: lib/helheim_web/templates/music/index.html.eex:157
 #, elixir-autogen, elixir-format
 msgid "Most upvoted songs, past 7 days"
 msgstr "Mest likede sange, seneste 7 dage"
 
-#: lib/helheim_web/controllers/song_controller.ex:57
-#: lib/helheim_web/templates/page/front_page.html.eex:118
-#: lib/helheim_web/templates/page/front_page.html.eex:126
+#: lib/helheim_web/controllers/song_controller.ex:60
+#: lib/helheim_web/templates/music/index.html.eex:153
+#: lib/helheim_web/templates/music/index.html.eex:161
 #, elixir-autogen, elixir-format
 msgid "No songs have been upvoted in this period yet..."
 msgstr "Ingen sange har fået likes i denne periode endnu..."
 
-#: lib/helheim_web/views/song_view.ex:91
+#: lib/helheim_web/views/song_view.ex:111
 #, elixir-autogen, elixir-format
 msgid "Upvote"
 msgstr "Like"
 
+#: lib/helheim_web/templates/music/index.html.eex:32
 #: lib/helheim_web/templates/song/show.html.eex:40
 #, elixir-autogen, elixir-format
 msgid "Upvotes"
 msgstr "Likes"
 
-#: lib/helheim_web/views/song_view.ex:92
+#: lib/helheim_web/views/song_view.ex:112
 #, elixir-autogen, elixir-format
 msgid "Remove your upvote"
 msgstr "Fjern like"
+
+#: lib/helheim_web/views/music_view.ex:14
+#, elixir-autogen, elixir-format
+msgid "%{decade}s"
+msgstr "%{decade}'erne"
+
+#: lib/helheim_web/views/music_view.ex:21
+#, elixir-autogen, elixir-format
+msgid "%{short}s"
+msgstr "%{short}'erne"
+
+#: lib/helheim_web/templates/music/artist.html.eex:3
+#: lib/helheim_web/templates/music/decade.html.eex:3
+#: lib/helheim_web/templates/music/genre.html.eex:3
+#, elixir-autogen, elixir-format
+msgid "All music"
+msgstr "Al musik"
+
+#: lib/helheim_web/templates/music/index.html.eex:24
+#, elixir-autogen, elixir-format
+msgid "Artists"
+msgstr "Kunstnere"
+
+#: lib/helheim_web/templates/music/index.html.eex:69
+#, elixir-autogen, elixir-format
+msgid "Decades"
+msgstr "Årtier"
+
+#: lib/helheim_web/templates/music/index.html.eex:4
+#, elixir-autogen, elixir-format
+msgid "Everything the site is listening to: the current charts, the genres and decades we keep coming back to, and the artists we play the most."
+msgstr "Alt hvad siden lytter til: de aktuelle hitlister, de genrer og årtier vi vender tilbage til, og de kunstnere vi spiller mest."
+
+#: lib/helheim_web/templates/music/index.html.eex:46
+#, elixir-autogen, elixir-format
+msgid "Genres"
+msgstr "Genrer"
+
+#: lib/helheim_web/templates/music/index.html.eex:16
+#, elixir-autogen, elixir-format
+msgid "Helheim in numbers"
+msgstr "Helheim i tal"
+
+#: lib/helheim_web/templates/music/index.html.eex:36
+#, elixir-autogen, elixir-format
+msgid "Listeners"
+msgstr "Lyttere"
+
+#: lib/helheim_web/templates/layout/sidebar.html.eex:10
+#: lib/helheim_web/templates/music/index.html.eex:1
+#, elixir-autogen, elixir-format
+msgid "Music"
+msgstr "Musik"
+
+#: lib/helheim_web/templates/song/show.html.eex:90
+#, elixir-autogen, elixir-format
+msgid "No one has upvoted this song yet..."
+msgstr "Ingen har liket denne sang endnu..."
+
+#: lib/helheim_web/templates/music/index.html.eex:48
+#, elixir-autogen, elixir-format
+msgid "No songs have been tagged with a genre yet..."
+msgstr "Ingen sange er blevet tagget med en genre endnu..."
+
+#: lib/helheim_web/templates/music/artist.html.eex:35
+#: lib/helheim_web/templates/music/decade.html.eex:11
+#: lib/helheim_web/templates/music/genre.html.eex:11
+#, elixir-autogen, elixir-format
+msgid "No songs here yet..."
+msgstr "Ingen sange her endnu..."
+
+#: lib/helheim_web/templates/music/index.html.eex:71
+#, elixir-autogen, elixir-format
+msgid "No songs with a known release year yet..."
+msgstr "Ingen sange med et kendt udgivelsesår endnu..."
+
+#: lib/helheim_web/templates/music/index.html.eex:20
+#, elixir-autogen, elixir-format
+msgid "Songs"
+msgstr "Sange"
+
+#: lib/helheim_web/templates/music/artist.html.eex:30
+#, elixir-autogen, elixir-format
+msgid "The most listened to songs by %{artist}."
+msgstr "De mest afspillede sange af %{artist}."
+
+#: lib/helheim_web/templates/music/decade.html.eex:6
+#, elixir-autogen, elixir-format
+msgid "The most listened to songs released in the %{decade}."
+msgstr "De mest afspillede sange udgivet i %{decade}."
+
+#: lib/helheim_web/templates/music/genre.html.eex:6
+#, elixir-autogen, elixir-format
+msgid "The most listened to songs tagged %{genre}."
+msgstr "De mest afspillede sange tagget %{genre}."
+
+#: lib/helheim_web/templates/song/show.html.eex:88
+#, elixir-autogen, elixir-format
+msgid "Upvoted by"
+msgstr "Liket af"

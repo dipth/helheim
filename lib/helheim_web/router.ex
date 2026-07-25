@@ -130,6 +130,14 @@ defmodule HelheimWeb.Router do
       resources "/notification_subscription", NotificationSubscriptionController, singleton: true, only: [:update]
     end
     resources "/online_users", OnlineUserController, only: [:index]
+    get "/music", MusicController, :index
+    get "/music/genres/:id", MusicController, :genre
+    get "/music/decades/:decade", MusicController, :decade
+    # A glob rather than an :id, because songs - not the artists table - are the
+    # source of truth for artist identity, and a glob lets a name containing a
+    # slash ("AC/DC") travel as real path segments instead of a percent-encoded
+    # slash that a proxy might rewrite.
+    get "/music/artists/*artist_name", MusicController, :artist
     get "/songs/recent", SongController, :recent
     get "/songs/top/day", SongController, :top_day
     get "/songs/top/week", SongController, :top_week

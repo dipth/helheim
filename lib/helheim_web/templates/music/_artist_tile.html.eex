@@ -1,0 +1,14 @@
+<%= link to: artist_page_path(@conn, @artist_name), class: "music-artist", title: @artist_name do %>
+  <%= if @artist && @artist.image_url_medium do %>
+    <img src="<%= @artist.image_url_medium %>" class="music-artist-image rounded" alt="">
+  <% else %>
+    <div class="music-artist-image music-artist-image-placeholder rounded"><i class="fa fa-user"></i></div>
+  <% end %>
+  <strong class="d-block text-truncate mt-1"><%= @artist_name %></strong>
+  <small class="d-block">
+    <%= listen_count_badge @count %>
+    <%= if @artist && @artist.country_code do %>
+      <span title="<%= @artist.country_name %>"><%= country_flag @artist.country_code %></span>
+    <% end %>
+  </small>
+<% end %>

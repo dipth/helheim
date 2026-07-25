@@ -6,6 +6,15 @@ defmodule HelheimWeb.SongView do
   end
 
   @doc """
+  The best cover to show at grid size. `cover_image_url` is 300x300, which is
+  plenty for a tile and lighter than the 500x500 detail image; the 64px
+  thumbnail is a last resort, since scaling it up to a tile looks soft.
+  """
+  def grid_cover_url(song) do
+    song.cover_image_url || song.cover_image_url_large || song.cover_image_url_small
+  end
+
+  @doc """
   Renders an ISO 3166-1 alpha-2 country code as its flag emoji via the
   regional indicator codepoints - no image assets needed. MusicBrainz's
   user-assigned region codes (XW worldwide, XE Europe, ...) have no flag
@@ -45,6 +54,17 @@ defmodule HelheimWeb.SongView do
       aria_label: gettext("Play preview"),
       data: [preview_url: song_preview_path(conn, :preview, song)]
     )
+  end
+
+  @doc """
+  Tooltip text for an avatar in a listener or upvoter grid: the plain username
+  plus how long ago the listen or vote happened. Deliberately not `username/1` -
+  that returns markup (badges, links) which cannot live inside a title
+  attribute, and `simple: true` keeps `time_ago_in_words/2` from wrapping its
+  text in a span for the same reason.
+  """
+  def avatar_tooltip(user, timestamp) do
+    "#{user.username} - #{time_ago_in_words(timestamp, simple: true)}"
   end
 
   def listen_count_badge(count) do

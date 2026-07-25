@@ -1,0 +1,36 @@
+<h1 class="mt-1 d-flex justify-content-between align-items-center">
+  <span><i class="fa fa-user"></i> <%= @artist_name %></span>
+  <%= link gettext("All music"), to: music_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
+</h1>
+
+<div class="card">
+  <div class="card-block media">
+    <div class="music-artist-header-image mr-1">
+      <%= if @artist && @artist.image_url_medium do %>
+        <img src="<%= @artist.image_url_medium %>" class="music-artist-image rounded" alt="">
+      <% else %>
+        <div class="music-artist-image music-artist-image-placeholder rounded"><i class="fa fa-user"></i></div>
+      <% end %>
+    </div>
+    <div class="media-body">
+      <p class="mb-1">
+        <%= if @artist && @artist.country_code do %>
+          <span title="<%= @artist.country_name %>"><%= country_flag @artist.country_code %></span>
+          <%= @artist.country_name %><br>
+        <% end %>
+        <%= listen_count_badge @listen_count %>
+      </p>
+      <p class="mb-0">
+        <%= lastfm_link lastfm_artist_url(@artist_name), gettext("Artist on Last.fm") %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<p><%= gettext "The most listened to songs by %{artist}.", artist: @artist_name %></p>
+
+<%= render HelheimWeb.SongView, "_song_list.html", conn: @conn,
+      songs: @songs,
+      count_key: :listen_count,
+      empty_message: gettext("No songs here yet..."),
+      upvoted_song_ids: @upvoted_song_ids %>

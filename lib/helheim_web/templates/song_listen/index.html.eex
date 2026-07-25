@@ -48,9 +48,11 @@
     <%= if Enum.empty?(@listens) do %>
       <p class="text-muted mb-0"><%= gettext "No listens have been tracked yet..." %></p>
     <% end %>
-    <%= for listen <- @listens do %>
-      <%= render HelheimWeb.SongView, "_listen.html", conn: @conn, listen: listen, show_username: false, upvoted_song_ids: @upvoted_song_ids %>
-    <% end %>
+    <div class="song-grid">
+      <%= for listen <- @listens do %>
+        <%= render HelheimWeb.SongView, "_song_grid_item.html", conn: @conn, song: listen.song, listen: listen, show_username: false, upvoted_song_ids: @upvoted_song_ids %>
+      <% end %>
+    </div>
     <%= pagination_links @conn, @listens %>
   </div>
 </div>

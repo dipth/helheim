@@ -26,7 +26,26 @@ defmodule HelheimWeb.SongControllerTest do
 
       conn = get conn, "/songs/recent"
       response = html_response(conn, 200)
-      assert length(String.split(response, "Creeping Death")) == 2
+      # One title attribute per grid tile, so one occurrence means one tile.
+      assert length(String.split(response, "title=\"Creeping Death\"")) == 2
+    end
+
+    test "it renders the listens as a grid of cover art", %{conn: conn} do
+      song = insert(:song, cover_image_url: "https://lastfm.example/300x300/cover.jpg")
+      insert(:song_listen, song: song)
+
+      conn = get conn, "/songs/recent"
+      response = html_response(conn, 200)
+      assert response =~ "song-grid"
+      assert response =~ "song-grid-cover"
+      assert response =~ "https://lastfm.example/300x300/cover.jpg"
+    end
+
+    test "it gives each cover link an accessible name", %{conn: conn} do
+      insert(:song_listen, song: insert(:song, title: "Creeping Death"))
+
+      conn = get conn, "/songs/recent"
+      assert html_response(conn, 200) =~ ~s(aria-label="Creeping Death")
     end
 
     test "it does not show listens from ignored users", %{conn: conn, user: user} do
@@ -44,12 +63,19 @@ defmodule HelheimWeb.SongControllerTest do
       assert html_response(conn, 200)
     end
 
+    test "it falls back to the first page when the page number is not a number", %{conn: conn} do
+      insert(:song_listen, song: insert(:song, title: "Creeping Death"))
+
+      conn = get conn, "/songs/recent", %{"page" => "abc"}
+      assert html_response(conn, 200) =~ "Creeping Death"
+    end
+
     test "it renders a placeholder when a song has no cover art", %{conn: conn} do
-      song = insert(:song, cover_image_url_small: nil)
+      song = insert(:song, cover_image_url: nil, cover_image_url_large: nil, cover_image_url_small: nil)
       insert(:song_listen, song: song)
 
       conn = get conn, "/songs/recent"
-      assert html_response(conn, 200) =~ "song-cover-placeholder"
+      assert html_response(conn, 200) =~ "song-grid-cover-placeholder"
     end
   end
 
@@ -127,12 +153,76 @@ defmodule HelheimWeb.SongControllerTest do
       assert response =~ "https://www.last.fm/music/Metallica/Ride%20the%20Lightning"
     end
 
-    test "it shows the most recent listeners of the song", %{conn: conn} do
+    test "it shows the most recent listeners of the song as a grid of avatars", %{conn: conn} do
       song = insert(:song)
       listen = insert(:song_listen, song: song)
 
       conn = get conn, "/songs/#{song.id}"
-      assert html_response(conn, 200) =~ listen.user.username
+      response = html_response(conn, 200)
+      assert response =~ gettext("Recent listeners")
+      assert response =~ "avatar-list"
+      assert response =~ listen.user.username
+    end
+
+    test "it shows a listener only once when they played the song on repeat", %{conn: conn} do
+      song = insert(:song)
+      listener = insert(:user)
+      insert(:song_listen, user: listener, song: song, played_at: Timex.shift(Timex.now, minutes: -10))
+      insert(:song_listen, user: listener, song: song, played_at: Timex.shift(Timex.now, minutes: -5))
+
+      conn = get conn, "/songs/#{song.id}"
+      assert length(String.split(html_response(conn, 200), "\"/profiles/#{listener.id}\"")) == 2
+    end
+
+    test "it shows a placeholder when no one has listened to the song", %{conn: conn} do
+      song = insert(:song)
+
+      conn = get conn, "/songs/#{song.id}"
+      assert html_response(conn, 200) =~ gettext("No one has listened to this song yet...")
+    end
+
+    test "it shows the users who upvoted the song as a grid of avatars", %{conn: conn} do
+      song = insert(:song)
+      upvote = insert(:song_upvote, song: song)
+
+      conn = get conn, "/songs/#{song.id}"
+      response = html_response(conn, 200)
+      assert response =~ gettext("Upvoted by")
+      assert response =~ upvote.user.username
+    end
+
+    test "it shows a placeholder when no one has upvoted the song", %{conn: conn} do
+      song = insert(:song)
+
+      conn = get conn, "/songs/#{song.id}"
+      assert html_response(conn, 200) =~ gettext("No one has upvoted this song yet...")
+    end
+
+    test "it does not show upvoters who block the current user", %{conn: conn, user: user} do
+      song = insert(:song)
+      blocker = insert(:user, username: "blocky-mc-blockface")
+      insert(:block, blocker: blocker, blockee: user)
+      insert(:song_upvote, song: song, user: blocker)
+
+      conn = get conn, "/songs/#{song.id}"
+      refute html_response(conn, 200) =~ "blocky-mc-blockface"
+    end
+
+    test "it does not show upvoters that the current user ignores", %{conn: conn, user: user} do
+      song = insert(:song)
+      ignoree = insert(:user, username: "ignored-individual")
+      insert(:ignore, ignorer: user, ignoree: ignoree, enabled: true)
+      insert(:song_upvote, song: song, user: ignoree)
+
+      conn = get conn, "/songs/#{song.id}"
+      refute html_response(conn, 200) =~ "ignored-individual"
+    end
+
+    test "it links the artist to their music page", %{conn: conn} do
+      song = insert(:song, artist_name: "Metallica")
+
+      conn = get conn, "/songs/#{song.id}"
+      assert html_response(conn, 200) =~ "/music/artists/Metallica"
     end
 
     test "it does not show listeners who block the current user", %{conn: conn, user: user} do
@@ -160,13 +250,12 @@ defmodule HelheimWeb.SongControllerTest do
         release_year: 1986,
         cover_image_url: "https://lastfm.freetls.fastly.net/i/u/300x300/abc.jpg",
         cover_image_url_large: "https://lastfm.freetls.fastly.net/i/u/500x500/abc.jpg")
-      tag = insert(:tag, name: "thrash metal")
-      Repo.insert!(%Helheim.SongTag{song_id: song.id, tag_id: tag.id, position: 1})
+      insert(:song_tag, song: song, tag: insert(:tag, name: "thrash metal"))
 
       conn = get conn, "/songs/#{song.id}"
       response = html_response(conn, 200)
       assert response =~ "1986"
-      assert response =~ "thrash metal"
+      assert response =~ "Thrash Metal"
       assert response =~ "500x500"
     end
 

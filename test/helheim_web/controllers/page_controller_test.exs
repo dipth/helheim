@@ -44,24 +44,23 @@ defmodule HelheimWeb.PageControllerTest do
       refute html_response(conn, 200) =~ gettext("Recent listens")
     end
 
-    test "it shows the top songs of the past 24 hours and past 7 days", %{conn: conn} do
-      song = insert(:song, title: "Orion")
-      insert_list(2, :song_listen, song: song)
+    test "it does not show the song charts, which live on the music page", %{conn: conn} do
+      insert(:song_listen, song: insert(:song, title: "Orion"))
+      insert(:song_upvote, song: insert(:song, title: "Blackened"))
 
       conn = get conn, "/front_page"
       response = html_response(conn, 200)
-      assert response =~ gettext("Top songs, past 24 hours")
-      assert response =~ gettext("Top songs, past 7 days")
+      refute response =~ gettext("Top songs, past 24 hours")
+      refute response =~ gettext("Top songs, past 7 days")
+      refute response =~ gettext("Most upvoted songs, past 24 hours")
+      refute response =~ gettext("Most upvoted songs, past 7 days")
     end
 
-    test "it shows the most upvoted songs of the past 24 hours and past 7 days even without recent listens", %{conn: conn} do
-      insert(:song_upvote, song: insert(:song, title: "Orion"))
+    test "it links to the music page", %{conn: conn} do
+      insert(:song_listen, song: insert(:song, title: "Orion"))
 
       conn = get conn, "/front_page"
-      response = html_response(conn, 200)
-      assert response =~ gettext("Most upvoted songs, past 24 hours")
-      assert response =~ gettext("Most upvoted songs, past 7 days")
-      assert response =~ "Orion"
+      assert html_response(conn, 200) =~ "/music"
     end
 
     test "it does not show the same song twice in the recent listens", %{conn: conn} do
@@ -71,10 +70,32 @@ defmodule HelheimWeb.PageControllerTest do
       insert(:song_listen, user: user, song: song, played_at: Timex.shift(Timex.now, minutes: -5))
 
       conn = get conn, "/front_page"
+      assert length(String.split(html_response(conn, 200), "Orion")) == 2
+    end
+
+    test "it shows at most 15 recent listens", %{conn: conn} do
+      insert_list(20, :song_listen)
+
+      conn = get conn, "/front_page"
+      assert length(String.split(html_response(conn, 200), "song-cover-frame")) == 16
+    end
+
+    test "it only shows the extra listen columns on wider screens", %{conn: conn} do
+      insert_list(11, :song_listen)
+
+      conn = get conn, "/front_page"
       response = html_response(conn, 200)
-      [_before, after_recent] = String.split(response, gettext("Recent listens"), parts: 2)
-      [recent_section, _rest] = String.split(after_recent, gettext("Top songs, past 24 hours"), parts: 2)
-      assert length(String.split(recent_section, "Orion")) == 2
+      assert response =~ "col-lg-4 hidden-sm-down"
+      assert response =~ "col-lg-4 hidden-md-down"
+    end
+
+    test "it does not render empty listen columns when there are only a few listens", %{conn: conn} do
+      insert_list(3, :song_listen)
+
+      conn = get conn, "/front_page"
+      response = html_response(conn, 200)
+      refute response =~ "col-lg-4 hidden-sm-down"
+      refute response =~ "col-lg-4 hidden-md-down"
     end
   end
 
