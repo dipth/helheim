@@ -1,0 +1,25 @@
+<%!--
+  A compact grid of linked profile photos.
+
+  Required assigns:
+    conn    - the connection
+    entries - list of {%Helheim.User{}, tooltip} tuples, in display order
+
+  Optional assigns:
+    class - extra classes for the container, e.g. "avatar-list-full" to show
+            every avatar instead of clipping the grid to a few rows
+--%>
+<div class="avatar-list <%= assigns[:class] %>">
+  <%= for {user, tooltip} <- @entries do %>
+    <a href="<%= public_profile_path(@conn, :show, user) %>">
+      <img
+        src="<%= HelheimWeb.Avatar.url({user.avatar, user}, :tiny) %>"
+        class="rounded"
+        alt="<%= user.username %>"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="<%= tooltip %>"
+      >
+    </a>
+  <% end %>
+</div>

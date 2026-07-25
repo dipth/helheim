@@ -67,6 +67,7 @@ defmodule HelheimWeb do
       import HelheimWeb.CommentHelpers
       import HelheimWeb.VisibilityHelpers
       import HelheimWeb.TableHelpers
+      import HelheimWeb.MusicHelpers
     end
   end
 

@@ -12,7 +12,7 @@
         <table class="table table-sm">
           <tr>
             <th><%= gettext "Artist" %></th>
-            <td><%= @song.artist_name %></td>
+            <td><%= link @song.artist_name, to: artist_page_path(@conn, @song.artist_name) %></td>
           </tr>
           <%= if @song.album_name do %>
             <tr>
@@ -29,7 +29,7 @@
           <%= if genre_tag = List.first(@song.song_tags) do %>
             <tr>
               <th><%= gettext "Genre" %></th>
-              <td><%= genre_tag.tag.name %></td>
+              <td><%= tag_label(genre_tag.tag.name) %></td>
             </tr>
           <% end %>
           <tr>
@@ -44,7 +44,7 @@
         <%= if length(@song.song_tags) > 0 do %>
           <p>
             <%= for song_tag <- @song.song_tags do %>
-              <span class="badge badge-default"><i class="fa fa-fw fa-tag"></i> <%= song_tag.tag.name %></span>
+              <span class="badge badge-default"><i class="fa fa-fw fa-tag"></i> <%= tag_label(song_tag.tag.name) %></span>
             <% end %>
           </p>
         <% end %>
@@ -73,14 +73,25 @@
     <div class="card">
       <div class="card-block">
         <h5 class="mb-1"><%= gettext "Recent listeners" %></h5>
-        <%= if length(@recent_listens) == 0 do %>
+        <%= if Enum.empty?(@recent_listens) do %>
           <p class="text-muted mb-0"><%= gettext "No one has listened to this song yet..." %></p>
+        <% else %>
+          <%= render HelheimWeb.SharedView, "_avatar_list.html", conn: @conn,
+                class: "avatar-list-full",
+                entries: Enum.map(@recent_listens, &{&1.user, avatar_tooltip(&1.user, &1.played_at)}) %>
         <% end %>
-        <%= for listen <- @recent_listens do %>
-          <div class="mb-1">
-            <%= avatar_with_username listen.user, true %>
-            <small class="text-muted"><%= time_ago_in_words listen.played_at %></small>
-          </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-block">
+        <h5 class="mb-1"><%= gettext "Upvoted by" %></h5>
+        <%= if Enum.empty?(@recent_upvotes) do %>
+          <p class="text-muted mb-0"><%= gettext "No one has upvoted this song yet..." %></p>
+        <% else %>
+          <%= render HelheimWeb.SharedView, "_avatar_list.html", conn: @conn,
+                class: "avatar-list-full",
+                entries: Enum.map(@recent_upvotes, &{&1.user, avatar_tooltip(&1.user, &1.inserted_at)}) %>
         <% end %>
       </div>
     </div>

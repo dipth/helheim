@@ -2,6 +2,7 @@ defmodule Helheim.Artist do
   use Helheim, :model
 
   alias Helheim.Artist
+  alias Helheim.Repo
 
   schema "artists" do
     field :name,             :string
@@ -35,5 +36,25 @@ defmodule Helheim.Artist do
   def by_names(query, names) do
     downcased = Enum.map(names, &String.downcase/1)
     from a in query, where: fragment("lower(?)", a.name) in ^downcased
+  end
+
+  @doc """
+  Joins aggregated `{artist_name, count}` rows to their enriched artist records
+  (images, nationality) in a single lookup, producing
+  `{artist_name, count, artist_or_nil}`. Names with no artist record - not
+  enriched yet, or enrichment came back empty - still come through, just
+  without the extras.
+  """
+  def with_records([]), do: []
+  def with_records(rows) do
+    artists_by_name =
+      Artist
+      |> by_names(Enum.map(rows, fn {artist_name, _count} -> artist_name end))
+      |> Repo.all()
+      |> Map.new(fn artist -> {String.downcase(artist.name), artist} end)
+
+    Enum.map(rows, fn {artist_name, count} ->
+      {artist_name, count, artists_by_name[String.downcase(artist_name)]}
+    end)
   end
 end

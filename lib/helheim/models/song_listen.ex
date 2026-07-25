@@ -36,6 +36,21 @@ defmodule Helheim.SongListen do
     from l in subquery(deduplicated)
   end
 
+  @doc """
+  Collapses the listens to one per user, keeping the newest listen of each, so
+  a listener who played the song on repeat only takes up one spot in a listener
+  grid. Like `latest_per_song/1`, the caller must re-apply `newest/1` after this
+  - the ordering here is consumed by the subquery.
+  """
+  def latest_per_user(query) do
+    deduplicated =
+      from l in query,
+        distinct: l.user_id,
+        order_by: [asc: l.user_id, desc: l.played_at]
+
+    from l in subquery(deduplicated)
+  end
+
   def not_from_users(query, nil), do: query
   def not_from_users(query, user_ids) do
     from l in query, where: l.user_id not in ^user_ids

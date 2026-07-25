@@ -1,13 +1,4 @@
 <h1 class="mt-1"><%= @title %></h1>
 
-<div class="card">
-  <div class="card-block">
-    <%= if Enum.empty?(@songs) do %>
-      <p class="text-muted mb-0"><%= @empty_message %></p>
-    <% end %>
-    <%= for {song, count} <- @songs do %>
-      <%= render "_song.html", [{@count_key, count}, conn: @conn, song: song, upvoted_song_ids: @upvoted_song_ids] %>
-    <% end %>
-    <%= pagination_links @conn, @songs %>
-  </div>
-</div>
+<%= render "_song_list.html", conn: @conn, songs: @songs, count_key: @count_key,
+      empty_message: @empty_message, upvoted_song_ids: @upvoted_song_ids %>

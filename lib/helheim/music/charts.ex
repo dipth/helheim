@@ -67,6 +67,11 @@ defmodule Helheim.Music.Charts do
   of being capped by the ttl. If chart queries ever show up in monitoring,
   the listen charts can be dropped from this list at the cost of vote
   counts inside them lagging up to one ttl.
+
+  The rule for anything added here later: a cached value belongs on this
+  list only if it embeds a `Song`, and therefore an `upvotes_count` that a
+  badge renders. The all time aggregates in `Helheim.Music.Stats` embed no
+  songs and are deliberately left out - see that module's moduledoc.
   """
   def invalidate_cache do
     Enum.each(

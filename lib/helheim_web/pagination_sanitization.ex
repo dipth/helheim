@@ -21,4 +21,17 @@ defmodule HelheimWeb.PaginationSanitization do
   def cap_total_pages(%Scrivener.Page{} = page, max_page) do
     %{page | total_pages: min(page.total_pages, max_page)}
   end
+
+  # The full list pages are capped at 100 pages to preserve performance.
+  @max_pages 100
+
+  @doc """
+  Paginates a full list page, clamping both the requested page and the
+  advertised page count to the cap.
+  """
+  def capped_paginate(query, params) do
+    query
+    |> Helheim.Repo.paginate(page: sanitized_page(params["page"], @max_pages))
+    |> cap_total_pages(@max_pages)
+  end
 end

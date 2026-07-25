@@ -1,0 +1,12 @@
+<h1 class="mt-1 d-flex justify-content-between align-items-center">
+  <span><i class="fa fa-tag"></i> <%= tag_label(@tag.name) %></span>
+  <%= link gettext("All music"), to: music_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
+</h1>
+
+<p><%= gettext "The most listened to songs tagged %{genre}.", genre: tag_label(@tag.name) %></p>
+
+<%= render HelheimWeb.SongView, "_song_list.html", conn: @conn,
+      songs: @songs,
+      count_key: :listen_count,
+      empty_message: gettext("No songs here yet..."),
+      upvoted_song_ids: @upvoted_song_ids %>
