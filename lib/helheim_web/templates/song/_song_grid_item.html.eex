@@ -13,7 +13,9 @@
 --%>
 <div class="song-grid-item">
   <div class="song-cover-frame">
-    <a href="<%= song_path(@conn, :show, @song) %>">
+    <%!-- The cover is decorative, so the link needs a name of its own rather
+          than reading as an unnamed link to a screen reader. --%>
+    <a href="<%= song_path(@conn, :show, @song) %>" aria-label="<%= @song.title %>">
       <%= if grid_cover_url(@song) do %>
         <img src="<%= grid_cover_url(@song) %>" class="song-grid-cover rounded" alt="">
       <% else %>

@@ -2,16 +2,25 @@ defmodule HelheimWeb.PaginationSanitization do
   def sanitized_page(nil), do: 1
   def sanitized_page(""), do: 1
   def sanitized_page(page) do
-    page = String.to_integer page
-    cond do
-      page > 1000 -> 1000
-      page < 1 -> 1
-      true -> page
+    # The page comes straight off the query string, so anything at all can turn
+    # up in it. Parsing rather than String.to_integer/1 keeps "?page=abc" - which
+    # crawlers and hand-edited urls do produce - from raising its way to a 500.
+    case Integer.parse(page) do
+      {page, ""} -> clamp_page(page)
+      _ -> 1
     end
   end
 
   def sanitized_page(page, max_page) do
     min(sanitized_page(page), max_page)
+  end
+
+  defp clamp_page(page) do
+    cond do
+      page > 1000 -> 1000
+      page < 1 -> 1
+      true -> page
+    end
   end
 
   @doc """

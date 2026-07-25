@@ -41,6 +41,13 @@ defmodule HelheimWeb.SongControllerTest do
       assert response =~ "https://lastfm.example/300x300/cover.jpg"
     end
 
+    test "it gives each cover link an accessible name", %{conn: conn} do
+      insert(:song_listen, song: insert(:song, title: "Creeping Death"))
+
+      conn = get conn, "/songs/recent"
+      assert html_response(conn, 200) =~ ~s(aria-label="Creeping Death")
+    end
+
     test "it does not show listens from ignored users", %{conn: conn, user: user} do
       ignoree = insert(:user)
       insert(:ignore, ignorer: user, ignoree: ignoree, enabled: true)
@@ -54,6 +61,13 @@ defmodule HelheimWeb.SongControllerTest do
       insert(:song_listen)
       conn = get conn, "/songs/recent", %{"page" => "999"}
       assert html_response(conn, 200)
+    end
+
+    test "it falls back to the first page when the page number is not a number", %{conn: conn} do
+      insert(:song_listen, song: insert(:song, title: "Creeping Death"))
+
+      conn = get conn, "/songs/recent", %{"page" => "abc"}
+      assert html_response(conn, 200) =~ "Creeping Death"
     end
 
     test "it renders a placeholder when a song has no cover art", %{conn: conn} do
