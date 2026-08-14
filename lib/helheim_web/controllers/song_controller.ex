@@ -6,11 +6,14 @@ defmodule HelheimWeb.SongController do
   alias Helheim.Deezer
   alias Helheim.Song
   alias Helheim.SongListen
+  alias Helheim.SongUpvote
   alias Helheim.SongUpvoteService
   alias Helheim.Music.Charts
 
-  # The full list pages are capped at 100 pages to preserve performance.
-  @max_pages 100
+  # The listener and upvoter grids on a song page show avatars, so they fit far
+  # more names than the old text list did - but still a bounded number, which is
+  # what lets them skip pagination.
+  @grid_limit 50
 
   def recent(conn, params) do
     listens =
@@ -62,13 +65,24 @@ defmodule HelheimWeb.SongController do
       |> Repo.get!(id)
       |> Repo.preload(song_tags: {Helheim.SongTag.ordered(Helheim.SongTag), [:tag]})
     current_user = current_resource(conn)
+    # Hoisted: this runs a query of its own and both grids need the same answer.
+    hidden_user_ids = hidden_user_ids(conn, current_user)
     recent_listens =
       SongListen
       |> SongListen.for_song(song)
+      |> SongListen.not_from_users(hidden_user_ids)
+      |> SongListen.latest_per_user
       |> SongListen.newest
-      |> SongListen.not_from_users(hidden_user_ids(conn, current_user))
       |> preload(:user)
-      |> limit(10)
+      |> limit(@grid_limit)
+      |> Repo.all
+    recent_upvotes =
+      SongUpvote
+      |> SongUpvote.for_song(song)
+      |> SongUpvote.not_from_users(hidden_user_ids)
+      |> SongUpvote.newest
+      |> preload(:user)
+      |> limit(@grid_limit)
       |> Repo.all
     comments =
       assoc(song, :comments)
@@ -84,6 +98,7 @@ defmodule HelheimWeb.SongController do
     render(conn, "show.html",
       song: song,
       recent_listens: recent_listens,
+      recent_upvotes: recent_upvotes,
       comments: comments,
       current_user_has_listens: current_user_has_listens,
       upvoted_song_ids: SongUpvoteService.upvoted_song_ids(current_user, [song]))
@@ -161,12 +176,6 @@ defmodule HelheimWeb.SongController do
     conn
     |> put_flash(:success, gettext("Your listens have been removed from this song."))
     |> redirect(to: song_path(conn, :show, song))
-  end
-
-  defp capped_paginate(query, params) do
-    query
-    |> Repo.paginate(page: sanitized_page(params["page"], @max_pages))
-    |> cap_total_pages(@max_pages)
   end
 
   # Users the viewer ignores, plus users who block the viewer, are left out

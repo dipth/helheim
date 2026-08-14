@@ -4,20 +4,8 @@
       <%= gettext "Recently logged in users" %>
       <%= link gettext("Show All"), to: public_profile_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
     </h5>
-    <div class="avatar-list">
-      <%= for user <- @newest_users do %>
-        <a href="<%= public_profile_path(@conn, :show, user.id) %>">
-          <img
-            src="<%= HelheimWeb.Avatar.url({user.avatar, user}, :tiny) %>"
-            class="rounded"
-            alt="<%= user.username %>"
-            data-toggle="tooltip"
-            data-placement="bottom"
-            title="<%= user.username %>"
-          >
-        </a>
-      <% end %>
-    </div>
+    <%= render HelheimWeb.SharedView, "_avatar_list.html", conn: @conn,
+          entries: Enum.map(@newest_users, &{&1, &1.username}) %>
   </div>
 </div>
 
@@ -77,54 +65,22 @@
 </div>
 
 <%= if length(@recent_song_listens) > 0 do %>
-  <div class="card-group mt-1">
-    <div class="card">
-      <div class="card-block">
-        <h5 class="mb-1 d-flex justify-content-between">
-          <%= gettext "Recent listens" %>
-          <%= link gettext("Show All"), to: song_path(@conn, :recent), class: "btn btn-outline-primary btn-sm mb-0" %>
-        </h5>
-        <%= for listen <- @recent_song_listens do %>
-          <%= render HelheimWeb.SongView, "_listen.html", conn: @conn, listen: listen, upvoted_song_ids: @upvoted_song_ids %>
+  <div class="card mt-1">
+    <div class="card-block">
+      <h5 class="mb-1 d-flex justify-content-between">
+        <%= gettext "Recent listens" %>
+        <%= link gettext("Show All"), to: music_path(@conn, :index), class: "btn btn-outline-primary btn-sm mb-0" %>
+      </h5>
+      <div class="row">
+        <%= for {listens, hidden_class} <- recent_listen_columns(@recent_song_listens) do %>
+          <div class="col-12 col-md-6 col-lg-4 <%= hidden_class %>">
+            <%= for listen <- listens do %>
+              <%= render HelheimWeb.SongView, "_listen.html", conn: @conn, listen: listen, upvoted_song_ids: @upvoted_song_ids %>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>
-
-    <%= render HelheimWeb.SongView, "_chart_card.html", conn: @conn,
-          title: gettext("Top songs, past 24 hours"),
-          show_all_path: song_path(@conn, :top_day),
-          songs: @top_songs_day,
-          count_key: :listen_count,
-          empty_message: gettext("No songs have been listened to in this period yet..."),
-          upvoted_song_ids: @upvoted_song_ids %>
-
-    <%= render HelheimWeb.SongView, "_chart_card.html", conn: @conn,
-          title: gettext("Top songs, past 7 days"),
-          show_all_path: song_path(@conn, :top_week),
-          songs: @top_songs_week,
-          count_key: :listen_count,
-          empty_message: gettext("No songs have been listened to in this period yet..."),
-          upvoted_song_ids: @upvoted_song_ids %>
-  </div>
-<% end %>
-
-<%= if length(@top_upvoted_day) + length(@top_upvoted_week) > 0 do %>
-  <div class="card-group mt-1">
-    <%= render HelheimWeb.SongView, "_chart_card.html", conn: @conn,
-          title: gettext("Most upvoted songs, past 24 hours"),
-          show_all_path: song_path(@conn, :top_upvoted_day),
-          songs: @top_upvoted_day,
-          count_key: :upvote_count,
-          empty_message: gettext("No songs have been upvoted in this period yet..."),
-          upvoted_song_ids: @upvoted_song_ids %>
-
-    <%= render HelheimWeb.SongView, "_chart_card.html", conn: @conn,
-          title: gettext("Most upvoted songs, past 7 days"),
-          show_all_path: song_path(@conn, :top_upvoted_week),
-          songs: @top_upvoted_week,
-          count_key: :upvote_count,
-          empty_message: gettext("No songs have been upvoted in this period yet..."),
-          upvoted_song_ids: @upvoted_song_ids %>
   </div>
 <% end %>
 

@@ -8,7 +8,6 @@ defmodule HelheimWeb.PageController do
   alias Helheim.CalendarEvent
   alias Helheim.SongListen
   alias Helheim.SongUpvoteService
-  alias Helheim.Music.Charts
 
   def index(conn, _params) do
     if Guardian.Plug.current_resource(conn) do
@@ -58,19 +57,12 @@ defmodule HelheimWeb.PageController do
       |> SongListen.latest_per_song
       |> SongListen.newest
       |> SongListen.with_preloads
-      |> limit(5)
+      # Fifteen, because the card lays them out in up to three columns of five -
+      # see HelheimWeb.PageView.recent_listen_columns/1.
+      |> limit(15)
       |> Repo.all
 
-    top_songs_day       = Charts.top_songs_last_day(5, conn.assigns[:ignoree_ids])
-    top_songs_week      = Charts.top_songs_last_week(5, conn.assigns[:ignoree_ids])
-    top_upvoted_day     = Charts.top_upvoted_songs_last_day(5, conn.assigns[:ignoree_ids])
-    top_upvoted_week    = Charts.top_upvoted_songs_last_week(5, conn.assigns[:ignoree_ids])
-
-    upvoted_song_ids =
-      SongUpvoteService.upvoted_song_ids(
-        current_resource(conn),
-        Enum.concat([recent_song_listens, top_songs_day, top_songs_week, top_upvoted_day, top_upvoted_week])
-      )
+    upvoted_song_ids = SongUpvoteService.upvoted_song_ids(current_resource(conn), recent_song_listens)
 
     render conn, "front_page.html",
       newest_users: newest_users,
@@ -79,10 +71,6 @@ defmodule HelheimWeb.PageController do
       newest_forum_topics: newest_forum_topics,
       upcoming_events: upcoming_events,
       recent_song_listens: recent_song_listens,
-      top_songs_day: top_songs_day,
-      top_songs_week: top_songs_week,
-      top_upvoted_day: top_upvoted_day,
-      top_upvoted_week: top_upvoted_week,
       upvoted_song_ids: upvoted_song_ids
   end
 

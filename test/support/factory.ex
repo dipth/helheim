@@ -252,6 +252,14 @@ defmodule Helheim.Factory do
     }
   end
 
+  def song_tag_factory do
+    %Helheim.SongTag{
+      song: build(:song),
+      tag: build(:tag),
+      position: 1
+    }
+  end
+
   def song_listen_factory do
     %Helheim.SongListen{
       user: build(:user),

@@ -17,6 +17,7 @@ config :helheim, Oban, testing: :manual
 
 # Never serve stale chart data across tests
 config :helheim, :chart_cache_ttl_ms, 0
+config :helheim, :music_stats_cache_ttl_ms, 0
 
 # Never cache external API responses across tests
 config :helheim, :api_cache_ttl_ms, 0

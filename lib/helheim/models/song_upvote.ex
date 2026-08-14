@@ -20,4 +20,13 @@ defmodule Helheim.SongUpvote do
   def for_song(query, song) do
     from u in query, where: u.song_id == ^song.id
   end
+
+  def newest(query) do
+    from u in query, order_by: [desc: u.inserted_at]
+  end
+
+  def not_from_users(query, nil), do: query
+  def not_from_users(query, user_ids) do
+    from u in query, where: u.user_id not in ^user_ids
+  end
 end

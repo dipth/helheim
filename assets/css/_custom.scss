@@ -58,6 +58,14 @@ label {
   }
 }
 
+// The front page clips its avatar grid (140 avatars) to a few rows; the listener
+// and upvoter grids on a song page are short and left-aligned, so they show in
+// full.
+.avatar-list-full {
+  max-height: none;
+  justify-content: flex-start;
+}
+
 form.link {
   display: inline;
 }
@@ -377,4 +385,88 @@ code {
   }
 }
 
+// Full page song lists (the charts, the recent listens, the browse pages) show
+// large cover art in a grid rather than the 64px thumbnails the summary cards on
+// the front page and the music page use. auto-fill holds the tile size roughly
+// constant and lets the column count follow the available width, so the same
+// grid works from a phone to a wide screen with a sidebar.
+.song-grid {
+  display: grid;
+  // 120px is what it takes to keep two covers per row on a narrow phone, where
+  // the card's own padding leaves under 280px to lay them out in; from sm up
+  // there is room for a tile size that shows the cover art off properly.
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-bottom: $spacer-y;
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  }
+}
+
+.song-grid-item {
+  // A grid item defaults to min-content width, which would stop the titles from
+  // ever ellipsising and let a long one widen its whole column instead.
+  min-width: 0;
+
+  // The overlay is sized for a 64px thumbnail by default; on a cover this large
+  // it needs to grow with it to stay an obvious target.
+  .song-preview-overlay {
+    bottom: 0.5rem;
+    left: 0.5rem;
+    width: 36px;
+    height: 36px;
+
+    i {
+      font-size: 1rem;
+    }
+  }
+
+  a:hover .song-grid-cover {
+    border-color: $brand-primary;
+  }
+}
+
+.song-grid-cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid $gray;
+  object-fit: cover;
+  transition: 0.1s ease-in-out;
+}
+
+.song-grid-cover-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.25);
+
+  i {
+    font-size: 2rem;
+    opacity: 0.5;
+  }
+}
+
+.song-grid-body {
+  margin-top: 0.5 * $spacer-y;
+}
+
+// Muted like the artist name on the summary rows, but still clearly a link on
+// hover. Bootstrap's .text-muted would work for the colour but darkens on hover,
+// which on this theme's near-black muted colour reads as the link disappearing.
+.song-grid-artist {
+  color: $text-muted;
+
+  &:hover,
+  &:focus {
+    color: $brand-primary;
+  }
+}
+
+.song-grid-badges {
+  margin-top: 0.25 * $spacer-y;
+}
+
 @import "calendar_events";
+@import "music";

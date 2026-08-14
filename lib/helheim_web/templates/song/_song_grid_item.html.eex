@@ -1,0 +1,53 @@
+<%!--
+  One tile in a `.song-grid`: a large cover over the song's details.
+
+  Required assigns:
+    conn, song, upvoted_song_ids
+
+  Optional assigns:
+    listen_count, upvote_count - extra badges, as in _song.html
+    listen                     - the SongListen this tile came from, adding who
+                                 played it and when
+    show_username              - pass false to leave the listener out, for a
+                                 page that is already about one person
+--%>
+<div class="song-grid-item">
+  <div class="song-cover-frame">
+    <%!-- The cover is decorative, so the link needs a name of its own rather
+          than reading as an unnamed link to a screen reader. --%>
+    <a href="<%= song_path(@conn, :show, @song) %>" aria-label="<%= @song.title %>">
+      <%= if grid_cover_url(@song) do %>
+        <img src="<%= grid_cover_url(@song) %>" class="song-grid-cover rounded" alt="">
+      <% else %>
+        <div class="song-grid-cover song-grid-cover-placeholder rounded"><i class="fa fa-music"></i></div>
+      <% end %>
+    </a>
+    <%= preview_button @conn, @song %>
+  </div>
+  <div class="song-grid-body">
+    <strong class="d-block text-truncate" title="<%= @song.title %>">
+      <%= link @song.title, to: song_path(@conn, :show, @song) %>
+    </strong>
+    <small class="d-block text-truncate" title="<%= @song.artist_name %>">
+      <%= link @song.artist_name, to: artist_page_path(@conn, @song.artist_name), class: "song-grid-artist" %>
+    </small>
+    <%= if assigns[:listen] do %>
+      <small class="d-block text-truncate">
+        <%= if assigns[:show_username] != false do %>
+          <%= username @listen.user, true %>,
+        <% end %>
+        <%= time_ago_in_words @listen.played_at %>
+      </small>
+    <% end %>
+    <div class="song-grid-badges">
+      <%= comment_count_badge @song %>
+      <%= if assigns[:listen_count] do %>
+        <%= listen_count_badge @listen_count %>
+      <% end %>
+      <%= if assigns[:upvote_count] do %>
+        <%= upvote_count_badge @upvote_count %>
+      <% end %>
+      <%= upvote_toggle @conn, @song, assigns %>
+    </div>
+  </div>
+</div>

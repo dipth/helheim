@@ -1,6 +1,7 @@
 <h4><%= gettext "Blocks" %>:</h4>
 
 <%= if Enum.any?(@blocks) do %>
+  <div class="table-responsive">
   <table class="table">
     <thead>
       <tr>
@@ -26,6 +27,7 @@
       <% end %>
     </tbody>
   </table>
+  </div>
 <% else %>
   <hr>
   <p class="text-center">

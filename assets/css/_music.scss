@@ -1,0 +1,199 @@
+// The music page's own visualisations. The song rows, chart cards and covers on
+// the page are the shared song partials and need nothing here.
+
+.music-stats {
+  display: flex;
+  flex-wrap: wrap;
+  // Absorbs the bottom margin of the last row of tiles, so they sit flush with
+  // the bottom of the card block however many rows they wrap onto.
+  margin-bottom: -0.5 * $spacer-y;
+
+  // The callout brings its own vertical rhythm for stacked use; here the tiles
+  // are laid out side by side instead.
+  .callout {
+    flex: 1 1 33%;
+    margin: 0 0 0.5 * $spacer-y;
+    padding: 0 0.5 * $spacer-x;
+  }
+
+  // Three tiles per row is as narrow as the numbers stay readable; from md
+  // there is room for all of them on one line.
+  @include media-breakpoint-up(md) {
+    .callout {
+      flex: 1 1 0;
+    }
+  }
+}
+
+// Genres and decades sit side by side from md up. The row already makes the two
+// columns the same height, but the cards inside them were not, so whichever chart
+// was shorter floated above a band of page background. Stretching the card fills
+// that, and the flex chain from here down lets the decade track claim whatever
+// height is left over, so the two charts end flush instead of one just being
+// padded out.
+.music-charts {
+  > [class*="col-"] {
+    display: flex;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .card-block {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.music-bar {
+  display: block;
+  margin-bottom: 0.5 * $spacer-y;
+  color: $body-color;
+
+  &:hover {
+    color: $brand-primary;
+    text-decoration: none;
+  }
+
+  .progress {
+    margin-bottom: 0;
+  }
+}
+
+.music-bar-label {
+  display: flex;
+  justify-content: space-between;
+
+  // A long genre name has to ellipsise instead of pushing the count out of the
+  // row, and a flex item needs an explicit min-width to be allowed to shrink
+  // below its content.
+  .music-bar-name {
+    min-width: 0;
+  }
+
+  // The count belongs to the bar underneath it, so the shared count badge keeps
+  // its typography but drops the pill: no background, and no padding, which also
+  // lines the number up with the end of the bar.
+  .badge {
+    padding: 0;
+    background-color: transparent;
+  }
+}
+
+.music-decades {
+  display: flex;
+  // Takes the height the heading leaves behind, which is what gives the bars
+  // room to grow when the chart beside this one is the taller of the two.
+  flex: 1 1 auto;
+}
+
+.music-decade {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0 2px;
+  color: $body-color;
+  text-align: center;
+
+  &:hover {
+    color: $brand-primary;
+    text-decoration: none;
+
+    .music-decade-bar {
+      background-color: lighten($brand-primary, 15%);
+    }
+  }
+}
+
+// The track grows into whatever height the card has spare, so the equalizer
+// stretches to match a taller neighbour rather than leaving the card padded out.
+// The min-height is the floor it falls back to when nothing else is setting the
+// card's height - a stacked phone layout, or when this is the taller chart - and
+// it is also what the bars' percentage heights resolve against.
+.music-decade-track {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: flex-end;
+  min-height: 140px;
+
+  @include media-breakpoint-down(xs) {
+    min-height: 100px;
+  }
+}
+
+.music-decade-bar {
+  width: 100%;
+  min-height: 2px;
+  background-color: $brand-primary;
+
+  @include border-radius($border-radius);
+}
+
+.music-decade-count,
+.music-decade-label {
+  display: block;
+  font-size: 0.75rem;
+}
+
+.music-decade-label {
+  font-weight: bold;
+}
+
+.music-rank {
+  min-width: 1.5rem;
+  color: $brand-primary;
+  font-weight: bold;
+}
+
+.music-artist {
+  display: block;
+  color: $body-color;
+  text-align: center;
+
+  &:hover {
+    color: $brand-primary;
+    text-decoration: none;
+
+    .music-artist-image {
+      border-color: $brand-primary;
+    }
+  }
+}
+
+.music-artist-image {
+  display: block;
+  width: 100%;
+  // Capped and centred so the three podium tiles stay a visual anchor instead of
+  // taking over the section on a wide screen, while still shrinking on a phone.
+  max-width: 200px;
+  margin: 0 auto;
+  aspect-ratio: 1;
+  border: 1px solid $gray;
+  object-fit: cover;
+  transition: 0.1s ease-in-out;
+}
+
+.music-artist-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.25);
+
+  i {
+    font-size: 2rem;
+    opacity: 0.5;
+  }
+}
+
+// The artist page header shows the same square image as the grid tiles, at a
+// fixed size beside the artist's details.
+.music-artist-header-image {
+  flex: 0 0 auto;
+  width: 96px;
+
+  @include media-breakpoint-up(md) {
+    width: 140px;
+  }
+}

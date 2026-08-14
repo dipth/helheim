@@ -1,0 +1,163 @@
+<h1 class="mt-1"><i class="fa fa-music"></i> <%= gettext "Music" %></h1>
+
+<p>
+  <%= gettext "Everything the site is listening to: the current charts, the genres and decades we keep coming back to, and the artists we play the most." %>
+</p>
+
+<p>
+  <%= link to: song_path(@conn, :recent), class: "btn btn-outline-primary btn-sm" do %>
+    <i class="fa fa-history"></i>
+    <%= gettext "Recent listens" %>
+  <% end %>
+</p>
+
+<div class="card">
+  <div class="card-block">
+    <h5 class="mb-1"><%= gettext "Helheim in numbers" %></h5>
+    <div class="music-stats">
+      <div class="callout callout-primary">
+        <h4 class="mb-0"><%= @totals.songs %></h4>
+        <small class="text-muted"><i class="fa fa-fw fa-music"></i> <%= gettext "Songs" %></small>
+      </div>
+      <div class="callout callout-info">
+        <h4 class="mb-0"><%= @totals.artists %></h4>
+        <small class="text-muted"><i class="fa fa-fw fa-user"></i> <%= gettext "Artists" %></small>
+      </div>
+      <div class="callout callout-success">
+        <h4 class="mb-0"><%= @totals.listens %></h4>
+        <small class="text-muted"><i class="fa fa-fw fa-headphones"></i> <%= gettext "Listens" %></small>
+      </div>
+      <div class="callout callout-warning">
+        <h4 class="mb-0"><%= @totals.upvotes %></h4>
+        <small class="text-muted"><i class="fa fa-fw fa-fire"></i> <%= gettext "Upvotes" %></small>
+      </div>
+      <div class="callout callout-danger">
+        <h4 class="mb-0"><%= @totals.listeners %></h4>
+        <small class="text-muted"><i class="fa fa-fw fa-users"></i> <%= gettext "Listeners" %></small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row music-charts">
+  <div class="col-12 col-md-6">
+    <div class="card">
+      <div class="card-block">
+        <h5 class="mb-1"><i class="fa fa-fw fa-tags"></i> <%= gettext "Genres" %></h5>
+        <%= if Enum.empty?(@top_genres) do %>
+          <p class="text-muted mb-0"><%= gettext "No songs have been tagged with a genre yet..." %></p>
+        <% end %>
+        <% largest_genre = largest_count(@top_genres) %>
+        <%= for {tag, count} <- @top_genres do %>
+          <%= link to: music_path(@conn, :genre, tag), class: "music-bar", title: tag_label(tag.name) do %>
+            <span class="music-bar-label">
+              <span class="music-bar-name text-truncate"><i class="fa fa-fw fa-tag"></i> <%= tag_label(tag.name) %></span>
+              <%= listen_count_badge count %>
+            </span>
+            <div class="progress progress-xs">
+              <div class="progress-bar" style="width: <%= bar_percent(count, largest_genre) %>%" aria-hidden="true"></div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <div class="card">
+      <div class="card-block">
+        <h5 class="mb-1"><i class="fa fa-fw fa-clock-o"></i> <%= gettext "Decades" %></h5>
+        <%= if Enum.empty?(@listens_per_decade) do %>
+          <p class="text-muted mb-0"><%= gettext "No songs with a known release year yet..." %></p>
+        <% end %>
+        <% largest_decade = largest_count(@listens_per_decade) %>
+        <div class="music-decades">
+          <%= for {decade, count} <- @listens_per_decade do %>
+            <%= link to: music_path(@conn, :decade, decade), class: "music-decade", title: decade_label(decade) do %>
+              <span class="music-decade-count"><%= count %></span>
+              <span class="music-decade-track">
+                <span class="music-decade-bar" style="height: <%= bar_percent(count, largest_decade) %>%"></span>
+              </span>
+              <span class="music-decade-label"><%= decade_short_label(decade) %></span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-block">
+    <h5 class="mb-1"><i class="fa fa-fw fa-users"></i> <%= gettext "Top artists" %></h5>
+    <%= if Enum.empty?(@top_artists) do %>
+      <p class="text-muted mb-0"><%= gettext "No listens have been tracked yet..." %></p>
+    <% end %>
+
+    <div class="row">
+      <%= for {artist_name, count, artist} <- Enum.take(@top_artists, 3) do %>
+        <div class="col-4">
+          <%= render "_artist_tile.html", conn: @conn, artist_name: artist_name, count: count, artist: artist %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <%= for {{artist_name, count, artist}, rank} <- @top_artists |> Enum.drop(3) |> Enum.with_index(4) do %>
+        <div class="col-12 col-md-6">
+          <div class="media mb-1">
+            <span class="music-rank"><%= rank %></span>
+            <%= render HelheimWeb.SongView, "_cover.html",
+                  href: artist_page_path(@conn, artist_name),
+                  image_url: artist && artist.image_url_small,
+                  icon: "fa-user" %>
+            <div class="media-body">
+              <%= link artist_name, to: artist_page_path(@conn, artist_name) %>
+              <%= if artist && artist.country_code do %>
+                <span title="<%= artist.country_name %>"><%= country_flag artist.country_code %></span>
+              <% end %>
+              <br>
+              <%= listen_count_badge count %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="card-group">
+  <%= render HelheimWeb.SongView, "_chart_card.html", conn: @conn,
+        title: gettext("Top songs, past 24 hours"),
+        show_all_path: song_path(@conn, :top_day),
+        songs: @top_songs_day,
+        count_key: :listen_count,
+        empty_message: gettext("No songs have been listened to in this period yet..."),
+        upvoted_song_ids: @upvoted_song_ids %>
+
+  <%= render HelheimWeb.SongView, "_chart_card.html", conn: @conn,
+        title: gettext("Top songs, past 7 days"),
+        show_all_path: song_path(@conn, :top_week),
+        songs: @top_songs_week,
+        count_key: :listen_count,
+        empty_message: gettext("No songs have been listened to in this period yet..."),
+        upvoted_song_ids: @upvoted_song_ids %>
+</div>
+
+<div class="card-group">
+  <%= render HelheimWeb.SongView, "_chart_card.html", conn: @conn,
+        title: gettext("Most upvoted songs, past 24 hours"),
+        show_all_path: song_path(@conn, :top_upvoted_day),
+        songs: @top_upvoted_day,
+        count_key: :upvote_count,
+        empty_message: gettext("No songs have been upvoted in this period yet..."),
+        upvoted_song_ids: @upvoted_song_ids %>
+
+  <%= render HelheimWeb.SongView, "_chart_card.html", conn: @conn,
+        title: gettext("Most upvoted songs, past 7 days"),
+        show_all_path: song_path(@conn, :top_upvoted_week),
+        songs: @top_upvoted_week,
+        count_key: :upvote_count,
+        empty_message: gettext("No songs have been upvoted in this period yet..."),
+        upvoted_song_ids: @upvoted_song_ids %>
+</div>
