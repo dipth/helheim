@@ -4,14 +4,12 @@ const path = require('path');
 const glob = require('glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, options) => ({
   optimization: {
     minimizer: [
-      new TerserPlugin({ parallel: true, sourceMap: false }),
-      new OptimizeCSSAssetsPlugin({})
+      new TerserPlugin({ parallel: true, sourceMap: false })
     ]
   },
   entry: {
@@ -78,7 +76,7 @@ module.exports = (env, options) => ({
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          { loader: 'css-loader', options: { url: false } },
           'postcss-loader',
           {
             loader: 'sass-loader',

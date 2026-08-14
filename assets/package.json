@@ -6,7 +6,7 @@
     "tar": "^7.5.18"
   },
   "scripts": {
-    "deploy": "webpack --mode production",
+    "deploy": "NODE_ENV=production webpack --mode production",
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
@@ -44,14 +44,15 @@
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
     "@babel/plugin-proposal-optional-chaining": "^7.18.6",
     "@babel/preset-env": "^7.9.5",
-    "autoprefixer": "^9.7.6",
+    "autoprefixer": "^10.4.0",
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^6.4.1",
-    "css-loader": "^3.5.2",
+    "css-loader": "^5.2.7",
+    "cssnano": "^7.0.0",
     "expose-loader": "^0.7.5",
     "mini-css-extract-plugin": "^0.9.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "postcss-loader": "^3.0.0",
+    "postcss": "^8.5.23",
+    "postcss-loader": "^4.3.0",
     "sass": "^1.53.0",
     "sass-loader": "^8.0.2",
     "terser-webpack-plugin": "^4.2.3",
