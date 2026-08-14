@@ -22,7 +22,7 @@
     "favico.js": "^0.3.10",
     "flatpickr": "^4.6.3",
     "intl": "^1.2.5",
-    "jquery": "~3.4.1",
+    "jquery": "^3.7.1",
     "kind-of": "^6.0.3",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
