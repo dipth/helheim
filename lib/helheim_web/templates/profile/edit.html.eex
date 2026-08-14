@@ -81,7 +81,7 @@
               <hr>
               <div class="form-group <%= if f.errors[:profile_text] do "has-danger" end %>">
                 <%= label f, :profile_text, gettext("Content"), class: "control-label" %>
-                <%= textarea f, :profile_text, class: "form-control", rows: 10 %>
+                <%= HelheimWeb.RichTextEditorHelper.rich_textarea f, :profile_text, mentions: true %>
                 <%= if message = f.errors[:profile_text] do %>
                   <div class="form-control-feedback"><%= translate_error(message) %></div>
                 <% end %>

@@ -47,6 +47,30 @@ defmodule Helheim.ScrubberTest do
       assert HtmlSanitizeEx.Scrubber.scrub(input, Helheim.Scrubber) == input
     end
 
+    test "allows setting alignment style for heading-tags while stripping other styles" do
+      input = "<h2 style=\"text-align: center;\">test</h2>"
+      assert HtmlSanitizeEx.Scrubber.scrub(input, Helheim.Scrubber) == input
+
+      input = "<h4 style=\"text-align: right;\">test</h4>"
+      assert HtmlSanitizeEx.Scrubber.scrub(input, Helheim.Scrubber) == input
+
+      input = "<h1 style=\"text-align: center; color: red;\">test</h1>"
+      assert HtmlSanitizeEx.Scrubber.scrub(input, Helheim.Scrubber) == "<h1 style=\"text-align: center;\">test</h1>"
+
+      input = "<h3 style=\"color: red;\">test</h3>"
+      assert HtmlSanitizeEx.Scrubber.scrub(input, Helheim.Scrubber) == "<h3>test</h3>"
+    end
+
+    test "strips other attributes from heading-tags" do
+      input = "<h2 class=\"huge\" id=\"anchor\" style=\"text-align: center;\">test</h2>"
+      assert HtmlSanitizeEx.Scrubber.scrub(input, Helheim.Scrubber) == "<h2 style=\"text-align: center;\">test</h2>"
+    end
+
+    test "strips the src of img-tags whose src is not a valid absolute url" do
+      input = "<img src=\"not-a-url\">"
+      assert HtmlSanitizeEx.Scrubber.scrub(input, Helheim.Scrubber) == "<img class=\"img-fluid rounded mx-auto d-block\" />"
+    end
+
     test "scrubs the body of span-tags" do
       input = "<span><script>alert('foo')</script></span>"
       assert HtmlSanitizeEx.Scrubber.scrub(input, Helheim.Scrubber) == "<span>alert('foo')</span>"

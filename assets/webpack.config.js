@@ -69,7 +69,7 @@ module.exports = (env, options) => ({
       },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: /node_modules[\\\/](?!(@tiptap|prosemirror-))/,
         use: {
           loader: 'babel-loader'
         }
